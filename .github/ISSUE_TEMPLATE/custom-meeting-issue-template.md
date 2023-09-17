@@ -22,6 +22,11 @@ assignees: ''
 - **Meeting Lead**: @github_name
 - **Scribe**: @github_name
 
+## Agenda
+- Discuss ..
+- Make plans for ..
+- ...
+
 ## Actions
 
 * @github_name to address issue #1
