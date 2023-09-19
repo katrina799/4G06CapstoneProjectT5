@@ -14,11 +14,17 @@ jobs:
   check_pr:
     runs-on: ubuntu-latest
     steps:
-    - name: Check if the PR has at least one label 
+    - name: Check if the PR has at least one label
+      env:
+        PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
       run: |
         labels=$(curl -s "https://api.github.com/repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }}" | jq -r '.labels')
         if [ -z "$labels" ] || [ "$labels" == "[]" ]; then
           echo "PR doesn't have any labels. Please add a label."
+          curl -X POST -H "Authorization: token $PAT_TOKEN" \
+          -H "Accept: application/vnd.github.v3+json" \
+          https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.pull_request.number }}/comments \
+          -d '{"body": "PR doesn't have any labels. Please add a label."}'
           exit 1
         fi
     # From https://github.com/marketplace/actions/verify-linked-issue
