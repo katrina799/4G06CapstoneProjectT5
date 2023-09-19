@@ -25,6 +25,7 @@ jobs:
         if [ -z "$labels" ] || [ "$labels" == "[]" ]; then
           echo "PR doesn't have any labels. Please add a label."
           echo "no_label=true" >> $GITHUB_OUTPUT
+          exit 1
         fi
 
     - name: Add comment in PR UI if there's no label
@@ -35,7 +36,6 @@ jobs:
       with:
         message: |
           PR doesn't have any labels. Please add a label :)
-      run: exit 1
 
     # From https://github.com/marketplace/actions/verify-linked-issue
     # This action will verify if an issue is linked or referenced in the PR
