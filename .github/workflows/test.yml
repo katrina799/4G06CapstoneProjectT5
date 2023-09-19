@@ -13,7 +13,6 @@ on:
 jobs:
   check_pr:
     runs-on: ubuntu-latest
-
     steps:
     - name: Check if the PR has at least one label 
       run: |
