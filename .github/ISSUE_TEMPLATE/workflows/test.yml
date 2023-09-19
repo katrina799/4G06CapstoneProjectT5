@@ -1,0 +1,30 @@
+name: PR Checks
+
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - edited
+      - reopened
+      - labeled
+      - unlabeled
+
+jobs:
+  check_pr:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check if the PR has at least one label 
+      run: |
+        labels=$(curl -s "https://api.github.com/repos/$GITHUB_REPOSITORY/pulls/$PR_NUMBER" | jq -r '.labels')
+        if [ -z "$labels" ] || [ "$labels" == "[]" ]; then
+          echo "PR doesn't have any labels. Please add a label."
+          exit 1
+        fi
+    # From https://github.com/marketplace/actions/verify-linked-issue
+    # This action will verify if an issue is linked or referenced in the PR
+    - name: Verify Linked Issue
+      uses: hattan/verify-linked-issue-action@v1.1.5
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
