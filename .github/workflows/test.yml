@@ -13,7 +13,13 @@ on:
 jobs:
   check_pr:
     runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
     steps:
+      - uses: mshick/add-pr-comment@v2
+        with:
+          message: |
+            **Add a label**
     - name: Check if the PR has at least one label
       env:
         PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
