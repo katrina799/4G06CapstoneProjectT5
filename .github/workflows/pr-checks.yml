@@ -33,8 +33,9 @@ jobs:
 
     - name: Check if the PR links an issue properly
       run: |
-        issue_link=$(curl -s "https://api.github.com/repos/$GITHUB_REPOSITORY/pulls/$PR_NUMBER" | jq -r .issue_url)
-        if [[ "$issue_link" == "null" ]]; then
+        issue_link=$(curl -s "https://api.github.com/repos/$GITHUB_REPOSITORY/pulls/$PR_NUMBER" | jq -r '.issue')
+        if [ "$issue_link" == "null" ]; then
           echo "PR is not linked to an issue. Please link it to an issue."
           exit 1
         fi
+
