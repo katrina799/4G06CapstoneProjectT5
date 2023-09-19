@@ -25,7 +25,6 @@ jobs:
         if [ -z "$labels" ] || [ "$labels" == "[]" ]; then
           echo "PR doesn't have any labels. Please add a label."
           echo "{no_label}={true}" >> $GITHUB_OUTPUT
-          exit 1
         fi
 
     - name: Add comment in PR UI if there's no label
