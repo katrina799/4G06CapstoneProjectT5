@@ -4,7 +4,7 @@ Please include a summary of the changes and attch the related issue link.
 
 **Summary**: Create the first pull request template and add the pull request directory
 
-**Issue Link**: https://github.com/wangq131/4G06CapstoneProjectT5/issues/7
+**Issue Link**: resolved[#7](https://github.com/wangq131/4G06CapstoneProjectT5/issues/7)
 
 ## Type of action
 
