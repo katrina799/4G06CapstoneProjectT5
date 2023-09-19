@@ -24,8 +24,8 @@ jobs:
 
     - name: Check if the PR has at least one label 
       run: |
-        labels=$(curl -s "https://api.github.com/repos/$GITHUB_REPOSITORY/pulls/$PR_NUMBER" | jq -r '.labels | length')
-        if [[ $labels -eq 0 ]]; then
+        labels=$(curl -s "https://api.github.com/repos/$GITHUB_REPOSITORY/pulls/$PR_NUMBER" | jq -r '.labels')
+        if [ -z "$labels" ] || [ "$labels" == "[]" ]; then
           echo "PR doesn't have any labels. Please add a label."
           exit 1
         fi
