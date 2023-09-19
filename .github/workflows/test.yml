@@ -35,6 +35,7 @@ jobs:
       with:
         message: |
           PR doesn't have any labels. Please add a label :)
+      run: exit 1
 
     # From https://github.com/marketplace/actions/verify-linked-issue
     # This action will verify if an issue is linked or referenced in the PR
