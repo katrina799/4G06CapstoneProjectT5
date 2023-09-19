@@ -39,6 +39,7 @@ jobs:
       # This action will add a PR comment
       uses: mshick/add-pr-comment@v2
       with:
+        allow-repeats: true
         message: |
           PR doesn't have any labels. Please add a label :)
 
