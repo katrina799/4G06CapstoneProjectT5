@@ -1,6 +1,6 @@
 ## Description
 
-Please include a summary of the changes and attach the related issue link. 
+Please include a summary of the changes and attach the related issue link (**please remove this**). 
 
 **Summary**: 
 
@@ -8,7 +8,7 @@ Please include a summary of the changes and attach the related issue link.
 
 ## Testing
 
-Please mention the verfication/testing used for this PR, which help other collaborators to verify.
+Please mention the verfication/testing used for this PR, which help other collaborators to verify (**please remove this**).
 
 ## Type of action
 
@@ -28,4 +28,4 @@ Please mention the verfication/testing used for this PR, which help other collab
 
 # Action Required
 
-Please mention the further steps needed to do if necessary.
+Please mention the further steps needed to do if necessary  (**please remove this**).
