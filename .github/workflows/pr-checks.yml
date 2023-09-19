@@ -1,0 +1,36 @@
+name: PR Checks
+
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+
+jobs:
+  check_pr:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Check if the PR has a title
+      run: |
+        title=$(curl -s "https://api.github.com/repos/$GITHUB_REPOSITORY/pulls/$PR_NUMBER" | jq -r .title)
+        if [[ -z "$title" ]]; then
+          echo "PR title is empty. Please provide a title."
+          exit 1
+        fi
+
+    - name: Check if the PR has at least one label 
+      run: |
+        labels=$(curl -s "https://api.github.com/repos/$GITHUB_REPOSITORY/pulls/$PR_NUMBER" | jq -r '.labels | length')
+        if [[ $labels -eq 0 ]]; then
+          echo "PR doesn't have any labels. Please add a label."
+          exit 1
+        fi
+
+    - name: Check if the PR links an issue properly
+      run: |
+        issue_link=$(curl -s "https://api.github.com/repos/$GITHUB_REPOSITORY/pulls/$PR_NUMBER" | jq -r .issue_url)
+        if [[ "$issue_link" == "null" ]]; then
+          echo "PR is not linked to an issue. Please link it to an issue."
+          exit 1
+        fi
