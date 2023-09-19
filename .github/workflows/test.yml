@@ -16,23 +16,27 @@ jobs:
     permissions:
       pull-requests: write
     steps:
-    - uses: mshick/add-pr-comment@v2
-      with:
-        message: |
-          **Add a label**
     - name: Check if the PR has at least one label
+      id: step_check_label
       env:
         PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
       run: |
         labels=$(curl -s "https://api.github.com/repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }}" | jq -r '.labels')
         if [ -z "$labels" ] || [ "$labels" == "[]" ]; then
           echo "PR doesn't have any labels. Please add a label."
-          curl -X POST -H "Authorization: token $PAT_TOKEN" \
-              -H "Accept: application/vnd.github.v3+json" \
-              "https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.pull_request.number }}/comments" \
-              -d "{\"body\": \"PR doesn't have any labels. Please add a label.\"}"
+          echo "::set-output name=no_label::true"
           exit 1
         fi
+
+    - name: Add comment in PR UI if there's no label
+      if: steps.step_check_label.outputs.no_label == 'true'
+      # From https://github.com/marketplace/actions/add-pr-comment
+      # This action will add a PR comment
+      uses: mshick/add-pr-comment@v2
+      with:
+        message: |
+          PR doesn't have any labels. Please add a label :)
+
     # From https://github.com/marketplace/actions/verify-linked-issue
     # This action will verify if an issue is linked or referenced in the PR
     - name: Verify Linked Issue
