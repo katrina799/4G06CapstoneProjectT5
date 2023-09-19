@@ -1,0 +1,39 @@
+name: Enforce Issue Requirements
+
+on:
+  issues:
+    types:
+      - opened
+      - edited
+
+jobs:
+  enforce-requirements:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check if issue is assigned to a project
+        run: |
+          issue_project=$(jq -r '.project' $GITHUB_EVENT_PATH)
+          if [ "$issue_project" == "null" ]; then
+            echo "Issue must be assigned to a project."
+            exit 1
+          fi
+        shell: bash
+
+      - name: Check if issue has labels
+        run: |
+          issue_labels=$(jq -r '.issue.labels' $GITHUB_EVENT_PATH)
+          if [ "${#issue_labels[@]}" -eq 0 ]; then
+            echo "Issue must have at least one label."
+            exit 1
+          fi
+        shell: bash
+
+      - name: Check if issue is assigned to at least one collaborator
+        run: |
+          issue_assignees=$(jq -r '.issue.assignees' $GITHUB_EVENT_PATH)
+          if [ "${#issue_assignees[@]}" -eq 0 ]; then
+            echo "Issue must be assigned to at least one team member."
+            exit 1
+          fi
+        shell: bash
