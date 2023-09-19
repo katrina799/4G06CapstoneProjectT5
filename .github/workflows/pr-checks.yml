@@ -8,6 +8,7 @@ on:
       - edited
       - reopened
       - labeled
+      - unlabeled
 
 jobs:
   check_pr:
