@@ -1,23 +1,19 @@
-# Description
+## Description
 
 Please include a summary of the changes and attch the related issue link. 
 
-Summary: 
+**Summary**: 
 
-Issue Link: 
+**Issue Link**: 
 
-# Date
-
-2023/9/18 21:22pm
-
-# Type of action
+## Type of action
 
 - [ ] Bug fix 
 - [ ] New feature
 - [ ] Requires a documentation update
 
 
-# Checklist:
+## Checklist
 
 - [ ] My code style is consistent with the current project
 - [ ] I have done a brief review of my code
@@ -27,4 +23,5 @@ Issue Link:
 - [ ] There should no potential errors occur after the changes
 
 # Action Required
-Please mention the further step need to do if required.
+
+Please mention the further steps needed to do if necessary.
