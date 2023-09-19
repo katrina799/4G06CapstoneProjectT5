@@ -12,7 +12,6 @@ Please include a summary of the changes and attch the related issue link.
 - [ ] New feature
 - [ ] Requires a documentation update
 
-
 ## Checklist
 
 - [ ] My code style is consistent with the current project
@@ -20,7 +19,7 @@ Please include a summary of the changes and attch the related issue link.
 - [ ] I have written readable comments
 - [ ] I have updated the documentation which related to the changes I made
 - [ ] I have written reasonable tests and the updated version all passed
-- [ ] There should no potential errors occur after the changes
+- [ ] There should be no potential errors after the changes get merged to main
 
 # Action Required
 
