@@ -2,7 +2,7 @@
 name: Custom meeting issue template
 about: Custom meeting issue template
 title: T5 Meeting 01 - Sep 17, 2023
-labels: documentation, Meeting
+labels: documentation, Medium, Meeting
 assignees: wangq131
 
 ---
