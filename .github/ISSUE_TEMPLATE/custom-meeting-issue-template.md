@@ -3,13 +3,13 @@ name: Custom meeting issue template
 about: Custom meeting issue template
 title: T5 Meeting 01 - Sep 17, 2023
 labels: documentation, Meeting
-assignees: wangq131
+assignees: ''
 
 ---
 
 ## T5 Meeting 01 Info
-- **Date**: 2023/09/17
-- **Time**: 16:00 - 17:00
+- **Date**: 2023/mm/dd
+- **Time**: hh:mm - hh:mm
 -  **Location**: Virtual, via Teams
 - **Attendees**: 
 
@@ -23,6 +23,7 @@ assignees: wangq131
 - **Scribe**: @github_name
 
 ## Agenda
+
 - Discuss ..
 - Make plans for ..
 - ...
