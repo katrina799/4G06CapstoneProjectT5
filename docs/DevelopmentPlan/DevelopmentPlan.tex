@@ -101,11 +101,11 @@ To better track project progress and work distributions, we use GitHub to manage
 \begin{itemize}
         \item \textbf{Opening an issue} \\
 
-        Create an issue using \textit{GitHub}'s issue tracker. Whenever there is a team meeting, lecture, or task, a \textit{GitHub} issue should be created using the corresponding templates. An issue created for recording lecture attendance should follow the issue template created for lecture purposes. An issue created for assigning a task (bug fix, adding a new feature) should follow the issue template created for general purpose. An issue created for documenting the team meetings should follow the issue template created for meeting purposes. An issue should have at least one label (e.g. \texttt{bug}, \texttt{documentation}, \texttt{repo management}, etc), and at least one assignee, and project linked to it. After an issue is created, the assignee is responsible for updating the status of the issue inside the \textit{GitHub} project board. There are four different statuses of issues inside the project board and each one of them should be put under the correct column:
+        Create an issue using \textit{GitHub}'s issue tracker. Whenever there is a team meeting, lecture, or task, a \textit{GitHub} issue should be created using the corresponding templates. An issue created for recording lecture attendance should follow the issue template created for lecture purposes. An issue created for assigning a task (bug fix, adding a new feature) should follow the issue template created for general purpose. An issue created for documenting the team meetings should follow the issue template created for meeting purposes. An issue should have at least one label (e.g. \texttt{bug}, \texttt{documentation}, \texttt{repo management}, etc.), and at least one assignee, and project linked to it. After an issue is created, the assignee is responsible for updating the status of the issue inside the \textit{GitHub} project board. There are four different statuses of issues inside the project board and each issue should be put under the correct column:
             \begin{itemize}
-                \item A newly created issue should be put under \texttt{Todo} column.
+                \item A newly created issue should be put under \texttt{Todo} column
                 \item An issue should be put under \texttt{In Progress} column when someone picks it up and starts working on it
-                \item An issue that the work has been done but needs a verification (e.g. when a PR is up and ready for a review) should be put under \texttt{In Verification} column.
+                \item An issue that the work has been done but needs a verification (e.g. when a PR is up and ready for a review) should be put under \texttt{In Verification} column
                 \item  An issue should be put under \texttt{Done} once it gets completed
             \end{itemize}
         \item \textbf{Making code changes} \\
@@ -113,22 +113,17 @@ To better track project progress and work distributions, we use GitHub to manage
         The steps below show when a code change needs to be merged into the main branch: \\
         \begin{enumerate}
             \item Clone the project \textit{GitHub} repository from remote main to local main if the local system does not have it cloned. Otherwise, pull the latest changes from the remote main
-            \item From \textit{VS Code}, open the folder containing the repo, a Dev Container should be configured to run to provide a development environment. \textit{Dev Container} should be used when doing development to ensure the development environment team members are using is consistent
-            \item Create a feature branch follows the naming convention of '[issue number]-[short description]', for example, the branch name '12-create-pr-check-workflow' will be a feature branch designated for the issue \#12 and the commits on this branch should be related to creating a workflow that checks the PR
-                \begin{itemize}
-                    \item Each commit will be checked by a workflow performed by \texttt{GitHub Actions}. The workflow will perform lint checks, automated testing, etc., to make sure code changes are aligned with our code standards and will not break anything. If the run of workflow fails, the PR containing the commits cannot be merged to the main
-                    \item Each PR will have at least one label associated with it, and will have an issue linked to it, otherwise, the PR check workflow will fail and the PR cannot be merged to the main
-                    \item If the branch of the PR is behind the main branch and there are conflicts that have not been solved, then a \texttt{git rebase} is needed to ensure the feature branch is up to date with the main branch, and the conflicts need to be resolved before the PR can be merged
-                \end{itemize}
-
+            \item From \textit{VS Code}, open the folder containing the repo, a \textit{Dev Container} should be configured to run to provide a development environment. \textit{Dev Container} should be used when doing development to ensure the development environment team members are using is consistent
+            \item Create a feature branch following the naming convention of '[issue number]-[short description]', for example, the branch named '12-create-pr-check-workflow' will be a feature branch designated for the issue \#12 and the commits on this branch should be related to creating a workflow that checks the PR
             \item Checkout to the feature branch created and the development should happen inside this branch. Unit tests and integration tests should be developed or updated alongside the code
             \item Commit the code changes on this feature branch using a descriptive message
             \item Push the code changes to the remote feature branch
             \item A branch protection rule is created for the main branch, code changes cannot be merged to the main branch directly, it can only be done by creating a PR, and at least two team members need to review and approve the PR before it can be merged. A draft PR should be created when it is still under development, a regular PR should be opened only when it is ready for a review
-                \begin{itemize}
-                    \item Each commit will be checked by a workflow performed by \texttt{GitHub Actions}. The workflow will perform linting checks, automated testing, etc., to make sure code changes are aligned with our code standards and will not break anything. If the run of workflow fails, the PR containing the commits cannot be merged to the main
-                    \item Each PR will have at least one label associated with it, and will have an issue linked to it, otherwise, the PR check workflow will fail and the PR cannot be merged to the main
-                \end{itemize}
+              \begin{itemize}
+                \item Each commit will be checked by a workflow performed by \texttt{GitHub Actions}. The workflow will perform lint checks, automated testing, etc., to make sure code changes are aligned with our code standards and will not break anything. If the run of workflow fails, the PR containing the commits cannot be merged to the main
+                \item Each PR will have at least one label associated with it, and will have an issue linked to it, otherwise, the PR check workflow will fail and the PR cannot be merged to the main
+                \item If the branch of the PR is behind the main branch and there are conflicts that have not been solved, then a \texttt{git rebase} is needed to ensure the feature branch is up to date with the main branch, and the conflicts need to be resolved before the PR can be merged
+              \end{itemize}
             \item Once the PR is approved and merged
                 \begin{itemize}
                     \item The remote feature branch should be deleted
@@ -150,27 +145,26 @@ To better track project progress and work distributions, we use GitHub to manage
         \item Design a user-centered and user-friendly interface
         \item Deploy a browser-based web app
     \end{itemize}
-    This includes techniques and knowledge spanning databases, data engineering, machine learning, and UI design, which might require a large amount of time to learn, implement, etc. Due to the sheer amount of topics and systems, we wish to implement, this might result in not being able to be fully implemented and well-tested in an 8-month period.
+    This includes techniques and knowledge spanning databases, data engineering, machine learning, and UI design, which might require a large amount of time to learn, implement, etc. Due to the sheer amount of topics and systems we wish to implement, this might result in features not to be fully implemented and well tested in an 8-month period.
 
     \subsection*{Will a part of the implementation be difficult?} 
-    The part of the implementation that we find will be difficult is to construct a whole training pipeline for the task priority classification that involves many steps for example, data ingestion step, preprocessing step, training step, evaluation step, post-process step, etc. It might be difficult to set up the pipeline, define the input and output of each step, arrange all the steps and make them work together, and define the appropriate triggers for starting the pipeline. We could create a flow diagram to show that we have analyzed and defined the input/output of each step, and we could construct a simple training pipeline for a simple classification task: Iris classification, which involves several simple steps including the preprocessing step, training step, and verification step to demonstrate that this can be overcome for the task priority classification.
+    The part of the implementation that we find will be difficult is to construct a whole training pipeline for the task priority classification that involves many steps, for example, data ingestion, preprocessing, training, evaluating, post-processing steps, etc. It might be difficult to set up the pipeline, define the input and output of each step, arrange all the steps and make them work together, and define the appropriate triggers for starting the pipeline. We could create a flow diagram to show that we have analyzed and defined the input/output of each step, and we could construct a simple training pipeline for a simple classification task like Iris classification, which involves several simple steps including the preprocessing, training, and verification to demonstrate that this can be overcome for the task priority classification.
 
     \subsection*{Proof of Concept Demonstration}
-    There might be many moving parts to our idea, but once the basis for them is set up, a lot of them will be managed a lot more smoothly moving forward. In order for us to feel as though our project is moving forward at an acceptable rate, there are a few basic milestones we would like to reach:
+    There might be many moving parts to our idea, but once the basis for them is set up, a lot of them will be managed significantly more smoothly moving forward. In order for us to feel as though our project is moving forward at an acceptable rate, there are a few basic milestones we would like to reach:
 
     \begin{itemize}
-        \item Have a simple data storage, even if it's as basic as reading and writing from a test file for now
+        \item Have a simple data storage, even if it is as basic as reading and writing from a test file for now
         \item A workflow that can extract basic data from a user's syllabus
         \item Preliminary model that accepts syllabus and schedule data
         \item Template pipeline with steps and framework chosen to handle the model training
         \item Host a local-based web app that can handle some basic communication between the model and the database 
         \item Minimal user interface designed simply for functionality
     \end{itemize}
-
-    Setting these up will be the bulk of the learning curve for technologies that aren't our main focus. Setting up a form of simple storage database, website, and data extraction workflow, are all processes that don't need to be altered too much while working with the data. Getting all these done and out of the way at this point will let us be able to focus on the lengthy process that will be fine-tuning the model and training pipeline to try to get the best results from our data.
+    Setting these up will be the bulk of the learning curve for technologies that are not our main focus. Setting up a form of simple storage database, website, and data extraction workflow, are all processes that do not need to be altered too much while working with the data. Getting all these done and out of the way at this point will let us be able to focus on the lengthy process that will be fine-tuning the model and training pipeline to try to get the best results from our data.
 
     \subsection*{Will testing be difficult?}
-    Testing the model's performance will not be difficult as some of us have worked on AI projects that perform cross-validation (K-fold) tests using \textit{scikit-learn} library. For those members that are not familiar with cross-validation testing or \textit{scikit-learn} library, online documentations and tutorials can be found easily for example, accessing \textit{scikit-learn} website from \href{https://scikit-learn.org/stable/index.html}{here}, reading cross-validation documentation from \href{https://scikit-learn.org/stable/modules/cross_validation.html}{here}.
+    Testing the model's performance will not be difficult as some of us have worked on AI projects that perform cross-validation (K-fold) tests using \textit{scikit-learn} library. For those members that are not familiar with cross-validation testing or \textit{scikit-learn} library, online documentations and tutorials can be found easily for them to learn, for example, accessing \textit{scikit-learn} website from \href{https://scikit-learn.org/stable/index.html}{here}, reading cross-validation documentation from \href{https://scikit-learn.org/stable/modules/cross_validation.html}{here}.
     Testing web apps will not be difficult as we have worked with \textit{Python} projects that are using \textit{Streamlit/Flask} as the web framework and \textit{PyTest} as the testing framework from previous co-op work terms and have learned and used those frameworks from projects of previous courses like \textit{SFWRENG 3X03}. As a result, we will be able to perform unit tests and integration tests for the web apps. 
     \subsection*{Is a required library difficult to install?}
     No, the required library is not difficult to install, using tools like \textit{pip} can easily install the library required very easily by running a command line.
@@ -187,7 +181,7 @@ The following tools and packages will be used for the development and management
     \item \textit{Pandas}: A \textit{Python} library that will be used for data manipulations, data visualization, and data analysis
     \item \textit{numpy}: A \textit{Python} library that will be used for numerical computing such as performing operations between arrays
     \item \textit{scikit-learn}: A machine learning library for \textit{Python} that will be used to develop models, set up pipelines, and evaluate the performance of a trained model
-    \item \textit{Flake8}: Linter tool that checks the format of the code against the PEP8 coding standard
+    \item \textit{Flake8}: Linter tool that checks the format of the code against the \textit{PEP8} coding standard
 \end{itemize}
 
 \section{Coding Standard}
