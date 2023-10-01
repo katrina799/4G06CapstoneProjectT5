@@ -1,9 +1,15 @@
 \documentclass{article}
 
-\usepackage{tabularx}
 \usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{indentfirst}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage[margin=1.5in]{geometry}
 
-\title{Problem Statement and Goals\\\progname}
+
+\title{\textbf{Problem Statement \& Goals}\\\textbf{Project Name: \progname}}
+
 
 \author{\authname}
 
@@ -11,6 +17,7 @@
 
 \input{../Comments}
 \input{../Common}
+
 
 \begin{document}
 
@@ -22,35 +29,155 @@
 \toprule
 \textbf{Date} & \textbf{Developer(s)} & \textbf{Change}\\
 \midrule
-Date1 & Name(s) & Description of changes\\
+2023/9/27 & Shuting Shi  &  Initial draft of the document\\
 Date2 & Name(s) & Description of changes\\
 ... & ... & ...\\
 \bottomrule
 \end{tabularx}
 \end{table}
 
-\section{Problem Statement}
+The project is a time management tool designed to assist students in studying and completing coursework efficiently and in an organized manner.
 
-\wss{You should check your problem statement with the
-\href{https://github.com/smiths/capTemplate/blob/main/docs/Checklists/ProbState-Checklist.pdf}
-{problem statement checklist}.}
-\wss{You can change the section headings, as long as you include the required information.}
+\section{Problem Statement}
 
 \subsection{Problem}
 
+    In an era where students are confronted with increasing academic workloads and diverse commitments, managing time and tasks has become a significantly challenging shot.
+
+    This project aims to ease the burden which students are undergoing by developing an application tailored to the specific needs of students. Our application employs a user-friendly interface and leverages the power of machine learning to automate task generation, prioritize assignments intelligently, and facilitate progress tracking. Additionally, it integrates with popular calendar platforms in the current industry, provides time usage predictions, fosters collaborative studying, incorporates facial recognition technology, and offers flexible task customization. Hence, this design encompasses the development of a website, mobile app, a centralized database, a social network component, and a comprehensive training pipeline.
 \subsection{Inputs and Outputs}
 
-\wss{Characterize the problem in terms of ``high level'' inputs and outputs.  
-Use abstraction so that you can avoid details.}
+\subsubsection{Automated Task Generation}
+\vspace{1ex}
+
+\noindent Input: Course outline/syllabus document in PDF format and the user preferences.
+
+\noindent Output: Customized daily task schedule.
+   
+\subsubsection{Intelligent Task Prioritization}
+\vspace{1ex}
+
+\noindent Input: Task details including due dates, percentage of the final grade, task complexity (may manually input by users), and course credits.
+
+\noindent Output: Prioritized task list with highlights.
+ 
+\subsubsection{Progress Visualization}
+\vspace{1ex}
+
+\noindent Input: Task list and progress updates.
+
+\noindent Output: Visual representation of task progress within the user interface.
+ 
+\subsubsection{Calendar Integration}
+\vspace{1ex}
+
+\noindent Input: User's calendar events from platforms like Google Calendar and Outlook Calendar.
+
+\noindent Output: Integrated calendar with task deadlines.
+ 
+\subsubsection{Time Usage Prediction}
+\vspace{1ex}
+
+\noindent Input: User's logged time and progress data.
+
+\noindent Output: Estimated time needed for completing tasks.
+
+\subsubsection{Study Plan Adjustment}
+\vspace{1ex}
+
+\noindent Input: User's input on task progress.
+
+\noindent Output: Adjusted study plan based on progress updates.
+
+\subsubsection{Pomodoro Timer}
+\vspace{1ex}
+
+\noindent Input: User settings for Pomodoro intervals.
+
+\noindent Output: Timer for Pomodoro technique.
+
+
+\subsubsection{Study with Peers}
+\vspace{1ex}
+
+\noindent Input: User connections, video chat requests.
+
+\noindent Output: Real-time video chat and collaborative study sessions.
+     
+
+\subsubsection{Facial Recognition}
+\vspace{1ex}
+
+\noindent Input: User's dynamic facial movements for attention level detection.
+
+\noindent Output: Feedback on user's attention level, and corresponding adjustment for user's study schedule.
+
+\subsubsection{Flexible Modification}
+\vspace{1ex}
+
+\noindent Input: User requests to modify tasks or study plans.
+
+\noindent Output: Customized tasks and study plans tailored to user needs.
+
 
 \subsection{Stakeholders}
 
+    Students in various levels of education, from high school to college institutions, have an overwhelming volume of schoolwork, and also the ones who are looking for study partners. 
+
+    Teachers and institutions who seek success and foster management skills of the student.
+
+    The target users are not constrained by demography or institution type and can be anywhere worldwide.
+
 \subsection{Environment}
+\subsubsection{Server Hardware}
+Web Server, Database Server, Machine Learning Server
+\subsubsection{Client Devices}
+Desktop Computers, Mobile Devices
+\subsubsection{Video Conferencing Hardware}
+Webcams, Microphones, Speakers
 
-\wss{Hardware and software}
-
+\subsubsection{Development Tools}
+Web Development, UI/UX Design Tools
 \section{Goals}
+
+    \subsection{Automated Task Generation}
+    
+    The foremost goal is to create a feature that allows users to upload course outlines in PDF format, enabling the application to automatically generate tasks based on due dates. This feature aims to reduce manual data entry efforts and in turn, enhances student study managing efficiency.
+       
+    \subsection{Intelligent Task Prioritization}
+
+    Implement machine learning algorithms to intelligently prioritize tasks based on due dates, percentage of final grade, task complexity, and course credits. The goal is to help users identify and focus on the most critical tasks and help students manage their coursework more effectively to improve overall academic performance.
+    
+    \subsection{Progress Visualization}
+    This application creates a user-friendly interface that enables students to track the progress of their tasks easily and straightforwardly. This visual representation of task completion status aims to help students control the pace of learning and avoid late assignment submissions.
+ 
+    \subsection{Calendar Integration}
+    The finished product enables integration with popular calendar platforms in the market such as Google Calendar and Outlook Calendar, and ensures synchronization of coursework deadlines with students' existing schedules, reducing the likelihood of missed deadlines.
+    
+    \subsection{Time Usage Prediction}
+    The finished product estimates the time required to complete specific tasks based on users' logged time and progress data which allows students to allocate their study time effectively and efficiently.
+
+ 
+    \subsection{Study Plan Adjustment}
+    This application allows users to input their progress percentages, and dynamically adjust study plans to accommodate their individual learning pace, which optimizes students' study schedules and reduces their stress.
+
+
+    \subsection{Pomodoro Timer}
+    The finished product helps users enhance their study efficiency through focused time management and supports productive study sessions with scheduled breaks, improving concentration and also benefiting students' health.
 
 \section{Stretch Goals}
 
+    \subsection{Study with Peers}
+
+    The product could have a collaborative feature that enables students to connect with classmates and friends for video-based study online sessions, which facilitates group learning and collaboration, enhancing students' understanding of course materials.        
+    
+    
+    \subsection{Facial Recognition}
+     The product could implement facial recognition technology to detect users' attention levels during study sessions, which offers insights into users' engagement and concentration, encouraging the establishment of focused study habits for students.
+
+    \subsection{Flexible Modification}
+    The product could let users modify and tailor generated tasks and study plans according to their specific needs and preferences which accommodates individual learning styles and evolving study requirements.
+\section{Conclusion}
+
+    By addressing the identified problem and achieving these goals, our project aims to provide students with a comprehensive, user-centric solution that empowers them to manage their time and tasks effectively, reduce academic stress, and enhance their overall academic success and well-being.
 \end{document}
