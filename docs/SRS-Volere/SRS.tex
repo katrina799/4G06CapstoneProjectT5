@@ -55,8 +55,10 @@ Date 2 & 1.1 & Notes\\
 \section{Purpose of the Project}
 \subsection{User Business}
 \lips
+The users would be students in high school to college institutes all over the world dealing with multiple courses.
+
 \subsection{Goals of the Project}
-\lips
+We aim to develop a tool to help students integrate multiple course information with their personal schedules to generate a customized study plan. The plan should dynamically self-adjust according to the user's preference and study efficiency so that students can finish their deliverables before the deadline at their own pace with minimal pressure.
 \section{Stakeholders}
 \subsection{Client}
 \lips
@@ -81,7 +83,7 @@ Date 2 & 1.1 & Notes\\
 \subsection{Implementation Environment of the Current System}
 \lips
 \subsection{Partner or Collaborative Applications}
-\lips
+Our system would import event data from and export generated studen plan to popular calendar applications like Google Calendar and Outlook Calendar. 
 \subsection{Off-the-Shelf Software}
 \lips
 \subsection{Anticipated Workplace Environment}
@@ -131,8 +133,63 @@ involved in the Project}
 \lips
 
 \section{Functional Requirements}
-\subsection{Functional Requirements}
-\lips
+\subsection{Authentication}
+\subsubsection{}
+The user could create an account with a username and a password.
+\subsubsection{}
+The user could log in to their account by providing a corresponding username and password.
+\subsubsection{}
+The user could access their and only their scheduling information once logged in.
+
+
+\subsection{User input}
+\subsubsection{}
+Without overwriting, the user could upload multiple \textit{.pdf} files containing course outlines.
+\subsubsection{}
+The system prompts users to choose their preferred study interval at which the system tends to allocate study sessions and allows changes later.
+\subsubsection{}
+The system prompts users to set their preferred Pomodoro intervals and allows changes later. 
+\subsubsection{}
+The system supports a friend list allowing users to send/reject/accept friend requests.
+\subsubsection{}
+On finishing each sub-task, the system would ask for the user's feedback on whether the pace i comfortable.
+
+\subsection{Data}
+\subsubsection{}
+The system could extract information including \texttt{courseName, taskType, taskName, weight, deadline} from uploaded course outline \textit{.pdf} files.
+\subsubsection{}
+With authentication, the system could import event and schedule data from other calendar apps including Calendar, Outlook, and Google Calendar.
+
+\subsubsection{}
+With authentication, the system could export event and schedule data to other calendar apps including Calendar, Outlook, and Google Calendar.
+
+
+
+
+\subsection{Scheduling}
+\subsubsection{}
+The system could calculate the estimated time needed to finish each task extracted from course outlines. 
+
+\subsubsection{}
+The estimated time needed to finish each task would dynamically adjust based on user feedback on past task completion progress.
+
+\subsubsection{}
+The system could prioritize tasks extracted based on \texttt{taskType, weight} and \texttt{deadline}.
+
+\subsubsection{}
+With data containing task information, preferred study time, schedule, and Pomodoro intervals gathered the system could generate a detailed study plan containing multiple sub-tasks for each task in the course outline available in-app and export it to other calendars.
+
+
+\subsubsection{}
+The system would have a Pomodoro clock ready for each sub-task.
+
+
+
+\subsubsection{}
+The system allows users to check their progress on each task and adjust the time needed.
+
+\subsubsection{}
+With a detailed study plan, the system could pair friends from the friend list with similar study plans to have video-based online study sessions.
 
 \section{Look and Feel Requirements}
 \subsection{Appearance Requirements}
