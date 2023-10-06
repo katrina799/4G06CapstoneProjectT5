@@ -12,6 +12,9 @@
 *.cb2
 .*.lb
 
+#IDE metadata
+**.idea/**
+
 ## Intermediate documents:
 *.dvi
 *.xdv
