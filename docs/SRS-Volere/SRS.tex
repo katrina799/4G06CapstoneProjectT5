@@ -207,18 +207,30 @@ With a detailed study plan, the system could pair friends from the friend list w
 
 \section{Usability and Humanity Requirements}
 \subsection{Ease of Use Requirements}
-The system must be easy to use by users with at least a grade 9 education background.
+The navigation must be intuitive to use by users with \texttt{MIN\_EDUCATION} education background.
+
+\textbf{Fit Criterion:} \texttt{MIN\_UNDERSTAND\%} of users with at least \texttt{MIN\_EDUCATION} of education could navigate through functions within \texttt{MAX\_TRIAL\_TIME} of exploring.
+
 \subsection{Personalization and Internationalization Requirements}
 N/A
 \subsection{Learning Requirements}
-The system must be understood by users within 10 minutes of exploring.
+The system must be understood by users within \texttt{MAX\_TRIAL\_TIME} of exploring.
+
+\textbf{Fit Criterion:} \texttt{MIN\_UNDERSTAND\%} of users with at least \texttt{MIN\_EDUCATION} of education could understand the system within \texttt{MAX\_TRIAL\_TIME} of exploring.
 \subsection{Understandability and Politeness Requirements}
 \subsubsection{}
-The language in the app must be grammatically correct 99\% of the time.
+The language in the app must be grammatically correct \texttt{MIN\_grammar\%} of the time.
+
+\textbf{Fit Criterion:} A group of \texttt{MIN\_TESTER\_NUM}  users could find no more than \texttt{MAX\_BAD\_GRAMMAR} of grammar mistakes.
+
 \subsubsection{}
 The language in the app must be non-offensive.
+
+\textbf{Fit Criterion:} A group of \texttt{MIN\_TESTER\_NUM} users could find no more than \texttt{MAX\_OFFENSIVE} of offensive messages.
 \subsection{Accessibility Requirements}
 Color combinations used in the interface must be distinguished by users with color blindness.
+
+\textbf{Fit Criterion:} A group of \texttt{MIN\_TESTER\_NUM} users could find no more than \texttt{MAX\_COLOR\_AMBIGUOUS} of indistinguishable color combinations in the UI filtered with Color Oracle.
 
 \section{Performance Requirements}
 \subsection{Speed and Latency Requirements}
@@ -240,12 +252,18 @@ Color combinations used in the interface must be distinguished by users with col
 \subsection{Expected Physical Environment}
 The system must be operable under the same physical environment that the desktop computer running it is operable.
 
+\textbf{Fit Criterion:} When the machine is operable, the system is operable at least \texttt{MIN\_OPERABLE\%} of time.
+
 \subsection{Requirements for Interfacing with Adjacent Systems}
 The system could interface with calendar APIs when called.
+
+\textbf{Fit Criterion:} At least \texttt{MIN\_API\_SUCCESS\%} of requests made to supported calendar APIs are success.
 \subsection{Productization Requirements}
 N/A
 \subsection{Release Requirements}
 The released version must pass all known regression tests.
+
+\textbf{Fit Criterion:} The released version must pass \texttt{MIN\_REGRESSION\_PASS\%} of regression tests. 
 
 \section{Maintainability and Support Requirements}
 \subsection{Maintenance Requirements}
@@ -259,15 +277,21 @@ The released version must pass all known regression tests.
 \subsection{Access Requirements}
 \subsubsection{}
 The system is accessible only if the correct combo of username and password is provided.
+
+\textbf{Fit Criterion:} An error message suggesting incorrect password or username is displayed.
 \subsubsection{}
 Users could not access other users' data.
+
+\textbf{Fit Criterion:} Only data linked to current logged in account could be displayed.
 \subsection{Integrity Requirements}
 No Unauthorised entity could modify the database.
+
+\textbf{Fit Criterion:} A group of \texttt{MIN\_TESTER\_NUM} unauthorised users could not modify data.
 \subsection{Privacy Requirements}
-\subsubsection{}
+
 The system will not release user information to a third party.
-\subsubsection{}
-user authentication information will be stored with encryption.
+
+\textbf{Fit Criterion:} The system does not provide user information to a third party.
 \subsection{Audit Requirements}
 N/A
 \subsection{Immunity Requirements}
@@ -280,8 +304,12 @@ N/A
 \section{Compliance Requirements}
 \subsection{Legal Requirements}
 The system must comply with local laws and regulations.
+
+\textbf{Fit Criterion:} The system does not violate local laws or regulations.
 \subsection{Standards Compliance Requirements}
 The code must comply with \textit{Flack8} coding standards.
+
+\textbf{Fit Criterion:} Merged code passes Flake8 linter workflow check.
 
 \section{Open Issues}
 \lips
