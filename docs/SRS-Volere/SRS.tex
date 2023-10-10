@@ -258,7 +258,20 @@ Inhibit the New Product}
 \lips
 
 \section{Ideas for Solution}
-\lips
+\subsection{Requirement FR 9.2.1 Without overwriting, the user could upload multiple PDF files containing course outlines.}
+\textbf{Potential solution}: We could use a Python web framework Flask to set up a web app which supports accessing and uploading multiple files with PDF extensions.\\
+\textbf{Advantages}: This will allow users to upload their PDF easily and more securely, and with no additional effort required for developers to implement and test these features, as Flask has already taken care of it for us.\\
+\textbf{Disadvantages}: Using Flask to support this feature doesn't present any foreseeable disadvantages in the near future. \\
+
+\subsection{Requirement: FR 9.4.3 The system could prioritize tasks extracted based on taskType, weight and deadline.}
+
+\textbf{Potential solution}: A inference pipeline could be set up to give inference on the unclassified tasks using taskType, weight and deadline as the inputs. The inference pipeline could use a trained model of task priority classification.\\
+\textbf{Advantages}: Setting an inference pipeline could be more flexible and could potentially give better results than implementing an fixed algorithm for giving predictions. Several steps for the inference pipeline could be constructed and it will be easier to make changes once it gets set up, simply adding, changing or removing steps when there is a future requirement.\\
+\textbf{Disadvantages}: There will be an overload of defining each step and connecting them. \\
+\subsection{Requirement:  FR 9.4.6 The system allows users to check their progress on each task and adjust the time needed.}
+\textbf{Potential solution}: Could implement a cloud based solution for holding and retrieving data of task, time, etc. A potential choice could be using AWS S3\\
+\textbf{Advantages}: This would allow users to check their progress of task and time in a more available, reliable, and well-managed service. The data can be well secured and can be accessed in many ways for example using AWS S3, AWS console, AWS Command Line, providing multiple ways for developers to implement  \\
+\textbf{Disadvantages}: There is a cost associated with it when using third party cloud services
 
 \newpage{}
 \section*{Appendix --- Reflection}
@@ -279,7 +292,7 @@ graduate attribute of Lifelong Learning.  Please answer the following questions:
   \begin{itemize}
     \item GitHub features such as issue tracker, using workflows/Github Actions, setting up Dev Containers, etc.
     \item Machine learning and neural network knowledge for the developing and optimizing task priority classification models
-    \item Machine learning libraries and framework such as pandas, scikit-learn, and Keras
+    \item Machine learning libraries and frameworks such as pandas, scikit-learn, and Keras
     \item Python web framework for web development such Streamlit and Flask
     \item Agile methodologies such as sprint planning and for team management, efficient collaborations and constant delivery, which is important for incremental and iterative development like this project
 \end{itemize}
