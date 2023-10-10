@@ -19,6 +19,15 @@
 }
 
 \newcommand{\lips}{\textit{Insert your content here.}}
+\newcounter{reqnum} %Functional requirement number
+\newcommand{\rthereqnum}{FR\refstepcounter{reqnum}\thereqnum:}
+\newcommand{\frref}[1]{FR\ref{#1}}
+\newcounter{nfreqnum} %Non-functional requirement number
+\newcommand{\rthenfreqnum}{FR\refstepcounter{nfreqnum}\thenfreqnum:}
+\newcommand{\rref}[1]{R\ref{#1}}
+\newcounter{nfrnum} %NFR Number
+\newcommand{\rthenfrnum}{NFR\refstepcounter{nfrnum}\thenfrnum:}
+\newcommand{\nfrref}[1]{NFR\ref{#1}}
 
 \input{../Comments}
 \input{../Common}
@@ -151,7 +160,7 @@ parameter & value & unit & description\\
 \subsection{Relevant Facts}
 Manually reading through multiple course outlines, inputting all the deliverable information into the calendar, and crunch time has always been an inefficient part of academic life. Students wish to have a seamless tool integrating deadline management into their everyday lives without risking overdue penalties.
 \subsection{Business Rules}
-\lips
+N/A
 \subsection{Assumptions}
 \subsubsection{}
 Course outlines are available as PDF files.
@@ -186,76 +195,83 @@ Users have a relatively stable weekly schedule.
 
 \section{Functional Requirements}
 \subsection{Authentication}
-\subsubsection{}
+\begin{itemize}
+
+\item[\rthereqnum \label{R_GetConsent}]
 The user could create an account with a username and a password.
-\subsubsection{}
+\item[\rthereqnum \label{R_GetConsent}]
 The user could log in to their account by providing a corresponding username and password.
-\subsubsection{}
+\item[\rthereqnum \label{R_GetConsent}]
 The user should be able to log out of the account.
-\subsubsection{}
+\item[\rthereqnum \label{R_GetConsent}]
 The user should be access to their scheduling information once logged in.
+
+\end{itemize}
 
 
 \subsection{User input}
-\subsubsection{}
+\begin{itemize}
+\item[\rthereqnum \label{R_GetConsent}]
 The user could upload multiple \textit{.pdf} files containing course outlines to the system.
-\subsubsection{}
+\item[\rthereqnum \label{R_GetConsent}]
 The system prompts users to choose their preferred study interval at which the system tends to allocate study sessions.
-\subsubsection{}
+\item[\rthereqnum \label{R_GetConsent}]
 The user could change their preferred study interval.
-\subsubsection{}
+\item[\rthereqnum \label{R_GetConsent}]
 The system prompts users to set their preferred Pomodoro intervals. 
-\subsubsection{}
+\item[\rthereqnum \label{R_GetConsent}]
 The user could change their Pomodoro interval
-\subsubsection{}
+\item[\rthereqnum \label{R_GetConsent}]
 The system supports a friend list allowing users to send friend requests.
-\subsubsection{}
+\item[\rthereqnum \label{R_GetConsent}]
 The user could accept an incoming friend request.
-\subsubsection{}
+\item[\rthereqnum \label{R_GetConsent}]
 The user could reject an incoming friend request.
-\subsubsection{}
+\item[\rthereqnum \label{R_GetConsent}]
 The user could change the progress of each task
-\subsubsection{}
+\item[\rthereqnum \label{R_GetConsent}]
 On finishing each sub-task, the system should ask for the user's feedback on whether the pace is comfortable.
-
+\end{itemize}
 
 \subsection{Data}
-\subsubsection{}
+\begin{itemize}
+\item[\rthereqnum \label{R_GetConsent}]
 The system could extract information including \texttt{courseName, taskType, taskName, weight, deadline} from uploaded course outline \textit{.pdf} files.
-\subsubsection{}
+\item[\rthereqnum \label{R_GetConsent}]
 The system could generate a list of tasks from uploaded PDFs 
-\subsubsection{}
+\item[\rthereqnum \label{R_GetConsent}]
 The system could assign proritoy to each task generated.
-\subsubsection{}
+\item[\rthereqnum \label{R_GetConsent}]
 The system could detect user's attention level
-\subsubsection{}
+\item[\rthereqnum \label{R_GetConsent}]
 The system should notify the user when the user's attention level is low
-\subsubsection{}
+\item[\rthereqnum \label{R_GetConsent}]
 The user should be able to view the status of each task
-\subsubsection{}
+\item[\rthereqnum \label{R_GetConsent}]
 With authentication, the system could import event and schedule data from other calendar apps including Calendar, Outlook, and Google Calendar.
-\subsubsection{}
+\item[\rthereqnum \label{R_GetConsent}]
 With authentication, the system could export event and schedule data to other calendar apps including Calendar, Outlook, and Google Calendar.
-\subsubsection{}
+\item[\rthereqnum \label{R_GetConsent}]
 The user should be able to export their study plan as a PDF
-
+\end{itemize}
 
 \subsection{Scheduling}
-
-\subsubsection{}
+\begin{itemize}
+\item[\rthereqnum \label{R_GetConsent}]
 The system could calculate the estimated time needed to finish each task. 
-\subsubsection{}
+\item[\rthereqnum \label{R_GetConsent}]
 The user could regenerate a study plan accordingly once a task's progress is changed by user
-\subsubsection{}
+\item[\rthereqnum \label{R_GetConsent}]
 The estimated time needed to finish each task would dynamically adjust based on user feedback on past task completion progress.
-\subsubsection{}
+\item[\rthereqnum \label{R_GetConsent}]
 The system could prioritize tasks extracted based on \texttt{taskType, weight} and \texttt{deadline}.
-\subsubsection{}
+\item[\rthereqnum \label{R_GetConsent}]
 With data containing task information, preferred study time, schedule, and Pomodoro intervals gathered the system could generate a detailed study plan containing multiple sub-tasks for each task in the course outline available in-app and export it to other calendars.
-\subsubsection{}
+\item[\rthereqnum \label{R_GetConsent}]
 The system would have a Pomodoro clock ready for each sub-task.
-\subsubsection{}
+\item[\rthereqnum \label{R_GetConsent}]
 With a detailed study plan, the system could pair friends from the friend list with similar study plans to have video-based online study sessions.
+\end{itemize}
 \section{Look and Feel Requirements}
 \subsection{Appearance Requirements}
 \lips
@@ -264,31 +280,39 @@ With a detailed study plan, the system could pair friends from the friend list w
 
 \section{Usability and Humanity Requirements}
 \subsection{Ease of Use Requirements}
-The navigation must be intuitive to use by users with \texttt{MIN\_EDUCATION} education background.
+\begin{itemize}
+\item[\rthenfrnum]The navigation must be intuitive to use by users with \texttt{MIN\_EDUCATION} education background.
 
 \textbf{Fit Criterion:} \texttt{MIN\_UNDERSTAND\%} of users with at least \texttt{MIN\_EDUCATION} of education could navigate through functions within \texttt{MAX\_TRIAL\_TIME} of exploring.
-
+\end{itemize}
 \subsection{Personalization and Internationalization Requirements}
 N/A
 \subsection{Learning Requirements}
+\begin{itemize}
+\item[\rthenfrnum]
 The system must be understood by users within \texttt{MAX\_TRIAL\_TIME} of exploring.
 
 \textbf{Fit Criterion:} \texttt{MIN\_UNDERSTAND\%} of users with at least \texttt{MIN\_EDUCATION} of education could understand the system within \texttt{MAX\_TRIAL\_TIME} of exploring.
+\end{itemize}
 \subsection{Understandability and Politeness Requirements}
-\subsubsection{}
+\begin{itemize}
+\item[\rthenfrnum]
 The language in the app must be grammatically correct \texttt{MIN\_grammar\%} of the time.
 
 \textbf{Fit Criterion:} A group of \texttt{MIN\_TESTER\_NUM}  users could find no more than \texttt{MAX\_BAD\_GRAMMAR} of grammar mistakes.
 
-\subsubsection{}
+\item[\rthenfrnum]
 The language in the app must be non-offensive.
 
 \textbf{Fit Criterion:} A group of \texttt{MIN\_TESTER\_NUM} users could find no more than \texttt{MAX\_OFFENSIVE} of offensive messages.
+\end{itemize}
 \subsection{Accessibility Requirements}
+\begin{itemize}
+\item[\rthenfrnum]
 Color combinations used in the interface must be distinguished by users with color blindness.
 
 \textbf{Fit Criterion:} A group of \texttt{MIN\_TESTER\_NUM} users could find no more than \texttt{MAX\_COLOR\_AMBIGUOUS} of indistinguishable color combinations in the UI filtered with Color Oracle.
-
+\end{itemize}
 \section{Performance Requirements}
 \subsection{Speed and Latency Requirements}
 \lips
@@ -307,21 +331,28 @@ Color combinations used in the interface must be distinguished by users with col
 
 \section{Operational and Environmental Requirements}
 \subsection{Expected Physical Environment}
+\begin{itemize}
+\item[\rthenfrnum]
 The system must be operable under the same physical environment that the desktop computer running it is operable.
 
 \textbf{Fit Criterion:} When the machine is operable, the system is operable at least \texttt{MIN\_OPERABLE\%} of time.
-
+\end{itemize}
 \subsection{Requirements for Interfacing with Adjacent Systems}
+\begin{itemize}
+\item[\rthenfrnum]
 The system could interface with calendar APIs when called.
 
 \textbf{Fit Criterion:} At least \texttt{MIN\_API\_SUCCESS\%} of requests made to supported calendar APIs are success.
+\end{itemize}
 \subsection{Productization Requirements}
 N/A
 \subsection{Release Requirements}
+\begin{itemize}
+\item[\rthenfrnum]
 The released version must pass all known regression tests.
 
 \textbf{Fit Criterion:} The released version must pass \texttt{MIN\_REGRESSION\_PASS\%} of regression tests. 
-
+\end{itemize}
 \section{Maintainability and Support Requirements}
 \subsection{Maintenance Requirements}
 \lips
@@ -332,23 +363,30 @@ The released version must pass all known regression tests.
 
 \section{Security Requirements}
 \subsection{Access Requirements}
-\subsubsection{}
+\begin{itemize}
+\item[\rthenfrnum]
 The system is accessible only if the correct combo of username and password is provided.
 
 \textbf{Fit Criterion:} An error message suggesting incorrect password or username is displayed.
-\subsubsection{}
+\item[\rthenfrnum]
 Users could not access other users' data.
 
 \textbf{Fit Criterion:} Only data linked to current logged in account could be displayed.
+\end{itemize}
 \subsection{Integrity Requirements}
+\begin{itemize}
+\item[\rthenfrnum]
 No Unauthorised entity could modify the database.
 
 \textbf{Fit Criterion:} A group of \texttt{MIN\_TESTER\_NUM} unauthorised users could not modify data.
+\end{itemize}
 \subsection{Privacy Requirements}
-
+\begin{itemize}
+\item[\rthenfrnum]
 The system will not release user information to a third party.
 
 \textbf{Fit Criterion:} The system does not provide user information to a third party.
+\end{itemize}
 \subsection{Audit Requirements}
 N/A
 \subsection{Immunity Requirements}
@@ -360,13 +398,19 @@ N/A
 
 \section{Compliance Requirements}
 \subsection{Legal Requirements}
+\begin{itemize}
+\item[\rthenfrnum]
 The system must comply with local laws and regulations.
 
 \textbf{Fit Criterion:} The system does not violate local laws or regulations.
+\end{itemize}
 \subsection{Standards Compliance Requirements}
+\begin{itemize}
+\item[\rthenfrnum]
 The code must comply with \textit{Flack8} coding standards.
 
 \textbf{Fit Criterion:} Merged code passes Flake8 linter workflow check.
+\end{itemize}
 
 \section{Open Issues}
 \lips
