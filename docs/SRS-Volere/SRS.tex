@@ -199,12 +199,28 @@ Users have a relatively stable weekly schedule.
 
 \item[\rthereqnum]
 The user could create an account with a username and a password.
+
+\textbf{Rational:} Users would need an account protected by a password to keep their schedule personal and private.
+
+\textbf{Priority:} HIGH
 \item[\rthereqnum]
 The user could log in to their account by providing a corresponding username and password.
+
+\textbf{Rational:} Users would need to access their account.
+
+\textbf{Priority:} HIGH
 \item[\rthereqnum]
 The user should be able to log out of the account.
+
+\textbf{Rational:} Users do not have to stay logged in.
+
+\textbf{Priority:} HIGH
 \item[\rthereqnum]
 The user should have access to their scheduling information once logged in.
+
+\textbf{Rational:} User's scheduling information should be available to them.
+
+\textbf{Priority:} HIGH
 
 \end{itemize}
 
@@ -213,64 +229,168 @@ The user should have access to their scheduling information once logged in.
 \begin{itemize}
 \item[\rthereqnum \label{R_upload_pdf}]
 The user could upload multiple PDF files containing course outlines to the system.
+
+\textbf{Rational:} Multiple courses would have multiple course outlines.
+
+\textbf{Priority:} HIGH
 \item[\rthereqnum]
 The system prompts users to choose their preferred study interval at which the system tends to allocate study sessions.
+
+\textbf{Rational:} The user would want to have their study session schedules at their preferred time.
+
+\textbf{Priority:} MEDIUM
 \item[\rthereqnum]
 The user could change their preferred study interval.
+
+\textbf{Rational:} The user's preferred study interval could change over time. 
+
+\textbf{Priority:} MEDIUM
 \item[\rthereqnum]
 The system prompts users to set their preferred Pomodoro intervals. 
+
+\textbf{Rational:} The user might have preferred Pomodoro intervals.
+
+\textbf{Priority:} MEDIUM
 \item[\rthereqnum]
-The user could change their Pomodoro interval
+The user could change their Pomodoro interval.
+
+\textbf{Rational:} The user's preferred Pomodoro intervals could change over time.
+
+\textbf{Priority:} MEDIUM
 \item[\rthereqnum]
 The system supports a friend list allowing users to send friend requests.
+
+\textbf{Rational:} The user needs to send friend requests to add friends.
+
+\textbf{Priority:} LOW
 \item[\rthereqnum]
 The user could accept an incoming friend request.
+
+\textbf{Rational:} The user could accept the friend request if they wish to befriend the request sender.
+
+\textbf{Priority:} MEDIUM
 \item[\rthereqnum]
 The user could reject an incoming friend request.
+
+\textbf{Rational:} The user could reject the friend request if they wish not to befriend the request sender.
+
+\textbf{Priority:} MEDIUM
 \item[\rthereqnum]
 The user could change the progress of each task
+
+\textbf{Rational:} The progress of each task should align with reality.
+
+\textbf{Priority:} HIGH
 \item[\rthereqnum]
 On finishing each sub-task, the system should ask for the user's feedback on whether the pace is comfortable.
+
+\textbf{Rational:} The schedule needs feedback to adjust the pace.
+
+\textbf{Priority:} HIGH
 \end{itemize}
 
 \subsection{Data}
 \begin{itemize}
 \item[\rthereqnum]
 The system could extract information including \texttt{courseName, taskType, taskName, weight, deadline} from the uploaded course outline PDF files.
+
+\textbf{Rational:} Course outlines would be provided as PDF files containing course information.
+
+\textbf{Priority:} HIGH
 \item[\rthereqnum]
-The system could generate a list of tasks from uploaded PDFs 
+The system could generate a list of tasks from uploaded PDFs.
+
+\textbf{Rational:} To generate a study plan, tasks to be finished are needed.
+
+\textbf{Priority:} HIGH
 \item[\rthereqnum \label{R_prioritize_task}]
 The system could assign priority to each task generated.
+
+\textbf{Rational:} From priority the system could allocate adequate time to finish each task.
+
+\textbf{Priority:} HIGH
 \item[\rthereqnum]
-The system could detect the user's attention level
+The system could detect the user's attention level.
+
+\textbf{Rational:} The user's attention level is needed to allocate rest time.
+
+\textbf{Priority:} MEDIUM
 \item[\rthereqnum]
-The system should notify the user when the user's attention level is low
+The system should notify the user when the user's attention level is low.
+
+\textbf{Rational:} The system would keep the user engaged in their study task.
+
+\textbf{Priority:} MEDIUM
 \item[\rthereqnum \label{R_check_task_progress}]
-The user should be able to view the progress of each task
+The user should be able to view the progress of each task.
+
+\textbf{Rational:} The user would want to see their progress.
+
+\textbf{Priority:} HIGH
 \item[\rthereqnum]
 With authentication, the system could import event and schedule data from other calendar apps including Calendar, Outlook, and Google Calendar.
+
+\textbf{Rational:} Study session allocation would consider avoiding conflicts with existing events.
+
+\textbf{Priority:} MEDIUM
 \item[\rthereqnum]
 With authentication, the system could export event and schedule data to other calendar apps including Calendar, Outlook, and Google Calendar.
+
+\textbf{Rational:} The user would want to use their own calendar of choice.
+
+\textbf{Priority:} MEDIUM
 \item[\rthereqnum]
-The user should be able to export their study plan as a PDF
+The user should be able to export their study plan as a PDF.
+
+\textbf{Rational:} The user could want to have an overview of their study plan offline.
+
+\textbf{Priority:} LOW
 \end{itemize}
 
 \subsection{Scheduling}
 \begin{itemize}
 \item[\rthereqnum]
 The system could calculate the estimated time needed to finish each task. 
+
+\textbf{Rational:} Total required tie is needed to decide the amount of subtasks needed.
+
+\textbf{Priority:} HIGH
 \item[\rthereqnum]
 The user could regenerate a study plan accordingly once a task's progress is changed by the user.
+
+\textbf{Rational:} Previously generated study plans could be outdated.
+
+\textbf{Priority:} HIGH
 \item[\rthereqnum]
 The estimated time needed to finish each task would dynamically adjust based on user feedback on past task completion progress.
+
+\textbf{Rational:} Estimated time needed may not be perfect.
+
+\textbf{Priority:} HIGH
 \item[\rthereqnum]
 The system could prioritize tasks extracted based on \texttt{taskType, weight} and \texttt{deadline}.
+
+\textbf{Rational:} The system would ensure high-priority tasks are finished on time.
+
+\textbf{Priority:} HIGH
 \item[\rthereqnum]
 With data containing task information, preferred study time, schedule, and Pomodoro intervals gathered the system could generate a detailed study plan containing multiple sub-tasks for each task in the course outline available in-app and export it to other calendars.
+
+\textbf{Rational:} A detailed study plan contains all the sub-tasks and their settings.
+
+\textbf{Priority:} HIGH
 \item[\rthereqnum]
 The system would have a Pomodoro clock ready for each sub-task.
+
+\textbf{Rational:} A Pomodoro clock would help the user balance their study and rest.
+
+\textbf{Priority:} MEDIUM
 \item[\rthereqnum]
 With a detailed study plan, the system could pair friends from the friend list with similar study plans to have video-based online study sessions.
+
+\textbf{Rational:} Friends with similar tasks at similar times could collaborate and inspire each other.
+
+\textbf{Priority:} LOW
 \end{itemize}
 \section{Look and Feel Requirements}
 \subsection{Appearance Requirements}
