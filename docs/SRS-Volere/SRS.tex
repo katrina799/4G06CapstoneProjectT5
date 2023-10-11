@@ -135,7 +135,7 @@ parameter & value & unit & description\\
 \hline
 \texttt{MIN\_EDUCATION} & high school & N/A & the minimum level of education\\
 \hline
-\texttt{MIN\_UNDERSTAND\%} & 95\% & N/A & the minimum percentage of testers who can understand among all testers\\
+\texttt{MIN\_UNDERSTAND\%} & 95 & N/A & the minimum percentage of testers who can understand among all testers\\
 \hline
 \texttt{MAX\_TRIAL\_TIME} & 1200 & \texttt{s} & the maximum allowed trial time\\
 \hline
@@ -147,11 +147,11 @@ parameter & value & unit & description\\
 \hline
 \texttt{MAX\_COLOR\_AMBIGUOUS} & 0& N/A & the maximum occurrence of indistinguishable color combinations allowed\\
 \hline
-\texttt{MIN\_OPERABLE\%} & 95\% & N/A & the minimum percentage of system being operable \\
+\texttt{MIN\_OPERABLE\%} & 95 & N/A & the minimum percentage of system being operable \\
 \hline
-\texttt{MIN\_API\_SUCCESS\%} & 95\% & N/A &  the minimum percentage of successful API calls\\
+\texttt{MIN\_API\_SUCCESS\%} & 95 & N/A &  the minimum percentage of successful API calls\\
 \hline
-\texttt{MIN\_REGRESSION\_PASS\%} & 100\%  & N/A &  the minimum percentage of successful API calls\\
+\texttt{MIN\_REGRESSION\_PASS\%} & 100  & N/A &  the minimum percentage of successful API calls\\
 \hline
 \end{tabular}
 
@@ -204,7 +204,7 @@ The user could log in to their account by providing a corresponding username and
 \item[\rthereqnum]
 The user should be able to log out of the account.
 \item[\rthereqnum]
-The user should be access to their scheduling information once logged in.
+The user should have access to their scheduling information once logged in.
 
 \end{itemize}
 
@@ -236,7 +236,7 @@ On finishing each sub-task, the system should ask for the user's feedback on whe
 \subsection{Data}
 \begin{itemize}
 \item[\rthereqnum]
-The system could extract information including \texttt{courseName, taskType, taskName, weight, deadline} from uploaded course outline PDF files.
+The system could extract information including \texttt{courseName, taskType, taskName, weight, deadline} from the uploaded course outline PDF files.
 \item[\rthereqnum]
 The system could generate a list of tasks from uploaded PDFs 
 \item[\rthereqnum \label{R_prioritize_task}]
@@ -284,6 +284,15 @@ With a detailed study plan, the system could pair friends from the friend list w
 \item[\rthenfrnum]The navigation must be intuitive to use by users with \texttt{MIN\_EDUCATION} education background.
 
 \textbf{Fit Criterion:} \texttt{MIN\_UNDERSTAND\%} of users with at least \texttt{MIN\_EDUCATION} of education could navigate through functions within \texttt{MAX\_TRIAL\_TIME} of exploring.
+
+\begin{itemize}
+    \item \( U \): Total number of users
+    \item \( E \): The set of users with at least \texttt{MIN\_EDUCATION}
+    \item \( N \): The number of users who can navigate through functions within \texttt{MAX\_TRIAL\_TIME}
+\end{itemize}
+\[
+    N \geq \left( \frac{\texttt{MIN\_UNDERSTAND\%}}{100} \right) \cdot |E|
+\]
 \end{itemize}
 \subsection{Personalization and Internationalization Requirements}
 N/A
@@ -293,25 +302,49 @@ N/A
 The system must be understood by users within \texttt{MAX\_TRIAL\_TIME} of exploring.
 
 \textbf{Fit Criterion:} \texttt{MIN\_UNDERSTAND\%} of users with at least \texttt{MIN\_EDUCATION} of education could understand the system within \texttt{MAX\_TRIAL\_TIME} of exploring.
+\begin{itemize}
+    \item \( U \): Total number of users
+    \item \( E \): The set of users with at least \texttt{MIN\_EDUCATION}
+    \item \( N \): The number of users who can navigate through functions within \texttt{MAX\_TRIAL\_TIME}
+\end{itemize}
+
+\[
+    N \geq \left( \frac{\texttt{MIN\_UNDERSTAND\%}}{100} \right) \cdot |E|
+\]
 \end{itemize}
 \subsection{Understandability and Politeness Requirements}
 \begin{itemize}
 \item[\rthenfrnum]
 The language in the app must be grammatically correct \texttt{MIN\_grammar\%} of the time.
 
-\textbf{Fit Criterion:} A group of \texttt{MIN\_TESTER\_NUM}  users could find no more than \texttt{MAX\_BAD\_GRAMMAR} of grammar mistakes.
+\textbf{Fit Criterion:} A group of \texttt{MIN\_TESTER\_NUM}  users could find at most \texttt{MAX\_BAD\_GRAMMAR} of grammar mistakes.
 
 \item[\rthenfrnum]
 The language in the app must be non-offensive.
 
 \textbf{Fit Criterion:} A group of \texttt{MIN\_TESTER\_NUM} users could find no more than \texttt{MAX\_OFFENSIVE} of offensive messages.
+\begin{itemize}
+    \item \( U \): Total number of users testing the system
+    \item \( O \): The number of offensive messages found by a group of users
+    \item \( G \): The group of at least \texttt{MIN\_TESTER\_NUM} users
+\end{itemize}
+\[
+    O \leq \texttt{MAX\_OFFENSIVE}
+\]
 \end{itemize}
 \subsection{Accessibility Requirements}
 \begin{itemize}
 \item[\rthenfrnum]
 Color combinations used in the interface must be distinguished by users with color blindness.
 
-\textbf{Fit Criterion:} A group of \texttt{MIN\_TESTER\_NUM} users could find no more than \texttt{MAX\_COLOR\_AMBIGUOUS} of indistinguishable color combinations in the UI filtered with Color Oracle.
+\textbf{Fit Criterion:} A group of \texttt{MIN\_TESTER\_NUM} users could find at most \texttt{MAX\_COLOR\_AMBIGUOUS} of indistinguishable color combinations in the UI filtered with Color Oracle.
+\begin{itemize}
+    \item \( C \): The number of indistinguishable color combinations found by a group of users, filtered with Color Oracle
+    \item \( G \): The group of at least \texttt{MIN\_TESTER\_NUM} users
+\end{itemize}
+\[
+    C \leq \texttt{MAX\_COLOR\_AMBIGUOUS}
+\]
 \end{itemize}
 \section{Performance Requirements}
 \subsection{Speed and Latency Requirements}
@@ -336,13 +369,27 @@ Color combinations used in the interface must be distinguished by users with col
 The system must be operable under the same physical environment that the desktop computer running it is operable.
 
 \textbf{Fit Criterion:} When the machine is operable, the system is operable at least \texttt{MIN\_OPERABLE\%} of time.
+\begin{itemize}
+    \item \( T \): Total time the machine is operable
+    \item \( S \): Total time the system is operable when the machine is operable
+\end{itemize}
+\[
+    \frac{S}{T} \geq \frac{\texttt{MIN\_OPERABLE\%}}{100}
+\]
 \end{itemize}
 \subsection{Requirements for Interfacing with Adjacent Systems}
 \begin{itemize}
 \item[\rthenfrnum]
 The system could interface with calendar APIs when called.
 
-\textbf{Fit Criterion:} At least \texttt{MIN\_API\_SUCCESS\%} of requests made to supported calendar APIs are success.
+\textbf{Fit Criterion:} At least \texttt{MIN\_API\_SUCCESS\%} of requests made to supported calendar APIs are successful.
+\begin{itemize}
+    \item \( R \): Total number of requests made to the supported calendar APIs
+    \item \( S \): Number of successful requests made to the supported calendar APIs
+\end{itemize}
+\[
+    \frac{S}{R} \geq \frac{\texttt{MIN\_API\_SUCCESS\%}}{100}
+\]
 \end{itemize}
 \subsection{Productization Requirements}
 N/A
@@ -352,6 +399,13 @@ N/A
 The released version must pass all known regression tests.
 
 \textbf{Fit Criterion:} The released version must pass \texttt{MIN\_REGRESSION\_PASS\%} of regression tests. 
+\begin{itemize}
+    \item \( T \): Total number of regression tests conducted on the released version
+    \item \( P \): Number of regression tests passed by the released version
+\end{itemize}
+\[
+    \frac{P}{T} \geq \frac{\texttt{MIN\_REGRESSION\_PASS\%}}{100}
+\]
 \end{itemize}
 \section{Maintainability and Support Requirements}
 \subsection{Maintenance Requirements}
@@ -367,11 +421,11 @@ The released version must pass all known regression tests.
 \item[\rthenfrnum]
 The system is accessible only if the correct combo of username and password is provided.
 
-\textbf{Fit Criterion:} An error message suggesting incorrect password or username is displayed.
+\textbf{Fit Criterion:} An error message suggesting an incorrect password or username is displayed.
 \item[\rthenfrnum]
 Users could not access other users' data.
 
-\textbf{Fit Criterion:} Only data linked to current logged in account could be displayed.
+\textbf{Fit Criterion:} Only data linked to the currently logged-in account could be displayed.
 \end{itemize}
 \subsection{Integrity Requirements}
 \begin{itemize}
@@ -411,7 +465,6 @@ The code must comply with \textit{Flack8} coding standards.
 
 \textbf{Fit Criterion:} Merged code passes Flake8 linter workflow check.
 \end{itemize}
-
 \section{Open Issues}
 \lips
 
