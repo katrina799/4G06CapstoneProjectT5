@@ -293,15 +293,31 @@ Default Value &N/A &N/A\\
 \hline
 Constraints & \texttt{NOT NULL}& \texttt{NOT NULL}\\
 \hline
-Source & Extracted from course outline & Extracted from the course outline\\
+Source & Extracted from the course outline & Extracted from the course outline\\
 \hline
 Usage & Record course information & Record course information\\
 \hline
-Attribute & courseId&\\
+Attribute & courseId&priority\\
 \hline
-Description & The unique identifier of a course&\\
+Description & The unique identifier of a course & The priority ranking of a task\\
 \hline
-Type & \texttt{VARCHAR(16)}&\\
+Type & \texttt{VARCHAR(16)}&INT\\
+\hline
+Allowed Values &N/A &N/A\\
+\hline
+Default Value &N/A &0\\
+\hline
+Constraints & \texttt{NOT NULL}&\texttt{NOT NULL}\\
+\hline
+Source & Uniquely generated when a course outline is uploaded&Calculated with \texttt{weight, deadline} and taskType\\
+\hline
+Usage & Record course information & Record priority of a task.\\
+\hline
+Attribute & deadline&\\
+\hline
+Description & The deadline of a task & \\
+\hline
+Type & \texttt{DATE}&\\
 \hline
 Allowed Values &N/A &\\
 \hline
@@ -309,9 +325,9 @@ Default Value &N/A &\\
 \hline
 Constraints & \texttt{NOT NULL}&\\
 \hline
-Source & Uniquely generated when a course outline is uploaded&\\
+Source & Extracted from the course outline&\\
 \hline
-Usage & Record course information &\\
+Usage & Record course information & \\
 \hline
 \end{longtable}
 
