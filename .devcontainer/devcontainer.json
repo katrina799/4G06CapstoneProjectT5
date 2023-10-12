@@ -11,5 +11,5 @@
 		}
 	},
 	
-	"postCreateCommand": "pip3 install -r requirements.txt"
+	"postCreateCommand": "sudo apt-get update && sudo apt-get install -y make texlive-xetex && pip3 install -r requirements.txt"
 }
