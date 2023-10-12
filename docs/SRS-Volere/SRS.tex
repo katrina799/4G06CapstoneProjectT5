@@ -83,26 +83,42 @@ Date 2 & 1.1 & Notes\\
 \section{Purpose of the Project}
 \subsection{User Business}
 The users would be students in high school to college institutes all over the world dealing with multiple courses.
-
 \subsection{Goals of the Project}
 We aim to develop a tool to help students integrate multiple course information with their personal schedules to generate a customized study plan. The plan should dynamically self-adjust according to the user's preference and study efficiency so that students can finish their deliverables before the deadline at their own pace with minimal pressure.
 \section{Stakeholders}
 \subsection{Client}
-\lips
+N/A
 \subsection{Customer}
-\lips
+The primary customers are students across various levels of education, from high school to college institutions. These students are in need of a comprehensive solution to manage their overwhelming schoolwork, deadlines, and tests.
 \subsection{Other Stakeholders}
-\lips
+\begin{itemize}
+  \item \textbf{Educational Institutions}: Schools, colleges, and universities that may use this app as part of their academic toolkit.
+  \item \textbf{Parents}: Concerned about their child's academic performance and well-being.
+  \item \textbf{Educational Researchers}: Those interested in studying the effects of task management and its correlation with academic success.
+\end{itemize}
+
 \subsection{Hands-On Users of the Project}
-\lips
-\subsection{Personas}
-\lips
-\subsection{Priorities Assigned to Users}
-\lips
+\textbf{Students}: Using the application to manage their studies and academic tasks, connecting through the app's social network component for collaborative study sessions.
 \subsection{User Participation}
-\lips
+\begin{itemize}
+  \item \textbf{Initial User Involvement}
+  Users will be initially involved in providing insights regarding their needs and preferences through surveys and interviews. 
+  \item \textbf{User Acceptance Testing}
+  Selected users will be involved in the beta testing phase to gather feedback and identify any issues or areas of improvement before the final release.
+  \item \textbf{Continuous Feedback}
+  Once the app is launched, user participation will continue through feedback mechanisms built into the app, allowing continuous improvement of features and user experience.
+  \item \textbf{Community Engagement}
+  Users can participate in community forums to discuss features, share tips, and support each other in using the app effectively
+\end{itemize}
+
 \subsection{Maintenance Users and Service Technicians}
-\lips
+\begin{itemize}
+    \item Maintenance users and service technicians are responsible for the maintenance and optimization of the application, ensuring all features and components function as intended.
+    \item They will monitor application performance, resolve any arising issues or bugs, and implement necessary updates and enhancements.
+    \item Service technicians will manage the training pipeline for machine learning algorithms, ensuring the models are accurate, reliable, and up-to-date.
+    \item Regular maintenance are scheduled to ensure the application's consistent performance. Critical issues are addressed immediately to minimize any disruption to users.
+\end{itemize}
+
 
 \section{Mandated Constraints}
 \subsection{Solution Constraints}
@@ -126,8 +142,16 @@ The monetary expenditure for the entire project could not exceed \$750.
 N/A
 
 \section{Naming Conventions and Terminology}
-\subsection{Glossary of All Terms, Including Acronyms, Used by Stakeholders
-involved in the Project}
+\subsection{Glossary of All Terms, Including Acronyms, Used by Stakeholders involved in the Project}
+\begin{itemize}
+    \item \textbf{UI:} User Interface - the space where interactions between humans and machines occur.
+    \item \textbf{ML:} Machine Learning - a field of artificial intelligence that uses statistical techniques to give computer systems the ability to "learn" from data.
+    \item \textbf{Pipeline (in ML):} A series of automated processes that allow for the streamlining of data from ingestion to processing, transformation, training, and evaluation in machine learning models.
+    \item \textbf{API:} Application Programming Interface - a set of tools and definitions used to implement software applications.
+    \item \textbf{HTTP:} Hypertext Transfer Protocol - an application protocol used for transferring hypermedia documents, such as HTML. It is the foundation of any data exchange on the Web.
+    \item \textbf{Database:} Centralized collection of data, which can be stored, accessed, and managed easily.
+    \item \textbf{Pomodoro Timer:} A time management method that uses a timer to break down work into intervals, traditionally 25 minutes in length, separated by short breaks.
+\end{itemize}
 \subsection{Table of Units}
 
 Throughout this document, SI (Syst\`{e}me International d'Unit\'{e}s) is employed
@@ -192,14 +216,29 @@ N/A
 
 
 \section{The Scope of the Work}
+
 \subsection{The Current Situation}
-\lips
+Currently, students across various educational levels face significant challenges in managing their academic tasks and schedules effectively due to the overwhelming schoolwork. Teachers and educational institutions also seek innovative solutions to foster management skills among students and enhance their learning experiences. The existing solutions are often not comprehensive, lacking intelligent task prioritization, progress visualization, and effective time management tools.
+
 \subsection{The Context of the Work}
-\lips
-\subsection{Work Partitioning}
-\lips
+The Smart Study Helper App is designed to bridge this gap by providing a user-friendly platform that combines automated task generation, intelligent task prioritization, progress visualization, and various other features. The development of this application intends to improve students' academic performance and mental well-being by reducing stress and enhancing learning experiences.
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.7\linewidth]{Context Diagram.drawio.png} 
+    \caption{Context Diagram}
+    \label{fig:samplelabel}
+\end{figure}
+
 \subsection{Specifying a Business Use Case (BUC)}
-\lips
+\begin{itemize}
+    \item \textbf{BUC Name:} Integrated Study Management
+    \item \textbf{Goal:} To provide a comprehensive solution that allows students to manage their academic tasks, schedules, and study sessions effectively.
+    \item \textbf{Actors:} Students, Educational Institutions, Teachers.
+    \item \textbf{Preconditions:} User registration and course information uploaded or inputted.
+    \item \textbf{Postconditions:} Enhanced student learning experiences, improved academic performance, reduced stress levels.
+    \item \textbf{Main Success Scenario:} Students effectively use the app to manage their study tasks, leading to improved academic outcomes and reduced stress. Educational institutions and teachers observe enhanced student management skills and learning experiences.
+    \item \textbf{Extensions:} Development of additional features based on user's feedback, improvement of machine learning model, larger user base.
+\end{itemize}
 
 \section{Business Data Model and Data Dictionary}
 \subsection{Business Data Model}
@@ -362,12 +401,157 @@ Usage & Record course information & \\
 
 
 \section{The Scope of the Product}
+
 \subsection{Product Boundary}
-\lips
+The Smart Study Helper App aims to serve as a comprehensive solution for students to manage their study schedules and tasks effectively. Its boundary extends from user registration, task generation, and prioritization, to progress visualization and study planning. It will interact with external calendar services and will allow users to collaborate with peers through its social network component. However, the app’s boundary does not extend to managing non-academic tasks or any other aspects of a user’s daily life not related to their study.
+
 \subsection{Product Use Case Table}
-\lips
-\subsection{Individual Product Use Cases (PUC's)}
-\lips
+\begin{longtable}{ |p{3cm}|p{5cm}|p{5cm}|}
+    \hline
+    Use Case Name & Primary Actor & Description \\
+    \hline
+    User Registration & Student & Allows new users to create an account \\
+    \hline
+    Upload Syllabus & Student & Enables users to upload course syllabus in PDF format \\
+    \hline
+    Task Generation & Application & Automatically generates tasks based on uploaded syllabus \\
+    \hline
+    Task Prioritization & Application & Prioritizes tasks based on ML algorithms \\
+    \hline
+    Progress Visualization & Student & Users can view the status of their tasks \\
+    \hline
+    Facial Recognition & Application & Detect users' stress levels by recognizing users' face \\
+    \hline
+    Classmates Lookup & Student & Users can look up online classmates who register the same course \\
+    \hline
+    Connected Learning & Student & Users can connect with their friends or classmates to study together \\
+    \hline
+    User Login & Student & Allows users to log into their account using username and password \\
+    \hline
+    Friend List Management & Student & Supports friend list for sending/rejecting/accepting friend requests \\
+    \hline
+    Export to Other Calendars & Application, Student & Exports event and schedule data to third-party calendar apps \\
+    \hline
+    Estimate Task Duration & Application & Calculates the estimated time for each task from course outlines \\
+    \hline
+\end{longtable}
+
+\subsection{Individual Product Use Cases (PUC’s)}
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.7\linewidth]{Use Case Diagram.drawio.png} 
+    \caption{Use Case Diagram}
+    \label{fig:samplelabel}
+\end{figure}
+
+\subsubsection{User Registration}
+\begin{itemize}
+    \item \textbf{Goal:} Enable students to create a unique account.
+    \item \textbf{Actors:} Student.
+    \item \textbf{Preconditions:} Student has accessed the application or web.
+    \item \textbf{Postconditions:} Student has an active account and can access the app's features.
+    \item \textbf{Main Flow:} Student enters required information, sets a password, and completes registration.
+\end{itemize}
+
+\subsubsection{Upload Syllabus}
+\begin{itemize}
+    \item \textbf{Goal:} Allow students to upload their course syllabus.
+    \item \textbf{Actors:} Student.
+    \item \textbf{Preconditions:} Student is logged in.
+    \item \textbf{Postconditions:} Syllabus is stored and ready for task generation.
+    \item \textbf{Main Flow:} Student selects the course syllabus in PDF format and uploads it.
+\end{itemize}
+
+\subsubsection{Task Generation}
+\begin{itemize}
+    \item \textbf{Goal:} Create tasks from the uploaded syllabus.
+    \item \textbf{Actors:} Application.
+    \item \textbf{Preconditions:} Syllabus has been uploaded.
+    \item \textbf{Postconditions:} Tasks are generated and displayed to the student.
+    \item \textbf{Main Flow:} Application processes the syllabus and generates relevant tasks.
+\end{itemize}
+
+\subsubsection{Task Prioritization}
+\begin{itemize}
+    \item \textbf{Goal:} Rank tasks based on importance.
+    \item \textbf{Actors:} Application.
+    \item \textbf{Preconditions:} Tasks have been generated.
+    \item \textbf{Postconditions:} Tasks are prioritized and presented in an organized manner.
+    \item \textbf{Main Flow:} Application uses ML algorithms to analyze and prioritize tasks.
+\end{itemize}
+
+\subsubsection{Progress Visualization}
+\begin{itemize}
+    \item \textbf{Goal:} Offer students a view of their task progress.
+    \item \textbf{Actors:} Student.
+    \item \textbf{Preconditions:} Tasks have been generated and prioritized.
+    \item \textbf{Postconditions:} Student can visually assess task status.
+    \item \textbf{Main Flow:} Student accesses a dashboard or progress section to view status of tasks.
+\end{itemize}
+
+\subsubsection{Facial Recognition}
+\begin{itemize}
+    \item \textbf{Goal:} Identify student stress levels using facial cues.
+    \item \textbf{Actors:} Application.
+    \item \textbf{Preconditions:} Student grants camera access.
+    \item \textbf{Postconditions:} App detects potential stress indicators.
+    \item \textbf{Main Flow:} Application uses facial recognition technology to analyze student's face for stress signs.
+\end{itemize}
+
+\subsubsection{Classmates Lookup}
+\begin{itemize}
+    \item \textbf{Goal:} Allow students to find classmates in the same course.
+    \item \textbf{Actors:} Student.
+    \item \textbf{Preconditions:} Student is registered in a course.
+    \item \textbf{Postconditions:} Student views a list of classmates in the same course.
+    \item \textbf{Main Flow:} Student accesses course section and views registered classmates.
+\end{itemize}
+
+\subsubsection{Connected Learning}
+\begin{itemize}
+    \item \textbf{Goal:} Provide students with a platform to study collaboratively.
+    \item \textbf{Actors:} Students.
+    \item \textbf{Preconditions:} Students have active accounts.
+    \item \textbf{Postconditions:} Students can connect and study together.
+    \item \textbf{Main Flow:} A student sends a connection request to another student. Once accepted, they can access video chat with joint study tools and features.
+\end{itemize}
+
+\subsubsection{User Login}
+\begin{itemize}
+    \item \textbf{Goal:} Allow students to log into their account.
+    \item \textbf{Actors:} Student.
+    \item \textbf{Preconditions:} Student has an active account.
+    \item \textbf{Postconditions:} Student is logged in and can access personalized data.
+    \item \textbf{Main Flow:} Student provides username and password; if credentials match, access is granted.
+\end{itemize}
+
+\subsubsection{Friend List Management}
+\begin{itemize}
+    \item \textbf{Goal:} Manage friend connections within the application.
+    \item \textbf{Actors:} Student.
+    \item \textbf{Preconditions:} Student is logged in.
+    \item \textbf{Postconditions:} Updated friend list status (friend request sent/received/accepted/rejected).
+    \item \textbf{Main Flow:} Student navigates to the friend list section, sends/receives/accepts/rejects friend requests.
+\end{itemize}
+
+\subsubsection{Export to Other Calendars}
+\begin{itemize}
+    \item \textbf{Goal:} Export event and schedule data to third-party calendar apps.
+    \item \textbf{Actors:} Application, Student.
+    \item \textbf{Preconditions:} Student has events or schedules in the application.
+    \item \textbf{Postconditions:} Events and schedules are exported and viewable in third-party apps.
+    \item \textbf{Main Flow:} With authentication, student initiates export to a chosen calendar app; data is formatted and transferred.
+\end{itemize}
+
+\subsubsection{Estimate Task Duration}
+\begin{itemize}
+    \item \textbf{Goal:} Calculate the estimated time needed for each task from course outlines.
+    \item \textbf{Actors:} Application.
+    \item \textbf{Preconditions:} Tasks have been extracted from course outlines.
+    \item \textbf{Postconditions:} Each task has an associated time estimate.
+    \item \textbf{Main Flow:} Application processes tasks from course outlines and estimates time requirements for each.
+\end{itemize}
+
 
 \section{Functional Requirements}
 \subsection{Authentication}
@@ -570,10 +754,23 @@ With a detailed study plan, the system could pair friends from the friend list w
 \textbf{Priority:} LOW
 \end{itemize}
 \section{Look and Feel Requirements}
+
 \subsection{Appearance Requirements}
-\lips
+The application's design should be user-friendly and intuitive. Key elements to consider include:
+\paragraph{AR1:} Clear typography: Text should be legible at all standard screen resolutions and sizes. 
+\paragraph{AR2:}Color scheme: The color palette should be eye-catching but not overwhelming. Calming and neutral tones should be used that helps to focus.
+\paragraph{AR3:}Icons and graphics: Visual aids should be recognizable and easy to learn.
+\paragraph{AR4:}Layout: The design should be responsive, ensuring usability across devices of varying screen sizes, from smartphones to tablets to desktop monitors.
+
 \subsection{Style Requirements}
-\lips
+The style of the application should make the application easy and clear to use, providing a sense of community for students. Aspects to focus on include:
+\paragraph{SR1:}Navigation: Menus and navigation tools should be logically organized and easy to access. 
+\paragraph{SR2:}Consistency: Elements like buttons, text fields, and icons should maintain a consistent design throughout the application.
+\paragraph{SR3:}Interactivity: Interactive elements like buttons or dropdowns should provide feedback, indicating appropriate responsiveness.
+\paragraph{SR4:}Accessibility: The design should cater to all users, including those with disabilities and elder adults. Features like text-to-speech and adjustable font sizes should be considered.
+\paragraph{SR5:}Animations: Any animations used should be subtle and not distractive so users can focus more on the main content. 
+
+
 
 \section{Usability and Humanity Requirements}
 \subsection{Ease of Use Requirements}
@@ -643,20 +840,32 @@ The language in the app must be non-offensive.
     \]
 \end{itemize}
 \section{Performance Requirements}
+
 \subsection{Speed and Latency Requirements}
-\lips
+\paragraph{SLR1:} Major actions, such as uploading syllabuses, generating tasks, and prioritizing tasks, should be completed in a timely manner.
+\paragraph{Fit Criteria:} During testing under normal load conditions, major actions are executed within a 2-second threshold.
+
 \subsection{Safety-Critical Requirements}
-\lips
+\paragraph{SCR1:} All data, especially sensitive academic information, must be securely encrypted to ensure protection against unauthorized access.
+\paragraph{Fit Criteria:} Throughout security testing, no incidents of data breaches or unauthorized data accesses are observed.
+
 \subsection{Precision or Accuracy Requirements}
-\lips
+\paragraph{PAR1:} ML-based features, particularly task prioritization, must achieve a high degree of accuracy.
+\paragraph{Fit Criteria:} When tested against predefined scenarios, ML algorithms show an accuracy rate of 90\% in task categorization and prioritization.
+
 \subsection{Robustness or Fault-Tolerance Requirements}
-\lips
+\paragraph{RFTR1:} The application must demonstrate resilience against unexpected inputs or actions and provide means of efficient data recovery.
+
+
 \subsection{Capacity Requirements}
-\lips
+\paragraph{CR1:} The system should be robust enough to manage a large number of concurrent users.
+\paragraph{Fit Criteria:} During load testing, the application manages the equivalent load of 10,000 users and data pertaining to 1 million courses without any performance issues or system crashes.
+\paragraph{CR2:}The system should store vast quantities of course data without any compromise in performance.
+\paragraph{Fit Criteria:} During load testing, the application manages the equivalent load of 1 million courses without any performance issues or system crashes.
 \subsection{Scalability or Extensibility Requirements}
-\lips
+\paragraph{SER1:} The design and architecture of the application should support ease of modification and the addition of new features.
 \subsection{Longevity Requirements}
-\lips
+N/A
 
 \section{Operational and Environmental Requirements}
 \subsection{Expected Physical Environment}
