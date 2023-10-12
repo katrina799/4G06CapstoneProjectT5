@@ -220,6 +220,22 @@ Source & User input when setting up the account & User input when setting up the
 \hline
 Usage & Authentication & Authentication \\
 \hline
+Attribute & pInterval & \\
+\hline
+Description & preferred Pomodoro interval & \\
+\hline
+Type & \texttt{INT}& \\
+\hline
+Allowed Values &N/A &\\
+\hline
+Default Value &N/A &\\
+\hline
+Constraints & \texttt{NOT NULL CHECK (pInterval >= 0 AND pInterval <= 300)} & \\
+\hline
+Source & User input when setting up the account &  \\
+\hline
+Usage & Scheduling &  \\
+\hline
 \end{longtable}
 \subsubsection{Courses}
 \begin{longtable}{ |p{3cm}|p{5cm}|p{5cm}|  }
