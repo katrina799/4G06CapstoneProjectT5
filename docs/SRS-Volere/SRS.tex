@@ -44,6 +44,13 @@
 \input{../Comments}
 \input{../Common}
 
+\newcounter{udreqnum} %User documentation requirement number
+\newcommand{\rtheudreqnum}{UDR\refstepcounter{udreqnum}\theudreqnum:}
+\newcommand{\udrrref}[1]{UDR\ref{#1}}
+\newcounter{utreqnum} %User training requirement number
+\newcommand{\rtheutreqnum}{UTR\refstepcounter{utreqnum}\theutreqnum:}
+\newcommand{\utrref}[1]{UTR\ref{#1}}
+
 \begin{document}
 
 \title{Software Requirements Specification for \progname: subtitle describing software} 
@@ -788,16 +795,49 @@ Inhibit the New Product}
 \lips
 \section{User Documentation and Training}
 \subsection{User Documentation Requirements}
-\lips
+
+\begin{itemize}[leftmargin=16.5mm,labelsep=4mm,label=\rtheudreqnum]
+\item A user manual that covers all functionalities of the website with step-by-step instructions should be provided in a digital format. The manual should be written in an easily understandable language, accompanied by illustrative diagrams. \\
+\item User manual should be updated with each release to reflect any changes made. \\
+\item A help/support channel should be provided so that users can ask questions and give feedback which will be taken into consideration for future developments and improvements.\\
+\end{itemize}
+
 \subsection{Training Requirements}
-\lips
+\begin{itemize}[leftmargin=16.5mm,labelsep=4mm,label=\rtheutreqnum]
+\item A short tutorial should be provided if it is the user’s first time using the website. \\
+\item A training video should be provided with demos on how to use major features of the website. \\
+\item Training videos should be added or updated with each release to reflect any changes.\\
+\end{itemize}
 
 \section{Waiting Room}
-\lips
+\begin{itemize}
+  \item Add a dark mode support for the website
+  \item Add a colour blind support for the website
+  \item Add sound effects to the website to make it more user friendly and interesting
+  \item Implement a feature where the users are able to integrate with other popular music apps like Spotify to play their favourite playlists while studying
+  \item Implement a badges or achievements system such as points for completing tasks which can make the use of the website more engaging and rewarding 
+  \item Provide data analysis and insight on how the user performs within a period of time and provide feedback on how to improve their way of study
+  \item Add support to other platforms such as mobile applications and desktop applications
+\end{itemize}
 
 \section{Ideas for Solution}
-\lips
+\subsection{Idea 1}
+\textbf{Requirement}: \frref{R_upload_pdf}, The user could upload multiple PDF files containing course outlines to the system. \\
+\textbf{Potential solution}: We could use a \textit{Python} web framework \textit{Flask} to set up a web app which supports accessing and uploading multiple files with PDF extensions.\\
+\textbf{Advantages}: This will allow users to upload their PDF easily and more securely, and with no additional effort required for developers to implement and test these features, as \textit{Flask} has already taken care of it for us.\\
+\textbf{Disadvantages}: Using \textit{Flask} to support this feature doesn't present any foreseeable disadvantages in the near future. \\
 
+\subsection{Idea 2}
+\textbf{Requirement}: \frref{R_prioritize_task}, The system could assign priority to each task generated. \\
+\textbf{Potential solution}: A inference pipeline could be set up to give inference on the unclassified tasks using type of task, weight, and deadline as the inputs. The inference pipeline could use a trained model of task priority classification.\\
+\textbf{Advantages}: Setting an inference pipeline could be more flexible and could potentially give better results than implementing an fixed algorithm for giving predictions. Several steps for the inference pipeline could be constructed and it will be easier to make changes once it gets set up, simply adding, changing or removing steps when there is a future requirement.\\
+\textbf{Disadvantages}: There will be an overload of defining each step and connecting them. \\
+
+\subsection{Idea 3}
+\textbf{Requirement}: \frref{R_check_task_progress}, The user should be able to view the progress of each task. \\
+\textbf{Potential solution}: Could implement a cloud based solution for holding and retrieving data of task, time, etc. A potential choice could be using \textit{AWS S3}\\
+\textbf{Advantages}: This would allow users to check their progress of task and time in a more available, reliable, and well-managed service. The data can be well secured and can be accessed in many ways for example using \textit{AWS S3}, \textit{AWS console}, \textit{AWS Command Line}, providing multiple ways for developers to implement  \\
+\textbf{Disadvantages}: There is a cost associated with it when using third party cloud services
 \newpage{}
 \section*{Appendix --- Reflection}
 
@@ -811,11 +851,37 @@ graduate attribute of Lifelong Learning.  Please answer the following questions:
   application, or software engineering knowledge, mechatronics knowledge or
   computer science knowledge.  Skills may be related to technology, or writing,
   or presentation, or team management, etc.  You should look to identify at
-  least one item for each team member.
+  least one item for each team member. \\
+  
+  The following knowledge and skills will the team need to acquire to successfully complete this capstone project:
+  \begin{itemize}
+    \item GitHub features such as issue tracker, using workflows/\textit{Github Actions}, setting up \textit{Dev Containers}, etc.
+    \item Machine learning and neural network knowledge for the developing and optimizing task priority classification models
+    \item Machine learning libraries and frameworks such as \textit{pandas}, \textit{scikit-learn}, and \textit{Keras}
+    \item \textit{Python} web framework for web development such \textit{Streamlit} and \textit{Flask}
+    \item Agile methodologies such as sprint planning and for team management, efficient collaborations and constant delivery, which is important for incremental and iterative development like this project
+  \end{itemize}
   \item For each of the knowledge areas and skills identified in the previous
   question, what are at least two approaches to acquiring the knowledge or
   mastering the skill?  Of the identified approaches, which will each team
   member pursue, and why did they make this choice?
+  \begin{table}[]
+    \begin{tabular}{| p{3cm} | p{3.5cm} | p{2cm} | p{5cm} |}
+    \hline
+      \textbf{Knowledge or Skills} & \textbf{Approaches} & \textbf{Assigned Team Member} & \textbf{Reason} \\
+    \hline
+      GitHub & \raggedright Use \textit{ChatGPT}, \texit{Google}, watch online tutorials, or ask supervisor for help  & Shuting, Shi & Strong interest in using \textit{GitHub} for project management, previous experience with other projects. \\
+    \hline
+      \raggedright Machine learning and neural network & \raggedright Use \textit{ChatGPT}, \textit{Google}, watch online tutorials, and read research papers & Qiang, Gao & Strong interest in ML and neural network, watched many online tutorials and read many related books. \\
+    \hline
+      \raggedright Machine learning libraries and framework & \raggedright Use \textit{ChatGPT}, \textit{Google}, watch online tutorials, or ask supervisor for help & Qianni, Wang & Experience with many ML projects where these libraries are being used in AI programs and previous co-op work terms. \\
+    \hline
+      \raggedright \textit{Python} web framework & \raggedright Use \textit{ChatGPT}, \textit{Google}, watch online tutorials, or ask supervisor for help & Chenwei, Song & Experience in web development in previous co-op work terms. \\
+    \hline
+      \raggedright Agile methodologies & \raggedright Use \textit{ChatGPT}, \textit{Google}, and watch online tutorials & Jingyao, Qin & Experience with Agile mindset in previous co-op work terms, strong interest in project management as the team lead. \\
+    \hline
+    \end{tabular}
+\end{table}
 \end{enumerate}
 
 \end{document}
