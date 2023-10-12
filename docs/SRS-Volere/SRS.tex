@@ -215,6 +215,8 @@ parameter & value & unit & description\\
 \hline
 \texttt{MIN\_API\_SUCCESS\%} & 95 & N/A &  the minimum percentage of successful API calls\\
 \hline
+\texttt{MIN\_REGRESSION\_PASS\%} & 100  & N/A &  the minimum percentage of successful API calls\\
+\hline
 \texttt{MAX\_RESPONSE\_TIME} & 24 & h & The maximum issue resolve response time\\
 \hline
 \texttt{MIN\_LANGUAGE}& 5& NA & The minimum number of languages that can be translated\\
@@ -944,7 +946,7 @@ The released version must pass all known regression tests.
 
 \begin{itemize}[leftmargin=16.5mm,labelsep=4mm,label=\rthemreqnum]
     \item The bugs and issues should be addressed within a response time corresponding to their severity. \\
-    \textbf{Fit Criteria}: If a bug significantly impacts the regular user experience, the response time for resolution does not exceed 24 hours.
+    \textbf{Fit Criteria}: If a bug significantly impacts the regular user experience, the response time for resolution does not exceed \texttt{MAX\_RESPONSE\_TIME} hours.
     \item The updates and patches should be delivered periodically.\\
     \textbf{Fit Criteria}: A feature update, aligned with user preferences and market trends, can be released each season.
     \item The application should be documented comprehensively, with a user manual, technical report, and clear code comments for further navigation and maintenance.\\
@@ -955,9 +957,9 @@ The released version must pass all known regression tests.
 \subsection{Supportability Requirements}
 \begin{itemize}[leftmargin=16.5mm,labelsep=4mm,label=\rthesreqnum]
     \item Users shall have easy access to a helpdesk for support.\\
-    \textbf{Fit Criteria}: Users are able to access the email contact, phone contact, and chatbot to address common user questions in 5 steps.\\
+    \textbf{Fit Criteria}: Users are able to access the email contact, phone contact, and chatbot to address common user questions in \texttt{MAX\_SUPPORT\_STEP} steps.\\
     \item The response time for offering support should be on time corresponding to the support type. \\
-    \textbf{Fit Criteria}: For critical functionality disasters, the support should be delivered within 24 hours.\\
+    \textbf{Fit Criteria}: For critical functionality disasters, the support should be delivered within \texttt{MAX\_RESPONSE\_TIME} hours.\\
     \item The application should have a mechanism for collecting users’ feedback for product continuous improvement.\\
     \textbf{Fit Criteria}: Users are able to provide feedback when they want.\\
 
@@ -1005,7 +1007,7 @@ N/A
 \subsection{Cultural Requirements}
 \begin{itemize}[leftmargin=16.5mm,labelsep=4mm,label=\rthecreqnum]
     \item The application shall be easily translatable into various languages without causing ambiguity in meaning.\\
-    \textbf{Fit Criteria}: The application can be translated into at least 5 languages(Spanish, French, Chinese, Italian and German).\\
+    \textbf{Fit Criteria}: The application can be translated into at least \texttt{MIN\_LANGUAGE} languages(Spanish, French, Chinese, Italian and German).\\
     \item The product shall avoid elements such as confusing icons, symbols, or offensive images that might cause controversy in different cultural environments.\\
     \textbf{Fit Criteria}: Users are able to feel comfortable and respected.\\
 \end{itemize}
