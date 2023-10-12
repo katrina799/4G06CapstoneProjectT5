@@ -52,6 +52,26 @@
 \newcommand{\rtheutreqnum}{UTR\refstepcounter{utreqnum}\theutreqnum:}
 \newcommand{\utrref}[1]{UTR\ref{#1}}
 
+
+
+\newcounter{mreqnum} %Maintenance Requirements number
+\newcommand{\rthemreqnum}{MR\refstepcounter{mreqnum}\themreqnum:}
+\newcommand{\mrrref}[1]{MR\ref{#1}}
+
+
+\newcounter{sreqnum} %Supportability Requirements number
+\newcommand{\rthesreqnum}{SR\refstepcounter{sreqnum}\thesreqnum:}
+\newcommand{\srrref}[1]{SR\ref{#1}}
+
+\newcounter{areqnum} %Adaptability Requirements number
+\newcommand{\rtheareqnum}{AR\refstepcounter{areqnum}\theareqnum:}
+\newcommand{\arrref}[1]{AR\ref{#1}}
+
+\newcounter{creqnum} %Cultural Requirements number
+\newcommand{\rthecreqnum}{CR\refstepcounter{creqnum}\thecreqnum:}
+\newcommand{\crrref}[1]{CR\ref{#1}}
+
+
 \begin{document}
 
 \title{Software Requirements Specification for \progname: subtitle describing software} 
@@ -166,6 +186,8 @@ symbol & unit & SI \\
 \hline
 \texttt{s} & time & second\\
 \hline
+\texttt{h} & time & hour\\
+\hline
 \end{tabular}
 
 \subsection{Symbolic Parameters}
@@ -193,7 +215,11 @@ parameter & value & unit & description\\
 \hline
 \texttt{MIN\_API\_SUCCESS\%} & 95 & N/A &  the minimum percentage of successful API calls\\
 \hline
-\texttt{MIN\_REGRESSION\_PASS\%} & 100  & N/A &  the minimum percentage of successful API calls\\
+\texttt{MAX\_RESPONSE\_TIME} & 24 & h & The maximum issue resolve response time\\
+\hline
+\texttt{MIN\_LANGUAGE}& 5& NA & The minimum number of languages that can be translated\\
+\hline
+\texttt{MAX\_SUPPORT\_STEP} & 5&NA& The maximum steps needed for asking for support\\
 \hline
 \end{tabular}
 
@@ -912,13 +938,37 @@ The released version must pass all known regression tests.
     \frac{P}{T} \geq \frac{\texttt{MIN\_REGRESSION\_PASS\%}}{100}
 \]
 \end{itemize}
+
 \section{Maintainability and Support Requirements}
 \subsection{Maintenance Requirements}
-\lips
+
+\begin{itemize}[leftmargin=16.5mm,labelsep=4mm,label=\rthemreqnum]
+    \item The bugs and issues should be addressed within a response time corresponding to their severity. \\
+    \textbf{Fit Criteria}: If a bug significantly impacts the regular user experience, the response time for resolution does not exceed 24 hours.
+    \item The updates and patches should be delivered periodically.\\
+    \textbf{Fit Criteria}: A feature update, aligned with user preferences and market trends, can be released each season.
+    \item The application should be documented comprehensively, with a user manual, technical report, and clear code comments for further navigation and maintenance.\\
+    \textbf{Fit Criteria}: A user manual can provide tutorials for full product feature utilization. A technical report should be updated at least once every season's maintenance. Clear code comments should be provided to facilitate developers’ navigation and maintenance.
+
+\end{itemize}
+
 \subsection{Supportability Requirements}
-\lips
+\begin{itemize}[leftmargin=16.5mm,labelsep=4mm,label=\rthesreqnum]
+    \item Users shall have easy access to a helpdesk for support.\\
+    \textbf{Fit Criteria}: Users are able to access the email contact, phone contact, and chatbot to address common user questions in 5 steps.\\
+    \item The response time for offering support should be on time corresponding to the support type. \\
+    \textbf{Fit Criteria}: For critical functionality disasters, the support should be delivered within 24 hours.\\
+    \item The application should have a mechanism for collecting users’ feedback for product continuous improvement.\\
+    \textbf{Fit Criteria}: Users are able to provide feedback when they want.\\
+
+\end{itemize}
 \subsection{Adaptability Requirements}
-\lips
+\begin{itemize}[leftmargin=16.5mm,labelsep=4mm,label=\rtheareqnum]
+    \item The product should be compatible with common systems and \textit{API}s to facilitate seamless integration and data exchange. \\
+    \textbf{Fit Criteria}: The product can interact with the \textit{Google} \textit{Calendar} \textit{API} through explicit \textit{HTTP} calls or using the \textit{Google} \textit{Client} \textit{Libraries}. \\
+    \item The product should implement modular architecture, allowing for the addition or replacement of components without causing issues.\\
+    \textbf{Fit Criteria}: The products’ independent modules can interact with each other through de-coupled interfaces.\\
+\end{itemize}
 
 \section{Security Requirements}
 \subsection{Access Requirements}
@@ -953,7 +1003,12 @@ N/A
 
 \section{Cultural Requirements}
 \subsection{Cultural Requirements}
-\lips
+\begin{itemize}[leftmargin=16.5mm,labelsep=4mm,label=\rthecreqnum]
+    \item The application shall be easily translatable into various languages without causing ambiguity in meaning.\\
+    \textbf{Fit Criteria}: The application can be translated into at least 5 languages(Spanish, French, Chinese, Italian and German).\\
+    \item The product shall avoid elements such as confusing icons, symbols, or offensive images that might cause controversy in different cultural environments.\\
+    \textbf{Fit Criteria}: Users are able to feel comfortable and respected.\\
+\end{itemize}
 
 \section{Compliance Requirements}
 \subsection{Legal Requirements}
@@ -970,16 +1025,22 @@ The code must comply with \textit{Flack8} coding standards.
 
 \textbf{Fit Criterion:} Merged code passes Flake8 linter workflow check.
 \end{itemize}
+
 \section{Open Issues}
-\lips
+ The application features should identify the dependency relationships for better organizing the development process.\\
+
 
 \section{Off-the-Shelf Solutions}
 \subsection{Ready-Made Products}
-\lips
+
+    The off-the-shelf product should be compatible with our application currently using technology stack, infrastructure and operating system (\textit{Windows} or \textit{IOS}, excluding \textit{Linux}).
+    Also, the selection of ready-made products shall be based on cost-effectiveness and alignment with the project's functionality requirements.
+    
 \subsection{Reusable Components}
-\lips
+For text and PDF extraction, reusable components could include robust text parsing algorithms, and document structure analysis tools, which can be used across various document types. In the context of modelling, reusable components could consist of machine learning models that have been trained on diverse datasets. Furthermore, in the field of facial recognition, reusable components may encompass pre-trained facial detection models and privacy protection mechanisms. Also, some existing website extensions or components can also be reused to assist the application development. \\
 \subsection{Products That Can Be Copied}
-\lips
+The configuration location and integrated module should be clearly defined in the documentation, also developer should maintain records of the updated versions of the copied source product.\\
+
 
 \section{New Problems}
 \subsection{Effects on the Current Environment}
