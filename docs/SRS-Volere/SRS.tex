@@ -9,6 +9,8 @@
 \usepackage{booktabs}
 \usepackage{tabularx}
 \usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{longtable}
 \hypersetup{
     bookmarks=true,         % show bookmarks bar?
       colorlinks=true,      % false: boxed links; true: colored links
@@ -19,6 +21,25 @@
 }
 
 \newcommand{\lips}{\textit{Insert your content here.}}
+\newcounter{reqnum} %Functional requirement number
+\newcommand{\rthereqnum}{FR\refstepcounter{reqnum}\thereqnum:}
+\newcommand{\frref}[1]{FR\ref{#1}}
+
+\newcounter{uhrnum} %Usability and Humanity Requirement number
+\newcommand{\rtheuhrnum}{UHR\refstepcounter{uhrnum}\theuhrnum:}
+\newcommand{\uhrref}[1]{UHR\ref{#1}}
+
+\newcounter{oernum} %Operational and Environmental Requirement number
+\newcommand{\rtheoernum}{OER\refstepcounter{oernum}\theoernum:}
+\newcommand{\oerref}[1]{OER\ref{#1}}
+
+\newcounter{srnum} %Security Requirement number
+\newcommand{\rthesrnum}{SR\refstepcounter{srnum}\thesrnum:}
+\newcommand{\srref}[1]{SR\ref{#1}}
+
+\newcounter{crnum} %Compliance  Requirement number
+\newcommand{\rthecrnum}{CR\refstepcounter{crnum}\thecrnum:}
+\newcommand{\crref}[1]{CR\ref{#1}}
 
 \input{../Comments}
 \input{../Common}
@@ -54,9 +75,10 @@ Date 2 & 1.1 & Notes\\
 ~\newpage
 \section{Purpose of the Project}
 \subsection{User Business}
-\lips
+The users would be students in high school to college institutes all over the world dealing with multiple courses.
+
 \subsection{Goals of the Project}
-\lips
+We aim to develop a tool to help students integrate multiple course information with their personal schedules to generate a customized study plan. The plan should dynamically self-adjust according to the user's preference and study efficiency so that students can finish their deliverables before the deadline at their own pace with minimal pressure.
 \section{Stakeholders}
 \subsection{Client}
 \lips
@@ -77,34 +99,90 @@ Date 2 & 1.1 & Notes\\
 
 \section{Mandated Constraints}
 \subsection{Solution Constraints}
-\lips
+The development of a fully functional product is required to be finished by February 5 when the Revision 0 Demonstration is scheduled.
 \subsection{Implementation Environment of the Current System}
-\lips
+The project implementation would be done through \textit{VS Code} in the beginning and converted into \textit{Github Codespace} once set up gets finished to ensure consistent compiling performance among group members.
 \subsection{Partner or Collaborative Applications}
-\lips
+Our system would import event data from and export generated study plans to popular calendar applications like \textit{Google Calendar} and \textit{Outlook Calendar}. 
 \subsection{Off-the-Shelf Software}
-\lips
+\subsubsection{StudySchedule.org}
+StudySchedule is a free scheduling software dedicated to generating customized daily schedules for students to study for MCAT. They would ask the user to set up an account, pick study material from their MCAT resource library, and take a questionnaire on time constraints and pace preference. Students could view their progress and make adjustments as they wish.
+\subsubsection{Taskade AI Genrator}
+Taskade is a powerful team project management tool. The component \textit{Taskade AI} is capable of generating tasks for given project topics and creating checklists, project plans, and calendar schedules. \textit{Taskade AI} is also capable of summarising \textit{PDF} files.
 \subsection{Anticipated Workplace Environment}
-\lips
+Our web-based app is anticipated to be compatible with mainstream browsers including \textit{Chrome, Safari, Microsoft Edge}, and \textit{Firefox} on the latest version of \textit{Windows, Linux} and \textit{macOS}.
 \subsection{Schedule Constraints}
-\lips
+Each member of our team would devote 8 hours per week to work on the project making a total of 40 hours per week.
 \subsection{Budget Constraints}
-\lips
+The monetary expenditure for the entire project could not exceed \$750.
 \subsection{Enterprise Constraints}
-\lips
+N/A
 
 \section{Naming Conventions and Terminology}
 \subsection{Glossary of All Terms, Including Acronyms, Used by Stakeholders
 involved in the Project}
-\lips
+\subsection{Table of Units}
+
+Throughout this document, SI (Syst\`{e}me International d'Unit\'{e}s) is employed
+as the unit system.  In addition to the basic units, several derived units are
+used as described below.  For each unit, the symbol is given followed by a
+description of the unit and the SI name.
+
+\begin{tabular}{ |l|l|l|  }
+
+\hline
+symbol & unit & SI \\
+\hline
+\texttt{s} & time & second\\
+\hline
+\end{tabular}
+
+\subsection{Symbolic Parameters}
+
+\begin{tabular}{|l|l|l|p{5cm}|}
+
+\hline
+parameter & value & unit & description\\
+\hline
+\texttt{MIN\_EDUCATION} & high school & N/A & the minimum level of education\\
+\hline
+\texttt{MIN\_UNDERSTAND\%} & 95 & N/A & the minimum percentage of testers who can understand among all testers\\
+\hline
+\texttt{MAX\_TRIAL\_TIME} & 1200 & \texttt{s} & the maximum allowed trial time\\
+\hline
+\texttt{MIN\_TESTER\_NUM} &  20& N/A & the minimum number of testers needed\\
+\hline
+\texttt{MAX\_BAD\_GRAMMAR} & 0& N/A & the maximum occurrence of grammar mistakes allowed \\
+\hline
+\texttt{MAX\_OFFENSIVE} & 0& N/A & the maximum occurrence of offensive messages allowed\\
+\hline
+\texttt{MAX\_COLOR\_AMBIGUOUS} & 0& N/A & the maximum occurrence of indistinguishable color combinations allowed\\
+\hline
+\texttt{MIN\_OPERABLE\%} & 95 & N/A & the minimum percentage of system being operable \\
+\hline
+\texttt{MIN\_API\_SUCCESS\%} & 95 & N/A &  the minimum percentage of successful API calls\\
+\hline
+\texttt{MIN\_REGRESSION\_PASS\%} & 100  & N/A &  the minimum percentage of successful API calls\\
+\hline
+\end{tabular}
+
 
 \section{Relevant Facts And Assumptions}
 \subsection{Relevant Facts}
-\lips
+Manually reading through multiple course outlines, inputting all the deliverable information into the calendar, and crunch time has always been an inefficient part of academic life. Students wish to have a seamless tool integrating deadline management into their everyday lives without risking overdue penalties.
 \subsection{Business Rules}
-\lips
+N/A
 \subsection{Assumptions}
-\lips
+\begin{itemize}
+    \item Course outlines are available as \textit{PDF} files.
+    \item Users are using \textit{Windows, Linux} and \textit{macOS} operating systems.
+    \item Users have access to browsers including \textit{Chrome, Safari, Microsoft Edge}, and \textit{Firefox}.
+    \item Users have access to the internet.
+    \item Users have basic technical skills including typing, downloading, and uploading files.
+    \item Users are using a mainstream calendar application: \textit{Google Calendar, Outlook Calendar, Calendar}.
+    \item Users have a relatively stable weekly schedule.
+\end{itemize}
+
 
 \section{The Scope of the Work}
 \subsection{The Current Situation}
@@ -120,7 +198,155 @@ involved in the Project}
 \subsection{Business Data Model}
 \lips
 \subsection{Data Dictionary}
-\lips
+\subsubsection{Users}
+
+\begin{longtable}{ |p{3cm}|p{5cm}|p{5cm}|}
+\hline
+\multicolumn{3}{|c|}{Users} \\
+\hline
+Attribute & userName & userPwd \\
+\hline
+Description & Unique identifier of a user & The password of an account\\
+\hline
+Type & \texttt{VARCHAR(50)}& \texttt{VARCHAR(50)}\\
+\hline
+Allowed Values &N/A &N/A\\
+\hline
+Default Value &N/A &N/A\\
+\hline
+Constraints & \texttt{PRIMARY KEY, NOT NULL} & \texttt{NOT NULL CHECK (CHAR\_LENGTH(userPwd) \textgreater 8)}\\
+\hline
+Source & User input when setting up the account & User input when setting up the account \\
+\hline
+Usage & Authentication & Authentication \\
+\hline
+Attribute & pInterval & \\
+\hline
+Description & preferred Pomodoro interval & \\
+\hline
+Type & \texttt{INT}& \\
+\hline
+Allowed Values &N/A &\\
+\hline
+Default Value &N/A &\\
+\hline
+Constraints & \texttt{NOT NULL CHECK (pInterval >= 0 AND pInterval <= 300)} & \\
+\hline
+Source & User input when setting up the account &  \\
+\hline
+Usage & Scheduling &  \\
+\hline
+\end{longtable}
+\subsubsection{Courses}
+\begin{longtable}{ |p{3cm}|p{5cm}|p{5cm}|  }
+\hline
+\multicolumn{3}{|c|}{Courses} \\
+\hline
+Attribute & subject & courseCode\\
+\hline
+Description & The subject of a course& The code of a course\\
+\hline
+Type & \texttt{VARCHAR(16)}& \texttt{VARCHAR(16)}\\
+\hline
+Allowed Values &N/A &N/A\\
+\hline
+Default Value &N/A &N/A\\
+\hline
+Constraints & \texttt{NOT NULL, PART OF PRIMARY KEY}& \texttt{NOT NULL, PART OF PRIMARY KEY}\\
+\hline
+Source & Extracted from the course outline & Extracted from the course outline\\
+\hline
+Usage & Record course information & Record course information\\
+\hline
+Attribute & courseId&\\
+\hline
+Description & The unique identifier of a course&\\
+\hline
+Type & \texttt{VARCHAR(16)}&\\
+\hline
+Allowed Values & N/A&\\
+\hline
+Default Value &N/A &\\
+\hline
+Constraints & \texttt{PRIMARY KEY}&\\
+\hline
+Source & Uniquely generated when a course outline is uploaded&\\
+\hline
+Usage & Record course information &\\
+\hline
+\end{longtable}
+
+\subsubsection{Tasks}
+\begin{longtable}[H]{ |p{3cm}|p{5cm}|p{5cm}|  }
+\hline
+\multicolumn{3}{|c|}{Tasks} \\
+\hline
+Attribute & weight & taskType\\
+\hline
+Description & The percentage weight associated with a task & The type of a task\\
+\hline
+Type & \texttt{DECIMAL(10,2)}& \texttt{INT}\\
+\hline
+Allowed Values &N/A & \parbox{5cm}{\texttt{0 - QUIZ}\\ \texttt{1 - ASSIGNMENT}\\ \texttt{2 - PRESENTATION}\\ \texttt{3 - MIDTERM}\\ \texttt{4 - EXAM}\\ \texttt{5 - REPORT}\\ \texttt{6 - OTHER}} \\
+\hline
+Default Value & 0& 0\\
+\hline
+Constraints & \texttt{NOT NULL CHECK (weight >= 0 AND weight <= 100)}& \texttt{NOT NULL}\\
+\hline
+Source & Extracted from the course outline & Extracted from the course outline \\
+\hline
+Usage & Record course information  & Record course information \\
+\hline
+Attribute & subject & courseCode\\
+\hline
+Description & The subject of a course& The code of a course\\
+\hline
+Type & \texttt{VARCHAR(16)}& \texttt{VARCHAR(16)}\\
+\hline
+Allowed Values &N/A &N/A\\
+\hline
+Default Value &N/A &N/A\\
+\hline
+Constraints & \texttt{NOT NULL}& \texttt{NOT NULL}\\
+\hline
+Source & Extracted from the course outline & Extracted from the course outline\\
+\hline
+Usage & Record course information & Record course information\\
+\hline
+Attribute & courseId&priority\\
+\hline
+Description & The unique identifier of a course & The priority ranking of a task\\
+\hline
+Type & \texttt{VARCHAR(16)}&INT\\
+\hline
+Allowed Values &N/A &N/A\\
+\hline
+Default Value &N/A &0\\
+\hline
+Constraints & \texttt{NOT NULL}&\texttt{NOT NULL}\\
+\hline
+Source & Uniquely generated when a course outline is uploaded&Calculated with \texttt{weight, deadline} and taskType\\
+\hline
+Usage & Record course information & Record priority of a task.\\
+\hline
+Attribute & deadline&\\
+\hline
+Description & The deadline of a task & \\
+\hline
+Type & \texttt{DATE}&\\
+\hline
+Allowed Values &N/A &\\
+\hline
+Default Value &N/A &\\
+\hline
+Constraints & \texttt{NOT NULL}&\\
+\hline
+Source & Extracted from the course outline&\\
+\hline
+Usage & Record course information & \\
+\hline
+\end{longtable}
+
 
 \section{The Scope of the Product}
 \subsection{Product Boundary}
@@ -131,9 +357,205 @@ involved in the Project}
 \lips
 
 \section{Functional Requirements}
-\subsection{Functional Requirements}
-\lips
+\subsection{Authentication}
+\begin{itemize}[leftmargin=16.5mm,labelsep=4mm,label=\rthereqnum]
 
+\item
+The user could create an account with a username and a password.
+
+\textbf{Rationale:} Users would need an account protected by a password to keep their schedule personal and private.
+
+\textbf{Priority:} HIGH
+\item
+The user could log in to their account by providing a corresponding username and password.
+
+\textbf{Rationale:} Users would need to access their accounts.
+
+\textbf{Priority:} HIGH
+\item
+The user should be able to log out of the account.
+
+\textbf{Rationale:} Users do not have to stay logged in.
+
+\textbf{Priority:} HIGH
+\item
+The user should have access to their scheduling information once logged in.
+
+\textbf{Rationale:} User's scheduling information should be available to them.
+
+\textbf{Priority:} HIGH
+
+\end{itemize}
+
+
+\subsection{User input}
+\begin{itemize}[leftmargin=16.5mm,labelsep=4mm,label=\rthereqnum]
+
+\item[\rthereqnum \label{R_upload_pdf}]
+The user could upload multiple PDF files containing course outlines to the system.
+
+\textbf{Rationale:} Multiple courses would have multiple course outlines.
+
+\textbf{Priority:} HIGH
+\item
+The system prompts users to choose their preferred study interval at which the system tends to allocate study sessions.
+
+\textbf{Rationale:} The user would want to have their study session schedules at their preferred time.
+
+\textbf{Priority:} MEDIUM
+\item
+The user could change their preferred study interval.
+
+\textbf{Rationale:} The user's preferred study interval could change over time. 
+
+\textbf{Priority:} MEDIUM
+\item
+The system prompts users to set their preferred Pomodoro intervals. 
+
+\textbf{Rationale:} The user might have preferred Pomodoro intervals.
+
+\textbf{Priority:} MEDIUM
+\item
+The user could change their Pomodoro interval.
+
+\textbf{Rationale:} The user's preferred Pomodoro intervals could change over time.
+
+\textbf{Priority:} MEDIUM
+\item
+The system supports a friend list allowing users to send friend requests.
+
+\textbf{Rationale:} The user needs to send friend requests to add friends.
+
+\textbf{Priority:} LOW
+\item
+The user could accept an incoming friend request.
+
+\textbf{Rationale:} The user could accept the friend request if they wish to befriend the request sender.
+
+\textbf{Priority:} LOW
+\item
+The user could reject an incoming friend request.
+
+\textbf{Rationale:} The user could reject the friend request if they wish not to befriend the request sender.
+
+\textbf{Priority:} LOW
+\item
+The user could change the progress of each task
+
+\textbf{Rationale:} The progress of each task should align with reality.
+
+\textbf{Priority:} HIGH
+\item
+On finishing each sub-task, the system should ask for the user's feedback on whether the pace is comfortable.
+
+\textbf{Rationale:} The schedule needs feedback to adjust the pace.
+
+\textbf{Priority:} HIGH
+\end{itemize}
+
+\subsection{Data}
+\begin{itemize}[leftmargin=16.5mm,labelsep=4mm,label=\rthereqnum]
+\item
+The system could extract information including \texttt{courseName, taskType, taskName, weight, deadline} from the uploaded course outline PDF files.
+
+\textbf{Rationale:} Course outlines would be provided as PDF files containing course information.
+
+\textbf{Priority:} HIGH
+\item
+The system could generate a list of tasks from uploaded PDFs.
+
+\textbf{Rationale:} To generate a study plan, tasks to be finished are needed.
+
+\textbf{Priority:} HIGH
+\item[\rthereqnum \label{R_prioritize_task}]
+The system could assign priority to each task generated.
+
+\textbf{Rationale:} From priority the system could allocate adequate time to finish each task.
+
+\textbf{Priority:} HIGH
+\item
+The system could detect the user's attention level.
+
+\textbf{Rationale:} The user's attention level is needed to allocate rest time.
+
+\textbf{Priority:} MEDIUM
+\item
+The system should notify the user when the user's attention level is low.
+
+\textbf{Rationale:} The system would keep the user engaged in their study task.
+
+\textbf{Priority:} MEDIUM
+\item[\rthereqnum \label{R_check_task_progress}]
+The user should be able to view the progress of each task.
+
+\textbf{Rationale:} The user would want to see their progress.
+
+\textbf{Priority:} HIGH
+\item
+With authentication, the system could import event and schedule data from other calendar apps including Calendar, Outlook, and Google Calendar.
+
+\textbf{Rationale:} Study session allocation would consider avoiding conflicts with existing events.
+
+\textbf{Priority:} MEDIUM
+\item
+With authentication, the system could export event and schedule data to other calendar apps including Calendar, Outlook, and Google Calendar.
+
+\textbf{Rationale:} The user would want to use their own calendar of choice.
+
+\textbf{Priority:} MEDIUM
+\item
+The user should be able to export their study plan as a PDF.
+
+\textbf{Rationale:} The user could want to have an overview of their study plan offline.
+
+\textbf{Priority:} LOW
+\end{itemize}
+
+\subsection{Scheduling}
+\begin{itemize}[leftmargin=16.5mm,labelsep=4mm,label=\rthereqnum]
+\item
+The system could calculate the estimated time needed to finish each task. 
+
+\textbf{Rationale:} Total required tie is needed to decide the amount of subtasks needed.
+
+\textbf{Priority:} HIGH
+\item
+The user could regenerate a study plan accordingly once a task's progress is changed by the user.
+
+\textbf{Rationale:} Previously generated study plans could be outdated.
+
+\textbf{Priority:} HIGH
+\item
+The estimated time needed to finish each task would dynamically adjust based on user feedback on past task completion progress.
+
+\textbf{Rationale:} Estimated time needed may not be perfect.
+
+\textbf{Priority:} HIGH
+\item
+The system could prioritize tasks extracted based on \texttt{taskType, weight} and \texttt{deadline}.
+
+\textbf{Rationale:} The system would ensure high-priority tasks are finished on time.
+
+\textbf{Priority:} HIGH
+\item
+With data containing task information, preferred study time, schedule, and Pomodoro intervals gathered the system could generate a detailed study plan containing multiple sub-tasks for each task in the course outline available in-app and export it to other calendars.
+
+\textbf{Rationale:} A detailed study plan contains all the sub-tasks and their settings.
+
+\textbf{Priority:} HIGH
+\item
+The system would have a Pomodoro clock ready for each sub-task.
+
+\textbf{Rationale:} A Pomodoro clock would help the user balance their study and rest.
+
+\textbf{Priority:} MEDIUM
+\item
+With a detailed study plan, the system could pair friends from the friend list with similar study plans to have video-based online study sessions.
+
+\textbf{Rationale:} Friends with similar tasks at similar times could collaborate and inspire each other.
+
+\textbf{Priority:} LOW
+\end{itemize}
 \section{Look and Feel Requirements}
 \subsection{Appearance Requirements}
 \lips
@@ -142,16 +564,71 @@ involved in the Project}
 
 \section{Usability and Humanity Requirements}
 \subsection{Ease of Use Requirements}
-\lips
-\subsection{Personalization and Internationalization Requirements}
-\lips
-\subsection{Learning Requirements}
-\lips
-\subsection{Understandability and Politeness Requirements}
-\lips
-\subsection{Accessibility Requirements}
-\lips
+\begin{itemize}[leftmargin=16.5mm,labelsep=4mm,label=\rtheuhrnum]
+\item The navigation must be intuitive to use by users with \texttt{MIN\_EDUCATION} education background.
 
+\textbf{Fit Criterion:} \texttt{MIN\_UNDERSTAND\%} of users with at least \texttt{MIN\_EDUCATION} of education could navigate through functions within \texttt{MAX\_TRIAL\_TIME} of exploring.
+
+\begin{itemize}
+    \item \( U \): Total number of users
+    \item \( E \): The set of users with at least \texttt{MIN\_EDUCATION}
+    \item \( N \): The number of users who can navigate through functions within \texttt{MAX\_TRIAL\_TIME}
+\end{itemize}
+\[
+    N \geq \left( \frac{\texttt{MIN\_UNDERSTAND\%}}{100} \right) \cdot |E|
+\]
+\end{itemize}
+\subsection{Personalization and Internationalization Requirements}
+N/A
+\subsection{Learning Requirements}
+\begin{itemize}[leftmargin=16.5mm,labelsep=4mm,label=\rtheuhrnum]
+\item
+The system must be understood by users within \texttt{MAX\_TRIAL\_TIME} of exploring.
+
+\textbf{Fit Criterion:} \texttt{MIN\_UNDERSTAND\%} of users with at least \texttt{MIN\_EDUCATION} of education could understand the system within \texttt{MAX\_TRIAL\_TIME} of exploring.
+\begin{itemize}
+    \item \( U \): Total number of users
+    \item \( E \): The set of users with at least \texttt{MIN\_EDUCATION}
+    \item \( N \): The number of users who can navigate through functions within \texttt{MAX\_TRIAL\_TIME}
+\end{itemize}
+
+\[
+    N \geq \left( \frac{\texttt{MIN\_UNDERSTAND\%}}{100} \right) \cdot |E|
+\]
+\end{itemize}
+\subsection{Understandability and Politeness Requirements}
+\begin{itemize}[leftmargin=16.5mm,labelsep=4mm,label=\rtheuhrnum]
+\item
+The language in the app must be grammatically correct \texttt{MIN\_grammar\%} of the time.
+
+\textbf{Fit Criterion:} A group of \texttt{MIN\_TESTER\_NUM}  users could find at most \texttt{MAX\_BAD\_GRAMMAR} of grammar mistakes.
+
+\item
+The language in the app must be non-offensive.
+
+\textbf{Fit Criterion:} A group of \texttt{MIN\_TESTER\_NUM} users could find no more than \texttt{MAX\_OFFENSIVE} of offensive messages.
+\begin{itemize}
+    \item \( U \): Total number of users testing the system
+    \item \( O \): The number of offensive messages found by a group of users
+    \item \( G \): The group of at least \texttt{MIN\_TESTER\_NUM} users
+\end{itemize}
+\[
+    O \leq \texttt{MAX\_OFFENSIVE}
+\]
+\end{itemize}
+\subsection{Accessibility Requirements}
+\begin{itemize}[leftmargin=16.5mm,labelsep=4mm,label=\rtheuhrnum]
+    \item Color combinations used in the interface must be distinguished by users with color blindness.\\
+    
+    \textbf{Fit Criterion:} A group of \texttt{MIN\_TESTER\_NUM} users could find at most \texttt{MAX\_COLOR\_AMBIGUOUS} of indistinguishable color combinations in the UI filtered with Color Oracle.
+    \begin{itemize}
+        \item \( C \): The number of indistinguishable color combinations found by a group of users, filtered with Color Oracle
+        \item \( G \): The group of at least \texttt{MIN\_TESTER\_NUM} users
+    \end{itemize}
+    \[
+        C \leq \texttt{MAX\_COLOR\_AMBIGUOUS}
+    \]
+\end{itemize}
 \section{Performance Requirements}
 \subsection{Speed and Latency Requirements}
 \lips
@@ -170,16 +647,49 @@ involved in the Project}
 
 \section{Operational and Environmental Requirements}
 \subsection{Expected Physical Environment}
-\lips
-\subsection{Wider Environment Requirements}
-\lips
-\subsection{Requirements for Interfacing with Adjacent Systems}
-\lips
-\subsection{Productization Requirements}
-\lips
-\subsection{Release Requirements}
-\lips
+\begin{itemize}[leftmargin=16.5mm,labelsep=4mm,label=\rtheoernum]
+\item
+The system must be operable under the same physical environment that the desktop computer running it is operable.
 
+\textbf{Fit Criterion:} When the machine is operable, the system is operable at least \texttt{MIN\_OPERABLE\%} of time.
+\begin{itemize}
+    \item \( T \): Total time the machine is operable
+    \item \( S \): Total time the system is operable when the machine is operable
+\end{itemize}
+\[
+    \frac{S}{T} \geq \frac{\texttt{MIN\_OPERABLE\%}}{100}
+\]
+\end{itemize}
+\subsection{Requirements for Interfacing with Adjacent Systems}
+\begin{itemize}[leftmargin=16.5mm,labelsep=4mm,label=\rtheoernum]
+\item
+The system could interface with calendar APIs when called.
+
+\textbf{Fit Criterion:} At least \texttt{MIN\_API\_SUCCESS\%} of requests made to supported calendar APIs are successful.
+\begin{itemize}
+    \item \( R \): Total number of requests made to the supported calendar APIs
+    \item \( S \): Number of successful requests made to the supported calendar APIs
+\end{itemize}
+\[
+    \frac{S}{R} \geq \frac{\texttt{MIN\_API\_SUCCESS\%}}{100}
+\]
+\end{itemize}
+\subsection{Productization Requirements}
+N/A
+\subsection{Release Requirements}
+\begin{itemize}[leftmargin=16.5mm,labelsep=4mm,label=\rtheoernum]
+\item
+The released version must pass all known regression tests.
+
+\textbf{Fit Criterion:} The released version must pass \texttt{MIN\_REGRESSION\_PASS\%} of regression tests. 
+\begin{itemize}
+    \item \( T \): Total number of regression tests conducted on the released version
+    \item \( P \): Number of regression tests passed by the released version
+\end{itemize}
+\[
+    \frac{P}{T} \geq \frac{\texttt{MIN\_REGRESSION\_PASS\%}}{100}
+\]
+\end{itemize}
 \section{Maintainability and Support Requirements}
 \subsection{Maintenance Requirements}
 \lips
@@ -190,15 +700,34 @@ involved in the Project}
 
 \section{Security Requirements}
 \subsection{Access Requirements}
-\lips
+\begin{itemize}[leftmargin=16.5mm,labelsep=4mm,label=\rthesrnum]
+\item
+The system is accessible only if the correct combo of username and password is provided.
+
+\textbf{Fit Criterion:} An error message suggesting an incorrect password or username is displayed.
+\item
+Users could not access other users' data.
+
+\textbf{Fit Criterion:} Only data linked to the currently logged-in account could be displayed.
+\end{itemize}
 \subsection{Integrity Requirements}
-\lips
+\begin{itemize}[leftmargin=16.5mm,labelsep=4mm,label=\rthesrnum]
+\item
+No Unauthorised entity could modify the database.
+
+\textbf{Fit Criterion:} A group of \texttt{MIN\_TESTER\_NUM} unauthorised users could not modify data.
+\end{itemize}
 \subsection{Privacy Requirements}
-\lips
+\begin{itemize}[leftmargin=16.5mm,labelsep=4mm,label=\rthesrnum]
+\item
+The system will not release user information to a third party.
+
+\textbf{Fit Criterion:} The system does not provide user information to a third party.
+\end{itemize}
 \subsection{Audit Requirements}
-\lips
+N/A
 \subsection{Immunity Requirements}
-\lips
+N/A
 
 \section{Cultural Requirements}
 \subsection{Cultural Requirements}
@@ -206,10 +735,19 @@ involved in the Project}
 
 \section{Compliance Requirements}
 \subsection{Legal Requirements}
-\lips
-\subsection{Standards Compliance Requirements}
-\lips
+\begin{itemize}[leftmargin=16.5mm,labelsep=4mm,label=\rthecrnum]
+\item
+The system must comply with local laws and regulations.
 
+\textbf{Fit Criterion:} The system does not violate local laws or regulations.
+\end{itemize}
+\subsection{Standards Compliance Requirements}
+\begin{itemize}[leftmargin=16.5mm,labelsep=4mm,label=\rthecrnum]
+\item
+The code must comply with \textit{Flack8} coding standards.
+
+\textbf{Fit Criterion:} Merged code passes Flake8 linter workflow check.
+\end{itemize}
 \section{Open Issues}
 \lips
 
