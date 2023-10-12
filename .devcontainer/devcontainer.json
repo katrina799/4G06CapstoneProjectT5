@@ -1,0 +1,15 @@
+{
+	"name": "Python 3",
+	"image": "mcr.microsoft.com/devcontainers/python:0-3.11",
+
+	// Leave it blank to use the default way of starting the container.
+	"customizations": {
+		"vscode": {
+			"settings": {},
+			"extensions": [
+			]
+		}
+	},
+	
+	"postCreateCommand": "pip3 install -r requirements.txt"
+}
