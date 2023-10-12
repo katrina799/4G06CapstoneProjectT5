@@ -8,6 +8,7 @@
 
 \usepackage{booktabs}
 \usepackage{tabularx}
+\usepackage{graphicx}
 \usepackage{hyperref}
 \usepackage{enumitem}
 \usepackage{longtable}
@@ -58,7 +59,6 @@
 \date{\today}
 	
 \maketitle
-
 ~\newpage
 
 \pagenumbering{roman}
@@ -203,7 +203,13 @@ N/A
 
 \section{Business Data Model and Data Dictionary}
 \subsection{Business Data Model}
-\lips
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.8\textwidth]{DFD.png}
+  \caption{Data Flow Diagram} 
+  \label{fig:dfd} 
+\end{figure}
+
 \subsection{Data Dictionary}
 \subsubsection{Users}
 
@@ -768,31 +774,100 @@ The code must comply with \textit{Flack8} coding standards.
 
 \section{New Problems}
 \subsection{Effects on the Current Environment}
-\lips
+
+\begin{itemize}
+    \item The introduction of new time management tools may affect existing scheduling systems within educational organizations. Any changes to the way students manage the study schedule may affect the way teachers and administrators organize their workflow and thus their existing scheduling systems.
+
+    \item The implementation of a new system may change the way students interact with existing tools and platforms. If the new tool enables seamless integration with existing popular scheduling platforms, users may stop using other scheduling tools. Some users may need to adapt to these changes, and this transition needs to be handled carefully to ensure a smooth user experience.
+
+    \item The data security requirements of the new tool and the user access control may require changes to the current security infrastructure. Any potential impact on existing security protocols should be fully assessed, and measures taken to mitigate risks.
+
+    \item The new system may change user workflows and procedures. If it automates and prioritizes tasks, this may impact the way they plan and manage assignment completion and course scheduling. Understanding and responding to these changes as early as possible is critical to ensure smooth operation.
+\end{itemize}
+
 \subsection{Effects on the Installed Systems}
-\lips
+This section specifies the interfaces between the new system and existing systems or components.
+\begin{itemize}
+    \item \textbf{Interface with Google Calendar}: The system should integrate with Google Calendar to synchronize and visualize task deadlines. The interface will involve certification, data exchange, and event management.
+    
+    \item \textbf{Interface with Outlook Calendar}: Similar to Google Calendar, the system shall integrate with Outlook Calendar to synchronize events. The interface will involve certification and event management.
+
+    \item \textbf{Interface with Machine Learning Server}: The system relies on machine learning algorithms to prioritize tasks. This interface includes sending data to the machine learning server, processing suggestions, and integrating them into the user interface.
+
+    \item \textbf{Interface to connect with users}: To facilitate collaborative learning, the system should enable users to connect with their peers. This interface includes user authentication, data exchange, and video chat integration.
+
+    \item \textbf{Interface with videoconferencing hardware} Users will use webcams, microphones, and speakers for video chat during collaborative learning. This interface is required to access these hardware components and manage live video conferencing.
+\end{itemize}
 \subsection{Potential User Problems}
-\lips
+\begin{itemize}
+    \item \textbf{User Confusion}:
+    The addition of machine learning-driven task prioritization, facial recognition, and online collaborative learning session features may confuse or create resistance from some users who are unfamiliar with these concepts.
+    
+    \textbf{Prevention and mitigation measures:}
+    \begin{itemize}
+        \item Develop a user-friendly onboarding process and provide extensive training materials to ensure users can easily understand and use the new features.
+        \item Provide customization options that allow users to customize the system to their preferences. This flexibility will help users take better control of their experience.
+    \end{itemize}
+    
+    \item \textbf{Privacy Concerns}:
+    Users may have privacy concerns, especially with attention-monitoring features such as facial recognition. They may be concerned that their facial data will be collected and used.
+    
+    \textbf{Prevention and Mitigation Measures:}
+    \begin{itemize}
+        \item Privacy concerns are addressed by implementing strong data protection measures. Users will be informed of what their data will be used for and how it will be processed and will be able to opt out of certain features.
+    \end{itemize}
+    
+    \item \textbf{Technical Issues}:
+    Technical issues or system incompatibilities may lead to adverse reactions, such as issues related to platform support or software bugs.
+    
+    \textbf{Prevention and Mitigation Measures:}
+    \begin{itemize}
+        \item Rigorous testing and quality assurance are conducted to detect and correct technical issues before they affect users. Updates and bug fixes will be performed regularly to ensure system stability.
+    \end{itemize}
+\end{itemize}
+
 \subsection{Limitations in the Anticipated Implementation Environment That May
 Inhibit the New Product}
-\lips
+\begin{itemize}
+    \item The planned servers may not have enough processing power or storage capacity to handle the expected growth in users and data volume.
+    
+    \item Available network bandwidth may not be sufficient to support real-time videoconferencing for collaborative learning sessions, leading to potential performance issues.
+    
+    \item Implementing system integration with external calendaring platforms (e.g., Google Calendar, Outlook) takes into account that these platforms may have limitations or constraints that affect the quality of the integration.
+    
+    \item Hardware for facial recognition may not be readily available or may not meet the accuracy requirements for detecting the user's level of attention.
+    
+    \item The implementation environment may be subject to specific data privacy regulations that may affect the collection and storage of user data.
+\end{itemize}
+
 \subsection{Follow-Up Problems}
-\lips
+This section anticipates potential challenges, unintended consequences, and limitations that the project may encounter during development and implementation.
+
+\begin{itemize}
+    \item The implementation of new features or technologies in the system may inadvertently result in non-compliance with existing laws and regulations, such as user privacy protection aspect. The project team will conduct regular assessments. Any necessary changes will be made to address potential legal issues.
+    \item 
+\end{itemize}
 
 \section{Tasks}
 \subsection{Project Planning}
-\lips
+\href{https://github.com/wangq131/4G06CapstoneProjectT5/blob/main/docs/DevelopmentPlan/DevelopmentPlan.tex#L248C1-L265C6}{See Project Scheduling Section in Development Plan.}
 \subsection{Planning of the Development Phases}
-\lips
+\href{https://github.com/wangq131/4G06CapstoneProjectT5/blob/main/docs/DevelopmentPlan/DevelopmentPlan.tex#L194C1-L245C16}{See Project Scheduling Section in Development Plan.}
 
 \section{Migration to the New Product}
-\subsection{Requirements for Migration to the New Product}
-\lips
-\subsection{Data That Has to be Modified or Translated for the New System}
-\lips
+The project is a stand-alone application, not an upgrade or replacement of an existing product. There is no need to involve a product migration. The Migration to the New Product section is not needed.
 
 \section{Costs}
-\lips
+The following are some of the major cost items that may need to be considered:
+
+\begin{itemize} 
+  \item \textbf{Cloud services}: using a cloud infrastructure (e.g. \textit{Amazon AWS}, \textit{Microsoft Azure}, or \textit{Google Cloud}) requires consideration of the cost of using cloud services.
+  \item \textbf{Server hosting}: using an independent server, server hosting, and maintenance costs need to be considered.
+  \item \textbf{Database}: database storage and access costs.
+  \item \textbf{Data Backup}: regular data backup and storage costs.
+  \item \textbf{Working Time}: takes NUMBER\_Of\_MEMBERS group members WORK\_HOURS a week.
+\end{itemize}
+
 \section{User Documentation and Training}
 \subsection{User Documentation Requirements}
 
