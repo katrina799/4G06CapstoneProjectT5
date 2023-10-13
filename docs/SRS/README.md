@@ -1,12 +1,20 @@
-# Software Requirements Specification (SRS)
+# Software Requirements Specification (SRS) for StudyApp
 
-<The SRS is for a single product, not a family of products. A Commonality Analysis is
-more appropriate for a family of products.>
+## Overview
 
-<The template in this folder is suited to Scientific Computing (also known as 
-Research Software) projects>
+This document outlines the specifications for `StudyApp`, an application designed to assist students with their academic tasks using machine learning. The SRS describes both functional and nonfunctional requirements, ensuring that developers, stakeholders, and users have a clear understanding of the application's expected behavior.
 
-The folders and files for this folder are as follows:
+To gain a comprehensive understanding of the application's requirements:
+1. Begin with the *Functional Requirements* section to grasp the core functionalities the application aims to provide.
+2. Explore the *Nonfunctional Requirements(10 - 17)* to understand the quality standards the application seeks to achieve.
 
-Describe ...
+## Contribution
 
+If you'd like to suggest changes or improvements:
+1. Fork this repository.
+2. Make your changes.
+3. Submit a pull request with a detailed description of your proposed alterations.
+
+## Feedback
+
+Your feedback is valuable! If you have any comments or insights about the SRS, please raise an issue in this repository.
