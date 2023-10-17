@@ -12,7 +12,7 @@
 
 ## Revision History
 
-<div align="center">
+</div>
 
 | Date | Developer(s) | Change |
 | ---- | ------------ | ------ |
@@ -26,15 +26,18 @@
 
 ## Table of Contents
 
-</div align="center">
+</div>
 
-1. [Introduction](#introduction)
-2. [Scope and Purpose of Hazard Analysis](#scope-and-purpose-of-hazard-analysis)
-3. [System Boundaries and Components](#system-boundaries-and-components)
-4. [Critical Assumptions](#critical-assumptions)
-5. [Failure Mode and Effect Analysis](#failure-mode-and-effect-analysis)
-6. [Safety and Security Requirements](#safety-and-security-requirements)
-7. [Roadmap](#roadmap)
+- [Hazard Analysis - \[Program Name\]](#hazard-analysis---program-name)
+  - [Revision History](#revision-history)
+  - [Table of Contents](#table-of-contents)
+  - [Introduction](#introduction)
+  - [Scope and Purpose of Hazard Analysis](#scope-and-purpose-of-hazard-analysis)
+  - [System Boundaries and Components](#system-boundaries-and-components)
+  - [Critical Assumptions](#critical-assumptions)
+  - [Failure Mode and Effect Analysis](#failure-mode-and-effect-analysis)
+  - [Safety and Security Requirements](#safety-and-security-requirements)
+  - [Roadmap](#roadmap)
 
 ---
 
