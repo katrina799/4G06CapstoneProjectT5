@@ -3,6 +3,7 @@
 \usepackage{booktabs}
 \usepackage{tabularx}
 \usepackage{hyperref}
+\usepackage{enumitem}
 
 \hypersetup{
     colorlinks=true,       % false: boxed links; true: colored links
@@ -11,6 +12,11 @@
     filecolor=magenta,      % color of file links
     urlcolor=cyan           % color of external links
 }
+
+\newcounter{srnum} %Security Requirement number
+\newcommand{\rthesrnum}{SR\refstepcounter{srnum}\thesrnum:}
+\newcommand{\srref}[1]{SR\ref{#1}}
+
 
 \title{Hazard Analysis\\\progname}
 
@@ -51,22 +57,40 @@ Date2 & Name(s) & Description of changes\\
 
 \pagenumbering{arabic}
 
-\wss{You are free to modify this template.}
 
 \section{Introduction}
-
-\wss{You can include your definition of what a hazard is here.}
+This document presents the hazard analysis of the Course Buddy application. The Course Buddy App is a software designed to aid students in their academic endeavors by enabling efficient task management, syllabus uploading, task generation, and prioritization based on machine learning algorithms.
+A hazard in the context of the Course Buddy App is any characteristic that, when combined with external circumstances, can lead to loss or compromise in the system. Hazards might pertain to data safety (protecting user data) and security (ensuring unauthorized access is prevented).
 
 \section{Scope and Purpose of Hazard Analysis}
-
+The primary aim of this document is to determine potential hazards within the system components, evaluate the effects and causes of failures, suggest mitigation measures, and determine resultant safety and security requirements.
 \section{System Boundaries and Components}
+\begin{enumerate}
+    \item \textbf{The Course Buddy Application}: Installed on user devices, comprising both the user interface (front-end) and server interactions (back-end). The primary components are:
+    \begin{itemize}
+        \item Syllabus Uploading
+        \item Task Generation
+        \item Task Prioritization (ML-based)
+        \item User Authentication \& Data Encryption
+        \item Notification System
+    \end{itemize}
+    
+    \item \textbf{The Physical Device (e.g., smartphone or tablet)}
+    \item \textbf{The Database}: Where all academic data, syllabuses, and task information will be stored.
+    \item \textbf{Backup Procedures}: Automated scripts for daily data backup.
+\end{enumerate}
 
 \section{Critical Assumptions}
 
-\wss{These assumptions that are made about the software or system.  You should
-minimize the number of assumptions that remove potential hazards.  For instance,
-you could assume a part will never fail, but it is generally better to include
-this potential failure mode.}
+\begin{enumerate}
+    \item \textbf{Device Compatibility}: It is assumed that users will utilize devices that meet the application's minimum technical specifications.
+    \item \textbf{Stable Internet Connectivity}: The app functions optimally with a stable internet connection, allowing for real-time data syncing, task updating, and notifications.
+    \item \textbf{Database Reliability}: We assume that the third-party database provider consistently maintains industry-standard security measures and operational uptimes.
+    \item \textbf{User Behavior}: It is assumed that users will not intentionally try to exploit or compromise the system. This includes attempting to bypass security protocols, introducing malicious software, or purposefully corrupting their data.
+    \item \textbf{External Services}: Services and APIs the application relies upon (for tasks like ML processing or cloud operations) are assumed to be available and operational at all times.
+    \item \textbf{Data Integrity}: It is assumed that the data being input by users, especially academic syllabuses or schedules, is accurate and up-to-date.
+    \item \textbf{Hardware Durability}: We assume that user devices, such as smartphones or tablets, will not abruptly fail during application operations, which could lead to data loss or corruption.
+\end{enumerate}
 
 \section{Failure Mode and Effect Analysis}
 
@@ -79,7 +103,38 @@ rationale design process how and why to fake it.)}
 
 \section{Roadmap}
 
-\wss{Which safety requirements will be implemented as part of the capstone timeline?
-Which requirements will be implemented in the future?}
+\subsection{Requirements to be Implemented as Part of the Capstone Timeline}
+\begin{itemize}[leftmargin=16.5mm,labelsep=4mm,label=\rthesrnum]
+    \item \textbf{Data Encryption} \\
+    Ensure data encryption during data transfers to prevent unauthorized access. \\
+    Integration of encryption protocols in the data transfer modules. \\
+    
+    \item \textbf{Encrypted Data Storage} \\
+    Store user data in a hashed or encrypted format. \\
+    Utilize encryption/hashing mechanisms in the data storage systems. \\
+    
+    \item \textbf{Audit Log Maintenance} \\
+    Maintain an audit log of all application activities. \\
+    Incorporate an activity logger within the application framework. \\
+    
+    \item \textbf{Role-based Access Control} \\
+    Implement strict role-based access control for data protection. \\
+    Establish role-based access control mechanisms in the user management module. \\
+    
+    \item \textbf{Attack Prevention} \\
+    Ensure protection of authentication data from brute force attacks. \\
+    Introduce rate-limiting to thwart brute force attacks. \\
+    
+    \item \textbf{Password Recovery} \\
+    Offer a mechanism for password retrieval. \\
+    Develop a password recovery module to generate and send a time-bound password reset link. \\
+\end{itemize}
+
+\subsection{Requirements to be Implemented in the Future}
+\begin{itemize}[leftmargin=16.5mm,labelsep=4mm,label=\rthesrnum]
+    \item \textbf{Security Patches and Updates} \\
+    Regularly roll out security patches and updates to fix known vulnerabilities. \\
+    Form a dedicated security updates team to monitor, identify, and rectify vulnerabilities. \\
+\end{itemize}
 
 \end{document}
