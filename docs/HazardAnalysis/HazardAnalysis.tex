@@ -7,6 +7,19 @@
 \usepackage{longtable}
 \usepackage{geometry}
 \usepackage{pdflscape}
+\usepackage{everypage}
+\usepackage{lipsum}
+
+\newcommand{\Lpagenumber}{\ifdim\textwidth=\linewidth\else\bgroup
+  \dimendef\margin=0 %use \margin instead of \dimen0
+  \ifodd\value{page}\margin=\oddsidemargin
+  \else\margin=\evensidemargin
+  \fi
+  \raisebox{\dimexpr -\topmargin-\headheight-\headsep-0.5\linewidth}[0pt][0pt]{%
+    \rlap{\hspace{\dimexpr \margin+\textheight+\footskip}%
+    \llap{\rotatebox{90}{\thepage}}}}%
+\egroup\fi}
+\AddEverypageHook{\Lpagenumber}%
 
 \hypersetup{
     colorlinks=true,       % false: boxed links; true: colored links
@@ -19,6 +32,9 @@
 \newcounter{srnum} %Security Requirement number
 \newcommand{\rthesrnum}{SR\refstepcounter{srnum}\thesrnum:}
 \newcommand{\srref}[1]{SR\ref{#1}}
+\newcounter{srrnum} %Security Requirement number
+\newcommand{\rthesrrnum}{SR\refstepcounter{srrnum}\thesrrnum:}
+\newcommand{\srrref}[1]{SR\ref{#1}}
 
 
 \title{Hazard Analysis\\\progname}
@@ -97,7 +113,8 @@ The primary aim of this document is to determine potential hazards within the sy
 
 \clearpage % Start a new page
 \begin{landscape}
-\hspace*{-4cm}
+    \pagestyle{empty}%
+
 \section{Failure Mode and Effect Analysis}
 
 
@@ -123,47 +140,48 @@ Estimate Task Duration & Incorrect estimates & Misallocated time for tasks & Alg
 \hline
 \end{longtable}
 \end{landscape}
+\pagestyle{plain}%
 \clearpage % End the landscape page and start a new page
 
 \section{Safety and Security Requirements}
-\begin{itemize}
-\item \textbf{SR1: Data Encryption}
+\begin{itemize}[leftmargin=16.5mm,labelsep=4mm,label=\rthesrnum]
+\item \textbf{Data Encryption}
   \begin{itemize}
   \item \textbf{Description:} Ensure data encryption during data transfers to prevent unauthorized access.
   \item \textbf{Fit Criteria:} Data being transferred should be encrypted using industry-standard algorithms, with no plain-text data leaks detected.
   \item \textbf{Function to Fulfill:} Implement encryption protocols in the data transfer modules.
   \end{itemize}
-\item \textbf{SR2: Encrypted Data Storage}
+\item \textbf{Encrypted Data Storage}
   \begin{itemize}
   \item \textbf{Description:} Store user data in a hashed or encrypted format to prevent direct access.
   \item \textbf{Fit Criteria:} No user data should be retrievable in plain text from the storage systems.
   \item \textbf{Function to Fulfill:} Use encryption/hashing mechanisms in the data storage systems.
   \end{itemize}
-\item \textbf{SR3: Audit Log Maintenance}
+\item \textbf{Audit Log Maintenance}
   \begin{itemize}
   \item \textbf{Description:} Maintain an audit log of all activities within the application for traceability and accountability.
   \item \textbf{Fit Criteria:} All user and system activities should be logged with time stamps and relevant meta-data.
   \item \textbf{Function to Fulfill:} Integrate an activity logger within the application framework.
   \end{itemize}
-\item \textbf{SR4: Role-based Access Control}
+\item \textbf{Role-based Access Control}
   \begin{itemize}
   \item \textbf{Description:} Have a strict role-based access control to prevent unauthorized data manipulation.
   \item \textbf{Fit Criteria:} Different user roles should have differing access levels, with no unauthorized data access incidents.
   \item \textbf{Function to Fulfill:} Implement role-based access control mechanisms in the user management module.
   \end{itemize}
-\item \textbf{SR5: Security Patches and Updates}
+\item \textbf{Security Patches and Updates}
   \begin{itemize}
   \item \textbf{Description:} Provide regular security patches and updates to the software to rectify known vulnerabilities.
   \item \textbf{Fit Criteria:} No known vulnerability should persist in the system for more than a month without a patch.
   \item \textbf{Function to Fulfill:}Establish a dedicated security updates team.
   \end{itemize}
-\item \textbf{SR6: Attack Prevention}
+\item \textbf{Attack Prevention}
   \begin{itemize}
   \item \textbf{Description:} The system should protect authentication data from brute force attacks.
   \item \textbf{Fit Criteria:} Restriction after a certain number of failed login attempts; option for the user to unlock account via email or phone.
   \item \textbf{Function to Fulfill:}Implement rate-limiting to prevent brute force attacks.
   \end{itemize}
-\item \textbf{SR7: Password Recovery}
+\item \textbf{Password Recovery}
   \begin{itemize}
   \item \textbf{Description:} The system should provide a mechanism for users to retrieve their passwords in case they forget them.
   \item \textbf{Fit Criteria:} A user who has forgotten their password should be able to receive a password reset link via their registered email. This link should expire after a certain duration.
@@ -174,7 +192,7 @@ Estimate Task Duration & Incorrect estimates & Misallocated time for tasks & Alg
 \section{Roadmap}
 
 \subsection{Requirements to be Implemented as Part of the Capstone Timeline}
-\begin{itemize}[leftmargin=16.5mm,labelsep=4mm,label=\rthesrnum]
+\begin{itemize}[leftmargin=16.5mm,labelsep=4mm,label=\rthesrrnum]
     \item \textbf{Data Encryption} \\
     Ensure data encryption during data transfers to prevent unauthorized access. \\
     Integration of encryption protocols in the data transfer modules. \\
