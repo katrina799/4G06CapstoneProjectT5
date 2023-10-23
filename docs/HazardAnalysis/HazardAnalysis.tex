@@ -4,11 +4,18 @@
 \usepackage{tabularx}
 \usepackage{hyperref}
 \usepackage{enumitem}
+
 \usepackage{longtable}
 \usepackage{geometry}
 \usepackage{pdflscape}
 \usepackage{everypage}
 \usepackage{lipsum}
+
+\hypersetup{
+    colorlinks=true,       
+    linkcolor=red,          
+    citecolor=green         
+}
 
 \newcommand{\Lpagenumber}{\ifdim\textwidth=\linewidth\else\bgroup
   \dimendef\margin=0 %use \margin instead of \dimen0
@@ -145,43 +152,43 @@ Estimate Task Duration & Incorrect estimates & Misallocated time for tasks & Alg
 
 \section{Safety and Security Requirements}
 \begin{itemize}[leftmargin=16.5mm,labelsep=4mm,label=\rthesrnum]
-\item \textbf{Data Encryption}
+\item \textbf{Data Encryption} [\label{Data_Encryption}]
   \begin{itemize}
   \item \textbf{Description:} Ensure data encryption during data transfers to prevent unauthorized access.
   \item \textbf{Fit Criteria:} Data being transferred should be encrypted using industry-standard algorithms, with no plain-text data leaks detected.
   \item \textbf{Function to Fulfill:} Implement encryption protocols in the data transfer modules.
   \end{itemize}
-\item \textbf{Encrypted Data Storage}
+\item \textbf{Encrypted Data Storage} [\label{Encrypted_Data_Storage}]
   \begin{itemize}
   \item \textbf{Description:} Store user data in a hashed or encrypted format to prevent direct access.
   \item \textbf{Fit Criteria:} No user data should be retrievable in plain text from the storage systems.
   \item \textbf{Function to Fulfill:} Use encryption/hashing mechanisms in the data storage systems.
   \end{itemize}
-\item \textbf{Audit Log Maintenance}
+\item \textbf{Audit Log Maintenance} [\label{Audit_Log_Maintenance}]
   \begin{itemize}
   \item \textbf{Description:} Maintain an audit log of all activities within the application for traceability and accountability.
   \item \textbf{Fit Criteria:} All user and system activities should be logged with time stamps and relevant meta-data.
   \item \textbf{Function to Fulfill:} Integrate an activity logger within the application framework.
   \end{itemize}
-\item \textbf{Role-based Access Control}
+\item \textbf{Role-based Access Control} [\label{Role-based_Access_Control}]
   \begin{itemize}
   \item \textbf{Description:} Have a strict role-based access control to prevent unauthorized data manipulation.
   \item \textbf{Fit Criteria:} Different user roles should have differing access levels, with no unauthorized data access incidents.
   \item \textbf{Function to Fulfill:} Implement role-based access control mechanisms in the user management module.
   \end{itemize}
-\item \textbf{Security Patches and Updates}
+\item \textbf{Security Patches and Updates} [\label{Security_Patches_and_Updates}]
   \begin{itemize}
   \item \textbf{Description:} Provide regular security patches and updates to the software to rectify known vulnerabilities.
   \item \textbf{Fit Criteria:} No known vulnerability should persist in the system for more than a month without a patch.
   \item \textbf{Function to Fulfill:}Establish a dedicated security updates team.
   \end{itemize}
-\item \textbf{Attack Prevention}
+\item \textbf{Attack Prevention} [\label{Attack_Prevention}]
   \begin{itemize}
   \item \textbf{Description:} The system should protect authentication data from brute force attacks.
   \item \textbf{Fit Criteria:} Restriction after a certain number of failed login attempts; option for the user to unlock account via email or phone.
   \item \textbf{Function to Fulfill:}Implement rate-limiting to prevent brute force attacks.
   \end{itemize}
-\item \textbf{Password Recovery}
+\item \textbf{Password Recovery} [\label{Password_Recovery}]
   \begin{itemize}
   \item \textbf{Description:} The system should provide a mechanism for users to retrieve their passwords in case they forget them.
   \item \textbf{Fit Criteria:} A user who has forgotten their password should be able to receive a password reset link via their registered email. This link should expire after a certain duration.
