@@ -4,7 +4,6 @@
 \usepackage{tabularx}
 \usepackage{hyperref}
 \usepackage{enumitem}
-
 \usepackage{longtable}
 \usepackage{geometry}
 \usepackage{pdflscape}
@@ -128,23 +127,23 @@ The primary aim of this document is to determine potential hazards within the sy
 
 \begin{longtable}{|p{1.5cm}|p{1.5cm}|p{1.5cm}|p{2cm}|p{2cm}|p{2cm}|p{1.5cm}|}
   \hline
-  \textbf{Design Function} & \textbf{Failure Modes} & \textbf{Effects of Failure} & \textbf{Causes of Failure} & \textbf{Detection} & \textbf{Recommended Action} & \textbf{SR} \\
+  \textbf{Design Function} & \textbf{Failure Modes} & \textbf{Effects of Failure} & \textbf{Causes of Failure} & \textbf{Detection} & \textbf{Recommend\newline -ed Action} & \textbf{SR} \\
   \hline
   User Registration & Username not accepted & Inability to access the tool & Username already exists & Authenticati\-on system would check username\newline uniqueness & Notify the user to choose another username & \srref{Data_Encryption},\srref{Encrypted_Data_Storage}, \srref{Role-based_Access_Control},\srref{Attack_Prevention} \\
   \hline
   User Login & Login failure & Denied access & Password mismatch & Authenticat \-ion system would check username and password match & Provide password recovery & \srref{Data_Encryption},\srref{Encrypted_Data_Storage}, \srref{Security_Patches_and_Updates},\srref{Role-based_Access_Control}, \srref{Attack_Prevention},\srref{Password_Recovery} \\
   \hline
-  Task Generation & No tasks generated & Disorgani -zed schedule & PDF extraction module not recognizing certain tasks & User feedback & Systematic bug fixes & FR16, PAR1 \\
+  Task Generation & No tasks generated & Disorgani -zed schedule & PDF extraction module not recognizing certain tasks & User feedback & Systematic bug fixes & \href{../SRS/SRS.pdf#page=28}{FR16}, \href{../SRS/SRS.pdf#page=34}{PAR1} \\
   \hline
-  Task Prioritization & Incorrect prioritization & Mismana \-ged time & Algorithm error & User feedback & Refine prioritization algorithm & \srref{Audit_Log_Maintenance},FR17, PAR1 \\
+  Task Prioritization & Incorrect prioritization & Mismana \-ged time & Algorithm error & User feedback & Refine prioritization algorithm & \srref{Audit_Log_Maintenance},\href{../SRS/SRS.pdf#page=28}{FR17}, \href{../SRS/SRS.pdf#page=34}{PAR1} \\
   \hline
-  Progress Visualization & Inaccurate visuals & Misunders \-tanding of progress & Progress data not updated with user feedback & Regression tests & Make sure visualization module uses updated data & \srref{Audit_Log_Maintenance},FR20, OER3 \\
+  Progress Visualization & Inaccurate visuals & Misunders \-tanding of progress & Progress data not updated with user feedback & Regression tests & Make sure visualization module uses updated data & \srref{Audit_Log_Maintenance},\href{../SRS/SRS.pdf#page=28}{FR20}, \href{../SRS/SRS.pdf#page=36}{OER3}\\
   \hline
-  Connected Learning & Connection issues & Isolation in learning & Network instability & Connectivity checks & Run a connectivity check when the user attempts connected learning & SLR1 \\
+  Connected Learning & Connection issues & Isolation in learning & Network instability & Connectivity checks & Run a connectivity check when the user attempts connected learning & \href{../SRS/SRS.pdf#page=33}{SLR1} \\
   \hline
-  Export to Other Calendars & Export failure & Disconnect \-ed schedules & Compatibility issues & User feedback & Enhance compatibility layers & \srref{Security_Patches_and_Updates},\srref{Audit_Log_Maintenance}, AR1 \\
+  Export to Other Calendars & Export failure & Disconnect \-ed schedules & Compatibility issues & User feedback & Enhance compatibility layers & \srref{Security_Patches_and_Updates},\srref{Audit_Log_Maintenance}, \href{../SRS/SRS.pdf#page=30}{AR1} \\
   \hline
-  Estimate Task Duration & Incorrect estimates & Misalloca \-ted time for tasks & Algorithm inaccuracies & User feedback & Refine estimation algorithms & FR14 \\
+  Estimate Task Duration & Incorrect estimates & Misalloca \-ted time for tasks & Algorithm inaccuracies & User feedback & Refine estimation algorithms & \href{../SRS/SRS.pdf#page=27}{FR14} \\
   \hline
   \end{longtable}
   
