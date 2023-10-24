@@ -10,6 +10,12 @@
 \usepackage{everypage}
 \usepackage{lipsum}
 
+\hypersetup{
+    colorlinks=true,       
+    linkcolor=blue,          
+    citecolor=green         
+}
+
 \newcommand{\Lpagenumber}{\ifdim\textwidth=\linewidth\else\bgroup
   \dimendef\margin=0 %use \margin instead of \dimen0
   \ifodd\value{page}\margin=\oddsidemargin
@@ -21,20 +27,9 @@
 \egroup\fi}
 \AddEverypageHook{\Lpagenumber}%
 
-\hypersetup{
-    colorlinks=true,       % false: boxed links; true: colored links
-    linkcolor=red,          % color of internal links (change box color with linkbordercolor)
-    citecolor=green,        % color of links to bibliography
-    filecolor=magenta,      % color of file links
-    urlcolor=cyan           % color of external links
-}
-
-\newcounter{srnum} %Security Requirement number
+\newcounter{srnum} % Security Requirement number
 \newcommand{\rthesrnum}{SR\refstepcounter{srnum}\thesrnum:}
 \newcommand{\srref}[1]{SR\ref{#1}}
-\newcounter{srrnum} %Security Requirement number
-\newcommand{\rthesrrnum}{SR\refstepcounter{srrnum}\thesrrnum:}
-\newcommand{\srrref}[1]{SR\ref{#1}}
 
 
 \title{Hazard Analysis\\\progname}
@@ -112,76 +107,76 @@ The primary aim of this document is to determine potential hazards within the sy
 \end{enumerate}
 
 \clearpage % Start a new page
-\begin{landscape}
-    \pagestyle{empty}%
 
 \section{Failure Mode and Effect Analysis}
 
 
-\begin{longtable}{|p{2cm}|p{3cm}|p{3cm}|p{3cm}|p{3cm}|p{3cm}|p{2cm}|}
-\hline
-\textbf{Design Function} & \textbf{Failure Modes} & \textbf{Effects of Failure} & \textbf{Causes of Failure} & \textbf{Detection} & \textbf{Recommended Action} & \textbf{SR} \\
-\hline
-User Registration & Username not accepted & Inability to access the tool & Username already exists & Authentication system would check username uniqueness & Notify the user to choose another username & SR1 SR2 SR4 SR6 \\
-\hline
-User Login & Login failure & Denied access & Password mismatch & Authentication system would check username and password match & Provide password recovery & SR1 SR2 SR5 SR4 SR6 SR7 \\
-\hline
-Task Generation & No tasks generated & Disorganized schedule & PDF extraction module not recognizing certain tasks & User feedback & Systematic bug fixes & FR16 PAR1 \\
-\hline
-Task Prioritization & Incorrect prioritization & Mismanaged time & Algorithm error & User feedback & Refine prioritization algorithm & SR3 FR17 PAR1 \\
-\hline
-Progress Visualization & Inaccurate visuals & Misunderstanding of progress & Progress data not updated with user feedback & Regression tests & Make sure visualization module uses updated data & SR3 FR20 OER3 \\
-\hline
-Connected Learning & Connection issues & Isolation in learning & Network instability & Connectivity checks & Run a connectivity check when the user attempts connected learning & SLR1 \\
-\hline
-Export to Other Calendars & Export failure & Disconnected schedules & Compatibility issues & User feedback & Enhance compatibility layers & SR5 SR3 AR1 \\
-\hline
-Estimate Task Duration & Incorrect estimates & Misallocated time for tasks & Algorithm inaccuracies & User feedback & Refine estimation algorithms & FR14 \\
-\hline
-\end{longtable}
-\end{landscape}
-\pagestyle{plain}%
-\clearpage % End the landscape page and start a new page
+
+\begin{longtable}{|p{1.5cm}|p{1.5cm}|p{1.5cm}|p{2cm}|p{2cm}|p{2cm}|p{1.8cm}|}
+  \hline
+  \textbf{Design Function} & \textbf{Failure Modes} & \textbf{Effects of Failure} & \textbf{Causes of Failure} & \textbf{Detection} & \textbf{Recommend\newline -ed Action} & \textbf{SR} \\
+  \hline
+  User Registration & Username not accepted & Inability to access the tool & Username already exists & Authenticati\-on system would check username\newline uniqueness & Notify the user to choose another username & \srref{Data_Encryption},\srref{Encrypted_Data_Storage}, \srref{Role-based_Access_Control},\srref{Attack_Prevention} \\
+  \hline
+  User Login & Login failure & Denied access & Password mismatch & Authenticat \-ion system would check username and password match & Provide password recovery & \srref{Data_Encryption},\srref{Encrypted_Data_Storage}, \srref{Security_Patches_and_Updates},\srref{Role-based_Access_Control}, \srref{Attack_Prevention},\srref{Password_Recovery} \\
+  \hline
+  Task Generation & No tasks generated & Disorgani -zed schedule & PDF extraction module not recognizing certain tasks & User feedback & Systematic bug fixes & \href{https://github.com/wangq131/4G06CapstoneProjectT5/blob/689841fefc298f80d84232996e1c7ca7981dd93d/docs/SRS/SRS.pdf}{FR16(P28)}, \href{https://github.com/wangq131/4G06CapstoneProjectT5/blob/689841fefc298f80d84232996e1c7ca7981dd93d/docs/SRS/SRS.pdf}{PAR1(P34)} \\
+  \hline
+  Task Prioritization & Incorrect prioritization & Mismana \-ged time & Algorithm error & User feedback & Refine prioritization algorithm & \srref{Audit_Log_Maintenance}, \href{https://github.com/wangq131/4G06CapstoneProjectT5/blob/689841fefc298f80d84232996e1c7ca7981dd93d/docs/SRS/SRS.pdf}{FR17(P28)}, \href{https://github.com/wangq131/4G06CapstoneProjectT5/blob/689841fefc298f80d84232996e1c7ca7981dd93d/docs/SRS/SRS.pdf}{PAR1(P34)} \\
+  \hline
+  Progress Visualization & Inaccurate visuals & Misunders \-tanding of progress & Progress data not updated with user feedback & Regression tests & Make sure visualization module uses updated data & \srref{Audit_Log_Maintenance}, \href{https://github.com/wangq131/4G06CapstoneProjectT5/blob/689841fefc298f80d84232996e1c7ca7981dd93d/docs/SRS/SRS.pdf}{FR20(P28)}, \href{https://github.com/wangq131/4G06CapstoneProjectT5/blob/689841fefc298f80d84232996e1c7ca7981dd93d/docs/SRS/SRS.pdf}{OER3(P36)}\\
+  \hline
+  Connected Learning & Connection issues & Isolation in learning & Network instability & Connectivity checks & Run a connectivity check when the user attempts connected learning & \href{https://github.com/wangq131/4G06CapstoneProjectT5/blob/689841fefc298f80d84232996e1c7ca7981dd93d/docs/SRS/SRS.pdf}{SLR1(P33)} \\
+  \hline
+  Export to Other Calendars & Export failure & Disconnect \-ed schedules & Compatibility issues & User feedback & Enhance compatibility layers & \srref{Security_Patches_and_Updates},\srref{Audit_Log_Maintenance}, \href{https://github.com/wangq131/4G06CapstoneProjectT5/blob/689841fefc298f80d84232996e1c7ca7981dd93d/docs/SRS/SRS.pdf}{AR1(P30)} \\
+  \hline
+  Estimate Task Duration & Incorrect estimates & Misalloca \-ted time for tasks & Algorithm inaccuracies & User feedback & Refine estimation algorithms & \href{https://github.com/wangq131/4G06CapstoneProjectT5/blob/689841fefc298f80d84232996e1c7ca7981dd93d/docs/SRS/SRS.pdf}{FR14(P17)} \\
+  \hline
+  \end{longtable}
+
+  
+  \pagestyle{plain}%
+  \clearpage % End the landscape page and start a new page
 
 \section{Safety and Security Requirements}
-\begin{itemize}[leftmargin=16.5mm,labelsep=4mm,label=\rthesrnum]
-\item \textbf{Data Encryption}
+\begin{itemize}
+\item [\rthesrnum \label{Data_Encryption}] \textbf{Data Encryption}
   \begin{itemize}
   \item \textbf{Description:} Ensure data encryption during data transfers to prevent unauthorized access.
   \item \textbf{Fit Criteria:} Data being transferred should be encrypted using industry-standard algorithms, with no plain-text data leaks detected.
   \item \textbf{Function to Fulfill:} Implement encryption protocols in the data transfer modules.
   \end{itemize}
-\item \textbf{Encrypted Data Storage}
+\item [\rthesrnum \label{Encrypted_Data_Storage}] \textbf{Encrypted Data Storage}
   \begin{itemize}
   \item \textbf{Description:} Store user data in a hashed or encrypted format to prevent direct access.
   \item \textbf{Fit Criteria:} No user data should be retrievable in plain text from the storage systems.
   \item \textbf{Function to Fulfill:} Use encryption/hashing mechanisms in the data storage systems.
   \end{itemize}
-\item \textbf{Audit Log Maintenance}
+\item [\rthesrnum \label{Audit_Log_Maintenance}] \textbf{Audit Log Maintenance}
   \begin{itemize}
   \item \textbf{Description:} Maintain an audit log of all activities within the application for traceability and accountability.
   \item \textbf{Fit Criteria:} All user and system activities should be logged with time stamps and relevant meta-data.
   \item \textbf{Function to Fulfill:} Integrate an activity logger within the application framework.
   \end{itemize}
-\item \textbf{Role-based Access Control}
+\item [\rthesrnum \label{Role-based_Access_Control}] \textbf{Role-based Access Control}
   \begin{itemize}
   \item \textbf{Description:} Have a strict role-based access control to prevent unauthorized data manipulation.
   \item \textbf{Fit Criteria:} Different user roles should have differing access levels, with no unauthorized data access incidents.
   \item \textbf{Function to Fulfill:} Implement role-based access control mechanisms in the user management module.
   \end{itemize}
-\item \textbf{Security Patches and Updates}
+\item [\rthesrnum \label{Security_Patches_and_Updates}] \textbf{Security Patches and Updates}
   \begin{itemize}
   \item \textbf{Description:} Provide regular security patches and updates to the software to rectify known vulnerabilities.
   \item \textbf{Fit Criteria:} No known vulnerability should persist in the system for more than a month without a patch.
   \item \textbf{Function to Fulfill:}Establish a dedicated security updates team.
   \end{itemize}
-\item \textbf{Attack Prevention}
+\item [\rthesrnum \label{Attack_Prevention}] \textbf{Attack Prevention}
   \begin{itemize}
   \item \textbf{Description:} The system should protect authentication data from brute force attacks.
   \item \textbf{Fit Criteria:} Restriction after a certain number of failed login attempts; option for the user to unlock account via email or phone.
   \item \textbf{Function to Fulfill:}Implement rate-limiting to prevent brute force attacks.
   \end{itemize}
-\item \textbf{Password Recovery}
+\item [\rthesrnum \label{Password_Recovery}] \textbf{Password Recovery}
   \begin{itemize}
   \item \textbf{Description:} The system should provide a mechanism for users to retrieve their passwords in case they forget them.
   \item \textbf{Fit Criteria:} A user who has forgotten their password should be able to receive a password reset link via their registered email. This link should expire after a certain duration.
@@ -192,35 +187,35 @@ Estimate Task Duration & Incorrect estimates & Misallocated time for tasks & Alg
 \section{Roadmap}
 
 \subsection{Requirements to be Implemented as Part of the Capstone Timeline}
-\begin{itemize}[leftmargin=16.5mm,labelsep=4mm,label=\rthesrrnum]
-    \item \textbf{Data Encryption} \\
+\begin{itemize}
+    \item \srref{Data_Encryption} \\
     Ensure data encryption during data transfers to prevent unauthorized access. \\
     Integration of encryption protocols in the data transfer modules. \\
     
-    \item \textbf{Encrypted Data Storage} \\
+    \item \srref{Encrypted_Data_Storage} \\
     Store user data in a hashed or encrypted format. \\
     Utilize encryption/hashing mechanisms in the data storage systems. \\
     
-    \item \textbf{Audit Log Maintenance} \\
+    \item \srref{Audit_Log_Maintenance} \\
     Maintain an audit log of all application activities. \\
     Incorporate an activity logger within the application framework. \\
     
-    \item \textbf{Role-based Access Control} \\
+    \item \srref{Role-based_Access_Control} \\
     Implement strict role-based access control for data protection. \\
     Establish role-based access control mechanisms in the user management module. \\
     
-    \item \textbf{Attack Prevention} \\
+    \item \srref{Attack_Prevention} \\
     Ensure protection of authentication data from brute force attacks. \\
     Introduce rate-limiting to thwart brute force attacks. \\
     
-    \item \textbf{Password Recovery} \\
+    \item \srref{Password_Recovery} \\
     Offer a mechanism for password retrieval. \\
     Develop a password recovery module to generate and send a time-bound password reset link. \\
 \end{itemize}
 
 \subsection{Requirements to be Implemented in the Future}
-\begin{itemize}[leftmargin=16.5mm,labelsep=4mm,label=\rthesrrnum]
-    \item \textbf{Security Patches and Updates} \\
+\begin{itemize}
+    \item \srref{Security_Patches_and_Updates} \\
     Regularly roll out security patches and updates to fix known vulnerabilities. \\
     Form a dedicated security updates team to monitor, identify, and rectify vulnerabilities. \\
 \end{itemize}
