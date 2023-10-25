@@ -281,3 +281,6 @@ TSWLatexianTemp*
 
 # DS_Store file from Mac computers
 .DS_Store
+
+# folder storying .pyc files Python uses
+*__pycache__*
