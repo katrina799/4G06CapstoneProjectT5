@@ -1,5 +1,7 @@
 import os
-
+import io
+import re
+import PyPDF2
 import boto3
 from flask import Flask, render_template, request, Response
 
@@ -65,6 +67,25 @@ def change_username():
         username = new_username
     return render_template("index.html", username=username)
 
+@app.route("/get_emails", methods=["GET"])
+def extract_emails_from_pdf():
+    filename = request.args.get("filename")
+    if request.method == "GET":
+        response = s3.get_object(Bucket=bucket_name, Key=filename)
+        pdf_file = response["Body"].read()
+        pdf_file_obj = io.BytesIO(pdf_file)
+        
+        pdf_reader = PyPDF2.PdfReader(pdf_file_obj)
+        text = ''
+
+        for page_num in range(len(pdf_reader.pages)):
+            page = pdf_reader.pages[page_num]
+            text += page.extract_text()
+
+        email_pattern = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,7}\b'
+        emails = re.findall(email_pattern, text)
+
+        return render_template("index.html", emails=emails)
 
 if __name__ == "__main__":
     app.run(debug=True)
