@@ -16,7 +16,7 @@ bucket_name = app.config["BUCKET_NAME"]
 mock_data_file = app.config["MOCK_DATA_POC_NAME"]
 
 username = ""
-
+emails = ""
 s3 = boto3.client(
     "s3",
     aws_access_key_id=os.environ.get("AWS_ACCESS_KEY_ID"),
@@ -30,7 +30,7 @@ def start():
     global username
     df = get_df_from_csv_in_s3(s3, bucket_name, mock_data_file)
     username = df.loc[0, "username"]  # For PoC purpose
-    return render_template("index.html", username=username)
+    return render_template("index.html", emails=emails, username=username)
 
 
 @app.route("/download", methods=["GET"])
@@ -65,27 +65,31 @@ def change_username():
         )
         os.remove(new_csv_file_path)
         username = new_username
-    return render_template("index.html", username=username)
+    return render_template("index.html", emails=emails, username=username)
+
 
 @app.route("/get_emails", methods=["GET"])
 def extract_emails_from_pdf():
+    global username
+    global emails
     filename = request.args.get("filename")
     if request.method == "GET":
         response = s3.get_object(Bucket=bucket_name, Key=filename)
         pdf_file = response["Body"].read()
         pdf_file_obj = io.BytesIO(pdf_file)
-        
+
         pdf_reader = PyPDF2.PdfReader(pdf_file_obj)
-        text = ''
+        text = ""
 
         for page_num in range(len(pdf_reader.pages)):
             page = pdf_reader.pages[page_num]
             text += page.extract_text()
 
-        email_pattern = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,7}\b'
+        email_pattern = r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,7}\b"
         emails = re.findall(email_pattern, text)
 
-        return render_template("index.html", emails=emails)
+        return render_template("index.html", emails=emails, username=username)
+
 
 if __name__ == "__main__":
     app.run(debug=True)
