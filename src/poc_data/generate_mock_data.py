@@ -12,4 +12,4 @@ mock_data = {
     ],
 }
 df = pd.DataFrame(data=mock_data)
-df.to_csv(f"{os.getcwd()}/{filename}")
+df.to_csv(f"{os.getcwd()}/{filename}", header=None)
