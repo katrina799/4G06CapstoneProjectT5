@@ -8,13 +8,20 @@
 </head>
 
 <body>
-    <h1>Welcome to Course Buddy!</h1>
+    <h1>Hello, {{username}}! Welcome to Course Buddy!</h1>
     <p>This is the home page :&rpar;</p>
 
     <form action="/download" method="get">
         <label for="filename">Enter Filename:</label>
-        <input type="text" id="filename" name="filename">
+        <input type="text" id="filename" name="filename" required>
         <input type="submit" value="Download">
+    </form>
+
+    <h1>Here to change your username: {{username}}</h1>
+    <form action="/change_username" method="post">
+        <label for="username">Enter New Username:</label>
+        <input type="text" id="newusername" name="newusername" required>
+        <input type="submit" value="Submit">
     </form>
 </body>
 
