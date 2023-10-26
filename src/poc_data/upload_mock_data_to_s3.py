@@ -1,11 +1,12 @@
 import os
 import boto3
-from config import BUCKET_NAME, MOCK_DATA_POC_NAME
+from src import config
+
 
 s3 = boto3.client(
     "s3",
     aws_access_key_id=os.environ.get("AWS_ACCESS_KEY_ID"),
     aws_secret_access_key=os.environ.get("AWS_SECRET_ACCESS_KEY"),
 )
-
-s3.upload_file(MOCK_DATA_POC_NAME, BUCKET_NAME, MOCK_DATA_POC_NAME)
+filepath = f"src/poc_data/{config.MOCK_DATA_POC_NAME}"
+s3.upload_file(filepath, config.BUCKET_NAME, config.MOCK_DATA_POC_NAME)
