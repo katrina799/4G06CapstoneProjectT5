@@ -1,6 +1,6 @@
 # Notes when running Flask app
 > **Important Note:**  
-> Please ensure that the environment variables `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` are set properly so we could access our `AWS S3` bucket before running the app
+> Please ensure that the environment variables `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` are set properly inside the `Dev Container` so we could access our `AWS S3` bucket before running the app
 - To run the app
     1. Inside the terminal, navigate to the `src` directory by running `cd src/`
     2. Run `flask run` inside the terminal
