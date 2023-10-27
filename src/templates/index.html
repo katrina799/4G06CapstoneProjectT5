@@ -8,7 +8,7 @@
 </head>
 
 <body>
-    <h1>Hello, {{username}}! Welcome to Course Buddy!</h1>
+    <h1>Hello, {{ username }}! Welcome to Course Buddy!</h1>
     <p>This is the home page :&rpar;</p>
 
     <form action="/download" method="get">
@@ -17,11 +17,32 @@
         <input type="submit" value="Download">
     </form>
 
-    <h1>Here to change your username: {{username}}</h1>
+    <h1>Here to change your username: {{ username }}</h1>
     <form action="/change_username" method="post">
         <label for="username">Enter New Username:</label>
         <input type="text" id="newusername" name="newusername" required>
         <input type="submit" value="Submit">
+    </form>
+
+    <h1>Here to change your courses: </h1>
+    <p>You have {{ courses|length }} course(s)</p>
+    <p>* Press the X on the right of a course to remove it</p>
+
+    <ul>
+        {% for course in courses %}
+        <li style="float: left">{{ loop.index }}. {{ course }}</li>
+        <form action="/remove_course" method="post">
+            <input type="hidden" name="index" value="{{ loop.index - 1 }}">
+            <input type="hidden" name="course" value="{{ course }}">
+            <input type="submit" value="X">
+        </form>
+        {% endfor %}
+    </ul>
+
+    <form action="/add_course" method="post">
+        <label for="newcourse">Add a New Course:</label>
+        <input type="text" id="newcourse" name="newcourse" required>
+        <input type="submit" value="Add">
     </form>
 </body>
 
