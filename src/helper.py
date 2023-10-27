@@ -10,6 +10,7 @@ def get_df_from_csv_in_s3(s3, bucket_name, s3_csv_file_path):
     return df
 
 
+# Upload a dataframe to s3
 def upload_df_to_s3(df, s3, bucket_name, s3_csv_file_path):
     new_csv_file_path = "poc_data/tmp.csv"
     df.to_csv(new_csv_file_path)
