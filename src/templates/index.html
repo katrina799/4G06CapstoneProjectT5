@@ -12,6 +12,66 @@
 
 <body>
     {% include 'header.html' %}
+    <div class="banner-container" style="background-color: antiquewhite;">
+        <div id="banner" class="banner-bar">
+            <img style="border-radius: 0; display: inline-block;" class="banner-image"
+                src="{{url_for('static', filename='fight.png')}}" />
+            <div>Lets start today's work with your course buddy!</div>
+        </div>
+    </div>
+    <div class="course-panel-container">
+        <div class="course-list">
+            <div class="panel-course" style="margin: 5px;">
+                <div style="display: flex; margin: 5px;">
+                    <h2>My Courses </h2>
+                    <h3>({{courses|length}})</h3>
+                </div>
+
+                <div class="courses" style="display: table; width: 256px;  border-spacing: 10px;">
+                    {% for course in courses %}
+                    <div id="{{ course.0.1 }}"" class=" course-detail">
+                        <div class="course-image">
+                            <img style="vertical-align:middle " src="{{url_for('static', filename='books.png')}}" />
+                        </div>
+                        <div class="course-progress">
+                            <div class="progress-bar"></div>
+                            <!-- dynamicly change progress bar -->
+                            <!-- <div class="progress-bar" style="width: {{ course_completion_percentage }}%;"></div> -->
+                        </div>
+                        <div class="course-details">
+                            <div class="course-title">{{course}}</div>
+                            <div class="course-desc">This a course in level 4, aims to learn the sicentific computation
+                            </div>
+                            <div class="instructor">By Prof Dr NED NEDIALKOV</div>
+                        </div>
+                        <form style="margin: 3px;" action="/remove_course" method="post">
+                            <input type="hidden" name="index" value="{{ loop.index - 1 }}">
+                            <input type="hidden" name="course" value="{{ course }}">
+                            <button type="submit" class="btn btn-danger">
+                                <i class="fa fa-trash-o" style="font-size:24px">
+                                </i>
+                                Delete
+                            </button>
+                        </form>
+                    </div>
+
+                    {% endfor %}
+                </div>
+
+                <form action="/add_course" method="post">
+                    <label for="newcourse">Add a New Course:</label>
+                    <input type="text" id="newcourse" name="newcourse" required>
+                    <button type="submit" class="btn btn-success">
+                        <i class="fa fa-plus" aria-hidden="true">
+                        </i>
+                        Add
+                    </button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
 
 
 </body>

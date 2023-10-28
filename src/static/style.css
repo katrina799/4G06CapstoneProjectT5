@@ -9,12 +9,43 @@
  Emoji"," Segoe UI Emoji";"
 }
 
+.glyphicon {
+    color: #b4c8cc;
+}
+
+.glyphicon:hover {
+    color: #69D2E7;
+}
+
+
+
+.banner-image {
+    width: 20px;
+    height: 20px;
+}
+
+.banner-bar {
+    grid-column-gap: 12px;
+    grid-row-gap: 12px;
+    background-color: var(--black);
+    color: var(--white);
+    grid-template-rows: auto auto;
+    grid-template-columns: 1fr 1fr;
+    grid-auto-columns: 1fr;
+    justify-content: center;
+    align-items: center;
+    padding: 12px 24px;
+    font-weight: 500;
+    display: flex;
+
+}
 
 
 .head {
     display: flex;
     align-items: center;
     border-bottom: 4px rgba(143, 198, 201, 0.887);
+    background-color: #E0E4CC;
     margin: 5px;
     position: sticky;
     top: 0;
@@ -68,7 +99,25 @@ a:hover {
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     display: table-cell;
     vertical-align: center;
-    text-align: center;
     padding: 5px;
 
+}
+
+.course-progress {
+    width: 100%;
+    height: 5px;
+    background-color: #e0e0e0;
+}
+
+.progress-bar {
+    background: green;
+    height: 100%;
+    transform-origin: left center;
+    transition: cubic-bezier(0.075, 0.82, 0.165, 1)
+}
+
+
+.course-image img {
+    width: 256px;
+    height: auto;
 }
