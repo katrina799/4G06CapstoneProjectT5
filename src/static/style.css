@@ -1,0 +1,74 @@
+.app-name {
+
+    font-size: x-large;
+    font-weight: 300;
+}
+
+.body {
+    font-family: -apple-system, BlinkMacSystemFont, " Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif, "Apple Color
+ Emoji"," Segoe UI Emoji";"
+}
+
+
+
+.head {
+    display: flex;
+    align-items: center;
+    border-bottom: 4px rgba(143, 198, 201, 0.887);
+    margin: 5px;
+    position: sticky;
+    top: 0;
+}
+
+.head>*:not(:last-child) {
+    margin-right: 30px;
+    /* adjust this value as needed */
+}
+
+a {
+    text-decoration: none;
+    /* Removes underline */
+    color: inherit;
+    /* Inherits the color of the parent, in case you don't want the default blue link color */
+}
+
+a:hover {
+    text-decoration: none;
+    /* Removes underline on hover, too */
+}
+
+
+.welcome-msg {
+
+    font-size: medium;
+    font-weight: 100;
+}
+
+.panel-course {
+    background-color: rgb(255, 255, 255);
+    border-radius: 4px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.panel-name {
+    background-color: rgb(255, 255, 255);
+    border-radius: 4px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.panel-file {
+    background-color: rgb(255, 255, 255);
+    border-radius: 4px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.course-detail {
+    background-color: rgb(255, 255, 255);
+    border-radius: 4px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    display: table-cell;
+    vertical-align: center;
+    text-align: center;
+    padding: 5px;
+
+}
