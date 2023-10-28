@@ -112,17 +112,15 @@ def add_course():
 
 @app.route("/course_page", methods=["GET", "POST"])
 def course_page():
-    if request.method == "POST":
-        return redirect(url_for("index"))
-
-    return render_template("course_page.html")
+    df = get_df_from_csv_in_s3(s3, bucket_name, mock_data_file)
+    courses = df.loc[0, "courses"]  # For PoC purpose
+    # Parsing it into a Python list
+    courses = ast.literal_eval(courses)
+    return render_template("course_page.html", courses=courses)
 
 
 @app.route("/plan_page", methods=["GET", "POST"])
 def plan_page():
-    if request.method == "POST":
-        return redirect(url_for("index"))
-
     return render_template("plan_page.html")
 
 
