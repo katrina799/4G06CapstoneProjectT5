@@ -107,5 +107,24 @@ def add_course():
     return redirect(url_for("start"))
 
 
+# router to course detailed page
+
+
+@app.route("/course_page", methods=["GET", "POST"])
+def course_page():
+    if request.method == "POST":
+        return redirect(url_for("index"))
+
+    return render_template("course_page.html")
+
+
+@app.route("/plan_page", methods=["GET", "POST"])
+def plan_page():
+    if request.method == "POST":
+        return redirect(url_for("index"))
+
+    return render_template("plan_page.html")
+
+
 if __name__ == "__main__":
     app.run(debug=True)
