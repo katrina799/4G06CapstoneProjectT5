@@ -1,0 +1,18 @@
+<div class="head">
+    <div class="app-name">Course Buddy</div>
+    <div class="welcome-msg">Hello, {{ username }}! Welcome to Course Buddy!</div>
+    <div class="timer"><span class="glyphicon glyphicon-time" style="font-size:24px; margin-left: 430px;"></span></div>
+    <a class="message" href="{{ url_for('plan_page') }}"><span class="glyphicon glyphicon-tasks"
+            style="font-size:24px;"></span> </a>
+    <a class="courses" href="{{ url_for('course_page') }}"><span class="glyphicon glyphicon-book"
+            style="font-size:24px;"></span>
+    </a>
+    <div class="setting"><span class="glyphicon glyphicon-cog" style="font-size:24px;"></span> </div>
+    <div class="notification"><span class="glyphicon glyphicon-bell" style="font-size:24px;"></span> </div>
+    <div class="user"> <span class="glyphicon glyphicon-user" style="font-size:24px;"></span>
+    </div>
+    <a class="home-image" href="{{ url_for('start') }}"><i class="glyphicon glyphicon-home"
+            style="font-size:24px;"></i></a>
+
+
+</div>
