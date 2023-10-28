@@ -124,5 +124,12 @@ def plan_page():
     return render_template("plan_page.html")
 
 
+@app.route("/profile_page", methods=["GET", "POST"])
+def profile_page():
+    df = get_df_from_csv_in_s3(s3, bucket_name, mock_data_file)
+    username = df.loc[0, "username"]
+    return render_template("profile_page.html", username=username)
+
+
 if __name__ == "__main__":
     app.run(debug=True)
