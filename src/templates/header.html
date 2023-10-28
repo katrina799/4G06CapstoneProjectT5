@@ -1,19 +1,20 @@
 <div class="head">
         <div class="app-name">Course Buddy</div>
         <div class="welcome-msg">Hello, {{ username }}! Welcome to Course Buddy!</div>
-        <div class="timer"><span class="glyphicon glyphicon-time" style="font-size:24px; margin-left: 430px;"></span>
+        <div class="timer"><i class="glyphicon glyphicon-time" style="font-size:24px; margin-left: 430px;"></i>
         </div>
-        <a class="message" href="{{ url_for('plan_page') }}"><span class="glyphicon glyphicon-tasks"
-                        style="font-size:24px;"></span> </a>
-        <a class="courses" href="{{ url_for('course_page') }}"><span class="glyphicon glyphicon-book"
-                        style="font-size:24px;"></span>
+        <a class="message" href="{{ url_for('plan_page') }}"><i class="glyphicon glyphicon-tasks"
+                        title="study plan schedule" style="font-size:24px;"></i> </a>
+        <a class="courses" href="{{ url_for('course_page') }}"><i class="glyphicon glyphicon-book"
+                        title="your course list" style="font-size:24px;"></i>
         </a>
-        <div class="setting"><span class="glyphicon glyphicon-cog" style="font-size:24px;"></span> </div>
-        <div class="notification"><span class="glyphicon glyphicon-bell" style="font-size:24px;"></span> </div>
-        <a class="user" href="{{ url_for('profile_page') }}"> <span class="glyphicon glyphicon-user"
-                        style="font-size:24px;"></span>
+        <div class="setting"><i class="glyphicon glyphicon-cog" style="font-size:24px;" title="setting"></i> </div>
+        <div class="notification"><i class="glyphicon glyphicon-bell" style="font-size:24px;"
+                        title="pomodoro timer"></i> </div>
+        <a class="user" href="{{ url_for('profile_page') }}"> <i class="glyphicon glyphicon-user" title="profile page"
+                        style="font-size:24px;"></i>
         </a>
-        <a class="home-image" href="{{ url_for('start') }}"><i class="glyphicon glyphicon-home"
+        <a class="home-image" href="{{ url_for('start') }}"><i class="glyphicon glyphicon-home" title="home page"
                         style="font-size:24px;"></i></a>
 
 
