@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}" />
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Course Buddy</title>
+</head>
+
+<body>
+    {% include 'header.html' %}
+    this is course page!!!
+
+    <div class="panel-course" style="margin: 5px;">
+        <div style="display: flex; margin: 5px;">
+            <h2>My Courses </h2>
+            <h3>({{courses|length}})</h3>
+        </div>
+
+        <!-- <p>You have {{ courses|length }} course(s)</p> -->
+        <p>* Press the X on the right of a course to remove it</p>
+        <div class="courses" style="display: table; width:100%;  border-spacing: 10px;">
+            {% for course in courses %}
+            <div id="{{ course.0.1 }}"" class=" course-detail">
+                <li style="font-size: medium;">{{ loop.index }}. {{ course }}</li>
+                <img style="width: 200px; vertical-align:middle " src="{{url_for('static', filename='books.png')}}" />
+                <form style="margin: 3px;" action="/remove_course" method="post">
+                    <input type="hidden" name="index" value="{{ loop.index - 1 }}">
+                    <input type="hidden" name="course" value="{{ course }}">
+                    <button type="submit" class="btn btn-danger">
+                        <i class="fa fa-trash-o" style="font-size:24px">
+                        </i>
+                        Delete
+                    </button>
+                </form>
+            </div>
+
+            {% endfor %}
+        </div>
+
+        <form action="/add_course" method="post">
+            <label for="newcourse">Add a New Course:</label>
+            <input type="text" id="newcourse" name="newcourse" required>
+            <button type="submit" class="btn btn-success">
+                <i class="fa fa-plus" aria-hidden="true">
+                </i>
+                Add
+            </button>
+        </form>
+    </div>
+
+</body>
+
+</html>
