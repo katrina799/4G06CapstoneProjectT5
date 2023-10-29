@@ -107,6 +107,5 @@ def add_course():
     return redirect(url_for("start"))
 
 
-# THIS IS A TESING COMMENT FOR TESTING IF THE LINTER IS WORKING WANT TO MAKE THE LINE LONG
 if __name__ == "__main__":
     app.run(debug=True)
