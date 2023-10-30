@@ -1,5 +1,7 @@
 import os
-
+import io
+import PyPDF2
+import re
 import boto3
 from flask import Flask, render_template, request, Response, redirect, url_for
 import ast
@@ -105,6 +107,31 @@ def add_course():
 
         upload_df_to_s3(df, s3, bucket_name, mock_data_file)
     return redirect(url_for("start"))
+
+# input:pdf file
+# output: a list of string emails
+# extract all the email in the input pdf
+
+
+@app.route("/get_emails", methods=["GET"])
+def extract_emails_from_pdf():
+    # filename = request.args.get("filename")
+    if request.method == "GET":
+        response = s3.get_object(Bucket=bucket_name, Key=filename)
+        pdf_file = response["Body"].read()
+        pdf_file_obj = io.BytesIO(pdf_file)
+
+        pdf_reader = PyPDF2.PdfReader(pdf_file_obj)
+        text = ''
+
+        for page_num in range(len(pdf_reader.pages)):
+            page = pdf_reader.pages[page_num]
+            text += page.extract_text()
+
+        email_pattern = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,7}\b'
+        emails = re.findall(email_pattern, text)
+
+        return render_template("index.html", emails=emails)
 
 
 if __name__ == "__main__":
