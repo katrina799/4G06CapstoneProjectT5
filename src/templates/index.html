@@ -44,6 +44,13 @@
         <input type="text" id="newcourse" name="newcourse" required>
         <input type="submit" value="Add">
     </form>
+
+
+    <h1>upload file to S3</h1>
+    <form method="POST" action="/upload" enctype="multipart/form-data">
+        <input type="file" name="file">
+        <input type="submit" value="Upload File">
+    </form>
 </body>
 
 </html>
