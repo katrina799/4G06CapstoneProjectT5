@@ -123,22 +123,161 @@ how they relate to your VnV efforts.}
 
 \section{Plan}
 
-\wss{Introduce this section.   You can provide a roadmap of the sections to
-  come.}
+This section outlines the comprehensive strategy for verifying and validating the Course Buddy software, ensuring its alignment with specified requirements and design standards. The plan spans from team roles in verification to the utilization of various testing and verification tools.
 
 \subsection{Verification and Validation Team}
-
-\wss{Your teammates.  Maybe your supervisor.
-  You should do more than list names.  You should say what each person's role is
-  for the project's verification.  A table is a good way to summarize this information.}
+     \begin{table}[H]
+     \centering
+     \begin{tabular}{l p{10cm}}
+          \toprule
+          \textbf{Name} & \textbf{Role and Specific Duties}\\
+          \midrule
+          Jinyao Qin & \textbf{Lead Verifier}: Oversees the entire process, coordinates with other team members, and ensures all verification steps are followed diligently.\\
+          
+          Qianni Wang & \textbf{Implementation Specialist}: Reviews the codebase to ensure it aligns with the documented requirements, also verifies the code's functionality, performance, and security aspects.\\
+          
+          Qiang Gao & \textbf{Implementation Specialist}: same as Qianni Wang\\
+          
+          Chenwei Song & \textbf{Manual Test Engineer}: Responsible for manual test cases, ensuring that all tests run in different environments, and reporting the results in an understandable format for the team.\\
+          
+          Shuting Shi & \textbf{Test Automation Engineer}: Responsible for automating test cases, ensuring that all tests run in different environments, and reporting the results in an understandable format for the team.\\
+          \bottomrule
+        \end{tabular}
+     \caption{Verification and Validation Team Members and Their Roles}
+     \end{table}
 
 \subsection{SRS Verification Plan}
 
-\wss{List any approaches you intend to use for SRS verification.  This may include
-  ad hoc feedback from reviewers, like your classmates, or you may plan for 
-  something more rigorous/systematic.}
+For the verification of the Software Requirements Specification (SRS) document, the following approaches will be adopted:
 
-\wss{Maybe create an SRS checklist?}
+\begin{enumerate}
+    \item \textbf{Peer Review:} The SRS will be reviewed by team members and classmates to identify any inconsistencies, ambiguities, or missing requirements.
+    \item \textbf{Expert Review:} Subject matter experts (SMEs) will be consulted to ensure the requirements are complete and feasible.
+    \item \textbf{Client Feedback:} The document will be shared with the client or stakeholders for their feedback, ensuring alignment with their expectations and needs.
+    \item \textbf{Automated Analysis Tools:} Tools such as requirement management software will be used for tracing and managing requirements systematically.
+\end{enumerate}
+
+Additionally, an SRS checklist will be utilized to systematically verify the content of the SRS document:
+
+\begin{itemize}
+    \item \textbf{1. Purpose of the Project}
+    \begin{itemize}
+        \item 1.1. User Business
+        \item 1.2. Goals of the Project
+    \end{itemize}
+    \item \textbf{2. Stakeholders}
+    \begin{itemize}
+        \item 2.1. Client
+        \item 2.2. Customer
+        \item 2.3. Other Stakeholders
+        \item 2.4. Hands-On Users of the Project
+        \item 2.5. User Participation
+    \end{itemize}
+    \item \textbf{6. The Scope of the Work}
+    \begin{itemize}
+        \item 6.1. The Current Situation
+        \item 6.2. The Context of the Work
+        \item 6.3. Specifying a Business Use Case (BUC)
+    \end{itemize}
+    \item \textbf{7. Business Data Model and Data Dictionary}
+    \begin{itemize}
+        \item 7.1. Business Data Model
+        \item 7.2. Data Dictionary
+    \end{itemize}
+    \item \textbf{8. The Scope of the Product}
+    \begin{itemize}
+        \item 8.1. Product Boundary
+        \item 8.2. Product Use Case Table
+        \item 8.3. Individual Product Use Cases (PUC's)
+    \end{itemize}
+    \item \textbf{9. Functional Requirements}
+    \begin{itemize}
+        \item 9.1. Authentication
+        \item 9.2. User Input
+        \item 9.3. Data
+        \item 9.4. Scheduling
+    \end{itemize}
+        \item \textbf{10. Look and Feel Requirements}
+    \begin{itemize}
+        \item 10.1. Appearance Requirements
+        \item 10.2. Style Requirements
+    \end{itemize}
+    \item \textbf{11. Usability and Humanity Requirements}
+    \begin{itemize}
+        \item 11.1. Ease of Use Requirements
+        \item 11.2. Personalization and Internationalization Requirements
+        \item 11.3. Learning Requirements
+        \item 11.4. Understandability and Politeness Requirements
+        \item 11.5. Accessibility Requirements
+    \end{itemize}
+    \item \textbf{12. Performance Requirements}
+    \begin{itemize}
+        \item 12.1. Speed and Latency Requirements
+        \item 12.2. Safety-Critical Requirements
+        \item 12.3. Precision or Accuracy Requirements
+        \item 12.4. Robustness or Fault-Tolerance Requirements
+        \item 12.5. Capacity Requirements
+        \item 12.6. Scalability or Extensibility Requirements
+        \item 12.7. Longevity Requirements
+    \end{itemize}
+    \item \textbf{13. Operational and Environmental Requirements}
+    \begin{itemize}
+        \item 13.1. Expected Physical Environment
+        \item 13.2. Requirements for Interfacing with Adjacent Systems
+        \item 13.3. Productization Requirements
+        \item 13.4. Release Requirements
+    \end{itemize}
+    \item \textbf{14. Maintainability and Support Requirements}
+    \begin{itemize}
+        \item 14.1. Maintenance Requirements
+        \item 14.2. Supportability Requirements
+        \item 14.3. Adaptability Requirements
+    \end{itemize}
+    \item \textbf{15. Security Requirements}
+    \begin{itemize}
+        \item 15.1. Access Requirements
+        \item 15.2. Integrity Requirements
+        \item 15.3. Privacy Requirements
+        \item 15.4. Audit Requirements
+        \item 15.5. Immunity Requirements
+    \end{itemize}
+    \item \textbf{16. Cultural Requirements}
+    \item \textbf{17. Compliance Requirements}
+    \begin{itemize}
+        \item 17.1. Legal Requirements
+        \item 17.2. Standards Compliance Requirements
+    \end{itemize}
+    \item \textbf{18. Open Issues}
+    \item \textbf{19. Off-the-Shelf Solutions}
+    \begin{itemize}
+        \item 19.1. Ready-Made Products
+        \item 19.2. Reusable Components
+        \item 19.3. Products That Can Be Copied
+    \end{itemize}
+    \item \textbf{20. New Problems}
+    \begin{itemize}
+        \item 20.1. Effects on the Current Environment
+        \item 20.2. Effects on the Installed Systems
+        \item 20.3. Potential User Problems
+        \item 20.4. Limitations in the Anticipated Implementation Environment
+        \item 20.5. Follow-Up Problems
+    \end{itemize}
+    \item \textbf{21. Tasks}
+    \begin{itemize}
+        \item 21.1. Project Planning
+        \item 21.2. Planning of the Development Phases
+    \end{itemize}
+    \item \textbf{22. Migration to the New Product}
+    \item \textbf{23. Costs}
+    \item \textbf{24. User Documentation and Training}
+    \begin{itemize}
+        \item 24.1. User Documentation Requirements
+        \item 24.2. Training Requirements
+    \end{itemize}
+    \item \textbf{25. Waiting Room}
+    \item \textbf{26. Ideas for Solutions}
+\end{itemize}
+
 
 \subsection{Design Verification Plan}
 
