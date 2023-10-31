@@ -107,9 +107,7 @@ def add_course():
     return redirect(url_for("start"))
 
 
-# router to course detailed page
-
-
+# Router to course detailed page
 @app.route("/course_page", methods=["GET", "POST"])
 def course_page():
     df = get_df_from_csv_in_s3(s3, bucket_name, mock_data_file)
@@ -118,12 +116,12 @@ def course_page():
     courses = ast.literal_eval(courses)
     return render_template("course_page.html", courses=courses)
 
-
+# Router to study plan detailed page
 @app.route("/plan_page", methods=["GET", "POST"])
 def plan_page():
     return render_template("plan_page.html")
 
-
+# Router to user profile page
 @app.route("/profile_page", methods=["GET", "POST"])
 def profile_page():
     df = get_df_from_csv_in_s3(s3, bucket_name, mock_data_file)
