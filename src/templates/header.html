@@ -1,7 +1,8 @@
 <div class="head">
         <div class="app-name">Course Buddy</div>
         <div class="welcome-msg">Hello, {{ username }}! Welcome to Course Buddy!</div>
-        <div class="timer"><i class="glyphicon glyphicon-time" style="font-size:24px; margin-left: 430px;"></i>
+        <div class="timer"><i class="glyphicon glyphicon-time" title="pomodoro timer"
+                        style="font-size:24px; margin-left: 430px;"></i>
         </div>
         <a class="message" href="{{ url_for('plan_page') }}"><i class="glyphicon glyphicon-tasks"
                         title="study plan schedule" style="font-size:24px;"></i> </a>
@@ -9,8 +10,8 @@
                         title="your course list" style="font-size:24px;"></i>
         </a>
         <div class="setting"><i class="glyphicon glyphicon-cog" style="font-size:24px;" title="setting"></i> </div>
-        <div class="notification"><i class="glyphicon glyphicon-bell" style="font-size:24px;"
-                        title="pomodoro timer"></i> </div>
+        <div class="notification"><i class="glyphicon glyphicon-bell" style="font-size:24px;" title="notifications"></i>
+        </div>
         <a class="user" href="{{ url_for('profile_page') }}"> <i class="glyphicon glyphicon-user" title="profile page"
                         style="font-size:24px;"></i>
         </a>
