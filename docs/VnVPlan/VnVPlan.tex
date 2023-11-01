@@ -88,41 +88,24 @@ This document ... \wss{provide an introductory blurb and roadmap of the
 \section{General Information}
 
 \subsection{Summary}
-
-\wss{Say what software is being tested.  Give its name and a brief overview of
-  its general functions.}
+Course Buddy is a scheduling software that generates personalized study plans for students from course outlines that would be incorporated into the student's own schedule.  The application also comes with social components that enable friend-collaborative study sessions.
 
 \subsection{Objectives}
+This VnV plan would direct us through the testing process to ensure that our system would accomplish all the intended functions correctly and efficiently.  
+Adequate tests would be planned according to functional and non-functional requirements stated in our SRS to ensure our project exhibits adequate qualities and functions.
+We would prioritize and polish core functions including PDF unloading and analysis, AI scheduling algorithms, compatibility with other calendar applications, and those associated non-functional requirements. If time allows, we would also aim to develop tests for AI attention detection and the social component.
 
-\wss{State what is intended to be accomplished.  The objective will be around
-  the qualities that are most important for your project.  You might have
-  something like: ``build confidence in the software correctness,''
-  ``demonstrate adequate usability.'' etc.  You won't list all of the qualities,
-  just those that are most important.}
-
-\wss{You should also list the objectives that are out of scope.  You don't have 
-the resources to do everything, so what will you be leaving out.  For instance, 
-if you are not going to verify the quality of usability, state this.  It is also 
-worthwhile to justify why the objectives are left out.}
-
-\wss{The objectives are important because they highlight that you are aware of 
-limitations in your resources for verification and validation.  You can't do everything, 
-so what are you going to prioritize?  As an example, if your system depends on an 
-external library, you can explicitly state that you will assume that external library 
-has already been verified by its implementation team.}
 
 \subsection{Relevant Documentation}
+\subsubsection{Development plan}\citet{DevelopmentPlan}
+As part of the development process, the writing of this VnV plan implementation of all the test cases shall follow the development process specified in the development plan.
 
-\wss{Reference relevant documentation.  This will definitely include your SRS
-  and your other project documents (design documents, like MG, MIS, etc).  You
-  can include these even before they are written, since by the time the project
-  is done, they will be written.}
-
-\citet{SRS}
-
-\wss{Don't just list the other documents.  You should explain why they are relevant and 
-how they relate to your VnV efforts.}
-
+\subsubsection{SRS}\citet{SRS}
+The functional and non-functional requirements and their corresponding fit criteria would lead the test plan and be used as a guideline to make sure tests could cover all the documented requirements.
+\subsubsection{Hazard Analysis}\citet{HazardAnalysis}
+Additional requirements related to software failures should also be covered in testing.
+\subsubsection{VnV Report}\citet{VnVReport}
+The result from executing this VnV plan would be recorded in the VnV report.  The VnV plan could be revised from the results.
 \section{Plan}
 
 \wss{Introduce this section.   You can provide a roadmap of the sections to
