@@ -51,6 +51,21 @@
         <input type="file" name="file">
         <input type="submit" value="Upload File">
     </form>
+    <h1>Here to Input a Syllabus to Get an Couse Email List</h1>
+
+    <form action="/get_emails" method="get">
+        <label for="filename">Enter Filename to Get Course Email List:</label>
+        <input type="text" id="filename" name="filename">
+        <input type="submit" id="showEmailsButton" value="Get Emails">
+        <div id="emailListDiv">
+            <h2>Email Addresses:</h2>
+            <ul>
+                {% for email in emails %}
+                <li>{{ email }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </form>
 </body>
 
 </html>
