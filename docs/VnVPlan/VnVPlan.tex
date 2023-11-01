@@ -217,112 +217,298 @@ as a Rev 0 demo for the supervisor.}
 \wss{Include a blurb here to explain why the subsections below
   cover the requirements.  References to the SRS would be good here.}
 
-\subsubsection{Authentication}
+  \subsubsection{Authentication}
 
-\begin{enumerate}
-					
-\item{TFR-UI1\\} FR1
-
-Control: Functional, Manual, Dynamic
-					
-Initial State: Sign-up page that is used to create an account with username and password
-					
-Input: Valid username and password in string format (letters, numbers, etc)
-					
-Output: A prompt saying that the account has been created successfully
-
-Test Case Derivation: If the username and password are provided in a valid format, the user should be able to create an account and should be notified that the account has been created
-
-How test will be performed: A list of string pairs with different combinations of letters, and numbers will be given to the function that handles creating an account and we can then check our database if the provided string pairs get saved and if the website is prompting the notification telling the account has been created. 
-
-\item{TFR-UI2\\} FR1
-
-Control: Functional, Manual, Dynamic
-					
-Initial State: Sign-up page that is used to create an account with username and password
-					
-Input: Invalid username or password (such as empty strings, too few characters, existing username etc.)
-					
-Output: A prompt saying that the username or password is invalid with detailed information such as more characters are needed or username/password cannot be empty or the username already exists
-
-Test Case Derivation: If the username and password are provided in an invalid format, the user should be notified with more information
-
-How test will be performed: Invalid usernames and passwords such as empty strings or strings with only a few letters or duplicated usernames will be given to the function that creates an account and we will check if the function throws an exception and if the website is notifying the user to provide valid inputs instead.
-
-\item{TFR-UI3\\} FR2
-
-Control: Functional, Manual, Dynamic
-					
-Initial State: Sign-in page that is used to sign in with an existing account that includes placeholders of username and password
-					
-Input: Username and password in string format
-					
-Output: If the username and password match user data stored in our database, the user should be able to log in and be redirected to the home page, otherwise the user should be prompted saying that the username and password provided do not match
-
-Test Case Derivation: If the username and password match, this means our user is authenticated and hence should be able to log in, authenticated users should be redirected to the home page once logged in for further actions. If the username and password do not match, the user should be prompted in some way to be notified and asked to try again
-
-How test will be performed: A list of usernames and passwords (some of them match mock data stored in our database and some of them are just random strings that are not in our database) should be given to the function that handles user login, and we will check for those that match the mock user data in our database if the website directs to the home page and for those that do not match if the website prompts saying that username and password do not match
-
-\item{TFR-UI4\\} FR3
-
-Control: Functional, Manual, Dynamic
-					
-Initial State: The user has logged in, and a drop-down menu is clicked and expanded
-					
-Input: The option \textit{log out} in the drop-down menu is selected and right-clicked
-					
-Output: The user should be able to log out of his/her account and prompted saying that you have logged out successfully
-
-Test Case Derivation: If the option \textit{log out} is selected and right-clicked, the user should be able to log out of his/her account and the user should be notified in some way so that he/she knows that the account has been logged out successfully
-
-How test will be performed: Manually log in using a mock account using different browsers and then log out for each one of them and see if we can log out and receive notifications about logging out
-\item{TFR-UI5\\} FR4
-
-Control: Functional, Manual, Dynamic
-					
-Initial State: The user has logged in and in the home page
-					
-Input:  The tab to view the scheduling information on the home page is selected and right-clicked
-					
-Output: The scheduling information (in list view, Kanban view or calendar view, by default is in list view) is displayed
-
-Test Case Derivation: The user should be able to view his/her scheduling information in a reasonable format such as list view, Kanban view or calendar view if the option to view the scheduling information is clicked on the home page
-					
-How test will be performed: Manually log in using a list of mock accounts (the difference between these accounts would be the customized way of viewing the scheduling information such as by default using list view, using Kanban view, or using calendar view) using different browsers and then click the tab that is responsible for redirecting to the page viewing the scheduling information on the home page and check if we are able to be redirected to the page listing scheduling information and check if the information is displayed in the view that the account has been set
-
-
-\end{enumerate}
-
-\subsubsection{User Input}
-
-\begin{enumerate}[resume]
-\item{TFR-UI1\\} FR5
-
-Control: Functional, Manual, Dynamic
-					
-Initial State: The user has logged in, and is currently on the course page,  
-					
-Input: The option uploading PDF is selected and right-clicked and a PDF file is uploaded 
-					
-Output: A prompt saying that the PDF has been uploaded successfully or saying that there is an error in cases where the format does not match (other files such as txt or csv etc.）
-
-Test Case Derivation: The user should be notified if the PDF gets uploaded successfully or when there is an error 
-					
-How test will be performed: Manually log in and navigate to the course page, click on the option to upload a PDF file to see if a prompt shows up saying that it gets uploaded successfully, also upload a different file with different formats such as txt and csv and see if there is a prompt saying that the format does not match
-\item{TFR-UI2\\} FR5
-
-Control: Functional, Manual, Dynamic
-					
-Initial State: The user has logged in, and is currently on the course page,  
-					
-Input: The option uploading PDF is selected and right-clicked and a PDF file is uploaded, repeat multiple times to upload multiple PDFs
-					
-Output: A prompt saying that the PDF has been uploaded successfully or saying that there is an error in cases where the format does not match (other files such as txt or csv etc.）for each upload
-
-Test Case Derivation: The user should be notified if the PDF gets uploaded successfully or when there is an error for each upload
-					
-How test will be performed: Manually log in and navigate to the course page, click on the option to upload a PDF file to see if a prompt shows up saying that it gets uploaded successfully. Repeat this multiple times to upload multiple PDFs and see if getting notifications multiple times 
-					
+  \begin{enumerate}
+            
+  \item{TFR1-A1\\}
+  
+  Control: Functional, Manual, Dynamic
+            
+  Initial State: Sign-up page that is used to create an account with username and password
+            
+  Input: Valid username and password in string format (letters, numbers, etc)
+            
+  Output: A prompt saying that the account has been created successfully
+  
+  Test Case Derivation: If the username and password are provided in a valid format, the user should be able to create an account and should be notified that the account has been created
+  
+  How test will be performed: A list of string pairs with different combinations of letters, and numbers will be given to the function that handles creating an account and we can then check our database if the provided string pairs get saved and if the website is prompting the notification telling the account has been created. 
+  
+  \item{TFR1-A2\\}
+  
+  Control: Functional, Manual, Dynamic
+            
+  Initial State: Sign-up page that is used to create an account with username and password
+            
+  Input: Invalid username or password (such as empty strings, too few characters, existing username etc.)
+            
+  Output: A prompt saying that the username or password is invalid with detailed information such as more characters are needed or username/password cannot be empty or the username already exists
+  
+  Test Case Derivation: If the username and password are provided in an invalid format, the user should be notified with more information
+  
+  How test will be performed: Invalid usernames and passwords such as empty strings or strings with only a few letters or duplicated usernames will be given to the function that creates an account and we will check if the function throws an exception and if the website is notifying the user to provide valid inputs instead.
+  
+  \item{TFR2-A3\\}
+  
+  Control: Functional, Manual, Dynamic
+            
+  Initial State: Sign-in page that is used to sign in with an existing account that includes placeholders of username and password
+            
+  Input: Username and password in string format
+            
+  Output: If the username and password match user data stored in our database, the user should be able to log in and be redirected to the home page, otherwise the user should be prompted saying that the username and password provided do not match
+  
+  Test Case Derivation: If the username and password match, this means our user is authenticated and hence should be able to log in, authenticated users should be redirected to the home page once logged in for further actions. If the username and password do not match, the user should be prompted in some way to be notified and asked to try again
+  
+  How test will be performed: A list of usernames and passwords (some of them match mock data stored in our database and some of them are just random strings that are not in our database) should be given to the function that handles user login, and we will check for those that match the mock user data in our database if the website directs to the home page and for those that do not match if the website prompts saying that username and password do not match
+  
+  \item{TFR3-A4\\}
+  
+  Control: Functional, Manual, Dynamic
+            
+  Initial State: The user has logged in, and a drop-down menu is clicked and expanded
+            
+  Input: The option \textit{log out} in the drop-down menu is selected and clicked
+            
+  Output: The user should be able to log out of his/her account and prompted saying that you have logged out successfully
+  
+  Test Case Derivation: If the option \textit{log out} is selected and clicked, the user should be able to log out of his/her account and the user should be notified in some way so that he/she knows that the account has been logged out successfully
+  
+  How test will be performed: Manually log in using a mock account using different browsers and then log out for each one of them and see if we can log out and receive notifications about logging out
+  \item{TFR4-A5\\}
+  
+  Control: Functional, Manual, Dynamic
+            
+  Initial State: The user has logged in and in the home page
+            
+  Input:  The tab to view the scheduling information on the home page is selected and clicked
+            
+  Output: The scheduling information (in list view, Kanban view or calendar view, by default it is in list view) is displayed
+  
+  Test Case Derivation: The user should be able to view his/her scheduling information in a reasonable format such as list view, Kanban view or calendar view if the option to view the scheduling information is clicked on the home page
+            
+  How test will be performed: Manually log in using a list of mock accounts (the difference between these accounts would be the customized way of viewing the scheduling information such as by default using list view, using Kanban view, or using calendar view) using different browsers and then click the tab that is responsible for redirecting to the page viewing the scheduling information on the home page and check if we can be redirected to the page listing scheduling information and check if the information is displayed in the view that the account has been set
+  
+  \end{enumerate}
+  
+  \subsubsection{User Input}
+  
+  \begin{enumerate}[resume]
+  \item{TFR5-UI1\\}
+  
+  Control: Functional, Manual, Dynamic
+            
+  Initial State: The user has logged in, and is currently on the course page,  
+            
+  Input: The option uploading PDF is selected and clicked and a PDF file is uploaded 
+            
+  Output: A prompt saying that the PDF has been uploaded successfully or saying that there is an error in cases where the format does not match (other files such as txt or csv etc.)
+  
+  Test Case Derivation: The user should be notified if the PDF gets uploaded successfully or when there is an error 
+            
+  How test will be performed: Manually log in and navigate to the course page, click on the option to upload a PDF file to see if a prompt shows up saying that it gets uploaded successfully, also upload a different file with different formats such as txt and csv and see if there is a prompt saying that the format does not match
+  \item{TFR5-UI2\\}
+  
+  Control: Functional, Manual, Dynamic
+            
+  Initial State: The user has logged in, and is currently on the course page,  
+            
+  Input: The option uploading PDF is selected and clicked and a PDF file is uploaded, repeat multiple times to upload multiple PDFs
+            
+  Output: A prompt saying that the PDF has been uploaded successfully or saying that there is an error in cases where the format does not match (other files such as txt or csv etc.)for each upload
+  
+  Test Case Derivation: The user should be notified if the PDF gets uploaded successfully or when there is an error for each upload
+            
+  How test will be performed: Manually log in and navigate to the course page, click on the option to upload a PDF file to see if a prompt shows up saying that it gets uploaded successfully. Repeat this multiple times to upload multiple PDFs and see if getting notifications multiple times 
+  
+  \item{TFR6-UI3\\}
+  
+  Control: Functional, Manual, Dynamic, Automatic
+            
+  Initial State: The user has logged in for the first time, a prompt shows up on the home page to ask if the user wants to select his/her preferred study intervals now or do it later, and a timetable is displayed where multiple study intervals are indicated
+            
+  Input: The user clicks on the option saying do it now or the user clicks on the option saying do it later
+            
+  Output: The user gets directed to the page where he/she can change the study intervals on a timetable if clicks on do it now or the prompt will be closed and the user stays on the home page
+  
+  Test Case Derivation: The user should be able to be redirected to the page where he/she can select the preferred study intervals if he/she wants to do it now for the first time, otherwise the prompt should disappear and the user should be able to stay on the home page and do further other actions
+  
+  How test will be performed: Manually log in to a new mock account and see if there is a prompt asking if we want to select the preferred study intervals now or do it later then click on do it now and see if we get directed to the page where we can select the intervals on a timetable. Repeat logging in for a different new account again but click on do it later this time to see the prompt goes away and if we stay on the home page
+  
+  \item{TFR7-UI4\\}
+  
+  Control: Functional, Manual, Dynamic, Automatic
+            
+  Initial State: The user has logged in, and a timetable is displayed where multiple study intervals are indicated
+            
+  Input: Drag and select the preferred time interval
+            
+  Output: The preferred time interval is highlighted and a save button is clicked
+  
+  Test Case Derivation: The selected time interval should be highlighted to indicate that this has been selected and once it is selected it should be saved after the save button is clicked
+  
+  How test will be performed: Manually log in and navigate to the setting to change the time interval, we will check if a timetable is displayed and  different time intervals are indicated in some ways, then we will select multiple different time intervals and check if selected intervals are highlighted and if the selected intervals are saved to the database once the save button is clicked 
+  
+  
+  \item{TFR8-UI5\\}
+  
+  Control: Functional, Manual, Dynamic, Automatic
+            
+  Initial State: The user has logged in for the first time, a prompt shows up on the home page to ask if the user wants to select his/her preferred study and break intervals now or do it later, and a Pomodoro is displayed where these can be input
+            
+  Input: The user clicks on the option saying do it now or the user clicks on the option saying do it later
+            
+  Output: The user gets directed to the page where he/she can change the study and break intervals on a Pomodoro if he clicks on do it now, or the prompt will be closed and the user stays on the home page if he clicks to do it later
+  
+  Test Case Derivation: The user should be able to be redirected to the page where he/she can select the preferred study and break intervals if he/she wants to do it now for the first time, otherwise the prompt should disappear and the user should be able to stay on the home page and do further other actions
+            
+  How test will be performed: Manually log in to a new mock account and see if there is a prompt asking if we want to select the preferred study and break intervals now or do it later then click on do it now and see if we get directed to the page where we can select the intervals on the Pomodoro. Repeat logging in for a different new account again but click on do it later this time to see if the prompt goes away and if we stay on the home page
+            
+  \item{TFR9-UI6\\}
+  
+  Control: Functional, Manual, Dynamic, Automatic
+            
+  Initial State: The user has logged in, and is on the page showing the Pomodoro settings
+            
+  Input: The user selects how much time they want to spend studying versus how much time taking a break
+            
+  Output: After the save button is clicked the Pomodoro settings will now reflect what the user had previously input for study and break times
+  
+  Test Case Derivation: The intervals for studying and taking a break should be shown on the timer once it has been input and save has been clicked
+            
+  How test will be performed: Manually log in and navigate to the setting to change the pomodoro study and break intervals, we will check if the Pomodoro is displayed and different time intervals are indicated in some ways, and then we will input multiple different intervals and check if the timer reflects these intervals and are saved to the database once the save button is clicked 
+  
+  \item{TFR10-UI7\\}
+  
+  Control: Functional, Manual, Dynamic
+            
+  Initial State: The user has logged in and the friend list panel is clicked and expanded
+            
+  Input: The option to send a friend request to a specific user (by username) is selected and clicked 
+            
+  Output: A prompt shows up and asks the user to provide the username that he/she wants to send a friend request to
+  
+  Test Case Derivation: Once the option of sending a friend request is selected, a prompt should be provided to ask the user to input the username that he/she wants to send a friend request to
+            
+  How test will be performed: Manually log in, expand the friend list, click on sending friend request option, and then check if a prompt asking the user to provide the username that he/she wants to send a friend request to shows up
+            
+  \item{TFR10-UI8\\}
+  
+  Control: Functional, Manual, Dynamic
+            
+  Initial State: A prompt is displayed asking to provide the username that he/she wants to send a friend request to
+            
+  Input: Valid and existing username and a send button is left-clicked
+            
+  Output: A text or diagram shows up to indicate that the friend request has been sent successfully 
+  
+  Test Case Derivation: When the user provides a valid username, the friend request should be sent successfully and there has to be a way to tell user that this has been done with no errors
+            
+  How test will be performed: Manually log in, expand the friend list, click on the sending friend request option, and then input a list of valid and existing usernames and click on the send button to see if we get notifications (by text or diagram) saying that the friend request has been sent 
+  
+  \item{TFR10-UI9\\}
+  
+  Control: Functional, Manual, Dynamic
+            
+  Initial State: A prompt is displayed asking to provide the username that he/she wants to send a friend request to
+            
+  Input: Invalid username such as empty string and a send button is left-clicked
+            
+  Output: A text or diagram shows up to indicate that the username provided is invalid 
+  
+  Test Case Derivation: When the user provides an invalid username, the friend request should not be sent and there has to be a way to tell the user that the username provided is invalid 
+            
+  How test will be performed: Manually log in, expand the friend list, click on the sending friend request option, and then input a list of invalid usernames such as empty strings and click on the send button to see if we get a notification (by text or diagram) saying that the username provided is invalid 
+  
+  \item{TFR11-UI10\\}
+  
+  Control: Functional, Manual, Dynamic
+            
+  Initial State: A notification indicating that there is an incoming friend request (could use sound effects or highlight the notification icon)
+            
+  Input: The notification gets left-clicked and the button accepting the friend request is clicked
+            
+  Output: A text or diagram showing that the friend request has been accepted
+  
+  Test Case Derivation: When the user accepts an incoming friend request, he/she should be notified when the friend request gets accepted successfully
+            
+  How test will be performed: Manually log in to one of the mock accounts, send a friend request to another mock account, log in to the account receiving the friend request and then check if there is a notification indicating that there is an incoming friend request, accept the friend request and then see if a text or a diagram gets displayed indicating that the friend request has been accepted
+  
+  \item{TFR12-UI11\\}
+  
+  Control: Functional, Manual, Dynamic
+            
+  Initial State: A notification indicating that there is an incoming friend request (could use sound effects or highlight the notification icon)
+            
+  Input: The notification gets left-clicked and the button rejecting the friend request is clicked
+            
+  Output: A text or diagram showing that the friend request has been rejected
+  
+  Test Case Derivation: When the user rejects an incoming friend request, he/she should be notified that it has been rejected when the friend request gets rejected
+            
+  How test will be performed: Manually log in to one of the mock accounts, send a friend request to another mock account, log in to the account receiving the friend request and then check if there is a notification indicating that there is an incoming friend request, reject the friend request and then see if a text or a diagram gets displayed indicating that the friend request has been rejected
+  
+  \item{TFR13-UI12\\}
+  
+  Control: Functional, Manual, Dynamic
+            
+  Initial State: The user is logged in and is on the page that displays their tasks and current progress on those tasks
+            
+  Input: The user can input for each task what their current progress status and then save it
+            
+  Output: The task list will be updated with the current progress of the task
+  
+  Test Case Derivation: The user should be able to see a list of the current tasks he has to do and how far along he is on them. He should also be able to manually change the progress for each task when he has made progress or feels he needs more time
+            
+  How test will be performed: Manually log in and navigate to the task list page, select a task to edit the progress on, and then input a random percentage ranging from 0 to 100, Then, after pressing the save button this change should be committed and reflected on the task list page upon revisiting
+  
+  \item{TFR14-UI13\\} 
+  
+  Control: Functional, Manual, Dynamic
+            
+  Initial State: The user is logged in and is on the page that displays their tasks and current progress on those tasks with a subtask marked as complete and there is a pop-up asking if the pace is comfortable
+            
+  Input: The user clicks if the pace is comfortable or not on the given pop-up
+            
+  Output: On clicking that the pace is comfortable, nothing is changed, if the pace is not comfortable the time for each task will change accordingly
+  
+  Test Case Derivation: The system curates a study plan for the user, so if the user does not feel as if he is doing well with this plan he should be able to provide feedback and have the study plan change around this feedback 
+            
+  How test will be performed: Manually log in head to the task list and complete a task. On the pop-up showing asking if the pace is comfortable, select that it is comfortable. Then, check that no change has been made to the timeline. Repeat this, but this time select that the pace is not comfortable, and then check that the study plan has changed how much time should be spent on the tasks
+  
+  \end{enumerate}
+  
+  \subsubsection{Data}[]
+  
+  \begin{enumerate}[resume]
+  
+  \item{TFR15-D1\\}
+  Control: Functional, Manual, Dynamic
+            
+  Initial State: The user has logged in and is on the PDF extraction page
+            
+  Input: The user clicks to upload a PDF of his course outline, selects the PDF he wishes to upload, and clicks upload
+            
+  Output: The page shows the PDF has been uploaded successfully and is ready for extraction
+  
+  Test Case Derivation: The user should be able to upload his course schedule and have the website display which PDF has been uploaded and if it has been successful and is ready for parsing
+            
+  How test will be performed: Manually log in and then navigate to the PDF extraction page. Click on the button to select a PDF to upload and then select the PDF that has the course outline. Check that the task list displayed by the website shows the correct information that can be found on the PDF
+  
+  \item{TFR16-D2\\}
+  
+  Control: Functional, Manual, Dynamic
+            
+  Initial State: The user has logged in and is on the PDF extraction page and has uploaded the course outline PDF
+            
+  Input: The user presses to extract the course information from the uploaded PDF
+            
+  Output: The page shows lists the course information extracted from the PDF as a task list
+  
+  Test Case Derivation: The user should be able to upload his course schedule and have the website extract the necessary information from it in order to create his schedule. After it has extracted the information it should display it to the user for quick verification
+            
+  How test will be performed: Manually log in and upload a course PDF. Continue and click to parse the course outline and create a task list. Check that the extracted information from the list including \textit{courseName}, \textit{taskType}, \textit{taskName}, weight, and deadline from the uploaded course outline is correctly displayed as a task list
 
 \end{enumerate}
 
