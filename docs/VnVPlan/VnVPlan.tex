@@ -216,16 +216,78 @@ as a Rev 0 demo for the supervisor.}
 \wss{Include a blurb here to explain why the subsections below
   cover the requirements.  References to the SRS would be good here.}
 
-\subsubsection{Area of Testing1}
-
-\wss{It would be nice to have a blurb here to explain why the subsections below
-  cover the requirements.  References to the SRS would be good here.  If a section
-  covers tests for input constraints, you should reference the data constraints
-  table in the SRS.}
-		
-\paragraph{Title for Test}
+\subsubsection{Authentication}
 
 \begin{enumerate}
+					
+\item{TFR-UI1\\} FR1
+
+Control: Functional, Manual, Dynamic
+					
+Initial State: Sign-up page that is used to create an account with username and password
+					
+Input: Valid username and password in string format (letters, numbers, etc)
+					
+Output: A prompt saying that the account has been created successfully
+
+Test Case Derivation: If the username and password are provided in a valid format, the user should be able to create an account and should be notified that the account has been created
+
+How test will be performed: A list of string pairs with different combinations of letters, and numbers will be given to the function that handles creating an account and we can then check our database if the provided string pairs get saved and if the website is prompting the notification telling the account has been created. 
+
+\item{TFR-UI2\\} FR1
+
+Control: Functional, Manual, Dynamic
+					
+Initial State: Sign-up page that is used to create an account with username and password
+					
+Input: Invalid username or password (such as empty strings, too few characters, existing username etc.)
+					
+Output: A prompt saying that the username or password is invalid with detailed information such as more characters are needed or username/password cannot be empty or the username already exists
+
+Test Case Derivation: If the username and password are provided in an invalid format, the user should be notified with more information
+
+How test will be performed: Invalid usernames and passwords such as empty strings or strings with only a few letters or duplicated usernames will be given to the function that creates an account and we will check if the function throws an exception and if the website is notifying the user to provide valid inputs instead.
+
+\item{TFR-UI3\\} FR2
+
+Control: Functional, Manual, Dynamic
+					
+Initial State: Sign-in page that is used to sign in with an existing account that includes placeholders of username and password
+					
+Input: Username and password in string format
+					
+Output: If the username and password match user data stored in our database, the user should be able to log in and be redirected to the home page, otherwise the user should be prompted saying that the username and password provided do not match
+
+Test Case Derivation: If the username and password match, this means our user is authenticated and hence should be able to log in, authenticated users should be redirected to the home page once logged in for further actions. If the username and password do not match, the user should be prompted in some way to be notified and asked to try again
+
+How test will be performed: A list of usernames and passwords (some of them match mock data stored in our database and some of them are just random strings that are not in our database) should be given to the function that handles user login, and we will check for those that match the mock user data in our database if the website directs to the home page and for those that do not match if the website prompts saying that username and password do not match
+
+\item{TFR-UI4\\} FR3
+
+Control: Functional, Manual, Dynamic
+					
+Initial State: The user has logged in, and a drop-down menu is clicked and expanded
+					
+Input: The option \textit{log out} in the drop-down menu is selected and right-clicked
+					
+Output: The user should be able to log out of his/her account and prompted saying that you have logged out successfully
+
+Test Case Derivation: If the option \textit{log out} is selected and right-clicked, the user should be able to log out of his/her account and the user should be notified in some way so that he/she knows that the account has been logged out successfully
+
+How test will be performed: Manually log in using a mock account using different browsers and then log out for each one of them and see if we can log out and receive notifications about logging out
+\item{TFR-UI5\\} FR4
+
+Control: Functional, Manual, Dynamic
+					
+Initial State: The user has logged in and in the home page
+					
+Input:  The tab to view the scheduling information on the home page is selected and right-clicked
+					
+Output: The scheduling information (in list view, Kanban view or calendar view, by default is in list view) is displayed
+
+Test Case Derivation: The user should be able to view his/her scheduling information in a reasonable format such as list view, Kanban view or calendar view if the option to view the scheduling information is clicked on the home page
+					
+How test will be performed: Manually log in using a list of mock accounts (the difference between these accounts would be the customized way of viewing the scheduling information such as by default using list view, using Kanban view, or using calendar view) using different browsers and then click the tab that is responsible for redirecting to the page viewing the scheduling information on the home page and check if we are able to be redirected to the page listing scheduling information and check if the information is displayed in the view that the account has been set
 
 \item{test-id1\\}
 
