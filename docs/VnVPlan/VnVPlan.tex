@@ -290,12 +290,40 @@ as a Rev 0 demo for the supervisor.}
             
   How test will be performed: Manually log in using a list of mock accounts (the difference between these accounts would be the customized way of viewing the scheduling information such as by default using list view, using Kanban view, or using calendar view) using different browsers and then click the tab that is responsible for redirecting to the page viewing the scheduling information on the home page and check if we can be redirected to the page listing scheduling information and check if the information is displayed in the view that the account has been set
   
+  \item{TFR5-A6\\}
+  
+  Control: Functional, Manual, Dynamic
+            
+  Initial State: The user is on the page where he can retrieve his password by answering a list of security questions
+            
+  Input:  Strings to each one of the security questions that match the user data stored in our database
+            
+  Output: The password gets changed successfully and updated in our database, a text or diagram should be displayed to notify the user that the password has been changed 
+  
+  Test Case Derivation: The user should be able to change his password by answering the security questions correctly and should be notified in some way that the password has been changed
+            
+  How test will be performed: Manually log in using a mock account, navigate to the changing password page, answer mock security questions correctly and see if we get a notification like a text or a diagram indicating that the password has been changed successfully
+  
+  \item{TFR5-A7\\}
+  
+  Control: Functional, Manual, Dynamic
+            
+  Initial State: The user is on the page where he can retrieve his password by answering a list of security questions
+            
+  Input:  Strings to each one of the security questions that do not match the user data stored in our database
+            
+  Output: A text or diagram should be displayed to notify the user that the answer to the security questions are not correct
+  
+  Test Case Derivation: The user should not be able to change his password by answering the security questions wrong and should be notified in some way that the answers are not correct
+            
+  How test will be performed: Manually log in using a mock account, navigate to the changing password page, answer mock security questions wrong and see if we get a notification like a text or a diagram indicating that the answers are wrong
+  
   \end{enumerate}
   
   \subsubsection{User Input}
   
   \begin{enumerate}[resume]
-  \item{TFR5-UI1\\}
+  \item{TFR6-UI1\\}
   
   Control: Functional, Manual, Dynamic
             
@@ -308,7 +336,7 @@ as a Rev 0 demo for the supervisor.}
   Test Case Derivation: The user should be notified if the PDF gets uploaded successfully or when there is an error 
             
   How test will be performed: Manually log in and navigate to the course page, click on the option to upload a PDF file to see if a prompt shows up saying that it gets uploaded successfully, also upload a different file with different formats such as txt and csv and see if there is a prompt saying that the format does not match
-  \item{TFR5-UI2\\}
+  \item{TFR6-UI2\\}
   
   Control: Functional, Manual, Dynamic
             
@@ -322,7 +350,7 @@ as a Rev 0 demo for the supervisor.}
             
   How test will be performed: Manually log in and navigate to the course page, click on the option to upload a PDF file to see if a prompt shows up saying that it gets uploaded successfully. Repeat this multiple times to upload multiple PDFs and see if getting notifications multiple times 
   
-  \item{TFR6-UI3\\}
+  \item{TFR7-UI3\\}
   
   Control: Functional, Manual, Dynamic, Automatic
             
@@ -336,7 +364,7 @@ as a Rev 0 demo for the supervisor.}
   
   How test will be performed: Manually log in to a new mock account and see if there is a prompt asking if we want to select the preferred study intervals now or do it later then click on do it now and see if we get directed to the page where we can select the intervals on a timetable. Repeat logging in for a different new account again but click on do it later this time to see the prompt goes away and if we stay on the home page
   
-  \item{TFR7-UI4\\}
+  \item{TFR8-UI4\\}
   
   Control: Functional, Manual, Dynamic, Automatic
             
@@ -351,7 +379,7 @@ as a Rev 0 demo for the supervisor.}
   How test will be performed: Manually log in and navigate to the setting to change the time interval, we will check if a timetable is displayed and  different time intervals are indicated in some ways, then we will select multiple different time intervals and check if selected intervals are highlighted and if the selected intervals are saved to the database once the save button is clicked 
   
   
-  \item{TFR8-UI5\\}
+  \item{TFR9-UI5\\}
   
   Control: Functional, Manual, Dynamic, Automatic
             
@@ -365,7 +393,7 @@ as a Rev 0 demo for the supervisor.}
             
   How test will be performed: Manually log in to a new mock account and see if there is a prompt asking if we want to select the preferred study and break intervals now or do it later then click on do it now and see if we get directed to the page where we can select the intervals on the Pomodoro. Repeat logging in for a different new account again but click on do it later this time to see if the prompt goes away and if we stay on the home page
             
-  \item{TFR9-UI6\\}
+  \item{TFR10-UI6\\}
   
   Control: Functional, Manual, Dynamic, Automatic
             
@@ -379,7 +407,7 @@ as a Rev 0 demo for the supervisor.}
             
   How test will be performed: Manually log in and navigate to the setting to change the pomodoro study and break intervals, we will check if the Pomodoro is displayed and different time intervals are indicated in some ways, and then we will input multiple different intervals and check if the timer reflects these intervals and are saved to the database once the save button is clicked 
   
-  \item{TFR10-UI7\\}
+  \item{TFR11-UI7\\}
   
   Control: Functional, Manual, Dynamic
             
@@ -393,7 +421,7 @@ as a Rev 0 demo for the supervisor.}
             
   How test will be performed: Manually log in, expand the friend list, click on sending friend request option, and then check if a prompt asking the user to provide the username that he/she wants to send a friend request to shows up
             
-  \item{TFR10-UI8\\}
+  \item{TFR11-UI8\\}
   
   Control: Functional, Manual, Dynamic
             
@@ -407,7 +435,7 @@ as a Rev 0 demo for the supervisor.}
             
   How test will be performed: Manually log in, expand the friend list, click on the sending friend request option, and then input a list of valid and existing usernames and click on the send button to see if we get notifications (by text or diagram) saying that the friend request has been sent 
   
-  \item{TFR10-UI9\\}
+  \item{TFR11-UI9\\}
   
   Control: Functional, Manual, Dynamic
             
@@ -421,7 +449,7 @@ as a Rev 0 demo for the supervisor.}
             
   How test will be performed: Manually log in, expand the friend list, click on the sending friend request option, and then input a list of invalid usernames such as empty strings and click on the send button to see if we get a notification (by text or diagram) saying that the username provided is invalid 
   
-  \item{TFR11-UI10\\}
+  \item{TFR12-UI10\\}
   
   Control: Functional, Manual, Dynamic
             
@@ -435,7 +463,7 @@ as a Rev 0 demo for the supervisor.}
             
   How test will be performed: Manually log in to one of the mock accounts, send a friend request to another mock account, log in to the account receiving the friend request and then check if there is a notification indicating that there is an incoming friend request, accept the friend request and then see if a text or a diagram gets displayed indicating that the friend request has been accepted
   
-  \item{TFR12-UI11\\}
+  \item{TFR13-UI11\\}
   
   Control: Functional, Manual, Dynamic
             
@@ -449,7 +477,7 @@ as a Rev 0 demo for the supervisor.}
             
   How test will be performed: Manually log in to one of the mock accounts, send a friend request to another mock account, log in to the account receiving the friend request and then check if there is a notification indicating that there is an incoming friend request, reject the friend request and then see if a text or a diagram gets displayed indicating that the friend request has been rejected
   
-  \item{TFR13-UI12\\}
+  \item{TFR14-UI12\\}
   
   Control: Functional, Manual, Dynamic
             
@@ -463,7 +491,7 @@ as a Rev 0 demo for the supervisor.}
             
   How test will be performed: Manually log in and navigate to the task list page, select a task to edit the progress on, and then input a random percentage ranging from 0 to 100, Then, after pressing the save button this change should be committed and reflected on the task list page upon revisiting
   
-  \item{TFR14-UI13\\} 
+  \item{TFR15-UI13\\} 
   
   Control: Functional, Manual, Dynamic
             
@@ -479,11 +507,11 @@ as a Rev 0 demo for the supervisor.}
   
   \end{enumerate}
   
-  \subsubsection{Data}[]
+  \subsubsection{Data}
   
-  \begin{enumerate}[resume]
+  \begin{enumerate}
   
-  \item{TFR15-D1\\}
+  \item{TFR16-D1\\}
   Control: Functional, Manual, Dynamic
             
   Initial State: The user has logged in and is on the PDF extraction page
@@ -496,7 +524,7 @@ as a Rev 0 demo for the supervisor.}
             
   How test will be performed: Manually log in and then navigate to the PDF extraction page. Click on the button to select a PDF to upload and then select the PDF that has the course outline. Check that the task list displayed by the website shows the correct information that can be found on the PDF
   
-  \item{TFR16-D2\\}
+  \item{TFR17-D2\\}
   
   Control: Functional, Manual, Dynamic
             
@@ -509,7 +537,6 @@ as a Rev 0 demo for the supervisor.}
   Test Case Derivation: The user should be able to upload his course schedule and have the website extract the necessary information from it in order to create his schedule. After it has extracted the information it should display it to the user for quick verification
             
   How test will be performed: Manually log in and upload a course PDF. Continue and click to parse the course outline and create a task list. Check that the extracted information from the list including \textit{courseName}, \textit{taskType}, \textit{taskName}, weight, and deadline from the uploaded course outline is correctly displayed as a task list
-
 \end{enumerate}
 
 \subsection{Tests for Nonfunctional Requirements}
