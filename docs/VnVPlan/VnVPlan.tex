@@ -1,5 +1,6 @@
 \documentclass[12pt, titlepage]{article}
 
+\usepackage{enumitem}
 \usepackage{booktabs}
 \usepackage{tabularx}
 \usepackage{hyperref}
@@ -289,39 +290,41 @@ Test Case Derivation: The user should be able to view his/her scheduling informa
 					
 How test will be performed: Manually log in using a list of mock accounts (the difference between these accounts would be the customized way of viewing the scheduling information such as by default using list view, using Kanban view, or using calendar view) using different browsers and then click the tab that is responsible for redirecting to the page viewing the scheduling information on the home page and check if we are able to be redirected to the page listing scheduling information and check if the information is displayed in the view that the account has been set
 
-\item{test-id1\\}
-
-Control: Manual versus Automatic
-					
-Initial State: 
-					
-Input: 
-					
-Output: \wss{The expected result for the given inputs}
-
-Test Case Derivation: \wss{Justify the expected value given in the Output field}
-					
-How test will be performed: 
-					
-\item{test-id2\\}
-
-Control: Manual versus Automatic
-					
-Initial State: 
-					
-Input: 
-					
-Output: \wss{The expected result for the given inputs}
-
-Test Case Derivation: \wss{Justify the expected value given in the Output field}
-
-How test will be performed: 
 
 \end{enumerate}
 
-\subsubsection{Area of Testing2}
+\subsubsection{User Input}
 
-...
+\begin{enumerate}[resume]
+\item{TFR-UI1\\} FR5
+
+Control: Functional, Manual, Dynamic
+					
+Initial State: The user has logged in, and is currently on the course page,  
+					
+Input: The option uploading PDF is selected and right-clicked and a PDF file is uploaded 
+					
+Output: A prompt saying that the PDF has been uploaded successfully or saying that there is an error in cases where the format does not match (other files such as txt or csv etc.）
+
+Test Case Derivation: The user should be notified if the PDF gets uploaded successfully or when there is an error 
+					
+How test will be performed: Manually log in and navigate to the course page, click on the option to upload a PDF file to see if a prompt shows up saying that it gets uploaded successfully, also upload a different file with different formats such as txt and csv and see if there is a prompt saying that the format does not match
+\item{TFR-UI2\\} FR5
+
+Control: Functional, Manual, Dynamic
+					
+Initial State: The user has logged in, and is currently on the course page,  
+					
+Input: The option uploading PDF is selected and right-clicked and a PDF file is uploaded, repeat multiple times to upload multiple PDFs
+					
+Output: A prompt saying that the PDF has been uploaded successfully or saying that there is an error in cases where the format does not match (other files such as txt or csv etc.）for each upload
+
+Test Case Derivation: The user should be notified if the PDF gets uploaded successfully or when there is an error for each upload
+					
+How test will be performed: Manually log in and navigate to the course page, click on the option to upload a PDF file to see if a prompt shows up saying that it gets uploaded successfully. Repeat this multiple times to upload multiple PDFs and see if getting notifications multiple times 
+					
+
+\end{enumerate}
 
 \subsection{Tests for Nonfunctional Requirements}
 
