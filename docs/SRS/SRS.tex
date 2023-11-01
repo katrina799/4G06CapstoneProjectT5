@@ -38,7 +38,7 @@
 \newcommand{\rthesrnum}{SR\refstepcounter{srnum}\thesrnum:}
 \newcommand{\srref}[1]{SR\ref{#1}}
 
-\newcounter{srnum} %style Requirement number
+\newcounter{strnum} %style Requirement number
 \newcommand{\rthestrnum}{STR\refstepcounter{strnum}\thestrnum:}
 \newcommand{\strref}[1]{STR\ref{#1}}
 
@@ -63,9 +63,9 @@
 \newcommand{\mrrref}[1]{MR\ref{#1}}
 
 
-\newcounter{sreqnum} %Supportability Requirements number
-\newcommand{\rthesreqnum}{SPR\refstepcounter{sreqnum}\thesreqnum:}
-\newcommand{\srrref}[1]{SPR\ref{#1}}
+\newcounter{spreqnum} %Supportability Requirements number
+\newcommand{\rthespreqnum}{SPR\refstepcounter{spreqnum}\thespreqnum:}
+\newcommand{\sprrref}[1]{SPR\ref{#1}}
 
 \newcounter{areqnum} %Adaptability Requirements number
 \newcommand{\rtheareqnum}{AR\refstepcounter{areqnum}\theareqnum:}
@@ -970,7 +970,7 @@ The released version must pass all known regression tests.
 \end{itemize}
 
 \subsection{Supportability Requirements}
-\begin{itemize}[leftmargin=13mm,labelsep=4mm,label=\rthesreqnum]
+\begin{itemize}[leftmargin=13mm,labelsep=4mm,label=\rthespreqnum]
     \item Users shall have easy access to a helpdesk for support.\\
     \textbf{Fit Criteria}: Users are able to access the email contact, phone contact, and chatbot to address common user questions in \texttt{MAX\_SUPPORT\_STEP} steps.\\
     \item The response time for offering support should be on time corresponding to the support type. \\
