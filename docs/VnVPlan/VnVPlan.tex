@@ -270,7 +270,7 @@ Initial State: The web application is launched.
 					
 Input/Condition: Users are asked to read the text on each page.
 					
-Output/Result: Users report that all the texts are legible.
+Output/Result: The percentage of users reporting that all the texts are legible.
 					
 How test will be performed: The web application displayed with screens with various resolutions and sizes. A group of are asked to read the texts and report any unclear typography.
 					
@@ -282,7 +282,7 @@ Initial State: The web application is launched.
 					
 Input/Condition: Users are asked to observe color on each page.
 					
-Output/Result: Users are comfortable with the color used.
+Output/Result: The percentage of users comfortable with the color used.
 					
 How test will be performed: A group of are asked to observe the color and report any distracting or overwhelming color palette.
 
@@ -294,7 +294,7 @@ Initial State: The web application is launched.
 					
 Input/Condition: Users are asked to interpret icons and graphics on each page.
 					
-Output/Result: Users are able to understand the meaning of each icon and graphic as designed.
+Output/Result: The percentage of users able to understand the meaning of each icon and graphic as designed.
 					
 How test will be performed: A group of are asked what they think each icon and graphic means. Any mismatch from the UI designer's intention would be recorded.
 
@@ -306,11 +306,11 @@ Initial State: The web application is launched.
 					
 Input/Condition: Users are asked to observe the layout of each page.
 					
-Output/Result: Users are comfortable with the payout.
+Output/Result: The percentage of users comfortable with the payout.
 					
 How test will be performed: The web application is launched with different devices including smartphones, tablets, and desktops.  Users are asked to point out any unresponsive, out-of-margin, or compressed elements.
 
-\item{STR-1\\}
+\item{TSTR-1\\}
 
 Type: Dynamic, Manual
 					
@@ -318,11 +318,11 @@ Initial State: The web application is launched.
 					
 Input/Condition: Users are asked to point out the menus and navigation bars.
 					
-Output/Result: Users are able to locate menus and navigation tools without confusion.
+Output/Result: The percentage of users able to locate menus and navigation tools without confusion.
 					
 How test will be performed: A group of are asked to point out the menus and navigation bars without assistance.
 
-\item{STR-2\\}
+\item{TSTR-2\\}
 
 Type: Dynamic, Manual
 					
@@ -330,11 +330,11 @@ Initial State: The web application is launched.
 					
 Input/Condition: Users are asked to point out inconsistent UI elements.
 					
-Output/Result: No inconsistent UI elements are found.
+Output/Result: The number of inconsistent UI elements found.
 					
 How test will be performed: A group of are asked to explore the application and point out any inconsistent UI elements that break the harmony.
 
-\item{STR-3\\}
+\item{TSTR-3\\}
 
 Type: Dynamic, Manual
 					
@@ -342,11 +342,11 @@ Initial State: The web application is launched.
 					
 Input/Condition: Users are asked to click each interactive UI element.
 					
-Output/Result: The interactive UI element responses.
+Output/Result: The number of interactive UI elements being unresponsive.
 					
 How test will be performed: A group of are asked to explore the application and report any unresponsive interactive elements.
 
-\item{STR-4\\}
+\item{TSTR-4\\}
 
 Type: Dynamic, Manual
 					
@@ -354,11 +354,11 @@ Initial State: The web application is launched.
 					
 Input/Condition: Users are asked to adjust font size.
 					
-Output/Result: The font sized can be suitable for all the users.
+Output/Result: The percentage of users reporting unsuitable font size.
 					
 How test will be performed: A group of users are asked to report how they like the default font size and attempt to adjust the font size to their preference. Report if the adjusted font still causes difficulty in reading.
 
-\item{STR-5\\}
+\item{TSTR-5\\}
 
 Type: Dynamic, Manual
 					
@@ -366,14 +366,307 @@ Initial State: The web application is launched.
 					
 Input/Condition: Users are asked to perform a task while an animation is displayed.
 					
-Output/Result: Users could perform the task distracted.
+Output/Result: The percentage of users who could perform the task distracted.
 					
 How test will be performed: A group of users is asked to perform a task that involves the animation display part of the screen.  They are asked to report if they feel the animation is intrusive or distracting.
 \end{enumerate}
 
-\subsubsection{Area of Testing2}
+\subsubsection{Usability and Humanity}
 
-...
+\begin{enumerate}
+\item{TUHR-1\\}
+
+Type: Dynamic, Manual
+					
+Initial State: The web application is launched.
+					
+Input/Condition: Users are asked to navigate to a required page.
+					
+Output/Result: The percentage of users able to navigate to a required page without confusion.
+					
+How test will be performed: A group of are asked to navigate to a required page without assistance within a reasonable amount of time undergoing minimum trial and error.
+
+\item{TUHR-2\\}
+
+Type: Dynamic, Manual
+					
+Initial State: The web application is launched.
+					
+Input/Condition: Users are asked to perform a core function.
+					
+Output/Result: The percentage of users able to perform a core function.
+					
+How test will be performed: A group of users are asked to perform a core function like generating a study plan without assistance within a reasonable amount of time undergoing minimum trial and error.
+\item{TUHR-3\\}
+
+Type: Dynamic, Manual
+					
+Initial State: The web application is launched.
+					
+Input/Condition: Users are asked to inspect the grammar of texts on the page.
+					
+Output/Result: The number of grammar mistakes found.
+					
+How test will be performed: A group of users are asked to report grammar mistakes in all the text visible in this web application.
+
+\item{TUHR-4\\}
+
+Type: Dynamic, Manual
+					
+Initial State: The web application is launched.
+					
+Input/Condition: Users are asked to inspect for offensive messages on the page.
+					
+Output/Result: The number of offensive messages found.
+					
+How test will be performed: A group of users are asked to report offensive messages in all the text visible in this web application.
+
+\item{TUHR-5\\}
+
+Type: Dynamic, Manual
+					
+Initial State: The web application is launched.
+					
+Input/Condition: Users are asked to observe color combinations on the page.
+					
+Output/Result: The number of indistinguishable color combinations found.
+					
+How test will be performed: A group of users are asked to report indistinguishable color combinations in this web application. This user group should include people with color blindness.
+
+
+\end{enumerate}
+
+\subsubsection{Performance}
+
+\begin{enumerate}
+\item{TSLR-5\\}
+
+Type: Dynamic, Automatic
+					
+Initial State: The web application is launched.
+					
+Input/Condition: The processing time for a core function.
+					
+Output/Result: The time it takes for the application to finish a core function.
+					
+How test will be performed: An automated script is used to perform and time a core function, including uploading syllabuses, generating tasks, and prioritizing tasks.
+
+\end{enumerate}
+\subsubsection{Safety-Critical}
+
+\begin{enumerate}
+\item{TSCR-1\\}
+
+Type: Dynamic, Automatic
+					
+Initial State: The web application is launched.
+					
+Input/Condition: A pair of new credentials are added.
+					
+Output/Result: Format of credentials in database.
+					
+How test will be performed: An automated script is used to add a pair of new credentials and check whether plain text is stored in the database.
+
+\end{enumerate}
+\subsubsection{Precision and Accuracy}
+
+\begin{enumerate}
+\item{TPAR-1\\}
+
+Type: Dynamic, Manual, Automated
+					
+Initial State: The web application is launched.
+					
+Input/Condition: A course outline is uploaded.
+					
+Output/Result: The percentage of coincidence between algorithm result and human result.
+					
+How test will be performed: An automated script is used to upload a course outline and categorize and prioritize extracted tasks. A group of users are asked to categorize and prioritize extracted tasks from the same course outline.  The computed result is compared with human decisions.
+
+\end{enumerate}
+
+\subsubsection{Robustness and Fault-Tolerance}
+
+\begin{enumerate}
+\item{TRFTR-1\\}
+
+Type: Dynamic, Automated
+					
+Initial State: The web application is launched.
+					
+Input/Condition: Incorrect user input.
+					
+Output/Result: The percentage of system crashes.
+					
+How test will be performed: An automated script is used to put false input in every interactive element, including wrong file format, special characters, out-of-boundary data, and malicious commands.
+\end{enumerate}
+\subsubsection{Capacity}
+
+\begin{enumerate}
+\item{TCR-1\\}
+
+Type: Dynamic, Automated
+					
+Initial State: The web application is launched.
+					
+Input/Condition: Massive user operations.
+					
+Output/Result: The percentage of system crashes.
+					
+How test will be performed: An automated script is used to log in a large amount of users and repetitively upload and download files.
+
+\item{TCR-2\\}
+
+Type: Dynamic, Automated
+					
+Initial State: The web application is launched.
+					
+Input/Condition: Massive course data input.
+					
+Output/Result: The processing time for a core function.
+					
+How test will be performed: An automated script is used to inject a large amount of course data.  Run TSLR-5.
+
+\end{enumerate}
+
+\subsubsection{Operational  and Environmental}
+
+\begin{enumerate}
+\item{TOER-1\\}
+
+Type: Dynamic, Automated
+					
+Initial State: The web application is launched.
+					
+Input/Condition: Send requests to supported calendar APIs.
+					
+Output/Result: The percentage of successful API requests.
+					
+How test will be performed: An automated script is used to send requests to calendar APIs and record the result.
+
+
+\item{TOER-2\\}
+
+Type: Dynamic, Automated
+					
+Initial State: The web application is launched.
+					
+Input/Condition: Run regression test suites.
+					
+Output/Result: The percentage of passed regression tests.
+					
+How test will be performed: An automated script is used to run regression tests.
+
+\end{enumerate}
+\subsubsection{Maintainability and Support}
+
+\begin{enumerate}
+\item{TMR-1\\}
+
+Type: Dynamic, Manual
+					
+Initial State: The web application is launched.
+					
+Input/Condition: Users are asked to contact support.
+					
+Output/Result: The steps needed to reach help.
+					
+How test will be performed: A group of users is asked to reach the helpdesk through email, phone, and chatbot and record the steps it takes from the main page to help.
+
+
+\item{TMR-2\\}
+
+Type: Dynamic, Automatic
+					
+Initial State: The web application is launched.
+					
+Input/Condition: User feedback is inputted.
+					
+Output/Result: User input in database.
+					
+How test will be performed: A script is used to input user feedback and check if this feedback gets stored in the database.
+
+\end{enumerate}
+
+\subsubsection{Security}
+
+\begin{enumerate}
+\item{TSR-1\\}
+
+Type: Dynamic, Automatic
+					
+Initial State: The web application is launched.
+					
+Input/Condition: Wrong credential pairs.
+					
+Output/Result: Account not logged in.
+					
+How test will be performed: A script is used to input the wrong credential pairs and check that an error message indicating bad credentials is displayed and the account is not logged in.
+
+\item{TSR-2\\}
+
+Type: Dynamic, Automatic
+					
+Initial State: The web application is launched.
+					
+Input/Condition: Create a new account.
+					
+Output/Result: Account data format.
+					
+How test will be performed: A script is used to create a new account and check that the account data is encrypted before transmission.
+
+\item{TSR-3\\}
+
+Type: Dynamic, Manual
+					
+Initial State: The web application is launched.
+					
+Input/Condition: Users are asked to modify the database.
+					
+Output/Result: The number of users successfully modified the database.
+					
+How test will be performed: A group of users is asked to taint the database as unauthorised entity.
+
+\item{TSR-4\\}
+
+Type: Dynamic, Automatic
+					
+Initial State: The web application is launched.
+					
+Input/Condition: A series of user actions.
+					
+Output/Result: An audit log.
+					
+How test will be performed: A script is used to perform a series of user actions and check that the activities are recorded with time stamps and relevant meta-data.
+
+\item{TSR-5\\}
+
+Type: Dynamic, Automatic
+					
+Initial State: The web application is launched.
+					
+Input/Condition: Login attempts.
+					
+Output/Result: Account restricted.
+					
+How test will be performed: A script is used to perform a brute-force attack to log in a test account.
+\end{enumerate}
+
+\subsubsection{Complience}
+
+\begin{enumerate}
+\item{TCPR-1\\}
+
+Type: Dynamic, Manual
+					
+Initial State: Development container is launched.
+					
+Input/Condition: A PR containing local changes is pushed.
+					
+Output/Result: Workflow result.
+					
+How test will be performed: A PR containing local changes is pushed, which triggers a workflow linter check.
+\end{enumerate}
 
 \subsection{Traceability Between Test Cases and Requirements}
 
