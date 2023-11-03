@@ -554,33 +554,20 @@ The Software Validation Plan will focus on ensuring that the final product meets
   
   \begin{enumerate}
   
-  \item{TFR16-D1\\}
-  Control: Functional, Manual, Dynamic
-            
-  Initial State: The user has logged in and is on the PDF extraction page
-            
-  Input: The user clicks to upload a PDF of his course outline, selects the PDF he wishes to upload, and clicks upload
-            
-  Output: The page shows the PDF has been uploaded successfully and is ready for extraction
-  
-  Test Case Derivation: The user should be able to upload his course schedule and have the website display which PDF has been uploaded and if it has been successful and is ready for parsing
-            
-  How test will be performed: Manually log in and then navigate to the PDF extraction page. Click on the button to select a PDF to upload and then select the PDF that has the course outline. Check that the task list displayed by the website shows the correct information that can be found on the PDF
-  
-  \item{TFR17-D2\\}
-  
-  Control: Functional, Manual, Dynamic
-            
-  Initial State: The user has logged in and is on the PDF extraction page and has uploaded the course outline PDF
-        
-  Input: The user presses to extract the course information from the uploaded PDF
-            
-  Output: The page shows lists the course information extracted from the PDF as a task list
-  
-  Test Case Derivation: The user should be able to upload his course schedule and have the website extract the necessary information from it in order to create his schedule. After it has extracted the information it should display it to the user for quick verification
-            
-  How test will be performed: Manually log in and upload a course PDF. Continue and click to parse the course outline and create a task list. Check that the extracted information from the list including \textit{courseName}, \textit{taskType}, \textit{taskName}, weight, and deadline from the uploaded course outline is correctly displayed as a task list
+    \item{TFR16-17-D1\\}
 
+    Control: Functional, Manual, Dynamic
+                        
+    Initial State: The user has logged in and is on the PDF extraction page and has uploaded the course outline PDF
+                        
+    Input: The user presses to extract the course information from the uploaded PDF
+                        
+    Output: The page shows lists the course information extracted from the PDF as a task list
+    
+    Test Case Derivation: The user should be able to upload his course schedule and have the website extract the necessary information from it in order to create his schedule. After it has extracted the information it should display it to the user for quick verification
+                        
+    How test will be performed: Manually log in and upload a course PDF. Continue and click to parse the course outline and create a task list. Check that the extracted information from the list including \textit{courseName}, \textit{taskType}, \textit{taskName}, weight, and deadline from the uploaded course outline is correctly displayed as a task list
+    
   \item{TFR18-D2\\}
   Control: Functional, Manual, Dynamic
             
