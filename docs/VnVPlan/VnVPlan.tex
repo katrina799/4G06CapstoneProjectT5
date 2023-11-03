@@ -17,6 +17,8 @@
 \usepackage{longtable}
 \usepackage{geometry}
 \usepackage{pdflscape}
+\usepackage{everypage}
+\usepackage{lipsum}
 
 \newcommand{\Lpagenumber}{\ifdim\textwidth=\linewidth\else\bgroup
   \dimendef\margin=0 %use \margin instead of \dimen0
@@ -720,7 +722,7 @@ How test will be performed: A PR containing local changes is pushed, which trigg
     \label{Traceability Matrix: Functional Requirements}
 \end{table}
 \clearpage
-\begin{table}[H]
+\begin{table}
     \centering
     \begin{adjustbox}{width=1.2\textwidth}
     \begin{tabular}{l|ccccccccccccccccccccccccc}
@@ -752,7 +754,7 @@ How test will be performed: A PR containing local changes is pushed, which trigg
     \end{tabular}
     \end{adjustbox}
 \end{table}
-\begin{table}[H]
+\begin{table}
     \centering
     \begin{adjustbox}{width=1.2\textwidth}
     \begin{tabular}{l|ccccccccccccccccccccccccc}
