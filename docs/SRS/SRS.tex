@@ -67,9 +67,9 @@
 \newcommand{\rthespreqnum}{SPR\refstepcounter{spreqnum}\thespreqnum:}
 \newcommand{\sprrref}[1]{SPR\ref{#1}}
 
-\newcounter{areqnum} %Adaptability Requirements number
-\newcommand{\rtheareqnum}{AR\refstepcounter{areqnum}\theareqnum:}
-\newcommand{\arrref}[1]{AR\ref{#1}}
+\newcounter{adreqnum} %Adaptability Requirements number
+\newcommand{\rtheadreqnum}{ADR\refstepcounter{adreqnum}\theadreqnum:}
+\newcommand{\adrrref}[1]{ADR\ref{#1}}
 
 \newcounter{creqnum} %Cultural Requirements number
 \newcommand{\rthecreqnum}{CR\refstepcounter{creqnum}\thecreqnum:}
@@ -980,7 +980,7 @@ The released version must pass all known regression tests.
 
 \end{itemize}
 \subsection{Adaptability Requirements}
-\begin{itemize}[leftmargin=14mm,labelsep=4mm,label=\rtheareqnum]
+\begin{itemize}[leftmargin=14mm,labelsep=4mm,label=\rtheadreqnum]
     \item The product should be compatible with common systems and \textit{API}s to facilitate seamless integration and data exchange. \\
     \textbf{Fit Criteria}: The product can interact with the \textit{Google} \textit{Calendar} \textit{API} through explicit \textit{HTTP} calls or using the \textit{Google} \textit{Client} \textit{Libraries}. \\
     \item The product should implement modular architecture, allowing for the addition or replacement of components without causing issues.\\
