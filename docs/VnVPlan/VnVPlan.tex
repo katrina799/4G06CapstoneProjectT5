@@ -12,6 +12,23 @@
 }
 \usepackage[round]{natbib}
 
+\usepackage{enumitem}
+\usepackage{adjustbox}
+\usepackage{longtable}
+\usepackage{geometry}
+\usepackage{pdflscape}
+
+\newcommand{\Lpagenumber}{\ifdim\textwidth=\linewidth\else\bgroup
+  \dimendef\margin=0 %use \margin instead of \dimen0
+  \ifodd\value{page}\margin=\oddsidemargin
+  \else\margin=\evensidemargin
+  \fi
+  \raisebox{\dimexpr -\topmargin-\headheight-\headsep-0.5\linewidth}[0pt][0pt]{%
+    \rlap{\hspace{\dimexpr \margin+\textheight+\footskip}%
+    \llap{\rotatebox{90}{\thepage}}}}%
+\egroup\fi}
+\AddEverypageHook{\Lpagenumber}%
+
 \input{../Comments}
 \input{../Common}
 
@@ -97,14 +114,14 @@ We would prioritize and polish core functions including PDF unloading and analys
 
 
 \subsection{Relevant Documentation}
-\subsubsection{Development plan}\citet{DevelopmentPlan}
+\subsubsection{Development plan}
 As part of the development process, the writing of this VnV plan implementation of all the test cases shall follow the development process specified in the development plan.
 
-\subsubsection{SRS}\citet{SRS}
+\subsubsection{SRS}
 The functional and non-functional requirements and their corresponding fit criteria would lead the test plan and be used as a guideline to make sure tests could cover all the documented requirements.
-\subsubsection{Hazard Analysis}\citet{HazardAnalysis}
+\subsubsection{Hazard Analysis}
 Additional requirements related to software failures should also be covered in testing.
-\subsubsection{VnV Report}\citet{VnVReport}
+\subsubsection{VnV Report}
 The result from executing this VnV plan would be recorded in the VnV report.  The VnV plan could be revised from the results.
 \section{Plan}
 
@@ -246,23 +263,12 @@ How test will be performed:
 
 \subsection{Tests for Nonfunctional Requirements}
 
-\wss{The nonfunctional requirements for accuracy will likely just reference the
-  appropriate functional tests from above.  The test cases should mention
-  reporting the relative error for these tests.  Not all projects will
-  necessarily have nonfunctional requirements related to accuracy}
-
-\wss{Tests related to usability could include conducting a usability test and
-  survey.  The survey will be in the Appendix.}
-
-\wss{Static tests, review, inspections, and walkthroughs, will not follow the
-format for the tests given below.}
-
 \subsubsection{Look and feel}
 		
 
 \begin{enumerate}
 
-\item{TAR-1\\}
+\item{TAR-1\\}\label{TAR-1}
 
 Type: Dynamic, Manual
 					
@@ -270,11 +276,11 @@ Initial State: The web application is launched.
 					
 Input/Condition: Users are asked to read the text on each page.
 					
-Output/Result: The percentage of users reporting that all the texts are legible.
+Output/Result: \texttt{MIN\_UNDERSTAND\%} of users reporting that all the texts are legible.
 					
-How test will be performed: The web application displayed with screens with various resolutions and sizes. A group of are asked to read the texts and report any unclear typography.
+How test will be performed: The web application displayed with screens with various resolutions and sizes. \texttt{MIN\_TESTER\_NUM} users are asked to read the texts and report any unclear typography.
 					
-\item{TAR-2\\}
+\item{TAR-2\\}\label{TAR-2}
 
 Type: Dynamic, Manual
 					
@@ -282,11 +288,11 @@ Initial State: The web application is launched.
 					
 Input/Condition: Users are asked to observe color on each page.
 					
-Output/Result: The percentage of users comfortable with the color used.
+Output/Result: \texttt{MIN\_UNDERSTAND\%} of users comfortable with the color used.
 					
-How test will be performed: A group of are asked to observe the color and report any distracting or overwhelming color palette.
+How test will be performed: \texttt{MIN\_TESTER\_NUM} users are asked to observe the color and report any distracting or overwhelming color palette.
 
-\item{TAR-3\\}
+\item{TAR-3\\}\label{TAR-3}
 
 Type: Dynamic, Manual
 					
@@ -294,11 +300,11 @@ Initial State: The web application is launched.
 					
 Input/Condition: Users are asked to interpret icons and graphics on each page.
 					
-Output/Result: The percentage of users able to understand the meaning of each icon and graphic as designed.
+Output/Result: \texttt{MIN\_UNDERSTAND\%} of users able to understand the meaning of each icon and graphic as designed.
 					
-How test will be performed: A group of are asked what they think each icon and graphic means. Any mismatch from the UI designer's intention would be recorded.
+How test will be performed: \texttt{MIN\_TESTER\_NUM} users are asked what they think each icon and graphic means. Any mismatch from the UI designer's intention would be recorded.
 
-\item{TAR-4\\}
+\item{TAR-4\\}\label{TAR-4}
 
 Type: Dynamic, Manual
 					
@@ -306,11 +312,11 @@ Initial State: The web application is launched.
 					
 Input/Condition: Users are asked to observe the layout of each page.
 					
-Output/Result: The percentage of users comfortable with the payout.
+Output/Result: \texttt{MIN\_UNDERSTAND\%} of users comfortable with the payout.
 					
-How test will be performed: The web application is launched with different devices including smartphones, tablets, and desktops.  Users are asked to point out any unresponsive, out-of-margin, or compressed elements.
+How test will be performed: The web application is launched with different devices including smartphones, tablets, and desktops.  \texttt{MIN\_TESTER\_NUM} users are asked to point out any unresponsive, out-of-margin, or compressed elements.
 
-\item{TSTR-1\\}
+\item{TSTR-1\\}\label{TSTR-1}
 
 Type: Dynamic, Manual
 					
@@ -318,11 +324,11 @@ Initial State: The web application is launched.
 					
 Input/Condition: Users are asked to point out the menus and navigation bars.
 					
-Output/Result: The percentage of users able to locate menus and navigation tools without confusion.
+Output/Result: \texttt{MIN\_UNDERSTAND\%} of users able to locate menus and navigation tools without confusion.
 					
-How test will be performed: A group of are asked to point out the menus and navigation bars without assistance.
+How test will be performed: \texttt{MIN\_TESTER\_NUM} users are asked to point out the menus and navigation bars without assistance.
 
-\item{TSTR-2\\}
+\item{TSTR-2\\}\label{TSTR-2}
 
 Type: Dynamic, Manual
 					
@@ -330,11 +336,11 @@ Initial State: The web application is launched.
 					
 Input/Condition: Users are asked to point out inconsistent UI elements.
 					
-Output/Result: The number of inconsistent UI elements found.
+Output/Result: \texttt{MAX\_ELEMENT\_BAD} inconsistent UI elements found.
 					
-How test will be performed: A group of are asked to explore the application and point out any inconsistent UI elements that break the harmony.
+How test will be performed: \texttt{MIN\_TESTER\_NUM} users are asked to explore the application and point out any inconsistent UI elements that break the harmony.
 
-\item{TSTR-3\\}
+\item{TSTR-3\\}\label{TSTR-3}
 
 Type: Dynamic, Manual
 					
@@ -342,11 +348,11 @@ Initial State: The web application is launched.
 					
 Input/Condition: Users are asked to click each interactive UI element.
 					
-Output/Result: The number of interactive UI elements being unresponsive.
+Output/Result: \texttt{MAX\_ELEMENT\_BAD} interactive UI elements being unresponsive.
 					
-How test will be performed: A group of are asked to explore the application and report any unresponsive interactive elements.
+How test will be performed: \texttt{MIN\_TESTER\_NUM} users are asked to explore the application and report any unresponsive interactive elements.
 
-\item{TSTR-4\\}
+\item{TSTR-4\\}\label{TSTR-4}
 
 Type: Dynamic, Manual
 					
@@ -354,11 +360,11 @@ Initial State: The web application is launched.
 					
 Input/Condition: Users are asked to adjust font size.
 					
-Output/Result: The percentage of users reporting unsuitable font size.
+Output/Result: \texttt{MAX\_UNSATISFIED\%} of users reporting unsuitable font size.
 					
-How test will be performed: A group of users are asked to report how they like the default font size and attempt to adjust the font size to their preference. Report if the adjusted font still causes difficulty in reading.
+How test will be performed: \texttt{MIN\_TESTER\_NUM} users are asked to report how they like the default font size and attempt to adjust the font size to their preference. Report if the adjusted font still causes difficulty in reading.
 
-\item{TSTR-5\\}
+\item{TSTR-5\\}\label{TSTR-5}
 
 Type: Dynamic, Manual
 					
@@ -366,15 +372,15 @@ Initial State: The web application is launched.
 					
 Input/Condition: Users are asked to perform a task while an animation is displayed.
 					
-Output/Result: The percentage of users who could perform the task distracted.
+Output/Result: \texttt{MIN\_UNDERSTAND\%} of users who could perform the task distracted.
 					
-How test will be performed: A group of users is asked to perform a task that involves the animation display part of the screen.  They are asked to report if they feel the animation is intrusive or distracting.
+How test will be performed: \texttt{MIN\_TESTER\_NUM} users are asked to perform a task that involves the animation display part of the screen.  They are asked to report if they feel the animation is intrusive or distracting.
 \end{enumerate}
 
 \subsubsection{Usability and Humanity}
 
 \begin{enumerate}
-\item{TUHR-1\\}
+\item{TUHR-1\\}\label{TUHR-1}
 
 Type: Dynamic, Manual
 					
@@ -382,11 +388,11 @@ Initial State: The web application is launched.
 					
 Input/Condition: Users are asked to navigate to a required page.
 					
-Output/Result: The percentage of users able to navigate to a required page without confusion.
+Output/Result: \texttt{MIN\_UNDERSTAND\%} of users able to navigate to a required page without confusion.
 					
-How test will be performed: A group of are asked to navigate to a required page without assistance within a reasonable amount of time undergoing minimum trial and error.
+How test will be performed: \texttt{MIN\_TESTER\_NUM} users are asked to navigate to a required page without assistance within a reasonable amount of time undergoing minimum trial and error.
 
-\item{TUHR-2\\}
+\item{TUHR-2\\}\label{TUHR-2}
 
 Type: Dynamic, Manual
 					
@@ -394,10 +400,10 @@ Initial State: The web application is launched.
 					
 Input/Condition: Users are asked to perform a core function.
 					
-Output/Result: The percentage of users able to perform a core function.
+Output/Result: \texttt{MIN\_UNDERSTAND\%} of users able to perform a core function.
 					
-How test will be performed: A group of users are asked to perform a core function like generating a study plan without assistance within a reasonable amount of time undergoing minimum trial and error.
-\item{TUHR-3\\}
+How test will be performed: \texttt{MIN\_TESTER\_NUM} users are asked to perform a core function like generating a study plan without assistance within a reasonable amount of time undergoing minimum trial and error.
+\item{TUHR-3\\}\label{TUHR-3}
 
 Type: Dynamic, Manual
 					
@@ -405,11 +411,11 @@ Initial State: The web application is launched.
 					
 Input/Condition: Users are asked to inspect the grammar of texts on the page.
 					
-Output/Result: The number of grammar mistakes found.
+Output/Result: \texttt{MAX\_BAD\_GRAMMAR} grammar mistakes found.
 					
-How test will be performed: A group of users are asked to report grammar mistakes in all the text visible in this web application.
+How test will be performed: \texttt{MIN\_TESTER\_NUM} users are asked to report grammar mistakes in all the text visible in this web application.
 
-\item{TUHR-4\\}
+\item{TUHR-4\\}\label{TUHR-4}
 
 Type: Dynamic, Manual
 					
@@ -417,11 +423,11 @@ Initial State: The web application is launched.
 					
 Input/Condition: Users are asked to inspect for offensive messages on the page.
 					
-Output/Result: The number of offensive messages found.
+Output/Result: \texttt{MAX\_OFFENSIVE} offensive messages found.
 					
-How test will be performed: A group of users are asked to report offensive messages in all the text visible in this web application.
+How test will be performed: \texttt{MIN\_TESTER\_NUM} users are asked to report offensive messages in all the text visible in this web application.
 
-\item{TUHR-5\\}
+\item{TUHR-5\\}\label{TUHR-5}
 
 Type: Dynamic, Manual
 					
@@ -429,9 +435,9 @@ Initial State: The web application is launched.
 					
 Input/Condition: Users are asked to observe color combinations on the page.
 					
-Output/Result: The number of indistinguishable color combinations found.
+Output/Result: \texttt{MAX\_COLOR\_AMBIGUOUS} indistinguishable color combinations found.
 					
-How test will be performed: A group of users are asked to report indistinguishable color combinations in this web application. This user group should include people with color blindness.
+How test will be performed: \texttt{MIN\_TESTER\_NUM} users are asked to report indistinguishable color combinations in this web application. This user group should include people with color blindness.
 
 
 \end{enumerate}
@@ -439,7 +445,7 @@ How test will be performed: A group of users are asked to report indistinguishab
 \subsubsection{Performance}
 
 \begin{enumerate}
-\item{TSLR-5\\}
+\item{TSLR-1\\}\label{TSLR-1}
 
 Type: Dynamic, Automatic
 					
@@ -447,7 +453,7 @@ Initial State: The web application is launched.
 					
 Input/Condition: The processing time for a core function.
 					
-Output/Result: The time it takes for the application to finish a core function.
+Output/Result: It takes \texttt{MAX\_TIME\_PROCESS} for the application to finish a core function.
 					
 How test will be performed: An automated script is used to perform and time a core function, including uploading syllabuses, generating tasks, and prioritizing tasks.
 
@@ -455,7 +461,7 @@ How test will be performed: An automated script is used to perform and time a co
 \subsubsection{Safety-Critical}
 
 \begin{enumerate}
-\item{TSCR-1\\}
+\item{TSCR-1\\}\label{TSCR-1}
 
 Type: Dynamic, Automatic
 					
@@ -471,7 +477,7 @@ How test will be performed: An automated script is used to add a pair of new cre
 \subsubsection{Precision and Accuracy}
 
 \begin{enumerate}
-\item{TPAR-1\\}
+\item{TPAR-1\\}\label{TPAR-1}
 
 Type: Dynamic, Manual, Automated
 					
@@ -479,16 +485,16 @@ Initial State: The web application is launched.
 					
 Input/Condition: A course outline is uploaded.
 					
-Output/Result: The percentage of coincidence between algorithm result and human result.
+Output/Result: \texttt{MIN\_PRECISION\%} of coincidence between algorithm result and human result.
 					
-How test will be performed: An automated script is used to upload a course outline and categorize and prioritize extracted tasks. A group of users are asked to categorize and prioritize extracted tasks from the same course outline.  The computed result is compared with human decisions.
+How test will be performed: An automated script is used to upload a course outline and categorize and prioritize extracted tasks. \texttt{MIN\_TESTER\_NUM} users are asked to categorize and prioritize extracted tasks from the same course outline.  The computed result is compared with human decisions.
 
 \end{enumerate}
 
 \subsubsection{Robustness and Fault-Tolerance}
 
 \begin{enumerate}
-\item{TRFTR-1\\}
+\item{TRFTR-1\\}\label{TRFTR-1}
 
 Type: Dynamic, Automated
 					
@@ -496,14 +502,14 @@ Initial State: The web application is launched.
 					
 Input/Condition: Incorrect user input.
 					
-Output/Result: The percentage of system crashes.
+Output/Result: \texttt{MIN\_OPERABLE\%} of the system operating.
 					
 How test will be performed: An automated script is used to put false input in every interactive element, including wrong file format, special characters, out-of-boundary data, and malicious commands.
 \end{enumerate}
 \subsubsection{Capacity}
 
 \begin{enumerate}
-\item{TCR-1\\}
+\item{TCR-1\\}\label{TCR-1}
 
 Type: Dynamic, Automated
 					
@@ -511,11 +517,11 @@ Initial State: The web application is launched.
 					
 Input/Condition: Massive user operations.
 					
-Output/Result: The percentage of system crashes.
+Output/Result: \texttt{MIN\_OPERABLE\%} of the system operating.
 					
 How test will be performed: An automated script is used to log in a large amount of users and repetitively upload and download files.
 
-\item{TCR-2\\}
+\item{TCR-2\\}\label{TCR-2}
 
 Type: Dynamic, Automated
 					
@@ -523,7 +529,7 @@ Initial State: The web application is launched.
 					
 Input/Condition: Massive course data input.
 					
-Output/Result: The processing time for a core function.
+Output/Result: It takes \texttt{MAX\_TIME\_PROCESS} to finish a core function.
 					
 How test will be performed: An automated script is used to inject a large amount of course data.  Run TSLR-5.
 
@@ -532,7 +538,7 @@ How test will be performed: An automated script is used to inject a large amount
 \subsubsection{Operational  and Environmental}
 
 \begin{enumerate}
-\item{TOER-1\\}
+\item{TOER-1\\}\label{TOER-1}
 
 Type: Dynamic, Automated
 					
@@ -540,12 +546,12 @@ Initial State: The web application is launched.
 					
 Input/Condition: Send requests to supported calendar APIs.
 					
-Output/Result: The percentage of successful API requests.
+Output/Result: \texttt{MIN\_API\_SUCCESS\%} of successful API requests.
 					
 How test will be performed: An automated script is used to send requests to calendar APIs and record the result.
 
 
-\item{TOER-2\\}
+\item{TOER-2\\}\label{TOER-2}
 
 Type: Dynamic, Automated
 					
@@ -553,7 +559,7 @@ Initial State: The web application is launched.
 					
 Input/Condition: Run regression test suites.
 					
-Output/Result: The percentage of passed regression tests.
+Output/Result: \texttt{MIN\_REGRESSION\_PASS\%} of passed regression tests.
 					
 How test will be performed: An automated script is used to run regression tests.
 
@@ -561,7 +567,7 @@ How test will be performed: An automated script is used to run regression tests.
 \subsubsection{Maintainability and Support}
 
 \begin{enumerate}
-\item{TMR-1\\}
+\item{TSPR-1\\}\label{TSPR-1}
 
 Type: Dynamic, Manual
 					
@@ -569,12 +575,12 @@ Initial State: The web application is launched.
 					
 Input/Condition: Users are asked to contact support.
 					
-Output/Result: The steps needed to reach help.
+Output/Result: \texttt{MAX\_SUPPORT\_STEP} steps needed to reach help.
 					
-How test will be performed: A group of users is asked to reach the helpdesk through email, phone, and chatbot and record the steps it takes from the main page to help.
+How test will be performed: \texttt{MIN\_TESTER\_NUM} users are asked to reach the helpdesk through email, phone, and chatbot and record the steps it takes from the main page to help.
 
 
-\item{TMR-2\\}
+\item{TSPR-2\\}\label{TSPR-2}
 
 Type: Dynamic, Automatic
 					
@@ -591,7 +597,7 @@ How test will be performed: A script is used to input user feedback and check if
 \subsubsection{Security}
 
 \begin{enumerate}
-\item{TSR-1\\}
+\item{TSR-1\\}\label{TSR-1}
 
 Type: Dynamic, Automatic
 					
@@ -603,7 +609,7 @@ Output/Result: Account not logged in.
 					
 How test will be performed: A script is used to input the wrong credential pairs and check that an error message indicating bad credentials is displayed and the account is not logged in.
 
-\item{TSR-2\\}
+\item{TSR-2\\}\label{TSR-2}
 
 Type: Dynamic, Automatic
 					
@@ -615,7 +621,7 @@ Output/Result: Account data format.
 					
 How test will be performed: A script is used to create a new account and check that the account data is encrypted before transmission.
 
-\item{TSR-3\\}
+\item{TSR-3\\}\label{TSR-3}
 
 Type: Dynamic, Manual
 					
@@ -623,11 +629,11 @@ Initial State: The web application is launched.
 					
 Input/Condition: Users are asked to modify the database.
 					
-Output/Result: The number of users successfully modified the database.
+Output/Result: \texttt{MAX\_ATTACK\_SUCCESS} users successfully modified the database.
 					
-How test will be performed: A group of users is asked to taint the database as unauthorised entity.
+How test will be performed: \texttt{MIN\_TESTER\_NUM} users are asked to taint the database as unauthorised entity.
 
-\item{TSR-4\\}
+\item{TSR-4\\}\label{TSR-4}
 
 Type: Dynamic, Automatic
 					
@@ -639,7 +645,7 @@ Output/Result: An audit log.
 					
 How test will be performed: A script is used to perform a series of user actions and check that the activities are recorded with time stamps and relevant meta-data.
 
-\item{TSR-5\\}
+\item{TSR-5\\}\label{TSR-5}
 
 Type: Dynamic, Automatic
 					
@@ -655,7 +661,7 @@ How test will be performed: A script is used to perform a brute-force attack to 
 \subsubsection{Complience}
 
 \begin{enumerate}
-\item{TCPR-1\\}
+\item{TCPR-1\\}\label{TCPR-1}
 
 Type: Dynamic, Manual
 					
@@ -667,136 +673,109 @@ Output/Result: Workflow result.
 					
 How test will be performed: A PR containing local changes is pushed, which triggers a workflow linter check.
 \end{enumerate}
-
+\clearpage % Start a new page
+\begin{landscape}
+    \pagestyle{empty}%
 \subsection{Traceability Between Test Cases and Requirements}
 
-\wss{Provide a table that shows which test cases are supporting which
-  requirements.}
+\begin{table}[H]
+    \centering
+    \begin{adjustbox}{width=1\textwidth}
+    \begin{tabular}{l|cccccccccccccccc}
+        \textbf{Test Case \#} & \multicolumn{13}{c}{\textbf{Requirement \#}}\\
+        \hline
+        ~ & \textbf{FR1} & \textbf{FR2} & \textbf{FR3} & \textbf{FR4} & \textbf{FR5} & \textbf{FR6} & \textbf{FR7} & \textbf{FR8} & \textbf{FR9} & \textbf{FR10} & \textbf{FR11} & \textbf{FR12} & \textbf{FR13}& \textbf{FR14}& \textbf{FR15}\\\
+        
+        \textbf{TFR1-A1}   & ~ & ~ & X & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~\\
+        \textbf{FR-MG-1}    & ~ & ~ & ~ & ~ & X & ~ & X & ~ & ~ & ~ & ~ & ~ & ~\\
+        \textbf{FR-MG-2}  & ~ & ~ & ~ & ~ & ~ & ~ & X & ~ & ~ & ~ & ~ & ~ & ~\\
+        \textbf{FR-MG-3}  & ~ & ~ & ~ & ~ & ~ & ~ & X & ~ & ~ & ~ & ~ & ~ & ~\\
+        \textbf{FR-MG-4}  & ~ & ~ & ~ & ~ & ~ & X & ~ & ~ & ~ & ~ & ~ & ~ & ~\\
+        \textbf{FR-EG-1}  & ~ & ~ & ~ & ~ & ~ & ~ & ~ & X & ~ & ~ & ~ & ~ & ~\\
+        \textbf{FR-EG-2}  & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & X & ~ & ~ & ~ & ~\\
+    \end{tabular}
+    \end{adjustbox}
+    \caption{Traceability Matrix: Functional Requirements}
+    \label{Traceability Matrix: Functional Requirements}
+\end{table}
 
-\section{Unit Test Description}
+\begin{table}[H]
+    \centering
+    \begin{adjustbox}{width=1\textwidth}
+    \begin{tabular}{l|cccccccccccccccc}
+        \textbf{Test Case \#} & \multicolumn{13}{c}{\textbf{Requirement \#}}\\
+        \hline
+        ~ & \textbf{FR16} & \textbf{FR17} & \textbf{FR18} & \textbf{FR19} & \textbf{FR20} & \textbf{FR21} & \textbf{FR22} & \textbf{FR23} & \textbf{FR24} & \textbf{FR25} & \textbf{FR26} & \textbf{FR27} & \textbf{FR28}& \textbf{FR29}& \textbf{FR30}\\\
+        
+        \textbf{FR-VS-2}   & ~ & ~ & X & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~\\
+        \textbf{FR-MG-1}    & ~ & ~ & ~ & ~ & X & ~ & X & ~ & ~ & ~ & ~ & ~ & ~\\
+        \textbf{FR-MG-2}  & ~ & ~ & ~ & ~ & ~ & ~ & X & ~ & ~ & ~ & ~ & ~ & ~\\
+        \textbf{FR-MG-3}  & ~ & ~ & ~ & ~ & ~ & ~ & X & ~ & ~ & ~ & ~ & ~ & ~\\
+        \textbf{FR-MG-4}  & ~ & ~ & ~ & ~ & ~ & X & ~ & ~ & ~ & ~ & ~ & ~ & ~\\
+        \textbf{FR-EG-1}  & ~ & ~ & ~ & ~ & ~ & ~ & ~ & X & ~ & ~ & ~ & ~ & ~\\
+        \textbf{FR-EG-2}  & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & X & ~ & ~ & ~ & ~\\
+    \end{tabular}
+    \end{adjustbox}
+    \caption{Traceability Matrix: Functional Requirements}
+    \label{Traceability Matrix: Functional Requirements}
+\end{table}
+\clearpage
+\begin{table}[H]
+    \centering
+    \begin{adjustbox}{width=1.2\textwidth}
+    \begin{tabular}{l|ccccccccccccccccccccccccc}
+        \textbf{Test Case \#} & \multicolumn{15}{c}{\textbf{Requirement \#}}\\
+        \hline
+        ~ & \textbf{AR1} & \textbf{AR2} & \textbf{AR3} & \textbf{AR4} & \textbf{STR1} & \textbf{STR2} & \textbf{STR3} & \textbf{STR4}& \textbf{STR5} & \textbf{UHR1} & \textbf{UHR2} & \textbf{UHR3} & \textbf{UHR4} & \textbf{UHR5}& \textbf{SLR1}& \textbf{SCR1}& \textbf{PAR1}& \textbf{RFTR1}& \textbf{CR1}& \textbf{CR2}& \textbf{SER1}& \textbf{OER1}& \textbf{OER2}& \textbf{OER3}\\\
+        \hyperref[TAR-1]{\textbf{TAR-1}}  & X & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~\\
+        \hyperref[TAR-2]{\textbf{TAR-2}}    & ~ & X & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~\\
+        \hyperref[TAR-3]{\textbf{TAR-3}}  & ~ & ~ & X & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~\\
+        \hyperref[TAR-4]{\textbf{TAR-4}}  & ~ & ~ & ~ & X & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~\\
+        \hyperref[TSTR-1]{\textbf{TSTR-1}}  & ~ & ~ & ~ & ~ & X & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~\\
+        \hyperref[TSTR-2]{\textbf{TSTR-2}}  & ~ & ~ & ~ & ~ & ~ & X & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~\\
+        \hyperref[TSTR-3]{\textbf{TSTR-3}}  & ~ & ~ & ~ & ~ & ~ & ~ & X & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~\\
+        \hyperref[TSTR-4]{\textbf{TSTR-4}}  & ~ & ~ & ~ & ~ & ~ & ~ & ~ & X & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~\\
+        \hyperref[TSTR-5]{\textbf{TSTR-5}}  & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & X & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~\\
+        \hyperref[TUHR-1]{\textbf{TUHR-1}}  & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & X & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~\\
+        \hyperref[TUHR-2]{\textbf{TUHR-2}}    & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & X & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~\\
+        \hyperref[TUHR-3]{\textbf{TUHR-3}}  & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & X & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~\\
+        \hyperref[TUHR-4]{\textbf{TUHR-4}}  & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & X & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~\\
+        \hyperref[TUHR-5]{\textbf{TUHR-5}}  & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & X & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~\\
+        \hyperref[TSLR-1]{\textbf{TSLR-1}}  & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & X & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~\\
+        \hyperref[TSCR-1]{\textbf{TSCR-1}}  & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & X & ~ & ~ & ~ & ~ & ~ & ~ & ~\\
+        \hyperref[TPAR-1]{\textbf{TPAR-1}}  & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & X & ~ & ~ & ~ & ~ & ~ & ~\\
+        \hyperref[TRFTR-1]{\textbf{TRFTR-1}}  & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & X & ~ & ~ & ~ & ~ & ~\\
+        \hyperref[TCR-1]{\textbf{TCR-1}}  & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & X & ~ & ~ & ~ & ~\\
+        \hyperref[TCR-2]{\textbf{TCR-2}}  & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & X & ~ & ~ & ~\\
+        \hyperref[TOER-1]{\textbf{TOER-1}}  & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & X & ~\\
+        \hyperref[TOER-2]{\textbf{TOER-2}}  & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ &  & X\\
+    \end{tabular}
+    \end{adjustbox}
+\end{table}
+\begin{table}[H]
+    \centering
+    \begin{adjustbox}{width=1.2\textwidth}
+    \begin{tabular}{l|ccccccccccccccccccccccccc}
+        \textbf{Test Case \#} & \multicolumn{15}{c}{\textbf{Requirement \#}}\\
+        \hline
+        ~ & \textbf{MR1} & \textbf{MR2} & \textbf{MR3} & \textbf{SPR1} & \textbf{SPR2} & \textbf{SPR3} & \textbf{ADR1} & \textbf{ADR2}& \textbf{SR1} & \textbf{SR2} & \textbf{SR3} & \textbf{SR4} & \textbf{SR5} & \textbf{SR6}& \textbf{SR7}& \textbf{SR8}& \textbf{SR9}& \textbf{CR1}& \textbf{CTR1}& \textbf{CTR2}& \textbf{CPR1}& \textbf{CPR2}\\\
+        \hyperref[TSPR-1]{\textbf{TSPR-1}}  & ~ & ~ & ~ & X & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~\\
+        \hyperref[TSPR-2]{\textbf{TSPR-2}}    & ~ & ~ & ~ & ~ & ~ & X & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~\\
+        \hyperref[TSR-1]{\textbf{TSR-1}}  & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & X & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~\\
+        \hyperref[TSR-2]{\textbf{TSR-2}}  & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & X & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~\\
+        \hyperref[TSR-3]{\textbf{TSR-3}}  & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & X & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~\\
+        \hyperref[TSR-4]{\textbf{TSR-4}}  & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & X & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~\\
+        \hyperref[TSR-5]{\textbf{TSR-5}}  & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & X & ~ & ~ & ~ & ~ & ~ & ~\\
+        \hyperref[TCPR-1]{\textbf{TCPR-1}}  & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ &  X\\
+    \end{tabular}
+    \end{adjustbox}
+    \caption{Traceability Matrix: Non-Functional Requirements}
+    \label{Traceability Matrix: Non-Functional Requirements}
+\end{table}
+\end{landscape}
+\pagestyle{plain}%
+\clearpage
 
-\wss{This section should not be filled in until after the MIS (detailed design
-  document) has been completed.}
-
-\wss{Reference your MIS (detailed design document) and explain your overall
-philosophy for test case selection.}  
-
-\wss{To save space and time, it may be an option to provide less detail in this section.  
-For the unit tests you can potentially layout your testing strategy here.  That is, you 
-can explain how tests will be selected for each module.  For instance, your test building 
-approach could be test cases for each access program, including one test for normal behaviour 
-and as many tests as needed for edge cases.  Rather than create the details of the input 
-and output here, you could point to the unit testing code.  For this to work, you code 
-needs to be well-documented, with meaningful names for all of the tests.}
-
-\subsection{Unit Testing Scope}
-
-\wss{What modules are outside of the scope.  If there are modules that are
-  developed by someone else, then you would say here if you aren't planning on
-  verifying them.  There may also be modules that are part of your software, but
-  have a lower priority for verification than others.  If this is the case,
-  explain your rationale for the ranking of module importance.}
-
-\subsection{Tests for Functional Requirements}
-
-\wss{Most of the verification will be through automated unit testing.  If
-  appropriate specific modules can be verified by a non-testing based
-  technique.  That can also be documented in this section.}
-
-\subsubsection{Module 1}
-
-\wss{Include a blurb here to explain why the subsections below cover the module.
-  References to the MIS would be good.  You will want tests from a black box
-  perspective and from a white box perspective.  Explain to the reader how the
-  tests were selected.}
-
-\begin{enumerate}
-
-\item{test-id1\\}
-
-Type: \wss{Functional, Dynamic, Manual, Automatic, Static etc. Most will
-  be automatic}
-					
-Initial State: 
-					
-Input: 
-					
-Output: \wss{The expected result for the given inputs}
-
-Test Case Derivation: \wss{Justify the expected value given in the Output field}
-
-How test will be performed: 
-					
-\item{test-id2\\}
-
-Type: \wss{Functional, Dynamic, Manual, Automatic, Static etc. Most will
-  be automatic}
-					
-Initial State: 
-					
-Input: 
-					
-Output: \wss{The expected result for the given inputs}
-
-Test Case Derivation: \wss{Justify the expected value given in the Output field}
-
-How test will be performed: 
-
-\item{...\\}
-    
-\end{enumerate}
-
-\subsubsection{Module 2}
-
-...
-
-\subsection{Tests for Nonfunctional Requirements}
-
-\wss{If there is a module that needs to be independently assessed for
-  performance, those test cases can go here.  In some projects, planning for
-  nonfunctional tests of units will not be that relevant.}
-
-\wss{These tests may involve collecting performance data from previously
-  mentioned functional tests.}
-
-\subsubsection{Module ?}
-		
-\begin{enumerate}
-
-\item{test-id1\\}
-
-Type: \wss{Functional, Dynamic, Manual, Automatic, Static etc. Most will
-  be automatic}
-					
-Initial State: 
-					
-Input/Condition: 
-					
-Output/Result: 
-					
-How test will be performed: 
-					
-\item{test-id2\\}
-
-Type: Functional, Dynamic, Manual, Static etc.
-					
-Initial State: 
-					
-Input: 
-					
-Output: 
-					
-How test will be performed: 
-
-\end{enumerate}
-
-\subsubsection{Module ?}
-
-...
-
-\subsection{Traceability Between Test Cases and Modules}
-
-\wss{Provide evidence that all of the modules have been considered.}
 				
 \bibliographystyle{plainnat}
 
@@ -810,8 +789,48 @@ This is where you can place additional information.
 
 \subsection{Symbolic Parameters}
 
-The definition of the test cases will call for SYMBOLIC\_CONSTANTS.
-Their values are defined in this section for easy maintenance.
+\begin{tabular}{|l|l|l|p{5cm}|}
+
+\hline
+parameter & value & unit & description\\
+\hline
+\texttt{MIN\_UNDERSTAND\%} & 95 & N/A & the minimum percentage of testers who can understand among all testers\\
+\hline
+\texttt{MAX\_UNSATISFIED\%} & 5 & N/A & the maximum percentage of testers reporting uncomfortable\\
+\hline
+\texttt{MAX\_TRIAL\_TIME} & 1200 & \texttt{s} & the maximum allowed trial time\\
+\hline
+\texttt{MIN\_TESTER\_NUM} &  20& N/A & the minimum number of testers needed\\
+\hline
+\texttt{MAX\_BAD\_GRAMMAR} & 0& N/A & the maximum occurrence of grammar mistakes allowed \\
+\hline
+\texttt{MAX\_OFFENSIVE} & 0& N/A & the maximum occurrence of offensive messages allowed\\
+\hline
+\texttt{MAX\_ELEMENT\_BAD} & 0& N/A & the maximum occurrence of inconsistent 
+ or unresponsive elements allowed\\
+\hline
+\texttt{MAX\_ATTACK\_SUCCESS} & 0& N/A & the maximum occurrence of successful attack\\
+\hline
+\texttt{MAX\_COLOR\_AMBIGUOUS} & 0& N/A & the maximum occurrence of indistinguishable color combinations allowed\\
+\hline
+\texttt{MAX\_TIME\_PROCESS} & 2& s & the maximum processing time for a core function\\
+\hline
+\texttt{MIN\_PRECISION\%} & 95 & N/A & the minimum precision of the algorithm\\
+\hline
+\texttt{MIN\_OPERABLE\%} & 95 & N/A & the minimum percentage of system being operable \\
+\hline
+\texttt{MIN\_API\_SUCCESS\%} & 95 & N/A &  the minimum percentage of successful API calls\\
+\hline
+\texttt{MIN\_REGRESSION\_PASS\%} & 100  & N/A &  the minimum percentage of successful API calls\\
+\hline
+\texttt{MAX\_RESPONSE\_TIME} & 24 & h & The maximum issue resolve response time\\
+\hline
+\texttt{MIN\_LANGUAGE}& 5& N/A & The minimum number of languages that can be translated\\
+\hline
+\texttt{MAX\_SUPPORT\_STEP} & 5&N/A& The maximum steps needed for asking for support\\
+
+\hline
+\end{tabular}
 
 \subsection{Usability Survey Questions}
 
