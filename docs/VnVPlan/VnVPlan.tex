@@ -679,48 +679,96 @@ How test will be performed: A PR containing local changes is pushed, which trigg
 \begin{landscape}
     \pagestyle{empty}%
 \subsection{Traceability Between Test Cases and Requirements}
-
+All requirements refer to \href{https://github.com/wangq131/4G06CapstoneProjectT5/blob/689841fefc298f80d84232996e1c7ca7981dd93d/docs/SRS/SRS.pdf}{SRS.pdf}.
 \begin{table}[H]
     \centering
     \begin{adjustbox}{width=1\textwidth}
-    \begin{tabular}{l|cccccccccccccccc}
-        \textbf{Test Case \#} & \multicolumn{13}{c}{\textbf{Requirement \#}}\\
+    \begin{tabular}{l|ccccc}
+        \textbf{Test Case \#} & \multicolumn{5}{c}{\textbf{Requirement \#}}\\
         \hline
-        ~ & \textbf{FR1} & \textbf{FR2} & \textbf{FR3} & \textbf{FR4} & \textbf{FR5} & \textbf{FR6} & \textbf{FR7} & \textbf{FR8} & \textbf{FR9} & \textbf{FR10} & \textbf{FR11} & \textbf{FR12} & \textbf{FR13}& \textbf{FR14}& \textbf{FR15}\\\
-        
-        \textbf{TFR1-A1}   & ~ & ~ & X & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~\\
-        \textbf{FR-MG-1}    & ~ & ~ & ~ & ~ & X & ~ & X & ~ & ~ & ~ & ~ & ~ & ~\\
-        \textbf{FR-MG-2}  & ~ & ~ & ~ & ~ & ~ & ~ & X & ~ & ~ & ~ & ~ & ~ & ~\\
-        \textbf{FR-MG-3}  & ~ & ~ & ~ & ~ & ~ & ~ & X & ~ & ~ & ~ & ~ & ~ & ~\\
-        \textbf{FR-MG-4}  & ~ & ~ & ~ & ~ & ~ & X & ~ & ~ & ~ & ~ & ~ & ~ & ~\\
-        \textbf{FR-EG-1}  & ~ & ~ & ~ & ~ & ~ & ~ & ~ & X & ~ & ~ & ~ & ~ & ~\\
-        \textbf{FR-EG-2}  & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & X & ~ & ~ & ~ & ~\\
+        ~ & \textbf{FR1} & \textbf{FR2} & \textbf{FR3} & \textbf{FR4} & \textbf{FR5} \\
+        \hyperref[TFR1-A1] \textbf{TFR1-A1}  & X & ~ & ~ & ~ & ~ \\
+        \hyperref[TFR1-A2] \textbf{TFR1-A2}  & X & ~ & ~ & ~ & ~ \\
+        \hyperref[TFR2-A3] \textbf{TFR2-A3}  & ~ & X & ~ & ~ & ~ \\
+        \hyperref[TFR3-A4] \textbf{TFR3-A4}  & ~ & ~ & X & ~ & ~ \\
+        \hyperref[TFR4-A5] \textbf{TFR4-A5}  & ~ & ~ & ~ & X & ~ \\
+        \hyperref[TFR5-A6] \textbf{TFR5-A6}  & ~ & ~ & ~ & ~ & X \\
+        \hyperref[TFR5-A7] \textbf{TFR5-A7}  & ~ & ~ & ~ & ~ & X \\
     \end{tabular}
     \end{adjustbox}
-    \caption{Traceability Matrix: Functional Requirements}
-    \label{Traceability Matrix: Functional Requirements}
+    \caption{Traceability Matrix: Functional Requirements - Authentication}
+    \label{table:TraceabilityMatrix}
 \end{table}
 
 \begin{table}[H]
     \centering
     \begin{adjustbox}{width=1\textwidth}
-    \begin{tabular}{l|cccccccccccccccc}
-        \textbf{Test Case \#} & \multicolumn{13}{c}{\textbf{Requirement \#}}\\
+    \begin{tabular}{l|cccccccccc}
+        \textbf{Test Case \#} & \multicolumn{10}{c}{\textbf{Requirement \#}}\\
         \hline
-        ~ & \textbf{FR16} & \textbf{FR17} & \textbf{FR18} & \textbf{FR19} & \textbf{FR20} & \textbf{FR21} & \textbf{FR22} & \textbf{FR23} & \textbf{FR24} & \textbf{FR25} & \textbf{FR26} & \textbf{FR27} & \textbf{FR28}& \textbf{FR29}& \textbf{FR30}\\\
-        
-        \textbf{FR-VS-2}   & ~ & ~ & X & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~\\
-        \textbf{FR-MG-1}    & ~ & ~ & ~ & ~ & X & ~ & X & ~ & ~ & ~ & ~ & ~ & ~\\
-        \textbf{FR-MG-2}  & ~ & ~ & ~ & ~ & ~ & ~ & X & ~ & ~ & ~ & ~ & ~ & ~\\
-        \textbf{FR-MG-3}  & ~ & ~ & ~ & ~ & ~ & ~ & X & ~ & ~ & ~ & ~ & ~ & ~\\
-        \textbf{FR-MG-4}  & ~ & ~ & ~ & ~ & ~ & X & ~ & ~ & ~ & ~ & ~ & ~ & ~\\
-        \textbf{FR-EG-1}  & ~ & ~ & ~ & ~ & ~ & ~ & ~ & X & ~ & ~ & ~ & ~ & ~\\
-        \textbf{FR-EG-2}  & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & X & ~ & ~ & ~ & ~\\
+        ~ & \textbf{FR6} & \textbf{FR7} & \textbf{FR8} & \textbf{FR9} & \textbf{FR10} & \textbf{FR11} & \textbf{FR12} & \textbf{FR13} & \textbf{FR14} & \textbf{FR15} \\\
+        \hyperref[TFR6-UI1] \textbf{TFR6-UI1}  & X & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ \\
+        \hyperref[TFR6-UI2] \textbf{TFR6-UI2}  & X & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ \\
+        \hyperref[TFR7-UI3] \textbf{TFR7-UI3}  & ~ & X & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ \\
+        \hyperref[TFR8-UI4] \textbf{TFR8-UI4}  & ~ & ~ & X & ~ & ~ & ~ & ~ & ~ & ~ & ~ \\
+        \hyperref[TFR9-UI5] \textbf{TFR9-UI5}  & ~ & ~ & ~ & X & ~ & ~ & ~ & ~ & ~ & ~ \\
+        \hyperref[TFR10-UI6] \textbf{TFR10-UI6}  & ~ & ~ & ~ & ~ & X & ~ & ~ & ~ & ~ & ~ \\
+        \hyperref[TFR11-UI7] \textbf{TFR11-UI7}  & ~ & ~ & ~ & ~ & ~ & X & ~ & ~ & ~ & ~ \\
+        \hyperref[TFR11-UI8] \textbf{TFR11-UI8}  & ~ & ~ & ~ & ~ & ~ & X & ~ & ~ & ~ & ~ \\
+        \hyperref[TFR11-UI9] \textbf{TFR11-UI9}  & ~ & ~ & ~ & ~ & ~ & X & ~ & ~ & ~ & ~ \\
+        \hyperref[TFR12-UI10] \textbf{TFR12-UI10}  & ~ & ~ & ~ & ~ & ~ & ~ & X & ~ & ~ & ~ \\
+        \hyperref[TFR13-UI11] \textbf{TFR13-UI11}  & ~ & ~ & ~ & ~ & ~ & ~ & ~ & X & ~ & ~ \\
+        \hyperref[TFR14-UI12] \textbf{TFR14-UI12}  & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & X & ~ \\
+        \hyperref[TFR15-UI13] \textbf{TFR15-UI13}  & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & X \\
     \end{tabular}
     \end{adjustbox}
-    \caption{Traceability Matrix: Functional Requirements}
-    \label{Traceability Matrix: Functional Requirements}
+    \caption{Traceability Matrix: Functional Requirements - User Input}
+    \label{Traceability Matrix: Functional Requirements - User Input}
 \end{table}
+
+\begin{table}[H]
+    \centering
+    \begin{adjustbox}{width=1\textwidth}
+    \begin{tabular}{l|ccccccccc}
+        \textbf{Test Case \#} & \multicolumn{9}{c}{\textbf{Requirement \#}}\\
+        \hline
+        ~ & \textbf{FR16} & \textbf{FR17} & \textbf{FR18} & \textbf{FR19} & \textbf{FR20} & \textbf{FR21} & \textbf{FR22} & \textbf{FR23} & \textbf{FR24} \\\
+        \hyperref[TFR16-17-D1] \textbf{TFR16-17-D1}  & X & X & ~ & ~ & ~ & ~ & ~ & ~ & ~ \\
+        \hyperref[TFR18-D2] \textbf{TFR18-D2}  & ~ & ~ & X & ~ & ~ & ~ & ~ & ~ & ~ \\
+        \hyperref[TFR19-D3] \textbf{TFR19-D3}  & ~ & ~ & ~ & X & ~ & ~ & ~ & ~ & ~ \\
+        \hyperref[TFR20-D4] \textbf{TFR20-D4}  & ~ & ~ & ~ & ~ & X & ~ & ~ & ~ & ~ \\
+        \hyperref[TFR21-D5] \textbf{TFR21-D5}  & ~ & ~ & ~ & ~ & ~ & X & ~ & ~ & ~ \\
+        \hyperref[TFR22-D6] \textbf{TFR22-D6}  & ~ & ~ & ~ & ~ & ~ & ~ & X & ~ & ~ \\
+        \hyperref[TFR23-D7] \textbf{TFR23-D7}  & ~ & ~ & ~ & ~ & ~ & ~ & ~ & X & ~ \\
+        \hyperref[TFR22-23-D8] \textbf{TFR22-23-D8}  & ~ & ~ & ~ & ~ & ~ & ~ & X & X & ~ \\
+        \hyperref[TFR24-D9] \textbf{TFR24-D9}  & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & X \\
+        \hyperref[TFR24-D10] \textbf{TFR24-D10}  & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & X \\
+    \end{tabular}
+    \end{adjustbox}
+    \caption{Traceability Matrix: Functional Requirements - Data}
+    \label{Traceability Matrix: Functional Requirements - Data}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \begin{adjustbox}{width=1\textwidth}
+    \begin{tabular}{l|ccccccc}
+        \textbf{Test Case \#} & \multicolumn{7}{c}{\textbf{Requirement \#}}\\
+        \hline
+        ~ & \textbf{FR25} & \textbf{FR26} & \textbf{FR27} & \textbf{FR28} & \textbf{FR29} & \textbf{FR30} & \textbf{FR31} \\\
+        \hyperref[TFR25-S1] \textbf{TFR25-S1}  & X & ~ & ~ & ~ & ~ & ~ & ~ \\
+        \hyperref[TFR26-S2] \textbf{TFR26-S2}  & ~ & X & ~ & ~ & ~ & ~ & ~\\
+        \hyperref[TFR27-S3] \textbf{TFR27-S3}  & ~ & ~ & X & ~ & ~ & ~ & ~ \\
+        \hyperref[TFR28-S4] \textbf{TFR28-S4}  & ~ & ~ & ~ & X & ~ & ~ & ~ \\
+        \hyperref[TFR29-S5] \textbf{TFR29-S5}  & ~ & ~ & ~ & ~ & X & ~ & ~ \\
+        \hyperref[TFR30-S6] \textbf{TFR30-S6}  & ~ & ~ & ~ & ~ & ~ & X & ~ \\
+        \hyperref[TFR31-S7] \textbf{TFR31-S7}  & ~ & ~ & ~ & ~ & ~ & ~ & X \\
+    \end{tabular}
+    \end{adjustbox}
+    \caption{Traceability Matrix: Functional Requirements - Scheduling}
+    \label{Traceability Matrix: Functional Requirements - Scheduling}
+\end{table}
+
 \clearpage
 \begin{table}
     \centering
