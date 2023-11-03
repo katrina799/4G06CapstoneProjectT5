@@ -580,8 +580,235 @@ The Software Validation Plan will focus on ensuring that the final product meets
   Test Case Derivation: The user should be able to upload his course schedule and have the website extract the necessary information from it in order to create his schedule. After it has extracted the information it should display it to the user for quick verification
             
   How test will be performed: Manually log in and upload a course PDF. Continue and click to parse the course outline and create a task list. Check that the extracted information from the list including \textit{courseName}, \textit{taskType}, \textit{taskName}, weight, and deadline from the uploaded course outline is correctly displayed as a task list
-\end{enumerate}
 
+  \item{TFR18-D2\\}
+  Control: Functional, Manual, Dynamic
+            
+  Initial State: The user has logged in and is on the PDF extraction page and has uploaded the course outline PDF.
+            
+  Input: The user presses to extract the course information from the uploaded PDF. The user has uploaded the corresponding \texttt{PDF} file of the course syllabus on \texttt{AWS S3}.
+            
+  Output: 
+  The function will show the user the calculated priority result on the extraction page and the course detail page as priority labels beside the course tasks. 
+  
+  Test Case Derivation: After all the priorities of course tasks have been calculated, the user should be able to preview and verify the calculated priorities on the extraction page related to the course information generated from the \texttt{PDF}. If the user agrees with the results, the user should be able to see the calculated priority result on his/her course detail page after clicking on the Add button.
+  
+  How the test will be performed: Manually log in and upload a course PDF. Continue and click to parse the course outline and create a task list. Check the priority label beside each task, and compare the labels according to the parameters of each task, the information extracted from the course syllabus file: \textit{taskType}, \textit{weight}, \textit{deadline}. If the priority labels are reasonable according to the parameters, click the Add button to save the generated priorities. The tester then manually goes to the course detail page to check if the labels are displayed correctly.
+
+  \item{TFR19-D3\\} 
+  Control: Functional, Manual, Dynamic
+            
+  Initial State: The user has logged in, set up a Pomodoro Timmer on the website, and turned on the camera on his/her device.
+            
+  Input: Live video stream captured by the camera, a series of consecutive image frames with information about faces, eyes, and movements.
+            
+  Output: After the end of the timer, the program will show the user the percentage score and a line graph chart showing the trend of the user's attention level during his/her focusing time.
+  
+  Test Case Derivation: The user should be able to detect human face and eye movements with different resolution cameras, in any lighting conditions, with different degrees of facial blocking, and at different angles, and receive reasonable analysis results after the Pomodoro Timmer ends. 
+            
+  How the test will be performed: Manually comparing single video frames of different resolutions to test the program's ability to localize the face and eyes of a person in different angles and lighting environments. Test the program's ability to recognize abnormality data by rapidly shaking and turning the head. Test the program's ability to recognize and classify facial expressions with different facial expressions. Partially cover the face to test whether the analysis results through eye tracking are reasonable. Test the system's analyzing ability and reaction time using real-time video data. Finding different testers to simulate different concentration situations in different environments to test the accuracy of the analysis results.
+
+  \item{TFR20-D4\\}
+
+Control: Functional, Manual, Dynamic
+					
+Initial State: The user has logged in, set up a Pomodoro Timmer on the website, and turned on the camera on his/her device. The program detected the user's real-time attention score was low for a period of time.
+					
+Input: Live video stream captured by the camera, a series of consecutive image frames with information about faces, eyes, and movements.
+					
+Output: While the Pomodoro Timmer is on, it will be paused and inform the user via a pop-up window that his/her current attention span is low and suggest a break time.
+
+Test Case Derivation: The user should be able to see a notification to suggest a short break when their attention level is low and not suitable to continue the study task.
+					
+How the test will be performed: Verify that the system gives correct feedback by looking around, and making different gestures and facial expressions to simulate different levels of attention. Verify that the system correctly and accurately triggers the reminder and pauses the timer after a specific period of inattention by performing different inattentiveness for different lengths of time.
+
+\item{TFR21-D5\\}
+
+Control: Functional, Manual, Dynamic
+					
+Initial State: The user has logged in and generated or created a task list, used Pomodoro Timmers to record work time, or used a checklist view or calendar view on the website to record their task progress each time after completing the scheduled study time period.
+					
+Input: The start and end times of the working hours for certain tasks recorded by the using the Pomodoro Timmers, the estimated progress user input at the end of the Pomodoro Timmers, as well as the user's list of tasks and the percentage of progress of the marked tasks.
+					
+Output: Displays to the user a list of tasks with completed or uncompleted status labels, and each uncompleted task has a progress bar that visually shows the progress of the current task.
+
+Test Case Derivation: The user should be able to view their task list on the website, including the progress status of each task. The progress status of each task can be shown as marked as completed or incomplete, and incomplete tasks will have a progress bar showing the progress of completion.
+					
+How test will be performed: Create test cases, use the Pomodoro Timmer tool to keep track of work time, and use the TO-DO List view and Calendar view to mark and change the progress of tasks, and verify if the function can generate the correct view. Test cases should cover different scenarios such as task completion, task incompletion, and change in task plan. During the development phase, conduct unit and integration tests to ensure that the components of the task management tool work together correctly to support the task progress viewing functionality.
+
+\item{TFR22-D6\\}
+
+Control: Functional, Manual, Dynamic
+					
+Initial State: The user has the credentials for the corresponding calendar application he/she is trying to import, and the user has logged in to the website, is located on the Calendar page of the website, and has clicked the Import button.
+					
+Input: The valid authentication information the user provides, such as a username and password or an authorization token, so that the system can access data from other calendar applications. The source of the event and schedule data used for import may be Calendar, Outlook, Google Calendar, and so on. This data includes information such as the date, time, and location of the event. 
+					
+Output: A new combined calendar schedule of the internal and external calendar data will be displayed on the calendar page of the website without any conflict. 
+
+Test Case Derivation: Once the user has successfully authenticated and selected the calendar data to be imported, the system should be able to import this data into the user's web system so that the user can view and manage it in the calendar view of the website. The system should detect if there is a conflict between the user's internal existing events and the newly imported events. The system informs the user if there is any conflict, and provides the user with a change plan to resolve the conflict such as replacing, merging, or deleting.
+
+How test will be performed: Test the authentication process manually against different external data sources to ensure that authentication can be performed successfully and relevant external data can be obtained. Use non-conflicting external calendar programs for import and merge to test whether the data is successfully combined and displayed correctly. Also use conflicting external calendar data for import testing to check whether the delete, merge, and replace functions are effective.
+
+\item{TFR23-D7\\}
+
+Control: Functional, Manual, Dynamic
+					
+Initial State: The user has the credentials for the corresponding calendar application he/she is trying to export to, and the user has logged in to the website, is located on the Calendar page of the website, and has clicked the Export button.
+					
+Input: Valid authentication information, such as a username and password or other authentication credentials. User's own task and schedule data, including \textit{taskType}, \textit{taskName}, \textit{weight}, \textit{deadline}, \textit{startTime}, \textit{endTime} etc. Also, the target calendar applications to which the data is exported, such as Calendar, Outlook, or Google Calendar.
+					
+Output: Tasks and events within the site can be seen on the corresponding external site with the relevant information of each of them. A success confirmation message or a failure error message at the end of the export process.
+
+Test Case Derivation: After the user clicks EXPORT, selects the target calendar application, and completes the relevant authentication, the system should export the user's event and schedule data to the selected target calendar application, ensuring that the data is rendered correctly in other applications. The user should be able to see the feedback to indicate whether the export operation was successful or not, if an error occurred, the user will see the appropriate error message. If the export was successful, the user should be able to get confirmation that the export operation was successful. If the user already has existing events and schedules in the target calendar application, the system should be able to recognize and inform the user and provide the user with decision options to resolve conflicts with the exported data.
+					
+How test will be performed: Manually create different types of events and calendars, then export them to different calendar applications, Calendar, Outlook, and Google Calendar, and verify the accuracy, completeness, and consistency of the data. Test whether the system can correctly recognize conflicts and provide users with decision-making options and successful conflict resolution by exporting calendar data with and without event conflicts. 
+
+\item{TFR22-23-D8\\}
+
+Control: Functional, Manual, Dynamic
+					
+Initial State: The user does not have the credentials for the corresponding calendar application he/she is trying to import or export to, and the user has logged in to the website, is located on the Calendar page of the website, and has clicked the Import or Export button.
+					
+Input: Invalid authentication information, such as a username and password or other authentication credentials. The target calendar applications to which the data is exported, such as Calendar, Outlook, or Google Calendar.
+					
+Output: The warning message popped up to notify the user the account authorization inputs are not valid.
+
+Test Case Derivation: Once a user's authorization is entered incorrectly, they should be able to be notified and given the opportunity to re-enter their credential information.
+					
+How test will be performed: Tested with incorrect authentication information. Manually try to import and export calendar data by using invalid credentials, non-existent usernames, and invalid passwords.
+
+\item{TFR24-D9\\}
+
+Control: Functional, Manual, Dynamic
+					
+Initial State: The user has logged in and is on the TO-DO list view on the website.
+					
+Input: The user clicks the Download button to issue a command requesting export to PDF. The user selects the time range of the TO-DO list view and selects the period format of the export list which can be daily, or weekly. The information data in the task list includes \textit{course}, \textit{taskName}, \textit{date}, \textit{deadline}, \textit{startTime}, \textit{endTime}, \textit{weight}, etc.
+					
+Output: PDF document with a to-do list view of the study plan in the selected time range and period format.
+
+Test Case Derivation: The user should be able to see a preview of the exported TO-DO list study plan before the PDF file is downloaded. After the user presses the download button on the preview page, the PDF file with the task list data should be downloaded to his/her local device. The preview and the PDF file should have proper formatting, fonts, and layout, and the exported task information should be accurate and consistent.
+					
+How the test will be performed: By manually simulating user input, perform the operation of exporting the TO-DO list as a PDF, and check whether the generated PDF file contains the correct information about the tasks, expected formatting, fonts, layout, etc. Manually test using different study plans, including different numbers of tasks, different dates, and times of scheduling, etc., to ensure that the export function works properly in a variety of situations.
+
+\item{TFR24-D10\\}
+
+Control: Functional, Manual, Dynamic
+					
+Initial State: The user has logged in and is on the calendar view on the website.
+					
+Input: The user clicks the Download button to issue a command requesting export to PDF. The user selects the time range of the calendar list view and selects the period format of the calendar data which can be weekly or monthly. The calendar data includes \textit{course}, \textit{taskName}, \textit{startDate}, \textit{endDate} \textit{deadline}, \textit{startTime}, \textit{endTime}, \textit{weight}, etc.
+					
+Output: PDF document with a calendar view of the study plan in the selected time range and period format.
+
+Test Case Derivation: The user should be able to see a preview of the exported study plan calendar before the PDF file is downloaded. After the user presses the download button on the preview page, the PDF file with the calendar data should be downloaded to his/her local device. The preview and the PDF file should have proper formatting, fonts, and layout, and the exported event and task information should be accurate and consistent.
+					
+How the test will be performed: By manually simulating user input, perform the operation of exporting the calendar view as a PDF, and check whether the generated PDF file contains the correct information about the tasks and events, expected formatting, fonts, layout, etc. Manually test using different study plans, including different numbers of tasks, different dates, and times of scheduling, etc., to ensure that the export function works properly in a variety of situations.
+
+\end{enumerate}
+\subsubsection{Scheduling}
+\begin{enumerate}
+
+  \item{TFR25-S1\\}
+
+  Control: Functional, Manual, Dynamic
+            
+  Initial State: The user has logged in and is on the task creation page or the extraction page.
+            
+  Input: the task information such as \textit{taskName}, \textit{taskType}, \textit{weight}, and \textit{priority}. The user's input for the initial estimated time needed to finish the task.
+            
+  Output: the initial estimate of the total time required for the task to complete.
+  
+  Test Case Derivation: The user should be able to view an initial estimated completion time for any task generated from the course syllabus PDF documents they upload. This estimated completion time can be modified by the user at any time after the task has been created. For any tasks created manually by users, the user can assign an initial estimated completion time period and change it at any time after the task has been created. 
+            
+  How the test will be performed:
+  Generate tasks from course syllabus PDF files and create tasks directly. Testing should encompass various types of tasks with different weights, user actions, different learning time records, and progress percentage inputs. Manually try to modify the value after the tasks have been created, and try input the various values like negative numbers or text, etc.
+
+\item{TFR26-S2\\}
+
+Control: Functional, Manual, Dynamic
+					
+Initial State: The user has logged in and generated or created a task list, used Pomodoro Timmers to record work time, or used a checklist or calendar view on the website to record their task progress each time after completing the scheduled study time period.
+					
+Input: Current schedule data for the task includes \textit{deadline}, \textit{priority}, \textit{weight}, current progress in completing the task, the user's history of the percentage of progress completed, and the corresponding time spent on the task.
+					
+Output: The updated Learning Plan, regenerated task schedule information based on the updated task progress from the user, which may include reordering of task list and TO-DO list, new priority of the task, etc.
+
+Test Case Derivation: Each time the user updates the task progress and records the corresponding time spent, they will receive a reminder to update the learning schedule. After that, the user should be able to view a newly generated learning plan associated with the rate of change in task progress.
+					
+How test will be performed: After simulating the user's change of task progress, check whether the system has kept all the original task information and updated the related task plan. Compare the pre- and post-update learning plans to ensure that the updated plan correctly reflects the changes in task progress.
+
+\item{TFR27-S3\\}
+
+Control: Functional, Manual, Dynamic
+					
+Initial State: The user has logged in and generated or created a task list, used Pomodoro Timmers to record work time, or used a checklist view or calendar view on the website to record their task progress each time after completing the scheduled study time period.
+					
+Input: \textit{taskName}, \textit{taskType}, \textit{weight} and the initial estimate of the total time required for the task to complete, the percentage of completing progress of the task recorded by the user at the end of the Pomodoro Timmers, and the corresponding time spent.
+					
+Output: The time needed to finish each task is dynamically updated accordingly.
+
+Test Case Derivation: The system should be capable of calculating the most up-to-date estimated time required to finish each task after the user records and inputs the progress percentage and the corresponding time spent.
+					
+How the test will be performed: Generate tasks from course syllabus PDF files and create tasks directly. Input multiple progress updates and corresponding study hours for each task. Estimate task completion time through both manual and automated testing methods. Testing should encompass various types of tasks with different weights, user actions, different learning time records, and progress percentage inputs. Compare the pre- and post-input of the new task progress and corresponding hours spent and check whether the changes in task estimated time needed are accurately reflected in the task data.
+
+\item{TFR28-S4\\}
+
+Control: Functional, Manual, Dynamic
+					
+Initial State: The user has logged in and uploaded a course syllabus PDF file, and is on the extraction page of the website. 
+					
+Input: The user's task list and data for tasks including \textit{taskType}, \textit{weight} and \textit{deadline}.
+					
+Output: A task priority list, based on sorting the tasks in order by task type, weight, and deadline. High-priority tasks will be ranked first.
+
+When the user attempts to extract all the information from the course, the program will extract the necessary data from the uploaded course syllabus PDF file and generate a list of tasks with a calculated priority number. The system should categorize all tasks into three priority levels: high, medium, and low, and assign each task a corresponding priority label. After this process, the user should be able to view the task lists with priority labels, ordered in descending order based on the priorities generated by the system.
+					
+How test will be performed: Create test sets with task lists of different task types, weights, and deadlines, and check that the generated list of sorted tasks meets the expected priority ordering. Using special case inputs, such as an empty task list, to ensure that the system handles edge cases correctly.
+
+\item{TFR29-S5\\}
+
+Control: Functional, Manual, Dynamic
+					
+Initial State: The user has logged in and generated or created a task list with task information.
+					
+Input: Task information: \textit{taskName}, \textit{taskType}, \textit{weight}, \textit{deadline} \textit{priority}. The learner's preferred day and time period for the study. The user's current schedule, including scheduled events, and other existing tasks. The working time of the Pomodoro Timmer setting for each learning task.
+					
+Output: A complete schedule of the learning program, including the name, weight, deadline, priority, sub-tasks under each task, scheduled start and end times of Pomodoro Timmer for each sub-tasks. Display task and sub-task time periods and information on other external platforms.
+
+Test Case Derivation: Select different study periods, days, and various Pomodoro interval settings to assess the system's ability to handle invalid or incomplete input data. Using valid data, confirm that the system can generate a comprehensive study plan for each task, considering preferred study times and schedules while avoiding conflicts with existing activities. Export study schedules to an external calendar program and test the system's capability to accurately and completely export study plans to other calendar applications. In cases of task scheduling conflicts, verify that the system can provide solutions, such as suggesting alternative study times or allocating sub-tasks to different days.
+
+How test will be performed: Tests can be performed using automated testing frameworks to simulate various scenarios and input data. Write unit tests for different components and functional modules of the system. Verify that the system is able to generate the correct study plan based on different inputs. And that it can be successfully and completely exported to other calendar applications. Verify that the system is able to effectively resolve schedule conflicts and provide sound advice.
+
+\item{TFR30-S6\\}
+
+Control: Functional, Manual, Dynamic
+
+Initial State: The user has logged in and generated a study schedule plan and a task list with task information and is on Pomodoro Timmer page.
+					
+Input: The generated task list with sub-tasks and the information of each sub-task, includes \textit{taskName}, \textit{startTime}, and \textit{endTime}.
+					
+Output: A list of Pomodoro Timmers of subtasks.
+
+Test Case Derivation: Using a valid list of sub-tasks and valid Pomodoro clock settings, e.g. 25 minutes of work and 5 minutes of rest, detect that each sub-task has a corresponding Pomodoro clock with work and rest time slots. Using an empty list of sub-tasks, the output should be that no Pomodoro clocks are created and no warning messages or errors appear. Entering an invalid sub-task list or invalid Pomodoro clock settings, the user should get a warning message that no Pomodoro clock can be created.
+					
+How test will be performed: Testing can be performed either by manually operating the system or by automated test scripts. The flow of the learning cycle should be tested to ensure that the Pomodoro clock is working as expected, and the user interactions and system responses should be tested to ensure that the system can correctly handle the user's actions and changes in the task state. Tests should cover different scenarios, including normal operation, incorrect operation, and edge cases.
+
+\item{TFR31-S7\\}
+
+Control: Functional, Manual, Dynamic
+					
+Initial State: The user has logged in and generated a study schedule plan and a task list with task information and is on Pomodoro Timmer page.
+					
+Input: The user's personal account profile information, and the user's contacts list, which includes a list of contacts that the user has added and their account information. The user's and the contacts' study schedules, including course lists, task lists, and sub-task schedule lists.
+					
+Output: The system will match the study schedules of the user and contacts and output a set of matched contact lists.
+
+Test Case Derivation: Simulate the user to enter his study plan and request the system to match contacts. Check if the system has successfully matched contacts that fit the study plan and outputs a list of matches. If the user sends a match request, the user's contacts should be able to receive a notification of the request, and after the contacts agree, the system should generate a schedule and a link to the online learning session and send it to the user and the contacts who accepted the request. If the contact does not accept the match request, the contact can choose to leave a message for the user, after which the user should be able to receive an alert message indicating that the match was not successful and the corresponding message from the contact.
+					
+How test will be performed: Testing is performed by manually simulating the user's interaction with the system; the testing steps include entering a learning plan, selecting matching contacts, viewing match results, and scheduling an online learning session. The testing process should cover a variety of scenarios, including matching under normal circumstances, no-match scenarios, updating of the contacts list, and correctness of session scheduling. The system should also handle boundary cases of input data, such as empty learning plans, incomplete user information, etc.
+\end{enumerate}
 \subsection{Tests for Nonfunctional Requirements}
 
 
