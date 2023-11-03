@@ -1,9 +1,11 @@
 \documentclass[12pt, titlepage]{article}
 
 \usepackage{enumitem}
+\usepackage{enumitem}
 \usepackage{booktabs}
 \usepackage{tabularx}
 \usepackage{hyperref}
+\usepackage{float}
 \usepackage{float}
 \hypersetup{
     colorlinks,
@@ -13,9 +15,26 @@
     urlcolor=blue
 }
 \usepackage[round]{natbib}
-
 \input{../Comments}
 \input{../Common}
+\usepackage{enumitem}
+\usepackage{adjustbox}
+\usepackage{longtable}
+\usepackage{geometry}
+\usepackage{pdflscape}
+\usepackage{everypage}
+\usepackage{lipsum}
+
+\newcommand{\Lpagenumber}{\ifdim\textwidth=\linewidth\else\bgroup
+  \dimendef\margin=0 %use \margin instead of \dimen0
+  \ifodd\value{page}\margin=\oddsidemargin
+  \else\margin=\evensidemargin
+  \fi
+  \raisebox{\dimexpr -\topmargin-\headheight-\headsep-0.5\linewidth}[0pt][0pt]{%
+    \rlap{\hspace{\dimexpr \margin+\textheight+\footskip}%
+    \llap{\rotatebox{90}{\thepage}}}}%
+\egroup\fi}
+\AddEverypageHook{\Lpagenumber}%
 
 \begin{document}
 
@@ -32,22 +51,16 @@
 \begin{tabularx}{\textwidth}{p{3cm}p{2cm}X}
 \toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
 \midrule
-Date 1 & 1.0 & Notes\\
-Date 2 & 1.1 & Notes\\
+Nov 3, 2023 & 1.0 & Initial Draft\\
 \bottomrule
 \end{tabularx}
 
 ~\\
-
 \newpage
 
 \tableofcontents
 
 \listoftables
-
-
-\listoffigures
-
 
 \newpage
 
@@ -65,8 +78,17 @@ Date 2 & 1.1 & Notes\\
       PDF & Portable Document Format\\
       .csv & Comma-Separated Values \\
       .txt & Text file\\
+      UI & User Interface \\
+      ML & Machine Learning\\
+      API & Application Programming Interface\\
+      HTTP & Hypertext Transfer Protocol\\
+      PDF & Portable Document Format\\
+      .csv & Comma-Separated Values \\
+      .txt & Text file\\
   \bottomrule
+  
 \end{tabular}\\
+
 
 \newpage
 
@@ -83,30 +105,62 @@ The V\&V plan is structured as follows:
     \item \textbf{System Test Description} 
     \item \textbf{Unit Test Description}
 \end{enumerate}
+This document outlines the Verification and Validation (V\&V) plan for the Course Buddy project developed by Team \#5, Overwatch League. The V\&V plan is a critical component of our project management and quality assurance processes, ensuring that Course Buddy not only meets its specified requirements but also fulfills the needs and expectations of its users and stakeholders.
+
+\paragraph{Roadmap}
+The V\&V plan is structured as follows:
+\begin{enumerate}
+    \item \textbf{Symbols, Abbreviations, and Acronyms}
+    \item \textbf{General Information}
+    \item \textbf{Plan} 
+    \item \textbf{System Test Description} 
+    \item \textbf{Unit Test Description}
+\end{enumerate}
 \section{General Information}
 
 \subsection{Summary}
-
-
+Course Buddy is a scheduling software that generates personalized study plans for students from course outlines that would be incorporated into the student's own schedule.  The application also comes with social components that enable friend-collaborative study sessions.
 
 \subsection{Objectives}
-
-
+This VnV plan would direct us through the testing process to ensure that our system would accomplish all the intended functions correctly and efficiently.  
+Adequate tests would be planned according to functional and non-functional requirements stated in our SRS to ensure our project exhibits adequate qualities and functions.
+We would prioritize and polish core functions including PDF unloading and analysis, AI scheduling algorithms, compatibility with other calendar applications, and those associated non-functional requirements. If time allows, we would also aim to develop tests for AI attention detection and the social component.
 
 
 \subsection{Relevant Documentation}
+\subsubsection{Development plan}
+As part of the development process, the writing of this VnV plan implementation of all the test cases shall follow the development process specified in the development plan.
 
-
-
-\citet{SRS}
-
-
-
+\subsubsection{SRS}
+The functional and non-functional requirements and their corresponding fit criteria would lead the test plan and be used as a guideline to make sure tests could cover all the documented requirements.
+\subsubsection{Hazard Analysis}
+Additional requirements related to software failures should also be covered in testing.
+\subsubsection{VnV Report}
+The result from executing this VnV plan would be recorded in the VnV report.  The VnV plan could be revised from the results.
 \section{Plan}
 
 This section outlines the comprehensive strategy for verifying and validating the Course Buddy software, ensuring it aligns with specified requirements and design standards. The plan spans from team roles in verification to the utilization of various testing and verification tools.
 
 \subsection{Verification and Validation Team}
+     \begin{table}[H]
+     \centering
+     \begin{tabular}{l p{10cm}}
+          \toprule
+          \textbf{Name} & \textbf{Role and Specific Duties}\\
+          \midrule
+          Jinyao Qin & \textbf{Lead Verifier}: Oversees the entire process, coordinates with other team members, and ensures all verification steps are followed diligently.\\
+          
+          Qianni Wang & \textbf{Implementation Specialist}: Reviews the codebase to ensure it aligns with the documented requirements, also verifies the code's functionality, performance, and security aspects.\\
+          
+          Qiang Gao & \textbf{Implementation Specialist}: same as Qianni Wang\\
+          
+          Chenwei Song & \textbf{Manual Test Engineer}: Responsible for manual test cases, ensuring that all tests run in different environments, and reporting the results in an understandable format for the team.\\
+          
+          Shuting Shi & \textbf{Test Automation Engineer}: Responsible for automating test cases, ensuring that all tests run in different environments, and reporting the results in an understandable format for the team.\\
+          \bottomrule
+        \end{tabular}
+     \caption{Verification and Validation Team Members and Their Roles}
+     \end{table}
      \begin{table}[H]
      \centering
      \begin{tabular}{l p{10cm}}
@@ -142,8 +196,70 @@ For the verification of the Software Requirements Specification (SRS) document, 
 Additionally, an SRS checklist will be utilized to systematically verify the content of the SRS document:
 Please see our \href{https://github.com/wangq131/4G06CapstoneProjectT5/blob/main/docs/SRS/SRS.pdf#page=2}{SRS.pdf} for more details.
 
+For the verification of the Software Requirements Specification (SRS) document, the following approaches will be adopted:
+
+\begin{enumerate}
+    \item \textbf{Peer Review:} The SRS will be reviewed by team members and classmates to identify any inconsistencies, ambiguities, or missing requirements.
+    \item \textbf{Expert Review:} Experts in software development will be consulted to ensure the requirements are complete and feasible.
+    \item \textbf{Supervisor Review:} The SRS will be reviewed by our supervisor, who can provide valuable insights from a strategic and technical perspective.
+    \item \textbf{Client Feedback:} The document will be shared with the client or stakeholders for their feedback, ensuring alignment with their expectations and needs.
+    \item \textbf{Automated Analysis Tools:} Tools such as requirement management software will be used for tracing and managing requirements systematically.
+\end{enumerate}
+
+Additionally, an SRS checklist will be utilized to systematically verify the content of the SRS document:
+Please see our \href{https://github.com/wangq131/4G06CapstoneProjectT5/blob/main/docs/SRS/SRS.pdf#page=2}{SRS.pdf} for more details.
+
 
 \subsection{Design Verification Plan}
+
+The design verification for our project will focus on ensuring that the design is user-friendly, intuitive, and aligns with the architectural requirements specified in the SRS. The verification plan will include the following key activities:
+
+\begin{enumerate}
+    \item \textbf{Peer Reviews:} The design documents and models will be reviewed by team members and classmates to critique and provide feedback on the design's usability, intuitiveness, and adherence to architectural requirements.
+    \item \textbf{Supervisor Review:} The design will be presented to the project supervisor for a thorough review, focusing on adherence to technical specifications and project objectives.
+    \item \textbf{Design Walkthroughs:} Scheduled sessions where the design team presents the design to the stakeholders, including peers and supervisors, for feedback and suggestions.
+    \item \textbf{Prototype Testing:} Early versions of the design will be tested to gather quick feedback on the design's effectiveness and user experience.
+    \item \textbf{Consistency Check:} Ensuring that the design remains consistent with the requirements and objectives outlined in the SRS document.
+\end{enumerate}
+
+To comprehensively verify the design, the following checklist will be used:
+
+\begin{enumerate}
+    \item \textbf{Design Documentation Review:}
+    \begin{itemize}
+        \item Check if the design documentation is complete and clearly describes the architecture, components, and interfaces.
+        \item Ensure that the design aligns with the project's objectives and requirements specified in the SRS.
+    \end{itemize}
+    
+    \item \textbf{User Interface (UI) and User Experience (UX) Evaluation:}
+    \begin{itemize}
+        \item Verify that the UI design is intuitive and user-friendly.
+        \item Ensure UI consistency across different parts of the application.
+        \item Assess the UX for compliance with common usability standards and practices.
+    \end{itemize}
+
+    \item \textbf{Architectural Conformity:}
+    \begin{itemize}
+        \item Confirm that the system architecture supports all the required functionalities.
+        \item Check for scalability, maintainability, and flexibility of the design.
+    \end{itemize}
+
+    \item \textbf{Performance and Security Review:}
+    \begin{itemize}
+        \item Ensure that the design incorporates adequate performance optimizations.
+        \item Review the design for potential security vulnerabilities and data protection measures.
+    \end{itemize}
+
+    \item \textbf{Compliance with Standards:}
+    \begin{itemize}
+        \item Verify adherence to relevant industry and design standards.
+    \end{itemize}
+
+    \item \textbf{Feedback Integration:}
+    \begin{itemize}
+        \item Check that feedback from previous reviews (by classmates, peers, or stakeholders) has been adequately incorporated into the design.
+    \end{itemize}
+\end{enumerate}
 
 The design verification for our project will focus on ensuring that the design is user-friendly, intuitive, and aligns with the architectural requirements specified in the SRS. The verification plan will include the following key activities:
 
@@ -217,6 +333,26 @@ To systematically verify the V\&V plan, the following checklist will be used:
     \item Are there measures in place to track and resolve any identified issues during the V\&V process?
     \item Does the plan align with the project's schedule, resources, and constraints?
 \end{itemize}
+The verification and validation (V\&V) plan for our project includes ensuring the integrity and effectiveness of the V\&V processes themselves. Given the importance of this plan in the overall project quality assurance, the following approaches will be employed:
+
+\begin{enumerate}
+    \item \textbf{Peer Review:} The V\&V plan will be reviewed by team members and classmates to identify any omissions or areas needing improvement.
+    \item \textbf{Mutation Testing:} This technique will be applied to evaluate the ability of our test cases to detect faults deliberately injected into the code.
+    \item \textbf{Iterative Feedback Incorporation:} Feedback from all review sessions and testing phases will be systematically incorporated to refine the V\&V plan.
+\end{enumerate}
+
+To systematically verify the V\&V plan, the following checklist will be used:
+
+\begin{itemize}
+    \item Is the plan comprehensive, covering all aspects of software verification and validation?
+    \item Are the responsibilities and roles in the V\&V process clearly defined?
+    \item Does the plan include a variety of testing methods (e.g., unit testing, integration testing, system testing)?
+    \item Is there a clear process for incorporating feedback and continuous improvement in the V\&V process?
+    \item Are there criteria defined for the success of each testing phase?
+    \item Is mutation testing included to assess the thoroughness of the test cases?
+    \item Are there measures in place to track and resolve any identified issues during the V\&V process?
+    \item Does the plan align with the project's schedule, resources, and constraints?
+\end{itemize}
 
 \subsection{Implementation Verification Plan}
 
@@ -229,8 +365,27 @@ The Implementation Verification Plan will ensure that the software implementatio
     \item \textbf{Continuous Integration:} Automated build and testing processes will be implemented using tools like GitHub Actions, to ensure continuous code quality, integration, and deployment.
     \item \textbf{Performance Testing:} The use of tools like Locust for load testing will help evaluate the application's performance under various conditions, particularly focusing on how the Flask application handles concurrent requests and data processing.
 \end{itemize}
+The Implementation Verification Plan will ensure that the software implementation adheres to the requirements and design specifications outlined in the SRS. Key components of this plan include:
+
+\begin{itemize}
+    \item \textbf{Unit Testing:} A comprehensive suite of unit tests, as detailed in the project's test plan, will validate individual components or modules of the software. /textit{PyTest}, a flexible and powerful testing tool, will be used for writing and executing these tests.
+    \item \textbf{Static Analysis:} /textit{Pylint} and /textit{Flake8} will be employed for static code analysis to identify potential bugs, security vulnerabilities, and issues with code style and complexity.
+    \item \textbf{Code Reviews and Walkthroughs:} Regularly scheduled code reviews and walkthroughs with team members and supervisors to inspect code quality, readability, and adherence to the Flask framework's best practices and design patterns.
+    \item \textbf{Continuous Integration:} Automated build and testing processes will be implemented using tools like GitHub Actions, to ensure continuous code quality, integration, and deployment.
+    \item \textbf{Performance Testing:} The use of tools like Locust for load testing will help evaluate the application's performance under various conditions, particularly focusing on how the Flask application handles concurrent requests and data processing.
+\end{itemize}
 
 \subsection{Automated Testing and Verification Tools}
+
+For automated testing and verification in our Flask/Python project, the following tools will be employed:
+
+\begin{itemize}
+    \item \textbf{Unit Testing Framework:} /textit{PyTest} will be used for developing and running unit tests.
+    \item \textbf{Profiling and Performance Tools:} Tools like /textit{cProfile} for Python will assist in identifying performance bottlenecks and optimizing code efficiency.
+    \item \textbf{Static Code Analyzers:} /textit{Pylint} and /textit{Flake8} will be used to analyze Python code quality, adherence to coding standards, and identification of potential errors.
+    \item \textbf{Continuous Integration:} GitHub Actions will automate the build, testing, and deployment process, ensuring continuous integration and delivery of the Python codebase.
+    \item \textbf{Linters:} /textit{Flake8} will be used to enforce coding standards.
+\end{itemize}
 
 For automated testing and verification in our Flask/Python project, the following tools will be employed:
 
@@ -494,7 +649,7 @@ The Software Validation Plan will focus on ensuring that the final product meets
   How test will be performed: Manually log in, expand the friend list, click on the sending friend request option, and then input a list of invalid usernames such as empty strings and click on the send button to see if we get a notification (by text or diagram) saying that the username provided is invalid 
   
   \item{TFR12-UI10\\} \label{TFR12-UI10}
-  
+		
   Control: Functional, Manual, Dynamic
             
   Initial State: A notification indicating that there is an incoming friend request (could use sound effects or highlight the notification icon)
@@ -506,7 +661,7 @@ The Software Validation Plan will focus on ensuring that the final product meets
   Test Case Derivation: When the user accepts an incoming friend request, he/she should be notified when the friend request gets accepted successfully
             
   How test will be performed: Manually log in to one of the mock accounts, send a friend request to another mock account, log in to the account receiving the friend request and then check if there is a notification indicating that there is an incoming friend request, accept the friend request and then see if a text or a diagram gets displayed indicating that the friend request has been accepted
-  
+		
   \item{TFR13-UI11\\} \label{TFR13-UI11}
 
   Control: Functional, Manual, Dynamic
@@ -550,7 +705,7 @@ The Software Validation Plan will focus on ensuring that the final product meets
   How test will be performed: Manually log in head to the task list and complete a task. On the pop-up showing asking if the pace is comfortable, select that it is comfortable. Then, check that no change has been made to the timeline. Repeat this, but this time select that the pace is not comfortable, and then check that the study plan has changed how much time should be spent on the tasks
   
   \end{enumerate}
-  
+		
   \subsubsection{Data}
   
   \begin{enumerate}
@@ -797,40 +952,285 @@ Test Case Derivation: Simulate the user to enter his study plan and request the 
 					
 How test will be performed: Testing is performed by manually simulating the user's interaction with the system; the testing steps include entering a learning plan, selecting matching contacts, viewing match results, and scheduling an online learning session. The testing process should cover a variety of scenarios, including matching under normal circumstances, no-match scenarios, updating of the contacts list, and correctness of session scheduling. The system should also handle boundary cases of input data, such as empty learning plans, incomplete user information, etc.
 \end{enumerate}
+\subsubsection{Scheduling}
+\begin{enumerate}
+
+  \item{TFR25-S1\\} \label{TFR25-S1}
+
+  Control: Functional, Manual, Dynamic
+            
+  Initial State: The user has logged in and is on the task creation page or the extraction page.
+            
+  Input: the task information such as \textit{taskName}, \textit{taskType}, \textit{weight}, and \textit{priority}. The user's input for the initial estimated time needed to finish the task.
+            
+  Output: the initial estimate of the total time required for the task to complete.
+  
+  Test Case Derivation: The user should be able to view an initial estimated completion time for any task generated from the course syllabus PDF documents they upload. This estimated completion time can be modified by the user at any time after the task has been created. For any tasks created manually by users, the user can assign an initial estimated completion time period and change it at any time after the task has been created. 
+            
+  How the test will be performed:
+  Generate tasks from course syllabus PDF files and create tasks directly. Testing should encompass various types of tasks with different weights, user actions, different learning time records, and progress percentage inputs. Manually try to modify the value after the tasks have been created, and try input the various values like negative numbers or text, etc.
+
+\item{TFR26-S2\\} \label{TFR26-S2}
+
+Control: Functional, Manual, Dynamic
+					
+Initial State: The user has logged in and generated or created a task list, used Pomodoro Timmers to record work time, or used a checklist or calendar view on the website to record their task progress each time after completing the scheduled study time period.
+					
+Input: Current schedule data for the task includes \textit{deadline}, \textit{priority}, \textit{weight}, current progress in completing the task, the user's history of the percentage of progress completed, and the corresponding time spent on the task.
+					
+Output: The updated Learning Plan, regenerated task schedule information based on the updated task progress from the user, which may include reordering of task list and TO-DO list, new priority of the task, etc.
+
+Test Case Derivation: Each time the user updates the task progress and records the corresponding time spent, they will receive a reminder to update the learning schedule. After that, the user should be able to view a newly generated learning plan associated with the rate of change in task progress.
+					
+How test will be performed: After simulating the user's change of task progress, check whether the system has kept all the original task information and updated the related task plan. Compare the pre- and post-update learning plans to ensure that the updated plan correctly reflects the changes in task progress.
+
+\item{TFR27-S3\\} \label{TFR27-S3}
+
+Control: Functional, Manual, Dynamic
+					
+Initial State: The user has logged in and generated or created a task list, used Pomodoro Timmers to record work time, or used a checklist view or calendar view on the website to record their task progress each time after completing the scheduled study time period.
+					
+Input: \textit{taskName}, \textit{taskType}, \textit{weight} and the initial estimate of the total time required for the task to complete, the percentage of completing progress of the task recorded by the user at the end of the Pomodoro Timmers, and the corresponding time spent.
+					
+Output: The time needed to finish each task is dynamically updated accordingly.
+
+Test Case Derivation: The system should be capable of calculating the most up-to-date estimated time required to finish each task after the user records and inputs the progress percentage and the corresponding time spent.
+					
+How the test will be performed: Generate tasks from course syllabus PDF files and create tasks directly. Input multiple progress updates and corresponding study hours for each task. Estimate task completion time through both manual and automated testing methods. Testing should encompass various types of tasks with different weights, user actions, different learning time records, and progress percentage inputs. Compare the pre- and post-input of the new task progress and corresponding hours spent and check whether the changes in task estimated time needed are accurately reflected in the task data.
+
+\item{TFR28-S4\\} \label{TFR28-S4}
+
+Control: Functional, Manual, Dynamic
+					
+Initial State: The user has logged in and uploaded a course syllabus PDF file, and is on the extraction page of the website. 
+					
+Input: The user's task list and data for tasks including \textit{taskType}, \textit{weight} and \textit{deadline}.
+					
+Output: A task priority list, based on sorting the tasks in order by task type, weight, and deadline. High-priority tasks will be ranked first.
+
+When the user attempts to extract all the information from the course, the program will extract the necessary data from the uploaded course syllabus PDF file and generate a list of tasks with a calculated priority number. The system should categorize all tasks into three priority levels: high, medium, and low, and assign each task a corresponding priority label. After this process, the user should be able to view the task lists with priority labels, ordered in descending order based on the priorities generated by the system.
+					
+How test will be performed: Create test sets with task lists of different task types, weights, and deadlines, and check that the generated list of sorted tasks meets the expected priority ordering. Using special case inputs, such as an empty task list, to ensure that the system handles edge cases correctly.
+
+\item{TFR29-S5\\} \label{TFR29-S5}
+
+Control: Functional, Manual, Dynamic
+					
+Initial State: The user has logged in and generated or created a task list with task information.
+					
+Input: Task information: \textit{taskName}, \textit{taskType}, \textit{weight}, \textit{deadline} \textit{priority}. The learner's preferred day and time period for the study. The user's current schedule, including scheduled events, and other existing tasks. The working time of the Pomodoro Timmer setting for each learning task.
+					
+Output: A complete schedule of the learning program, including the name, weight, deadline, priority, sub-tasks under each task, scheduled start and end times of Pomodoro Timmer for each sub-tasks. Display task and sub-task time periods and information on other external platforms.
+
+Test Case Derivation: Select different study periods, days, and various Pomodoro interval settings to assess the system's ability to handle invalid or incomplete input data. Using valid data, confirm that the system can generate a comprehensive study plan for each task, considering preferred study times and schedules while avoiding conflicts with existing activities. Export study schedules to an external calendar program and test the system's capability to accurately and completely export study plans to other calendar applications. In cases of task scheduling conflicts, verify that the system can provide solutions, such as suggesting alternative study times or allocating sub-tasks to different days.
+
+How test will be performed: Tests can be performed using automated testing frameworks to simulate various scenarios and input data. Write unit tests for different components and functional modules of the system. Verify that the system is able to generate the correct study plan based on different inputs. And that it can be successfully and completely exported to other calendar applications. Verify that the system is able to effectively resolve schedule conflicts and provide sound advice.
+
+\item{TFR30-S6\\} \label{TFR30-S6}
+
+Control: Functional, Manual, Dynamic
+
+Initial State: The user has logged in and generated a study schedule plan and a task list with task information and is on Pomodoro Timmer page.
+					
+Input: The generated task list with sub-tasks and the information of each sub-task, includes \textit{taskName}, \textit{startTime}, and \textit{endTime}.
+					
+Output: A list of Pomodoro Timmers of subtasks.
+
+Test Case Derivation: Using a valid list of sub-tasks and valid Pomodoro clock settings, e.g. 25 minutes of work and 5 minutes of rest, detect that each sub-task has a corresponding Pomodoro clock with work and rest time slots. Using an empty list of sub-tasks, the output should be that no Pomodoro clocks are created and no warning messages or errors appear. Entering an invalid sub-task list or invalid Pomodoro clock settings, the user should get a warning message that no Pomodoro clock can be created.
+					
+How test will be performed: Testing can be performed either by manually operating the system or by automated test scripts. The flow of the learning cycle should be tested to ensure that the Pomodoro clock is working as expected, and the user interactions and system responses should be tested to ensure that the system can correctly handle the user's actions and changes in the task state. Tests should cover different scenarios, including normal operation, incorrect operation, and edge cases.
+
+\item{TFR31-S7\\} \label{TFR31-S7}
+
+Control: Functional, Manual, Dynamic
+					
+Initial State: The user has logged in and generated a study schedule plan and a task list with task information and is on Pomodoro Timmer page.
+					
+Input: The user's personal account profile information, and the user's contacts list, which includes a list of contacts that the user has added and their account information. The user's and the contacts' study schedules, including course lists, task lists, and sub-task schedule lists.
+					
+Output: The system will match the study schedules of the user and contacts and output a set of matched contact lists.
+
+Test Case Derivation: Simulate the user to enter his study plan and request the system to match contacts. Check if the system has successfully matched contacts that fit the study plan and outputs a list of matches. If the user sends a match request, the user's contacts should be able to receive a notification of the request, and after the contacts agree, the system should generate a schedule and a link to the online learning session and send it to the user and the contacts who accepted the request. If the contact does not accept the match request, the contact can choose to leave a message for the user, after which the user should be able to receive an alert message indicating that the match was not successful and the corresponding message from the contact.
+					
+How test will be performed: Testing is performed by manually simulating the user's interaction with the system; the testing steps include entering a learning plan, selecting matching contacts, viewing match results, and scheduling an online learning session. The testing process should cover a variety of scenarios, including matching under normal circumstances, no-match scenarios, updating of the contacts list, and correctness of session scheduling. The system should also handle boundary cases of input data, such as empty learning plans, incomplete user information, etc.
+\end{enumerate}
 \subsection{Tests for Nonfunctional Requirements}
 
-
-
-
-\subsubsection{Area of Testing1}
+\subsubsection{Look and feel}
 		
-\paragraph{Title for Test}
 
 \begin{enumerate}
 
-\item{test-id1\\}
+\item{TAR-1\\}\label{TAR-1}
 
-Type: Functional, Dynamic, Manual, Static etc.
+Type: Dynamic, Manual
 					
-Initial State: 
+Initial State: The web application is launched.
 					
-Input/Condition: 
+Input/Condition: Users are asked to read the text on each page.
 					
-Output/Result: 
+Output/Result:  \hyperref[MIN_UNDERSTAND]{\texttt{MIN\_UNDERSTAND\%}} of users reporting that all the texts are legible.
 					
-How test will be performed: 
+How test will be performed: The web application displayed with screens with various resolutions and sizes. \hyperref[MIN_TESTER_NUM]{\texttt{MIN\_TESTER\_NUM}} users are asked to read the texts and report any unclear typography.
 					
-\item{test-id2\\}
+\item{TAR-2\\}\label{TAR-2}
 
-Type: Functional, Dynamic, Manual, Static etc.
+Type: Dynamic, Manual
 					
-Initial State: 
+Initial State: The web application is launched.
 					
-Input: 
+Input/Condition: Users are asked to observe color on each page.
 					
-Output: 
+Output/Result: \hyperref[MIN_UNDERSTAND]{\texttt{MIN\_UNDERSTAND\%}} of users comfortable with the color used.
 					
-How test will be performed: 
+How test will be performed: \hyperref[MIN_TESTER_NUM]{\texttt{MIN\_TESTER\_NUM}} users are asked to observe the color and report any distracting or overwhelming color palette.
+
+\item{TAR-3\\}\label{TAR-3}
+
+Type: Dynamic, Manual
+					
+Initial State: The web application is launched.
+					
+Input/Condition: Users are asked to interpret icons and graphics on each page.
+					
+Output/Result: \hyperref[MIN_UNDERSTAND]{\texttt{MIN\_UNDERSTAND\%}} of users able to understand the meaning of each icon and graphic as designed.
+					
+How test will be performed: \hyperref[MIN_TESTER_NUM]{\texttt{MIN\_TESTER\_NUM}} users are asked what they think each icon and graphic means. Any mismatch from the UI designer's intention would be recorded.
+
+\item{TAR-4\\}\label{TAR-4}
+
+Type: Dynamic, Manual
+					
+Initial State: The web application is launched.
+					
+Input/Condition: Users are asked to observe the layout of each page.
+					
+Output/Result: \hyperref[MIN_UNDERSTAND]{\texttt{MIN\_UNDERSTAND\%}} of users comfortable with the payout.
+					
+How test will be performed: The web application is launched with different devices including smartphones, tablets, and desktops.  \hyperref[MIN_TESTER_NUM]{\texttt{MIN\_TESTER\_NUM}} users are asked to point out any unresponsive, out-of-margin, or compressed elements.
+
+\item{TSTR-1\\}\label{TSTR-1}
+
+Type: Dynamic, Manual
+					
+Initial State: The web application is launched.
+					
+Input/Condition: Users are asked to point out the menus and navigation bars.
+					
+Output/Result: \hyperref[MIN_UNDERSTAND]{\texttt{MIN\_UNDERSTAND\%}} of users able to locate menus and navigation tools without confusion.
+					
+How test will be performed: \hyperref[MIN_TESTER_NUM]{\texttt{MIN\_TESTER\_NUM}} users are asked to point out the menus and navigation bars without assistance.
+
+\item{TSTR-2\\}\label{TSTR-2}
+
+Type: Dynamic, Manual
+					
+Initial State: The web application is launched.
+					
+Input/Condition: Users are asked to point out inconsistent UI elements.
+					
+Output/Result: \hyperref[MAX_ELEMENT_BAD]{\texttt{MAX\_ELEMENT\_BAD}} inconsistent UI elements found.
+					
+How test will be performed: \hyperref[MIN_TESTER_NUM]{\texttt{MIN\_TESTER\_NUM}} users are asked to explore the application and point out any inconsistent UI elements that break the harmony.
+
+\item{TSTR-3\\}\label{TSTR-3}
+
+Type: Dynamic, Manual
+					
+Initial State: The web application is launched.
+					
+Input/Condition: Users are asked to click each interactive UI element.
+					
+Output/Result: \hyperref[MAX_ELEMENT_BAD]{\texttt{MAX\_ELEMENT\_BAD}} interactive UI elements being unresponsive.
+					
+How test will be performed: \hyperref[MIN_TESTER_NUM]{\texttt{MIN\_TESTER\_NUM}} users are asked to explore the application and report any unresponsive interactive elements.
+
+\item{TSTR-4\\}\label{TSTR-4}
+
+Type: Dynamic, Manual
+					
+Initial State: The web application is launched.
+					
+Input/Condition: Users are asked to adjust font size.
+					
+Output/Result: \hyperref[MAX_UNSATISFIED]{\texttt{MAX\_UNSATISFIED\%}} of users reporting unsuitable font size.
+					
+How test will be performed: \hyperref[MIN_TESTER_NUM]{\texttt{MIN\_TESTER\_NUM}} users are asked to report how they like the default font size and attempt to adjust the font size to their preference. Report if the adjusted font still causes difficulty in reading.
+
+\item{TSTR-5\\}\label{TSTR-5}
+
+Type: Dynamic, Manual
+					
+Initial State: The web application is launched.
+					
+Input/Condition: Users are asked to perform a task while an animation is displayed.
+					
+Output/Result: \hyperref[MIN_UNDERSTAND]{\texttt{MIN\_UNDERSTAND\%}} of users who could perform the task distracted.
+					
+How test will be performed: \hyperref[MIN_TESTER_NUM]{\texttt{MIN\_TESTER\_NUM}} users are asked to perform a task that involves the animation display part of the screen.  They are asked to report if they feel the animation is intrusive or distracting.
+\end{enumerate}
+
+\subsubsection{Usability and Humanity}
+
+\begin{enumerate}
+
+Type: Dynamic, Manual
+					
+Initial State: The web application is launched.
+					
+Input/Condition: Users are asked to navigate to a required page.
+					
+Output/Result: \hyperref[MIN_UNDERSTAND]{\texttt{MIN\_UNDERSTAND\%}} of users able to navigate to a required page without confusion.
+					
+How test will be performed: \hyperref[MIN_TESTER_NUM]{\texttt{MIN\_TESTER\_NUM}} users are asked to navigate to a required page without assistance within a reasonable amount of time undergoing minimum trial and error.
+
+\item{TUHR-2\\}\label{TUHR-2}
+
+Type: Dynamic, Manual
+					
+Initial State: The web application is launched.
+					
+Input/Condition: Users are asked to perform a core function.
+					
+Output/Result: \hyperref[MIN_UNDERSTAND]{\texttt{MIN\_UNDERSTAND\%}} of users able to perform a core function.
+					
+How the test will be performed: \hyperref[MIN_TESTER_NUM]{\texttt{MIN\_TESTER\_NUM}} users are asked to perform a core function like generating a study plan without assistance within a reasonable amount of time undergoing minimum trial and error.
+\item{TUHR-3\\}\label{TUHR-3}
+
+Type: Dynamic, Manual
+					
+Initial State: The web application is launched.
+					
+Input/Condition: Users are asked to inspect the grammar of texts on the page.
+					
+Output/Result: \hyperref[MAX_BAD_GRAMMAR]{\texttt{MAX\_BAD\_GRAMMAR}} grammar mistakes found.
+					
+How test will be performed: \hyperref[MIN_TESTER_NUM]{\texttt{MIN\_TESTER\_NUM}} users are asked to report grammar mistakes in all the text visible in this web application.
+
+\item{TUHR-4\\}\label{TUHR-4}
+
+Type: Dynamic, Manual
+					
+Initial State: The web application is launched.
+					
+Input/Condition: Users are asked to inspect for offensive messages on the page.
+					
+Output/Result: \hyperref[MAX_OFFENSIVE]{\texttt{MAX\_OFFENSIVE}} offensive messages found.
+					
+How test will be performed: \hyperref[MIN_TESTER_NUM]{\texttt{MIN\_TESTER\_NUM}} users are asked to report offensive messages in all the text visible in this web application.
+
+\item{TUHR-5\\}\label{TUHR-5}
+
+Type: Dynamic, Manual
+					
+Initial State: The web application is launched.
+					
+Input/Condition: Users are asked to observe color combinations on the page.
+					
+Output/Result: \hyperref[MAX_COLOR_AMBIGUOUS]{\texttt{MAX\_COLOR\_AMBIGUOUS}} indistinguishable color combinations found.
+					
+How test will be performed: \hyperref[MIN_TESTER_NUM]{\texttt{MIN\_TESTER\_NUM}} users are asked to report indistinguishable color combinations in this web application. This user group should include people with color blindness.
+
 
 \end{enumerate}
 
@@ -840,54 +1240,76 @@ How test will be performed:
 
 \subsection{Traceability Between Test Cases and Requirements}
 
+\wss{Provide a table that shows which test cases are supporting which
+  requirements.}
 
 \section{Unit Test Description}
 
+\wss{This section should not be filled in until after the MIS (detailed design
+  document) has been completed.}
 
+\wss{Reference your MIS (detailed design document) and explain your overall
+philosophy for test case selection.}  
 
-
-
-
+\wss{To save space and time, it may be an option to provide less detail in this section.  
+For the unit tests you can potentially layout your testing strategy here.  That is, you 
+can explain how tests will be selected for each module.  For instance, your test building 
+approach could be test cases for each access program, including one test for normal behaviour 
+and as many tests as needed for edge cases.  Rather than create the details of the input 
+and output here, you could point to the unit testing code.  For this to work, you code 
+needs to be well-documented, with meaningful names for all of the tests.}
 
 \subsection{Unit Testing Scope}
 
-
+\wss{What modules are outside of the scope.  If there are modules that are
+  developed by someone else, then you would say here if you aren't planning on
+  verifying them.  There may also be modules that are part of your software, but
+  have a lower priority for verification than others.  If this is the case,
+  explain your rationale for the ranking of module importance.}
 
 \subsection{Tests for Functional Requirements}
 
-
+\wss{Most of the verification will be through automated unit testing.  If
+  appropriate specific modules can be verified by a non-testing based
+  technique.  That can also be documented in this section.}
 
 \subsubsection{Module 1}
 
+\wss{Include a blurb here to explain why the subsections below cover the module.
+  References to the MIS would be good.  You will want tests from a black box
+  perspective and from a white box perspective.  Explain to the reader how the
+  tests were selected.}
 
 \begin{enumerate}
+\item{TPAR-1\\}\label{TPAR-1}
 
 \item{test-id1\\}
 
-Type: 
-
+Type: \wss{Functional, Dynamic, Manual, Automatic, Static etc. Most will
+  be automatic}
 					
-Initial State: 
+Input/Condition: A course outline is uploaded.
 					
 Input: 
 					
-Output: 
+Output: \wss{The expected result for the given inputs}
 
-Test Case Derivation: 
+Test Case Derivation: \wss{Justify the expected value given in the Output field}
 
 How test will be performed: 
 					
 \item{test-id2\\}
 
-Type: 
+Type: \wss{Functional, Dynamic, Manual, Automatic, Static etc. Most will
+  be automatic}
 					
 Initial State: 
 					
 Input: 
 					
-Output: 
+Output: \wss{The expected result for the given inputs}
 
-Test Case Derivation: 
+Test Case Derivation: \wss{Justify the expected value given in the Output field}
 
 How test will be performed: 
 
@@ -895,43 +1317,62 @@ How test will be performed:
     
 \end{enumerate}
 
-\subsubsection{Module 2}
+\subsubsection{Operational  and Environmental}
 
-...
-
-\subsection{Tests for Nonfunctional Requirements}
-
-
-
-
-
-\subsubsection{Module ?}
-		
 \begin{enumerate}
+\item{TOER-1\\}\label{TOER-1}
 
-\item{test-id1\\}
+Type: Dynamic, Automated
+					
+Initial State: The web application is launched.
+					
+Input/Condition: Send requests to supported calendar APIs.
+					
+Output/Result: \hyperref[MIN_API_SUCCESS]{\texttt{MIN\_API\_SUCCESS\%}} of successful API requests.
+					
+How test will be performed: An automated script is used to send requests to calendar APIs and record the result.
 
-Type: 
-					
-Initial State: 
-					
-Input/Condition: 
-					
-Output/Result: 
-					
-How test will be performed: 
-					
-\item{test-id2\\}
 
-Type: Functional, Dynamic, Manual, Static etc.
+\item{TOER-2\\}\label{TOER-2}
+
+Type: Dynamic, Automated
 					
-Initial State: 
+Initial State: The web application is launched.
 					
-Input: 
+Input/Condition: Run regression test suites.
 					
-Output: 
+Output/Result: \hyperref[MIN_REGRESSION_PASS]{\texttt{MIN\_REGRESSION\_PASS\%}} of passed regression tests.
 					
-How test will be performed: 
+How test will be performed: An automated script is used to run regression tests.
+
+\end{enumerate}
+\subsubsection{Maintainability and Support}
+
+\begin{enumerate}
+\item{TSPR-1\\}\label{TSPR-1}
+
+Type: Dynamic, Manual
+					
+Initial State: The web application is launched.
+					
+Input/Condition: Users are asked to contact support.
+					
+Output/Result: \hyperref[MAX_SUPPORT_STEP]{\texttt{MAX\_SUPPORT\_STEP}} steps needed to reach help.
+					
+How test will be performed: \hyperref[MIN_TESTER_NUM]{\texttt{MIN\_TESTER\_NUM}} users are asked to reach the helpdesk through email, phone, and chatbot and record the steps it takes from the main page to help.
+
+
+\item{TSPR-2\\}\label{TSPR-2}
+
+Type: Dynamic, Automatic
+					
+Initial State: The web application is launched.
+					
+Input/Condition: User feedback is inputted.
+					
+Output/Result: User input in database.
+					
+How test will be performed: A script is used to input user feedback and check if this feedback gets stored in the database.
 
 \end{enumerate}
 
@@ -941,11 +1382,11 @@ How test will be performed:
 
 \subsection{Traceability Between Test Cases and Modules}
 
-
+\wss{Provide evidence that all of the modules have been considered.}
 				
 \bibliographystyle{plainnat}
 
-\bibliography{../../refs/References}
+
 
 \newpage
 
@@ -955,12 +1396,52 @@ This is where you can place additional information.
 
 \subsection{Symbolic Parameters}
 
-The definition of the test cases will call for SYMBOLIC\_CONSTANTS.
-Their values are defined in this section for easy maintenance.
+\begin{longtable}{|l|l|l|p{5cm}|}
 
-\subsection{Usability Survey Questions?}
+\hline
+parameter & value & unit & description\\
+\hline
+\texttt{MIN\_UNDERSTAND\%}\label{MIN_UNDERSTAND} & 95 & N/A & the minimum percentage of testers who can understand among all testers\\
+\hline
+\texttt{MAX\_UNSATISFIED\%}\label{MAX_UNSATISFIED} & 5 & N/A & the maximum percentage of testers reporting uncomfortable\\
+\hline
+\texttt{MAX\_TRIAL\_TIME}\label{MAX_TRIAL_TIME} & 1200 & \texttt{s} & the maximum allowed trial time\\
+\hline
+\texttt{MIN\_TESTER\_NUM}\label{MIN_TESTER_NUM} &  20& N/A & the minimum number of testers needed\\
+\hline
+\texttt{MAX\_BAD\_GRAMMAR}\label{MAX_BAD_GRAMMAR} & 0& N/A & the maximum occurrence of grammar mistakes allowed \\
+\hline
+\texttt{MAX\_OFFENSIVE}\label{MAX_OFFENSIVE} & 0& N/A & the maximum occurrence of offensive messages allowed\\
+\hline
+\texttt{MAX\_ELEMENT\_BAD}\label{MAX_ELEMENT_BAD} & 0& N/A & the maximum occurrence of inconsistent 
+ or unresponsive elements allowed\\
+\hline
+\texttt{MAX\_ATTACK\_SUCCESS}\label{MAX_ATTACK_SUCCESS} & 0& N/A & the maximum occurrence of successful attack\\
+\hline
+\texttt{MAX\_COLOR\_AMBIGUOUS}\label{MAX_COLOR_AMBIGUOUS} & 0& N/A & the maximum occurrence of indistinguishable color combinations allowed\\
+\hline
+\texttt{MAX\_TIME\_PROCESS}\label{MAX_TIME_PROCESS} & 2& s & the maximum processing time for a core function\\
+\hline
+\texttt{MIN\_PRECISION\%}\label{MIN_PRECISION} & 95 & N/A & the minimum precision of the algorithm\\
+\hline
+\texttt{MIN\_OPERABLE\%}\label{MIN_OPERABLE} & 95 & N/A & the minimum percentage of system being operable \\
+\hline
+\texttt{MIN\_API\_SUCCESS\%}\label{MIN_API_SUCCESS} & 95 & N/A &  the minimum percentage of successful API calls\\
+\hline
+\texttt{MIN\_REGRESSION\_PASS\%}\label{MIN_REGRESSION_PASS} & 100  & N/A &  the minimum percentage of successful API calls\\
+\hline
+\texttt{MAX\_RESPONSE\_TIME}\label{MAX_RESPONSE_TIME} & 24 & h & The maximum issue resolve response time\\
+\hline
+\texttt{MIN\_LANGUAGE}\label{MIN_LANGUAGE} & 5& N/A & The minimum number of languages that can be translated\\
+\hline
+\texttt{MAX\_SUPPORT\_STEP}\label{MAX_SUPPORT_STEP} & 5&N/A& The maximum steps needed for asking for support\\
 
+\hline
+\end{longtable}
 
+\subsection{Usability Survey Questions}
+
+\wss{This is a section that would be appropriate for some projects.}
 
 \newpage{}
 \section*{Appendix --- Reflection}
@@ -968,6 +1449,13 @@ Their values are defined in this section for easy maintenance.
 The information in this section will be used to evaluate the team members on the
 graduate attribute of Lifelong Learning.  Please answer the following questions:
 
+\newpage{}
+\section*{Appendix --- Reflection}
+
+\wss{This section is not required for CAS 741}
+
+The information in this section will be used to evaluate the team members on the
+graduate attribute of Lifelong Learning.  Please answer the following questions:
 
 \begin{enumerate}
   \item What knowledge and skills will the team collectively need to acquire to
@@ -991,7 +1479,6 @@ graduate attribute of Lifelong Learning.  Please answer the following questions:
   mastering the skill?  Of the identified approaches, which will each team
   member pursue, and why did they make this choice?
 
-
   \begin{table}[]
     \begin{tabular}{| p{3cm} | p{3.5cm} | p{2cm} | p{5cm} |}
     \hline
@@ -1009,8 +1496,6 @@ graduate attribute of Lifelong Learning.  Please answer the following questions:
     \hline
     \end{tabular}
 \end{table}
-
-
 \end{enumerate}
 
 \end{document}
