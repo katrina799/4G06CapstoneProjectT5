@@ -3,6 +3,7 @@
 \usepackage{booktabs}
 \usepackage{tabularx}
 \usepackage{hyperref}
+\usepackage{float}
 \hypersetup{
     colorlinks,
     citecolor=blue,
@@ -36,29 +37,16 @@ Date 2 & 1.1 & Notes\\
 \end{tabularx}
 
 ~\\
-\wss{The intention of the VnV plan is to increase confidence in the software.
-However, this does not mean listing every verification and validation technique
-that has ever been devised.  The VnV plan should also be a \textbf{feasible}
-plan. Execution of the plan should be possible with the time and team available.
-If the full plan cannot be completed during the time available, it can either be
-modified to ``fake it'', or a better solution is to add a section describing
-what work has been completed and what work is still planned for the future.}
-
-\wss{The VnV plan is typically started after the requirements stage, but before
-the design stage.  This means that the sections related to unit testing cannot
-initially be completed.  The sections will be filled in after the design stage
-is complete.  the final version of the VnV plan should have all sections filled
-in.}
 
 \newpage
 
 \tableofcontents
 
 \listoftables
-\wss{Remove this section if it isn't needed}
+
 
 \listoffigures
-\wss{Remove this section if it isn't needed}
+
 
 \newpage
 
@@ -69,160 +57,212 @@ in.}
   \toprule		
   \textbf{symbol} & \textbf{description}\\
   \midrule 
-  T & Test\\
+      UI & User Interface \\
+      ML & Machine Learning\\
+      API & Application Programming Interface\\
+      HTTP & Hypertext Transfer Protocol\\
+      PDF & Portable Document Format\\
+      .csv & Comma-Separated Values \\
+      .txt & Text file\\
   \bottomrule
 \end{tabular}\\
-
-\wss{symbols, abbreviations, or acronyms --- you can simply reference the SRS
-  \citep{SRS} tables, if appropriate}
-
-\wss{Remove this section if it isn't needed}
 
 \newpage
 
 \pagenumbering{arabic}
 
-This document ... \wss{provide an introductory blurb and roadmap of the
-  Verification and Validation plan}
+This document outlines the Verification and Validation (V\&V) plan for the Course Buddy project developed by Team \#5, Overwatch League. The V\&V plan is a critical component of our project management and quality assurance processes, ensuring that Course Buddy not only meets its specified requirements but also fulfills the needs and expectations of its users and stakeholders.
 
+\paragraph{Roadmap}
+The V\&V plan is structured as follows:
+\begin{enumerate}
+    \item \textbf{Symbols, Abbreviations, and Acronyms}
+    \item \textbf{General Information}
+    \item \textbf{Plan} 
+    \item \textbf{System Test Description} 
+    \item \textbf{Unit Test Description}
+\end{enumerate}
 \section{General Information}
 
 \subsection{Summary}
 
-\wss{Say what software is being tested.  Give its name and a brief overview of
-  its general functions.}
+
 
 \subsection{Objectives}
 
-\wss{State what is intended to be accomplished.  The objective will be around
-  the qualities that are most important for your project.  You might have
-  something like: ``build confidence in the software correctness,''
-  ``demonstrate adequate usability.'' etc.  You won't list all of the qualities,
-  just those that are most important.}
 
-\wss{You should also list the objectives that are out of scope.  You don't have 
-the resources to do everything, so what will you be leaving out.  For instance, 
-if you are not going to verify the quality of usability, state this.  It is also 
-worthwhile to justify why the objectives are left out.}
 
-\wss{The objectives are important because they highlight that you are aware of 
-limitations in your resources for verification and validation.  You can't do everything, 
-so what are you going to prioritize?  As an example, if your system depends on an 
-external library, you can explicitly state that you will assume that external library 
-has already been verified by its implementation team.}
 
 \subsection{Relevant Documentation}
 
-\wss{Reference relevant documentation.  This will definitely include your SRS
-  and your other project documents (design documents, like MG, MIS, etc).  You
-  can include these even before they are written, since by the time the project
-  is done, they will be written.}
+
 
 \citet{SRS}
 
-\wss{Don't just list the other documents.  You should explain why they are relevant and 
-how they relate to your VnV efforts.}
+
 
 \section{Plan}
 
-\wss{Introduce this section.   You can provide a roadmap of the sections to
-  come.}
+This section outlines the comprehensive strategy for verifying and validating the Course Buddy software, ensuring it aligns with specified requirements and design standards. The plan spans from team roles in verification to the utilization of various testing and verification tools.
 
 \subsection{Verification and Validation Team}
-
-\wss{Your teammates.  Maybe your supervisor.
-  You should do more than list names.  You should say what each person's role is
-  for the project's verification.  A table is a good way to summarize this information.}
+     \begin{table}[H]
+     \centering
+     \begin{tabular}{l p{10cm}}
+          \toprule
+          \textbf{Name} & \textbf{Role and Specific Duties}\\
+          \midrule
+          Jinyao Qin & \textbf{Lead Verifier}: Oversees the entire process, coordinates with other team members, and ensures all verification steps are followed diligently.\\
+          
+          Qianni Wang & \textbf{Implementation Specialist}: Reviews the codebase to ensure it aligns with the documented requirements, also verifies the code's functionality, performance, and security aspects.\\
+          
+          Qiang Gao & \textbf{Implementation Specialist}: same as Qianni Wang\\
+          
+          Chenwei Song & \textbf{Manual Test Engineer}: Responsible for manual test cases, ensuring that all tests run in different environments, and reporting the results in an understandable format for the team.\\
+          
+          Shuting Shi & \textbf{Test Automation Engineer}: Responsible for automating test cases, ensuring that all tests run in different environments, and reporting the results in an understandable format for the team.\\
+          \bottomrule
+        \end{tabular}
+     \caption{Verification and Validation Team Members and Their Roles}
+     \end{table}
 
 \subsection{SRS Verification Plan}
 
-\wss{List any approaches you intend to use for SRS verification.  This may include
-  ad hoc feedback from reviewers, like your classmates, or you may plan for 
-  something more rigorous/systematic.}
+For the verification of the Software Requirements Specification (SRS) document, the following approaches will be adopted:
 
-\wss{Maybe create an SRS checklist?}
+\begin{enumerate}
+    \item \textbf{Peer Review:} The SRS will be reviewed by team members and classmates to identify any inconsistencies, ambiguities, or missing requirements.
+    \item \textbf{Expert Review:} Experts in software development will be consulted to ensure the requirements are complete and feasible.
+    \item \textbf{Supervisor Review:} The SRS will be reviewed by our supervisor, who can provide valuable insights from a strategic and technical perspective.
+    \item \textbf{Client Feedback:} The document will be shared with the client or stakeholders for their feedback, ensuring alignment with their expectations and needs.
+    \item \textbf{Automated Analysis Tools:} Tools such as requirement management software will be used for tracing and managing requirements systematically.
+\end{enumerate}
+
+Additionally, an SRS checklist will be utilized to systematically verify the content of the SRS document:
+Please see our \href{https://github.com/wangq131/4G06CapstoneProjectT5/blob/main/docs/SRS/SRS.pdf#page=2}{SRS.pdf} for more details.
+
 
 \subsection{Design Verification Plan}
 
-\wss{Plans for design verification}
+The design verification for our project will focus on ensuring that the design is user-friendly, intuitive, and aligns with the architectural requirements specified in the SRS. The verification plan will include the following key activities:
 
-\wss{The review will include reviews by your classmates}
+\begin{enumerate}
+    \item \textbf{Peer Reviews:} The design documents and models will be reviewed by team members and classmates to critique and provide feedback on the design's usability, intuitiveness, and adherence to architectural requirements.
+    \item \textbf{Supervisor Review:} The design will be presented to the project supervisor for a thorough review, focusing on adherence to technical specifications and project objectives.
+    \item \textbf{Design Walkthroughs:} Scheduled sessions where the design team presents the design to the stakeholders, including peers and supervisors, for feedback and suggestions.
+    \item \textbf{Prototype Testing:} Early versions of the design will be tested to gather quick feedback on the design's effectiveness and user experience.
+    \item \textbf{Consistency Check:} Ensuring that the design remains consistent with the requirements and objectives outlined in the SRS document.
+\end{enumerate}
 
-\wss{Create a checklists?}
+To comprehensively verify the design, the following checklist will be used:
+
+\begin{enumerate}
+    \item \textbf{Design Documentation Review:}
+    \begin{itemize}
+        \item Check if the design documentation is complete and clearly describes the architecture, components, and interfaces.
+        \item Ensure that the design aligns with the project's objectives and requirements specified in the SRS.
+    \end{itemize}
+    
+    \item \textbf{User Interface (UI) and User Experience (UX) Evaluation:}
+    \begin{itemize}
+        \item Verify that the UI design is intuitive and user-friendly.
+        \item Ensure UI consistency across different parts of the application.
+        \item Assess the UX for compliance with common usability standards and practices.
+    \end{itemize}
+
+    \item \textbf{Architectural Conformity:}
+    \begin{itemize}
+        \item Confirm that the system architecture supports all the required functionalities.
+        \item Check for scalability, maintainability, and flexibility of the design.
+    \end{itemize}
+
+    \item \textbf{Performance and Security Review:}
+    \begin{itemize}
+        \item Ensure that the design incorporates adequate performance optimizations.
+        \item Review the design for potential security vulnerabilities and data protection measures.
+    \end{itemize}
+
+    \item \textbf{Compliance with Standards:}
+    \begin{itemize}
+        \item Verify adherence to relevant industry and design standards.
+    \end{itemize}
+
+    \item \textbf{Feedback Integration:}
+    \begin{itemize}
+        \item Check that feedback from previous reviews (by classmates, peers, or stakeholders) has been adequately incorporated into the design.
+    \end{itemize}
+\end{enumerate}
+
 
 \subsection{Verification and Validation Plan Verification Plan}
 
-\wss{The verification and validation plan is an artifact that should also be
-verified.  Techniques for this include review and mutation testing.}
+The verification and validation (V\&V) plan for our project includes ensuring the integrity and effectiveness of the V\&V processes themselves. Given the importance of this plan in the overall project quality assurance, the following approaches will be employed:
 
-\wss{The review will include reviews by your classmates}
+\begin{enumerate}
+    \item \textbf{Peer Review:} The V\&V plan will be reviewed by team members and classmates to identify any omissions or areas needing improvement.
+    \item \textbf{Mutation Testing:} This technique will be applied to evaluate the ability of our test cases to detect faults deliberately injected into the code.
+    \item \textbf{Iterative Feedback Incorporation:} Feedback from all review sessions and testing phases will be systematically incorporated to refine the V\&V plan.
+\end{enumerate}
 
-\wss{Create a checklists?}
+To systematically verify the V\&V plan, the following checklist will be used:
+
+\begin{itemize}
+    \item Is the plan comprehensive, covering all aspects of software verification and validation?
+    \item Are the responsibilities and roles in the V\&V process clearly defined?
+    \item Does the plan include a variety of testing methods (e.g., unit testing, integration testing, system testing)?
+    \item Is there a clear process for incorporating feedback and continuous improvement in the V\&V process?
+    \item Are there criteria defined for the success of each testing phase?
+    \item Is mutation testing included to assess the thoroughness of the test cases?
+    \item Are there measures in place to track and resolve any identified issues during the V\&V process?
+    \item Does the plan align with the project's schedule, resources, and constraints?
+\end{itemize}
 
 \subsection{Implementation Verification Plan}
 
-\wss{You should at least point to the tests listed in this document and the unit
-  testing plan.}
+The Implementation Verification Plan will ensure that the software implementation adheres to the requirements and design specifications outlined in the SRS. Key components of this plan include:
 
-\wss{In this section you would also give any details of any plans for static
-  verification of the implementation.  Potential techniques include code
-  walkthroughs, code inspection, static analyzers, etc.}
+\begin{itemize}
+    \item \textbf{Unit Testing:} A comprehensive suite of unit tests, as detailed in the project's test plan, will validate individual components or modules of the software. /textit{PyTest}, a flexible and powerful testing tool, will be used for writing and executing these tests.
+    \item \textbf{Static Analysis:} /textit{Pylint} and /textit{Flake8} will be employed for static code analysis to identify potential bugs, security vulnerabilities, and issues with code style and complexity.
+    \item \textbf{Code Reviews and Walkthroughs:} Regularly scheduled code reviews and walkthroughs with team members and supervisors to inspect code quality, readability, and adherence to the Flask framework's best practices and design patterns.
+    \item \textbf{Continuous Integration:} Automated build and testing processes will be implemented using tools like GitHub Actions, to ensure continuous code quality, integration, and deployment.
+    \item \textbf{Performance Testing:} The use of tools like Locust for load testing will help evaluate the application's performance under various conditions, particularly focusing on how the Flask application handles concurrent requests and data processing.
+\end{itemize}
 
 \subsection{Automated Testing and Verification Tools}
 
-\wss{What tools are you using for automated testing.  Likely a unit testing
-  framework and maybe a profiling tool, like ValGrind.  Other possible tools
-  include a static analyzer, make, continuous integration tools, test coverage
-  tools, etc.  Explain your plans for summarizing code coverage metrics.
-  Linters are another important class of tools.  For the programming language
-  you select, you should look at the available linters.  There may also be tools
-  that verify that coding standards have been respected, like flake9 for
-  Python.}
+For automated testing and verification in our Flask/Python project, the following tools will be employed:
 
-\wss{If you have already done this in the development plan, you can point to
-that document.}
+\begin{itemize}
+    \item \textbf{Unit Testing Framework:} /textit{PyTest} will be used for developing and running unit tests.
+    \item \textbf{Profiling and Performance Tools:} Tools like /textit{cProfile} for Python will assist in identifying performance bottlenecks and optimizing code efficiency.
+    \item \textbf{Static Code Analyzers:} /textit{Pylint} and /textit{Flake8} will be used to analyze Python code quality, adherence to coding standards, and identification of potential errors.
+    \item \textbf{Continuous Integration:} GitHub Actions will automate the build, testing, and deployment process, ensuring continuous integration and delivery of the Python codebase.
+    \item \textbf{Linters:} /textit{Flake8} will be used to enforce coding standards.
+\end{itemize}
 
-\wss{The details of this section will likely evolve as you get closer to the
-  implementation.}
 
 \subsection{Software Validation Plan}
 
-\wss{If there is any external data that can be used for validation, you should
-  point to it here.  If there are no plans for validation, you should state that
-  here.}
+The Software Validation Plan will focus on ensuring that the final product meets the requirements and expectations of the stakeholders. Key strategies include:
 
-\wss{You might want to use review sessions with the stakeholder to check that
-the requirements document captures the right requirements.  Maybe task based
-inspection?}
-
-\wss{For those capstone teams with an external supervisor, the Rev 0 demo should 
-be used as an opportunity to validate the requirements.  You should plan on 
-demonstrating your project to your supervisor shortly after the scheduled Rev 0 demo.  
-The feedback from your supervisor will be very useful for improving your project.}
-
-\wss{For teams without an external supervisor, user testing can serve the same purpose 
-as a Rev 0 demo for the supervisor.}
-
-\wss{This section might reference back to the SRS verification section.}
+\begin{itemize}
+    \item \textbf{Beta Testing:} Involvement of selected users in the beta testing phase to provide real-world feedback on the software's functionality and usability.
+    \item \textbf{Stakeholder Review Sessions:} Regular review meetings with stakeholders to confirm that the software meets the intended requirements and use cases.
+    \item \textbf{Demo to Supervisor:} A demonstration of the software to the project supervisor following the Rev 0 demo for feedback and validation.
+    \item \textbf{Reference to SRS Verification:} Aligning the validation activities with the SRS verification efforts to ensure consistency in meeting the documented requirements.
+\end{itemize}
 
 \section{System Test Description}
 	
 \subsection{Tests for Functional Requirements}
 
-\wss{Subsets of the tests may be in related, so this section is divided into
-  different areas.  If there are no identifiable subsets for the tests, this
-  level of document structure can be removed.}
 
-\wss{Include a blurb here to explain why the subsections below
-  cover the requirements.  References to the SRS would be good here.}
 
 \subsubsection{Area of Testing1}
 
-\wss{It would be nice to have a blurb here to explain why the subsections below
-  cover the requirements.  References to the SRS would be good here.  If a section
-  covers tests for input constraints, you should reference the data constraints
-  table in the SRS.}
-		
+
+
 \paragraph{Title for Test}
 
 \begin{enumerate}
@@ -235,9 +275,9 @@ Initial State:
 					
 Input: 
 					
-Output: \wss{The expected result for the given inputs}
+Output: 
 
-Test Case Derivation: \wss{Justify the expected value given in the Output field}
+Test Case Derivation: 
 					
 How test will be performed: 
 					
@@ -249,9 +289,9 @@ Initial State:
 					
 Input: 
 					
-Output: \wss{The expected result for the given inputs}
+Output: 
 
-Test Case Derivation: \wss{Justify the expected value given in the Output field}
+Test Case Derivation: 
 
 How test will be performed: 
 
@@ -263,16 +303,8 @@ How test will be performed:
 
 \subsection{Tests for Nonfunctional Requirements}
 
-\wss{The nonfunctional requirements for accuracy will likely just reference the
-  appropriate functional tests from above.  The test cases should mention
-  reporting the relative error for these tests.  Not all projects will
-  necessarily have nonfunctional requirements related to accuracy}
 
-\wss{Tests related to usability could include conducting a usability test and
-  survey.  The survey will be in the Appendix.}
 
-\wss{Static tests, review, inspections, and walkthroughs, will not follow the
-format for the tests given below.}
 
 \subsubsection{Area of Testing1}
 		
@@ -312,75 +344,54 @@ How test will be performed:
 
 \subsection{Traceability Between Test Cases and Requirements}
 
-\wss{Provide a table that shows which test cases are supporting which
-  requirements.}
 
 \section{Unit Test Description}
 
-\wss{This section should not be filled in until after the MIS (detailed design
-  document) has been completed.}
 
-\wss{Reference your MIS (detailed design document) and explain your overall
-philosophy for test case selection.}  
 
-\wss{To save space and time, it may be an option to provide less detail in this section.  
-For the unit tests you can potentially layout your testing strategy here.  That is, you 
-can explain how tests will be selected for each module.  For instance, your test building 
-approach could be test cases for each access program, including one test for normal behaviour 
-and as many tests as needed for edge cases.  Rather than create the details of the input 
-and output here, you could point to the unit testing code.  For this to work, you code 
-needs to be well-documented, with meaningful names for all of the tests.}
+
+
+
 
 \subsection{Unit Testing Scope}
 
-\wss{What modules are outside of the scope.  If there are modules that are
-  developed by someone else, then you would say here if you aren't planning on
-  verifying them.  There may also be modules that are part of your software, but
-  have a lower priority for verification than others.  If this is the case,
-  explain your rationale for the ranking of module importance.}
+
 
 \subsection{Tests for Functional Requirements}
 
-\wss{Most of the verification will be through automated unit testing.  If
-  appropriate specific modules can be verified by a non-testing based
-  technique.  That can also be documented in this section.}
+
 
 \subsubsection{Module 1}
 
-\wss{Include a blurb here to explain why the subsections below cover the module.
-  References to the MIS would be good.  You will want tests from a black box
-  perspective and from a white box perspective.  Explain to the reader how the
-  tests were selected.}
 
 \begin{enumerate}
 
 \item{test-id1\\}
 
-Type: \wss{Functional, Dynamic, Manual, Automatic, Static etc. Most will
-  be automatic}
+Type: 
+
 					
 Initial State: 
 					
 Input: 
 					
-Output: \wss{The expected result for the given inputs}
+Output: 
 
-Test Case Derivation: \wss{Justify the expected value given in the Output field}
+Test Case Derivation: 
 
 How test will be performed: 
 					
 \item{test-id2\\}
 
-Type: \wss{Functional, Dynamic, Manual, Automatic, Static etc. Most will
-  be automatic}
+Type: 
 					
 Initial State: 
 					
 Input: 
 					
-Output: \wss{The expected result for the given inputs}
+Output: 
 
-Test Case Derivation: \wss{Justify the expected value given in the Output field}
+Test Case Derivation: 
 
 How test will be performed: 
 
@@ -394,12 +405,9 @@ How test will be performed:
 
 \subsection{Tests for Nonfunctional Requirements}
 
-\wss{If there is a module that needs to be independently assessed for
-  performance, those test cases can go here.  In some projects, planning for
-  nonfunctional tests of units will not be that relevant.}
 
-\wss{These tests may involve collecting performance data from previously
-  mentioned functional tests.}
+
+
 
 \subsubsection{Module ?}
 		
@@ -407,8 +415,7 @@ How test will be performed:
 
 \item{test-id1\\}
 
-Type: \wss{Functional, Dynamic, Manual, Automatic, Static etc. Most will
-  be automatic}
+Type: 
 					
 Initial State: 
 					
@@ -438,7 +445,7 @@ How test will be performed:
 
 \subsection{Traceability Between Test Cases and Modules}
 
-\wss{Provide evidence that all of the modules have been considered.}
+
 				
 \bibliographystyle{plainnat}
 
@@ -457,10 +464,17 @@ Their values are defined in this section for easy maintenance.
 
 \subsection{Usability Survey Questions?}
 
-\wss{This is a section that would be appropriate for some projects.}
+
 
 \newpage{}
 \section*{Appendix --- Reflection}
+
+The information in this section will be used to evaluate the team members on the
+graduate attribute of Lifelong Learning.  Please answer the following questions:
+
+\newpage{}
+\section*{Appendix --- Reflection}
+
 
 
 The information in this section will be used to evaluate the team members on the
