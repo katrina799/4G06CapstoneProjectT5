@@ -71,9 +71,9 @@
 \newcommand{\rtheadreqnum}{ADR\refstepcounter{adreqnum}\theadreqnum:}
 \newcommand{\adrrref}[1]{ADR\ref{#1}}
 
-\newcounter{creqnum} %Cultural Requirements number
-\newcommand{\rthecreqnum}{CR\refstepcounter{creqnum}\thecreqnum:}
-\newcommand{\crrref}[1]{CR\ref{#1}}
+\newcounter{ctreqnum} %Cultural Requirements number
+\newcommand{\rthectreqnum}{CTR\refstepcounter{ctreqnum}\thectreqnum:}
+\newcommand{\ctrrref}[1]{CTuR\ref{#1}}
 
 
 \begin{document}
@@ -1044,7 +1044,7 @@ The system should protect authentication data from brute force attacks.
 \end{itemize}
 \section{Cultural Requirements}
 \subsection{Cultural Requirements}
-\begin{itemize}[leftmargin=13.5mm,labelsep=4mm,label=\rthecreqnum]
+\begin{itemize}[leftmargin=13.5mm,labelsep=4mm,label=\rthectreqnum]
     \item The application shall be easily translatable into various languages without causing ambiguity in meaning.\\
     \textbf{Fit Criteria}: The application can be translated into at least \texttt{MIN\_LANGUAGE} languages(Spanish, French, Chinese, Italian and German).\\
     \item The product shall avoid elements such as confusing icons, symbols, or offensive images that might cause controversy in different cultural environments.\\
