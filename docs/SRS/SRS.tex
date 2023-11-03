@@ -38,6 +38,10 @@
 \newcommand{\rthesrnum}{SR\refstepcounter{srnum}\thesrnum:}
 \newcommand{\srref}[1]{SR\ref{#1}}
 
+\newcounter{strnum} %style Requirement number
+\newcommand{\rthestrnum}{STR\refstepcounter{strnum}\thestrnum:}
+\newcommand{\strref}[1]{STR\ref{#1}}
+
 \newcounter{cprnum} %Compliance  Requirement number
 \newcommand{\rthecprnum}{CPR\refstepcounter{cprnum}\thecprnum:}
 \newcommand{\cprref}[1]{CR\ref{#1}}
@@ -59,17 +63,17 @@
 \newcommand{\mrrref}[1]{MR\ref{#1}}
 
 
-\newcounter{sreqnum} %Supportability Requirements number
-\newcommand{\rthesreqnum}{SR\refstepcounter{sreqnum}\thesreqnum:}
-\newcommand{\srrref}[1]{SR\ref{#1}}
+\newcounter{spreqnum} %Supportability Requirements number
+\newcommand{\rthespreqnum}{SPR\refstepcounter{spreqnum}\thespreqnum:}
+\newcommand{\sprrref}[1]{SPR\ref{#1}}
 
-\newcounter{areqnum} %Adaptability Requirements number
-\newcommand{\rtheareqnum}{AR\refstepcounter{areqnum}\theareqnum:}
-\newcommand{\arrref}[1]{AR\ref{#1}}
+\newcounter{adreqnum} %Adaptability Requirements number
+\newcommand{\rtheadreqnum}{ADR\refstepcounter{adreqnum}\theadreqnum:}
+\newcommand{\adrrref}[1]{ADR\ref{#1}}
 
-\newcounter{creqnum} %Cultural Requirements number
-\newcommand{\rthecreqnum}{CR\refstepcounter{creqnum}\thecreqnum:}
-\newcommand{\crrref}[1]{CR\ref{#1}}
+\newcounter{ctreqnum} %Cultural Requirements number
+\newcommand{\rthectreqnum}{CTR\refstepcounter{ctreqnum}\thectreqnum:}
+\newcommand{\ctrrref}[1]{CTuR\ref{#1}}
 
 
 \begin{document}
@@ -93,6 +97,7 @@
 \toprule {\textbf{Date}} & {\textbf{Version}} & {\textbf{Notes}}\\
 \midrule
 Oct 11, 2023 & Revision 0 & First draft of SRS \\
+Nov 1, 2023 & Revision 0.1 & Security update \\
 \bottomrule
 \end{tabularx}
 
@@ -613,6 +618,13 @@ The user should have access to their scheduling information once logged in.
 
 \textbf{Priority:} HIGH
 
+\item 
+The system should provide a mechanism for users to retrieve their passwords in case they forget them.
+
+\textbf{Rationale:} A user who has forgotten their password should be able to recover their account.
+
+\textbf{Priority:} HIGH
+
 \end{itemize}
 
 
@@ -795,11 +807,11 @@ The application's design should be user-friendly and intuitive. Key elements to 
 
 \subsection{Style Requirements}
 The style of the application should make the application easy and clear to use, providing a sense of community for students. Aspects to focus on include:
-\paragraph{SR1:}Navigation: Menus and navigation tools should be logically organized and easy to access. 
-\paragraph{SR2:}Consistency: Elements like buttons, text fields, and icons should maintain a consistent design throughout the application.
-\paragraph{SR3:}Interactivity: Interactive elements like buttons or dropdowns should provide feedback, indicating appropriate responsiveness.
-\paragraph{SR4:}Accessibility: The design should cater to all users, including those with disabilities and elder adults. Features like text-to-speech and adjustable font sizes should be considered.
-\paragraph{SR5:}Animations: Any animations used should be subtle and not distractive so users can focus more on the main content. 
+\paragraph{STR1:}Navigation: Menus and navigation tools should be logically organized and easy to access. 
+\paragraph{STR2:}Consistency: Elements like buttons, text fields, and icons should maintain a consistent design throughout the application.
+\paragraph{STTR3:}Interactivity: Interactive elements like buttons or dropdowns should provide feedback, indicating appropriate responsiveness.
+\paragraph{STR4:}Accessibility: The design should cater to all users, including those with disabilities and elder adults. Features like text-to-speech and adjustable font sizes should be considered.
+\paragraph{STR5:}Animations: Any animations used should be subtle and not distractive so users can focus more on the main content. 
 
 
 
@@ -958,7 +970,7 @@ The released version must pass all known regression tests.
 \end{itemize}
 
 \subsection{Supportability Requirements}
-\begin{itemize}[leftmargin=13mm,labelsep=4mm,label=\rthesreqnum]
+\begin{itemize}[leftmargin=13mm,labelsep=4mm,label=\rthespreqnum]
     \item Users shall have easy access to a helpdesk for support.\\
     \textbf{Fit Criteria}: Users are able to access the email contact, phone contact, and chatbot to address common user questions in \texttt{MAX\_SUPPORT\_STEP} steps.\\
     \item The response time for offering support should be on time corresponding to the support type. \\
@@ -968,7 +980,7 @@ The released version must pass all known regression tests.
 
 \end{itemize}
 \subsection{Adaptability Requirements}
-\begin{itemize}[leftmargin=14mm,labelsep=4mm,label=\rtheareqnum]
+\begin{itemize}[leftmargin=14mm,labelsep=4mm,label=\rtheadreqnum]
     \item The product should be compatible with common systems and \textit{API}s to facilitate seamless integration and data exchange. \\
     \textbf{Fit Criteria}: The product can interact with the \textit{Google} \textit{Calendar} \textit{API} through explicit \textit{HTTP} calls or using the \textit{Google} \textit{Client} \textit{Libraries}. \\
     \item The product should implement modular architecture, allowing for the addition or replacement of components without causing issues.\\
@@ -986,6 +998,11 @@ The system is accessible only if the correct combo of username and password is p
 Users could not access other users' data.
 
 \textbf{Fit Criterion:} Only data linked to the currently logged-in account could be displayed.
+\item
+Ensure data encryption during data transfers to prevent unauthorized access.
+
+\textbf{Fit Criteria:} Data being transferred should be encrypted using industry-standard algorithms, with no plain-text data leaks detected.
+
 \end{itemize}
 \subsection{Integrity Requirements}
 \begin{itemize}[leftmargin=13.5mm,labelsep=4mm,label=\rthesrnum]
@@ -993,6 +1010,11 @@ Users could not access other users' data.
 No Unauthorised entity could modify the database.
 
 \textbf{Fit Criterion:} A group of \texttt{MIN\_TESTER\_NUM} unauthorised users could not modify data.
+\item
+Have a strict role-based access control to prevent unauthorized data manipulation.
+
+\textbf{Fit Criteria:} Different user roles should have differing access levels, with no unauthorized data access incidents.
+
 \end{itemize}
 \subsection{Privacy Requirements}
 \begin{itemize}[leftmargin=13.5mm,labelsep=4mm,label=\rthesrnum]
@@ -1002,13 +1024,27 @@ The system will not release user information to a third party.
 \textbf{Fit Criterion:} The system does not provide user information to a third party.
 \end{itemize}
 \subsection{Audit Requirements}
-N/A
-\subsection{Immunity Requirements}
-N/A
+\begin{itemize}[leftmargin=13.5mm,labelsep=4mm,label=\rthesrnum]
+\item 
+Maintain an audit log of all activities within the application for traceability and accountability.
 
+\textbf{Fit Criteria:} All user and system activities should be logged with time stamps and relevant meta-data.
+
+\end{itemize}  
+\subsection{Immunity Requirements}
+\begin{itemize}[leftmargin=13.5mm,labelsep=4mm,label=\rthesrnum]
+\item 
+Provide regular security patches and updates to the software to rectify known vulnerabilities.
+
+\textbf{Fit Criteria:} No known vulnerability should persist in the system for more than a month without a patch.
+\item
+The system should protect authentication data from brute force attacks.
+
+\textbf{Fit Criteria:} Restriction after a certain number of failed login attempts; option for the user to unlock account via email or phone.
+\end{itemize}
 \section{Cultural Requirements}
 \subsection{Cultural Requirements}
-\begin{itemize}[leftmargin=13.5mm,labelsep=4mm,label=\rthecreqnum]
+\begin{itemize}[leftmargin=13.5mm,labelsep=4mm,label=\rthectreqnum]
     \item The application shall be easily translatable into various languages without causing ambiguity in meaning.\\
     \textbf{Fit Criteria}: The application can be translated into at least \texttt{MIN\_LANGUAGE} languages(Spanish, French, Chinese, Italian and German).\\
     \item The product shall avoid elements such as confusing icons, symbols, or offensive images that might cause controversy in different cultural environments.\\
