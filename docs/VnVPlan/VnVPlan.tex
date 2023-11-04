@@ -1,11 +1,8 @@
 \documentclass[12pt, titlepage]{article}
 
-\usepackage{enumitem}
-\usepackage{enumitem}
 \usepackage{booktabs}
 \usepackage{tabularx}
 \usepackage{hyperref}
-\usepackage{float}
 \usepackage{float}
 \hypersetup{
     colorlinks,
@@ -56,11 +53,13 @@ Nov 3, 2023 & 1.0 & Initial Draft\\
 \end{tabularx}
 
 ~\\
+
 \newpage
 
 \tableofcontents
 
 \listoftables
+
 
 \newpage
 
@@ -78,13 +77,6 @@ Nov 3, 2023 & 1.0 & Initial Draft\\
       PDF & Portable Document Format\\
       .csv & Comma-Separated Values \\
       .txt & Text file\\
-      UI & User Interface \\
-      ML & Machine Learning\\
-      API & Application Programming Interface\\
-      HTTP & Hypertext Transfer Protocol\\
-      PDF & Portable Document Format\\
-      .csv & Comma-Separated Values \\
-      .txt & Text file\\
   \bottomrule
   
 \end{tabular}\\
@@ -94,17 +86,6 @@ Nov 3, 2023 & 1.0 & Initial Draft\\
 
 \pagenumbering{arabic}
 
-This document outlines the Verification and Validation (V\&V) plan for the Course Buddy project developed by Team \#5, Overwatch League. The V\&V plan is a critical component of our project management and quality assurance processes, ensuring that Course Buddy not only meets its specified requirements but also fulfills the needs and expectations of its users and stakeholders.
-
-\paragraph{Roadmap}
-The V\&V plan is structured as follows:
-\begin{enumerate}
-    \item \textbf{Symbols, Abbreviations, and Acronyms}
-    \item \textbf{General Information}
-    \item \textbf{Plan} 
-    \item \textbf{System Test Description} 
-    \item \textbf{Unit Test Description}
-\end{enumerate}
 This document outlines the Verification and Validation (V\&V) plan for the Course Buddy project developed by Team \#5, Overwatch League. The V\&V plan is a critical component of our project management and quality assurance processes, ensuring that Course Buddy not only meets its specified requirements but also fulfills the needs and expectations of its users and stakeholders.
 
 \paragraph{Roadmap}
@@ -161,25 +142,6 @@ This section outlines the comprehensive strategy for verifying and validating th
         \end{tabular}
      \caption{Verification and Validation Team Members and Their Roles}
      \end{table}
-     \begin{table}[H]
-     \centering
-     \begin{tabular}{l p{10cm}}
-          \toprule
-          \textbf{Name} & \textbf{Role and Specific Duties}\\
-          \midrule
-          Jinyao Qin & \textbf{Lead Verifier}: Oversees the entire process, coordinates with other team members, and ensures all verification steps are followed diligently.\\
-          
-          Qianni Wang & \textbf{Implementation Specialist}: Reviews the codebase to ensure it aligns with the documented requirements, also verifies the code's functionality, performance, and security aspects.\\
-          
-          Qiang Gao & \textbf{Implementation Specialist}: same as Qianni Wang\\
-          
-          Chenwei Song & \textbf{Manual Test Engineer}: Responsible for manual test cases, ensuring that all tests run in different environments, and reporting the results in an understandable format for the team.\\
-          
-          Shuting Shi & \textbf{Test Automation Engineer}: Responsible for automating test cases, ensuring that all tests run in different environments, and reporting the results in an understandable format for the team.\\
-          \bottomrule
-        \end{tabular}
-     \caption{Verification and Validation Team Members and Their Roles}
-     \end{table}
 
 \subsection{SRS Verification Plan}
 
@@ -196,70 +158,8 @@ For the verification of the Software Requirements Specification (SRS) document, 
 Additionally, an SRS checklist will be utilized to systematically verify the content of the SRS document:
 Please see our \href{https://github.com/wangq131/4G06CapstoneProjectT5/blob/main/docs/SRS/SRS.pdf#page=2}{SRS.pdf} for more details.
 
-For the verification of the Software Requirements Specification (SRS) document, the following approaches will be adopted:
-
-\begin{enumerate}
-    \item \textbf{Peer Review:} The SRS will be reviewed by team members and classmates to identify any inconsistencies, ambiguities, or missing requirements.
-    \item \textbf{Expert Review:} Experts in software development will be consulted to ensure the requirements are complete and feasible.
-    \item \textbf{Supervisor Review:} The SRS will be reviewed by our supervisor, who can provide valuable insights from a strategic and technical perspective.
-    \item \textbf{Client Feedback:} The document will be shared with the client or stakeholders for their feedback, ensuring alignment with their expectations and needs.
-    \item \textbf{Automated Analysis Tools:} Tools such as requirement management software will be used for tracing and managing requirements systematically.
-\end{enumerate}
-
-Additionally, an SRS checklist will be utilized to systematically verify the content of the SRS document:
-Please see our \href{https://github.com/wangq131/4G06CapstoneProjectT5/blob/main/docs/SRS/SRS.pdf#page=2}{SRS.pdf} for more details.
-
 
 \subsection{Design Verification Plan}
-
-The design verification for our project will focus on ensuring that the design is user-friendly, intuitive, and aligns with the architectural requirements specified in the SRS. The verification plan will include the following key activities:
-
-\begin{enumerate}
-    \item \textbf{Peer Reviews:} The design documents and models will be reviewed by team members and classmates to critique and provide feedback on the design's usability, intuitiveness, and adherence to architectural requirements.
-    \item \textbf{Supervisor Review:} The design will be presented to the project supervisor for a thorough review, focusing on adherence to technical specifications and project objectives.
-    \item \textbf{Design Walkthroughs:} Scheduled sessions where the design team presents the design to the stakeholders, including peers and supervisors, for feedback and suggestions.
-    \item \textbf{Prototype Testing:} Early versions of the design will be tested to gather quick feedback on the design's effectiveness and user experience.
-    \item \textbf{Consistency Check:} Ensuring that the design remains consistent with the requirements and objectives outlined in the SRS document.
-\end{enumerate}
-
-To comprehensively verify the design, the following checklist will be used:
-
-\begin{enumerate}
-    \item \textbf{Design Documentation Review:}
-    \begin{itemize}
-        \item Check if the design documentation is complete and clearly describes the architecture, components, and interfaces.
-        \item Ensure that the design aligns with the project's objectives and requirements specified in the SRS.
-    \end{itemize}
-    
-    \item \textbf{User Interface (UI) and User Experience (UX) Evaluation:}
-    \begin{itemize}
-        \item Verify that the UI design is intuitive and user-friendly.
-        \item Ensure UI consistency across different parts of the application.
-        \item Assess the UX for compliance with common usability standards and practices.
-    \end{itemize}
-
-    \item \textbf{Architectural Conformity:}
-    \begin{itemize}
-        \item Confirm that the system architecture supports all the required functionalities.
-        \item Check for scalability, maintainability, and flexibility of the design.
-    \end{itemize}
-
-    \item \textbf{Performance and Security Review:}
-    \begin{itemize}
-        \item Ensure that the design incorporates adequate performance optimizations.
-        \item Review the design for potential security vulnerabilities and data protection measures.
-    \end{itemize}
-
-    \item \textbf{Compliance with Standards:}
-    \begin{itemize}
-        \item Verify adherence to relevant industry and design standards.
-    \end{itemize}
-
-    \item \textbf{Feedback Integration:}
-    \begin{itemize}
-        \item Check that feedback from previous reviews (by classmates, peers, or stakeholders) has been adequately incorporated into the design.
-    \end{itemize}
-\end{enumerate}
 
 The design verification for our project will focus on ensuring that the design is user-friendly, intuitive, and aligns with the architectural requirements specified in the SRS. The verification plan will include the following key activities:
 
@@ -333,26 +233,6 @@ To systematically verify the V\&V plan, the following checklist will be used:
     \item Are there measures in place to track and resolve any identified issues during the V\&V process?
     \item Does the plan align with the project's schedule, resources, and constraints?
 \end{itemize}
-The verification and validation (V\&V) plan for our project includes ensuring the integrity and effectiveness of the V\&V processes themselves. Given the importance of this plan in the overall project quality assurance, the following approaches will be employed:
-
-\begin{enumerate}
-    \item \textbf{Peer Review:} The V\&V plan will be reviewed by team members and classmates to identify any omissions or areas needing improvement.
-    \item \textbf{Mutation Testing:} This technique will be applied to evaluate the ability of our test cases to detect faults deliberately injected into the code.
-    \item \textbf{Iterative Feedback Incorporation:} Feedback from all review sessions and testing phases will be systematically incorporated to refine the V\&V plan.
-\end{enumerate}
-
-To systematically verify the V\&V plan, the following checklist will be used:
-
-\begin{itemize}
-    \item Is the plan comprehensive, covering all aspects of software verification and validation?
-    \item Are the responsibilities and roles in the V\&V process clearly defined?
-    \item Does the plan include a variety of testing methods (e.g., unit testing, integration testing, system testing)?
-    \item Is there a clear process for incorporating feedback and continuous improvement in the V\&V process?
-    \item Are there criteria defined for the success of each testing phase?
-    \item Is mutation testing included to assess the thoroughness of the test cases?
-    \item Are there measures in place to track and resolve any identified issues during the V\&V process?
-    \item Does the plan align with the project's schedule, resources, and constraints?
-\end{itemize}
 
 \subsection{Implementation Verification Plan}
 
@@ -365,27 +245,8 @@ The Implementation Verification Plan will ensure that the software implementatio
     \item \textbf{Continuous Integration:} Automated build and testing processes will be implemented using tools like GitHub Actions, to ensure continuous code quality, integration, and deployment.
     \item \textbf{Performance Testing:} The use of tools like Locust for load testing will help evaluate the application's performance under various conditions, particularly focusing on how the Flask application handles concurrent requests and data processing.
 \end{itemize}
-The Implementation Verification Plan will ensure that the software implementation adheres to the requirements and design specifications outlined in the SRS. Key components of this plan include:
-
-\begin{itemize}
-    \item \textbf{Unit Testing:} A comprehensive suite of unit tests, as detailed in the project's test plan, will validate individual components or modules of the software. /textit{PyTest}, a flexible and powerful testing tool, will be used for writing and executing these tests.
-    \item \textbf{Static Analysis:} /textit{Pylint} and /textit{Flake8} will be employed for static code analysis to identify potential bugs, security vulnerabilities, and issues with code style and complexity.
-    \item \textbf{Code Reviews and Walkthroughs:} Regularly scheduled code reviews and walkthroughs with team members and supervisors to inspect code quality, readability, and adherence to the Flask framework's best practices and design patterns.
-    \item \textbf{Continuous Integration:} Automated build and testing processes will be implemented using tools like GitHub Actions, to ensure continuous code quality, integration, and deployment.
-    \item \textbf{Performance Testing:} The use of tools like Locust for load testing will help evaluate the application's performance under various conditions, particularly focusing on how the Flask application handles concurrent requests and data processing.
-\end{itemize}
 
 \subsection{Automated Testing and Verification Tools}
-
-For automated testing and verification in our Flask/Python project, the following tools will be employed:
-
-\begin{itemize}
-    \item \textbf{Unit Testing Framework:} /textit{PyTest} will be used for developing and running unit tests.
-    \item \textbf{Profiling and Performance Tools:} Tools like /textit{cProfile} for Python will assist in identifying performance bottlenecks and optimizing code efficiency.
-    \item \textbf{Static Code Analyzers:} /textit{Pylint} and /textit{Flake8} will be used to analyze Python code quality, adherence to coding standards, and identification of potential errors.
-    \item \textbf{Continuous Integration:} GitHub Actions will automate the build, testing, and deployment process, ensuring continuous integration and delivery of the Python codebase.
-    \item \textbf{Linters:} /textit{Flake8} will be used to enforce coding standards.
-\end{itemize}
 
 For automated testing and verification in our Flask/Python project, the following tools will be employed:
 
@@ -952,108 +813,6 @@ Test Case Derivation: Simulate the user to enter his study plan and request the 
 					
 How test will be performed: Testing is performed by manually simulating the user's interaction with the system; the testing steps include entering a learning plan, selecting matching contacts, viewing match results, and scheduling an online learning session. The testing process should cover a variety of scenarios, including matching under normal circumstances, no-match scenarios, updating of the contacts list, and correctness of session scheduling. The system should also handle boundary cases of input data, such as empty learning plans, incomplete user information, etc.
 \end{enumerate}
-\subsubsection{Scheduling}
-\begin{enumerate}
-
-  \item{TFR25-S1\\} \label{TFR25-S1}
-
-  Control: Functional, Manual, Dynamic
-            
-  Initial State: The user has logged in and is on the task creation page or the extraction page.
-            
-  Input: the task information such as \textit{taskName}, \textit{taskType}, \textit{weight}, and \textit{priority}. The user's input for the initial estimated time needed to finish the task.
-            
-  Output: the initial estimate of the total time required for the task to complete.
-  
-  Test Case Derivation: The user should be able to view an initial estimated completion time for any task generated from the course syllabus PDF documents they upload. This estimated completion time can be modified by the user at any time after the task has been created. For any tasks created manually by users, the user can assign an initial estimated completion time period and change it at any time after the task has been created. 
-            
-  How the test will be performed:
-  Generate tasks from course syllabus PDF files and create tasks directly. Testing should encompass various types of tasks with different weights, user actions, different learning time records, and progress percentage inputs. Manually try to modify the value after the tasks have been created, and try input the various values like negative numbers or text, etc.
-
-\item{TFR26-S2\\} \label{TFR26-S2}
-
-Control: Functional, Manual, Dynamic
-					
-Initial State: The user has logged in and generated or created a task list, used Pomodoro Timmers to record work time, or used a checklist or calendar view on the website to record their task progress each time after completing the scheduled study time period.
-					
-Input: Current schedule data for the task includes \textit{deadline}, \textit{priority}, \textit{weight}, current progress in completing the task, the user's history of the percentage of progress completed, and the corresponding time spent on the task.
-					
-Output: The updated Learning Plan, regenerated task schedule information based on the updated task progress from the user, which may include reordering of task list and TO-DO list, new priority of the task, etc.
-
-Test Case Derivation: Each time the user updates the task progress and records the corresponding time spent, they will receive a reminder to update the learning schedule. After that, the user should be able to view a newly generated learning plan associated with the rate of change in task progress.
-					
-How test will be performed: After simulating the user's change of task progress, check whether the system has kept all the original task information and updated the related task plan. Compare the pre- and post-update learning plans to ensure that the updated plan correctly reflects the changes in task progress.
-
-\item{TFR27-S3\\} \label{TFR27-S3}
-
-Control: Functional, Manual, Dynamic
-					
-Initial State: The user has logged in and generated or created a task list, used Pomodoro Timmers to record work time, or used a checklist view or calendar view on the website to record their task progress each time after completing the scheduled study time period.
-					
-Input: \textit{taskName}, \textit{taskType}, \textit{weight} and the initial estimate of the total time required for the task to complete, the percentage of completing progress of the task recorded by the user at the end of the Pomodoro Timmers, and the corresponding time spent.
-					
-Output: The time needed to finish each task is dynamically updated accordingly.
-
-Test Case Derivation: The system should be capable of calculating the most up-to-date estimated time required to finish each task after the user records and inputs the progress percentage and the corresponding time spent.
-					
-How the test will be performed: Generate tasks from course syllabus PDF files and create tasks directly. Input multiple progress updates and corresponding study hours for each task. Estimate task completion time through both manual and automated testing methods. Testing should encompass various types of tasks with different weights, user actions, different learning time records, and progress percentage inputs. Compare the pre- and post-input of the new task progress and corresponding hours spent and check whether the changes in task estimated time needed are accurately reflected in the task data.
-
-\item{TFR28-S4\\} \label{TFR28-S4}
-
-Control: Functional, Manual, Dynamic
-					
-Initial State: The user has logged in and uploaded a course syllabus PDF file, and is on the extraction page of the website. 
-					
-Input: The user's task list and data for tasks including \textit{taskType}, \textit{weight} and \textit{deadline}.
-					
-Output: A task priority list, based on sorting the tasks in order by task type, weight, and deadline. High-priority tasks will be ranked first.
-
-When the user attempts to extract all the information from the course, the program will extract the necessary data from the uploaded course syllabus PDF file and generate a list of tasks with a calculated priority number. The system should categorize all tasks into three priority levels: high, medium, and low, and assign each task a corresponding priority label. After this process, the user should be able to view the task lists with priority labels, ordered in descending order based on the priorities generated by the system.
-					
-How test will be performed: Create test sets with task lists of different task types, weights, and deadlines, and check that the generated list of sorted tasks meets the expected priority ordering. Using special case inputs, such as an empty task list, to ensure that the system handles edge cases correctly.
-
-\item{TFR29-S5\\} \label{TFR29-S5}
-
-Control: Functional, Manual, Dynamic
-					
-Initial State: The user has logged in and generated or created a task list with task information.
-					
-Input: Task information: \textit{taskName}, \textit{taskType}, \textit{weight}, \textit{deadline} \textit{priority}. The learner's preferred day and time period for the study. The user's current schedule, including scheduled events, and other existing tasks. The working time of the Pomodoro Timmer setting for each learning task.
-					
-Output: A complete schedule of the learning program, including the name, weight, deadline, priority, sub-tasks under each task, scheduled start and end times of Pomodoro Timmer for each sub-tasks. Display task and sub-task time periods and information on other external platforms.
-
-Test Case Derivation: Select different study periods, days, and various Pomodoro interval settings to assess the system's ability to handle invalid or incomplete input data. Using valid data, confirm that the system can generate a comprehensive study plan for each task, considering preferred study times and schedules while avoiding conflicts with existing activities. Export study schedules to an external calendar program and test the system's capability to accurately and completely export study plans to other calendar applications. In cases of task scheduling conflicts, verify that the system can provide solutions, such as suggesting alternative study times or allocating sub-tasks to different days.
-
-How test will be performed: Tests can be performed using automated testing frameworks to simulate various scenarios and input data. Write unit tests for different components and functional modules of the system. Verify that the system is able to generate the correct study plan based on different inputs. And that it can be successfully and completely exported to other calendar applications. Verify that the system is able to effectively resolve schedule conflicts and provide sound advice.
-
-\item{TFR30-S6\\} \label{TFR30-S6}
-
-Control: Functional, Manual, Dynamic
-
-Initial State: The user has logged in and generated a study schedule plan and a task list with task information and is on Pomodoro Timmer page.
-					
-Input: The generated task list with sub-tasks and the information of each sub-task, includes \textit{taskName}, \textit{startTime}, and \textit{endTime}.
-					
-Output: A list of Pomodoro Timmers of subtasks.
-
-Test Case Derivation: Using a valid list of sub-tasks and valid Pomodoro clock settings, e.g. 25 minutes of work and 5 minutes of rest, detect that each sub-task has a corresponding Pomodoro clock with work and rest time slots. Using an empty list of sub-tasks, the output should be that no Pomodoro clocks are created and no warning messages or errors appear. Entering an invalid sub-task list or invalid Pomodoro clock settings, the user should get a warning message that no Pomodoro clock can be created.
-					
-How test will be performed: Testing can be performed either by manually operating the system or by automated test scripts. The flow of the learning cycle should be tested to ensure that the Pomodoro clock is working as expected, and the user interactions and system responses should be tested to ensure that the system can correctly handle the user's actions and changes in the task state. Tests should cover different scenarios, including normal operation, incorrect operation, and edge cases.
-
-\item{TFR31-S7\\} \label{TFR31-S7}
-
-Control: Functional, Manual, Dynamic
-					
-Initial State: The user has logged in and generated a study schedule plan and a task list with task information and is on Pomodoro Timmer page.
-					
-Input: The user's personal account profile information, and the user's contacts list, which includes a list of contacts that the user has added and their account information. The user's and the contacts' study schedules, including course lists, task lists, and sub-task schedule lists.
-					
-Output: The system will match the study schedules of the user and contacts and output a set of matched contact lists.
-
-Test Case Derivation: Simulate the user to enter his study plan and request the system to match contacts. Check if the system has successfully matched contacts that fit the study plan and outputs a list of matches. If the user sends a match request, the user's contacts should be able to receive a notification of the request, and after the contacts agree, the system should generate a schedule and a link to the online learning session and send it to the user and the contacts who accepted the request. If the contact does not accept the match request, the contact can choose to leave a message for the user, after which the user should be able to receive an alert message indicating that the match was not successful and the corresponding message from the contact.
-					
-How test will be performed: Testing is performed by manually simulating the user's interaction with the system; the testing steps include entering a learning plan, selecting matching contacts, viewing match results, and scheduling an online learning session. The testing process should cover a variety of scenarios, including matching under normal circumstances, no-match scenarios, updating of the contacts list, and correctness of session scheduling. The system should also handle boundary cases of input data, such as empty learning plans, incomplete user information, etc.
-\end{enumerate}
 \subsection{Tests for Nonfunctional Requirements}
 
 \subsubsection{Look and feel}
@@ -1173,6 +932,7 @@ How test will be performed: \hyperref[MIN_TESTER_NUM]{\texttt{MIN\_TESTER\_NUM}}
 \subsubsection{Usability and Humanity}
 
 \begin{enumerate}
+\item{TUHR-1\\}\label{TUHR-1}
 
 Type: Dynamic, Manual
 					
@@ -1234,87 +994,97 @@ How test will be performed: \hyperref[MIN_TESTER_NUM]{\texttt{MIN\_TESTER\_NUM}}
 
 \end{enumerate}
 
-\subsubsection{Area of Testing2}
+\subsubsection{Performance}
 
-...
+\begin{enumerate}
+\item{TSLR-1\\}\label{TSLR-1}
 
-\subsection{Traceability Between Test Cases and Requirements}
+Type: Dynamic, Automatic
+					
+Initial State: The web application is launched.
+					
+Input/Condition: The processing time for a core function.
+					
+Output/Result: It takes \hyperref[MAX_TIME_PROCESS]{\texttt{MAX\_TIME\_PROCESS}} for the application to finish a core function.
+					
+How test will be performed: An automated script is used to perform and time a core function, including uploading syllabuses, generating tasks, and prioritizing tasks.
 
-\wss{Provide a table that shows which test cases are supporting which
-  requirements.}
+\end{enumerate}
+\subsubsection{Safety-Critical}
 
-\section{Unit Test Description}
+\begin{enumerate}
+\item{TSCR-1\\}\label{TSCR-1}
 
-\wss{This section should not be filled in until after the MIS (detailed design
-  document) has been completed.}
+Type: Dynamic, Automatic
+					
+Initial State: The web application is launched.
+					
+Input/Condition: A pair of new credentials are added.
+					
+Output/Result: Format of credentials in database.
+					
+How test will be performed: An automated script is used to add a pair of new credentials and check whether plain text is stored in the database.
 
-\wss{Reference your MIS (detailed design document) and explain your overall
-philosophy for test case selection.}  
-
-\wss{To save space and time, it may be an option to provide less detail in this section.  
-For the unit tests you can potentially layout your testing strategy here.  That is, you 
-can explain how tests will be selected for each module.  For instance, your test building 
-approach could be test cases for each access program, including one test for normal behaviour 
-and as many tests as needed for edge cases.  Rather than create the details of the input 
-and output here, you could point to the unit testing code.  For this to work, you code 
-needs to be well-documented, with meaningful names for all of the tests.}
-
-\subsection{Unit Testing Scope}
-
-\wss{What modules are outside of the scope.  If there are modules that are
-  developed by someone else, then you would say here if you aren't planning on
-  verifying them.  There may also be modules that are part of your software, but
-  have a lower priority for verification than others.  If this is the case,
-  explain your rationale for the ranking of module importance.}
-
-\subsection{Tests for Functional Requirements}
-
-\wss{Most of the verification will be through automated unit testing.  If
-  appropriate specific modules can be verified by a non-testing based
-  technique.  That can also be documented in this section.}
-
-\subsubsection{Module 1}
-
-\wss{Include a blurb here to explain why the subsections below cover the module.
-  References to the MIS would be good.  You will want tests from a black box
-  perspective and from a white box perspective.  Explain to the reader how the
-  tests were selected.}
+\end{enumerate}
+\subsubsection{Precision and Accuracy}
 
 \begin{enumerate}
 \item{TPAR-1\\}\label{TPAR-1}
 
-\item{test-id1\\}
-
-Type: \wss{Functional, Dynamic, Manual, Automatic, Static etc. Most will
-  be automatic}
+Type: Dynamic, Manual, Automated
+					
+Initial State: The web application is launched.
 					
 Input/Condition: A course outline is uploaded.
 					
-Input: 
+Output/Result: \hyperref[MIN_PRECISION]{\texttt{MIN\_PRECISION\%}} of coincidence between algorithm result and human result.
 					
-Output: \wss{The expected result for the given inputs}
+How test will be performed: An automated script is used to upload a course outline and categorize and prioritize extracted tasks. \hyperref[MIN_TESTER_NUM]{\texttt{MIN\_TESTER\_NUM}} users are asked to categorize and prioritize extracted tasks from the same course outline.  The computed result is compared with human decisions.
 
-Test Case Derivation: \wss{Justify the expected value given in the Output field}
+\end{enumerate}
 
-How test will be performed: 
+\subsubsection{Robustness and Fault-Tolerance}
+
+\begin{enumerate}
+\item{TRFTR-1\\}\label{TRFTR-1}
+
+Type: Dynamic, Automated
 					
-\item{test-id2\\}
-
-Type: \wss{Functional, Dynamic, Manual, Automatic, Static etc. Most will
-  be automatic}
+Initial State: The web application is launched.
 					
-Initial State: 
+Input/Condition: Incorrect user input.
 					
-Input: 
+Output/Result: \hyperref[MIN_OPERABLE]{\texttt{MIN\_OPERABLE\%}} of the system operating.
 					
-Output: \wss{The expected result for the given inputs}
+How test will be performed: An automated script is used to put false input in every interactive element, including wrong file format, special characters, out-of-boundary data, and malicious commands.
+\end{enumerate}
+\subsubsection{Capacity}
 
-Test Case Derivation: \wss{Justify the expected value given in the Output field}
+\begin{enumerate}
+\item{TCR-1\\}\label{TCR-1}
 
-How test will be performed: 
+Type: Dynamic, Automated
+					
+Initial State: The web application is launched.
+					
+Input/Condition: Massive user operations.
+					
+Output/Result: \hyperref[MIN_OPERABLE]{\texttt{MIN\_OPERABLE\%}} of the system operating.
+					
+How test will be performed: An automated script is used to log in a large amount of users and repetitively upload and download files.
 
-\item{...\\}
-    
+\item{TCR-2\\}\label{TCR-2}
+
+Type: Dynamic, Automated
+					
+Initial State: The web application is launched.
+					
+Input/Condition: Massive course data input.
+					
+Output/Result: It takes \hyperref[MAX_TIME_PROCESS]{\texttt{MAX\_TIME\_PROCESS}} to finish a core function.
+					
+How test will be performed: An automated script is used to inject a large amount of course data.  Run TSLR-5.
+
 \end{enumerate}
 
 \subsubsection{Operational  and Environmental}
@@ -1376,15 +1146,235 @@ How test will be performed: A script is used to input user feedback and check if
 
 \end{enumerate}
 
-\subsubsection{Module ?}
+\subsubsection{Security}
 
-...
+\begin{enumerate}
+\item{TSR-1\\}\label{TSR-1}
 
-\subsection{Traceability Between Test Cases and Modules}
+Type: Dynamic, Automatic
+					
+Initial State: The web application is launched.
+					
+Input/Condition: Wrong credential pairs.
+					
+Output/Result: Account not logged in.
+					
+How test will be performed: A script is used to input the wrong credential pairs and check that an error message indicating bad credentials is displayed and the account is not logged in.
 
-\wss{Provide evidence that all of the modules have been considered.}
+\item{TSR-2\\}\label{TSR-2}
+
+Type: Dynamic, Automatic
+					
+Initial State: The web application is launched.
+					
+Input/Condition: Create a new account.
+					
+Output/Result: Account data format.
+					
+How test will be performed: A script is used to create a new account and check that the account data is encrypted before transmission.
+
+\item{TSR-3\\}\label{TSR-3}
+
+Type: Dynamic, Manual
+					
+Initial State: The web application is launched.
+					
+Input/Condition: Users are asked to modify the database.
+					
+Output/Result: \hyperref[MAX_ATTACK_SUCCESS]{\texttt{MAX\_ATTACK\_SUCCESS}} users successfully modified the database.
+					
+How test will be performed: \hyperref[MIN_TESTER_NUM]{\texttt{MIN\_TESTER\_NUM}} users are asked to taint the database as unauthorised entity.
+
+\item{TSR-4\\}\label{TSR-4}
+
+Type: Dynamic, Automatic
+					
+Initial State: The web application is launched.
+					
+Input/Condition: A series of user actions.
+					
+Output/Result: An audit log.
+					
+How test will be performed: A script is used to perform a series of user actions and check that the activities are recorded with time stamps and relevant meta-data.
+
+\item{TSR-5\\}\label{TSR-5}
+
+Type: Dynamic, Automatic
+					
+Initial State: The web application is launched.
+					
+Input/Condition: Login attempts.
+					
+Output/Result: Account restricted.
+					
+How test will be performed: A script is used to perform a brute-force attack to log in to a test account.
+\end{enumerate}
+
+\subsubsection{Complience}
+
+\begin{enumerate}
+\item{TCPR-1\\}\label{TCPR-1}
+
+Type: Dynamic, Manual
+					
+Initial State: Development container is launched.
+					
+Input/Condition: A PR containing local changes is pushed.
+					
+Output/Result: Workflow result.
+					
+How test will be performed: A PR containing local changes is pushed, which triggers a workflow linter check.
+\end{enumerate}
+\subsection{Traceability Between Test Cases and Requirements}
+All requirements refer to \href{https://github.com/wangq131/4G06CapstoneProjectT5/blob/689841fefc298f80d84232996e1c7ca7981dd93d/docs/SRS/SRS.pdf}{SRS.pdf}.
+
+\begin{table}[H]
+    \centering
+    \begin{adjustbox}{width=1\textwidth}
+    \begin{tabular}{l|ccccc}
+        \textbf{Test Case \#} & \multicolumn{5}{c}{\textbf{Requirement \#}}\\
+        \hline
+        ~ & \textbf{FR1} & \textbf{FR2} & \textbf{FR3} & \textbf{FR4} & \textbf{FR5} \\
+        \hyperref[TFR1-A1]{\textbf{TFR1-A1}}  & X & ~ & ~ & ~ & ~ \\
+        \hyperref[TFR1-A2]{\textbf{TFR1-A2}}  & X & ~ & ~ & ~ & ~ \\
+        \hyperref[TFR2-A3]{\textbf{TFR2-A3}}  & ~ & X & ~ & ~ & ~ \\
+        \hyperref[TFR3-A4]{\textbf{TFR3-A4}}  & ~ & ~ & X & ~ & ~ \\
+        \hyperref[TFR4-A5]{\textbf{TFR4-A5}}  & ~ & ~ & ~ & X & ~ \\
+        \hyperref[TFR5-A6]{\textbf{TFR5-A6}}  & ~ & ~ & ~ & ~ & X \\
+        \hyperref[TFR5-A7]{\textbf{TFR5-A7}}  & ~ & ~ & ~ & ~ & X \\
+    \end{tabular}
+    \end{adjustbox}
+    \caption{Traceability Matrix: Functional Requirements - Authentication}
+    \label{table:TraceabilityMatrix}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \begin{adjustbox}{width=1\textwidth}
+    \begin{tabular}{l|cccccccccc}
+        \textbf{Test Case \#} & \multicolumn{10}{c}{\textbf{Requirement \#}}\\
+        \hline
+        ~ & \textbf{FR6} & \textbf{FR7} & \textbf{FR8} & \textbf{FR9} & \textbf{FR10} & \textbf{FR11} & \textbf{FR12} & \textbf{FR13} & \textbf{FR14} & \textbf{FR15} \\\
+        \hyperref[TFR6-UI1]{\textbf{TFR6-UI1}}  & X & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ \\
+        \hyperref[TFR6-UI2]{\textbf{TFR6-UI2}}  & X & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ \\
+        \hyperref[TFR7-UI3]{\textbf{TFR7-UI3}}  & ~ & X & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ \\
+        \hyperref[TFR8-UI4]{\textbf{TFR8-UI4}}  & ~ & ~ & X & ~ & ~ & ~ & ~ & ~ & ~ & ~ \\
+        \hyperref[TFR9-UI5]{\textbf{TFR9-UI5}}  & ~ & ~ & ~ & X & ~ & ~ & ~ & ~ & ~ & ~ \\
+        \hyperref[TFR10-UI6]{\textbf{TFR10-UI6}}   & ~ & ~ & ~ & ~ & X & ~ & ~ & ~ & ~ & ~ \\
+        \hyperref[TFR11-UI7]{\textbf{TFR11-UI7}}   & ~ & ~ & ~ & ~ & ~ & X & ~ & ~ & ~ & ~ \\
+        \hyperref[TFR11-UI8]{\textbf{TFR11-UI8}}   & ~ & ~ & ~ & ~ & ~ & X & ~ & ~ & ~ & ~ \\
+        \hyperref[TFR11-UI9]{\textbf{TFR11-UI9}}   & ~ & ~ & ~ & ~ & ~ & X & ~ & ~ & ~ & ~ \\
+        \hyperref[TFR12-UI10]{\textbf{TFR12-UI10}}   & ~ & ~ & ~ & ~ & ~ & ~ & X & ~ & ~ & ~ \\
+        \hyperref[TFR13-UI11]{\textbf{TFR13-UI11}}   & ~ & ~ & ~ & ~ & ~ & ~ & ~ & X & ~ & ~ \\
+        \hyperref[TFR14-UI12]{\textbf{TFR14-UI12}}   & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & X & ~ \\
+        \hyperref[TFR15-UI13]{\textbf{TFR15-UI13}}   & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & X \\
+    \end{tabular}
+    \end{adjustbox}
+    \caption{Traceability Matrix: Functional Requirements - User Input}
+    \label{Traceability Matrix: Functional Requirements - User Input}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \begin{adjustbox}{width=1\textwidth}
+    \begin{tabular}{l|ccccccccc}
+        \textbf{Test Case \#} & \multicolumn{9}{c}{\textbf{Requirement \#}}\\
+        \hline
+        ~ & \textbf{FR16} & \textbf{FR17} & \textbf{FR18} & \textbf{FR19} & \textbf{FR20} & \textbf{FR21} & \textbf{FR22} & \textbf{FR23} & \textbf{FR24} \\\
+        \hyperref[TFR16-17-D1]{\textbf{TFR16-17-D1}}   & X & X & ~ & ~ & ~ & ~ & ~ & ~ & ~ \\
+        \hyperref[TFR18-D2]{\textbf{TFR18-D2}}   & ~ & ~ & X & ~ & ~ & ~ & ~ & ~ & ~ \\
+        \hyperref[TFR19-D3]{\textbf{TFR19-D3}}   & ~ & ~ & ~ & X & ~ & ~ & ~ & ~ & ~ \\
+        \hyperref[TFR20-D4]{\textbf{TFR20-D4}}   & ~ & ~ & ~ & ~ & X & ~ & ~ & ~ & ~ \\
+        \hyperref[TFR21-D5]{\textbf{TFR21-D5}}  & ~ & ~ & ~ & ~ & ~ & X & ~ & ~ & ~ \\
+        \hyperref[TFR22-D6]{\textbf{TFR22-D6}}  & ~ & ~ & ~ & ~ & ~ & ~ & X & ~ & ~ \\
+        \hyperref[TFR23-D7]{\textbf{TFR23-D7}}   & ~ & ~ & ~ & ~ & ~ & ~ & ~ & X & ~ \\
+        \hyperref[TFR22-23-D8]{\textbf{TFR22-23-D8}}   & ~ & ~ & ~ & ~ & ~ & ~ & X & X & ~ \\
+        \hyperref[TFR24-D9]{\textbf{TFR24-D9}}   & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & X \\
+        \hyperref[TFR24-D10]{\textbf{TFR24-D10}}   & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & X \\
+    \end{tabular}
+    \end{adjustbox}
+    \caption{Traceability Matrix: Functional Requirements - Data}
+    \label{Traceability Matrix: Functional Requirements - Data}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \begin{adjustbox}{width=1\textwidth}
+    \begin{tabular}{l|ccccccc}
+        \textbf{Test Case \#} & \multicolumn{7}{c}{\textbf{Requirement \#}}\\
+        \hline
+        ~ & \textbf{FR25} & \textbf{FR26} & \textbf{FR27} & \textbf{FR28} & \textbf{FR29} & \textbf{FR30} & \textbf{FR31} \\\
+        \hyperref[TFR25-S1]{\textbf{TFR25-S1}}   & X & ~ & ~ & ~ & ~ & ~ & ~ \\
+        \hyperref[TFR26-S2]{\textbf{TFR26-S2}}   & ~ & X & ~ & ~ & ~ & ~ & ~\\
+        \hyperref[TFR27-S3]{\textbf{TFR27-S3}}   & ~ & ~ & X & ~ & ~ & ~ & ~ \\
+        \hyperref[TFR28-S4]{\textbf{TFR28-S4}}   & ~ & ~ & ~ & X & ~ & ~ & ~ \\
+        \hyperref[TFR29-S5]{\textbf{TFR29-S5}}   & ~ & ~ & ~ & ~ & X & ~ & ~ \\
+        \hyperref[TFR30-S6]{\textbf{TFR30-S6}}   & ~ & ~ & ~ & ~ & ~ & X & ~ \\
+        \hyperref[TFR31-S7]{\textbf{TFR31-S7}}   & ~ & ~ & ~ & ~ & ~ & ~ & X \\
+    \end{tabular}
+    \end{adjustbox}
+    \caption{Traceability Matrix: Functional Requirements - Scheduling}
+    \label{Traceability Matrix: Functional Requirements - Scheduling}
+\end{table}
+
+\clearpage
+\begin{table}
+    \centering
+    \begin{adjustbox}{width=1.2\textwidth}
+    \begin{tabular}{l|ccccccccccccccccccccccccc}
+        \textbf{Test Case \#} & \multicolumn{15}{c}{\textbf{Requirement \#}}\\
+        \hline
+        ~ & \textbf{AR1} & \textbf{AR2} & \textbf{AR3} & \textbf{AR4} & \textbf{STR1} & \textbf{STR2} & \textbf{STR3} & \textbf{STR4}& \textbf{STR5} & \textbf{UHR1} & \textbf{UHR2} & \textbf{UHR3} & \textbf{UHR4} & \textbf{UHR5}& \textbf{SLR1}& \textbf{SCR1}& \textbf{PAR1}& \textbf{RFTR1}& \textbf{CR1}& \textbf{CR2}& \textbf{SER1}& \textbf{OER1}& \textbf{OER2}& \textbf{OER3}\\\
+        \hyperref[TAR-1]{\textbf{TAR-1}}  & X & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~\\
+        \hyperref[TAR-2]{\textbf{TAR-2}}    & ~ & X & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~\\
+        \hyperref[TAR-3]{\textbf{TAR-3}}  & ~ & ~ & X & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~\\
+        \hyperref[TAR-4]{\textbf{TAR-4}}  & ~ & ~ & ~ & X & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~\\
+        \hyperref[TSTR-1]{\textbf{TSTR-1}}  & ~ & ~ & ~ & ~ & X & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~\\
+        \hyperref[TSTR-2]{\textbf{TSTR-2}}  & ~ & ~ & ~ & ~ & ~ & X & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~\\
+        \hyperref[TSTR-3]{\textbf{TSTR-3}}  & ~ & ~ & ~ & ~ & ~ & ~ & X & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~\\
+        \hyperref[TSTR-4]{\textbf{TSTR-4}}  & ~ & ~ & ~ & ~ & ~ & ~ & ~ & X & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~\\
+        \hyperref[TSTR-5]{\textbf{TSTR-5}}  & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & X & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~\\
+        \hyperref[TUHR-1]{\textbf{TUHR-1}}  & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & X & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~\\
+        \hyperref[TUHR-2]{\textbf{TUHR-2}}    & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & X & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~\\
+        \hyperref[TUHR-3]{\textbf{TUHR-3}}  & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & X & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~\\
+        \hyperref[TUHR-4]{\textbf{TUHR-4}}  & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & X & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~\\
+        \hyperref[TUHR-5]{\textbf{TUHR-5}}  & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & X & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~\\
+        \hyperref[TSLR-1]{\textbf{TSLR-1}}  & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & X & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~\\
+        \hyperref[TSCR-1]{\textbf{TSCR-1}}  & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & X & ~ & ~ & ~ & ~ & ~ & ~ & ~\\
+        \hyperref[TPAR-1]{\textbf{TPAR-1}}  & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & X & ~ & ~ & ~ & ~ & ~ & ~\\
+        \hyperref[TRFTR-1]{\textbf{TRFTR-1}}  & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & X & ~ & ~ & ~ & ~ & ~\\
+        \hyperref[TCR-1]{\textbf{TCR-1}}  & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & X & ~ & ~ & ~ & ~\\
+        \hyperref[TCR-2]{\textbf{TCR-2}}  & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & X & ~ & ~ & ~\\
+        \hyperref[TOER-1]{\textbf{TOER-1}}  & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & X & ~\\
+        \hyperref[TOER-2]{\textbf{TOER-2}}  & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ &  & X\\
+    \end{tabular}
+    \end{adjustbox}
+\end{table}
+\begin{table}
+    \centering
+    \begin{adjustbox}{width=1.2\textwidth}
+    \begin{tabular}{l|ccccccccccccccccccccccccc}
+        \textbf{Test Case \#} & \multicolumn{15}{c}{\textbf{Requirement \#}}\\
+        \hline
+        ~ & \textbf{MR1} & \textbf{MR2} & \textbf{MR3} & \textbf{SPR1} & \textbf{SPR2} & \textbf{SPR3} & \textbf{ADR1} & \textbf{ADR2}& \textbf{SR1} & \textbf{SR2} & \textbf{SR3} & \textbf{SR4} & \textbf{SR5} & \textbf{SR6}& \textbf{SR7}& \textbf{SR8}& \textbf{SR9}& \textbf{CR1}& \textbf{CTR1}& \textbf{CTR2}& \textbf{CPR1}& \textbf{CPR2}\\\
+        \hyperref[TSPR-1]{\textbf{TSPR-1}}  & ~ & ~ & ~ & X & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~\\
+        \hyperref[TSPR-2]{\textbf{TSPR-2}}    & ~ & ~ & ~ & ~ & ~ & X & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~\\
+        \hyperref[TSR-1]{\textbf{TSR-1}}  & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & X & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~\\
+        \hyperref[TSR-2]{\textbf{TSR-2}}  & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & X & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~\\
+        \hyperref[TSR-3]{\textbf{TSR-3}}  & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & X & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~\\
+        \hyperref[TSR-4]{\textbf{TSR-4}}  & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & X & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~\\
+        \hyperref[TSR-5]{\textbf{TSR-5}}  & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & X & ~ & ~ & ~ & ~ & ~ & ~\\
+        \hyperref[TCPR-1]{\textbf{TCPR-1}}  & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ &  X\\
+    \end{tabular}
+    \end{adjustbox}
+    \caption{Traceability Matrix: Non-Functional Requirements}
+    \label{Traceability Matrix: Non-Functional Requirements}
+\end{table}
+\pagestyle{plain}%
+\clearpage
+
 				
-\bibliographystyle{plainnat}
+% \bibliographystyle{plainnat}
 
 
 
@@ -1441,7 +1431,24 @@ parameter & value & unit & description\\
 
 \subsection{Usability Survey Questions}
 
-\wss{This is a section that would be appropriate for some projects.}
+\begin{enumerate}
+  \item Which part of the typography do you find confusing?
+  \item Do you like the color choice of the page?
+  \item What do you think this icon/graphic means?
+  \item Which part of the layout do you find awkward?
+  \item Could you point at the menu/navigation tool on this page?
+  \item Which element do you think is inconsistent with the rest?
+  \item Which interactive element do you find unresponsive?
+  \item Are you comfortable with the default font size? If not, could you adjust it to your preference?
+  \item Do you find this animation intrusive or distracting?
+  \item Could you navigate to the progress page?
+  \item Could you make a schedule with this course outline?
+  \item What grammar mistakes could you find?
+  \item What offensive message could you find?
+  \item Which color combination on the page do you find indistinguishable?
+  \item How many steps do you need to reach support?
+  \item Are you able to modify this database?
+\end{enumerate}
 
 \newpage{}
 \section*{Appendix --- Reflection}
@@ -1452,7 +1459,6 @@ graduate attribute of Lifelong Learning.  Please answer the following questions:
 \newpage{}
 \section*{Appendix --- Reflection}
 
-\wss{This section is not required for CAS 741}
 
 The information in this section will be used to evaluate the team members on the
 graduate attribute of Lifelong Learning.  Please answer the following questions:
