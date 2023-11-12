@@ -113,11 +113,13 @@ def course_page():
     # render the course page, display the course content(name)
     return render_template("course_page.html", courses=courses)
 
+
 # Router to study plan detailed page
 @app.route("/plan_page", methods=["GET", "POST"])
 def plan_page():
     # render the plan page
     return render_template("plan_page.html")
+
 
 # Router to user profile page
 @app.route("/profile_page", methods=["GET", "POST"])
