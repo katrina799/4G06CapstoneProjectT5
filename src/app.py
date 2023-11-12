@@ -110,22 +110,19 @@ def add_course():
 # Router to course detailed page
 @app.route("/course_page", methods=["GET", "POST"])
 def course_page():
-    df = get_df_from_csv_in_s3(s3, bucket_name, mock_data_file)
-    courses = df.loc[0, "courses"]  # For PoC purpose
-    # Parsing it into a Python list
-    courses = ast.literal_eval(courses)
+    # render the course page, display the course content(name)
     return render_template("course_page.html", courses=courses)
 
 # Router to study plan detailed page
 @app.route("/plan_page", methods=["GET", "POST"])
 def plan_page():
+    # render the plan page
     return render_template("plan_page.html")
 
 # Router to user profile page
 @app.route("/profile_page", methods=["GET", "POST"])
 def profile_page():
-    df = get_df_from_csv_in_s3(s3, bucket_name, mock_data_file)
-    username = df.loc[0, "username"]
+    # render the profile page, showing username on pege
     return render_template("profile_page.html", username=username)
 
 
