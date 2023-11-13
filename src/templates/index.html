@@ -38,21 +38,28 @@
                             <!-- dynamicly change progress bar -->
                             <!-- <div class="progress-bar" style="width: {{ course_completion_percentage }}%;"></div> -->
                         </div>
-                        <div class="course-details">
-                            <div class="course-title">{{course}}</div>
-                            <div class="course-desc">This a course in level 4, aims to learn the sicentific computation
+                        <div style="position: relative;">
+                            <div class="course-details">
+                                <div class="course-title">{{course}}</div>
+                                <div style="margin-top: 5px;" class="course-desc">This a course in level 4, aims to
+                                    learn the sicentific
+                                    computation
+                                </div>
+                                <div class="instructor">By Prof Dr NED NEDIALKOV</div>
                             </div>
-                            <div class="instructor">By Prof Dr NED NEDIALKOV</div>
+                            <form style="position: absolute; top: 0; right: 0; margin: 3px;" action="/remove_course"
+                                method="post">
+                                <input type="hidden" name="index" value="{{ loop.index - 1 }}">
+                                <input type="hidden" name="course" value="{{ course }}">
+                                <button type="submit" class="btn btn-danger btn-xs">
+                                    <i class="fa fa-trash-o" style="font-size:12px">
+                                    </i>
+                                    Delete
+                                </button>
+                            </form>
+
                         </div>
-                        <form style="margin: 3px;" action="/remove_course" method="post">
-                            <input type="hidden" name="index" value="{{ loop.index - 1 }}">
-                            <input type="hidden" name="course" value="{{ course }}">
-                            <button type="submit" class="btn btn-danger">
-                                <i class="fa fa-trash-o" style="font-size:12px">
-                                </i>
-                                Delete
-                            </button>
-                        </form>
+
                     </div>
 
                     {% endfor %}
