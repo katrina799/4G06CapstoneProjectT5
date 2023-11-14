@@ -1,7 +1,7 @@
 import os
 
 import boto3
-from flask import Flask, render_template, request, Response, redirect, url_for
+from flask import Flask, render_template, request, Response, redirect, url_for, jsonify
 import ast
 
 from helper import get_df_from_csv_in_s3, upload_df_to_s3
@@ -24,6 +24,22 @@ s3 = boto3.client(
     aws_secret_access_key=os.environ.get("AWS_SECRET_ACCESS_KEY"),
 )
 
+tasks = {
+    "todo": [
+        {
+            "id": 1,
+            "title": "Assignment 1",
+            "course": "SFWRENG 4G06A",
+            "due_date": "2023-11-20",
+            "weight": "10%",
+            "est_time": "1 hour",
+            "priority": "high",
+        }
+    ],
+    "in_progress": [],
+    "done": [],
+}
+
 
 # Set up home page for the website
 @app.route("/")
@@ -36,10 +52,13 @@ def start():
     courses = ast.literal_eval(courses)
 
     return render_template(
+        
         "index.html",
         username=username,
         courses=courses,
-        current_page='home')
+        current_page='home',
+        tasks=tasks
+    )
 
 
 # Download a file from s3
@@ -109,37 +128,6 @@ def add_course():
 
         upload_df_to_s3(df, s3, bucket_name, mock_data_file)
     return redirect(url_for("start"))
-
-
-# Router to course detailed page
-@app.route("/course_page", methods=["GET", "POST"])
-def course_page():
-    # render the course page, display the course content(name)
-    return render_template(
-        "course_page.html",
-        username=username,
-        courses=courses,
-        current_page='course_page')
-
-
-# Router to study plan detailed page
-@app.route("/plan_page", methods=["GET", "POST"])
-def plan_page():
-    # render the plan page
-    return render_template(
-        "plan_page.html",
-        username=username,
-        current_page='plan_page')
-
-
-# Router to user profile page
-@app.route("/profile_page", methods=["GET", "POST"])
-def profile_page():
-    # render the profile page, showing username on pege
-    return render_template(
-        "profile_page.html",
-        username=username,
-        current_page='profile_page')
 
 
 if __name__ == "__main__":
