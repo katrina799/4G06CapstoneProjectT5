@@ -1,0 +1,68 @@
+.tasks-calendar-container {
+    max-width: 1200px;
+    margin: 20px auto;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .task-board {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .task-column {
+    width: 30%;
+    margin-right: 15px;
+    background-color: #f4f4f4;
+    border-radius: 5px;
+    padding: 10px;
+  }
+  
+  .task-card {
+    background-color: #fff;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    padding: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    cursor: pointer;
+  }
+  
+  .task-header {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .task-metadata span {
+    display: block;
+    color: #666;
+    font-size: 0.9em;
+    margin-bottom: 3px;
+  }
+  
+  .priority-low {
+    color: #2f855a;
+  }
+  
+  .priority-medium {
+    color: #e6b325;
+  }
+  
+  .priority-high {
+    color: #c53030;
+  }
+  
+  /* Add responsive behavior if needed */
+  @media (max-width: 768px) {
+    .tasks-calendar-container {
+      flex-direction: column;
+    }
+  
+    .task-column {
+      width: 100%;
+      margin-right: 0;
+      margin-bottom: 20px;
+    }
+  }
+  
