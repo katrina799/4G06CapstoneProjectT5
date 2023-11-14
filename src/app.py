@@ -34,10 +34,39 @@ tasks = {
             "weight": "10%",
             "est_time": "1 hour",
             "priority": "high",
+        },
+        {
+            "id": 4,
+            "title": "Assignment 4",
+            "course": "SFWRENG 4G06A",
+            "due_date": "2023-11-23",
+            "weight": "10%",
+            "est_time": "1 hour",
+            "priority": "high",
         }
     ],
-    "in_progress": [],
-    "done": [],
+    "in_progress": [
+        {
+            "id": 2,
+            "title": "Assignment 2",
+            "course": "SFWRENG 4G06A",
+            "due_date": "2023-11-23",
+            "weight": "10%",
+            "est_time": "1 hour",
+            "priority": "high",
+        }
+    ],
+    "done": [
+        {
+            "id": 3,
+            "title": "Assignment 3",
+            "course": "SFWRENG 4G06A",
+            "due_date": "2023-11-25",
+            "weight": "10%",
+            "est_time": "1 hour",
+            "priority": "low",
+        }
+    ],
 }
 
 

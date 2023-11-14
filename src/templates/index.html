@@ -7,6 +7,7 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}" />
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='task.css') }}" />
     <title>Course Buddy</title>
 </head>
 
@@ -80,7 +81,7 @@
     </div>
 
 
-    <div class="tasks-calendar-container" style="max-width: 1200px; margin: 20px auto; display: flex; justify-content: space-between;">
+    <div class="tasks-calendar-container">
         <div class="task-board">
             <!-- To Do Column -->
             <div class="task-column" id="todo">
@@ -103,7 +104,13 @@
                 <h2>In Progress</h2>
                 {% for task in tasks.in_progress %}
                 <div class="task-card" draggable="true" data-id="{{ task.id }}" data-status="in-progress">
-                    <!-- Similar structure as the To Do tasks -->
+                    <div class="task-header">{{ task.course }} - {{ task.title }}</div>
+                    <div class="task-metadata">
+                        <span>Due: {{ task.due_date }}</span>
+                        <span>Weight: {{ task.weight }}</span>
+                        <span>Est. Time: {{ task.est_time }}</span>
+                    </div>
+                    <div class="task-priority {{ 'priority-' + task.priority|lower }}">{{ task.priority }} Priority</div>
                 </div>
                 {% endfor %}
             </div>
@@ -113,12 +120,18 @@
                 <h2>Done</h2>
                 {% for task in tasks.done %}
                 <div class="task-card" draggable="true" data-id="{{ task.id }}" data-status="done">
-                    <!-- Similar structure as the To Do tasks -->
+                    <div class="task-header">{{ task.course }} - {{ task.title }}</div>
+                    <div class="task-metadata">
+                        <span>Due: {{ task.due_date }}</span>
+                        <span>Weight: {{ task.weight }}</span>
+                        <span>Est. Time: {{ task.est_time }}</span>
+                    </div>
+                    <div class="task-priority {{ 'priority-' + task.priority|lower }}">{{ task.priority }} Priority</div>
                 </div>
                 {% endfor %}
             </div>
         </div>
-        <div class="calendar-container" style="flex: 1;">
+        <div class="calendar-container">
             <!-- Calendar here -->
             <div class="calendar-placeholder">
                 Calendar Widget Goes Here
