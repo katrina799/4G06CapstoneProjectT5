@@ -4,7 +4,7 @@ import PyPDF2
 import re
 import botocore
 import boto3
-from flask import Flask, render_template, request, Response, redirect, url_for
+from flask import Flask, render_template, request, Response, redirect, url_for, jsonify
 import ast
 from helper import (
     check_syllabus_exists,
@@ -33,6 +33,22 @@ s3 = boto3.client(
     aws_secret_access_key=os.environ.get("AWS_SECRET_ACCESS_KEY"),
 )
 
+tasks = {
+    "todo": [
+        {
+            "id": 1,
+            "title": "Assignment 1",
+            "course": "SFWRENG 4G06A",
+            "due_date": "2023-11-20",
+            "weight": "10%",
+            "est_time": "1 hour",
+            "priority": "high",
+        }
+    ],
+    "in_progress": [],
+    "done": [],
+}
+
 
 # Set up home page for the website
 @app.route("/")
@@ -50,6 +66,7 @@ def start():
     tasks = tasks_df.groupby('status').apply(lambda x: x.drop('status', axis=1).to_dict(orient='records')).to_dict()
 
     return render_template(
+        
         "index.html",
         username=username,
         courses=courses,
@@ -135,8 +152,7 @@ def course_page():
         "course_page.html",
         username=username,
         courses=courses,
-        current_page="course_page",
-    )
+        current_page='course_page')
 
 
 # Router to study plan detailed page
@@ -144,112 +160,19 @@ def course_page():
 def plan_page():
     # render the plan page
     return render_template(
-        "plan_page.html", username=username, current_page="plan_page"
-    )
+        "plan_page.html",
+        username=username,
+        current_page='plan_page')
 
 
-# Router to user profile pageile
+# Router to user profile page
 @app.route("/profile_page", methods=["GET", "POST"])
 def profile_page():
     # render the profile page, showing username on pege
     return render_template(
-        "profile_page.html", username=username, current_page="profile_page"
-    )
-
-
-@app.route("/course_detail_page/<course_id>")
-def course_detail(course_id):
-    message = request.args.get("message", "")
-    bk = bucket_name
-    syllabus_exists, pdf_name = check_syllabus_exists(course_id, s3, bk)
-
-    if syllabus_exists:
-        email_list = extract_emails_from_pdf(pdf_name)
-    else:
-        email_list = []
-
-    return render_template(
-        "course_detail_page.html",
-        course_id=course_id,
-        course=course_id,
+        "profile_page.html",
         username=username,
-        email_list=email_list,
-        message=message,
-    )
-
-
-# input:pdf file
-# output: a list of string emails
-# extract all the email in the input pdf
-@app.route("/get_emails", methods=["GET"])
-def extract_emails_from_pdf(filename):
-    if request.method == "GET":
-        response = s3.get_object(Bucket=bucket_name, Key=filename)
-        pdf_file = response["Body"].read()
-        pdf_file_obj = io.BytesIO(pdf_file)
-
-        pdf_reader = PyPDF2.PdfReader(pdf_file_obj)
-        text = ""
-
-        for page_num in range(len(pdf_reader.pages)):
-            page = pdf_reader.pages[page_num]
-            text += page.extract_text()
-
-        email_pattern = r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,7}\b"
-        emails = re.findall(email_pattern, text)
-
-        return emails
-
-
-@app.route("/upload/<course_id>", methods=["POST"])
-def upload_file(course_id):
-    print("course id", course_id)
-    if (
-        "file" not in request.files
-        or not request.files["file"]
-        or request.files["file"].filename == ""
-    ):
-        print("checked")
-        return redirect(
-            url_for(
-                "course_detail",
-                course_id=course_id,
-                message="No file selected",
-                username=username,
-            )
-        )
-
-    file = request.files["file"]
-    new_filename = f"{course_id}-syllabus.pdf"
-    file.filename = new_filename
-    print("file:", file.filename)
-
-    try:
-        print("uploading")
-
-        s3.upload_fileobj(
-            file, bucket_name, file.filename, ExtraArgs={"ACL": "private"}
-        )
-        update_csv(course_id, file.filename)
-        print("returning")
-        return redirect(
-            url_for(
-                "course_detail",
-                course_id=course_id,
-                message="File uploaded successfully!",
-                username=username,
-            )
-        )
-    except botocore.exceptions.NoCredentialsError:
-        print("error")
-        return redirect(
-            url_for(
-                "course_detail",
-                course_id=course_id,
-                message="AWS authentication failed. Check your AWS keys.",
-                username=username,
-            )
-        )
+        current_page='profile_page')
 
 
 if __name__ == "__main__":
