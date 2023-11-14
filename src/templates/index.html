@@ -12,7 +12,7 @@
 
 <body>
     {% include 'header.html' %}
-    <div class="banner-container" style="background-color: antiquewhite;">
+    <div class="banner-container" style="background-color: #f6fff8;">
         <div id="banner" class="banner-bar">
             <img style="border-radius: 0; display: inline-block;" class="banner-image"
                 src="{{url_for('static', filename='fight.png')}}" />
@@ -22,9 +22,18 @@
     <div class="course-panel-container">
         <div class="course-list">
             <div class="panel-course" style="margin: 5px;">
-                <div style="display: flex; margin: 5px;">
+                <div style="display: flex; margin: 5px; align-items: center; ">
                     <h2>My Courses </h2>
                     <h3>({{courses|length}})</h3>
+                    <form action="/add_course" method="post" style="margin-top: 15px; margin-left: 15px;">
+                        <label for="newcourse">Add a New Course:</label>
+                        <input type="text" id="newcourse" name="newcourse" required>
+                        <button type="submit" class="btn btn-success btn-xs">
+                            <i class="fa fa-plus" aria-hidden="true">
+                            </i>
+                            Add
+                        </button>
+                    </form>
                 </div>
 
                 <div class="courses" style="display: table; width: 256px;  border-spacing: 10px;">
@@ -40,12 +49,12 @@
                         </div>
                         <div style="position: relative;">
                             <div class="course-details">
-                                <div class="course-title">{{course}}</div>
+                                <h4>{{course}}</h4>
                                 <div style="margin-top: 5px;" class="course-desc">This a course in level 4, aims to
                                     learn the sicentific
                                     computation
                                 </div>
-                                <div class="instructor">By Prof Dr NED NEDIALKOV</div>
+                                <div class="instructor">By Prof Dr ned nedialkov</div>
                             </div>
                             <form style="position: absolute; top: 0; right: 0; margin: 3px;" action="/remove_course"
                                 method="post">
@@ -65,15 +74,6 @@
                     {% endfor %}
                 </div>
 
-                <form action="/add_course" method="post">
-                    <label for="newcourse">Add a New Course:</label>
-                    <input type="text" id="newcourse" name="newcourse" required>
-                    <button type="submit" class="btn btn-success btn-xs">
-                        <i class="fa fa-plus" aria-hidden="true">
-                        </i>
-                        Add
-                    </button>
-                </form>
             </div>
         </div>
 
