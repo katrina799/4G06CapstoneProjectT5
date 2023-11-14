@@ -116,9 +116,9 @@ def add_course():
 def course_page():
     # render the course page, display the course content(name)
     return render_template(
-        "course_page.html", 
+        "course_page.html",
         username=username,
-        courses=courses, 
+        courses=courses,
         current_page='course_page')
 
 
