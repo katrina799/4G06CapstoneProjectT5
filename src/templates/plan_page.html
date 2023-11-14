@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}" />
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Course Buddy</title>
+</head>
+
+<body>
+    {% include 'header.html' %}
+    This is plan page!!!
+
+    <div class="panel-file" style="margin: 5px;">
+
+        <h1>Download File</h1>
+        <form action="/download" method="get">
+            <label for="filename">Enter Filename:</label>
+            <input type="text" id="filename" name="filename" required>
+            <button type="submit" class="btn btn-success">
+                <i class="fa fa-plus" aria-hidden="true">
+                </i>
+                Download
+            </button>
+        </form>
+
+
+    </div>
+</body>
+
+</html>

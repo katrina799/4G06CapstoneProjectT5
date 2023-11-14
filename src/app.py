@@ -35,7 +35,11 @@ def start():
     # Parsing it into a Python list
     courses = ast.literal_eval(courses)
 
-    return render_template("index.html", username=username, courses=courses)
+    return render_template(
+        "index.html",
+        username=username,
+        courses=courses,
+        current_page='home')
 
 
 # Download a file from s3
@@ -105,6 +109,37 @@ def add_course():
 
         upload_df_to_s3(df, s3, bucket_name, mock_data_file)
     return redirect(url_for("start"))
+
+
+# Router to course detailed page
+@app.route("/course_page", methods=["GET", "POST"])
+def course_page():
+    # render the course page, display the course content(name)
+    return render_template(
+        "course_page.html",
+        username=username,
+        courses=courses,
+        current_page='course_page')
+
+
+# Router to study plan detailed page
+@app.route("/plan_page", methods=["GET", "POST"])
+def plan_page():
+    # render the plan page
+    return render_template(
+        "plan_page.html",
+        username=username,
+        current_page='plan_page')
+
+
+# Router to user profile page
+@app.route("/profile_page", methods=["GET", "POST"])
+def profile_page():
+    # render the profile page, showing username on pege
+    return render_template(
+        "profile_page.html",
+        username=username,
+        current_page='profile_page')
 
 
 if __name__ == "__main__":

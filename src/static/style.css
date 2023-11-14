@@ -1,0 +1,119 @@
+.body {
+    font-family: -apple-system, BlinkMacSystemFont, " Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif, "Apple Color
+ Emoji"," Segoe UI Emoji";"
+}
+
+.glyphicon {
+    color: #b4c8cc;
+}
+
+.glyphicon:hover {
+    color: #66b0bf;
+}
+
+
+
+.banner-image {
+    width: 20px;
+    height: 20px;
+}
+
+.banner-bar {
+    grid-column-gap: 12px;
+    grid-row-gap: 12px;
+    background-color: var(--black);
+    color: var(--white);
+    grid-template-rows: auto auto;
+    grid-template-columns: 1fr 1fr;
+    grid-auto-columns: 1fr;
+    justify-content: center;
+    align-items: center;
+    padding: 12px 24px;
+    font-weight: 500;
+    display: flex;
+
+}
+
+
+.head {
+    display: flex;
+    align-items: center;
+    border-bottom: 4px rgba(143, 198, 201, 0.887);
+    background-color: #cce3de;
+    margin: 5px;
+    position: sticky;
+    top: 0;
+    height: 50px;
+    font-size: 16px;
+    overflow: hidden;
+    word-wrap: break-word;
+    min-width: 0;
+
+}
+
+.head>*:not(:last-child) {
+    margin-right: 30px;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+
+
+.panel-course {
+    background-color: rgb(255, 255, 255);
+    border-radius: 4px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.panel-name {
+    background-color: rgb(255, 255, 255);
+    border-radius: 4px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.panel-file {
+    background-color: rgb(255, 255, 255);
+    border-radius: 4px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.course-detail {
+    background-color: rgb(255, 255, 255);
+    border-radius: 4px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    display: table-cell;
+    vertical-align: center;
+    padding: 5px;
+
+}
+
+.course-progress {
+    width: 100%;
+    height: 5px;
+    background-color: #e0e0e0;
+}
+
+.progress-bar {
+    background: green;
+    height: 100%;
+    transform-origin: left center;
+    transition: cubic-bezier(0.075, 0.82, 0.165, 1)
+}
+
+
+.course-image img {
+    width: 256px;
+    height: auto;
+}
+
+.active i {
+    color: #66b0bf;
+
+}
