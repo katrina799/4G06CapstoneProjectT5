@@ -1,195 +1,195 @@
-task_name,university,school_year,course_name,course_code,credit,task_mode,task_type,task_weight_percent,due_date,due_time,time_required_hours,difficulty,current_date_(today),#_days_left,current_progress_percent,time_spent_hours,priority_level
-Assignment 3,McMaster University,4,Scientific Computation,SFWRENG 4X03,3,Individual,Assignment,8.0,2023-11-15,11:59 pm,18.0,5.0,2023-11-11,4,10.0,0.0,5
-Quiz 7,McMaster University,4,"Ethics, Equity and Law in Engineering",ENGINEER 4A03,3,Individual,Quiz,4.29,2023-11-13,11:59 pm,0.25,2.0,2023-11-12,1,0.0,0.0,3
-Project Part II: Case Study,McMaster University,4,"Ethics, Equity and Law in Engineering",ENGINEER 4A03,3,Group,Project,5.0,2023-11-17,11:59 pm,2.0,3.0,2023-11-12,5,0.0,0.0,3
-Lab 2/PPA2,McMaster University,2,Principles of Programming,COMPENG 2SH4,4,Individual,Lab,10.0,2023-10-27,11:59 pm,12.0,4.0,2023-10-20,7,50.0,12.0,5
-Assignment 4,McMaster University,4,Scientific Computation,SFWRENG 4X03,3,Individual,Assignment,8.0,2023-11-30,11:59 pm,25.0,5.0,2023-11-12,14,0.0,0.0,1
-DT 2: Design Project M3: User Requirements Elicitation & Definition,McMaster University,4,Human Computor Interfaces,SFWRENG 4HC3,3,Group,Project,10.0,2023-11-08,11:59 pm,4.0,4.0,2023-11-07,1,30.0,5.0,5
-Design Project M3: Critical Reflection,McMaster University,4,Human Computor Interfaces,SFWRENG 4HC4,3,Individual,Project,3.0,2023-11-11,11:59 pm,1.0,3.0,2023-11-08,3,50.0,1.0,4
-DT 2: Design Project M3: User Requirements Elicitation & Definition,McMaster University,4,Human Computor Interfaces,SFERENG 4HC3,3,Group,Project,10.0,2023-11-08,11:59 pm,5.0,4.0,2023-11-06,2,5.0,1.0,4
-Design Project M3: Mid-Project Team Evaluations,McMaster University,4,Human Computor Interfaces,SFERENG 4HC3,3,Individual,Project,2.0,2023-11-06,11:59 pm,1.0,1.0,2023-11-06,0,80.0,1.0,5
-"Team Formed, Project Selected",McMaster University,4,Software Design IV - Capstone Design Project,SFWRENG 4G06A,6,Group,Project,0.0,2023-09-18,11:59 pm,0.5,2.0,2023-09-17,1,50.0,1.0,5
-Design Project M1 Critical Reflection,McMaster University,4,Human Computor Interfaces,SFERENG 4HC3,3,Individual,Project,5.0,2023-09-22,11:59 pm,3.0,3.0,2023-09-17,5,0.0,0.0,3
-Assignment 1,McMaster University,4,Scientific Computation,SFWRENG 4X03,3,Individual,Assignment,8.0,2023-10-05,11:59 pm,16.0,5.0,2023-09-17,18,0.0,0.0,1
-[OPTIONAL] Check-in: Interaction Critical Evaluations,McMaster University,4,Human Computor Interfaces,SFERENG 4HC3,3,Individual,Assignment,0.0,2023-09-29,11:59 pm,6.0,4.0,2023-09-24,5,0.0,0.0,1
-Assignment 1,McMaster University,4,Scientific Computation,SFWRENG 4X03,3,Individual,Assignment,8.0,2023-10-05,11:59 pm,16.0,5.0,2023-09-24,11,0.0,0.0,2
-"Problem Statement, POC Plan, Development Plan",McMaster University,4,Software Design IV - Capstone Design Project,SFWRENG 4G06A,6,Group,Project,2.0,2023-10-02,11:59 pm,6.0,4.0,2023-09-24,8,20.0,4.0,4
-Test 1,McMaster University,4,"Introduction to Anthropology: Sex, Food and Death",ANTHROP 1AA3,3,Individual,Test Review,25.0,2023-10-06,8:30 am,2.0,3.0,2023-09-24,12,0.0,0.0,2
-Midterm Test,McMaster University,4,Real-Time Systems and Control Applications,SFWRENG 4AA4,4,Individual,Test Review,25.0,2023-10-06,1:30 pm,12.0,4.0,2023-09-24,12,0.0,0.0,4
-Assignment 1,McMaster University,4,Scientific Computation,SFWRENG 4X03,3,Individual,Assignment,8.0,2023-10-05,11:59 pm,12.0,5.0,2023-10-01,4,20.0,3.0,5
-"Problem Statement, POC Plan, Development Plan",McMaster University,4,Software Design IV - Capstone Design Project,SFWRENG 4G06A,6,Group,Project,2.0,2023-10-02,11:59 pm,2.0,4.0,2023-10-01,1,80.0,8.0,4
-Test 1,McMaster University,4,"Introduction to Anthropology: Sex, Food and Death",ANTHROP 1AA3,3,Individual,Test Review,25.0,2023-10-06,8:30 am,0.0,3.0,2023-10-01,5,100.0,1.5,1
-Midterm Test,McMaster University,4,Real-Time Systems and Control Applications,SFWRENG 4AA4,4,Individual,Test Review,25.0,2023-10-06,1:30 pm,10.0,4.0,2023-10-01,5,15.0,2.0,5
-Assignment 2,McMaster University,4,Scientific Computation,SFWRENG 4X03,3,Individual,Assignment,8.0,2023-10-25,11:59 pm,16.0,5.0,2023-10-01,24,0.0,0.0,1
-Assignment 2,McMaster University,4,Scientific Computation,SFWRENG 4X03,3,Individual,Assignment,8.0,2023-10-25,11:59 pm,16.0,5.0,2023-10-15,10,0.0,0.0,2
-Assignment 1,McMaster University,4,"Introduction to Anthropology: Sex, Food and Death",ANTHROP 1AA3,3,Individual,Assignment,25.0,2023-10-16,11:59 pm,8.0,4.0,2023-10-15,1,0.0,0.0,5
-Hazard Analysis 0,McMaster University,4,Software Design IV - Capstone Design Project,SFWRENG 4G06A,6,Group,Project,3.0,2023-10-20,11:59 pm,1.0,4.0,2023-10-15,5,0.0,0.0,2
-Assignment 2,McMaster University,4,Scientific Computation,SFWRENG 4X03,3,Individual,Assignment,8.0,2023-10-25,11:59 pm,12.0,5.0,2023-10-22,3,30.0,6.0,5
-Interaction Critical Evaluations,McMaster University,4,Human Computor Interfaces,SFERENG 4HC3,3,Individual,Assignment,10.0,2023-10-27,11:59 pm,14.0,4.0,2023-10-22,5,30.0,4.0,4
-V&V Plan Revision 0,McMaster University,4,Software Design IV - Capstone Design Project,SFWRENG 4G06A,6,Group,Project,5.0,2023-11-03,11:59 pm,15.0,4.0,2023-10-22,12,0.0,0.0,2
-Assignment 3,McMaster University,4,Scientific Computation,SFWRENG 4X03,3,Individual,Assignment,8.0,2023-11-15,11:59 pm,10.0,5.0,2023-11-14,1,20.0,4.0,5
-Proof of Concept,McMaster University,4,Software Design IV - Capstone Design Project,SFWRENG 4G06A,6,Group,Project,5.0,2023-11-21,11:59 pm,14.0,4.0,2023-11-14,7,25.0,5.0,4
-Assignment 3,McMaster University,4,"Ethics, Equity and Law in Engineering",ENGINEER 4A03,3,Individual,Assignment,10.0,2023-11-24,11:59 pm,10.0,5.0,2023-11-14,10,0.0,0.0,3
-Design and Prototyping Exercise,McMaster University,4,Human Computor Interfaces,SFERENG 4HC3,3,Individual,Assignment,15.0,2023-11-24,11:59 pm,12.0,4.0,2023-11-15,9,0.0,0.0,3
-Proof of Concept Demonstration,McMaster University,4,Computer Science Capstone Project,COMPSCI 4ZP6A,6,Group,Project,10.0,2023-11-17,11:59 pm,14.0,5.0,2023-11-12,5,0.0,0.0,5
-Assignment 3,McMaster University,4,Introduction to Machine Learning,COMPSCI 4ML3,3,Individual,Assignment,7.5,2023-11-18,11:59 pm,1.0,4.0,2023-11-12,6,90.0,7.0,4
-Schematic Design,Toronto Metropolitan University,4,Integration Studio I,ASC520,3,Individual,Project,50.0,2023-12-07,12:00 pm,50.0,5.0,2023-11-13,24,0.0,0.0,3
-Assignment 2,McMaster University,4,Human Computor Interfaces,SFWRENG 4HC3,3,Individual,Assigment,15.0,2023-11-27,11:59 pm,10.0,5.0,2023-11-13,14,0.0,0.0,2
-Discussion #2,McMaster University,4,Regional Geography of Canada,ENVSOCTY 2OC3,3,Individual,Assigment,19.5,2023-11-20,11:59 pm,12.0,1.0,2023-11-13,7,20.0,3.0,5
-Assignment 3,McMaster University,3,Scientific Computation,CIMPSCI 4XO3,3,Individual,Assigment,8.0,2023-11-15,11:59 pm,20.0,4.0,2023-11-13,2,0.0,0.0,5
-Lab 4,McMaster University,2,Logic Design,COMPENG 2DI4,4,Group,Lab,6.0,2023-11-14,11:59 pm,7.0,3.0,2023-11-13,1,5.0,1.0,4
-Assignment 5,McMaster University,4,Introduction to Quantum Computing ,ENGPHYS 4QC3,3,Individual,Assigment,6.0,2023-11-19,11:59 pm,3.0,3.0,2023-11-13,6,20.0,1.0,3
-Lab 4,McMaster University,3,Electronic Devices and Circuits II,ELECENG 3EJ4,4,Individual,Lab,6.0,2023-11-17,11:59 pm,8.0,5.0,2023-11-13,4,0.0,0.0,5
-Individual essay 2.1,University of Toronto ,4,Getting Medieval: Myths and Monsters,MST201,1,Individual,Assigment,15.0,2023-11-17,11:59 pm,25.0,3.0,2023-11-13,4,70.0,30.0,2
-Group Assignment,Toronto Metropolitan University,4,Project Economics,ASC522,1,Hybrid,Assigment,40.0,2023-11-27,12:00 pm,8.0,3.0,2023-11-13,14,80.0,15.0,3
-Assignment 3,McMaster University,4,Scientific Computation,COMPSCI 4X03,3,Individual,Assigment,8.0,2023-11-15,11:59 pm,5.0,4.0,2023-11-13,2,40.0,4.0,4
-Test 2,McMaster University,4,Human Aging: Biological and Lifestyle Influences,KINESIOL 4SS3,3,Individual,Midterm Test,15.0,2023-11-16,11:59 pm,48.0,3.0,2023-11-13,3,0.0,0.0,3
-Assignment 3,McMaster University,3,Principles of Programming Languages,COMPSCI 3MI3,3,Individual,Assigment,8.0,2023-11-20,11:59 pm,20.0,4.0,2023-11-13,7,0.0,0.0,2
-Lab3,McMaster University,2,Principles of Programming,COMPENG 2SH4,4,Individual,Lab,5.0,2023-11-17,11:59 pm,20.0,5.0,2023-11-13,4,30.0,5.0,5
-Report,McMaster University,4,Capstone Project,ENGPHYS 4A06,6,Group,Report,20.0,2023-11-24,11:59 pm,10.0,3.0,2023-11-13,11,0.0,0.0,2
-Quiz 7,McMaster University,3,Introduction to the Practice of Music Therapy,MUSIC 2MT3,3,Individual,Quiz,5.0,2023-11-16,11:59 pm,0.5,2.0,2023-11-13,3,0.0,0.0,2
-Group project ,University of Toronto ,4,Sustainable Finance,RSM 436,1,Group,Project,40.0,2023-11-17,11:59 pm,25.0,3.0,2023-11-13,4,50.0,5.0,4
-Assignment 3,University of Toronto ,4,Information Security ,COMPSCI 3IS3,3,Individual,Assigment,20.0,2023-11-12,11:59 pm,1.0,4.0,2023-11-11,1,80.0,2.0,5
-Assignment 3,University of Toronto ,4,Scientific Computation ,SFWRENG 4X03,3,Individual,Assigment,10.0,2023-11-15,11:59 pm,0.0,5.0,2023-11-14,1,100.0,6.0,1
-Paper Presentation,University of Toronto ,6,Theoretical Foundations of Unsupervised Learning,CAS 775,3,Individual,Presentation,45.0,2023-11-22,11:59 pm,10.0,5.0,2023-11-14,8,30.0,3.0,4
-Topic Presentation,University of Toronto ,6,(Micro)service-oriented architectures,CAS 735,3,Group,Presentation,20.0,2023-11-23,11:59 pm,7.0,3.0,2023-11-14,9,10.0,1.0,4
-Assignment 1,McMaster University,5,Information Security,COMPSCI 3IS3,3,Individual,Assignment,10.0,2023-10-10,11:59 pm,2.0,2.0,2023-10-02,8,20.0,0.5,4
-Assignment 2,McMaster University,5,Information Security,COMPSCI 3IS3,3,Individual,Assignment,10.0,2023-10-30,11:59 pm,0.33,4.0,2023-10-27,3,90.0,2.5,4
-Assignment 3,McMaster University,5,Information Security,COMPSCI 3IS3,3,Individual,Assignment,20.0,2023-11-12,11:59 pm,3.0,5.0,2023-11-05,7,100.0,0.0,4
-Quiz 1,McMaster University,5,Information Security,COMPSCI 3IS3,3,Individual,Quiz,1.0,2023-11-06,11:59 pm,0.1,3.0,2023-11-06,1,0.0,0.0,2
-Quiz 2,McMaster University,5,Information Security,COMPSCI 3IS3,3,Individual,Quiz,1.0,2023-11-09,11:59 pm,0.1,3.0,2023-11-09,1,0.0,0.0,2
-Quiz 3,McMaster University,5,Information Security,COMPSCI 3IS3,3,Individual,Quiz,1.0,2023-11-13,11:59 pm,0.1,3.0,2023-11-13,1,0.0,0.0,2
+task_name,university,school_year,course_name,course_code,credit,task_mode,task_type,task_weight_percent,due_date,due_time,time_required_hours,difficulty,current_date_(today),current_progress_percent,time_spent_hours,priority_level,days_until_due
+Assignment 3,McMaster University,4,Scientific Computation,SFWRENG 4X03,3,Individual,Assignment,8.0,2023-11-15,11:59 pm,18.0,5.0,2023-11-11,10.0,0.0,5,4
+Quiz 7,McMaster University,4,"Ethics, Equity and Law in Engineering",ENGINEER 4A03,3,Individual,Quiz,4.29,2023-11-13,11:59 pm,0.25,2.0,2023-11-12,0.0,0.0,3,1
+Project Part II: Case Study,McMaster University,4,"Ethics, Equity and Law in Engineering",ENGINEER 4A03,3,Group,Project,5.0,2023-11-17,11:59 pm,2.0,3.0,2023-11-12,0.0,0.0,3,5
+Lab 2/PPA2,McMaster University,2,Principles of Programming,COMPENG 2SH4,4,Individual,Lab,10.0,2023-10-27,11:59 pm,12.0,4.0,2023-10-20,50.0,12.0,5,7
+Assignment 4,McMaster University,4,Scientific Computation,SFWRENG 4X03,3,Individual,Assignment,8.0,2023-11-30,11:59 pm,25.0,5.0,2023-11-12,0.0,0.0,1,18
+DT 2: Design Project M3: User Requirements Elicitation & Definition,McMaster University,4,Human Computor Interfaces,SFWRENG 4HC3,3,Group,Project,10.0,2023-11-08,11:59 pm,4.0,4.0,2023-11-07,30.0,5.0,5,1
+Design Project M3: Critical Reflection,McMaster University,4,Human Computor Interfaces,SFWRENG 4HC4,3,Individual,Project,3.0,2023-11-11,11:59 pm,1.0,3.0,2023-11-08,50.0,1.0,4,3
+DT 2: Design Project M3: User Requirements Elicitation & Definition,McMaster University,4,Human Computor Interfaces,SFERENG 4HC3,3,Group,Project,10.0,2023-11-08,11:59 pm,5.0,4.0,2023-11-06,5.0,1.0,4,2
+Design Project M3: Mid-Project Team Evaluations,McMaster University,4,Human Computor Interfaces,SFERENG 4HC3,3,Individual,Project,2.0,2023-11-06,11:59 pm,1.0,1.0,2023-11-06,80.0,1.0,5,0
+"Team Formed, Project Selected",McMaster University,4,Software Design IV - Capstone Design Project,SFWRENG 4G06A,6,Group,Project,0.0,2023-09-18,11:59 pm,0.5,2.0,2023-09-17,50.0,1.0,5,1
+Design Project M1 Critical Reflection,McMaster University,4,Human Computor Interfaces,SFERENG 4HC3,3,Individual,Project,5.0,2023-09-22,11:59 pm,3.0,3.0,2023-09-17,0.0,0.0,3,5
+Assignment 1,McMaster University,4,Scientific Computation,SFWRENG 4X03,3,Individual,Assignment,8.0,2023-10-05,11:59 pm,16.0,5.0,2023-09-17,0.0,0.0,1,18
+[OPTIONAL] Check-in: Interaction Critical Evaluations,McMaster University,4,Human Computor Interfaces,SFERENG 4HC3,3,Individual,Assignment,0.0,2023-09-29,11:59 pm,6.0,4.0,2023-09-24,0.0,0.0,1,5
+Assignment 1,McMaster University,4,Scientific Computation,SFWRENG 4X03,3,Individual,Assignment,8.0,2023-10-05,11:59 pm,16.0,5.0,2023-09-24,0.0,0.0,2,11
+"Problem Statement, POC Plan, Development Plan",McMaster University,4,Software Design IV - Capstone Design Project,SFWRENG 4G06A,6,Group,Project,2.0,2023-10-02,11:59 pm,6.0,4.0,2023-09-24,20.0,4.0,4,8
+Test 1,McMaster University,4,"Introduction to Anthropology: Sex, Food and Death",ANTHROP 1AA3,3,Individual,Test Review,25.0,2023-10-06,8:30 am,2.0,3.0,2023-09-24,0.0,0.0,2,12
+Midterm Test,McMaster University,4,Real-Time Systems and Control Applications,SFWRENG 4AA4,4,Individual,Test Review,25.0,2023-10-06,1:30 pm,12.0,4.0,2023-09-24,0.0,0.0,4,12
+Assignment 1,McMaster University,4,Scientific Computation,SFWRENG 4X03,3,Individual,Assignment,8.0,2023-10-05,11:59 pm,12.0,5.0,2023-10-01,20.0,3.0,5,4
+"Problem Statement, POC Plan, Development Plan",McMaster University,4,Software Design IV - Capstone Design Project,SFWRENG 4G06A,6,Group,Project,2.0,2023-10-02,11:59 pm,2.0,4.0,2023-10-01,80.0,8.0,4,1
+Test 1,McMaster University,4,"Introduction to Anthropology: Sex, Food and Death",ANTHROP 1AA3,3,Individual,Test Review,25.0,2023-10-06,8:30 am,0.0,3.0,2023-10-01,100.0,1.5,1,5
+Midterm Test,McMaster University,4,Real-Time Systems and Control Applications,SFWRENG 4AA4,4,Individual,Test Review,25.0,2023-10-06,1:30 pm,10.0,4.0,2023-10-01,15.0,2.0,5,5
+Assignment 2,McMaster University,4,Scientific Computation,SFWRENG 4X03,3,Individual,Assignment,8.0,2023-10-25,11:59 pm,16.0,5.0,2023-10-01,0.0,0.0,1,24
+Assignment 2,McMaster University,4,Scientific Computation,SFWRENG 4X03,3,Individual,Assignment,8.0,2023-10-25,11:59 pm,16.0,5.0,2023-10-15,0.0,0.0,2,10
+Assignment 1,McMaster University,4,"Introduction to Anthropology: Sex, Food and Death",ANTHROP 1AA3,3,Individual,Assignment,25.0,2023-10-16,11:59 pm,8.0,4.0,2023-10-15,0.0,0.0,5,1
+Hazard Analysis 0,McMaster University,4,Software Design IV - Capstone Design Project,SFWRENG 4G06A,6,Group,Project,3.0,2023-10-20,11:59 pm,1.0,4.0,2023-10-15,0.0,0.0,2,5
+Assignment 2,McMaster University,4,Scientific Computation,SFWRENG 4X03,3,Individual,Assignment,8.0,2023-10-25,11:59 pm,12.0,5.0,2023-10-22,30.0,6.0,5,3
+Interaction Critical Evaluations,McMaster University,4,Human Computor Interfaces,SFERENG 4HC3,3,Individual,Assignment,10.0,2023-10-27,11:59 pm,14.0,4.0,2023-10-22,30.0,4.0,4,5
+V&V Plan Revision 0,McMaster University,4,Software Design IV - Capstone Design Project,SFWRENG 4G06A,6,Group,Project,5.0,2023-11-03,11:59 pm,15.0,4.0,2023-10-22,0.0,0.0,2,12
+Assignment 3,McMaster University,4,Scientific Computation,SFWRENG 4X03,3,Individual,Assignment,8.0,2023-11-15,11:59 pm,10.0,5.0,2023-11-14,20.0,4.0,5,1
+Proof of Concept,McMaster University,4,Software Design IV - Capstone Design Project,SFWRENG 4G06A,6,Group,Project,5.0,2023-11-21,11:59 pm,14.0,4.0,2023-11-14,25.0,5.0,4,7
+Assignment 3,McMaster University,4,"Ethics, Equity and Law in Engineering",ENGINEER 4A03,3,Individual,Assignment,10.0,2023-11-24,11:59 pm,10.0,5.0,2023-11-14,0.0,0.0,3,10
+Design and Prototyping Exercise,McMaster University,4,Human Computor Interfaces,SFERENG 4HC3,3,Individual,Assignment,15.0,2023-11-24,11:59 pm,12.0,4.0,2023-11-15,0.0,0.0,3,9
+Proof of Concept Demonstration,McMaster University,4,Computer Science Capstone Project,COMPSCI 4ZP6A,6,Group,Project,10.0,2023-11-17,11:59 pm,14.0,5.0,2023-11-12,0.0,0.0,5,5
+Assignment 3,McMaster University,4,Introduction to Machine Learning,COMPSCI 4ML3,3,Individual,Assignment,7.5,2023-11-18,11:59 pm,1.0,4.0,2023-11-12,90.0,7.0,4,6
+Schematic Design,Toronto Metropolitan University,4,Integration Studio I,ASC520,3,Individual,Project,50.0,2023-12-07,12:00 pm,50.0,5.0,2023-11-13,0.0,0.0,3,24
+Assignment 2,McMaster University,4,Human Computor Interfaces,SFWRENG 4HC3,3,Individual,Assignment,15.0,2023-11-27,11:59 pm,10.0,5.0,2023-11-13,0.0,0.0,2,14
+Discussion #2,McMaster University,4,Regional Geography of Canada,ENVSOCTY 2OC3,3,Individual,Assignment,19.5,2023-11-20,11:59 pm,12.0,1.0,2023-11-13,20.0,3.0,5,7
+Assignment 3,McMaster University,3,Scientific Computation,CIMPSCI 4XO3,3,Individual,Assignment,8.0,2023-11-15,11:59 pm,20.0,4.0,2023-11-13,0.0,0.0,5,2
+Lab 4,McMaster University,2,Logic Design,COMPENG 2DI4,4,Group,Lab,6.0,2023-11-14,11:59 pm,7.0,3.0,2023-11-13,5.0,1.0,4,1
+Assignment 5,McMaster University,4,Introduction to Quantum Computing ,ENGPHYS 4QC3,3,Individual,Assignment,6.0,2023-11-19,11:59 pm,3.0,3.0,2023-11-13,20.0,1.0,3,6
+Lab 4,McMaster University,3,Electronic Devices and Circuits II,ELECENG 3EJ4,4,Individual,Lab,6.0,2023-11-17,11:59 pm,8.0,5.0,2023-11-13,0.0,0.0,5,4
+Individual essay 2.1,University of Toronto ,4,Getting Medieval: Myths and Monsters,MST201,1,Individual,Assignment,15.0,2023-11-17,11:59 pm,25.0,3.0,2023-11-13,70.0,30.0,2,4
+Group Assignment,Toronto Metropolitan University,4,Project Economics,ASC522,1,Hybrid,Assignment,40.0,2023-11-27,12:00 pm,8.0,3.0,2023-11-13,80.0,15.0,3,14
+Assignment 3,McMaster University,4,Scientific Computation,COMPSCI 4X03,3,Individual,Assignment,8.0,2023-11-15,11:59 pm,5.0,4.0,2023-11-13,40.0,4.0,4,2
+Test 2,McMaster University,4,Human Aging: Biological and Lifestyle Influences,KINESIOL 4SS3,3,Individual,Midterm,15.0,2023-11-16,11:59 pm,48.0,3.0,2023-11-13,0.0,0.0,3,3
+Assignment 3,McMaster University,3,Principles of Programming Languages,COMPSCI 3MI3,3,Individual,Assignment,8.0,2023-11-20,11:59 pm,20.0,4.0,2023-11-13,0.0,0.0,2,7
+Lab3,McMaster University,2,Principles of Programming,COMPENG 2SH4,4,Individual,Lab,5.0,2023-11-17,11:59 pm,20.0,5.0,2023-11-13,30.0,5.0,5,4
+Report,McMaster University,4,Capstone Project,ENGPHYS 4A06,6,Group,Report,20.0,2023-11-24,11:59 pm,10.0,3.0,2023-11-13,0.0,0.0,2,11
+Quiz 7,McMaster University,3,Introduction to the Practice of Music Therapy,MUSIC 2MT3,3,Individual,Quiz,5.0,2023-11-16,11:59 pm,0.5,2.0,2023-11-13,0.0,0.0,2,3
+Group project ,University of Toronto ,4,Sustainable Finance,RSM 436,1,Group,Project,40.0,2023-11-17,11:59 pm,25.0,3.0,2023-11-13,50.0,5.0,4,4
+Assignment 3,University of Toronto ,4,Information Security ,COMPSCI 3IS3,3,Individual,Assignment,20.0,2023-11-12,11:59 pm,1.0,4.0,2023-11-11,80.0,2.0,5,1
+Assignment 3,University of Toronto ,4,Scientific Computation ,SFWRENG 4X03,3,Individual,Assignment,10.0,2023-11-15,11:59 pm,0.0,5.0,2023-11-14,100.0,6.0,1,1
+Paper Presentation,University of Toronto ,6,Theoretical Foundations of Unsupervised Learning,CAS 775,3,Individual,Presentation,45.0,2023-11-22,11:59 pm,10.0,5.0,2023-11-14,30.0,3.0,4,8
+Topic Presentation,University of Toronto ,6,(Micro)service-oriented architectures,CAS 735,3,Group,Presentation,20.0,2023-11-23,11:59 pm,7.0,3.0,2023-11-14,10.0,1.0,4,9
+Assignment 1,McMaster University,5,Information Security,COMPSCI 3IS3,3,Individual,Assignment,10.0,2023-10-10,11:59 pm,2.0,2.0,2023-10-02,20.0,0.5,4,8
+Assignment 2,McMaster University,5,Information Security,COMPSCI 3IS3,3,Individual,Assignment,10.0,2023-10-30,11:59 pm,0.33,4.0,2023-10-27,90.0,2.5,4,3
+Assignment 3,McMaster University,5,Information Security,COMPSCI 3IS3,3,Individual,Assignment,20.0,2023-11-12,11:59 pm,3.0,5.0,2023-11-05,100.0,0.0,4,7
+Quiz 1,McMaster University,5,Information Security,COMPSCI 3IS3,3,Individual,Quiz,1.0,2023-11-06,11:59 pm,0.1,3.0,2023-11-06,0.0,0.0,2,0
+Quiz 2,McMaster University,5,Information Security,COMPSCI 3IS3,3,Individual,Quiz,1.0,2023-11-09,11:59 pm,0.1,3.0,2023-11-09,0.0,0.0,2,0
+Quiz 3,McMaster University,5,Information Security,COMPSCI 3IS3,3,Individual,Quiz,1.0,2023-11-13,11:59 pm,0.1,3.0,2023-11-13,0.0,0.0,2,0
 "Accounting Cycle
-Assignment",McMaster University,5,Intermediate Financial Accounting I,COMMERCE 3AB3,3,Individual,Assignment,10.0,2023-10-02,11:59 pm,4.0,3.0,2023-09-22,10,50.0,5.0,4
-Appendix C Assignment,McMaster University,5,Intermediate Financial Accounting I,COMMERCE 3AB3,3,Individual,Assignment,0.83,2023-10-25,11:59 pm,0.75,2.0,2023-09-19,36,50.0,0.75,1
-Chapter 1 Assignment,McMaster University,5,Intermediate Financial Accounting I,COMMERCE 3AB3,3,Individual,Assignment,0.83,2023-10-25,11:59 pm,1.5,2.0,2023-09-15,40,0.0,0.0,1
-Chapter 2 Assignment,McMaster University,5,Intermediate Financial Accounting I,COMMERCE 3AB3,3,Individual,Assignment,0.83,2023-10-25,11:59 pm,0.5,2.0,2023-09-16,39,80.0,1.0,1
-Chapter 4 Assignment,McMaster University,5,Intermediate Financial Accounting I,COMMERCE 3AB3,3,Individual,Assignment,0.83,2023-10-25,11:59 pm,0.25,2.0,2023-09-30,26,90.0,1.0,1
-Chapter 5 Assignment,McMaster University,5,Intermediate Financial Accounting I,COMMERCE 3AB3,3,Individual,Assignment,0.83,2023-10-25,11:59 pm,1.5,2.0,2023-10-06,19,0.0,0.0,1
-Chapter 6 Assignment,McMaster University,5,Intermediate Financial Accounting I,COMMERCE 3AB3,3,Individual,Assignment,0.83,2023-10-25,11:59 pm,1.5,2.0,2023-10-20,5,0.0,0.0,1
-Chapter 7 Assignment,McMaster University,5,Intermediate Financial Accounting I,COMMERCE 3AB3,3,Individual,Assignment,0.83,2023-12-06,11:59 pm,1.5,2.0,2023-10-27,40,0.0,0.0,1
-Chapter 8 Assignment,McMaster University,5,Intermediate Financial Accounting I,COMMERCE 3AB3,3,Individual,Assignment,0.83,2023-12-06,11:59 pm,1.5,2.0,2023-10-27,40,0.0,0.0,1
-Chapter 9 Assignment,McMaster University,5,Intermediate Financial Accounting I,COMMERCE 3AB3,3,Individual,Assignment,0.83,2023-12-06,11:59 pm,1.5,2.0,2023-11-03,33,0.0,0.0,1
-Chapter 10 Assignment,McMaster University,5,Intermediate Financial Accounting I,COMMERCE 3AB3,3,Individual,Assignment,0.83,2023-12-06,11:59 pm,1.5,2.0,2023-11-10,26,0.0,0.0,1
-Chapter 11 Assignment,McMaster University,5,Intermediate Financial Accounting I,COMMERCE 3AB3,3,Individual,Assignment,0.83,2023-12-06,11:59 pm,1.5,2.0,2023-11-12,24,0.0,0.0,1
-Chapter 12 Assignment,McMaster University,5,Intermediate Financial Accounting I,COMMERCE 3AB3,3,Individual,Assignment,0.83,2023-12-06,11:59 pm,1.5,2.0,2023-11-12,24,0.0,0.0,1
-Midterm,McMaster University,5,Intermediate Financial Accounting I,COMMERCE 3AB3,3,Individual,Exam Review,30.0,2023-10-26,7:00 pm,4.0,3.0,2023-10-23,3,10.0,26.0,5
-Case Study,McMaster University,5,Intermediate Financial Accounting I,COMMERCE 3AB3,3,Group,Project,10.0,2023-11-29,11:59 pm,4.0,3.0,2023-11-12,17,1.0,0.5,3
-Assignment 1,McMaster University,5,Scientific Computation,SFWRENG 4X03,3,Individual,Assignment,8.0,2023-10-05,11:59 pm,0.5,5.0,2023-10-02,3,90.0,2.5,4
-Assignment 2,McMaster University,5,Scientific Computation,SFWRENG 4X03,3,Individual,Assignment,8.0,2023-10-25,11:59 pm,0.5,5.0,2023-10-20,3,90.0,2.0,4
-Assignment 3,McMaster University,5,Scientific Computation,SFWRENG 4X04,3,Individual,Assignment,8.0,2023-11-16,11:59 pm,1.0,5.0,2023-11-11,4,80.0,3.0,4
-Midterm,McMaster University,5,Scientific Computation,SFWRENG 4X05,3,Individual,Exam Review,20.0,2023-10-30,9:30 am,15.0,3.0,2023-10-26,4,50.0,15.0,5
+Assignment",McMaster University,5,Intermediate Financial Accounting I,COMMERCE 3AB3,3,Individual,Assignment,10.0,2023-10-02,11:59 pm,4.0,3.0,2023-09-22,50.0,5.0,4,10
+Appendix C Assignment,McMaster University,5,Intermediate Financial Accounting I,COMMERCE 3AB3,3,Individual,Assignment,0.83,2023-10-25,11:59 pm,0.75,2.0,2023-09-19,50.0,0.75,1,36
+Chapter 1 Assignment,McMaster University,5,Intermediate Financial Accounting I,COMMERCE 3AB3,3,Individual,Assignment,0.83,2023-10-25,11:59 pm,1.5,2.0,2023-09-15,0.0,0.0,1,40
+Chapter 2 Assignment,McMaster University,5,Intermediate Financial Accounting I,COMMERCE 3AB3,3,Individual,Assignment,0.83,2023-10-25,11:59 pm,0.5,2.0,2023-09-16,80.0,1.0,1,39
+Chapter 4 Assignment,McMaster University,5,Intermediate Financial Accounting I,COMMERCE 3AB3,3,Individual,Assignment,0.83,2023-10-25,11:59 pm,0.25,2.0,2023-09-30,90.0,1.0,1,25
+Chapter 5 Assignment,McMaster University,5,Intermediate Financial Accounting I,COMMERCE 3AB3,3,Individual,Assignment,0.83,2023-10-25,11:59 pm,1.5,2.0,2023-10-06,0.0,0.0,1,19
+Chapter 6 Assignment,McMaster University,5,Intermediate Financial Accounting I,COMMERCE 3AB3,3,Individual,Assignment,0.83,2023-10-25,11:59 pm,1.5,2.0,2023-10-20,0.0,0.0,1,5
+Chapter 7 Assignment,McMaster University,5,Intermediate Financial Accounting I,COMMERCE 3AB3,3,Individual,Assignment,0.83,2023-12-06,11:59 pm,1.5,2.0,2023-10-27,0.0,0.0,1,40
+Chapter 8 Assignment,McMaster University,5,Intermediate Financial Accounting I,COMMERCE 3AB3,3,Individual,Assignment,0.83,2023-12-06,11:59 pm,1.5,2.0,2023-10-27,0.0,0.0,1,40
+Chapter 9 Assignment,McMaster University,5,Intermediate Financial Accounting I,COMMERCE 3AB3,3,Individual,Assignment,0.83,2023-12-06,11:59 pm,1.5,2.0,2023-11-03,0.0,0.0,1,33
+Chapter 10 Assignment,McMaster University,5,Intermediate Financial Accounting I,COMMERCE 3AB3,3,Individual,Assignment,0.83,2023-12-06,11:59 pm,1.5,2.0,2023-11-10,0.0,0.0,1,26
+Chapter 11 Assignment,McMaster University,5,Intermediate Financial Accounting I,COMMERCE 3AB3,3,Individual,Assignment,0.83,2023-12-06,11:59 pm,1.5,2.0,2023-11-12,0.0,0.0,1,24
+Chapter 12 Assignment,McMaster University,5,Intermediate Financial Accounting I,COMMERCE 3AB3,3,Individual,Assignment,0.83,2023-12-06,11:59 pm,1.5,2.0,2023-11-12,0.0,0.0,1,24
+Midterm,McMaster University,5,Intermediate Financial Accounting I,COMMERCE 3AB3,3,Individual,Exam Review,30.0,2023-10-26,7:00 pm,4.0,3.0,2023-10-23,10.0,26.0,5,3
+Case Study,McMaster University,5,Intermediate Financial Accounting I,COMMERCE 3AB3,3,Group,Project,10.0,2023-11-29,11:59 pm,4.0,3.0,2023-11-12,1.0,0.5,3,17
+Assignment 1,McMaster University,5,Scientific Computation,SFWRENG 4X03,3,Individual,Assignment,8.0,2023-10-05,11:59 pm,0.5,5.0,2023-10-02,90.0,2.5,4,3
+Assignment 2,McMaster University,5,Scientific Computation,SFWRENG 4X03,3,Individual,Assignment,8.0,2023-10-25,11:59 pm,0.5,5.0,2023-10-20,90.0,2.0,4,5
+Assignment 3,McMaster University,5,Scientific Computation,SFWRENG 4X04,3,Individual,Assignment,8.0,2023-11-16,11:59 pm,1.0,5.0,2023-11-11,80.0,3.0,4,5
+Midterm,McMaster University,5,Scientific Computation,SFWRENG 4X05,3,Individual,Exam Review,20.0,2023-10-30,9:30 am,15.0,3.0,2023-10-26,50.0,15.0,5,4
 "Group Details and Industry Partner
-Submission Form",McMaster University,5,Engineering & Management Capstone,ENGNMGT 5B03,3,Group,Project,0.0,2023-09-15,10:00pm,0.5,1.0,2023-09-14,1,50.0,0.5,2
-Project Charter,McMaster University,5,Engineering & Management Capstone,ENGNMGT 5B03,3,Group,Project,5.0,2023-10-06,10:00pm,0.1,2.0,2023-10-03,3,90.0,0.2,3
-Project Proposal,McMaster University,5,Engineering & Management Capstone,ENGNMGT 5B03,3,Group,Project,15.0,2023-10-20,10:00pm,0.5,3.0,2023-10-18,2,70.0,1.0,3
-Resume/CV,McMaster University,5,Engineering & Management Capstone,ENGNMGT 5B03,3,Individual,Assignment,5.0,2023-10-20,10:00pm,0.0,1.0,2023-10-18,2,0.0,1.0,4
-Progress Meeting Summaries,McMaster University,5,Engineering & Management Capstone,ENGNMGT 5B03,3,Individual,Assignment,10.0,2023-11-17,10:00pm,1.0,3.0,2023-11-11,7,50.0,1.0,4
-Final Presentation Slides,McMaster University,5,Engineering & Management Capstone,ENGNMGT 5B03,3,Group,Presentation,35.0,2023-11-26,10:00pm,3.0,4.0,2023-11-13,13,0.0,0.0,5
-Final Client Deck,McMaster University,5,Engineering & Management Capstone,ENGNMGT 5B03,3,Group,Report,35.0,2023-12-08,10:00pm,5.0,3.0,2023-11-13,25,15.0,1.5,5
+Submission Form",McMaster University,5,Engineering & Management Capstone,ENGNMGT 5B03,3,Group,Project,0.0,2023-09-15,10:00pm,0.5,1.0,2023-09-14,50.0,0.5,2,1
+Project Charter,McMaster University,5,Engineering & Management Capstone,ENGNMGT 5B03,3,Group,Project,5.0,2023-10-06,10:00pm,0.1,2.0,2023-10-03,90.0,0.2,3,3
+Project Proposal,McMaster University,5,Engineering & Management Capstone,ENGNMGT 5B03,3,Group,Project,15.0,2023-10-20,10:00pm,0.5,3.0,2023-10-18,70.0,1.0,3,2
+Resume/CV,McMaster University,5,Engineering & Management Capstone,ENGNMGT 5B03,3,Individual,Assignment,5.0,2023-10-20,10:00pm,0.0,1.0,2023-10-18,0.0,1.0,4,2
+Progress Meeting Summaries,McMaster University,5,Engineering & Management Capstone,ENGNMGT 5B03,3,Individual,Assignment,10.0,2023-11-17,10:00pm,1.0,3.0,2023-11-11,50.0,1.0,4,6
+Final Presentation Slides,McMaster University,5,Engineering & Management Capstone,ENGNMGT 5B03,3,Group,Presentation,35.0,2023-11-26,10:00pm,3.0,4.0,2023-11-13,0.0,0.0,5,13
+Final Client Deck,McMaster University,5,Engineering & Management Capstone,ENGNMGT 5B03,3,Group,Report,35.0,2023-12-08,10:00pm,5.0,3.0,2023-11-13,15.0,1.5,5,25
 "Team Formed, Project Selected
-Submission Form",McMaster University,5,Software Design IV - Capstone Design Project,SFWRENG 4G06,3,Group,Project,0.0,2023-09-18,11:59 pm,0.5,3.0,2023-09-14,4,50.0,0.5,2
-"Problem Statement, POC Plan, Development Plan",McMaster University,5,Software Design IV - Capstone Design Project,SFWRENG 4G06,3,Group,Report,2.0,2023-10-11,11:59 pm,0.5,2.0,2023-10-09,2,50.0,0.5,4
-SRS Revision 0,McMaster University,5,Software Design IV - Capstone Design Project,SFWRENG 4G06,3,Group,Report,5.0,2023-10-11,11:59 pm,1.0,4.0,2023-10-09,2,80.0,4.0,4
-Hazard Analysis Revision 0,McMaster University,5,Software Design IV - Capstone Design Project,SFWRENG 4G06,3,Group,Report,3.0,2023-10-20,11:59 pm,0.5,3.0,2023-10-19,1,90.0,4.0,4
-V&V Plan Revision 0,McMaster University,5,Software Design IV - Capstone Design Project,SFWRENG 4G06,3,Group,Report,5.0,2023-11-03,11:59 pm,0.5,3.0,2023-11-03,1,90.0,5.0,4
-Proof of Concept Demonstration,McMaster University,5,Software Design IV - Capstone Design Project,SFWRENG 4HC3,3,Group,Presentation,5.0,2023-11-21,11:59 pm,4.0,5.0,2023-11-13,8,50.0,4.0,4
-Assignment 1,McMaster University,4,Human Computer Interfaces,SFWRENG 4G06,3,Individual,Assignment,5.0,2022-09-20,5:00 pm,0.75,4.0,2022-09-15,5,67.0,1.5,3
-Assignment 2,McMaster University,4,Human Computer Interfaces,SFWRENG 4G06,3,Individual,Assignment,5.0,2022-10-17,5:00 pm,0.5,3.0,2022-10-15,2,90.0,2.5,3
-Milestone 0,McMaster University,4,Human Computer Interfaces,SFWRENG 4G06,3,Group,Project,0.0,2022-09-22,5:00 pm,0.1,2.0,2022-09-18,4,50.0,0.1,4
-Milestone 1,McMaster University,4,Human Computer Interfaces,SFWRENG 4G06,3,Group,Report,6.0,2022-10-06,5:00 pm,0.5,3.0,2022-10-01,5,70.0,1.0,4
-Milestone 2,McMaster University,4,Human Computer Interfaces,SFWRENG 4G06,3,Group,Report,6.0,2022-11-03,5:00 pm,2.0,4.0,2022-10-21,12,60.0,3.0,4
-Milestone 3,McMaster University,4,Human Computer Interfaces,SFWRENG 4G06,3,Group,Project,13.5,2022-11-21,5:00 pm,2.0,4.0,2022-11-19,2,80.0,8.0,4
-Milestone 4,McMaster University,4,Human Computer Interfaces,SFWRENG 4G06,3,Group,Project,4.0,2022-12-06,5:00 pm,2.0,4.0,2022-11-29,7,40.0,1.5,4
-Midterm,McMaster University,4,Human Computer Interfaces,SFWRENG 4G06,3,Individual,Exam,15.0,2022-10-25,11:00 am,4.0,3.0,2022-10-22,3,60.0,6.0,5
-Final Exam,McMaster University,4,Human Computer Interfaces,SFWRENG 4G06,3,Individual,Exam,45.0,2022-12-10,12:30 pm,28.0,3.0,2022-12-05,5,15.0,5.0,5
-Lab 1,McMaster University,4,Real-Time Systems and Control Applications,MECHTRON 4AA4,4,Group,Lab,3.0,2022-09-18,5:30 pm,1.0,1.0,2022-09-16,2,0.0,0.0,2
-Lab 2,McMaster University,4,Real-Time Systems and Control Applications,MECHTRON 4AA4,4,Group,Lab,3.0,2022-09-25,5:30 pm,1.0,1.0,2022-09-23,2,0.0,0.0,2
-Lab 3,McMaster University,4,Real-Time Systems and Control Applications,MECHTRON 4AA4,4,Group,Lab,3.0,2022-10-02,5:30 pm,1.0,1.0,2022-09-30,2,0.0,0.0,2
-Lab 4,McMaster University,4,Real-Time Systems and Control Applications,MECHTRON 4AA4,4,Group,Lab,3.0,2022-10-09,5:30 pm,2.0,1.0,2022-10-07,2,0.0,0.0,2
-Lab 5,McMaster University,4,Real-Time Systems and Control Applications,MECHTRON 4AA4,4,Group,Lab,3.0,2022-10-23,5:30 pm,2.0,1.0,2022-10-21,2,0.0,0.0,2
-Lab 6,McMaster University,4,Real-Time Systems and Control Applications,MECHTRON 4AA4,4,Group,Lab,3.0,2022-10-30,5:30 pm,2.0,2.0,2022-10-28,2,0.0,0.0,2
-Lab 7,McMaster University,4,Real-Time Systems and Control Applications,MECHTRON 4AA4,4,Group,Lab,3.0,2022-11-06,5:30 pm,3.0,2.0,2022-11-04,2,0.0,0.0,2
-Lab 8,McMaster University,4,Real-Time Systems and Control Applications,MECHTRON 4AA4,4,Group,Lab,3.0,2022-11-13,5:30 pm,3.0,3.0,2022-11-13,2,0.0,0.0,2
-Lab 9,McMaster University,4,Real-Time Systems and Control Applications,MECHTRON 4AA4,4,Group,Lab,3.0,2022-11-20,5:30 pm,3.0,3.0,2022-11-18,2,0.0,0.0,2
-Lab 10,McMaster University,4,Real-Time Systems and Control Applications,MECHTRON 4AA4,4,Group,Lab,3.0,2022-11-27,5:30 pm,3.0,2.0,2022-11-25,2,0.0,0.0,2
-Midterm,McMaster University,4,Real-Time Systems and Control Applications,MECHTRON 4AA4,4,Individual,Exam,30.0,2022-10-22,5:00 pm,12.0,3.0,2022-10-20,2,60.0,15.0,5
-Final Exam,McMaster University,4,Real-Time Systems and Control Applications,MECHTRON 4AA4,4,Individual,Exam,40.0,2022-12-20,7:30 pm,2.0,3.0,2022-12-14,6,30.0,15.0,5
-Quiz 1,McMaster University,4,Operations Modelling & Analysis,COMMERCE 4QA3,3,Individual,Quiz,5.0,2022-09-27,9:00 pm,0.83,2.0,2022-09-26,1,0.0,0.0,5
-Quiz 2,McMaster University,4,Operations Modelling & Analysis,COMMERCE 4QA3,3,Individual,Quiz,5.0,2022-10-25,9:00 pm,0.83,2.0,2022-10-24,1,0.0,0.0,5
-Quiz 3,McMaster University,4,Operations Modelling & Analysis,COMMERCE 4QA3,3,Individual,Quiz,5.0,2022-11-22,9:00 pm,0.83,4.0,2022-11-21,1,0.0,0.0,5
-Quiz 4,McMaster University,4,Operations Modelling & Analysis,COMMERCE 4QA3,3,Individual,Quiz,5.0,2022-12-06,9:00 pm,0.83,5.0,2022-12-05,1,0.0,0.0,5
-Midterm,McMaster University,4,Operations Modelling & Analysis,COMMERCE 4QA3,3,Individual,Exam,35.0,2022-11-04,7:00 pm,20.0,3.0,2022-10-30,5,20.0,5.0,5
-Final Exam,McMaster University,4,Operations Modelling & Analysis,COMMERCE 4QA3,3,Individual,Exam,45.0,2022-12-12,4:00 pm,12.0,3.0,2022-12-08,4,67.0,24.0,5
-Introductory Flipgrid Video ,McMaster University,4,Innovation Driven Project Development and Management,ENGNMGT 4A03,3,Individual,Presentation,5.0,2022-09-16,11:59 pm,0.5,1.0,2022-09-15,1,0.0,0.0,1
-Assignment 1,McMaster University,4,Innovation Driven Project Development and Management,ENGNMGT 4A03,3,Group,Report,10.0,2022-09-23,11:59 pm,1.0,2.0,2022-09-20,3,50.0,1.0,3
-Assignment 2,McMaster University,4,Innovation Driven Project Development and Management,ENGNMGT 4A03,3,Group,Report,10.0,2022-10-07,11:59 pm,1.5,2.0,2022-10-05,2,40.0,1.0,3
-Assignment 3,McMaster University,4,Innovation Driven Project Development and Management,ENGNMGT 4A03,3,Group,Report,10.0,2022-10-21,11:59 pm,2.0,2.0,2022-10-19,2,30.0,1.0,3
-Assignment 4,McMaster University,4,Innovation Driven Project Development and Management,ENGNMGT 4A03,3,Group,Report,10.0,2022-11-04,11:59 pm,2.0,3.0,2022-11-02,1,70.0,2.0,3
-Assignment 5,McMaster University,4,Innovation Driven Project Development and Management,ENGNMGT 4A03,3,Group,Report,10.0,2022-11-18,11:59 pm,2.0,3.0,2022-11-16,2,60.0,2.5,3
-Assignment 6 (Group),McMaster University,4,Innovation Driven Project Development and Management,ENGNMGT 4A03,3,Group,Presentation,10.0,2022-12-07,10:30 am,3.0,3.0,2022-11-28,9,70.0,4.0,5
-Assignment 6 (Individual),McMaster University,4,Innovation Driven Project Development and Management,ENGNMGT 4A03,3,Individual,Presentation,5.0,2022-12-07,10:30 am,0.33,2.0,2022-12-06,1,0.0,0.0,5
-Final Report ,McMaster University,4,Innovation Driven Project Development and Management,ENGNMGT 4A03,3,Group,Report,20.0,2022-12-08,11:59 pm,5.0,3.0,2022-12-06,2,50.0,1.0,5
-Final Peer Assessment,McMaster University,4,Innovation Driven Project Development and Management,ENGNMGT 4A03,3,Individual,Report,10.0,2022-12-08,11:59 pm,0.5,1.0,2022-12-07,1,0.0,0.0,4
-Project Presentation,McMaster University,5,Capstone,COMPSCI 4ZPR,6,Group,Presentation,15.0,2023-11-17,11:30am,20.0,5.0,2023-11-13,4,10.0,4.0,5
-Assignment 3,McMaster Univeristy,5,Computer Graphics,COMPSCI 3GC3,3,Individual,Assignment,10.0,2023-12-01,11:59pm,8.0,4.0,2023-11-13,17,0.0,0.0,2
-FInal Exam,McMaster Univeristy,5,COMMERCE 4PA3 - Business Policy,COMMERCE 4PA3,3,Individual,Exam,25.0,2023-11-30,11:59pm,30.0,5.0,2023-11-13,16,10.0,3.0,2
-Final Presentation,McMaster Univeristy,5,COMMERCE 4PA3 - Business Policy,COMMERCE 4PA3,3,Group,Presentation,15.0,2023-11-15,10:05am,5.0,3.0,2023-11-13,0,85.0,20.0,5
-Project part 1: fixed-wing aircraft simulation,University of Toronto,6,AER1216 Fundamental of UAV,AER1216,1,Group,Project,25.0,2023-12-14,9:00am,30.0,2.0,2023-11-13,30,0.0,0.0,4
-Assignment 3,University of Toronto,6,State Estimation,AER1513,1,Individual,Assignment,20.0,2023-12-14,9:00am,10.0,2.0,2023-11-13,32,0.0,0.0,3
-Final Project,Duke Univeristy,6,Applied BioStatistics,BIOSTATS702,3,Individual,Project,20.0,2023-12-13,9:00am,30.0,4.0,2023-11-13,28,10.0,3.0,2
-Final Presentation,Duke Univeristy,6,Introduction to Statistical Theory and Methods,BIOSTAT 701,3,Group,Presentation,15.0,2023-11-15,10:00am,5.0,3.0,2023-11-13,2,85.0,20.0,5
-Assignment 1,McMaster Univeristy,5, Predictive and Intelligent Control,MECHTRON 4AX3,3,Individual,Assignment,4.0,2023-10-03,11:59pm,10.0,2.0,2023-11-13,0,0.0,0.0,1
-Group Assignment1,McMaster Univeristy,1,Organizational Behaviour,Commerce 1BA3,3,Group,Assignment,10.0,2023-10-06,11:59pm,3.0,2.0,2023-11-12,0,0.0,0.0,1
-Group Assignment2,McMaster Univeristy,1,Organizational Behaviour,Commerce 1BA3,3,Group,Assignment,10.0,2023-10-27,11:59pm,3.0,3.0,2023-11-12,0,0.0,0.0,1
-Group Assignment3,McMaster Univeristy,1,Organizational Behaviour,Commerce 1BA3,3,Group,Assignment,10.0,2023-11-08,11:59pm,3.0,2.0,2023-11-12,0,0.0,0.0,1
-Assignment 1,McMaster Univeristy,5,"Ethics, Equity and Law in Engineering",ENGINEER 4A03,3,Individual,Assignment,10.0,2023-10-06,11:59pm,10.0,4.0,2023-11-13,0,0.0,0.0,1
-Assignment 2,McMaster Univeristy,5,"Ethics, Equity and Law in Engineering",ENGINEER 4A04,3,Individual,Assignment,10.0,2023-11-05,11:59pm,10.0,4.0,2023-11-13,0,0.0,0.0,1
-Assignment 3,McMaster Univeristy,5,"Ethics, Equity and Law in Engineering",ENGINEER 4A04,3,Individual,Assignment,10.0,2023-11-24,11:59pm,10.0,4.0,2023-11-13,11,0.0,0.0,4
-Group Contract,McMaster Univeristy,5,"Ethics, Equity and Law in Engineering",ENGINEER 4A04,3,Group,Document,0.0,2023-10-16,6:00pm,1.0,1.0,2023-11-13,0,0.0,0.0,1
-Project Part I: Literature Review,McMaster Univeristy,5,"Ethics, Equity and Law in Engineering",ENGINEER 4A04,3,Group,Essay,5.0,2023-10-20,11:59pm,5.0,2.0,2023-11-13,0,0.0,0.0,1
-Project Part II Case Study,McMaster Univeristy,5,"Ethics, Equity and Law in Engineering",ENGINEER 4A04,3,Group,Essay,5.0,2023-11-17,11:59pm,5.0,2.0,2023-11-13,4,0.0,0.0,5
-Assignment 1,McMaster Univeristy,5,Linear Optimization,COMPSCI 4O03,3,Individual,Assignment,10.0,2021-10-09,11:59pm,8.0,4.0,2021-10-04,5,20.0,1.0,4
-Assignment 2,McMaster Univeristy,5,Linear Optimization,COMPSCI 4O04,3,Individual,Assignment,10.0,2021-11-06,11:59pm,8.0,3.0,2021-11-02,4,50.0,2.5,3
-Assignment 3,McMaster Univeristy,5,Linear Optimization,COMPSCI 4O05,3,Individual,Assignment,10.0,2021-12-06,11:59pm,8.0,4.0,2021-11-13,23,0.0,0.0,2
-Assignment 1,McMaster Univeristy,5,Communication Skills,COMPSCI 3I03,3,Individual,Assignment,10.0,2021-10-24,11:59pm,5.0,4.0,2021-10-22,2,80.0,3.0,3
-Peer Evaluation,McMaster Univeristy,5,Communication Skills,COMPSCI 3I04,3,Individual,Survey,0.0,2021-12-07,11:59pm,1.0,1.0,2021-12-04,3,40.0,0.5,4
-Recorded Presentation,McMaster Univeristy,5,Communication Skills,COMPSCI 3I05,3,Individual,Presentation,10.0,2021-11-12,11:59pm,10.0,3.0,2021-10-31,12,0.0,0.0,2
-Assignment 2,McMaster Univeristy,5,Communication Skills,COMPSCI 3I06,3,Individual,Assignment,10.0,2021-11-30,11:59pm,5.0,3.0,2021-11-30,0,90.0,5.0,5
-Final Report,McMaster Univeristy,5,Communication Skills,COMPSCI 3I07,3,Individual,Report,10.0,2021-12-15,11:59pm,10.0,5.0,2021-12-02,13,50.0,4.0,2
-Midterm 1,McMaster Univeristy,5,MATERIALS IN DESIGN AND MANUFACTURING,MATLS 4MS4,4,Individual,Exam,10.0,2022-10-06,11:59pm,1.5,4.0,2022-10-05,2,0.0,0.0,5
-Project 1,McMaster Univeristy,5,MATERIALS IN DESIGN AND MANUFACTURING,MATLS 4MS4,4,Individual,Project,25.0,2022-10-21,11:59pm,8.0,4.0,2022-10-20,1,0.0,0.0,1
-Midterm2,McMaster Univeristy,5,MATERIALS IN DESIGN AND MANUFACTURING,MATLS 4MS4,4,Individual,Midtwem,10.0,2022-11-25,11:59pm,1.5,4.0,2022-11-21,4,40.0,2.0,3
-Project 2,McMaster Univeristy,5,MATERIALS IN DESIGN AND MANUFACTURING,MATLS 4MS4,4,Individual,Project,35.0,2022-11-25,11:59pm,6.0,4.0,2022-11-25,0,90.0,3.0,5
-Project Proposal,McMaster Univeristy,5,MATERIALS IN DESIGN AND MANUFACTURING,MATLS 4MS4,4,Individual,Project,0.0,2022-11-04,11:59pm,4.0,3.0,2022-11-01,3,60.0,2.5,4
-Final Project,McMaster Univeristy,5,MATERIALS IN DESIGN AND MANUFACTURING,MATLS 4MS4,4,Individual,Project,25.0,2022-12-16,11:59pm,20.0,5.0,2022-12-14,2,90.0,20.0,5
-Assignment ,McMaster Univeristy,4,Robotics,MECHENG 4K03,3,Individual,Assignment,10.0,2023-11-18,11:59pm,3.5,4.0,2023-11-13,5,0.0,0.0,1
-Midterm,McMaster Univeristy,4,Robotics,MECHENG 4K03,3,Individual,Exam,10.0,2023-10-18,11:59pm,1.0,3.0,2023-11-13,0,0.0,0.0,1
-Midterm,McMaster Univeristy,4,Robotics,MECHENG 4K03,3,Individual,Exam,10.0,2023-11-07,11:59pm,1.0,3.0,2023-11-13,0,0.0,0.0,1
-Midterm,McMaster Univeristy,4,Robotics,MECHENG 4K03,3,Individual,Exam,10.0,2023-11-14,11:59pm,1.0,2.0,2023-11-13,1,0.0,0.0,5
-Final Exam,McMaster Univeristy,4,Robotics,MECHENG 4K03,3,Individual,Exam,60.0,2023-12-20,11:59pm,2.5,5.0,2023-11-13,18,0.0,0.0,3
-Assignment 1,McMaster Univeristy,5,Predictive and Intelligent Control,MECHTRON 4AX3,3,Individual,Assignment,4.0,2023-09-22,11:30am,0.0,3.0,2023-11-13,4,100.0,12.0,1
-Assignment 2,McMaster Univeristy,5,Predictive and Intelligent Control,MECHTRON 4AX3,3,Individual,Assignment,4.0,2023-10-06,11:30am,0.0,3.0,2023-11-13,4,100.0,13.0,1
-Assignment 3,McMaster Univeristy,5,Predictive and Intelligent Control,MECHTRON 4AX3,3,Individual,Assignment,4.0,2023-11-26,11:30am,0.0,3.0,2023-11-13,0,100.0,20.0,1
-Assignment 4,McMaster Univeristy,5,Predictive and Intelligent Control,MECHTRON 4AX3,3,Individual,Assignment,4.0,2023-11-16,11:30am,12.0,3.0,2023-11-13,4,90.0,1.0,5
-Assignment 5,McMaster Univeristy,5,Predictive and Intelligent Control,MECHTRON 4AX3,3,Individual,Assignment,4.0,2023-11-30,11:30am,15.0,3.0,2023-11-13,17,0.0,0.0,1
-Midterm 3,McMaster Univeristy,5,Robotics,MECHENG 4K03,3,Individual,Midterm,10.0,2023-11-14,13:30pm,3.0,5.0,2023-11-13,1,90.0,5.0,5
-Assignment 1,McMaster Univeristy,5,Database,SFWRENG 3DB3 ,3,Individual,Assignment,12.0,2023-10-02,10:00pm,0.0,4.0,2023-11-13,0,100.0,16.0,2
-Assignment 2,McMaster Univeristy,5,Database,SFWRENG 3DB3 ,3,Individual,Assignment,13.0,2023-11-10,10:00pm,0.0,4.0,2023-11-13,0,100.0,16.0,2
-Assignment 3,McMaster Univeristy,5,Database,SFWRENG 3DB3 ,3,Individual,Assignment,14.0,2023-12-01,10:00pm,16.0,3.0,2023-11-13,18,0.0,0.0,3
-Lab 9,McMaster Univeristy,5,Real-Time System and Control Applications,MECHTRON 4AA4,4,Individual,Lab,4.0,2023-11-17,17:30pm,3.0,5.0,2023-11-13,4,0.0,0.0,2
-Lab 6 ,McMaster University,4,Digital Signal Processing,COMP ENG 4TL4,4,Individual,Lab,5.0,2023-11-16,17:20pm,2.5,4.0,2023-11-13,3,20.0,0.2,3
-Lab 3,McMaster University,4,Computer Architecture,COMP ENG 4DM4,4,Group,Lab,5.0,2023-11-14,11:20am,3.0,4.0,2023-11-13,1,0.0,0.0,5
-Lab4,McMaster University,4,Computer Architecture,COMP ENG 4DM5,4,Group,Lab,5.0,2023-11-21,11:20am,3.0,4.0,2023-11-13,7,0.0,0.0,1
-Lab4,McMaster University,1,Introductory Physics,PHYSICS 1A03,3,Individual,Lab,5.0,2023-11-14,14:20pm,1.5,4.0,2023-11-13,1,0.0,0.0,5
-LON-CAPA Assignment 6,McMaster University,1,Introductory Physics,PHYSICS 1A04,3,Individual,Assignment,8.0,2023-11-17,11:59pm,3.0,2.0,2023-11-13,4,30.0,3.5,4
-Lab 5,McMaster University,1,Introductory Physics,PHYSICS 1A05,3,Individual,Lab,5.0,2023-11-21,10:00am,1.5,3.0,2023-11-13,7,0.0,0.0,3
-LON-CAPA Assignment 7,McMaster University,1,Introductory Physics,PHYSICS 1A06,3,Individual,Assignment,8.0,2023-11-24,11:59pm,3.0,2.0,2023-11-13,11,0.0,0.0,2
-Lab6,McMaster University,1,Introductory Physics,PHYSICS 1A07,3,Individual,Lab,5.0,2023-11-28,10:00am,1.5,4.0,2023-11-13,15,0.0,0.0,1
-Midterm 2,McMaster University,1,Introductory Physics,PHYSICS 1A07,3,Individual,Exam,15.0,2023-11-08,10:30am,1.5,5.0,2023-11-13,0,0.0,0.0,1
-Assignment 3,McMaster University,4,Smart Systems,MECH ENG 4SS3,3,Individual,Assignment,10.0,2023-11-20,11:59pm,4.0,4.0,2023-11-13,7,40.0,2.5,4
-Assignment 4,McMaster University,4,Smart Systems,MECH ENG 4SS3,3,Individual,Assignment,10.0,2023-11-27,11:59pm,4.0,3.0,2023-11-13,14,10.0,0.5,2
-Midterm test,McMaster University,5,Robotics,MECH ENG 4K03,3,Individual,Exam,10.0,2023-11-14,14:30pm,0.7,4.0,2023-11-13,0,0.0,5.0,3
-Lab4,McMaster University,5,Computer Architecture,COMPENG 4DM4,4,Group,Lab,7.0,2023-11-21,11:59pm,8.0,5.0,2023-11-13,8,10.0,0.5,2
-Assignment 4,McMaster University,4,Predictive and intelligence control,MECHTRON 4AX3,3,Individual,Assignment,4.0,2023-11-16,11:59pm,2.0,4.0,2023-11-13,3,0.0,0.0,4
-Midterm 3,McMaster University,4,Robotics,MECH ENG 4K03,3,Individual,Exam,10.0,2023-11-14,2:30pm,1.0,5.0,2023-11-13,1,0.0,0.0,5
+Submission Form",McMaster University,5,Software Design IV - Capstone Design Project,SFWRENG 4G06,3,Group,Project,0.0,2023-09-18,11:59 pm,0.5,3.0,2023-09-14,50.0,0.5,2,4
+"Problem Statement, POC Plan, Development Plan",McMaster University,5,Software Design IV - Capstone Design Project,SFWRENG 4G06,3,Group,Report,2.0,2023-10-11,11:59 pm,0.5,2.0,2023-10-09,50.0,0.5,4,2
+SRS Revision 0,McMaster University,5,Software Design IV - Capstone Design Project,SFWRENG 4G06,3,Group,Report,5.0,2023-10-11,11:59 pm,1.0,4.0,2023-10-09,80.0,4.0,4,2
+Hazard Analysis Revision 0,McMaster University,5,Software Design IV - Capstone Design Project,SFWRENG 4G06,3,Group,Report,3.0,2023-10-20,11:59 pm,0.5,3.0,2023-10-19,90.0,4.0,4,1
+V&V Plan Revision 0,McMaster University,5,Software Design IV - Capstone Design Project,SFWRENG 4G06,3,Group,Report,5.0,2023-11-03,11:59 pm,0.5,3.0,2023-11-03,90.0,5.0,4,0
+Proof of Concept Demonstration,McMaster University,5,Software Design IV - Capstone Design Project,SFWRENG 4HC3,3,Group,Presentation,5.0,2023-11-21,11:59 pm,4.0,5.0,2023-11-13,50.0,4.0,4,8
+Assignment 1,McMaster University,4,Human Computer Interfaces,SFWRENG 4G06,3,Individual,Assignment,5.0,2022-09-20,5:00 pm,0.75,4.0,2022-09-15,67.0,1.5,3,5
+Assignment 2,McMaster University,4,Human Computer Interfaces,SFWRENG 4G06,3,Individual,Assignment,5.0,2022-10-17,5:00 pm,0.5,3.0,2022-10-15,90.0,2.5,3,2
+Milestone 0,McMaster University,4,Human Computer Interfaces,SFWRENG 4G06,3,Group,Project,0.0,2022-09-22,5:00 pm,0.1,2.0,2022-09-18,50.0,0.1,4,4
+Milestone 1,McMaster University,4,Human Computer Interfaces,SFWRENG 4G06,3,Group,Report,6.0,2022-10-06,5:00 pm,0.5,3.0,2022-10-01,70.0,1.0,4,5
+Milestone 2,McMaster University,4,Human Computer Interfaces,SFWRENG 4G06,3,Group,Report,6.0,2022-11-03,5:00 pm,2.0,4.0,2022-10-21,60.0,3.0,4,13
+Milestone 3,McMaster University,4,Human Computer Interfaces,SFWRENG 4G06,3,Group,Project,13.5,2022-11-21,5:00 pm,2.0,4.0,2022-11-19,80.0,8.0,4,2
+Milestone 4,McMaster University,4,Human Computer Interfaces,SFWRENG 4G06,3,Group,Project,4.0,2022-12-06,5:00 pm,2.0,4.0,2022-11-29,40.0,1.5,4,7
+Midterm,McMaster University,4,Human Computer Interfaces,SFWRENG 4G06,3,Individual,Exam,15.0,2022-10-25,11:00 am,4.0,3.0,2022-10-22,60.0,6.0,5,3
+Final Exam,McMaster University,4,Human Computer Interfaces,SFWRENG 4G06,3,Individual,Exam,45.0,2022-12-10,12:30 pm,28.0,3.0,2022-12-05,15.0,5.0,5,5
+Lab 1,McMaster University,4,Real-Time Systems and Control Applications,MECHTRON 4AA4,4,Group,Lab,3.0,2022-09-18,5:30 pm,1.0,1.0,2022-09-16,0.0,0.0,2,2
+Lab 2,McMaster University,4,Real-Time Systems and Control Applications,MECHTRON 4AA4,4,Group,Lab,3.0,2022-09-25,5:30 pm,1.0,1.0,2022-09-23,0.0,0.0,2,2
+Lab 3,McMaster University,4,Real-Time Systems and Control Applications,MECHTRON 4AA4,4,Group,Lab,3.0,2022-10-02,5:30 pm,1.0,1.0,2022-09-30,0.0,0.0,2,2
+Lab 4,McMaster University,4,Real-Time Systems and Control Applications,MECHTRON 4AA4,4,Group,Lab,3.0,2022-10-09,5:30 pm,2.0,1.0,2022-10-07,0.0,0.0,2,2
+Lab 5,McMaster University,4,Real-Time Systems and Control Applications,MECHTRON 4AA4,4,Group,Lab,3.0,2022-10-23,5:30 pm,2.0,1.0,2022-10-21,0.0,0.0,2,2
+Lab 6,McMaster University,4,Real-Time Systems and Control Applications,MECHTRON 4AA4,4,Group,Lab,3.0,2022-10-30,5:30 pm,2.0,2.0,2022-10-28,0.0,0.0,2,2
+Lab 7,McMaster University,4,Real-Time Systems and Control Applications,MECHTRON 4AA4,4,Group,Lab,3.0,2022-11-06,5:30 pm,3.0,2.0,2022-11-04,0.0,0.0,2,2
+Lab 8,McMaster University,4,Real-Time Systems and Control Applications,MECHTRON 4AA4,4,Group,Lab,3.0,2022-11-13,5:30 pm,3.0,3.0,2022-11-13,0.0,0.0,2,0
+Lab 9,McMaster University,4,Real-Time Systems and Control Applications,MECHTRON 4AA4,4,Group,Lab,3.0,2022-11-20,5:30 pm,3.0,3.0,2022-11-18,0.0,0.0,2,2
+Lab 10,McMaster University,4,Real-Time Systems and Control Applications,MECHTRON 4AA4,4,Group,Lab,3.0,2022-11-27,5:30 pm,3.0,2.0,2022-11-25,0.0,0.0,2,2
+Midterm,McMaster University,4,Real-Time Systems and Control Applications,MECHTRON 4AA4,4,Individual,Exam,30.0,2022-10-22,5:00 pm,12.0,3.0,2022-10-20,60.0,15.0,5,2
+Final Exam,McMaster University,4,Real-Time Systems and Control Applications,MECHTRON 4AA4,4,Individual,Exam,40.0,2022-12-20,7:30 pm,2.0,3.0,2022-12-14,30.0,15.0,5,6
+Quiz 1,McMaster University,4,Operations Modelling & Analysis,COMMERCE 4QA3,3,Individual,Quiz,5.0,2022-09-27,9:00 pm,0.83,2.0,2022-09-26,0.0,0.0,5,1
+Quiz 2,McMaster University,4,Operations Modelling & Analysis,COMMERCE 4QA3,3,Individual,Quiz,5.0,2022-10-25,9:00 pm,0.83,2.0,2022-10-24,0.0,0.0,5,1
+Quiz 3,McMaster University,4,Operations Modelling & Analysis,COMMERCE 4QA3,3,Individual,Quiz,5.0,2022-11-22,9:00 pm,0.83,4.0,2022-11-21,0.0,0.0,5,1
+Quiz 4,McMaster University,4,Operations Modelling & Analysis,COMMERCE 4QA3,3,Individual,Quiz,5.0,2022-12-06,9:00 pm,0.83,5.0,2022-12-05,0.0,0.0,5,1
+Midterm,McMaster University,4,Operations Modelling & Analysis,COMMERCE 4QA3,3,Individual,Exam,35.0,2022-11-04,7:00 pm,20.0,3.0,2022-10-30,20.0,5.0,5,5
+Final Exam,McMaster University,4,Operations Modelling & Analysis,COMMERCE 4QA3,3,Individual,Exam,45.0,2022-12-12,4:00 pm,12.0,3.0,2022-12-08,67.0,24.0,5,4
+Introductory Flipgrid Video ,McMaster University,4,Innovation Driven Project Development and Management,ENGNMGT 4A03,3,Individual,Presentation,5.0,2022-09-16,11:59 pm,0.5,1.0,2022-09-15,0.0,0.0,1,1
+Assignment 1,McMaster University,4,Innovation Driven Project Development and Management,ENGNMGT 4A03,3,Group,Report,10.0,2022-09-23,11:59 pm,1.0,2.0,2022-09-20,50.0,1.0,3,3
+Assignment 2,McMaster University,4,Innovation Driven Project Development and Management,ENGNMGT 4A03,3,Group,Report,10.0,2022-10-07,11:59 pm,1.5,2.0,2022-10-05,40.0,1.0,3,2
+Assignment 3,McMaster University,4,Innovation Driven Project Development and Management,ENGNMGT 4A03,3,Group,Report,10.0,2022-10-21,11:59 pm,2.0,2.0,2022-10-19,30.0,1.0,3,2
+Assignment 4,McMaster University,4,Innovation Driven Project Development and Management,ENGNMGT 4A03,3,Group,Report,10.0,2022-11-04,11:59 pm,2.0,3.0,2022-11-02,70.0,2.0,3,2
+Assignment 5,McMaster University,4,Innovation Driven Project Development and Management,ENGNMGT 4A03,3,Group,Report,10.0,2022-11-18,11:59 pm,2.0,3.0,2022-11-16,60.0,2.5,3,2
+Assignment 6 (Group),McMaster University,4,Innovation Driven Project Development and Management,ENGNMGT 4A03,3,Group,Presentation,10.0,2022-12-07,10:30 am,3.0,3.0,2022-11-28,70.0,4.0,5,9
+Assignment 6 (Individual),McMaster University,4,Innovation Driven Project Development and Management,ENGNMGT 4A03,3,Individual,Presentation,5.0,2022-12-07,10:30 am,0.33,2.0,2022-12-06,0.0,0.0,5,1
+Final Report ,McMaster University,4,Innovation Driven Project Development and Management,ENGNMGT 4A03,3,Group,Report,20.0,2022-12-08,11:59 pm,5.0,3.0,2022-12-06,50.0,1.0,5,2
+Final Peer Assessment,McMaster University,4,Innovation Driven Project Development and Management,ENGNMGT 4A03,3,Individual,Report,10.0,2022-12-08,11:59 pm,0.5,1.0,2022-12-07,0.0,0.0,4,1
+Project Presentation,McMaster University,5,Capstone,COMPSCI 4ZPR,6,Group,Presentation,15.0,2023-11-17,11:30am,20.0,5.0,2023-11-13,10.0,4.0,5,4
+Assignment 3,McMaster Univeristy,5,Computer Graphics,COMPSCI 3GC3,3,Individual,Assignment,10.0,2023-12-01,11:59pm,8.0,4.0,2023-11-13,0.0,0.0,2,18
+FInal Exam,McMaster Univeristy,5,COMMERCE 4PA3 - Business Policy,COMMERCE 4PA3,3,Individual,Exam,25.0,2023-11-30,11:59pm,30.0,5.0,2023-11-13,10.0,3.0,2,17
+Final Presentation,McMaster Univeristy,5,COMMERCE 4PA3 - Business Policy,COMMERCE 4PA3,3,Group,Presentation,15.0,2023-11-15,10:05am,5.0,3.0,2023-11-13,85.0,20.0,5,2
+Project part 1: fixed-wing aircraft simulation,University of Toronto,6,AER1216 Fundamental of UAV,AER1216,1,Group,Project,25.0,2023-12-14,9:00am,30.0,2.0,2023-11-13,0.0,0.0,4,31
+Assignment 3,University of Toronto,6,State Estimation,AER1513,1,Individual,Assignment,20.0,2023-12-14,9:00am,10.0,2.0,2023-11-13,0.0,0.0,3,31
+Final Project,Duke Univeristy,6,Applied BioStatistics,BIOSTATS702,3,Individual,Project,20.0,2023-12-13,9:00am,30.0,4.0,2023-11-13,10.0,3.0,2,30
+Final Presentation,Duke Univeristy,6,Introduction to Statistical Theory and Methods,BIOSTAT 701,3,Group,Presentation,15.0,2023-11-15,10:00am,5.0,3.0,2023-11-13,85.0,20.0,5,2
+Assignment 1,McMaster Univeristy,5, Predictive and Intelligent Control,MECHTRON 4AX3,3,Individual,Assignment,4.0,2023-10-03,11:59pm,10.0,2.0,2023-11-13,0.0,0.0,1,-41
+Group Assignment1,McMaster Univeristy,1,Organizational Behaviour,Commerce 1BA3,3,Group,Assignment,10.0,2023-10-06,11:59pm,3.0,2.0,2023-11-12,0.0,0.0,1,-37
+Group Assignment2,McMaster Univeristy,1,Organizational Behaviour,Commerce 1BA3,3,Group,Assignment,10.0,2023-10-27,11:59pm,3.0,3.0,2023-11-12,0.0,0.0,1,-16
+Group Assignment3,McMaster Univeristy,1,Organizational Behaviour,Commerce 1BA3,3,Group,Assignment,10.0,2023-11-08,11:59pm,3.0,2.0,2023-11-12,0.0,0.0,1,-4
+Assignment 1,McMaster Univeristy,5,"Ethics, Equity and Law in Engineering",ENGINEER 4A03,3,Individual,Assignment,10.0,2023-10-06,11:59pm,10.0,4.0,2023-11-13,0.0,0.0,1,-38
+Assignment 2,McMaster Univeristy,5,"Ethics, Equity and Law in Engineering",ENGINEER 4A04,3,Individual,Assignment,10.0,2023-11-05,11:59pm,10.0,4.0,2023-11-13,0.0,0.0,1,-8
+Assignment 3,McMaster Univeristy,5,"Ethics, Equity and Law in Engineering",ENGINEER 4A04,3,Individual,Assignment,10.0,2023-11-24,11:59pm,10.0,4.0,2023-11-13,0.0,0.0,4,11
+Group Contract,McMaster Univeristy,5,"Ethics, Equity and Law in Engineering",ENGINEER 4A04,3,Group,Document,0.0,2023-10-16,6:00pm,1.0,1.0,2023-11-13,0.0,0.0,1,-28
+Project Part I: Literature Review,McMaster Univeristy,5,"Ethics, Equity and Law in Engineering",ENGINEER 4A04,3,Group,Essay,5.0,2023-10-20,11:59pm,5.0,2.0,2023-11-13,0.0,0.0,1,-24
+Project Part II Case Study,McMaster Univeristy,5,"Ethics, Equity and Law in Engineering",ENGINEER 4A04,3,Group,Essay,5.0,2023-11-17,11:59pm,5.0,2.0,2023-11-13,0.0,0.0,5,4
+Assignment 1,McMaster Univeristy,5,Linear Optimization,COMPSCI 4O03,3,Individual,Assignment,10.0,2021-10-09,11:59pm,8.0,4.0,2021-10-04,20.0,1.0,4,5
+Assignment 2,McMaster Univeristy,5,Linear Optimization,COMPSCI 4O04,3,Individual,Assignment,10.0,2021-11-06,11:59pm,8.0,3.0,2021-11-02,50.0,2.5,3,4
+Assignment 3,McMaster Univeristy,5,Linear Optimization,COMPSCI 4O05,3,Individual,Assignment,10.0,2021-12-06,11:59pm,8.0,4.0,2021-11-13,0.0,0.0,2,23
+Assignment 1,McMaster Univeristy,5,Communication Skills,COMPSCI 3I03,3,Individual,Assignment,10.0,2021-10-24,11:59pm,5.0,4.0,2021-10-22,80.0,3.0,3,2
+Peer Evaluation,McMaster Univeristy,5,Communication Skills,COMPSCI 3I04,3,Individual,Survey,0.0,2021-12-07,11:59pm,1.0,1.0,2021-12-04,40.0,0.5,4,3
+Recorded Presentation,McMaster Univeristy,5,Communication Skills,COMPSCI 3I05,3,Individual,Presentation,10.0,2021-11-12,11:59pm,10.0,3.0,2021-10-31,0.0,0.0,2,12
+Assignment 2,McMaster Univeristy,5,Communication Skills,COMPSCI 3I06,3,Individual,Assignment,10.0,2021-11-30,11:59pm,5.0,3.0,2021-11-30,90.0,5.0,5,0
+Final Report,McMaster Univeristy,5,Communication Skills,COMPSCI 3I07,3,Individual,Report,10.0,2021-12-15,11:59pm,10.0,5.0,2021-12-02,50.0,4.0,2,13
+Midterm 1,McMaster Univeristy,5,MATERIALS IN DESIGN AND MANUFACTURING,MATLS 4MS4,4,Individual,Exam,10.0,2022-10-06,11:59pm,1.5,4.0,2022-10-05,0.0,0.0,5,1
+Project 1,McMaster Univeristy,5,MATERIALS IN DESIGN AND MANUFACTURING,MATLS 4MS4,4,Individual,Project,25.0,2022-10-21,11:59pm,8.0,4.0,2022-10-20,0.0,0.0,1,1
+Midterm2,McMaster Univeristy,5,MATERIALS IN DESIGN AND MANUFACTURING,MATLS 4MS4,4,Individual,Midterm,10.0,2022-11-25,11:59pm,1.5,4.0,2022-11-21,40.0,2.0,3,4
+Project 2,McMaster Univeristy,5,MATERIALS IN DESIGN AND MANUFACTURING,MATLS 4MS4,4,Individual,Project,35.0,2022-11-25,11:59pm,6.0,4.0,2022-11-25,90.0,3.0,5,0
+Project Proposal,McMaster Univeristy,5,MATERIALS IN DESIGN AND MANUFACTURING,MATLS 4MS4,4,Individual,Project,0.0,2022-11-04,11:59pm,4.0,3.0,2022-11-01,60.0,2.5,4,3
+Final Project,McMaster Univeristy,5,MATERIALS IN DESIGN AND MANUFACTURING,MATLS 4MS4,4,Individual,Project,25.0,2022-12-16,11:59pm,20.0,5.0,2022-12-14,90.0,20.0,5,2
+Assignment ,McMaster Univeristy,4,Robotics,MECHENG 4K03,3,Individual,Assignment,10.0,2023-11-18,11:59pm,3.5,4.0,2023-11-13,0.0,0.0,1,5
+Midterm,McMaster Univeristy,4,Robotics,MECHENG 4K03,3,Individual,Exam,10.0,2023-10-18,11:59pm,1.0,3.0,2023-11-13,0.0,0.0,1,-26
+Midterm,McMaster Univeristy,4,Robotics,MECHENG 4K03,3,Individual,Exam,10.0,2023-11-07,11:59pm,1.0,3.0,2023-11-13,0.0,0.0,1,-6
+Midterm,McMaster Univeristy,4,Robotics,MECHENG 4K03,3,Individual,Exam,10.0,2023-11-14,11:59pm,1.0,2.0,2023-11-13,0.0,0.0,5,1
+Final Exam,McMaster Univeristy,4,Robotics,MECHENG 4K03,3,Individual,Exam,60.0,2023-12-20,11:59pm,2.5,5.0,2023-11-13,0.0,0.0,3,37
+Assignment 1,McMaster Univeristy,5,Predictive and Intelligent Control,MECHTRON 4AX3,3,Individual,Assignment,4.0,2023-09-22,11:30am,0.0,3.0,2023-11-13,100.0,12.0,1,-52
+Assignment 2,McMaster Univeristy,5,Predictive and Intelligent Control,MECHTRON 4AX3,3,Individual,Assignment,4.0,2023-10-06,11:30am,0.0,3.0,2023-11-13,100.0,13.0,1,-38
+Assignment 3,McMaster Univeristy,5,Predictive and Intelligent Control,MECHTRON 4AX3,3,Individual,Assignment,4.0,2023-11-26,11:30am,0.0,3.0,2023-11-13,100.0,20.0,1,13
+Assignment 4,McMaster Univeristy,5,Predictive and Intelligent Control,MECHTRON 4AX3,3,Individual,Assignment,4.0,2023-11-16,11:30am,12.0,3.0,2023-11-13,90.0,1.0,5,3
+Assignment 5,McMaster Univeristy,5,Predictive and Intelligent Control,MECHTRON 4AX3,3,Individual,Assignment,4.0,2023-11-30,11:30am,15.0,3.0,2023-11-13,0.0,0.0,1,17
+Midterm 3,McMaster Univeristy,5,Robotics,MECHENG 4K03,3,Individual,Midterm,10.0,2023-11-14,13:30pm,3.0,5.0,2023-11-13,90.0,5.0,5,1
+Assignment 1,McMaster Univeristy,5,Database,SFWRENG 3DB3 ,3,Individual,Assignment,12.0,2023-10-02,10:00pm,0.0,4.0,2023-11-13,100.0,16.0,2,-42
+Assignment 2,McMaster Univeristy,5,Database,SFWRENG 3DB3 ,3,Individual,Assignment,13.0,2023-11-10,10:00pm,0.0,4.0,2023-11-13,100.0,16.0,2,-3
+Assignment 3,McMaster Univeristy,5,Database,SFWRENG 3DB3 ,3,Individual,Assignment,14.0,2023-12-01,10:00pm,16.0,3.0,2023-11-13,0.0,0.0,3,18
+Lab 9,McMaster Univeristy,5,Real-Time System and Control Applications,MECHTRON 4AA4,4,Individual,Lab,4.0,2023-11-17,17:30pm,3.0,5.0,2023-11-13,0.0,0.0,2,4
+Lab 6 ,McMaster University,4,Digital Signal Processing,COMP ENG 4TL4,4,Individual,Lab,5.0,2023-11-16,17:20pm,2.5,4.0,2023-11-13,20.0,0.2,3,3
+Lab 3,McMaster University,4,Computer Architecture,COMP ENG 4DM4,4,Group,Lab,5.0,2023-11-14,11:20am,3.0,4.0,2023-11-13,0.0,0.0,5,1
+Lab4,McMaster University,4,Computer Architecture,COMP ENG 4DM5,4,Group,Lab,5.0,2023-11-21,11:20am,3.0,4.0,2023-11-13,0.0,0.0,1,8
+Lab4,McMaster University,1,Introductory Physics,PHYSICS 1A03,3,Individual,Lab,5.0,2023-11-14,14:20pm,1.5,4.0,2023-11-13,0.0,0.0,5,1
+LON-CAPA Assignment 6,McMaster University,1,Introductory Physics,PHYSICS 1A04,3,Individual,Assignment,8.0,2023-11-17,11:59pm,3.0,2.0,2023-11-13,30.0,3.5,4,4
+Lab 5,McMaster University,1,Introductory Physics,PHYSICS 1A05,3,Individual,Lab,5.0,2023-11-21,10:00am,1.5,3.0,2023-11-13,0.0,0.0,3,8
+LON-CAPA Assignment 7,McMaster University,1,Introductory Physics,PHYSICS 1A06,3,Individual,Assignment,8.0,2023-11-24,11:59pm,3.0,2.0,2023-11-13,0.0,0.0,2,11
+Lab6,McMaster University,1,Introductory Physics,PHYSICS 1A07,3,Individual,Lab,5.0,2023-11-28,10:00am,1.5,4.0,2023-11-13,0.0,0.0,1,15
+Midterm 2,McMaster University,1,Introductory Physics,PHYSICS 1A07,3,Individual,Exam,15.0,2023-11-08,10:30am,1.5,5.0,2023-11-13,0.0,0.0,1,-5
+Assignment 3,McMaster University,4,Smart Systems,MECH ENG 4SS3,3,Individual,Assignment,10.0,2023-11-20,11:59pm,4.0,4.0,2023-11-13,40.0,2.5,4,7
+Assignment 4,McMaster University,4,Smart Systems,MECH ENG 4SS3,3,Individual,Assignment,10.0,2023-11-27,11:59pm,4.0,3.0,2023-11-13,10.0,0.5,2,14
+Midterm test,McMaster University,5,Robotics,MECH ENG 4K03,3,Individual,Exam,10.0,2023-11-14,14:30pm,0.7,4.0,2023-11-13,0.0,5.0,3,1
+Lab4,McMaster University,5,Computer Architecture,COMPENG 4DM4,4,Group,Lab,7.0,2023-11-21,11:59pm,8.0,5.0,2023-11-13,10.0,0.5,2,8
+Assignment 4,McMaster University,4,Predictive and intelligence control,MECHTRON 4AX3,3,Individual,Assignment,4.0,2023-11-16,11:59pm,2.0,4.0,2023-11-13,0.0,0.0,4,3
+Midterm 3,McMaster University,4,Robotics,MECH ENG 4K03,3,Individual,Exam,10.0,2023-11-14,2:30pm,1.0,5.0,2023-11-13,0.0,0.0,5,1
