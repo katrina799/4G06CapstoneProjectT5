@@ -6,3 +6,4 @@ PRIORITY_MODEL_FILE_NAME = "trained_priority_model.joblib"
 PRIORITY_MODEL_FILE_PATH = (
     f"src/task-priority-training-pipeline/{PRIORITY_MODEL_FILE_NAME}"
 )
+MOCK_DATA_POC_TASKS = "mock_data_tasks.csv"

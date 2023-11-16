@@ -33,6 +33,7 @@ def start():
     df = get_df_from_csv_in_s3(s3, bucket_name, mock_data_file)
     username = df.loc[0, "username"]  # For PoC purpose
     courses = df.loc[0, "courses"]  # For PoC purpose
+    
     # Parsing it into a Python list
     courses = ast.literal_eval(courses)
 
