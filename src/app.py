@@ -33,22 +33,6 @@ s3 = boto3.client(
     aws_secret_access_key=os.environ.get("AWS_SECRET_ACCESS_KEY"),
 )
 
-tasks = {
-    "todo": [
-        {
-            "id": 1,
-            "title": "Assignment 1",
-            "course": "SFWRENG 4G06A",
-            "due_date": "2023-11-20",
-            "weight": "10%",
-            "est_time": "1 hour",
-            "priority": "high",
-        }
-    ],
-    "in_progress": [],
-    "done": [],
-}
-
 
 # Set up home page for the website
 @app.route("/")
@@ -66,7 +50,6 @@ def start():
     tasks = tasks_df.groupby('status').apply(lambda x: x.drop('status', axis=1).to_dict(orient='records')).to_dict()
 
     return render_template(
-        
         "index.html",
         username=username,
         courses=courses,
