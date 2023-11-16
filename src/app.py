@@ -24,51 +24,6 @@ s3 = boto3.client(
     aws_secret_access_key=os.environ.get("AWS_SECRET_ACCESS_KEY"),
 )
 
-tasks = {
-    "todo": [
-        {
-            "id": 1,
-            "title": "Assignment 1",
-            "course": "SFWRENG 4G06A",
-            "due_date": "2023-11-20",
-            "weight": "10%",
-            "est_time": "1 hour",
-            "priority": "high",
-        },
-        {
-            "id": 4,
-            "title": "Assignment 4",
-            "course": "SFWRENG 4G06A",
-            "due_date": "2023-11-23",
-            "weight": "10%",
-            "est_time": "1 hour",
-            "priority": "high",
-        }
-    ],
-    "in_progress": [
-        {
-            "id": 2,
-            "title": "Assignment 2",
-            "course": "SFWRENG 4G06A",
-            "due_date": "2023-11-23",
-            "weight": "10%",
-            "est_time": "1 hour",
-            "priority": "high",
-        }
-    ],
-    "done": [
-        {
-            "id": 3,
-            "title": "Assignment 3",
-            "course": "SFWRENG 4G06A",
-            "due_date": "2023-11-25",
-            "weight": "10%",
-            "est_time": "1 hour",
-            "priority": "low",
-        }
-    ],
-}
-
 
 # Set up home page for the website
 @app.route("/")
@@ -77,6 +32,7 @@ def start():
     df = get_df_from_csv_in_s3(s3, bucket_name, mock_data_file)
     username = df.loc[0, "username"]  # For PoC purpose
     courses = df.loc[0, "courses"]  # For PoC purpose
+    
     # Parsing it into a Python list
     courses = ast.literal_eval(courses)
 
