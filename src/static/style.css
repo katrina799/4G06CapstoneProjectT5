@@ -117,3 +117,8 @@ a:hover {
     color: #66b0bf;
 
 }
+
+.course-link {
+    display: inline-block;
+    width: 100%;
+}

@@ -34,39 +34,40 @@
 
                 <div class="courses" style="display: table; width: 256px;  border-spacing: 10px;">
                     {% for course in courses %}
-                    <div id="{{ course.0.1 }}"" class=" course-detail">
-                        <div class="course-image">
-                            <img style="vertical-align:middle " src="{{url_for('static', filename='books.png')}}" />
-                        </div>
-                        <div class="course-progress">
-                            <div class="progress-bar"></div>
-                            <!-- dynamicly change progress bar -->
-                            <!-- <div class="progress-bar" style="width: {{ course_completion_percentage }}%;"></div> -->
-                        </div>
-                        <div style="position: relative;">
-                            <div class="course-details">
-                                <h4>{{course}}</h4>
-                                <div style="margin-top: 5px;" class="course-desc">This a course in level 4, aims to
-                                    learn the sicentific
-                                    computation
-                                </div>
-                                <div class="instructor">By Prof Dr ned nedialkov</div>
+                    <a href="/course_detail_page/{{ course.id }}" class="course-detail-link">
+                        <div id="{{ course.0.1 }}"" class=" course-detail">
+                            <div class="course-image">
+                                <img style="vertical-align:middle " src="{{url_for('static', filename='books.png')}}" />
                             </div>
-                            <form style="position: absolute; top: 0; right: 0; margin: 3px;" action="/remove_course"
-                                method="post">
-                                <input type="hidden" name="index" value="{{ loop.index - 1 }}">
-                                <input type="hidden" name="course" value="{{ course }}">
-                                <button type="submit" class="btn btn-danger btn-xs">
-                                    <i class="fa fa-trash-o" style="font-size:12px">
-                                    </i>
-                                    Delete
-                                </button>
-                            </form>
+                            <div class="course-progress">
+                                <div class="progress-bar"></div>
+                                <!-- dynamicly change progress bar -->
+                                <!-- <div class="progress-bar" style="width: {{ course_completion_percentage }}%;"></div> -->
+                            </div>
+                            <div style="position: relative;">
+                                <div class="course-details">
+                                    <h4>{{course}}</h4>
+                                    <div style="margin-top: 5px;" class="course-desc">This a course in level 4, aims to
+                                        learn the sicentific
+                                        computation
+                                    </div>
+                                    <div class="instructor">By Prof Dr ned nedialkov</div>
+                                </div>
+                                <form style="position: absolute; top: 0; right: 0; margin: 3px;" action="/remove_course"
+                                    method="post">
+                                    <input type="hidden" name="index" value="{{ loop.index - 1 }}">
+                                    <input type="hidden" name="course" value="{{ course }}">
+                                    <button type="submit" class="btn btn-danger btn-xs">
+                                        <i class="fa fa-trash-o" style="font-size:12px">
+                                        </i>
+                                        Delete
+                                    </button>
+                                </form>
+
+                            </div>
 
                         </div>
-
-                    </div>
-
+                    </a>
                     {% endfor %}
                 </div>
 
