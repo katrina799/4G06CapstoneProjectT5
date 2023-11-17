@@ -1,6 +1,5 @@
-from unittest.mock import patch, MagicMock
 import pandas as pd
-from unittest.mock import patch, MagicMock, ANY
+from unittest.mock import patch, ANY
 import pytest
 from src.app import app
 import ast
