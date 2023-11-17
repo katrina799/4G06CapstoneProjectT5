@@ -1,5 +1,4 @@
 # Automated tests
 
-The folders and files for this folder are as follows:
-
-Describe ...
+To run a test, undter /test run 
+pytest test_script_name.py
