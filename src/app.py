@@ -1,7 +1,7 @@
 import os
 
 import boto3
-from flask import Flask, render_template, request, Response, redirect, url_for, jsonify
+from flask import Flask, render_template, request, Response, redirect, url_for
 import ast
 
 from helper import get_df_from_csv_in_s3, upload_df_to_s3
@@ -13,6 +13,7 @@ app = Flask(__name__)
 app.config.from_pyfile("config.py")
 bucket_name = app.config["BUCKET_NAME"]
 mock_data_file = app.config["MOCK_DATA_POC_NAME"]
+mock_tasks_data_file = app.config["MOCK_DATA_POC_TASKS"]
 
 # Setting global variables
 username = ""
@@ -28,16 +29,18 @@ s3 = boto3.client(
 # Set up home page for the website
 @app.route("/")
 def start():
-    global username, courses
+    global username, courses, tasks
     df = get_df_from_csv_in_s3(s3, bucket_name, mock_data_file)
     username = df.loc[0, "username"]  # For PoC purpose
     courses = df.loc[0, "courses"]  # For PoC purpose
-    
     # Parsing it into a Python list
     courses = ast.literal_eval(courses)
 
+    tasks_df = get_df_from_csv_in_s3(s3, bucket_name, mock_tasks_data_file)
+    # Convert the tasks DataFrame to a list of dictionaries
+    tasks = tasks_df.groupby('status').apply(lambda x: x.drop('status', axis=1).to_dict(orient='records')).to_dict()
+
     return render_template(
-        
         "index.html",
         username=username,
         courses=courses,
