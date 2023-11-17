@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}" />
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Course Details - {{ course.name }}</title>
+</head>
+
+<body>
+    {% include 'header.html' %}
+    <!-- 课程详细信息展示区 -->
+    <div class="course-detail-container" style="margin: 20px;">
+        <h1>{{ course.name }}</h1> <!-- 课程名称 -->
+        <p>{{ course.description }}</p> <!-- 课程描述 -->
+        <h3>Instructor: {{ course.instructor }}</h3> <!-- 讲师信息 -->
+
+        <!-- 如果有其他信息，可以继续添加 -->
+
+        <!-- 文件下载表单 -->
+        <div class="panel-file" style="margin-top: 20px;">
+            <h2>Download Course Material</h2>
+            <form action="/download/{{ course.id }}" method="get">
+                <label for="filename">Enter Filename:</label>
+                <input type="text" id="filename" name="filename" required>
+                <button type="submit" class="btn btn-success">
+                    <i class="fa fa-download" aria-hidden="true"></i> Download
+                </button>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

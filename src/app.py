@@ -36,10 +36,8 @@ def start():
     courses = ast.literal_eval(courses)
 
     return render_template(
-        "index.html",
-        username=username,
-        courses=courses,
-        current_page='home')
+        "index.html", username=username, courses=courses, current_page="home"
+    )
 
 
 # Download a file from s3
@@ -119,7 +117,8 @@ def course_page():
         "course_page.html",
         username=username,
         courses=courses,
-        current_page='course_page')
+        current_page="course_page",
+    )
 
 
 # Router to study plan detailed page
@@ -127,9 +126,8 @@ def course_page():
 def plan_page():
     # render the plan page
     return render_template(
-        "plan_page.html",
-        username=username,
-        current_page='plan_page')
+        "plan_page.html", username=username, current_page="plan_page"
+    )
 
 
 # Router to user profile page
@@ -137,9 +135,26 @@ def plan_page():
 def profile_page():
     # render the profile page, showing username on pege
     return render_template(
-        "profile_page.html",
-        username=username,
-        current_page='profile_page')
+        "profile_page.html", username=username, current_page="profile_page"
+    )
+
+
+@app.route("/course_detail_page/<course_id>")
+def course_detail(course_id):
+    course = get_course_by_id(course_id)  # 从数据源获取课程信息的函数
+    if course:
+        return render_template("course_detail_page.html", course=course)
+    else:
+        return "Course not found", 404
+
+
+def get_course_by_id(course_id):
+    global courses
+    for course_str in courses:
+        course = ast.literal_eval(course_str)  # 将字符串转换为字典
+        if course["id"] == course_id:
+            return course
+    return None
 
 
 if __name__ == "__main__":
