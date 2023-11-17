@@ -11,4 +11,4 @@
         - Alternatively, if developing using *VSCode*, there will be a pop-up on the bottom right saying that our application is avaliable. Click `Open in Browser` to open the web app
 - To close the running server, press `CTRL+C` inside the terminal
 > **Note:**  
-> Please reupload `poc_data/mock_data_poc.csv` to our `AWS S3` after development as changing username or adding/removing courses will overwrite the file stored in `AWS S3`. Instruction on how to upload mock data is [here](https://github.com/wangq131/4G06CapstoneProjectT5/blob/main/src/poc_data/README.md)
+> Please reupload `poc-data/mock_data_poc.csv` to our `AWS S3` after development as changing username or adding/removing courses will overwrite the file stored in `AWS S3`. Instruction on how to upload mock data is [here](https://github.com/wangq131/4G06CapstoneProjectT5/blob/main/src/poc-data/README.md)
