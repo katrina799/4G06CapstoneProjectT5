@@ -155,59 +155,11 @@ def profile_page():
 
 @app.route("/course_detail_page/<course_id>")
 def course_detail(course_id):
-    course = course_id  # 从数据源获取课程信息的函数
+    course = course_id
     if course:
         return render_template("course_detail_page.html", course=course)
     else:
         return "Course not found", 404
-
-
-# input:pdf file
-# output: a list of string emails
-# extract all the email in the input pdf
-@app.route("/get_emails", methods=["GET"])
-def extract_emails_from_pdf():
-    filename = request.args.get("filename")
-    if request.method == "GET":
-        response = s3.get_object(Bucket=bucket_name, Key=filename)
-        pdf_file = response["Body"].read()
-        pdf_file_obj = io.BytesIO(pdf_file)
-
-        pdf_reader = PyPDF2.PdfReader(pdf_file_obj)
-        text = ""
-
-        for page_num in range(len(pdf_reader.pages)):
-            page = pdf_reader.pages[page_num]
-            text += page.extract_text()
-
-        email_pattern = r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,7}\b"
-        emails = re.findall(email_pattern, text)
-
-        return render_template("index.html", emails=emails)
-
-
-@app.route("/")
-def index():
-    return render_template("upload.html")
-
-
-@app.route("/upload", methods=["POST"])
-def upload_file():
-    if "file" not in request.files:
-        return "No file selected"
-
-    file = request.files["file"]
-
-    if file.filename == "":
-        return "No file selected"
-
-    try:
-        s3.upload_fileobj(
-            file, bucket_name, file.filename, ExtraArgs={"ACL": "private"}
-        )
-        return "File uploaded successfully!"
-    except botocore.exceptions.NoCredentialsError:
-        return "AWS authentication failed. Please check your AWS keys."
 
 
 # input:pdf file

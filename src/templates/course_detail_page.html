@@ -12,24 +12,21 @@
 
 <body>
     {% include 'header.html' %}
-    <!-- 课程详细信息展示区 -->
+
     <div class="course-detail-container" style="margin: 20px;">
-        <h1>{{ course.name }}</h1> <!-- 课程名称 -->
-        <p>{{ course.description }}</p> <!-- 课程描述 -->
-        <h3>Course: {{ course}}</h3> <!-- 讲师信息 -->
+        <h1>{{ course.name }}</h1>
 
-        <!-- 如果有其他信息，可以继续添加 -->
-
-        <!-- 文件下载表单 -->
         <div class="panel-file" style="margin-top: 20px;">
             <h2>Upload Course Syllabus</h2>
-            <form action="/download/{{ course.id }}" method="get">
-                <label for="filename">Enter Filename:</label>
-                <input type="text" id="filename" name="filename" required>
-                <button type="submit" class="btn btn-success">
-                    <i class="fa fa-download" aria-hidden="true"></i> Download
+            <form method="POST" action="/upload" enctype="multipart/form-data" class="form-inline">
+                <div class="form-group mb-2">
+                    <input type="file" name="file" class="form-control-file">
+                </div>
+                <button type="submit" class="btn btn-primary mb-2">
+                    <i class="fa fa-upload" aria-hidden="true"></i> Upload File
                 </button>
             </form>
+
         </div>
     </div>
 </body>
