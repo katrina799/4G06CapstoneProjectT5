@@ -79,9 +79,8 @@ replacement_dict = {2: 1, 3: 2, 4: 2, 5: 3}
 data["priority_level"] = data["priority_level"].replace(replacement_dict)
 y = data["priority_level"]
 
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.2, random_state=0
-)
+split_params = {"test_size": 0.2, "random_state": 0}
+X_train, X_test, y_train, y_test = train_test_split(X, y, **split_params)
 
 # Numerical feature pipeline
 numerical_cols = [
