@@ -72,6 +72,10 @@ feature_selected_columns = [
     "days_until_due",
 ]
 X = data[feature_selected_columns]
+replacement_dict = {2: 1, 3: 2, 4: 2, 5: 3}
+
+data["priority_level"] = data["priority_level"].replace(replacement_dict)
+y = data["priority_level"]
 y = data["priority_level"]
 
 split_params = {"test_size": 0.2, "random_state": 0}
