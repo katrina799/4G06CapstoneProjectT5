@@ -34,7 +34,7 @@
 
                 <div class="courses" style="display: table; width: 256px;  border-spacing: 10px;">
                     {% for course in courses %}
-                    <a href="/course_detail_page/{{ course.id }}" class="course-detail-link">
+                    <a href="/course_detail_page/{{ course }}" class="course-detail-link">
                         <div id="{{ course.0.1 }}"" class=" course-detail">
                             <div class="course-image">
                                 <img style="vertical-align:middle " src="{{url_for('static', filename='books.png')}}" />
