@@ -125,7 +125,8 @@ preprocessor = ColumnTransformer(
 )
 
 # This can be changed to different model
-classfier = DecisionTreeClassifier()
+classfier = RandomForestClassifier()
+#DecisionTreeClassifier()
 #LogisticRegression(max_iter=1000)
 #GradientBoostingClassifier(n_estimators=100, learning_rate=0.1, max_depth=3, random_state=42)
 #RandomForestClassifier()
