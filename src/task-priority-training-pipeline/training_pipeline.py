@@ -136,7 +136,10 @@ classfier = GradientBoostingClassifier(
 # GradientBoostingClassifier(n_estimators=100, learning_rate=0.1,
 #  max_depth=3, random_state=42)
 # RandomForestClassifier()
-
+# classfier = MLPClassifier(solver='lbfgs',
+#                           alpha=1e-5,
+#                           hidden_layer_sizes=(12,),
+#                           random_state=1)
 
 # Create the full pipeline
 pipeline = Pipeline(steps=[("preprocessor", preprocessor), ("cf", classfier)])
