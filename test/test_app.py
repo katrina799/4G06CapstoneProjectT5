@@ -33,7 +33,7 @@ def test_remove_course(mock_get_df, mock_upload_df, client):
     # Assertions
     assert response.status_code == 302
     mock_get_df.assert_called_once_with(
-        ANY, ANY, ANY)  
+        ANY, ANY, ANY)
     mock_upload_df.assert_called_once_with(ANY, ANY, ANY, ANY)
 
     # Additional check to ensure the course is removed
