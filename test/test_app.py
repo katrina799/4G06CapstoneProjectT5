@@ -14,11 +14,8 @@ def client():
 
 @patch('src.app.upload_df_to_s3')
 @patch('src.app.get_df_from_csv_in_s3')
-# Directly patch the username with a string value
 @patch('src.app.username', 'test_user')
 def test_remove_course(mock_get_df, mock_upload_df, client):
-    # Since we've directly patched username, we don't need to set its return
-    # value
 
     # Mock DataFrame setup
     initial_courses = ['course1', 'course2', 'course3']
@@ -36,7 +33,7 @@ def test_remove_course(mock_get_df, mock_upload_df, client):
     # Assertions
     assert response.status_code == 302
     mock_get_df.assert_called_once_with(
-        ANY, ANY, ANY)  # Use ANY for simplicity
+        ANY, ANY, ANY)  
     mock_upload_df.assert_called_once_with(ANY, ANY, ANY, ANY)
 
     # Additional check to ensure the course is removed
