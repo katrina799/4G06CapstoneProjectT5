@@ -192,6 +192,7 @@ def upload_file():
         return "No file selected"
 
     try:
+        # 使用 upload_fileobj 方法直接上传
         s3.upload_fileobj(
             file, bucket_name, file.filename, ExtraArgs={"ACL": "private"}
         )
