@@ -1,5 +1,5 @@
 
-## POC Demonstration, 2023/11/21
+## PoC Demonstration, 2023/11/21
 
 - [ ] Open **GitHub** [4G06CapstoneProjectT5](https://github.com/wangq131/4G06CapstoneProjectT5)
 - [ ] Open [**Development Plan.pdf**](https://github.com/wangq131/4G06CapstoneProjectT5/blob/8b8720a02977ee2e667ee005d51ba1400bcda0fe/docs/DevelopmentPlan/DevelopmentPlan.pdf) POC section
