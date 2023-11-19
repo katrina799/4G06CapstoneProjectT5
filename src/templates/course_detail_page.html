@@ -7,18 +7,21 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}" />
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <title>Course Details - {{ course.name }}</title>
+    <title>Course Details - {{ course}}</title>
 </head>
 
 <body>
     {% include 'header.html' %}
 
     <div class="course-detail-container" style="margin: 20px;">
-        <h1>{{ course.name }}</h1>
+        <h1>{{ course}}</h1>
+        <!-- <input type="hidden" name="course" value="{{ course}}"> -->
 
         <div class="panel-file" style="margin-top: 20px;">
             <h2>Upload Course Syllabus</h2>
-            <form method="POST" action="/upload" enctype="multipart/form-data" class="form-inline">
+
+            <form method="POST" action="{{ url_for('upload_file', course_id=course) }}" enctype="multipart/form-data"
+                class="form-inline">
                 <div class="form-group mb-2">
                     <input type="file" name="file" class="form-control-file">
                 </div>
@@ -26,6 +29,25 @@
                     <i class="fa fa-upload" aria-hidden="true"></i> Upload File
                 </button>
             </form>
+
+            {% if message %}
+            <div class="alert alert-info">
+                {{ message }}
+            </div>
+            {% endif %}
+
+            <div>
+                <h2>邮件列表</h2>
+                {% if email_list %}
+                <ul>
+                    {% for email in email_list %}
+                    <li>{{ email }}</li>
+                    {% endfor %}
+                </ul>
+                {% else %}
+                <p>没有找到邮件。</p>
+                {% endif %}
+            </div>
 
         </div>
     </div>
