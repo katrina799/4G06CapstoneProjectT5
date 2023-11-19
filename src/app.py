@@ -1,12 +1,12 @@
 import os
 import io
-import PyPDF2
+import pypdf
 import re
 import botocore
 import boto3
 from flask import Flask, render_template, request, Response, redirect, url_for
 import ast
-from helper import (
+from .helper import (
     check_syllabus_exists,
     update_csv,
     upload_df_to_s3,
@@ -178,7 +178,7 @@ def extract_emails_from_pdf(filename):
         pdf_file = response["Body"].read()
         pdf_file_obj = io.BytesIO(pdf_file)
 
-        pdf_reader = PyPDF2.PdfReader(pdf_file_obj)
+        pdf_reader = pypdf.PdfReader(pdf_file_obj)
         text = ""
 
         for page_num in range(len(pdf_reader.pages)):
