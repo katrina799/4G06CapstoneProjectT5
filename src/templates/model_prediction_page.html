@@ -20,6 +20,18 @@
                 <h4 class="alert-heading">Your Prediction:</h4>
                 <p>{{ prediction }}</p>
             </div>
+            <div>
+                <h4>Prediction Probabilities:</h4>
+                <p>{{ prediction_prob }}</p>
+            </div>
+            <div>
+                <h4>Model Parameters:</h4>
+                <ul>
+                    {% for key, value in model_params.items() %}
+                        <li><b>{{ key }}:</b> {{ value }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
         {% else %}
             <div class="alert alert-warning" role="alert">
                 <h4 class="alert-heading">No Prediction Available</h4>

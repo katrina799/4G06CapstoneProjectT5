@@ -100,10 +100,18 @@ def prority_predict():
 
         # Replace values in the prediction list
         mapped_prediction = [priority_mapping.get(n, n) for n in prediction]
+
+        pred_prob = pipeline.predict_proba(input_df).tolist()
+
+        model_params = pipeline.get_params()
+
         # Return prediction
         return render_template(
             "model_prediction_page.html",
             prediction=mapped_prediction,
+            prediction_prob=pred_prob,
+            model_params=model_params,
+
         )
     return render_template("model_page.html")
 
