@@ -173,22 +173,12 @@ def profile_page():
 
 @app.route("/course_detail_page/<course_id>")
 def course_detail(course_id):
-<<<<<<< HEAD
     message = request.args.get("message", "")
     bk = bucket_name
     syllabus_exists, pdf_name = check_syllabus_exists(course_id, s3, bk)
 
     if syllabus_exists:
         email_list = extract_emails_from_pdf(pdf_name)
-=======
-    # 假设有一个函数check_syllabus_exists()来检测S3中是否有大纲文件
-    message = request.args.get("message", "")
-    syllabus_exists, syllabus_filename = check_syllabus_exists(course_id)
-
-    if syllabus_exists:
-        # 直接调用get_emails路由来提取邮件
-        email_list = extract_emails_from_pdf(syllabus_filename)
->>>>>>> a297ed5 (features are added)
     else:
         email_list = []
 
@@ -200,26 +190,6 @@ def course_detail(course_id):
         email_list=email_list,
         message=message,
     )
-<<<<<<< HEAD
-=======
-
-
-def check_syllabus_exists(course_id):
-    try:
-        # 假设大纲文件的命名规则是：course_id + "-syllabus.pdf"
-        syllabus_filename = course_id + "-syllabus.pdf"
-
-        # 检查文件是否存在于S3上
-        s3.head_object(Bucket=bucket_name, Key=syllabus_filename)
-        return True, syllabus_filename
-    except botocore.exceptions.ClientError as e:
-        # 如果文件不存在，head_object会抛出ClientError异常
-        if e.response["Error"]["Code"] == "404":
-            return False, None
-        else:
-            # 如果出现其他错误，重新抛出异常
-            raise e
->>>>>>> a297ed5 (features are added)
 
 
 # input:pdf file
@@ -265,7 +235,7 @@ def upload_file(course_id):
 
     file = request.files["file"]
     new_filename = f"{course_id}-syllabus.pdf"
-<<<<<<< HEAD
+
     file.filename = new_filename
     print("file:", file.filename)
 
@@ -275,18 +245,7 @@ def upload_file(course_id):
         s3.upload_fileobj(
             file, bucket_name, file.filename, ExtraArgs={"ACL": "private"}
         )
-=======
-    file.filename = new_filename  # 更新文件名
-    print("file:", file.filename)
 
-    try:
-        # 使用 upload_fileobj 方法直接上传
-        print("uploading")
-        s3.upload_fileobj(
-            file, bucket_name, file.filename, ExtraArgs={"ACL": "private"}
-        )
-        # 确保update_csv函数已经定义
->>>>>>> a297ed5 (features are added)
         update_csv(course_id, file.filename)
         print("returning")
         return redirect(
@@ -303,37 +262,10 @@ def upload_file(course_id):
             url_for(
                 "course_detail",
                 course_id=course_id,
-<<<<<<< HEAD
                 message="AWS authentication failed. Check your AWS keys.",
                 username=username,
             )
         )
-=======
-                message="AWS authentication failed. Please check your AWS keys.",
-                username=username,
-            )
-        )
-
-
-def update_csv(course_id, syllabus_filename):
-    csv_file_path = "./poc-data/moc_course_info.csv"  # 更改为实际的文件路径
-
-    # 读取CSV文件，删除空行
-    df = pd.read_csv(csv_file_path).dropna(how="all")
-
-    # 检查course_id是否在非空的单元格中
-    if course_id in df["course"].dropna().values:
-        df.loc[df["course"] == course_id, "course_syllabus"] = syllabus_filename
-    else:
-        # 创建一个新的DataFrame来添加新行
-        new_row = pd.DataFrame(
-            {"course": [course_id], "course_syllabus": [syllabus_filename]}
-        )
-        df = pd.concat([df, new_row], ignore_index=True)
-
-    # 写回CSV文件
-    df.to_csv(csv_file_path, index=False)
->>>>>>> a297ed5 (features are added)
 
 
 if __name__ == "__main__":
