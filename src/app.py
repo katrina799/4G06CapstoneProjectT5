@@ -124,6 +124,7 @@ def model_page():
         "model_page.html", username=username, current_page="model_page"
     )
 
+
 # Download a file from s3
 @app.route("/download", methods=["GET"])
 def download():
