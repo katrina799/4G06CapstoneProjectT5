@@ -6,9 +6,12 @@ import botocore
 import boto3
 from flask import Flask, render_template, request, Response, redirect, url_for
 import ast
-import pandas as pd
-
-from helper import get_df_from_csv_in_s3, upload_df_to_s3
+from helper import (
+    check_syllabus_exists,
+    update_csv,
+    upload_df_to_s3,
+    get_df_from_csv_in_s3,
+)
 
 
 app = Flask(__name__)
@@ -147,7 +150,8 @@ def profile_page():
 @app.route("/course_detail_page/<course_id>")
 def course_detail(course_id):
     message = request.args.get("message", "")
-    syllabus_exists, pdf_name = check_syllabus_exists(course_id)
+    bk = bucket_name
+    syllabus_exists, pdf_name = check_syllabus_exists(course_id, s3, bk)
 
     if syllabus_exists:
         email_list = extract_emails_from_pdf(pdf_name)
@@ -162,19 +166,6 @@ def course_detail(course_id):
         email_list=email_list,
         message=message,
     )
-
-
-def check_syllabus_exists(course_id):
-    try:
-        pdf_name = course_id + "-syllabus.pdf"
-
-        s3.head_object(Bucket=bucket_name, Key=pdf_name)
-        return True, pdf_name
-    except botocore.exceptions.ClientError as e:
-        if e.response["Error"]["Code"] == "404":
-            return False, None
-        else:
-            raise e
 
 
 # input:pdf file
@@ -249,21 +240,6 @@ def upload_file(course_id):
                 username=username,
             )
         )
-
-
-def update_csv(course_id, pdf_name):
-    csv_file_path = "./poc-data/moc_course_info.csv"
-
-    df = pd.read_csv(csv_file_path).dropna(how="all")
-
-    col_name = "course_syllabus"
-    if course_id in df["course"].dropna().values:
-        df.loc[df["course"] == course_id, col_name] = pdf_name
-    else:
-        new_row = pd.DataFrame({"course": [course_id], col_name: [pdf_name]})
-        df = pd.concat([df, new_row], ignore_index=True)
-
-    df.to_csv(csv_file_path, index=False)
 
 
 if __name__ == "__main__":
