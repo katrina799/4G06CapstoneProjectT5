@@ -46,14 +46,18 @@ def start():
 
     tasks_df = get_df_from_csv_in_s3(s3, bucket_name, mock_tasks_data_file)
     # Convert the tasks DataFrame to a list of dictionaries
-    tasks = tasks_df.groupby('status').apply(lambda x: x.drop('status', axis=1).to_dict(orient='records')).to_dict()
+    tasks = (
+        tasks_df.groupby("status")
+        .apply(lambda x: x.drop("status", axis=1).to_dict(orient="records"))
+        .to_dict()
+    )
 
     return render_template(
         "index.html",
         username=username,
         courses=courses,
-        current_page='home',
-        tasks=tasks
+        current_page="home",
+        tasks=tasks,
     )
 
 
@@ -134,7 +138,8 @@ def course_page():
         "course_page.html",
         username=username,
         courses=courses,
-        current_page='course_page')
+        current_page="course_page",
+    )
 
 
 # Router to study plan detailed page
@@ -142,9 +147,8 @@ def course_page():
 def plan_page():
     # render the plan page
     return render_template(
-        "plan_page.html",
-        username=username,
-        current_page='plan_page')
+        "plan_page.html", username=username, current_page="plan_page"
+    )
 
 
 # Router to user profile page
@@ -152,9 +156,8 @@ def plan_page():
 def profile_page():
     # render the profile page, showing username on pege
     return render_template(
-        "profile_page.html",
-        username=username,
-        current_page='profile_page')
+        "profile_page.html", username=username, current_page="profile_page"
+    )
 
 
 if __name__ == "__main__":
