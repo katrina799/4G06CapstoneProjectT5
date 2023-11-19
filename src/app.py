@@ -158,11 +158,11 @@ def profile_page():
 def course_detail(course_id):
     # 假设有一个函数check_syllabus_exists()来检测S3中是否有大纲文件
     message = request.args.get("message", "")
-    syllabus_exists, syllabus_filename = check_syllabus_exists(course_id)
+    syllabus_exists, pdf_name = check_syllabus_exists(course_id)
 
     if syllabus_exists:
         # 直接调用get_emails路由来提取邮件
-        email_list = extract_emails_from_pdf(syllabus_filename)
+        email_list = extract_emails_from_pdf(pdf_name)
     else:
         email_list = []
 
@@ -179,11 +179,11 @@ def course_detail(course_id):
 def check_syllabus_exists(course_id):
     try:
         # 假设大纲文件的命名规则是：course_id + "-syllabus.pdf"
-        syllabus_filename = course_id + "-syllabus.pdf"
+        pdf_name = course_id + "-syllabus.pdf"
 
         # 检查文件是否存在于S3上
-        s3.head_object(Bucket=bucket_name, Key=syllabus_filename)
-        return True, syllabus_filename
+        s3.head_object(Bucket=bucket_name, Key=pdf_name)
+        return True, pdf_name
     except botocore.exceptions.ClientError as e:
         # 如果文件不存在，head_object会抛出ClientError异常
         if e.response["Error"]["Code"] == "404":
@@ -263,26 +263,25 @@ def upload_file(course_id):
             url_for(
                 "course_detail",
                 course_id=course_id,
-                message="AWS authentication failed. Please check your AWS keys.",
+                message="AWS authentication failed. Check your AWS keys.",
                 username=username,
             )
         )
 
 
-def update_csv(course_id, syllabus_filename):
+def update_csv(course_id, pdf_name):
     csv_file_path = "./poc-data/moc_course_info.csv"  # 更改为实际的文件路径
 
     # 读取CSV文件，删除空行
     df = pd.read_csv(csv_file_path).dropna(how="all")
 
     # 检查course_id是否在非空的单元格中
+    col_name = "course_syllabus"
     if course_id in df["course"].dropna().values:
-        df.loc[df["course"] == course_id, "course_syllabus"] = syllabus_filename
+        df.loc[df["course"] == course_id, col_name] = pdf_name
     else:
         # 创建一个新的DataFrame来添加新行
-        new_row = pd.DataFrame(
-            {"course": [course_id], "course_syllabus": [syllabus_filename]}
-        )
+        new_row = pd.DataFrame({"course": [course_id], col_name: [pdf_name]})
         df = pd.concat([df, new_row], ignore_index=True)
 
     # 写回CSV文件
