@@ -31,7 +31,7 @@ username = ""
 courses = []
 emails = ""
 model = None
-current_page = "home" 
+current_page = "home"
 
 s3 = boto3.client(
     "s3",
