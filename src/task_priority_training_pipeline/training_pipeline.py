@@ -5,18 +5,10 @@ from joblib import dump
 
 import boto3
 import pandas as pd
-from sklearn.base import TransformerMixin
 from sklearn.model_selection import train_test_split
-from sklearn.pipeline import Pipeline
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.compose import ColumnTransformer
-from sklearn.preprocessing import StandardScaler, OneHotEncoder
-# from sklearn.ensemble import RandomForestClassifier
-from sklearn.ensemble import GradientBoostingClassifier
-# from sklearn.linear_model import LogisticRegression
-# from sklearn.tree import DecisionTreeClassifier
 
 from src import config
+from src.helper import get_task_priority_training_pipeline
 
 # Set up logger
 logging.basicConfig(
@@ -29,15 +21,6 @@ parser = argparse.ArgumentParser(description="Process the file path.")
 parser.add_argument("data_file_path", type=str, help="Data file path")
 
 args = parser.parse_args()
-
-
-class SqueezeTransformer(TransformerMixin):
-    def fit(self, X, y=None):
-        return self
-
-    def transform(self, X):
-        return X.squeeze()
-
 
 # Read the data
 data = pd.read_csv(args.data_file_path)
@@ -75,6 +58,8 @@ feature_selected_columns = [
     "days_until_due",
 ]
 X = data[feature_selected_columns]
+X.to_csv("src/poc-data/poc_task_priority_input.csv")
+
 replacement_dict = {2: 1, 3: 2, 4: 2, 5: 3}
 data["priority_level"] = data["priority_level"].replace(replacement_dict)
 y = data["priority_level"]
@@ -82,67 +67,7 @@ y = data["priority_level"]
 split_params = {"test_size": 0.2, "random_state": 0}
 X_train, X_test, y_train, y_test = train_test_split(X, y, **split_params)
 
-# Numerical feature pipeline
-numerical_cols = [
-    "school_year",
-    "credit",
-    "task_weight_percent",
-    "time_required_hours",
-    "difficulty",
-    "current_progress_percent",
-    "time_spent_hours",
-    "days_until_due",
-]
-numerical_feature_pipeline = Pipeline(
-    [
-        ("scaler", StandardScaler()),
-    ]
-)
-
-# Categorical feature pipeline
-category_cols = ["task_mode", "task_type"]
-categorical_feature_pipeline = Pipeline(
-    steps=[("onehot", OneHotEncoder(handle_unknown="ignore"))]
-)
-
-# Text feature pipeline
-text_cols = ["task_name", "course_name"]
-text_feature_pipeline = Pipeline(
-    steps=[
-        (
-            "squeeze",
-            SqueezeTransformer(),
-        ),  # Custom transformer to squeeze the DataFrame column
-        ("td-idf", TfidfVectorizer()),
-    ]
-)
-
-# Preprocessing step: combining feature pipelines
-preprocessor = ColumnTransformer(
-    transformers=[
-        ("numerical", numerical_feature_pipeline, numerical_cols),
-        ("categorical", categorical_feature_pipeline, category_cols),
-        ("text1", text_feature_pipeline, text_cols[0]),
-        ("text2", text_feature_pipeline, text_cols[1]),
-    ]
-)
-
-# This can be changed to different model
-classfier = GradientBoostingClassifier(
-    n_estimators=150, learning_rate=0.1, max_depth=5, random_state=42
-)
-# DecisionTreeClassifier()
-# LogisticRegression(max_iter=1000)
-# GradientBoostingClassifier(n_estimators=100, learning_rate=0.1,
-#  max_depth=3, random_state=42)
-# RandomForestClassifier()
-# classfier = MLPClassifier(solver='lbfgs',
-#                           alpha=1e-5,
-#                           hidden_layer_sizes=(12,),
-#                           random_state=1)
-
-# Create the full pipeline
-pipeline = Pipeline(steps=[("preprocessor", preprocessor), ("cf", classfier)])
+pipeline = get_task_priority_training_pipeline()
 
 pipeline.fit(X_train, y_train)
 

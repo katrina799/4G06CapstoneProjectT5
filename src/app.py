@@ -6,25 +6,31 @@ import botocore
 import boto3
 from flask import Flask, render_template, request, Response, redirect, url_for
 import ast
+import pandas as pd
+
 from helper import (
     check_syllabus_exists,
     update_csv,
     upload_df_to_s3,
     get_df_from_csv_in_s3,
+    load_priority_model_from_s3,
 )
 
 
 app = Flask(__name__)
 
+
 # Loading configs/global variables
 app.config.from_pyfile("config.py")
 bucket_name = app.config["BUCKET_NAME"]
 mock_data_file = app.config["MOCK_DATA_POC_NAME"]
+model_file_path = app.config["PRIORITY_MODEL_PATH"]
 
 # Setting global variables
 username = ""
 courses = []
 emails = ""
+model = None
 
 s3 = boto3.client(
     "s3",
@@ -45,6 +51,24 @@ def start():
 
     return render_template(
         "index.html", username=username, courses=courses, current_page="home"
+    )
+
+
+# Predict priority using trained model based on user input
+@app.route("/priority_predict", methods=["GET"])
+def prority_predict():
+    # Load pipeline that has transformed processor and trained model
+    pipeline = load_priority_model_from_s3(s3, bucket_name, model_file_path)
+
+    # Load input data
+    input_data = pd.read_csv("poc-data/poc_task_priority_input.csv")
+
+    prediction = pipeline.predict(input_data)
+
+    # Return prediction
+    return render_template(
+        "model_page.html",
+        prediction=prediction.tolist(),
     )
 
 
