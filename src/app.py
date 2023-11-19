@@ -156,12 +156,10 @@ def profile_page():
 
 @app.route("/course_detail_page/<course_id>")
 def course_detail(course_id):
-    # 假设有一个函数check_syllabus_exists()来检测S3中是否有大纲文件
     message = request.args.get("message", "")
     syllabus_exists, pdf_name = check_syllabus_exists(course_id)
 
     if syllabus_exists:
-        # 直接调用get_emails路由来提取邮件
         email_list = extract_emails_from_pdf(pdf_name)
     else:
         email_list = []
@@ -178,18 +176,14 @@ def course_detail(course_id):
 
 def check_syllabus_exists(course_id):
     try:
-        # 假设大纲文件的命名规则是：course_id + "-syllabus.pdf"
         pdf_name = course_id + "-syllabus.pdf"
 
-        # 检查文件是否存在于S3上
         s3.head_object(Bucket=bucket_name, Key=pdf_name)
         return True, pdf_name
     except botocore.exceptions.ClientError as e:
-        # 如果文件不存在，head_object会抛出ClientError异常
         if e.response["Error"]["Code"] == "404":
             return False, None
         else:
-            # 如果出现其他错误，重新抛出异常
             raise e
 
 
@@ -236,17 +230,15 @@ def upload_file(course_id):
 
     file = request.files["file"]
     new_filename = f"{course_id}-syllabus.pdf"
-    file.filename = new_filename  # 更新文件名
+    file.filename = new_filename
     print("file:", file.filename)
 
     try:
-        # 使用 upload_fileobj 方法直接上传
         print("uploading")
 
         s3.upload_fileobj(
             file, bucket_name, file.filename, ExtraArgs={"ACL": "private"}
         )
-        # 确保update_csv函数已经定义
         update_csv(course_id, file.filename)
         print("returning")
         return redirect(
@@ -270,21 +262,17 @@ def upload_file(course_id):
 
 
 def update_csv(course_id, pdf_name):
-    csv_file_path = "./poc-data/moc_course_info.csv"  # 更改为实际的文件路径
+    csv_file_path = "./poc-data/moc_course_info.csv"
 
-    # 读取CSV文件，删除空行
     df = pd.read_csv(csv_file_path).dropna(how="all")
 
-    # 检查course_id是否在非空的单元格中
     col_name = "course_syllabus"
     if course_id in df["course"].dropna().values:
         df.loc[df["course"] == course_id, col_name] = pdf_name
     else:
-        # 创建一个新的DataFrame来添加新行
         new_row = pd.DataFrame({"course": [course_id], col_name: [pdf_name]})
         df = pd.concat([df, new_row], ignore_index=True)
 
-    # 写回CSV文件
     df.to_csv(csv_file_path, index=False)
 
 
