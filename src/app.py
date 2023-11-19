@@ -287,6 +287,7 @@ def upload_file(course_id):
 
     file = request.files["file"]
     new_filename = f"{course_id}-syllabus.pdf"
+
     file.filename = new_filename
     print("file:", file.filename)
 
@@ -296,6 +297,7 @@ def upload_file(course_id):
         s3.upload_fileobj(
             file, bucket_name, file.filename, ExtraArgs={"ACL": "private"}
         )
+
         update_csv(course_id, file.filename)
         print("returning")
         return redirect(
