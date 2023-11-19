@@ -78,6 +78,8 @@ feature_selected_columns = [
     "days_until_due",
 ]
 X = data[feature_selected_columns]
+X.to_csv("src/poc-data/poc_task_priority_input.csv")
+
 replacement_dict = {2: 1, 3: 2, 4: 2, 5: 3}
 data["priority_level"] = data["priority_level"].replace(replacement_dict)
 y = data["priority_level"]
