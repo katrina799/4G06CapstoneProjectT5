@@ -4,13 +4,23 @@ import botocore
 import boto3
 from flask import Flask, render_template, request, Response, redirect, url_for
 import ast
-from .helper import (
-    check_syllabus_exists,
-    update_csv,
-    upload_df_to_s3,
-    get_df_from_csv_in_s3,
-    extract_emails_from_pdf,
-)
+
+try:
+    from helper import (
+        check_syllabus_exists,
+        update_csv,
+        upload_df_to_s3,
+        get_df_from_csv_in_s3,
+        extract_emails_from_pdf,
+    )
+except ImportError:
+    from .helper import (
+        check_syllabus_exists,
+        update_csv,
+        upload_df_to_s3,
+        get_df_from_csv_in_s3,
+        extract_emails_from_pdf,
+    )
 
 
 app = Flask(__name__)
