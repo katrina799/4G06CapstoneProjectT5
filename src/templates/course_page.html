@@ -32,12 +32,14 @@
                     </form>
                 </div>
 
-                <div class="courses" style="display: table; width: 256px;  border-spacing: 10px;">
+                <div class="courses"
+                    style="display: flex; flex-wrap: wrap; justify-content: flex-start; width: 100%; border-spacing: 10px;">
                     {% for course in courses %}
-                    <a href="/course_detail_page/{{ course }}" class="course-detail-link">
+                    <a href="/course_detail_page/{{ course }}" class="course-detail-link" style="flex-basis: 256px;">
                         <div id="{{ course.0.1 }}"" class=" course-detail">
                             <div class="course-image">
-                                <img style="vertical-align:middle " src="{{url_for('static', filename='books.png')}}" />
+                                <img style="vertical-align:middle; width: 256px;"
+                                    src="{{url_for('static', filename='books.png')}}" />
                             </div>
                             <div class="course-progress">
                                 <div class="progress-bar"></div>
