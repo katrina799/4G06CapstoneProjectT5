@@ -1,20 +1,28 @@
 import os
-import io
-import PyPDF2
-import re
+import pandas as pd
 import botocore
 import boto3
 from flask import Flask, render_template, request, Response, redirect, url_for
 import ast
-import pandas as pd
 
-from helper import (
-    check_syllabus_exists,
-    update_csv,
-    upload_df_to_s3,
-    get_df_from_csv_in_s3,
-    load_priority_model_from_s3,
-)
+try:
+    from helper import (
+        check_syllabus_exists,
+        update_csv,
+        upload_df_to_s3,
+        get_df_from_csv_in_s3,
+        extract_emails_from_pdf,
+        load_priority_model_from_s3,
+    )
+except ImportError:
+    from .helper import (
+        check_syllabus_exists,
+        update_csv,
+        upload_df_to_s3,
+        get_df_from_csv_in_s3,
+        extract_emails_from_pdf,
+        load_priority_model_from_s3,
+    )
 
 
 app = Flask(__name__)
@@ -59,11 +67,12 @@ def start():
 def prority_predict():
     if request.method == "POST":
         # Load pipeline that has transformed processor and trained model
-        pipeline = load_priority_model_from_s3(
-            s3, bucket_name, model_file_path
-        )
+        m_f_p = model_file_path
+        pipeline = load_priority_model_from_s3(s3, bucket_name, m_f_p)
         # Retrieve input data
         form_data = request.form
+        t_w_p = "task_weight_percent"
+        t_r_h = "time_required_hours"
         input_data = {
             "task_name": [form_data.get("task_name")],
             "school_year": [int(form_data.get("school_year"))],
@@ -71,12 +80,8 @@ def prority_predict():
             "credit": [int(form_data.get("credit"))],
             "task_mode": [form_data.get("task_mode")],
             "task_type": [form_data.get("task_type")],
-            "task_weight_percent": [
-                float(form_data.get("task_weight_percent"))
-            ],
-            "time_required_hours": [
-                float(form_data.get("time_required_hours"))
-            ],
+            t_w_p: [float(form_data.get(t_w_p))],
+            t_r_h: [float(form_data.get(t_r_h))],
             "difficulty": [float(form_data.get("difficulty"))],
             "current_progress_percent": [
                 float(form_data.get("current_progress_percent"))
@@ -111,7 +116,6 @@ def prority_predict():
             prediction=mapped_prediction,
             prediction_prob=pred_prob,
             model_params=model_params,
-
         )
     return render_template("model_page.html")
 
@@ -222,7 +226,12 @@ def course_detail(course_id):
     syllabus_exists, pdf_name = check_syllabus_exists(course_id, s3, bk)
 
     if syllabus_exists:
-        email_list = extract_emails_from_pdf(pdf_name)
+        email_list = extract_emails_from_pdf(
+            pdf_name,
+            request,
+            bucket_name,
+            s3,
+        )
     else:
         email_list = []
 
@@ -234,29 +243,6 @@ def course_detail(course_id):
         email_list=email_list,
         message=message,
     )
-
-
-# input:pdf file
-# output: a list of string emails
-# extract all the email in the input pdf
-@app.route("/get_emails", methods=["GET"])
-def extract_emails_from_pdf(filename):
-    if request.method == "GET":
-        response = s3.get_object(Bucket=bucket_name, Key=filename)
-        pdf_file = response["Body"].read()
-        pdf_file_obj = io.BytesIO(pdf_file)
-
-        pdf_reader = PyPDF2.PdfReader(pdf_file_obj)
-        text = ""
-
-        for page_num in range(len(pdf_reader.pages)):
-            page = pdf_reader.pages[page_num]
-            text += page.extract_text()
-
-        email_pattern = r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,7}\b"
-        emails = re.findall(email_pattern, text)
-
-        return emails
 
 
 @app.route("/upload/<course_id>", methods=["POST"])
