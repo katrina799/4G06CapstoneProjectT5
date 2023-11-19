@@ -31,6 +31,7 @@ username = ""
 courses = []
 emails = ""
 model = None
+current_page = "home" 
 
 s3 = boto3.client(
     "s3",
@@ -42,15 +43,16 @@ s3 = boto3.client(
 # Set up home page for the website
 @app.route("/")
 def start():
-    global username, courses
+    global username, courses, current_page
     df = get_df_from_csv_in_s3(s3, bucket_name, mock_data_file)
     username = df.loc[0, "username"]  # For PoC purpose
     courses = df.loc[0, "courses"]  # For PoC purpose
     # Parsing it into a Python list
     courses = ast.literal_eval(courses)
-
+    current_page = "home"
     return render_template(
-        "index.html", username=username, courses=courses, current_page="home"
+        "index.html",
+        username=username, courses=courses, current_page=current_page
     )
 
 
@@ -119,9 +121,11 @@ def prority_predict():
 # Router to smodel page
 @app.route("/model_page", methods=["GET", "POST"])
 def model_page():
+    global current_page
+    current_page = "model_page"
     # render the plan page
     return render_template(
-        "model_page.html", username=username, current_page="model_page"
+        "model_page.html", username=username, current_page=current_page
     )
 
 
@@ -157,6 +161,7 @@ def change_username():
 # Remove an existing course
 @app.route("/remove_course", methods=["POST"])
 def remove_course():
+    global username, current_page, courses
     if request.method == "POST":
         index = request.form["index"]
 
@@ -170,13 +175,21 @@ def remove_course():
         df.loc[df["username"] == username, "courses"] = list_str
 
         upload_df_to_s3(df, s3, bucket_name, mock_data_file)
+        courses = user_courses
+        if current_page == "course_page":
+            return render_template(
+                "course_page.html",
+                username=username,
+                courses=courses,
+                current_page="course_page",
+            )
     return redirect(url_for("start"))
 
 
 # Add a new course
 @app.route("/add_course", methods=["POST"])
 def add_course():
-    global username
+    global username, current_page, courses
     if request.method == "POST":
         new_course = request.form["newcourse"]
         df = get_df_from_csv_in_s3(s3, bucket_name, mock_data_file)
@@ -189,38 +202,53 @@ def add_course():
         user_courses.append(new_course)
         list_str = str(user_courses)
         df.loc[df["username"] == username, "courses"] = list_str
-
+        courses = user_courses
         upload_df_to_s3(df, s3, bucket_name, mock_data_file)
+        if current_page == "course_page":
+            return render_template(
+                "course_page.html",
+                username=username,
+                courses=courses,
+                current_page="course_page",
+            )
+        print(current_page)
+        print(courses)
     return redirect(url_for("start"))
 
 
 # Router to course detailed page
 @app.route("/course_page", methods=["GET", "POST"])
 def course_page():
+    global courses, current_page
+    current_page = "course_page"
     # render the course page, display the course content(name)
     return render_template(
         "course_page.html",
         username=username,
         courses=courses,
-        current_page="course_page",
+        current_page=current_page,
     )
 
 
 # Router to study plan detailed page
 @app.route("/plan_page", methods=["GET", "POST"])
 def plan_page():
+    global current_page
+    current_page = "plan_page"
     # render the plan page
     return render_template(
-        "plan_page.html", username=username, current_page="plan_page"
+        "plan_page.html", username=username, current_page=current_page
     )
 
 
 # Router to user profile pageile
 @app.route("/profile_page", methods=["GET", "POST"])
 def profile_page():
+    global current_page
+    current_page = "profile_page"
     # render the profile page, showing username on pege
     return render_template(
-        "profile_page.html", username=username, current_page="profile_page"
+        "profile_page.html", username=username, current_page=current_page
     )
 
 
