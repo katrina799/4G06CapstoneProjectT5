@@ -14,7 +14,6 @@ from helper import (
     upload_df_to_s3,
     get_df_from_csv_in_s3,
     load_priority_model_from_s3,
-    get_task_priority_training_pipeline,
 )
 
 
@@ -58,29 +57,17 @@ def start():
 # Predict priority using trained model based on user input
 @app.route("/priority_predict", methods=["GET"])
 def prority_predict():
-    # Load model
-    model = load_priority_model_from_s3(s3, bucket_name, model_file_path)
+    # Load pipeline that has transformed processor and trained model
+    pipeline = load_priority_model_from_s3(s3, bucket_name, model_file_path)
 
     # Load input data
-    input_data = pd.csv("poc-data/poc_task_priority_input.csv")
+    input_data = pd.read_csv("poc-data/poc_task_priority_input.csv")
 
-    # Load the pipeline
-    pipeline = get_task_priority_training_pipeline()
-    # Transform the input data
-    preprocessor = pipeline.named_steps["preprocessor"]
-
-    # Transform the input data
-
-    transformed_data = preprocessor.transform(input_data)
-
-    # Use the pipeline for predictions
-    prediction = pipeline.predict(transformed_data)
-    # Make prediction
-    prediction = model.predict(input_data)
+    prediction = pipeline.predict(input_data)
 
     # Return prediction
     return render_template(
-        "model.html",
+        "model_page.html",
         prediction=prediction.tolist(),
     )
 

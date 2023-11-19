@@ -1,6 +1,7 @@
 # Helper functions that will be commonly used
 import pandas as pd
 import os
+import io
 import botocore
 from joblib import load
 
@@ -88,7 +89,8 @@ def get_task_priority_training_pipeline():
 # Load priority model from s3
 def load_priority_model_from_s3(s3, bucket_name, s3_model_file_path):
     s3_obj = s3.get_object(Bucket=bucket_name, Key=s3_model_file_path)
-    model_file = s3_obj["Body"]
+    model_file = io.BytesIO(s3_obj["Body"].read())
+    model_file.seek(0)
     model = load(model_file)
     return model
 

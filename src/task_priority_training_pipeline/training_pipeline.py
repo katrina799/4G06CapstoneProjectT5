@@ -7,13 +7,6 @@ import boto3
 import pandas as pd
 from sklearn.model_selection import train_test_split
 
-# from sklearn.ensemble import RandomForestClassifier
-# from sklearn.ensemble import GradientBoostingClassifier
-
-
-# from sklearn.linear_model import LogisticRegression
-# from sklearn.tree import DecisionTreeClassifier
-
 from src import config
 from src.helper import get_task_priority_training_pipeline
 
@@ -73,7 +66,6 @@ y = data["priority_level"]
 
 split_params = {"test_size": 0.2, "random_state": 0}
 X_train, X_test, y_train, y_test = train_test_split(X, y, **split_params)
-
 
 pipeline = get_task_priority_training_pipeline()
 
