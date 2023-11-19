@@ -1,8 +1,12 @@
 import os
-
+import io
+import PyPDF2
+import re
+import botocore
 import boto3
 from flask import Flask, render_template, request, Response, redirect, url_for
 import ast
+import pandas as pd
 
 from helper import get_df_from_csv_in_s3, upload_df_to_s3
 
@@ -17,6 +21,7 @@ mock_data_file = app.config["MOCK_DATA_POC_NAME"]
 # Setting global variables
 username = ""
 courses = []
+emails = ""
 
 s3 = boto3.client(
     "s3",
@@ -36,10 +41,8 @@ def start():
     courses = ast.literal_eval(courses)
 
     return render_template(
-        "index.html",
-        username=username,
-        courses=courses,
-        current_page='home')
+        "index.html", username=username, courses=courses, current_page="home"
+    )
 
 
 # Download a file from s3
@@ -119,7 +122,8 @@ def course_page():
         "course_page.html",
         username=username,
         courses=courses,
-        current_page='course_page')
+        current_page="course_page",
+    )
 
 
 # Router to study plan detailed page
@@ -127,19 +131,139 @@ def course_page():
 def plan_page():
     # render the plan page
     return render_template(
-        "plan_page.html",
-        username=username,
-        current_page='plan_page')
+        "plan_page.html", username=username, current_page="plan_page"
+    )
 
 
-# Router to user profile page
+# Router to user profile pageile
 @app.route("/profile_page", methods=["GET", "POST"])
 def profile_page():
     # render the profile page, showing username on pege
     return render_template(
-        "profile_page.html",
+        "profile_page.html", username=username, current_page="profile_page"
+    )
+
+
+@app.route("/course_detail_page/<course_id>")
+def course_detail(course_id):
+    message = request.args.get("message", "")
+    syllabus_exists, pdf_name = check_syllabus_exists(course_id)
+
+    if syllabus_exists:
+        email_list = extract_emails_from_pdf(pdf_name)
+    else:
+        email_list = []
+
+    return render_template(
+        "course_detail_page.html",
+        course_id=course_id,
+        course=course_id,
         username=username,
-        current_page='profile_page')
+        email_list=email_list,
+        message=message,
+    )
+
+
+def check_syllabus_exists(course_id):
+    try:
+        pdf_name = course_id + "-syllabus.pdf"
+
+        s3.head_object(Bucket=bucket_name, Key=pdf_name)
+        return True, pdf_name
+    except botocore.exceptions.ClientError as e:
+        if e.response["Error"]["Code"] == "404":
+            return False, None
+        else:
+            raise e
+
+
+# input:pdf file
+# output: a list of string emails
+# extract all the email in the input pdf
+@app.route("/get_emails", methods=["GET"])
+def extract_emails_from_pdf(filename):
+    if request.method == "GET":
+        response = s3.get_object(Bucket=bucket_name, Key=filename)
+        pdf_file = response["Body"].read()
+        pdf_file_obj = io.BytesIO(pdf_file)
+
+        pdf_reader = PyPDF2.PdfReader(pdf_file_obj)
+        text = ""
+
+        for page_num in range(len(pdf_reader.pages)):
+            page = pdf_reader.pages[page_num]
+            text += page.extract_text()
+
+        email_pattern = r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,7}\b"
+        emails = re.findall(email_pattern, text)
+
+        return emails
+
+
+@app.route("/upload/<course_id>", methods=["POST"])
+def upload_file(course_id):
+    print("course id", course_id)
+    if (
+        "file" not in request.files
+        or not request.files["file"]
+        or request.files["file"].filename == ""
+    ):
+        print("checked")
+        return redirect(
+            url_for(
+                "course_detail",
+                course_id=course_id,
+                message="No file selected",
+                username=username,
+            )
+        )
+
+    file = request.files["file"]
+    new_filename = f"{course_id}-syllabus.pdf"
+    file.filename = new_filename
+    print("file:", file.filename)
+
+    try:
+        print("uploading")
+
+        s3.upload_fileobj(
+            file, bucket_name, file.filename, ExtraArgs={"ACL": "private"}
+        )
+        update_csv(course_id, file.filename)
+        print("returning")
+        return redirect(
+            url_for(
+                "course_detail",
+                course_id=course_id,
+                message="File uploaded successfully!",
+                username=username,
+            )
+        )
+    except botocore.exceptions.NoCredentialsError:
+        print("error")
+        return redirect(
+            url_for(
+                "course_detail",
+                course_id=course_id,
+                message="AWS authentication failed. Check your AWS keys.",
+                username=username,
+            )
+        )
+
+
+def update_csv(course_id, pdf_name):
+    csv_file_path = "./poc-data/moc_course_info.csv"
+
+    df = pd.read_csv(csv_file_path).dropna(how="all")
+
+    col_name = "course_syllabus"
+    if course_id in df["course"].dropna().values:
+        df.loc[df["course"] == course_id, col_name] = pdf_name
+    else:
+        new_row = pd.DataFrame({"course": [course_id], col_name: [pdf_name]})
+        df = pd.concat([df, new_row], ignore_index=True)
+
+    df.to_csv(csv_file_path, index=False)
 
 
 if __name__ == "__main__":
