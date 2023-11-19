@@ -1,5 +1,0 @@
-id,title,course,due_date,weight,est_time,priority,status
-1,Assignment 1,SFWRENG 4G06A,2023-11-20,10%,1 hour,high,todo
-4,Assignment 4,SFWRENG 4G06A,2023-11-23,10%,1 hour,high,todo
-2,Assignment 2,SFWRENG 4G06A,2023-11-23,10%,1 hour,high,in_progress
-3,Assignment 3,SFWRENG 4G06A,2023-11-25,10%,1 hour,low,done
