@@ -37,7 +37,9 @@
             {% endif %}
 
             <div>
+
                 <h2>Course Email List</h2>
+
                 {% if email_list %}
                 <ul>
                     {% for email in email_list %}
@@ -46,6 +48,7 @@
                 </ul>
                 {% else %}
                 <p>no email has been found</p>
+
                 {% endif %}
             </div>
 

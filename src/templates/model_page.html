@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Model Prediction</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .container {
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 class="mb-4">Model Prediction</h2>
+        
+        <form action="/priority_predict" method="post">
+            <div class="form-group">
+                <label for="taskName">Task Name:</label>
+                <input type="text" class="form-control" id="taskName" name="task_name" value="Assignment 3" required>
+            </div>
+            <div class="form-group">
+                <label for="schoolYear">School Year:</label>
+                <input type="number" class="form-control" id="schoolYear" name="school_year" value="4" required>
+            </div>
+            <div class="form-group">
+                <label for="courseName">Course Name:</label>
+                <input type="text" class="form-control" id="courseName" name="course_name" value="Scientific Computation" required>
+            </div>
+            <div class="form-group">
+                <label for="credit">Credit:</label>
+                <input type="number" class="form-control" id="credit" name="credit" value="3" required>
+            </div>
+            <div class="form-group">
+                <label for="taskMode">Task Mode:</label>
+                <input type="text" class="form-control" id="taskMode" name="task_mode" value="Individual" required>
+            </div>
+            <div class="form-group">
+                <label for="taskType">Task Type:</label>
+                <input type="text" class="form-control" id="taskType" name="task_type" value="Assignment" required>
+            </div>
+            <div class="form-group">
+                <label for="taskWeightPercent">Task Weight (%):</label>
+                <input type="number" class="form-control" id="taskWeightPercent" name="task_weight_percent" value="8.0" required>
+            </div>
+            <div class="form-group">
+                <label for="timeRequiredHours">Time Required (hours):</label>
+                <input type="number" class="form-control" id="timeRequiredHours" name="time_required_hours" value="18.0" required>
+            </div>
+            <div class="form-group">
+                <label for="difficulty">Difficulty (1-10):</label>
+                <input type="number" class="form-control" id="difficulty" name="difficulty" value="5.0" required>
+            </div>
+            <div class="form-group">
+                <label for="currentProgressPercent">Current Progress (%):</label>
+                <input type="number" class="form-control" id="currentProgressPercent" name="current_progress_percent" value="10.0" required>
+            </div>
+            <div class="form-group">
+                <label for="timeSpentHours">Time Spent (hours):</label>
+                <input type="number" class="form-control" id="timeSpentHours" name="time_spent_hours" value="0.0" required>
+            </div>
+            <div class="form-group">
+                <label for="daysUntilDue">Days Until Due:</label>
+                <input type="number" class="form-control" id="daysUntilDue" name="days_until_due" value="4" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+
+        <a href="/" class="btn btn-primary">Go Back</a>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

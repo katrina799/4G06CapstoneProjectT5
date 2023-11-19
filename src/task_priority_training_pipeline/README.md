@@ -6,5 +6,5 @@
 
 To run the training pipeline and upload the trained model to S3:
 - Navigate to the root directory by running `cd /workspaces/4G06CapstoneProjectT5`
-- Run the code `python3 -m src.task-priority-training-pipeline.training_pipeline 'src/poc-data/task-priority-data/task_priority_data_cleaned.csv'`
+- Run the code `python3 -m src.task_priority_training_pipeline.training_pipeline 'src/poc-data/task-priority-data/task_priority_data_cleaned.csv'`
     - Note that `'src/poc-data/task-priority-data/task_priority_data_cleaned.csv'` can be changed to other input data

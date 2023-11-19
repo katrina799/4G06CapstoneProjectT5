@@ -37,7 +37,6 @@
 
 .head {
     display: flex;
-    align-items: center;
     border-bottom: 4px rgba(143, 198, 201, 0.887);
     background-color: #cce3de;
     margin: 5px;
@@ -48,6 +47,8 @@
     overflow: hidden;
     word-wrap: break-word;
     min-width: 0;
+    justify-content: space-between;
+    align-items: center;
 
 }
 
@@ -116,4 +117,20 @@ a:hover {
 .active i {
     color: #66b0bf;
 
+}
+
+.icon-container {
+    display: flex;
+    align-items: center;
+}
+
+.icon-container a,
+.icon-container div {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 10px;
+}
+
+.clearfix {
+    clear: both;
 }
