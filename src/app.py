@@ -55,21 +55,65 @@ def start():
 
 
 # Predict priority using trained model based on user input
-@app.route("/priority_predict", methods=["GET"])
+@app.route("/priority_predict", methods=["GET", "POST"])
 def prority_predict():
-    # Load pipeline that has transformed processor and trained model
-    pipeline = load_priority_model_from_s3(s3, bucket_name, model_file_path)
+    if request.method == "POST":
+        # Load pipeline that has transformed processor and trained model
+        pipeline = load_priority_model_from_s3(
+            s3, bucket_name, model_file_path
+        )
+        # Retrieve input data
+        form_data = request.form
+        input_data = {
+            "task_name": [form_data.get("task_name")],
+            "school_year": [int(form_data.get("school_year"))],
+            "course_name": [form_data.get("course_name")],
+            "credit": [int(form_data.get("credit"))],
+            "task_mode": [form_data.get("task_mode")],
+            "task_type": [form_data.get("task_type")],
+            "task_weight_percent": [
+                float(form_data.get("task_weight_percent"))
+            ],
+            "time_required_hours": [
+                float(form_data.get("time_required_hours"))
+            ],
+            "difficulty": [float(form_data.get("difficulty"))],
+            "current_progress_percent": [
+                float(form_data.get("current_progress_percent"))
+            ],
+            "time_spent_hours": [float(form_data.get("time_spent_hours"))],
+            "days_until_due": [int(form_data.get("days_until_due"))],
+        }
 
-    # Load input data
-    input_data = pd.read_csv("poc-data/poc_task_priority_input.csv")
+        input_df = pd.DataFrame(input_data)
 
-    prediction = pipeline.predict(input_data)
+        # Ensure that text columns are in the correct format
+        for text_col in ["task_name", "course_name"]:
+            input_df[text_col] = input_df[text_col].apply(
+                lambda x: [x] if isinstance(x, str) else x
+            )
 
-    # Return prediction
-    return render_template(
-        "model_page.html",
-        prediction=prediction.tolist(),
-    )
+        # Give prediction on the input data
+        prediction = pipeline.predict(input_df).tolist()
+
+        priority_mapping = {1: "Low", 2: "Medium", 3: "High"}
+
+        # Replace values in the prediction list
+        mapped_prediction = [priority_mapping.get(n, n) for n in prediction]
+
+        pred_prob = pipeline.predict_proba(input_df).tolist()
+
+        model_params = pipeline.get_params()
+
+        # Return prediction
+        return render_template(
+            "model_prediction_page.html",
+            prediction=mapped_prediction,
+            prediction_prob=pred_prob,
+            model_params=model_params,
+
+        )
+    return render_template("model_page.html")
 
 
 # Download a file from s3
