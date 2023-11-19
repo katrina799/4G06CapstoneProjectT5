@@ -11,8 +11,10 @@ from sklearn.pipeline import Pipeline
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.compose import ColumnTransformer
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
+
 # from sklearn.ensemble import RandomForestClassifier
 from sklearn.ensemble import GradientBoostingClassifier
+
 # from sklearn.linear_model import LogisticRegression
 # from sklearn.tree import DecisionTreeClassifier
 
@@ -169,4 +171,3 @@ s3 = boto3.client(
 s3_file_path = f"model/{config.PRIORITY_MODEL_FILE_NAME}"
 s3.upload_file(model_filepath, config.BUCKET_NAME, s3_file_path)
 logging.info(f"Model uploaded to S3 as {s3_file_path}")
-

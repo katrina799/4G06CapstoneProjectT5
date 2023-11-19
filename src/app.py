@@ -158,6 +158,8 @@ def profile_page():
     return render_template(
         "profile_page.html", username=username, current_page="profile_page"
     )
+
+
 @app.route("/course_detail_page/<course_id>")
 def course_detail(course_id):
     message = request.args.get("message", "")
