@@ -116,6 +116,14 @@ def prority_predict():
     return render_template("model_page.html")
 
 
+# Router to smodel page
+@app.route("/model_page", methods=["GET", "POST"])
+def model_page():
+    # render the plan page
+    return render_template(
+        "model_page.html", username=username, current_page="model_page"
+    )
+
 # Download a file from s3
 @app.route("/download", methods=["GET"])
 def download():
