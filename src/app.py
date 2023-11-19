@@ -14,9 +14,9 @@ from helper import (
     upload_df_to_s3,
     get_df_from_csv_in_s3,
     load_priority_model_from_s3,
+    get_task_priority_training_pipeline,
 )
 
-#from task_priority_training_pipeline.training_pipeline import pipeline
 
 app = Flask(__name__)
 
@@ -55,31 +55,34 @@ def start():
     )
 
 
-# # Predict priority using trained model based on user input
-# @app.route("/priority_predict", methods=["GET"])
-# def prority_predict():
-#     # Load model
-#     model = load_priority_model_from_s3(s3, bucket_name, model_file_path)
+# Predict priority using trained model based on user input
+@app.route("/priority_predict", methods=["GET"])
+def prority_predict():
+    # Load model
+    model = load_priority_model_from_s3(s3, bucket_name, model_file_path)
 
-#     # Load input data
-#     input_data = pd.csv("poc-data/poc_task_priority_input.csv")
-#     # Transform the input data
-#     preprocessor = pipeline.named_steps["preprocessor"]
+    # Load input data
+    input_data = pd.csv("poc-data/poc_task_priority_input.csv")
 
-#     # Transform the input data
+    # Load the pipeline
+    pipeline = get_task_priority_training_pipeline()
+    # Transform the input data
+    preprocessor = pipeline.named_steps["preprocessor"]
 
-#     transformed_data = preprocessor.transform(input_data)
+    # Transform the input data
 
-#     # Use the pipeline for predictions
-#     prediction = pipeline.predict(transformed_data)
-#     # Make prediction
-#     prediction = model.predict(input_data)
+    transformed_data = preprocessor.transform(input_data)
 
-#     # Return prediction
-#     return render_template(
-#         "model.html",
-#         prediction=prediction.tolist(),
-#     )
+    # Use the pipeline for predictions
+    prediction = pipeline.predict(transformed_data)
+    # Make prediction
+    prediction = model.predict(input_data)
+
+    # Return prediction
+    return render_template(
+        "model.html",
+        prediction=prediction.tolist(),
+    )
 
 
 # Download a file from s3
