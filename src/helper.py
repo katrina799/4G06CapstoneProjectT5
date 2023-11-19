@@ -80,9 +80,9 @@ def get_task_priority_training_pipeline():
             ("text2", text_feature_pipeline, text_cols[1]),
         ]
     )
-    pipeline = Pipeline(
-        steps=[("preprocessor", preprocessor), ("cf", classifier)]
-    )
+    prepro = preprocessor
+    classif = classifier
+    pipeline = Pipeline(steps=[("preprocessor", prepro), ("cf", classif)])
 
     return pipeline
 
@@ -94,7 +94,6 @@ def load_priority_model_from_s3(s3, bucket_name, s3_model_file_path):
     model_file.seek(0)
     model = load(model_file)
     return model
-
 
 
 # Get a specific csv file from s3 and return it as a dataframe

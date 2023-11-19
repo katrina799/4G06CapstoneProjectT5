@@ -12,6 +12,7 @@ try:
         upload_df_to_s3,
         get_df_from_csv_in_s3,
         extract_emails_from_pdf,
+        load_priority_model_from_s3,
     )
 except ImportError:
     from .helper import (
@@ -20,6 +21,7 @@ except ImportError:
         upload_df_to_s3,
         get_df_from_csv_in_s3,
         extract_emails_from_pdf,
+        load_priority_model_from_s3,
     )
 
 
@@ -65,11 +67,12 @@ def start():
 def prority_predict():
     if request.method == "POST":
         # Load pipeline that has transformed processor and trained model
-        pipeline = load_priority_model_from_s3(
-            s3, bucket_name, model_file_path
-        )
+        m_f_p = model_file_path
+        pipeline = load_priority_model_from_s3(s3, bucket_name, m_f_p)
         # Retrieve input data
         form_data = request.form
+        t_w_p = "task_weight_percent"
+        t_r_h = "time_required_hours"
         input_data = {
             "task_name": [form_data.get("task_name")],
             "school_year": [int(form_data.get("school_year"))],
@@ -77,12 +80,8 @@ def prority_predict():
             "credit": [int(form_data.get("credit"))],
             "task_mode": [form_data.get("task_mode")],
             "task_type": [form_data.get("task_type")],
-            "task_weight_percent": [
-                float(form_data.get("task_weight_percent"))
-            ],
-            "time_required_hours": [
-                float(form_data.get("time_required_hours"))
-            ],
+            t_w_p: [float(form_data.get(t_w_p))],
+            t_r_h: [float(form_data.get(t_r_h))],
             "difficulty": [float(form_data.get("difficulty"))],
             "current_progress_percent": [
                 float(form_data.get("current_progress_percent"))
@@ -117,7 +116,6 @@ def prority_predict():
             prediction=mapped_prediction,
             prediction_prob=pred_prob,
             model_params=model_params,
-
         )
     return render_template("model_page.html")
 
