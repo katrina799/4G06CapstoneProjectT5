@@ -11,8 +11,11 @@ from sklearn.pipeline import Pipeline
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.compose import ColumnTransformer
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
+
 # from sklearn.ensemble import RandomForestClassifier
-from sklearn.ensemble import GradientBoostingClassifier
+# from sklearn.ensemble import GradientBoostingClassifier
+from sklearn.neural_network import MLPClassifier
+
 # from sklearn.linear_model import LogisticRegression
 # from sklearn.tree import DecisionTreeClassifier
 
@@ -128,18 +131,18 @@ preprocessor = ColumnTransformer(
 )
 
 # This can be changed to different model
-classfier = GradientBoostingClassifier(
-    n_estimators=150, learning_rate=0.1, max_depth=5, random_state=42
+classfier = MLPClassifier(
+    solver="lbfgs", alpha=1e-5, hidden_layer_sizes=(12,), random_state=1
 )
+# classfier = GradientBoostingClassifier(
+#     n_estimators=150, learning_rate=0.1, max_depth=5, random_state=42
+# )
 # DecisionTreeClassifier()
 # LogisticRegression(max_iter=1000)
 # GradientBoostingClassifier(n_estimators=100, learning_rate=0.1,
 #  max_depth=3, random_state=42)
 # RandomForestClassifier()
-# classfier = MLPClassifier(solver='lbfgs',
-#                           alpha=1e-5,
-#                           hidden_layer_sizes=(12,),
-#                           random_state=1)
+
 
 # Create the full pipeline
 pipeline = Pipeline(steps=[("preprocessor", preprocessor), ("cf", classfier)])
