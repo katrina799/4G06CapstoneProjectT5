@@ -1,7 +1,5 @@
 import os
-import io
-import pypdf
-import re
+
 import botocore
 import boto3
 from flask import Flask, render_template, request, Response, redirect, url_for
@@ -11,6 +9,7 @@ from .helper import (
     update_csv,
     upload_df_to_s3,
     get_df_from_csv_in_s3,
+    extract_emails_from_pdf,
 )
 
 
@@ -154,7 +153,12 @@ def course_detail(course_id):
     syllabus_exists, pdf_name = check_syllabus_exists(course_id, s3, bk)
 
     if syllabus_exists:
-        email_list = extract_emails_from_pdf(pdf_name)
+        email_list = extract_emails_from_pdf(
+            pdf_name,
+            request,
+            bucket_name,
+            s3,
+        )
     else:
         email_list = []
 
@@ -166,29 +170,6 @@ def course_detail(course_id):
         email_list=email_list,
         message=message,
     )
-
-
-# input:pdf file
-# output: a list of string emails
-# extract all the email in the input pdf
-@app.route("/get_emails", methods=["GET"])
-def extract_emails_from_pdf(filename):
-    if request.method == "GET":
-        response = s3.get_object(Bucket=bucket_name, Key=filename)
-        pdf_file = response["Body"].read()
-        pdf_file_obj = io.BytesIO(pdf_file)
-
-        pdf_reader = pypdf.PdfReader(pdf_file_obj)
-        text = ""
-
-        for page_num in range(len(pdf_reader.pages)):
-            page = pdf_reader.pages[page_num]
-            text += page.extract_text()
-
-        email_pattern = r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,7}\b"
-        emails = re.findall(email_pattern, text)
-
-        return emails
 
 
 @app.route("/upload/<course_id>", methods=["POST"])

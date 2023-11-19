@@ -1,10 +1,11 @@
 import pytest
-from unittest.mock import patch, ANY, MagicMock
+from unittest.mock import patch, ANY
 from src.app import app
 import pandas as pd
 import ast
-from pypdf import PdfWriter, PdfReader, PageObject
 import io
+from werkzeug.datastructures import FileStorage
+from urllib.parse import unquote_plus
 
 
 @pytest.fixture
@@ -49,10 +50,10 @@ def test_remove_course(mock_get_df, mock_upload_df, client):
 @patch("src.app.extract_emails_from_pdf")
 @patch("src.app.check_syllabus_exists")
 @patch("src.app.username", "test_user")
-def test_course_detail(mock_check_syllabus, mock_extract_emails, client):
+def test_course_detail(mock_check_syllabus, mock_extract_es, client):
     course_id = "test_course"
     mock_check_syllabus.return_value = (True, "syllabus.pdf")
-    mock_extract_emails.return_value = ["email1@example.com", "email2@example.com"]
+    mock_extract_es.return_value = ["email1@example.com", "email2@example.com"]
 
     response = client.get(f"/course_detail_page/{course_id}")
 
@@ -61,10 +62,32 @@ def test_course_detail(mock_check_syllabus, mock_extract_emails, client):
     assert b"email1@example.com" in response.data
     assert b"email2@example.com" in response.data
 
-    # 测试当没有教学大纲存在的情况
     mock_check_syllabus.return_value = (False, "")
     response = client.get(f"/course_detail_page/{course_id}")
 
     assert response.status_code == 200
     assert b"email1@example.com" not in response.data
     assert b"email2@example.com" not in response.data
+
+
+@patch("src.app.s3.upload_fileobj")
+@patch("src.app.update_csv")
+def test_upload_file(mock_update_csv, mock_upload_fileobj, client):
+    mock_file = FileStorage(
+        stream=io.BytesIO(b"test file content"),
+        filename="test.pdf",
+        content_type="application/pdf",
+    )
+
+    course_id = "course123"
+    data = {"file": mock_file}
+
+    response = client.post(
+        f"/upload/{course_id}", data=data, content_type="multipart/form-data"
+    )
+
+    assert response.status_code == 302
+    assert "course_detail" in response.location
+
+    decoded_location = unquote_plus(response.location)
+    assert "File uploaded successfully!" in decoded_location

@@ -2,6 +2,9 @@
 import pandas as pd
 import os
 import botocore
+import io
+import pypdf
+import re
 
 
 # Get a specific csv file from s3 and return it as a dataframe
@@ -49,3 +52,27 @@ def check_syllabus_exists(course_id, s3, bucket_name):
             return False, None
         else:
             raise e
+
+
+def extract_emails_from_pdf(
+    filename,
+    request,
+    bucket_name,
+    s3,
+):
+    if request.method == "GET":
+        response = s3.get_object(Bucket=bucket_name, Key=filename)
+        pdf_file = response["Body"].read()
+        pdf_file_obj = io.BytesIO(pdf_file)
+
+        pdf_reader = pypdf.PdfReader(pdf_file_obj)
+        text = ""
+
+        for page_num in range(len(pdf_reader.pages)):
+            page = pdf_reader.pages[page_num]
+            text += page.extract_text()
+
+        email_pattern = r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,7}\b"
+        emails = re.findall(email_pattern, text)
+
+        return emails
