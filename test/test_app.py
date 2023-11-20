@@ -175,8 +175,8 @@ def test_upload_file(
 
     # Updated to match the actual call as per test failure details
     mock_upload_fileobj.assert_called_with(
-        ANY,  # Expect any FileStorage object due to file name modification
-        "course-buddy",  # Use the actual bucket name as seen in the failure details
+        ANY,
+        "course-buddy",
         f"{course_id}-syllabus.pdf",
         ExtraArgs={"ACL": "private"},
     )
