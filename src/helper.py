@@ -196,8 +196,8 @@ def extract_instructor_name_from_pdf(filename, bucket_name, s3):
     instructor_pattern = r"(?:Dr\.|Instructor:)\s+([A-Za-z]+ [A-Za-z]+)"
     match = re.search(instructor_pattern, text)
     if match:
-        instructor_name = match.group(1).strip()
+        instructor_name = "Dr. " + match.group(1).strip()
     else:
-        instructor_name = "not found haha"
+        instructor_name = "sorry not found"
 
     return instructor_name
