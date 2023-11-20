@@ -12,7 +12,11 @@
 
 <body>
     {% include 'header.html' %}
-    This is profile page!!!
+    <div class="banner-container" style="background-color: #f6fff8;">
+        <div id="banner" class="banner-bar">
+            <div>This is profile page!!!</div>
+        </div>
+    </div>
     <div class="panel-name" style="margin: 5px;">
         <h1>Change user name: {{ username }}</h1>
         <form action="/change_username" method="post">

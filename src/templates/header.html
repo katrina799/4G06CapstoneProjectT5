@@ -5,6 +5,9 @@
                 <a class="home-image {{ 'active' if current_page == 'home' else '' }}" href="{{ url_for('start') }}"><i
                                 class="glyphicon glyphicon-home" title="home page"
                                 style="font-size:24px; margin-left: 430px;"></i></a>
+                <a class="model {{ 'active' if current_page == 'model_page' else '' }}"
+                        href="{{ url_for('model_page') }}"><i class="glyphicon glyphicon-stats" title="model prediction"
+                                style="font-size:24px;"></i> </a>
                 <div class="timer"><i class="glyphicon glyphicon-time" title="pomodoro timer"
                                 style="font-size:24px;"></i>
                 </div>
@@ -24,7 +27,7 @@
                         href="{{ url_for('profile_page') }}">
                         <i class="glyphicon glyphicon-user" title="profile page" style="font-size:24px;"></i>
                 </a>
-                <div class="clearfix"></div>
+
         </div>
 
 

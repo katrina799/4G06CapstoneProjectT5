@@ -119,6 +119,77 @@ a:hover {
 
 }
 
+.btn-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn-container button {
+    flex: 1;
+}
+
+.panel-heading {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background-color: white;
+    border-bottom: 1px solid #eee;
+}
+
+.panel-title {
+    color: #333;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.panel-body {
+    background-color: #f8f8f8;
+    border-radius: 4px;
+    padding: 15px;
+    margin: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-size: 16px;
+    color: #555;
+}
+
+.panel {
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    overflow: hidden;
+}
+
+.panel-success {
+    border-color: #d4edda;
+}
+
+.panel-info {
+    border-color: #d1ecf1;
+}
+
+.panel-primary {
+    border-color: #b8daff;
+}
+
+.panel-heading {
+    background-color: #f5f5f5;
+    border-bottom: 2px solid #ddd;
+    padding: 15px 20px;
+}
+
+.model-params::-webkit-scrollbar {
+    width: 6px;
+}
+
+.model-params::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 10px;
+}
+
+.model-params::-webkit-scrollbar-track {
+    background-color: #f8f8f8;
+}
+
 .icon-container {
     display: flex;
     align-items: center;
@@ -128,7 +199,7 @@ a:hover {
 .icon-container div {
     display: inline-block;
     vertical-align: middle;
-    margin-right: 10px;
+    margin-right: 20px;
 }
 
 .clearfix {
