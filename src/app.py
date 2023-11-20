@@ -13,6 +13,7 @@ try:
         get_df_from_csv_in_s3,
         extract_emails_from_pdf,
         load_priority_model_from_s3,
+        extract_instructor_name_from_pdf,
     )
 except ImportError:
     from .helper import (
@@ -22,6 +23,7 @@ except ImportError:
         get_df_from_csv_in_s3,
         extract_emails_from_pdf,
         load_priority_model_from_s3,
+        extract_instructor_name_from_pdf,
     )
 
 
@@ -37,7 +39,6 @@ model_file_path = app.config["PRIORITY_MODEL_PATH"]
 # Setting global variables
 username = ""
 courses = []
-emails = ""
 model = None
 current_page = "home"
 
@@ -58,9 +59,9 @@ def start():
     # Parsing it into a Python list
     courses = ast.literal_eval(courses)
     current_page = "home"
+    c_p = current_page
     return render_template(
-        "index.html",
-        username=username, courses=courses, current_page=current_page
+        "index.html", username=username, courses=courses, current_page=c_p
     )
 
 
@@ -263,12 +264,19 @@ def course_detail(course_id):
     if syllabus_exists:
         email_list = extract_emails_from_pdf(
             pdf_name,
-            request,
+            bucket_name,
+            s3,
+        )
+        instructor_name = extract_instructor_name_from_pdf(
+            pdf_name,
             bucket_name,
             s3,
         )
     else:
         email_list = []
+        instructor_name = ""
+
+    print("prof:", instructor_name)
 
     return render_template(
         "course_detail_page.html",
@@ -276,13 +284,13 @@ def course_detail(course_id):
         course=course_id,
         username=username,
         email_list=email_list,
+        instructor_name=instructor_name,
         message=message,
     )
 
 
 @app.route("/upload/<course_id>", methods=["POST"])
 def upload_file(course_id):
-    print("course id", course_id)
     if (
         "file" not in request.files
         or not request.files["file"]
@@ -311,7 +319,25 @@ def upload_file(course_id):
             file, bucket_name, file.filename, ExtraArgs={"ACL": "private"}
         )
 
-        update_csv(course_id, file.filename)
+        # 提取电子邮件列表
+        bk = bucket_name
+        syllabus_exists, pdf_name = check_syllabus_exists(course_id, s3, bk)
+        if syllabus_exists:
+            email_list = extract_emails_from_pdf(
+                pdf_name,
+                bucket_name,
+                s3,
+            )
+            instructor_name = extract_instructor_name_from_pdf(
+                pdf_name,
+                bucket_name,
+                s3,
+            )
+        else:
+            email_list = []
+            instructor_name = ""
+
+        update_csv(course_id, file.filename, email_list, instructor_name)
         print("returning")
         return redirect(
             url_for(

@@ -1,4 +1,6 @@
 # Helper functions that will be commonly used
+import spacy
+from pypdf import PdfReader
 import pandas as pd
 import os
 import io
@@ -115,16 +117,28 @@ def upload_df_to_s3(df, s3, bucket_name, s3_csv_file_path):
     os.remove(new_csv_file_path)
 
 
-def update_csv(course_id, pdf_name):
+def update_csv(course_id, pdf_name, email_list, instructor_name):
     csv_file_path = "./poc-data/mock_course_info.csv"
 
     df = pd.read_csv(csv_file_path).dropna(how="all")
 
-    col_name = "course_syllabus"
+    col_name_syllabus = "course_syllabus"
+    col_name_emails = "email_list"
+    col_name_prof = "instructor_name"
+
     if course_id in df["course"].dropna().values:
-        df.loc[df["course"] == course_id, col_name] = pdf_name
+        df.loc[df["course"] == course_id, col_name_syllabus] = pdf_name
+        df.loc[df["course"] == course_id, col_name_emails] = str(email_list)
+        df.loc[df["course"] == course_id, col_name_prof] = instructor_name
     else:
-        new_row = pd.DataFrame({"course": [course_id], col_name: [pdf_name]})
+        new_row = pd.DataFrame(
+            {
+                "course": [course_id],
+                col_name_syllabus: [pdf_name],
+                col_name_emails: [str(email_list)],
+                col_name_prof: [instructor_name],
+            }
+        )
         df = pd.concat([df, new_row], ignore_index=True)
 
     df.to_csv(csv_file_path, index=False)
@@ -145,23 +159,45 @@ def check_syllabus_exists(course_id, s3, bucket_name):
 
 def extract_emails_from_pdf(
     filename,
-    request,
     bucket_name,
     s3,
 ):
-    if request.method == "GET":
-        response = s3.get_object(Bucket=bucket_name, Key=filename)
-        pdf_file = response["Body"].read()
-        pdf_file_obj = io.BytesIO(pdf_file)
+    response = s3.get_object(Bucket=bucket_name, Key=filename)
+    pdf_file = response["Body"].read()
+    pdf_file_obj = io.BytesIO(pdf_file)
 
-        pdf_reader = pypdf.PdfReader(pdf_file_obj)
-        text = ""
+    pdf_reader = pypdf.PdfReader(pdf_file_obj)
+    text = ""
 
-        for page_num in range(len(pdf_reader.pages)):
-            page = pdf_reader.pages[page_num]
-            text += page.extract_text()
+    for page_num in range(len(pdf_reader.pages)):
+        page = pdf_reader.pages[page_num]
+        text += page.extract_text()
 
-        email_pattern = r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,7}\b"
-        emails = re.findall(email_pattern, text)
+    email_pattern = r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,7}\b"
+    emails = re.findall(email_pattern, text)
 
-        return emails
+    return emails
+
+
+def extract_instructor_name_from_pdf(filename, bucket_name, s3):
+    response = s3.get_object(Bucket=bucket_name, Key=filename)
+    pdf_file = response["Body"].read()
+    pdf_file_obj = io.BytesIO(pdf_file)
+
+    pdf_reader = pypdf.PdfReader(pdf_file_obj)
+    text = ""
+
+    for page_num in range(len(pdf_reader.pages)):
+        page = pdf_reader.pages[page_num]
+        text += page.extract_text()
+
+    # 查找 “Dr.” 或 “Instructor:” 后面的两个单词组成的名字
+    # 这里的正则表达式匹配 “Dr.” 或 “Instructor:” 后的任意空格，然后是两个单词
+    instructor_pattern = r"(?:Dr\.|Instructor:)\s+([A-Za-z]+ [A-Za-z]+)"
+    match = re.search(instructor_pattern, text)
+    if match:
+        instructor_name = match.group(1).strip()
+    else:
+        instructor_name = "not found haha"
+
+    return instructor_name

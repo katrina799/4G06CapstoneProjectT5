@@ -39,6 +39,19 @@
                 {{ message }}
             </div>
             {% endif %}
+            
+            <div>
+
+                <h2>Course Instructor</h2>
+
+                {% if instructor_name %}
+                    <p style="text-indent: 40px;"> {{ instructor_name }}</p>
+
+                {% else %}
+                <p style="text-indent: 40px;"> cannot find instructor name</p>
+
+                {% endif %}
+            </div>
 
             <div>
 
@@ -51,7 +64,7 @@
                     {% endfor %}
                 </ul>
                 {% else %}
-                <p>no email has been found</p>
+                <p style="text-indent: 40px;">no email has been found</p>
 
                 {% endif %}
             </div>
