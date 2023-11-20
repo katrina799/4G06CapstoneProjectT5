@@ -224,7 +224,7 @@ def add_course():
 def course_page():
     global courses, current_page
     current_page = "course_page"
-    # render the course page, display the course content(name)
+    # Render the course page, display the course content(name)
     return render_template(
         "course_page.html",
         username=username,
@@ -238,7 +238,7 @@ def course_page():
 def plan_page():
     global current_page
     current_page = "plan_page"
-    # render the plan page
+    # Render the plan page
     return render_template(
         "plan_page.html", username=username, current_page=current_page
     )
@@ -249,7 +249,7 @@ def plan_page():
 def profile_page():
     global current_page
     current_page = "profile_page"
-    # render the profile page, showing username on pege
+    # Render the profile page, showing username on pege
     return render_template(
         "profile_page.html", username=username, current_page=current_page
     )
@@ -288,7 +288,7 @@ def course_detail(course_id):
     )
 
 
-# upload the a pdf syllabus file to S3 and extract the course info in the file
+# Upload the a pdf syllabus file to S3 and extract the course info in the file
 @app.route("/upload/<course_id>", methods=["POST"])
 def upload_file(course_id):
     if (
@@ -318,13 +318,13 @@ def upload_file(course_id):
         bk = bucket_name
         syllabus_exists, pdf_name = check_syllabus_exists(course_id, s3, bk)
         if syllabus_exists:
-            # extract email list
+            # Extract email list
             email_list = extract_emails_from_pdf(
                 pdf_name,
                 bucket_name,
                 s3,
             )
-            # extract instructor name
+            # Extract instructor name
             instructor_name = extract_instructor_name_from_pdf(
                 pdf_name,
                 bucket_name,

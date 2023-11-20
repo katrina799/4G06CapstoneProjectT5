@@ -116,7 +116,7 @@ def upload_df_to_s3(df, s3, bucket_name, s3_csv_file_path):
     os.remove(new_csv_file_path)
 
 
-# update the record in mock_course_info.csv file
+# Update the record in mock_course_info.csv file
 def update_csv(course_id, pdf_name, email_list, instructor_name):
     csv_file_path = config.MOCK_COURSE_INFO_CSV
 
@@ -144,7 +144,7 @@ def update_csv(course_id, pdf_name, email_list, instructor_name):
     df.to_csv(csv_file_path, index=False)
 
 
-# check if the syllabus pdf is exist in S3 folder or not
+# Check if the syllabus pdf is exist in S3 folder or not
 def check_syllabus_exists(course_id, s3, bucket_name):
     try:
         pdf_name = course_id + "-syllabus.pdf"
@@ -158,7 +158,7 @@ def check_syllabus_exists(course_id, s3, bucket_name):
             raise e
 
 
-# extract all emails exist in a pdf in S3
+# Extract all emails exist in a pdf in S3
 def extract_emails_from_pdf(
     filename,
     bucket_name,
@@ -181,7 +181,7 @@ def extract_emails_from_pdf(
     return emails
 
 
-# extract the instructor name in a syllabus file in S3
+# Extract the instructor name in a syllabus file in S3
 def extract_instructor_name_from_pdf(filename, bucket_name, s3):
     response = s3.get_object(Bucket=bucket_name, Key=filename)
     pdf_file = response["Body"].read()
