@@ -6,3 +6,4 @@ PRIORITY_MODEL_FILE_PATH = (
     f"src/task_priority_training_pipeline/{PRIORITY_MODEL_FILE_NAME}"
 )
 PRIORITY_MODEL_PATH = f"model/{PRIORITY_MODEL_FILE_NAME}"
+MOCK_COURSE_INFO_CSV = "./poc-data/mock_course_info.csv"

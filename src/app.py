@@ -13,6 +13,7 @@ try:
         get_df_from_csv_in_s3,
         extract_emails_from_pdf,
         load_priority_model_from_s3,
+        extract_instructor_name_from_pdf,
     )
 except ImportError:
     from .helper import (
@@ -22,6 +23,7 @@ except ImportError:
         get_df_from_csv_in_s3,
         extract_emails_from_pdf,
         load_priority_model_from_s3,
+        extract_instructor_name_from_pdf,
     )
 
 
@@ -37,7 +39,6 @@ model_file_path = app.config["PRIORITY_MODEL_PATH"]
 # Setting global variables
 username = ""
 courses = []
-emails = ""
 model = None
 current_page = "home"
 
@@ -58,9 +59,9 @@ def start():
     # Parsing it into a Python list
     courses = ast.literal_eval(courses)
     current_page = "home"
+    c_p = current_page
     return render_template(
-        "index.html",
-        username=username, courses=courses, current_page=current_page
+        "index.html", username=username, courses=courses, current_page=c_p
     )
 
 
@@ -223,7 +224,7 @@ def add_course():
 def course_page():
     global courses, current_page
     current_page = "course_page"
-    # render the course page, display the course content(name)
+    # Render the course page, display the course content(name)
     return render_template(
         "course_page.html",
         username=username,
@@ -237,7 +238,7 @@ def course_page():
 def plan_page():
     global current_page
     current_page = "plan_page"
-    # render the plan page
+    # Render the plan page
     return render_template(
         "plan_page.html", username=username, current_page=current_page
     )
@@ -248,12 +249,13 @@ def plan_page():
 def profile_page():
     global current_page
     current_page = "profile_page"
-    # render the profile page, showing username on pege
+    # Render the profile page, showing username on pege
     return render_template(
         "profile_page.html", username=username, current_page=current_page
     )
 
 
+# Router to course detail page
 @app.route("/course_detail_page/<course_id>")
 def course_detail(course_id):
     message = request.args.get("message", "")
@@ -263,12 +265,17 @@ def course_detail(course_id):
     if syllabus_exists:
         email_list = extract_emails_from_pdf(
             pdf_name,
-            request,
+            bucket_name,
+            s3,
+        )
+        instructor_name = extract_instructor_name_from_pdf(
+            pdf_name,
             bucket_name,
             s3,
         )
     else:
         email_list = []
+        instructor_name = ""
 
     return render_template(
         "course_detail_page.html",
@@ -276,19 +283,19 @@ def course_detail(course_id):
         course=course_id,
         username=username,
         email_list=email_list,
+        instructor_name=instructor_name,
         message=message,
     )
 
 
+# Upload the a pdf syllabus file to S3 and extract the course info in the file
 @app.route("/upload/<course_id>", methods=["POST"])
 def upload_file(course_id):
-    print("course id", course_id)
     if (
         "file" not in request.files
         or not request.files["file"]
         or request.files["file"].filename == ""
     ):
-        print("checked")
         return redirect(
             url_for(
                 "course_detail",
@@ -302,17 +309,32 @@ def upload_file(course_id):
     new_filename = f"{course_id}-syllabus.pdf"
 
     file.filename = new_filename
-    print("file:", file.filename)
 
     try:
-        print("uploading")
-
         s3.upload_fileobj(
             file, bucket_name, file.filename, ExtraArgs={"ACL": "private"}
         )
 
-        update_csv(course_id, file.filename)
-        print("returning")
+        bk = bucket_name
+        syllabus_exists, pdf_name = check_syllabus_exists(course_id, s3, bk)
+        if syllabus_exists:
+            # Extract email list
+            email_list = extract_emails_from_pdf(
+                pdf_name,
+                bucket_name,
+                s3,
+            )
+            # Extract instructor name
+            instructor_name = extract_instructor_name_from_pdf(
+                pdf_name,
+                bucket_name,
+                s3,
+            )
+        else:
+            email_list = []
+            instructor_name = ""
+
+        update_csv(course_id, file.filename, email_list, instructor_name)
         return redirect(
             url_for(
                 "course_detail",
@@ -322,7 +344,6 @@ def upload_file(course_id):
             )
         )
     except botocore.exceptions.NoCredentialsError:
-        print("error")
         return redirect(
             url_for(
                 "course_detail",
