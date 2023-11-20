@@ -1,6 +1,4 @@
 # Helper functions that will be commonly used
-import spacy
-from pypdf import PdfReader
 import pandas as pd
 import os
 import io
