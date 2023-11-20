@@ -12,6 +12,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.compose import ColumnTransformer
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
 from sklearn.neural_network import MLPClassifier
+import config
 
 
 class SqueezeTransformer(TransformerMixin):
@@ -115,8 +116,9 @@ def upload_df_to_s3(df, s3, bucket_name, s3_csv_file_path):
     os.remove(new_csv_file_path)
 
 
+# update the record in mock_course_info.csv file
 def update_csv(course_id, pdf_name, email_list, instructor_name):
-    csv_file_path = "./poc-data/mock_course_info.csv"
+    csv_file_path = config.MOCK_COURSE_INFO_CSV
 
     df = pd.read_csv(csv_file_path).dropna(how="all")
 
@@ -142,6 +144,7 @@ def update_csv(course_id, pdf_name, email_list, instructor_name):
     df.to_csv(csv_file_path, index=False)
 
 
+# check if the syllabus pdf is exist in S3 folder or not
 def check_syllabus_exists(course_id, s3, bucket_name):
     try:
         pdf_name = course_id + "-syllabus.pdf"
@@ -155,6 +158,7 @@ def check_syllabus_exists(course_id, s3, bucket_name):
             raise e
 
 
+# extract all emails exist in a pdf in S3
 def extract_emails_from_pdf(
     filename,
     bucket_name,
@@ -177,6 +181,7 @@ def extract_emails_from_pdf(
     return emails
 
 
+# extract the instructor name in a syllabus file in S3
 def extract_instructor_name_from_pdf(filename, bucket_name, s3):
     response = s3.get_object(Bucket=bucket_name, Key=filename)
     pdf_file = response["Body"].read()
@@ -189,8 +194,6 @@ def extract_instructor_name_from_pdf(filename, bucket_name, s3):
         page = pdf_reader.pages[page_num]
         text += page.extract_text()
 
-    # 查找 “Dr.” 或 “Instructor:” 后面的两个单词组成的名字
-    # 这里的正则表达式匹配 “Dr.” 或 “Instructor:” 后的任意空格，然后是两个单词
     instructor_pattern = r"(?:Dr\.|Instructor:)\s+([A-Za-z]+ [A-Za-z]+)"
     match = re.search(instructor_pattern, text)
     if match:

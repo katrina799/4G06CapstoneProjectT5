@@ -255,6 +255,7 @@ def profile_page():
     )
 
 
+# Router to course detail page
 @app.route("/course_detail_page/<course_id>")
 def course_detail(course_id):
     message = request.args.get("message", "")
@@ -276,8 +277,6 @@ def course_detail(course_id):
         email_list = []
         instructor_name = ""
 
-    print("prof:", instructor_name)
-
     return render_template(
         "course_detail_page.html",
         course_id=course_id,
@@ -289,6 +288,7 @@ def course_detail(course_id):
     )
 
 
+# upload the a pdf syllabus file to S3 and extract the course info in the file
 @app.route("/upload/<course_id>", methods=["POST"])
 def upload_file(course_id):
     if (
@@ -296,7 +296,6 @@ def upload_file(course_id):
         or not request.files["file"]
         or request.files["file"].filename == ""
     ):
-        print("checked")
         return redirect(
             url_for(
                 "course_detail",
@@ -310,24 +309,22 @@ def upload_file(course_id):
     new_filename = f"{course_id}-syllabus.pdf"
 
     file.filename = new_filename
-    print("file:", file.filename)
 
     try:
-        print("uploading")
-
         s3.upload_fileobj(
             file, bucket_name, file.filename, ExtraArgs={"ACL": "private"}
         )
 
-        # 提取电子邮件列表
         bk = bucket_name
         syllabus_exists, pdf_name = check_syllabus_exists(course_id, s3, bk)
         if syllabus_exists:
+            # extract email list
             email_list = extract_emails_from_pdf(
                 pdf_name,
                 bucket_name,
                 s3,
             )
+            # extract instructor name
             instructor_name = extract_instructor_name_from_pdf(
                 pdf_name,
                 bucket_name,
@@ -338,7 +335,6 @@ def upload_file(course_id):
             instructor_name = ""
 
         update_csv(course_id, file.filename, email_list, instructor_name)
-        print("returning")
         return redirect(
             url_for(
                 "course_detail",
@@ -348,7 +344,6 @@ def upload_file(course_id):
             )
         )
     except botocore.exceptions.NoCredentialsError:
-        print("error")
         return redirect(
             url_for(
                 "course_detail",
