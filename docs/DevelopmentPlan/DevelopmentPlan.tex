@@ -140,6 +140,7 @@ To better track project progress and work distributions, we use \textit{GitHub} 
     \begin{itemize}
         \item Manage a database
         \item Implement an algorithm that extracts date and task-related texts from a PDF
+        \item Collect data for the classification of task priority
         \item Build a model to classify the priority of a task
         \item Construct a training pipeline to define the steps when training the model
         \item Design a user-centered and user-friendly interface
@@ -155,11 +156,12 @@ To better track project progress and work distributions, we use \textit{GitHub} 
 
     \begin{itemize}
         \item Have a simple data storage, even if it is as basic as reading and writing from a test file for now
-        \item A workflow that can extract basic data from a user's syllabus
-        \item Preliminary model that accepts syllabus and schedule data
-        \item Template pipeline with steps and framework chosen to handle the model training
-        \item Host a local-based web app that can handle some basic communication between the model and the database 
-        \item Minimal user interface designed simply for functionality
+        \item A workflow/function that can extract basic data such as emails from a user's syllabus
+        \item Have a survey ready for data collection of task priority classification. 
+        \item Preliminary model for task priority classification which takes task-related data such as *day until due* and *difficulty*, and gives predictions accordingly using the trained model
+        \item A training pipeline with steps such as preprocessing step, and training step. After running the training pipeline, trained model will be uploaded to *AWS S3*
+        \item Host a local-based web app that can handle some basic communication with the model and the database 
+        \item Minimal user interface designed simply for basic functionality
     \end{itemize}
     Setting these up will be the bulk of the learning curve for technologies that are not our main focus. Setting up a form of simple storage database, website, and data extraction workflow, are all processes that do not need to be altered too much while working with the data. Getting all these done and out of the way at this point will let us be able to focus on the lengthy process that will be fine-tuning the model and training pipeline to try to get the best results from our data.
 
