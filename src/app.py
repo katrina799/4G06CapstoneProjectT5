@@ -118,7 +118,7 @@ def prority_predict():
     return render_template("model_page.html")
 
 
-# Router to smodel page
+# Router to model page
 @app.route("/model_page", methods=["GET", "POST"])
 def model_page():
     global current_page
@@ -211,8 +211,6 @@ def add_course():
                 courses=courses,
                 current_page="course_page",
             )
-        print(current_page)
-        print(courses)
     return redirect(url_for("start"))
 
 
