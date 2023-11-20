@@ -12,7 +12,11 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.compose import ColumnTransformer
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
 from sklearn.neural_network import MLPClassifier
-import config
+
+try:
+    from config import MOCK_COURSE_INFO_CSV
+except ImportError:
+    from .config import MOCK_COURSE_INFO_CSV
 
 
 class SqueezeTransformer(TransformerMixin):
@@ -118,7 +122,7 @@ def upload_df_to_s3(df, s3, bucket_name, s3_csv_file_path):
 
 # Update the record in mock_course_info.csv file
 def update_csv(course_id, pdf_name, email_list, instructor_name):
-    csv_file_path = config.MOCK_COURSE_INFO_CSV
+    csv_file_path = MOCK_COURSE_INFO_CSV
 
     df = pd.read_csv(csv_file_path).dropna(how="all")
 
