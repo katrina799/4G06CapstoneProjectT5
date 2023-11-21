@@ -35,6 +35,7 @@ app.config.from_pyfile("config.py")
 bucket_name = app.config["BUCKET_NAME"]
 mock_data_file = app.config["MOCK_DATA_POC_NAME"]
 model_file_path = app.config["PRIORITY_MODEL_PATH"]
+mock_tasks_data_file = app.config["MOCK_DATA_POC_TASKS"]
 
 # Setting global variables
 username = ""
@@ -52,16 +53,27 @@ s3 = boto3.client(
 # Set up home page for the website
 @app.route("/")
 def start():
-    global username, courses, current_page
+    global username, courses, current_page, tasks
     df = get_df_from_csv_in_s3(s3, bucket_name, mock_data_file)
     username = df.loc[0, "username"]  # For PoC purpose
     courses = df.loc[0, "courses"]  # For PoC purpose
     # Parsing it into a Python list
     courses = ast.literal_eval(courses)
     current_page = "home"
+    tasks_df = get_df_from_csv_in_s3(s3, bucket_name, mock_tasks_data_file)
+    # Convert the tasks DataFrame to a list of dictionaries
+    tasks = (
+        tasks_df.groupby("status")
+        .apply(lambda x: x.drop("status", axis=1).to_dict(orient="records"))
+        .to_dict()
+    )
     c_p = current_page
     return render_template(
-        "index.html", username=username, courses=courses, current_page=c_p
+        "index.html",
+        username=username,
+        courses=courses,
+        current_page=c_p,
+        tasks=tasks,
     )
 
 

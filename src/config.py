@@ -7,3 +7,4 @@ PRIORITY_MODEL_FILE_PATH = (
 )
 PRIORITY_MODEL_PATH = f"model/{PRIORITY_MODEL_FILE_NAME}"
 MOCK_COURSE_INFO_CSV = "./poc-data/mock_course_info.csv"
+MOCK_DATA_POC_TASKS = "mock_data_tasks.csv"
