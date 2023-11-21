@@ -1,9 +1,10 @@
-.tasks-calendar-container {
-    max-width: 1200px;
-    margin: 20px auto;
+  .tasks-calendar-container {
+    width: 70%;
+    margin: 40px 0; 
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start; 
   }
+
 
   .task-board {
     width: 100%;
