@@ -16,8 +16,8 @@
     urlcolor=blue
 }
 
-\input{../../Comments}
-\input{../../Common}
+ \input{../../Comments}
+ \input{../../Common}
 
 \newcounter{acnum}
 \newcommand{\actheacnum}{AC\theacnum}
@@ -33,7 +33,7 @@
 
 \begin{document}
 
-\title{Module Guide for \progname{}} 
+\title{Module Guide for \progname{Course Buddy}} 
 \author{\authname}
 \date{\today}
 
@@ -46,8 +46,7 @@
 \begin{tabularx}{\textwidth}{p{3cm}p{2cm}X}
 \toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
 \midrule
-Date 1 & 1.0 & Notes\\
-Date 2 & 1.1 & Notes\\
+2024-01-17 & 1.0 & First version of module guide\\
 \bottomrule
 \end{tabularx}
 
@@ -69,10 +68,7 @@ This section records information for easy reference.
   M & Module \\
   MG & Module Guide \\
   OS & Operating System \\
-  R & Requirement\\
-  SC & Scientific Computing \\
   SRS & Software Requirements Specification\\
-  \progname & Explanation of program name\\
   UC & Unlikely Change \\
   \wss{etc.} & \wss{...}\\
   \bottomrule
@@ -94,14 +90,14 @@ This section records information for easy reference.
 
 Decomposing a system into modules is a commonly accepted approach to developing
 software.  A module is a work assignment for a programmer or programming
-team~\citep{ParnasEtAl1984}.  We advocate a decomposition
+team ~\cite{Parnas1972a}.  We advocate a decomposition
 based on the principle of information hiding~\citep{Parnas1972a}.  This
 principle supports design for change, because the ``secrets'' that each module
 hides represent likely future changes.  Design for change is valuable in SC,
 where modifications are frequent, especially during initial development as the
 solution space is explored.  
 
-Our design follows the rules layed out by \citet{ParnasEtAl1984}, as follows:
+Our design follows the rules layed out by ~\citet{ParnasEtAl1984}, as follows:
 \begin{itemize}
 \item System details that are likely to change independently should be the
   secrets of separate modules.
@@ -111,7 +107,7 @@ Our design follows the rules layed out by \citet{ParnasEtAl1984}, as follows:
 \end{itemize}
 
 After completing the first stage of the design, the Software Requirements
-Specification (SRS), the Module Guide (MG) is developed~\citep{ParnasEtAl1984}. The MG
+Specification (SRS), the Module Guide (MG) is developed ~\citep{ParnasEtAl1984}. The MG
 specifies the modular structure of the system and is intended to allow both
 designers and maintainers to easily identify the parts of the software.  The
 potential readers of this document are as follows:
@@ -157,11 +153,17 @@ adapted here is called design for
 change.
 
 \begin{description}
-\item[\refstepcounter{acnum} \actheacnum \label{acHardware}:] The specific
-  hardware on which the software is running.
-\item[\refstepcounter{acnum} \actheacnum \label{acInput}:] The format of the
-  initial input data.
-\item ...
+\item[\refstepcounter{acnum} \actheacnum \label{acUI}:]
+The user interface design could be changed, especially the layout, colour, and fonts.
+\item[\refstepcounter{acnum} \actheacnum \label{acALGM}:]
+The algorithms might be changed, such as the algorithm for PDF extraction and task priority prediction.
+\item[\refstepcounter{acnum} \actheacnum \label{acDBSCH}:]
+The database storage system could be modified, such as the database schema, tables, constraints or other elements.
+\item[\refstepcounter{acnum} \actheacnum \label{acAPI}:]
+The API usage in the back-end system could be upgraded or changed.
+\item[\refstepcounter{acnum} \actheacnum \label{acSCALE}:]
+The web load or data scale could be changed in the development of the application.
+
 \end{description}
 
 \subsection{Unlikely Changes} \label{SecUchange}
@@ -169,14 +171,18 @@ change.
 The module design should be as general as possible. However, a general system is
 more complex. Sometimes this complexity is not necessary. Fixing some design
 decisions at the system architecture stage can simplify the software design. If
-these decision should later need to be changed, then many parts of the design
+these decisions should later need to be changed, then many parts of the design
 will potentially need to be modified. Hence, it is not intended that these
 decisions will be changed.
 
 \begin{description}
-\item[\refstepcounter{ucnum} \uctheucnum \label{ucIO}:] Input/Output devices
-  (Input: File and/or Keyboard, Output: File, Memory, and/or Screen).
-\item ...
+\item[\refstepcounter{ucnum} \uctheucnum \label{ucIO}:] The programming languages and technical stack won't be changed.
+\item[\refstepcounter{ucnum} \uctheucnum \label{ucIO}:] The major functionality and purpose of this application won't be changed from educational use to other business use.  
+\item[\refstepcounter{ucnum} \uctheucnum \label{ucIO}:]
+The deployment of the database on AWS cloud service won't be changed because of high cost.
+\item[\refstepcounter{ucnum} \uctheucnum \label{ucIO}:] The application's overall architecture won't be changed dramatically.
+\item[\refstepcounter{ucnum} \uctheucnum \label{ucIO}:]
+The interface device would always be the computer keyboard and monitor.
 \end{description}
 
 \section{Module Hierarchy} \label{SecMH}
@@ -187,8 +193,20 @@ below, which are leaves in the hierarchy tree, are the modules that will
 actually be implemented.
 
 \begin{description}
-\item [\refstepcounter{mnum} \mthemnum \label{mHH}:] Hardware-Hiding Module
-\item ...
+\item [\refstepcounter{mnum} \mthemnum \label{mIM}:] Interface Module
+\item [\refstepcounter{mnum} \mthemnum \label{mBEWS}:] Back End Web Service Module
+\item [\refstepcounter{mnum} \mthemnum \label{mUserAM}:] User Authentication Module
+\item [\refstepcounter{mnum} \mthemnum \label{mTaskAM}:] Task Module
+\item [\refstepcounter{mnum} \mthemnum \label{mCM}:] Course Module
+\item [\refstepcounter{mnum} \mthemnum \label{mUM}:] User Module
+\item [\refstepcounter{mnum} \mthemnum \label{mMsgNM}:] Message Notification Module
+\item [\refstepcounter{mnum} \mthemnum \label{mFRSM}:] Friend System Module
+\item [\refstepcounter{mnum} \mthemnum \label{mTM}:] Timetable Module
+\item [\refstepcounter{mnum} \mthemnum \label{mPM}:] Pomodoro Module
+\item [\refstepcounter{mnum} \mthemnum \label{mPEM}:] PDF Extraction Module
+\item [\refstepcounter{mnum} \mthemnum \label{mDTM}:] Database Module
+\item [\refstepcounter{mnum} \mthemnum \label{mSPSM}:] Study Plan Scheduling Module
+\item [\refstepcounter{mnum} \mthemnum \label{mTPPM}:] Task Priority Prediction Module
 \end{description}
 
 
@@ -199,22 +217,27 @@ actually be implemented.
 \textbf{Level 1} & \textbf{Level 2}\\
 \midrule
 
-{Hardware-Hiding Module} & ~ \\
+{Hardware-Hiding Module} & Interface Module\\
 \midrule
 
-\multirow{7}{0.3\textwidth}{Behaviour-Hiding Module} & ?\\
-& ?\\
-& ?\\
-& ?\\
-& ?\\
-& ?\\
-& ?\\ 
-& ?\\
+\multirow{7}{0.3\textwidth}{Behaviour-Hiding Module}
+& Back End Web Service Module\\
+& User Authentication Module\\ 
+& Task Module\\
+& Course Module\\
+& User Module\\
+& Message Notification Module\\ 
+& Friend System Module\\ 
+& Timetable Module\\ 
+& Pomodoro Module\\
 \midrule
 
-\multirow{3}{0.3\textwidth}{Software Decision Module} & {?}\\
-& ?\\
-& ?\\
+\multirow{3}{0.3\textwidth}{Software Decision Module}
+& PDF Extraction Module \\
+& Database Module\\
+& Study Plan Scheduling Module \\
+& Task Priority Prediction Module \\
+
 \bottomrule
 
 \end{tabular}
@@ -222,6 +245,7 @@ actually be implemented.
 \label{TblMH}
 \end{table}
 
+\newpage
 \section{Connection Between Requirements and Design} \label{SecConnection}
 
 The design of the system is intended to satisfy the requirements developed in
@@ -235,24 +259,20 @@ proposed by \citet{ParnasEtAl1984}. The \emph{Secrets} field in a module
 decomposition is a brief statement of the design decision hidden by the
 module. The \emph{Services} field specifies \emph{what} the module will do
 without documenting \emph{how} to do it. For each module, a suggestion for the
-implementing software is given under the \emph{Implemented By} title. If the
-entry is \emph{OS}, this means that the module is provided by the operating
-system or by standard programming language libraries.  \emph{\progname{}} means the
-module will be implemented by the \progname{} software.
+implementing software is given under the \emph{Implemented By} title
 
 Only the leaf modules in the hierarchy have to be implemented. If a dash
 (\emph{--}) is shown, this means that the module is not a leaf and will not have
 to be implemented.
 
-\subsection{Hardware Hiding Modules (\mref{mHH})}
+\subsection{Hardware Hiding Modules }
 
+\subsubsection{Interface Module (\mref{mIM})}
 \begin{description}
-\item[Secrets:]The data structure and algorithm used to implement the virtual
-  hardware.
-\item[Services:]Serves as a virtual hardware used by the rest of the
-  system. This module provides the interface between the hardware and the
-  software. So, the system can use it to display outputs or to accept inputs.
-\item[Implemented By:] OS
+\item[Secrets:]Hide the detailed structure and logic of front-end technical implementation, which involves the graphic design and user interface.
+\item[Services:]Serves as the medium for users to interact with the application to implement diverse functionalities effectively. The client side of the application sends user data to the backend, and then in turn processes the received information and displays it in the interface in a user-friendly and easily understandable form. 
+\item[Implemented By:] Developed using web technologies like HTML, CSS
+
 \end{description}
 
 \subsection{Behaviour-Hiding Module}
@@ -267,18 +287,79 @@ to be implemented.
 \item[Implemented By:] --
 \end{description}
 
-\subsubsection{Input Format Module (\mref{mInput})}
+\subsubsection{Back End Web Service Module (\mref{mBEWS})}
 
 \begin{description}
-\item[Secrets:]The format and structure of the input data.
-\item[Services:]Converts the input data into the data structure used by the
-  input parameters module.
-\item[Implemented By:] [Your Program Name Here]
-\item[Type of Module:] [Record, Library, Abstract Object, or Abstract Data Type]
-  [Information to include for leaf modules in the decomposition by secrets tree.]
+\item[Secrets:] Internal Logic and data processing methods
+\item[Services:] Offers web services for front-end modules, handling requests, responses and exceptions
+\item[Implemented By:] Server-side Languages and Principles
 \end{description}
 
-\subsubsection{Etc.}
+
+\subsubsection{User Authentication Module (\mref{mUserAM})}
+
+\begin{description}
+\item[Secrets:] The confidential authentication mechanism, involves the encryption of the password, the location of data stored, and the process of verification of data.
+\item[Services:]  Provides verification service for checking user identities during the login procedure. This module ensures only the authenticated user can access certain features of this application.
+\item[Implemented By:] Integrates with User Module and Database module, utilizes data mapping and hashing technique for verification. 
+\end{description}
+
+\subsubsection{Task Module (\mref{mTaskAM})}
+
+\begin{description}
+\item[Secrets:] The internal prioritization logic and categorization of tasks.
+\item[Services:] Provides functionalities for users to manipulate tasks, including creating, reading, updating and deleting tasks. Also, the service involves additional features: setting deadlines,  tasks, set difficulty levels. 
+\item[Implemented By:] Integrates with the database module for consistent data storage of task information. Also, utilize request transmission technique API for sending data to the Task prioritization module, and receive requests from the back-end server-side to execute instructions.
+\end{description}
+
+
+\subsubsection{Course Module (\mref{mCM})}
+
+\begin{description}
+\item[Secrets:]Course Data structure and management algorithms
+\item[Services:]Manages course information, including the creation, modification, and deletion.
+\item[Implemented By: Integrates with the database for storing the course data] 
+\end{description}
+
+\subsubsection{User Module (\mref{mUM})}
+
+\begin{description}
+\item[Secrets:] User info data handling method.
+\item[Services:] Manages User information, including the creation, modification, and deletion.
+\item[Implemented By:] Integrates with the database module and authentication module. 
+\end{description}
+
+\subsubsection{Message Notification Module (\mref{mMsgNM})}
+
+\begin{description}
+\item[Secrets:] Notification generation and delivery mechanisms.
+\item[Services: ] Sends notifications to users based on the specific triggers.
+\item[Implemented By:] Integrates with the Friend System Module and User Module by the event-driven mechanism to implement message notification service.
+\end{description}
+
+\subsubsection{Friend System Module (\mref{mFRSM})}
+
+\begin{description}
+\item[Secrets:]Friend recommendation and classmate lookup mechanisms.
+\item[Services:] Manages friend lists, friend requests, and friend deletion.
+\item[Implemented By:] Integrates with User Module, Database Module, the technical solution involves database relations with analysis of user social information. 
+\end{description}
+\subsubsection{Timetable Module (\mref{mTM})}
+
+\begin{description}
+\item[Secrets:] Timetable generation and management mechanisms.
+\item[Services:] Offers users to create, view, and manipulate their timetables. 
+\item[Implemented By:] Supported by the front-end interface involves interactive components collecting user-triggered actions, also combined with the study plan scheduling module.   
+\end{description}
+
+\subsubsection{Pomodoro Module (\mref{mPM})}
+
+\begin{description}
+\item[Secrets:] Specific study time interval and design technique
+\item[Services:] Provides a Pomodoro timer for users productively conduct study tasks. 
+\item[Implemented By:] Integrate with the user interface and provide a real-time interactive feature by scripting language and UI design.
+\end{description}
+
 
 
 \subsection{Software Decision Module}
@@ -294,8 +375,38 @@ to be implemented.
 \item[Implemented By:] --
 \end{description}
 
-\subsubsection{Etc.}
 
+\subsubsection{PDF Extraction Module (\mref{mPEM})}
+
+\begin{description}
+\item[Secrets:] Techniques and specific algorithms or logics for extracting data from PDF files, and the standardized format of data while to be stored in the database. 
+\item[Services:] Extracts and processes information from the user-uploaded PDF documents.
+\item[Implemented By:] Utilizes specific libraries for pdf processing
+\end{description}
+
+\subsubsection{Database Module (\mref{mDTM})}
+
+\begin{description}
+\item[Secrets:] Database schema and query optimization techniques
+\item[Services:] Provides CRUD (create, read, update, and delete) manipulation of all the data used in the application efficiently. 
+\item[Implemented By:] Deployed on the AWS cloud service platform and utilized a relational database system.  
+\end{description}
+
+\subsubsection{Study Plan Scheduling Module (\mref{mSPSM})}
+
+\begin{description}
+\item[Secrets:] Algorithms for creating and optimizing study schedules. 
+\item[Services:] Generates personalized study plans based on user input. 
+\item[Implemented By:] Integrates with the Course and User Modules.
+\end{description}
+
+\subsubsection{Task Priority Prediction Module (\mref{mTPPM})}
+
+\begin{description}
+\item[Secrets:] The Algorithms and criteria for priority determination.
+\item[Services:] Predicts and assigns priorities to the target tasks
+\item[Implemented By:] Utilizes machine learning mechanism to improve the accuracy of prediction. 
+\end{description}
 \section{Traceability Matrix} \label{SecTM}
 
 This section shows two traceability matrices: between the modules and the
@@ -309,17 +420,37 @@ requirements and between the modules and the anticipated changes.
 \toprule
 \textbf{Req.} & \textbf{Modules}\\
 \midrule
-R1 & \mref{mHH}, \mref{mInput}, \mref{mParams}, \mref{mControl}\\
-R2 & \mref{mInput}, \mref{mParams}\\
-R3 & \mref{mVerify}\\
-R4 & \mref{mOutput}, \mref{mControl}\\
-R5 & \mref{mOutput}, \mref{mODEs}, \mref{mControl}, \mref{mSeqDS}, \mref{mSolver}, \mref{mPlot}\\
-R6 & \mref{mOutput}, \mref{mODEs}, \mref{mControl}, \mref{mSeqDS}, \mref{mSolver}, \mref{mPlot}\\
-R7 & \mref{mOutput}, \mref{mEnergy}, \mref{mControl}, \mref{mSeqDS}, \mref{mPlot}\\
-R8 & \mref{mOutput}, \mref{mEnergy}, \mref{mControl}, \mref{mSeqDS}, \mref{mPlot}\\
-R9 & \mref{mVerifyOut}\\
-R10 & \mref{mOutput}, \mref{mODEs}, \mref{mControl}\\
-R11 & \mref{mOutput}, \mref{mODEs}, \mref{mEnergy}, \mref{mControl}\\
+FR1 & \mref{mUserAM}, \mref{mUM}, \mref{mBEWS}, \mref{mDTM}\\
+FR2 & \mref{mUserAM}, \mref{mUM}, \mref{mBEWS}, \mref{mDTM}\\
+FR3 & \mref{mUserAM}, \mref{mUM}, \mref{mBEWS}, \mref{mDTM}\\
+FR4 & \mref{mUserAM}, \mref{mUM}, \mref{mBEWS}, \mref{mDTM}, \mref{mTaskAM}\\
+FR5 & \mref{mUserAM}, \mref{mUM}, \mref{mBEWS}, \mref{mDTM}\\
+FR6 & \mref{mUM}, \mref{mDTM}, \mref{mPEM}\\
+FR7 & \mref{mUM}, \mref{mDTM}, \mref{mPM}\\
+FR8 & \mref{mUM}, \mref{mDTM}, \mref{mPM}\\
+FR9 & \mref{mUM}, \mref{mDTM}, \mref{mPM}, \mref{mBEWS}\\
+FR10 &  \mref{mIM}, \mref{mUM}, \mref{mDTM}, \mref{mPM}\\
+FR11 & \mref{mFRSM}, \mref{mUM}, \mref{mMsgNM}, \mref{mBEWS}\\
+FR12 & \mref{mFRSM}, \mref{mUM}, \mref{mMsgNM}, \mref{mBEWS}\\
+FR13 & \mref{mFRSM}, \mref{mUM}, \mref{mMsgNM}, \mref{mBEWS}\\
+FR14 & \mref{mTaskAM}, \mref{mUM}, \mref{mIM}, \mref{mBEWS}\\
+FR15 & \mref{mTaskAM}, \mref{mDTM}\\
+FR16 & \mref{mPEM}, \mref{mDTM}\\
+FR17 & \mref{mTaskAM}, \mref{mTPPM}\\
+FR18 & \mref{mTaskAM}, \mref{mUM}, \mref{mDTM}\\
+FR19 & \mref{mIM}, \mref{mDTM}, \mref{mBEWS}\\
+FR20 & \mref{mIM}, \mref{mBEWS}\\
+FR21 & \mref{mIM}, \mref{mTaskAM}, \mref{mDTM}\\
+FR22 & \mref{mTaskAM}, \mref{mTM}, \mref{mUserAM}, \mref{mIM},  \mref{mBEWS}\\
+FR23 & \mref{mTaskAM}, \mref{mTM}, \mref{mUserAM}, \mref{mIM},  \mref{mBEWS}\\
+FR24 & \mref{mSPSM}, \mref{mPEM}\\
+FR25 & \mref{mTaskAM}, \mref{mBEWS}\\
+FR26 & \mref{mSPSM}, \mref{mDTM}, \mref{mTaskAM}\\
+FR27 & \mref{mTaskAM}, \mref{mDTM}\\
+FR28 & \mref{mTPPM}, \mref{mTaskAM}\\
+FR29 & \mref{mSPSM}, \mref{mDTM}, \mref{mBEWS}, \mref{mUserAM},  \mref{mTaskAM}\\
+FR30 & \mref{mPM}, \mref{mTaskAM}\\
+FR31 & \mref{mSPSM}, \mref{mFRSM}, \mref{mBEWS}\\
 \bottomrule
 \end{tabular}
 \caption{Trace Between Requirements and Modules}
@@ -332,18 +463,11 @@ R11 & \mref{mOutput}, \mref{mODEs}, \mref{mEnergy}, \mref{mControl}\\
 \toprule
 \textbf{AC} & \textbf{Modules}\\
 \midrule
-\acref{acHardware} & \mref{mHH}\\
-\acref{acInput} & \mref{mInput}\\
-\acref{acParams} & \mref{mParams}\\
-\acref{acVerify} & \mref{mVerify}\\
-\acref{acOutput} & \mref{mOutput}\\
-\acref{acVerifyOut} & \mref{mVerifyOut}\\
-\acref{acODEs} & \mref{mODEs}\\
-\acref{acEnergy} & \mref{mEnergy}\\
-\acref{acControl} & \mref{mControl}\\
-\acref{acSeqDS} & \mref{mSeqDS}\\
-\acref{acSolver} & \mref{mSolver}\\
-\acref{acPlot} & \mref{mPlot}\\
+\acref{acUI} & \mref{mIM}\\
+\acref{acALGM} & \mref{mTPPM}, \mref{mSPSM}, \mref{mPEM}\\
+\acref{acDBSCH} & \mref{mDTM}\\
+\acref{acAPI} & \mref{mBEWS}\\
+\acref{acSCALE} & \mref{mDTM} \\
 \bottomrule
 \end{tabular}
 \caption{Trace Between Anticipated Changes and Modules}
@@ -351,29 +475,117 @@ R11 & \mref{mOutput}, \mref{mODEs}, \mref{mEnergy}, \mref{mControl}\\
 \end{table}
 
 \section{Use Hierarchy Between Modules} \label{SecUse}
+The use hierarchy between these modules is represented using a DAG diagram, which visualizes the interconnections between different modules inside this software application system. Each node represents a module stated in the previous module decomposition section. The edges indicate the dependencies between modules. An arrow from module A to module B implies that module A depends on module B, both the functionality support and data transmission. We can see that the Back End Web Service Module is located as a central node on this diagram, which serves as a communication hub for the breach of sub-system modules.
 
-In this section, the uses hierarchy between modules is
-provided. \citet{Parnas1978} said of two programs A and B that A {\em uses} B if
-correct execution of B may be necessary for A to complete the task described in
-its specification. That is, A {\em uses} B if there exist situations in which
-the correct functioning of A depends upon the availability of a correct
-implementation of B.  Figure \ref{FigUH} illustrates the use relation between
-the modules. It can be seen that the graph is a directed acyclic graph
-(DAG). Each level of the hierarchy offers a testable and usable subset of the
-system, and modules in the higher level of the hierarchy are essentially simpler
-because they use modules from the lower levels.
-
+This diagram reflects several software architecture concepts. Modularity can be easily understood, the information-hiding principle is also an additional effect.  Each module hides its internal details from other modules, and the design idea of loose coupling and high cohesion are proven. Such layer architecture makes this application can be high maintainable and reusable because the changes in one individual module would have little effect on others. 
 \begin{figure}[H]
 \centering
-%\includegraphics[width=0.7\textwidth]{UsesHierarchy.png}
+\includegraphics[width=0.7\textwidth]{UseHierachy.png}
 \caption{Use hierarchy among modules}
 \label{FigUH}
 \end{figure}
 
+\section{Timeline}
+
+This section provides a detailed timeline for the implementation, testing, and verification of the system modules, split across two pages for clarity. Each task requires the collaboration of two or more team members to ensure thoroughness and accuracy. The timeline is structured to ensure functional implementation and basic testing by February 5, 2024, and complete full testing and verification by February 20, 2024.
+
+% Part 1 of the table
+\begin{table}[H]
+\centering
+\begin{tabular}{|p{0.15\textwidth}|p{0.35\textwidth}|p{0.25\textwidth}|p{0.15\textwidth}|}
+\hline
+\textbf{Module} & \textbf{Task} & \textbf{Responsible Members} & \textbf{Completion Date} \\
+\hline
+Interface Module & UI Design and Initial Development & Jingyao Qin, Chenwei Song & 2024-01-24 \\
+\hline
+ & UI Module Testing & Qianni Wang, Shuting Shi & 2024-01-28 \\
+\hline
+Back End Web Service & Server Setup and API Development & Chenwei Song, Qiang Gao & 2024-01-26 \\
+\hline
+ & Back End Module Testing & Jingyao Qin, Qianni Wang & 2024-01-30 \\
+\hline
+User Authentication & Authentication Mechanism Implementation & Qianni Wang, Shuting Shi & 2024-01-25 \\
+\hline
+ & Authentication Module Testing & Chenwei Song, Qiang Gao & 2024-01-29 \\
+\hline
+Task Module & Task Management Functions Implementation & Shuting Shi, Qiang Gao & 2024-01-27 \\
+\hline
+ & Task Module Testing & Jingyao Qin, Chenwei Song & 2024-01-31 \\
+\hline
+Database Module & Database Design and Integration & Qiang Gao, Jingyao Qin & 2024-01-26 \\
+\hline
+ & Database Module Testing & Qianni Wang, Shuting Shi & 2024-01-30 \\
+\hline
+Pomodoro Module & Timer Functionality Implementation & Jingyao Qin, Qianni Wang & 2024-01-23 \\
+\hline
+ & Pomodoro Module Testing & Chenwei Song, Qiang Gao & 2024-01-27 \\
+\hline
+PDF Extraction Module & PDF Processing and Extraction Logic & Chenwei Song, Shuting Shi & 2024-01-28 \\
+\hline
+ & PDF Extraction Module Testing & Qianni Wang, Qiang Gao & 2024-02-01 \\
+\hline
+Study Plan Scheduling & Scheduling Algorithms Development & Qianni Wang, Qiang Gao & 2024-01-29 \\
+\hline
+\end{tabular}
+\caption{Timeline (Part 1)}
+\label{table:timeline1}
+\end{table}
+\newpage 
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|p{0.15\textwidth}|p{0.35\textwidth}|p{0.25\textwidth}|p{0.15\textwidth}|}
+\hline
+\textbf{Module} & \textbf{Task} & \textbf{Responsible Members} & \textbf{Completion Date} \\
+\hline
+ & Scheduling Module Testing & Jingyao Qin, Chenwei Song & 2024-02-02 \\
+\hline
+Task Priority Prediction & Priority Algorithm Implementation & Shuting Shi, Jingyao Qin & 2024-01-30 \\
+\hline
+ & Priority Prediction Testing & Chenwei Song, Qianni Wang & 2024-02-03 \\
+\hline
+Basic Testing & Integration Testing for Each Module & All Members & 2024-02-05 \\
+\hline
+Refinement & Bug Fixing and Code Refinement & All Members & 2024-02-10 \\
+\hline
+Full Testing and Verification & Comprehensive System Testing & All Members & 2024-02-15 \\
+\hline
+Final Verification & Final Review and Verification & All Members & 2024-02-20 \\
+\hline
+\end{tabular}
+\caption{Timeline (Part 2)}
+\label{table:timeline2}
+\end{table}
+
+
+
+
+\section{Reflection}
+The information in this section will be used to evaluate the team members on the
+graduate attribute of Problem Analysis and Design.  Please answer the following questions:
+
+\begin{enumerate}
+  \item What are the limitations of your solution?  Put another way, given
+  unlimited resources, what could you do to make the project better? (LO\_ProbSolutions)
+
+  The current scope of our application is very limited because of the cost consideration. If the user amount grows significantly, our backend module may face the condition of overload, and traffic burden. Also, The central module plays a very important role, if it fails, then most functionalities could be affected. Therefore, the current application is not fault-tolerant and error-free. The current module architecture design appears that low flexibility of inner connections between each other, so new features and module additions could be a heavy workload if the new one has close relationships with many modules which need a lot of data transmission and interaction.
+
+  Therefore, if given unlimited resources, a failure-tolerant mechanism system should be deployed for a better user experience. Also, investing in more optimized algorithms with unlimited data resources to do analysis could make our prediction more accurate and increase computing efficiency. Also, to solve the problem of scope limitation, conduct a distributed system to relieve the stress of the server when customer usage is too high.  
+  \item Give a brief overview of other design solutions you considered.  What
+  are the benefits and tradeoffs of those other designs compared with the chosen
+  design?  From all the potential options, why did you select a documented design?(LO\_Explores)
+
+  Instead of having a centralized back-end service center, the micro-service architecture design could be a valuable approach for a software application, which is composed of small independent services that could communicate over individual APIs. There are many benefits of this design. This design is very flexible, expanding each service to satisfy the specific need, and maintaining good usability. Continuous integration and deployment are also supported. rollback can also be triggered when the error occurs. Because the cost of maintainability for this kind of architecture is low, experiments and new changes are encouraged, then the product release cycle can be highly reduced. 
+  
+  The reason why we chose our current design is because of the balance between complexity and maintainability.  We conduct modularization but still centralize the back-end service, which eases the build complexity and effort at the initial stage of development while maintaining flexibility. Continuous integration and deployment are supported in our current design system, the decentralized optimization can also easily be brought in the future if necessary.
+
+  
+\end{enumerate}
+
 %\section*{References}
 
 \bibliographystyle {plainnat}
-\bibliography{../../../refs/References}
+\bibliography {../Design.bib}
 
 \newpage{}
 
