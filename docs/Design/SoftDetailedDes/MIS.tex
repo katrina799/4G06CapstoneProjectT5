@@ -33,8 +33,8 @@ urlcolor=cyan          % color of external links
 
 \externaldocument{../../SRS/SRS}
 
-\input{../../Comments}
-\input{../../Common}
+ \input{../../Comments}
+ \input{../../Common}
 
 \begin{document}
 
@@ -53,8 +53,7 @@ urlcolor=cyan          % color of external links
 \begin{tabularx}{\textwidth}{p{3cm}p{2cm}X}
 \toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
 \midrule
-Date 1 & 1.0 & Notes\\
-Date 2 & 1.1 & Notes\\
+2021/1/17 & Version 0  & Initial draft of the document\\
 \bottomrule
 \end{tabularx}
 
@@ -62,9 +61,8 @@ Date 2 & 1.1 & Notes\\
 
 \section{Symbols, Abbreviations and Acronyms}
 
-See SRS Documentation at \wss{give url}
+See SRS Documentation at \url{https://github.com/wangq131/4G06CapstoneProjectT5/blob/main/docs/SRS/SRS.pdf}
 
-\wss{Also add any additional symbols, abbreviations or acronyms}
 
 \newpage
 
@@ -75,27 +73,23 @@ See SRS Documentation at \wss{give url}
 \pagenumbering{arabic}
 
 \section{Introduction}
+This document outlines the Module Interface Specifications (MIS) for the "Course Buddy" application, an innovative tool designed to streamline the study process for students and educators. By delineating the interactions between the software's modules, this MIS serves as a fundamental component in the development and maintenance of the application, ensuring each module's functionality aligns with the overall system architecture.
 
-The following document details the Module Interface Specifications for
-\wss{Fill in your project name and description}
+The System Requirement Specifications (SRS) and Module Guide are complementary documents that, alongside this MIS, provide a comprehensive understanding of "Course Buddy's" requirements and design. The entire documentation set, including the source code and its most current implementation, is hosted for public access at our GitHub repository: \url{https://github.com/wangq131/4G06CapstoneProjectT5}.
 
-Complementary documents include the System Requirement Specifications
-and Module Guide.  The full documentation and implementation can be
-found at \url{...}.  \wss{provide the url for your repo}
+In this document, interface specifications are described functionally, with a focus on the inputs, outputs, and data types necessary for module interoperability. This approach provides a clear and direct understanding of module functionalities, preparing the way for detailed implementation strategies, including data structures and algorithmic solutions.
+
 
 \section{Notation}
 
-\wss{You should describe your notation.  You can use what is below as
-  a starting point.}
-
-The structure of the MIS for modules comes from \citet{HoffmanAndStrooper1995},
+The structure of the MIS for modules comes from ~\citet{HoffmanAndStrooper1995},
 with the addition that template modules have been adapted from
-\cite{GhezziEtAl2003}.  The mathematical notation comes from Chapter 3 of
-\citet{HoffmanAndStrooper1995}.  For instance, the symbol := is used for a
+~\citet{GhezziEtAl2003}.  The mathematical notation comes from Chapter 3 of
+~\citet{HoffmanAndStrooper1995}.  For instance, the symbol := is used for a
 multiple assignment statement and conditional rules follow the form $(c_1
 \Rightarrow r_1 | c_2 \Rightarrow r_2 | ... | c_n \Rightarrow r_n )$.
 
-The following table summarizes the primitive data types used by \progname. 
+The following table summarizes the primitive data types used by Course Buddy. 
 
 \begin{center}
 \renewcommand{\arraystretch}{1.2}
@@ -113,12 +107,13 @@ real & $\mathbb{R}$ & any number in (-$\infty$, $\infty$)\\
 \end{center}
 
 \noindent
-The specification of \progname \ uses some derived data types: sequences, strings, and
+The specification of Course Buddy uses some derived data types: sequences, strings, and
 tuples. Sequences are lists filled with elements of the same data type. Strings
 are sequences of characters. Tuples contain a list of values, potentially of
-different types. In addition, \progname \ uses functions, which
+different types. In addition, Course Buddy uses functions, which
 are defined by the data types of their inputs and outputs. Local functions are
 described by giving their type signature followed by their specification.
+
 
 \section{Module Decomposition}
 
@@ -131,21 +126,27 @@ The following table is taken directly from the Module Guide document for this pr
 \textbf{Level 1} & \textbf{Level 2}\\
 \midrule
 
-{Hardware-Hiding} & ~ \\
+{Hardware-Hiding Module} & Interface Module\\
 \midrule
 
-\multirow{7}{0.3\textwidth}{Behaviour-Hiding} & Input Parameters\\
-& Output Format\\
-& Output Verification\\
-& Temperature ODEs\\
-& Energy Equations\\ 
-& Control Module\\
-& Specification Parameters Module\\
+\multirow{7}{0.3\textwidth}{Behaviour-Hiding Module}
+& Back End Web Service Module\\
+& User Authentication Module\\ 
+& Task Module\\
+& Course Module\\
+& User Module\\
+& Message Notification Module\\ 
+& Friend System Module\\ 
+& Timetable Module\\ 
+& Pomodoro Module\\
 \midrule
 
-\multirow{3}{0.3\textwidth}{Software Decision} & {Sequence Data Structure}\\
-& ODE Solver\\
-& Plotting\\
+\multirow{3}{0.3\textwidth}{Software Decision Module}
+& PDF Extraction Module \\
+& Database Module\\
+& Study Plan Scheduling Module \\
+& Task Priority Prediction Module \\
+
 \bottomrule
 
 \end{tabular}
@@ -153,35 +154,35 @@ The following table is taken directly from the Module Guide document for this pr
 \label{TblMH}
 \end{table}
 
+
 \newpage
-~\newpage
-
-\section{MIS of \wss{Module Name}} \label{Module} \wss{Use labels for
-  cross-referencing}
-
-\wss{You can reference SRS labels, such as R\ref{R_Inputs}.}
-
-\wss{It is also possible to use \LaTeX for hypperlinks to external documents.}
+\section{MIS of Interface Module} \label{InterfaceModule}
 
 \subsection{Module}
-
-\wss{Short name for the module}
+Interface
 
 \subsection{Uses}
-
+Back-End Web Service\ref{BackEndWebServiceModule}
 
 \subsection{Syntax}
 
 \subsubsection{Exported Constants}
+None
 
 \subsubsection{Exported Access Programs}
 
 \begin{center}
-\begin{tabular}{p{2cm} p{4cm} p{4cm} p{2cm}}
+\begin{tabular}{p{4cm} p{3cm} p{3cm} p{3cm}}
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-\wss{accessProg} & - & - & - \\
+renderAuthPage&  - & \textit{Boolean} & internetError \\
+renderHomePage&  \textit{String} & \textit{Boolean} & internetError \\
+renderModelPage&  \textit{String} & \textit{Boolean} & internetError \\
+renderPlanPage&  \textit{String} & \textit{Boolean} & internetError \\
+renderUserProfilePage&  \textit{String} & \textit{Boolean} & internetError \\
+renderCoursePage&  \textit{String} & \textit{Boolean} & internetError \\
+
 \hline
 \end{tabular}
 \end{center}
@@ -190,52 +191,1363 @@ The following table is taken directly from the Module Guide document for this pr
 
 \subsubsection{State Variables}
 
-\wss{Not all modules will have state variables.  State variables give the module
-  a memory.}
+
+userName: \textit{String}\\
+currentPage: \textit{String}\\
+pageTitle: \textit{String}\\
+renderSuccess: \textit{Boolean}\\
+
 
 \subsubsection{Environment Variables}
 
-\wss{This section is not necessary for all modules.  Its purpose is to capture
-  when the module has external interaction with the environment, such as for a
-  device driver, screen interface, keyboard, file, etc.}
+\textit{DBAccessID}, \textit{DBAccessCode}, \textit{sessionToken}
 
 \subsubsection{Assumptions}
 
-\wss{Try to minimize assumptions and anticipate programmer errors via
-  exceptions, but for practical purposes assumptions are sometimes appropriate.}
+\begin{itemize}
+  \item The database server is assumed to be available 24/7 with minimal downtime for maintenance 
+  \item The volume of the data stored in the database will not exceed the capacity of the database
+\end{itemize}
 
 \subsubsection{Access Routine Semantics}
 
-\noindent \wss{accessProg}():
+\noindent renderAuthPage():
 \begin{itemize}
-\item transition: \wss{if appropriate} 
-\item output: \wss{if appropriate} 
-\item exception: \wss{if appropriate} 
+\item transition: \(currentPage := \text{"Authentication Page"}\)
+\item output: \(renderSuccess := pageTitle = \text{"Authentication Page"}\)
+\item exception: internetError
 \end{itemize}
 
-\wss{A module without environment variables or state variables is unlikely to
-  have a state transition.  In this case a state transition can only occur if
-  the module is changing the state of another module.}
+\noindent renderHomePage(\textit{sessionToken}):
+\begin{itemize}
+\item transition: \(currentPage := \text{"Home Page"}\)
+\item output: \(renderSuccess := pageTitle = \text{"Home Page"}\)
+\item exception: internetError
+\end{itemize}
 
-\wss{Modules rarely have both a transition and an output.  In most cases you
-  will have one or the other.}
+\noindent renderModelPage(\textit{sessionToken}):
+\begin{itemize}
+\item transition: \(currentPage := \text{"Model Page"}\)
+\item output: \(renderSuccess := pageTitle = \text{"Model Page"}\)
+\item exception: internetError
+\end{itemize}
+
+\noindent renderPlanPage(\textit{sessionToken}):
+\begin{itemize}
+\item transition: \(currentPage := \text{Plan Page"}\)
+\item output: \(renderSuccess := pageTitle = \text{"Plan Page"}\)
+\item exception: internetError
+\end{itemize}
+
+\noindent renderUserProfilePage(\textit{sessionToken}):
+\begin{itemize}
+\item transition: \(currentPage := \text{"UserProfile Page"}\)
+\item output: \(renderSuccess := pageTitle = \text{"UserProfile Page"}\)
+\item exception: internetError
+\end{itemize}
+
+\noindent renderCoursePage(\textit{sessionToken}):
+\begin{itemize}
+\item transition: \(currentPage := \text{"Course Page"}\)
+\item output: \(renderSuccess := pageTitle = \text{"Course Page"}\)
+\item exception: internetError
+\end{itemize}
+
+
+\subsubsection{Local Functions}
+\noindent createBackup:  \textit{List[csv File]} \\
+\noindent createBackup $\equiv$ files
+
+
+\newpage
+\section{MIS of Back-End Web Service Module} \label{BackEndWebServiceModule}
+
+\subsection{Module}
+Back-End Web Service
+
+\subsection{Uses}
+Message Notification\ref{MessageNotificationModule}, User Authentication\ref{UserAuthenticationModule}, Timetable\ref{TimetableModule}, Interface\ref{InterfaceModule}, User\ref{UserModule}, Course\ref{CourseModule}, Task\ref{TaskModule}, PDF Extraction\ref{PDFExtractionModule}, Pomodoro\ref{PomodoroTimerModule}, Study Plan Scheduling\ref{StudyPlanSchedulingModule}, Friend\ref{FriendSysModule}
+\
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+None
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{p{4cm} p{3cm} p{3cm} p{3cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+handleRequest & \textit{RequestData} & \textit{ResponseData} & requestError \\
+processData & \textit{Data} & \textit{ProcessedData} & processingError \\
+sendResponse & \textit{ResponseData} & - & responseError \\
+handleException & \textit{ExceptionData} & - & - \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+
+requestQueue: \textit{Queue[RequestData]}\\
+responseData: \textit{ResponseData}
+
+\subsubsection{Environment Variables}
+
+\textit{ServerStorage}, \textit{ServerProcessor}
+
+\subsubsection{Secrets}
+Internal Logic and data processing methods
+
+\subsubsection{Services}
+Offers web services for front-end modules, handling requests, responses, and exceptions
+
+\subsubsection{Implemented By}
+Server-side Languages and Principles
+
+\subsubsection{Assumptions}
+
+\begin{itemize}
+  \item The server is always running and capable of handling multiple simultaneous requests.
+  \item There is a standardized format for requests and responses between the front-end and back-end.
+\end{itemize}
+
+\subsubsection{Access Routine Semantics}
+
+\noindent handleRequest(\textit{requestData}):
+\begin{itemize}
+\item transition: 
+\begin{align*}
+\text{Add \textit{requestData} to } requestQueue
+\end{align*}
+
+\item output: 
+\begin{align*}
+\text{The response generated from processing the request}
+\end{align*}
+
+\item exception: requestError
+\end{itemize}
+
+\noindent processData(\textit{data}):
+\begin{itemize}
+\item transition: 
+\begin{align*}
+\text{Process \textit{data} using internal logic}
+\end{align*}
+
+\item output: 
+\begin{align*}
+\text{ProcessedData}
+\end{align*}
+
+\item exception: processingError
+\end{itemize}
+
+\noindent sendResponse(\textit{responseData}):
+\begin{itemize}
+\item transition: 
+\begin{align*}
+\text{Send \textit{responseData} to the requesting module}
+\end{align*}
+
+\item exception: responseError
+\end{itemize}
+
+\noindent handleException(\textit{exceptionData}):
+\begin{itemize}
+\item transition: 
+\begin{align*}
+\text{Handle \textit{exceptionData} according to server protocols}
+\end{align*}
+
+\item exception: None
+\end{itemize}
+
+\subsubsection{Local Functions}
+N/A
+
+
+\newpage
+\section{MIS of User Authentication Module} \label{UserAuthenticationModule}
+
+\subsection{Module}
+Database
+
+\subsection{Uses}
+Back-End Web Service\ref{BackEndWebServiceModule}
+\
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+sessionToken: \textit{String}
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{p{4cm} p{3cm} p{3cm} p{3cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+verifyAuth&  \textit{String} & \textit{Boolean} & - \\
+getSessionToken&  - & \textit{String} & internetError \\
+newUser&  \textit{String} & \textit{Boolean} & internetError \\
+resetPassword&  \textit{String} & \textit{Boolean} & internetError \\
+
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+
+userName: \textit{String}\\
+authSuccess: \textit{Boolean}\\
+sessionToken: \textit{String}\\
+userList: \textit{List[User]}
+
+\subsubsection{Environment Variables}
+
+\textit{DBAccessID}, \textit{DBAccessCode}
+
+\subsubsection{Assumptions}
+
+\begin{itemize}
+  \item The database server is assumed to be available 24/7 with minimal downtime for maintenance 
+  \item The volume of the data stored in the database will not exceed the capacity of the database
+\end{itemize}
+
+\subsubsection{Access Routine Semantics}
+
+\noindent verifyAuth(\textit{userName}, \textit{password}):
+\begin{itemize}
+\item transition: 
+\begin{align*}
+\textit{authSuccess} := &\, \exists \, (\textit{user} \in \textit{users} \, \land \\
+&\, \textit{user.username} = \textit{userName} \, \land \\
+&\, \textit{user.password} = \textit{password}) \\
+\end{align*}
+\item output: 
+\begin{align*}
+\textit{authSuccess} := &\, \exists \, (\textit{user} \in \textit{users} \, \land \\
+&\, \textit{user.username} = \textit{userName} \, \land \\
+&\, \textit{user.password} = \textit{password}) \\
+\end{align*}
+
+\item exception: None
+\end{itemize}
+
+\noindent getSessionToken():
+\begin{itemize}
+\item output: 
+\begin{align*}
+\textit{out} := &\, \textit{sessionToken} \, | \\
+&\, \textit{authSuccess} = \textit{true} \\
+&\, \textit{or} \\
+&\, \text{"No token generated"} \, | \\
+&\, \textit{authSuccess} = \textit{false}
+\end{align*}
+
+\item exception: None
+\end{itemize}
+\noindent newUser(\textit{userName}, \textit{password}):
+\begin{itemize}
+\item transition: 
+\begin{align*}
+userList := userList \cup \{(userName, password)\}
+\end{align*}
+
+\item output: 
+\begin{align*}
+out := \begin{cases}
+true, & \text{if the user is successfully added;} \\
+false, & \text{otherwise.}
+\end{cases}
+\end{align*}
+
+
+\item exception: None
+\end{itemize}
+
+\noindent resetPassword(\textit{userName}, \textit{password}):
+\begin{itemize}
+\item transition: 
+\begin{align*}
+\forall user \in userList, \, (user.userName = userName \Rightarrow user.password = newPassword)
+\end{align*}
+
+\item output: 
+\begin{align*}
+out := \begin{cases}
+true, & \text{if } \exists user \in userList \text{ with } user.userName = userName; \\
+false, & \text{otherwise.}
+\end{cases}
+\end{align*}
+
+\item exception: None
+\end{itemize}
+
+\subsubsection{Local Functions}
+N/A
+
+\newpage
+\section{MIS of Task Module} \label{TaskModule}
+
+\subsection{Module}
+Task
+
+\subsection{Uses}
+Task Priority Prediction\ref{TaskPriorityPredictionModule}
+\
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+None
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{p{4cm} p{3cm} p{3cm} p{3cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+addTask&  \textit{String} & \textit{Boolean} & - \\
+updateTask&  \textit{String} & \textit{Boolean} & - \\
+deleteTask&  \textit{String} & \textit{Boolean} & - \\
+getTask&  \textit{String} & \textit{List[String]} & - \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+
+taskId: \textit{String}\\
+taskType: \textit{String}\\
+courseCode: \textit{String}\\
+taskWeight: \textit{Double}\\
+deadline: \textit{String}\\
+taskList: \textit{List(Task)}\\
+
+
+
+\subsubsection{Environment Variables}
+
+\textit{DBAccessID}, \textit{DBAccessCode}
+
+\subsubsection{Assumptions}
+
+\begin{itemize}
+  \item The volume of the course data stored in the database will not exceed the capacity of the database
+\end{itemize}
+
+\subsubsection{Access Routine Semantics}
+
+\noindent addTask(\textit{taskId}):
+\begin{itemize}
+\item transition: \(taskList := (taskList \cup (task \in taskList \, | \, task.taskid = taskId))\)
+\item output: $out := \mathit{\exists \, (task \in taskList \, | \, task.taskId = taskId)
+}$
+
+\end{itemize}
+
+\noindent updateTask(\textit{taskId},\textit{taskType},\textit{courseCode},\textit{taskWeight},\textit{deadline}):
+\begin{itemize}
+\item transition:
+\begin{align*}
+task &\in taskList \, | \\
+&task.taskId = taskId \, \land \\
+&task.taskType = taskType \, \land \\
+&task.courseCode = courseCode \, \land \\
+&task.taskWeight = taskWeight \, \land \\
+&task.deadline = deadline
+\end{align*}
+\item output: 
+\begin{align*}
+out := \exists \, (task &\in taskList \, | \\
+&task.taskId = taskId \, ; \\
+&task.taskType = taskType \, ; \\
+&task.courseCode = courseCode \, ; \\
+&task.taskWeight = taskWeight \, ; \\
+&task.deadline = deadline)
+\end{align*}
+
+\item exception: None
+\end{itemize}
+
+\noindent deleteTask(\textit{taskId}):
+\begin{itemize}
+\item transition: \(taskList := (task \setminus task \, | \, task.taskId = taskId )\)
+\item output: $out := \mathit{! \ \exists \, (task \in taskList \, | \, task.taskId = taskId)
+}$
+\item exception: None
+\end{itemize}
+
+\noindent getTask(\textit{taskId}):
+\begin{itemize}
+\item output: 
+\begin{align*}
+out := &\, \{task.taskType, task.courseCode, task.taskWeight, task.deadline\| \\
+&\, task \in taskList \, \land \, task.taskId = taskId\}
+\end{align*}
+
+\item exception: None
+\end{itemize}
+
+\subsubsection{Local Functions}
+N/A
+
+
+\newpage
+\section{MIS of Course Module} \label{CourseModule}
+
+\subsection{Module}
+Course
+
+\subsection{Uses}
+Database\ref{DatabaseModule}
+\
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+None
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{p{4cm} p{3cm} p{3cm} p{3cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+addCourse&  \textit{String} & \textit{Boolean} & courseAlreadyExist \\
+updateCourse&  \textit{String} & \textit{Boolean} & - \\
+deleteCourse&  \textit{String} & \textit{Boolean} & courseDoesNotExist \\
+getCourse&  \textit{String} & \textit{List[String]} & courseDoesNotExist \\
+
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+
+courseCode: \textit{String}\\
+courseName: \textit{String}\\
+courseInstructor: \textit{String}\\
+emailList: \textit{List[String]}\\
+courseList: \textit{List(Course)}\\
+
+
+\subsubsection{Environment Variables}
+
+\textit{DBAccessID}, \textit{DBAccessCode}
+
+\subsubsection{Assumptions}
+
+\begin{itemize}
+  \item The volume of the course data stored in the database will not exceed the capacity of the database
+\end{itemize}
+
+\subsubsection{Access Routine Semantics}
+
+\noindent addCourse(\textit{courseCode}):
+\begin{itemize}
+\item transition: \(courseList := (courseList \cup (course \in courseList \, | \, course.courseCode = courseCode))\)
+\item output: $out := \mathit{\exists \, (course \in courseList \, | \, course.courseCode = courseCode)
+}$
+\item exception: courseAlreadyExist
+\end{itemize}
+
+\noindent updateCourse(\textit{courseCode},\textit{courseName},\textit{courseInstructor},\textit{emailList}):
+\begin{itemize}
+\item transition:
+\begin{align*}
+course &\in courseList \, | \\
+&course.courseCode = courseCode \, ; \\
+&course.courseName = courseName \, ; \\
+&course.courseInstructor = courseInstructor \, ; \\
+&course.emailList = emailList
+\end{align*}
+\item output: 
+\begin{align*}
+out := \exists \, (course &\in courseList \, | \\
+&course.courseCode = courseCode \, \land \\
+&course.courseName = courseName \, \land \\
+&course.courseInstructor = courseInstructor \, \land \\
+&course.emailList = emailList)
+\end{align*}
+\item exception: None
+\end{itemize}
+
+
+\noindent deleteCourse(\textit{courseCode}):
+\begin{itemize}
+\item transition: \(courseList := (course \setminus course \, | \, course.courseCode = courseCode )\)
+\item output: $out := \mathit{! \ \exists \, (course \in courseList \, | \, course.courseCode = courseCode)
+}$
+\item exception: courseDoesNotExist
+\end{itemize}
+
+\noindent getCourse(\textit{courseCode}):
+\begin{itemize}
+\item 
+\begin{align*}
+out := &\, \{course.courseName, course.courseInstructor, course.emailList\, | \\
+&\, course \in courseList \, \land \, course.courseCode = courseCode\}
+\end{align*}
+
+\item exception: courseDoesNotExist
+\end{itemize}
+
+
+\subsubsection{Local Functions}
+N/A
+
+
+
+
+\newpage
+\section{MIS of Timetable} \label{TimetableModule}
+
+\subsection{Module}
+TimeTable
+
+\subsection{Uses}
+BackEndWebService\ref{BackEndWebServiceModule}
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+None
+
+\subsubsection{Exported Access Programs}
+\begin{center}
+\begin{tabular}{p{4cm} p{3cm} p{3cm} p{3cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+switchView & \textit{String} & - & - \\
+modifyTimetable&  \textit{String, String} & - & InvalidModificationException \\
+exportToGoogleCalendar&  - & \textit{String} &  ExportFailureException \\
+setPreferredStudyTime&  \textit{Time,Time} & - & - \\
+syncWithGoogleCalendar&  \textit{Task} & - & SyncFailureException \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+
+currentViewType: \textit{String}\\
+timetableData: \textit{List[Dictionary]}\\
+preferredStudyTime: \textit{List[Tuple]}\\
+
+
+\subsubsection{Environment Variables}
+
+DBAccessID: \textit{String}\\
+DBAccessCode: \textit{String}\\
+GoogleCalendarAPIKey: \textit{String}
+
+
+\subsubsection{Assumptions}
+
+\begin{itemize}
+  \item The volume of data stored in the database will not exceed the capacity of the database.
+\end{itemize}
+
+\subsubsection{Access Routine Semantics}
+
+\noindent switchView(\textit{viewType}):
+\begin{itemize}
+\item transition: \( currentViewType := \textit{viewType} \)
+\item output: \( out := \text{null} \)
+\item exception: None
+\end{itemize}
+
+\noindent modifyTimetable(\textit{action}, \textit{details}):
+\begin{itemize}
+\item transition: 
+\[
+\text{if } \text{valid}(\textit{action}, \textit{details}) \text{ then } \text{timetableData} := \textit{details}
+\]
+\item output: \( out := \text{null} \)
+\item exception: 
+\[
+\begin{array}{ll}
+\text{exc} := & \begin{cases}
+\text{InvalidModificationException}, & \text{if } \neg \text{valid}(\textit{action}, \textit{details}) \\
+\text{null}, & \text{otherwise}
+\end{cases}
+\end{array}
+\]
+\end{itemize}
+
+\noindent setPreferredStudyTime(\textit{startTime}, \textit{endTime}):
+\begin{itemize}
+\item transition: 
+\[
+\text{if } \textit{startTime} < \textit{endTime} \text{ then } \text{preferredStudyTime} := \{(\textit{startTime}, \textit{endTime})\}
+\]
+\item output: \( out := \text{null} \)
+\item exception: None
+\end{itemize}
+
+\noindent exportToGoogleCalendar():
+\begin{itemize}
+\item transition: 
+\[
+\text{if GoogleCalendarAPIKey is available()} \text{ then send } \text{timetableData} \text{ to Google Calendar}
+\]
+\item output: \( out := \text{export status} \)
+\item exception: 
+\[
+\begin{array}{ll}
+\text{exc} := & \begin{cases}
+\text{ExportFailureException}, & \text{if export fails} \\
+\text{null}, & \text{otherwise}
+\end{cases}
+\end{array}
+\]
+\end{itemize}
+
+\noindent syncWithGoogleCalendar(\textit{Task}):
+\begin{itemize}
+\item transition: 
+\[
+\begin{array}{l}
+\text{if GoogleCalendarAPIKey is available()} \Rightarrow \text{retrieve data from Google Calendar} \\
+\text{and update timetableData}
+\end{array}
+\]
+\item output: None
+\item exception: 
+\[
+\begin{array}{l}
+\text{exc} := \begin{cases}
+\text{SyncFailureException}, & \text{if sync fails} \\
+\text{null}, & \text{otherwise}
+\end{cases}
+\end{array}
+\]
+\end{itemize}
+
+\subsubsection{Local Functions}
+\noindent valid(\textit{action}, \textit{details}):
+\begin{itemize}
+\item output: 
+\[
+\begin{array}{l}
+out := \begin{cases}
+\text{true}, & \text{if action and details are valid} \\
+\text{false}, & \text{otherwise}
+\end{cases}
+\end{array}
+\]
+\item exception: None
+\end{itemize}
+
+
+
+
+
+\newpage
+\section{MIS of Pomodoro Timer Module}
+\label{PomodoroTimerModule}
+
+\subsection{Module}
+PomodoroTimer
+
+\subsection{Uses}
+None
+
+\subsection{Syntax}
+
+\subsubsection{Exported Access Programs}
+\begin{center}
+\begin{tabular}{p{4cm} p{3cm} p{3cm} p{3cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+startSession&  \textit{Integer} & \textit{Void} & \textit{InvalidTimeException} \\
+stopSession& - & \textit{Void} & - \\
+getRemainingTime& - & \textit{Integer} & - \\
+setWorkDuration&  \textit{Integer} & \textit{Void} & \textit{InvalidTimeException} \\
+setBreakDuration&  \textit{Integer} & \textit{Void} & \textit{InvalidTimeException} \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+workDuration: \textit{Integer}\\
+breakDuration: \textit{Integer}\\
+remainingTime: \textit{Integer}
+
+\subsubsection{Environment Variables}
+N/A
+
+\subsubsection{Assumptions}
+\begin{itemize}
+  \item It is assumed that the user enters valid time intervals for work and break durations.
+  \item It is assumed that the system clock is accurate and synchronized with real time.
+  \item It is assumed that notifications for the end of work or break intervals are enabled and can be sent to the user.
+  \item It is assumed that the module will be used in an environment where regular work-break cycles are beneficial for productivity.
+\end{itemize}
+
+\subsubsection{Access Routine Semantics}
+
+\noindent startSession(\textit{duration}):
+\begin{itemize}
+\item transition: 
+    \[
+    workDuration := duration, \quad remainingTime := duration
+    \]
+\item output: 
+    \[
+    out := \text{null} \quad \text{if } \quad duration > 0
+    \]
+\item exception: 
+    \[
+    exc := \begin{cases} 
+    InvalidTimeException, & \text{if } duration \leq 0 \\
+    \text{null}, & \text{otherwise} 
+    \end{cases}
+    \]
+\end{itemize}
+
+\noindent stopSession():
+\begin{itemize}
+\item transition: 
+    \[
+    remainingTime := 0
+    \]
+\item output: 
+    \[
+    out := \text{null}
+    \]
+\item exception: None
+\end{itemize}
+
+\noindent getRemainingTime():
+\begin{itemize}
+\item output: 
+    \[
+    out := remainingTime
+    \]
+\item exception: None
+\end{itemize}
+
+\noindent setWorkDuration(\textit{newDuration}):
+\begin{itemize}
+\item transition: 
+    \[
+    workDuration := \begin{cases} 
+    newDuration, & \text{if } newDuration > 0 \\
+    workDuration, & \text{otherwise}
+    \end{cases}
+    \]
+\item output: 
+    \[
+    out := \text{null}
+    \]
+\item exception: 
+    \[
+    exc := \begin{cases} 
+    InvalidTimeException, & \text{if } newDuration \leq 0 \\
+    \text{null}, & \text{otherwise} 
+    \end{cases}
+    \]
+\end{itemize}
+
+\noindent setBreakDuration(\textit{newDuration}):
+\begin{itemize}
+\item transition: 
+    \[
+    breakDuration := \begin{cases} 
+    newDuration, & \text{if } newDuration > 0 \\
+    breakDuration, & \text{otherwise}
+    \end{cases}
+    \]
+\item output: 
+    \[
+    out := \text{null}
+    \]
+\item exception: 
+    \[
+    exc := \begin{cases} 
+    InvalidTimeException, & \text{if } newDuration \leq 0 \\
+    \text{null}, & \text{otherwise} 
+    \end{cases}
+    \]
+\end{itemize}
+
+
+\subsubsection{Local Functions}
+None
+
+
+
+
+\newpage
+\section{MIS of PDF Extraction Module} \label{PDFExtractionModule}
+
+\subsection{Module}
+PDFExtraction
+
+\subsection{Uses}
+BackEndWebService\ref{BackEndWebServiceModule}
+
+\subsection{Syntax}
+
+\subsubsection{Exported Access Programs}
+\begin{center}
+\begin{tabular}{p{4cm} p{3cm} p{3cm} p{3cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+extractCourseInfo&  \textit{String} & \textit{Dictionary} & \textit{fileDoesNotExist}, \textit{InvalidInputException}, \textit{DataExtractionException} \\
+getScoreDistribution&  \textit{Course} & \textit{Dictionary} & - \\
+getCourseDescription&  \textit{Course} & \textit{String} & - \\
+getInstructorInfo&  \textit{Course} & \textit{Dictionary} & - \\
+getTAsInfo&  \textit{Course} & \textit{Dictionary} & - \\
+communicateWithAPI&  \textit{String} & \textit{String} & \textit{fileDoesNotExist}, \textit{APIResponseParsingException}, \textit{APICommunicationException}, \textit{APIAuthenticationException}\\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+PDFDocumentContent: \textit{String}\\
+ExtractedCourseInfo: \textit{Dictionary}
+
+\subsubsection{Environment Variables}
+ChatGPTAPIKey: \textit{String}\\
+APIRateLimit: \textit{Integer}
+
+\subsubsection{Assumptions}
+
+\begin{itemize}
+  \item It is assumed that the format and content of the course syllabus will be consistent. 
+  \item It is assumed that the PDF document contains key information about the course and this information is in text form.
+  \item It is assumed that the \textit{ChatGPT} API is available and accessible for information extraction related to natural language processing.
+  \item It is assumed that the module will have access to the Internet at runtime to communicate with and obtain information from the \textit{ChatGPT} API.
+\end{itemize}
+
+\subsubsection{Access Routine Semantics}
+
+\noindent extractCourseInfo(\textit{String}):
+\begin{itemize}
+\item transition: \( \text{PDFDocumentContent} := \text{ExtractContent}(String) \)
+\item output: $out := \mathit{\exists ci \in CourseInfos \mid Extract(PDFDocumentContent, String) = ci \land formatData(ci) \rightarrow Dictionary}$
+\item exception: 
+    \begin{itemize}
+        \item $exc := \mathit{fileDoesNotExist} \iff \lnot (\exists f \in Files \mid f = String)$
+        \item $exc := \mathit{InvalidInputException} \iff \lnot (validateInput(String))$
+        \item $exc := \mathit{DataExtractionException} \iff \lnot (\exists d \in Data \mid Extract(PDFDocumentContent, String) = d)$
+    \end{itemize}
+\end{itemize}
+
+\noindent getScoreDistribution(\textit{Course}):
+\begin{itemize}
+\item transition: None
+\item output: $out := \mathit{\exists sd \in ScoreDistributions \mid sd \text{ corresponds to } Course \land formatData(sd)}$
+\item exception: None
+\end{itemize}
+
+\noindent getCourseDescription(\textit{Course}):
+\begin{itemize}
+\item transition: None
+\item output: $out := \mathit{\exists desc \in Descriptions \mid desc \text{ corresponds to } Course \land formatData(desc)}$
+\item exception: None
+\end{itemize}
+
+\noindent getInstructorInfo(\textit{Course}):
+\begin{itemize}
+\item transition: None
+\item output: $out := \mathit{\exists info \in InstructorInfos \mid info \text{ corresponds to } Course \land formatData(info)}$
+\item exception: None
+\end{itemize}
+
+\noindent getTAsInfo(\textit{Course}):
+\begin{itemize}
+\item transition: None
+\item output: $out := \mathit{\exists info \in TAsInfos \mid info \text{ corresponds to } Course \land formatData(info)}$
+\item exception: None
+\end{itemize}
+
+\noindent communicateWithAPI(\textit{String}):
+\begin{itemize}
+\item transition: \( \text{APIResponses} := \text{APIResponses} \cup \{ \text{Communicate}(ChatGPTAPIKey, String) \} \)
+\item output: $out := \mathit{\exists resp \in APIResponses \mid Communicate(ChatGPTAPIKey, String) = resp \land formatData(resp)}$
+\item exception: 
+    \begin{itemize}
+        \item $exc := \mathit{fileDoesNotExist} \iff \lnot (\exists f \in Files \mid f = String)$
+        \item $exc := \mathit{APIResponseParsingException} \iff \lnot (\exists r \in ParsableResponses \mid r = resp)$
+        \item $exc := \mathit{APICommunicationException} \iff \lnot (\exists c \in CommunicableResponses \mid c = resp)$
+        \item $exc := \mathit{APIAuthenticationException} \iff \lnot (\exists a \in AuthenticatedKeys \mid a = ChatGPTAPIKey)$
+    \end{itemize}
+\end{itemize}
+
 
 \subsubsection{Local Functions}
 
-\wss{As appropriate} \wss{These functions are for the purpose of specification.
-  They are not necessarily something that is going to be implemented
-  explicitly.  Even if they are implemented, they are not exported; they only
-  have local scope.}
+\noindent validateInput(\textit{String}):
+\begin{itemize}
+\item transition: None
+\item output: \( \text{isValid} := (\textit{String} \neq \varnothing) \land (\textit{String} \in \text{ValidInputs}) \)
+\item exception: None
+\end{itemize}
+
+\noindent formatData(\textit{String}):
+\begin{itemize}
+\item transition: \( \text{FormattedData} := \text{UpdateFormattedData}(\textit{String}) \)
+\item output: 
+    \begin{itemize}
+        \item \( \text{formattedData} := \left\{ \text{ExtractedData} \mid \text{ExtractedData} \text{ is derived from } \textit{String} \text{ and formatted into corresponding structures} \right\} \)
+        \item This includes formatting \textit{String} into structures like:
+            \begin{itemize}
+                \item Course information as a \textit{Dictionary}
+                \item Score distribution as a \textit{Dictionary}
+                \item Course description as a \textit{String}
+                \item Instructor information as a \textit{Dictionary}
+                \item TA information as a \textit{Dictionary}
+            \end{itemize}
+    \end{itemize}
+\item exception: 
+    \begin{itemize}
+        \item \( exc := \text{DataFormatException} \iff \lnot (\textit{String} \text{ can be correctly parsed and formatted}) \)
+    \end{itemize}
+\end{itemize}
+
+
+
+\newpage
+\section{MIS of Database Module} \label{DatabaseModule}
+
+\subsection{Module}
+Database
+
+\subsection{Uses}
+User\ref{UserModule}, Course\ref{CourseModule}, Task\ref{TaskModule}
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+None
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{p{4cm} p{3cm} p{3cm} p{3cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+connectToDB&  \textit{String} & \textit{Boolean} & - \\
+getDataFile&  \textit{String} & \textit{csv File} & fileDoesNotExist \\
+uploadDataFile&  \textit{String} & - & - \\
+deleteDataFile&  \textit{String} & - & fileDoesNotExist \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+
+files: \textit{List[csv File]}
+
+\subsubsection{Environment Variables}
+
+\textit{DBAccessID}, \textit{DBAccessCode}
+
+\subsubsection{Assumptions}
+
+\begin{itemize}
+  \item The database server is assumed to be available 24/7 with minimal downtime for maintenance 
+  \item The volume of the data stored in the database will not exceed the capacity of the database
+\end{itemize}
+
+\subsubsection{Access Routine Semantics}
+
+\noindent connectToDB(\textit{addressOfDB}):
+\begin{itemize}
+\item output: $out := \mathit{\exists( ip: ipAddress|ip=addressOfDB)}$
+\item exception: None
+\end{itemize}
+
+\noindent getDataFile(\textit{fileName}):
+\begin{itemize}
+\item output: \(out := file: (file: csv File|file=fileName \land file \in files)\)
+\item exception: fileDoesNotExist
+\end{itemize}
+
+\noindent uploadDataFile(\textit{fileName}):
+\begin{itemize}
+\item transition: \(files := (files \cup fileName)\)
+\item exception: None
+\end{itemize}
+
+\noindent deleteDataFile(\textit{fileName}):
+\begin{itemize}
+\item transition: \(files := (files \setminus fileName)\)
+\item exception: fileDoesNotExist
+\end{itemize}
+
+\subsubsection{Local Functions}
+\noindent createBackup:  \textit{List[csv File]} \\
+\noindent createBackup $\equiv$ files
+
 
 \newpage
 
+\section{MIS of Study Plan Scheduling Module} \label{StudyPlanSchedulingModule}
+
+\subsection{Module}
+Study Plan Scheduling
+
+\subsection{Uses}
+None
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+None
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{p{4cm} p{3cm} p{3cm} p{3cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+getPlan&  \textit{set[Task]} & \textit{dict[timeSlot: Task]} & - \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+
+timeSlotsMap: \textit{dict[timeSlot: Task]}
+
+\subsubsection{Environment Variables}
+None
+
+\subsubsection{Assumptions}
+
+\begin{itemize}
+  \item The interval of time slot is fixed 
+  \item The number of tasks are always less than the number of time slots that the timetable have
+\end{itemize}
+
+\subsubsection{Access Routine Semantics}
+
+\noindent getPlan(\textit{tasks}):
+\begin{itemize}
+\item transition: timeSlotsMap = Null \implies \( \forall task: Task \in Tasks: \exists timeSlotsMap[i: timeSlot] = task \)
+\item exception: None
+\end{itemize}
+
+
+\subsubsection{Local Functions}
+createTimeSlot(interval: int): \textit{List[timeSlot]}
+
+\newpage
+\section{MIS of Task Priority Prediction Module} \label{TaskPriorityPredictionModule}
+
+\subsection{Module}
+Task Priority Prediction
+
+\subsection{Uses}
+None
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+None
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{p{4cm} p{3cm} p{3cm} p{3cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+getPriority&  \textit{Task} & \textit{String} & - \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+
+priorities: \textit{Enum[String]}
+
+\subsubsection{Environment Variables}
+None
+
+\subsubsection{Assumptions}
+
+\begin{itemize}
+  \item Assume that the level of priorities are well defined
+  \item Assume that task priorities are consistently evaluated based on these criteria
+\end{itemize}
+
+\subsubsection{Access Routine Semantics}
+
+
+\noindent getPriority(\textit{task}):
+\begin{itemize}
+\item output: \text{priority}[i] where \[ 
+\text{For each task } i, \text{ and for each field } j = 1, 2, ..., \text{length(task.fields)}, \text{ with weights } weight[j] \in \mathbb{R}: 
+\]
+\[
+\sum_{j}{} (\text{weight}[j] \times \text{field}[j]) \implies \text{priority}[i]
+\]
+
+\item exception: None
+\end{itemize}
+
+\subsubsection{Local Functions}
+None
+
+\newpage
+\section{MIS of User Module} \label{UserModule}
+
+\subsection{Module}
+
+UserDB
+
+\subsection{Uses}
+
+Database Management System (DBMS)
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+
+None
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{p{2cm} p{4cm} p{4cm} p{2cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+createUser & userData: UserData & userID: UserID & UserAlreadyExists \\
+queryUser & userID: UserID & userData: UserData & UserNotFound \\
+updateUser & userID: UserID, userData: UserData & - & UserNotFound \\
+deleteUser & userID: UserID & - & UserNotFound \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+
+userTable: Seq of UserData
+
+\subsubsection{Environment Variables}
+
+None
+
+\subsubsection{Assumptions}
+
+User creation is atomic and unique identifiers are generated for each user.
+
+\subsubsection{Access Routine Semantics}
+
+\noindent createUser(userData):
+\begin{itemize}
+\item transition: userTable := userTable 
+\item output: \textit{out} := a unique userID
+\item exception: \textit{exc} := UserAlreadyExists when there exists some user in userTable with userData.userID
+\end{itemize}
+
+\newpage
+\section{MIS of Message Notification Module} \label{MessageNotificationModule}
+
+\subsection{Module}
+
+MessageNotification
+
+\subsection{Uses}
+
+None
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+
+None
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{p{3cm} p{5cm} p{2cm} p{2.5cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+sendNotification & userID: UserID, message: String & - & UserNotFound \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+
+notificationQueue: Queue of Notification
+
+\subsubsection{Environment Variables}
+
+None
+
+\subsubsection{Assumptions}
+
+Notifications are sent in real-time and users are online to receive them.
+
+\subsubsection{Access Routine Semantics}
+
+\noindent sendNotification(userID, message):
+\begin{itemize}
+\item transition: notificationQueue := notificationQueue.enqueue(\{userID, message\})
+\item exception: \textit{exc} := UserNotFound when no user exists with userID
+\end{itemize}
+
+\newpage
+
+\section{MIS of Friend System Module} \label{FriendSysModule}
+
+\subsection{Module}
+
+FriendSystem
+
+\subsection{Uses}
+
+Back-End Web Service\ref{BackEndWebServiceModule}
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+
+None
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{p{2.5cm} p{5cm} p{2cm} p{3cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+addFriend & userID: UserID, friendID: UserID & - & UserNotFound, AlreadyFriends \\
+removeFriend & userID: UserID, friendID: UserID & - & UserNotFound, NotFriends \\
+sendMessage & userID: UserID, friendID: UserID, message: String & - & UserNotFound, NotFriends \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+
+friendList: Map of UserID to List of UserID
+
+\subsubsection{Environment Variables}
+
+None
+
+\subsubsection{Assumptions}
+
+Users can only send messages to users who are already their friends.
+
+\subsubsection{Access Routine Semantics}
+
+\noindent addFriend(userID, friendID):
+\begin{itemize}
+\item transition: friendList[userID] := friendList[userID] $\cup$ \{friendID\}
+\item exception: \textit{exc} := UserNotFound when no user exists with friendID
+\end{itemize}
+
+\noindent removeFriend(userID, friendID):
+\begin{itemize}
+\item transition: friendList[userID] := friendList[userID] $\setminus$ \{friendID\}
+\item exception: \textit{exc} := UserNotFound when no user exists with friendID
+\end{itemize}
+
+\noindent sendMessage(userID, friendID, message):
+\begin{itemize}
+\item transition: \textit{A message is sent to friendID from userID with content message.}
+\item exception: \textit{exc} := UserNotFound when no user exists with friendID, NotFriends if friendID is not in friendList[userID]
+\end{itemize}
+
+
+\newpage
+
+\section{Appendix --- Reflection}
+
+
+The information in this section will be used to evaluate the team members on the
+graduate attribute of Lifelong Learning.  Please answer the following questions:
+
+\begin{enumerate}
+  \item What knowledge and skills will the team collectively need to acquire to
+  successfully complete the verification and validation of your project?
+  Examples of possible knowledge and skills include dynamic testing knowledge,
+  static testing knowledge, specific tool usage etc.  You should look to
+  identify at least one item for each team member.
+
+
+  \begin{itemize}
+    \item UI/UX usability validation tools such  as \textit{UserTesting}, \textit{Lookback.io}. to better evaluate our product is user-friendly in a couple of perspectives: effective, learnable, and user-friendly.
+    \item Dynamic Testing Tools such as \textit{Behave}, which is a tool that allows users to write the test cases in human languages to test for python-system framework. 
+    \item AI Model Validation Frameworks such as \textit{Snitch AI} and \textit{scikit-learn} which can help our trained morel enhance quality and troubleshoot quickly.
+    \item Static Code Analysis Tools such as \textit{SonarQube} to ensure the code quality which also can be integrated with \textit{CI/CD} for continuous development
+    \item Enhance continuous delivery/deployment by exploring the \textit{Actions} features in \textit{GitHub} Pro to build custom workflow pipeline.
+   \end{itemize} 
+
+
+  \item For each of the knowledge areas and skills identified in the previous
+  question, what are at least two approaches to acquiring the knowledge or
+  mastering the skill?  Of the identified approaches, which will each team
+  member pursue, and why did they make this choice?
+
+  \begin{table}[]
+    \begin{tabular}{| p{3cm} | p{3.5cm} | p{2cm} | p{5cm} |}
+    \hline
+      \textbf{Knowledge or Skills} & \textbf{Approaches} & \textbf{Assigned Team Member} & \textbf{Reason} \\
+    \hline
+      \raggedright UI/UX Usability validation & \raggedright Use \textit{ChatGPT}, \textit{Google}, watch online tutorials, or ask supervisor for help  & Shuting, Shi & Working on the initial UI design, familiar with the key features and the components of website. Therefore, can detect the usability requirements of our target user groups and easy to make modifications accordingly \\
+    \hline
+      \raggedright  Dynamic Testing Tools & \raggedright Use \textit{ChatGPT}, \textit{Google}, watch online tutorials & Qiang, Gao & Have the related experience in the previous co-op work terms, implemented similar functionality in previous project. Strong interest in the dynamic testing section. \\
+    \hline
+      \raggedright AI Model Validation Framework & \raggedright Use \textit{ChatGPT}, \textit{Google}, watch online tutorials & Qianni, Wang & Experience with many ML projects where these libraries are being used in AI programs and previous co-op work terms. Working on the model training,  data-sets selection and integration, familiar with the model algorithm, easy to do modifications if encounters specific model bias. \\
+    \hline
+      \raggedright Static Code Analysis Tools & \raggedright Use \textit{ChatGPT}, \textit{Google}, watch online tutorials & Chenwei, Song & Experience in enhancing clean code in previous co-op work terms. Strong interest in the code analysis section. \\
+    \hline
+      \raggedright GitHub Action Feature & \raggedright Use \textit{ChatGPT}, \textit{Google}, and watch online tutorials & Jingyao, Qin & Strong interest in GitHub features, have related experience in the previous coop term, quick to hand on this technique. \\
+    \hline
+    \end{tabular}
+\end{table}
+\end{enumerate}
+
+\newpage
 \bibliographystyle {plainnat}
-\bibliography {../../../refs/References}
+\bibliography {../Design.bib}
 
-\newpage
-
-\section{Appendix} \label{Appendix}
-
-\wss{Extra information if required}
 
 \end{document}
