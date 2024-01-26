@@ -42,12 +42,22 @@ function dragLeave(e) {
 function drop(e) {
     e.preventDefault();
     e.target.classList.remove('hovered');
+
     const id = e.dataTransfer.getData('text/plain');
     const draggableElement = document.querySelector(`[data-id="${id}"]`);
-    const newStatus = e.target.getAttribute('data-status');
-    e.target.appendChild(draggableElement);
+    const targetColumn = e.target.closest('.task-column'); 
+    const sourceColumnId = draggableElement.closest('.task-column').getAttribute('id');
+    const newStatus = targetColumn.getAttribute('data-status');
+
+    targetColumn.appendChild(draggableElement);
     updateTaskStatus(id, newStatus);
+
+    if (sourceColumnId !== targetColumn.getAttribute('id')) { 
+        updateTaskCount(sourceColumnId, -1); 
+        updateTaskCount(targetColumn.getAttribute('id'), 1); 
+    }
 }
+
 
 function updateTaskStatus(taskId, newStatus) {
     fetch('/update_task_status', {
@@ -66,5 +76,12 @@ function updateTaskStatus(taskId, newStatus) {
         console.error('Error updating task status:', error);
         alert('Failed to update task status.'); 
     });
+}
+
+function updateTaskCount(columnId, change) {
+    let column = document.getElementById(columnId);
+    let taskCounter = column.querySelector('.task-count');
+    let currentCount = parseInt(taskCounter.textContent) || 0;
+    taskCounter.textContent = currentCount + change;
 }
 

@@ -3,7 +3,15 @@ import os
 import pandas as pd
 import botocore
 import boto3
-from flask import Flask, jsonify, render_template, request, Response, redirect, url_for
+from flask import (
+    Flask,
+    jsonify,
+    render_template,
+    request,
+    Response,
+    redirect,
+    url_for,
+)
 import ast
 
 try:
@@ -368,29 +376,29 @@ def upload_file(course_id):
 
 
 # update tasks status after dragging
-@app.route('/update_task_status', methods=['POST'])
+@app.route("/update_task_status", methods=["POST"])
 def update_task_status():
     data = request.get_json()
-    task_id = data['id']
-    new_status = data['status']
+    task_id = int(data['id'])
+    new_status = data["status"]
 
-    # Fetch the current tasks data from S3
     tasks_df = get_df_from_csv_in_s3(s3, bucket_name, mock_tasks_data_file)
+    tasks_df.set_index("id", inplace=True)
 
-    # Check if the task exists and update its status
-    if task_id in tasks_df['id'].values:
-        tasks_df.loc[tasks_df['id'] == task_id, 'status'] = new_status
-        # Convert DataFrame to CSV and upload back to S3
+    if task_id in tasks_df.index:
+        tasks_df.at[task_id, "status"] = new_status
+
         csv_buffer = StringIO()
+        tasks_df.reset_index(inplace=True)
         tasks_df.to_csv(csv_buffer, index=False)
         s3.put_object(
-            Bucket=bucket_name, 
-            Key=mock_tasks_data_file, 
-            Body=csv_buffer.getvalue()
+            Bucket=bucket_name,
+            Key=mock_tasks_data_file,
+            Body=csv_buffer.getvalue(),
         )
-        return jsonify({'message': 'Task status updated successfully'})
+        return jsonify({"message": "Task status updated successfully"})
     else:
-        return jsonify({'message': 'Task not found'}), 404
+        return jsonify({"message": "Task not found"}), 404
 
 
 if __name__ == "__main__":
