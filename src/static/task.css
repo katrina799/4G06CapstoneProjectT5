@@ -96,3 +96,28 @@
       grid-template-columns: 1fr;
     }
   }
+
+  .status-circle {
+    height: 15px;
+    width: 15px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 5px;
+  }
+
+  .todo-circle {
+    background-color: #3498db; /* blue */
+  }
+
+  .in-progress-circle {
+    background-color: #f39c12; /* orange */
+  }
+
+  .done-circle {
+    background-color: #2ecc71; /* green */
+  }
+
+  .task-count {
+    float: right; 
+  }

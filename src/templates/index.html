@@ -83,7 +83,11 @@
         <div class="task-board">
             <!-- To Do Column -->
             <div class="task-column" id="todo">
-                <h2>To Do</h2>
+                <h2>
+                    <span class="status-circle todo-circle"></span>
+                    To Do
+                    <span class="task-count">{{ tasks.todo|length }}</span>
+                </h2>
                 {% for task in tasks.todo %}
                 <div class="task-card" draggable="true" data-id="{{ task.id }}" data-status="todo">
                     <div class="task-header">{{ task.course }} - {{ task.title }}</div>
@@ -99,7 +103,11 @@
 
             <!-- In Progress Column -->
             <div class="task-column" id="in-progress">
-                <h2>In Progress</h2>
+                <h2>
+                    <span class="status-circle in-progress-circle"></span>
+                    In Progress
+                    <span class="task-count">{{ tasks.in_progress|length }}</span>
+                </h2>
                 {% for task in tasks.in_progress %}
                 <div class="task-card" draggable="true" data-id="{{ task.id }}" data-status="in-progress">
                     <div class="task-header">{{ task.course }} - {{ task.title }}</div>
@@ -115,7 +123,11 @@
 
             <!-- Done Column -->
             <div class="task-column" id="done">
-                <h2>Done</h2>
+                <h2>
+                    <span class="status-circle done-circle"></span>
+                    Done
+                    <span class="task-count">{{ tasks.done|length }}</span>
+                </h2>
                 {% for task in tasks.done %}
                 <div class="task-card" draggable="true" data-id="{{ task.id }}" data-status="done">
                     <div class="task-header">{{ task.course }} - {{ task.title }}</div>
