@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}" />
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Indie Flower' rel='stylesheet'>
+    <title>Course Buddy</title>
+    <style>
+        #pomodoro-section {
+            position: relative;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+
+        #pomodoro-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('../static/tomato.png');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.3; 
+            z-index: -1; 
+        }
+
+        h1, #time, #controls {
+            position: relative;
+            z-index: 1;
+        }
+
+        h1 {
+            font-size: 5em;
+            margin: 0.5em 0;
+            font-family: 'Indie Flower';
+            font-weight: bold;
+        }
+
+        #time {
+            font-size: 8em;
+            margin: 0.5em 0;
+            font-family: 'Indie Flower';
+        }
+
+        #controls {
+            margin-top: 20px;
+        }
+
+        button {
+            background-color:  #cce3de;
+            border: none;
+            border-radius: 5px;
+            padding: 1em 2em;
+            font-size: 1em;
+            margin: 0 10px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: rgba(143, 198, 201, 0.887);;
+            color: white;
+        }
+
+        button:active {
+            transform: translateY(2px);
+        }
+    </style>
+</head>
+
+<body>
+    {% include 'header.html' %}
+    <div class="banner-container" style="background-color: #f6fff8;">
+        <div id="banner" class="banner-bar">
+            <div>This is pomodoro page!!!</div>
+        </div>
+    </div>
+    <div></div>
+    <div id="pomodoro-section" style="flex-grow: 1;">
+        <h1>POMODORO TIMER</h1>
+        <div id="time">25:00</div>
+        <div id="controls">
+            <button id="startBtn">START</button>
+            <button id="resetBtn">RESET</button>
+        </div>
+
+    </div>
+
+    <script src="{{ url_for('static', filename='pomodoro.js') }}"></script>
+
+</body>
+
+</html>

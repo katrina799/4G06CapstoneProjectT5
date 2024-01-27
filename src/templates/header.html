@@ -8,9 +8,9 @@
                 <a class="model {{ 'active' if current_page == 'model_page' else '' }}"
                         href="{{ url_for('model_page') }}"><i class="glyphicon glyphicon-stats" title="model prediction"
                                 style="font-size:24px;"></i> </a>
-                <div class="timer"><i class="glyphicon glyphicon-time" title="pomodoro timer"
+                <a class="timer {{ 'active' if current_page == 'pomodoro_page' else '' }}" href="{{ url_for('pomodoro_page') }}"><i class="glyphicon glyphicon-time" title="pomodoro timer"
                                 style="font-size:24px;"></i>
-                </div>
+                </a>
                 <a class="message {{ 'active' if current_page == 'plan_page' else '' }}"
                         href="{{ url_for('plan_page') }}"><i class="glyphicon glyphicon-tasks"
                                 title="study plan schedule" style="font-size:24px;"></i> </a>

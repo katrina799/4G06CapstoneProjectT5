@@ -205,3 +205,29 @@ a:hover {
 .clearfix {
     clear: both;
 }
+
+
+.timer {
+    font-size: 2em;
+    color: white;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.interval-selection {
+    margin-bottom: 20px;
+}
+
+.controls button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}

@@ -267,6 +267,17 @@ def profile_page():
     )
 
 
+# Router to pomodoro page
+@app.route("/pomodoro_page", methods=["GET", "POST"])
+def pomodoro_page():
+    global current_page
+    current_page = "pomodoro_page"
+    # Render the profile page, showing username on pege
+    return render_template(
+        "pomodoro_page.html", username=username, current_page=current_page
+    )
+
+
 # Router to course detail page
 @app.route("/course_detail_page/<course_id>")
 def course_detail(course_id):
