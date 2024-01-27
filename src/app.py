@@ -1,3 +1,4 @@
+from datetime import datetime
 from io import StringIO
 import os
 import pandas as pd
@@ -401,6 +402,45 @@ def update_task_status():
         return jsonify({"message": "Task status updated successfully"})
     else:
         return jsonify({"message": "Task not found"}), 404
+
+
+@app.route("/add_task", methods=["POST"])
+def add_task():
+    course_name = request.form.get("course_name")
+    task_name = request.form.get("task_name")
+    due_date = request.form.get("due_date")
+    weight = request.form.get("weight")
+    est_hours = request.form.get("est_hours")
+
+    due_date_obj = datetime.strptime(due_date, "%Y-%m-%d")
+    priority = "high" if (due_date_obj - datetime.now()).days < 7 else "low"
+
+    tasks_df = get_df_from_csv_in_s3(s3, bucket_name, mock_tasks_data_file)
+
+    new_task = {
+        "id": tasks_df["id"].max() + 1,
+        "title": task_name,
+        "course": course_name,
+        "due_date": due_date,
+        "weight": weight,
+        "est_time": est_hours,
+        "priority": priority,
+        "status": "todo",
+    }
+    new_task_df = pd.DataFrame([new_task])
+    tasks_df = pd.concat([tasks_df, new_task_df], ignore_index=True)
+
+    csv_buffer = StringIO()
+    tasks_df.to_csv(csv_buffer, index=False)
+    csv_buffer.seek(0)
+    s3.put_object(
+        Bucket=bucket_name,
+        Key=mock_tasks_data_file,
+        Body=csv_buffer.getvalue(),
+        ContentType="text/csv",
+    )
+
+    return redirect(url_for("start"))
 
 
 if __name__ == "__main__":

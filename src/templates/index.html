@@ -99,6 +99,23 @@
                     <div class="task-priority {{ 'priority-' + task.priority|lower }}">{{ task.priority }} Priority</div>
                 </div>
                 {% endfor %}
+                <button id="add-task-btn" onclick="showAddTaskForm()">Add Task</button>
+                <div id="add-task-form" style="display:none;">
+                    <form action="/add_task" method="post">
+                        <input type="text" name="course_name" placeholder="Course Name" required>
+                        <input type="text" name="task_name" placeholder="Task Name" required>
+                        <input type="date" name="due_date" placeholder="Due Date" required>
+                        <input type="text" name="weight" placeholder="Weight" required>
+                        <input type="text" name="est_hours" placeholder="Estimated Hours" required>
+                        <button type="submit">Submit</button>
+                    </form>
+                </div>
+                <script>
+                    function showAddTaskForm() {
+                        var form = document.getElementById('add-task-form');
+                        form.style.display = form.style.display === 'none' ? 'block' : 'none';
+                    }
+                </script>
             </div>
 
             <!-- In Progress Column -->
