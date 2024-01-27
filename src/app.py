@@ -379,22 +379,24 @@ def upload_file(course_id):
 @app.route("/update_task_status", methods=["POST"])
 def update_task_status():
     data = request.get_json()
-    task_id = int(data['id'])
+
+    try:
+        task_id = int(data["id"])
+    except ValueError:
+        return jsonify({"message": "Invalid task ID format"}), 400
     new_status = data["status"]
 
     tasks_df = get_df_from_csv_in_s3(s3, bucket_name, mock_tasks_data_file)
-    tasks_df.set_index("id", inplace=True)
-
-    if task_id in tasks_df.index:
-        tasks_df.at[task_id, "status"] = new_status
-
+    if task_id in tasks_df["id"].tolist():
+        tasks_df.loc[tasks_df["id"] == task_id, "status"] = new_status
         csv_buffer = StringIO()
-        tasks_df.reset_index(inplace=True)
         tasks_df.to_csv(csv_buffer, index=False)
+        csv_buffer.seek(0)
         s3.put_object(
             Bucket=bucket_name,
             Key=mock_tasks_data_file,
             Body=csv_buffer.getvalue(),
+            ContentType="text/csv",
         )
         return jsonify({"message": "Task status updated successfully"})
     else:

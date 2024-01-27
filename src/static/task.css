@@ -121,3 +121,8 @@
   .task-count {
     float: right; 
   }
+
+  .hide {
+    display: none; 
+}
+

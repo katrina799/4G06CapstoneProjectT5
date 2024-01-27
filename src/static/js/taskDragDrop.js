@@ -49,17 +49,18 @@ function drop(e) {
     const sourceColumnId = draggableElement.closest('.task-column').getAttribute('id');
     const newStatus = targetColumn.getAttribute('data-status');
 
-    targetColumn.appendChild(draggableElement);
-    updateTaskStatus(id, newStatus);
-
-    if (sourceColumnId !== targetColumn.getAttribute('id')) { 
-        updateTaskCount(sourceColumnId, -1); 
-        updateTaskCount(targetColumn.getAttribute('id'), 1); 
+    if (!targetColumn || !targetColumn.classList.contains('task-column')) {
+        console.error('Dropped on a non-column element:', e.target);
+        return; 
     }
+
+    targetColumn.appendChild(draggableElement);
+    updateTaskStatus(id, newStatus, sourceColumnId, targetColumn.id);
 }
 
 
-function updateTaskStatus(taskId, newStatus) {
+function updateTaskStatus(taskId, newStatus, sourceColumnId, targetColumnId) {
+    taskId = parseInt(taskId);
     fetch('/update_task_status', {
         method: 'POST',
         body: JSON.stringify({ id: taskId, status: newStatus }),
@@ -70,11 +71,20 @@ function updateTaskStatus(taskId, newStatus) {
     .then(response => response.json())
     .then(data => {
         console.log(data); 
-        alert(data.message); 
+        if (data.message === "Task status updated successfully") {
+            if (sourceColumnId !== targetColumnId) { 
+                updateTaskCount(sourceColumnId, -1); 
+                updateTaskCount(targetColumnId, 1); 
+            }
+        } else {
+            alert(data.message); 
+            document.getElementById(sourceColumnId).appendChild(draggableElement);
+        }
     })
     .catch(error => {
         console.error('Error updating task status:', error);
         alert('Failed to update task status.'); 
+        document.getElementById(sourceColumnId).appendChild(draggableElement);
     });
 }
 
@@ -84,4 +94,3 @@ function updateTaskCount(columnId, change) {
     let currentCount = parseInt(taskCounter.textContent) || 0;
     taskCounter.textContent = currentCount + change;
 }
-
