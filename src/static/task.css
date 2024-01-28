@@ -154,5 +154,20 @@
   background-color: #f0f0f0;
 }
 
+.todo-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;  /* Adjust the height as needed, or make it responsive */
+}
+
+.task-container {
+  flex-grow: 1;
+  overflow-y: auto;  /* Allows scrolling if there are many tasks */
+}
+
+#add-task-btn {
+  margin-top: auto;  /* Pushes the button to the bottom */
+}
+
 
 

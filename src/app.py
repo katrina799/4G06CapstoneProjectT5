@@ -440,6 +440,7 @@ def add_task():
         Body=csv_buffer.getvalue(),
         ContentType="text/csv",
     )
+    return redirect(url_for("start"))
 
 
 @app.route("/delete_task/<int:task_id>", methods=["POST"])

@@ -88,18 +88,22 @@
                     To Do
                     <span class="task-count">{{ tasks.todo|length }}</span>
                 </h2>
-                {% for task in tasks.todo %}
-                <div class="task-card" draggable="true" data-id="{{ task.id }}" data-status="todo">
-                    <div class="task-header">{{ task.course }} - {{ task.title }}</div>
-                    <div class="task-metadata">
-                        <span>Due: {{ task.due_date }}</span>
-                        <span>Weight: {{ task.weight }}</span>
-                        <span>Est. Time: {{ task.est_time }}</span>
+                <div class="todo-container">
+                    <div class="task-container">
+                        {% for task in tasks.todo %}
+                        <div class="task-card" draggable="true" data-id="{{ task.id }}" data-status="todo">
+                            <div class="task-header">{{ task.course }} - {{ task.title }}</div>
+                            <div class="task-metadata">
+                                <span>Due: {{ task.due_date }}</span>
+                                <span>Weight: {{ task.weight }}</span>
+                                <span>Est. Time: {{ task.est_time }}</span>
+                            </div>
+                            <div class="task-priority {{ 'priority-' + task.priority|lower }}">{{ task.priority }} Priority</div>
+                        </div>
+                        {% endfor %}
                     </div>
-                    <div class="task-priority {{ 'priority-' + task.priority|lower }}">{{ task.priority }} Priority</div>
+                    <button id="add-task-btn" onclick="showAddTaskForm()">Add Task</button>
                 </div>
-                {% endfor %}
-                <button id="add-task-btn" onclick="showAddTaskForm()">Add Task</button>
                 <div id="add-task-form" style="display:none;">
                     <form action="/add_task" method="post">
                         <input type="text" name="course_name" placeholder="Course Name" required>
