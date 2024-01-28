@@ -429,7 +429,7 @@ def add_task():
     }
     new_task_df = pd.DataFrame([new_task])
     tasks_df = pd.concat([tasks_df, new_task_df], ignore_index=True)
-    print('DataFrame after update:', tasks_df) 
+    print("DataFrame after update:", tasks_df)
 
     csv_buffer = StringIO()
     tasks_df.to_csv(csv_buffer, index=False)
@@ -442,20 +442,30 @@ def add_task():
     )
 
 
-@app.route("/delete_task/<task_id>")
+@app.route("/delete_task/<int:task_id>", methods=["POST"])
 def delete_task(task_id):
-    tasks_df = get_df_from_csv_in_s3(s3, bucket_name, mock_tasks_data_file)
-    tasks_df = tasks_df[tasks_df["id"] != task_id]
-
-    csv_buffer = StringIO()
-    tasks_df.to_csv(csv_buffer, index=False)
-    csv_buffer.seek(0)
-    s3.put_object(
-        Bucket=bucket_name,
-        Key=mock_tasks_data_file,
-        Body=csv_buffer.getvalue(),
-        ContentType="text/csv",
-    )
+    try:
+        tasks_df = get_df_from_csv_in_s3(s3, bucket_name, mock_tasks_data_file)
+        if task_id in tasks_df["id"].values:
+            tasks_df = tasks_df[tasks_df["id"] != task_id]
+            csv_buffer = StringIO()
+            tasks_df.to_csv(csv_buffer, index=False)
+            csv_buffer.seek(0)
+            s3.put_object(
+                Bucket=bucket_name,
+                Key=mock_tasks_data_file,
+                Body=csv_buffer.getvalue(),
+                ContentType="text/csv",
+            )
+            return jsonify({"message": "Task deleted successfully"}), 200
+        else:
+            return jsonify({"message": "Task not found"}), 404
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        return (
+            jsonify({"message": "An error occurred while deleting the task"}),
+            500,
+        )
 
 
 if __name__ == "__main__":

@@ -17,12 +17,16 @@ document.addEventListener('DOMContentLoaded', (event) => {
     document.querySelectorAll('.task-card').forEach(function (element) {
         element.addEventListener('contextmenu', function (event) {
             event.preventDefault();
+            const taskCardElement = event.target.closest('.task-card');
+            const taskId = taskCardElement ? taskCardElement.getAttribute('data-id') : null; 
+            sessionStorage.setItem('selectedTaskId', taskId);
             document.getElementById('contextMenu').style.display = 'block';
             document.getElementById('contextMenu').style.left = `${event.pageX}px`;
             document.getElementById('contextMenu').style.top = `${event.pageY}px`;
-            sessionStorage.setItem('selectedTaskId', event.target.getAttribute('data-id'));
         });
     });
+    
+    
 
     document.addEventListener('click', function (event) {
         document.getElementById('contextMenu').style.display = 'none';
