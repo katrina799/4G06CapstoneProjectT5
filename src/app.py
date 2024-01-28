@@ -429,6 +429,7 @@ def add_task():
     }
     new_task_df = pd.DataFrame([new_task])
     tasks_df = pd.concat([tasks_df, new_task_df], ignore_index=True)
+    print('DataFrame after update:', tasks_df) 
 
     csv_buffer = StringIO()
     tasks_df.to_csv(csv_buffer, index=False)
@@ -440,7 +441,21 @@ def add_task():
         ContentType="text/csv",
     )
 
-    return redirect(url_for("start"))
+
+@app.route("/delete_task/<task_id>")
+def delete_task(task_id):
+    tasks_df = get_df_from_csv_in_s3(s3, bucket_name, mock_tasks_data_file)
+    tasks_df = tasks_df[tasks_df["id"] != task_id]
+
+    csv_buffer = StringIO()
+    tasks_df.to_csv(csv_buffer, index=False)
+    csv_buffer.seek(0)
+    s3.put_object(
+        Bucket=bucket_name,
+        Key=mock_tasks_data_file,
+        Body=csv_buffer.getvalue(),
+        ContentType="text/csv",
+    )
 
 
 if __name__ == "__main__":

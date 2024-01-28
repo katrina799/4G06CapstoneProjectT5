@@ -13,6 +13,37 @@ document.addEventListener('DOMContentLoaded', (event) => {
         column.addEventListener('dragleave', dragLeave);
         column.addEventListener('drop', drop);
     });
+
+    document.querySelectorAll('.task-card').forEach(function (element) {
+        element.addEventListener('contextmenu', function (event) {
+            event.preventDefault();
+            document.getElementById('contextMenu').style.display = 'block';
+            document.getElementById('contextMenu').style.left = `${event.pageX}px`;
+            document.getElementById('contextMenu').style.top = `${event.pageY}px`;
+            sessionStorage.setItem('selectedTaskId', event.target.getAttribute('data-id'));
+        });
+    });
+
+    document.addEventListener('click', function (event) {
+        document.getElementById('contextMenu').style.display = 'none';
+    });
+
+    document.getElementById('deleteTask').addEventListener('click', function () {
+        const taskId = sessionStorage.getItem('selectedTaskId');
+        if (taskId) {
+            fetch(`/delete_task/${taskId}`, {
+                method: 'POST',
+            }).then(response => {
+                if (response.ok) {
+                    location.reload();
+                } else {
+                    alert('Failed to delete the task.');
+                }
+            }).catch(error => {
+                alert('Error: ' + error);
+            });
+        }
+    });
 });
 
 function dragStart(e) {
