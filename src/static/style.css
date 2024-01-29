@@ -11,6 +11,11 @@
     color: #66b0bf;
 }
 
+.app-grid {
+    display: flex;
+    justify-content: space-around; 
+    flex-wrap: wrap;
+}
 
 
 .banner-image {
