@@ -12,6 +12,8 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.compose import ColumnTransformer
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
 from sklearn.neural_network import MLPClassifier
+import csv
+import sqlite3
 
 try:
     from config import MOCK_COURSE_INFO_CSV
@@ -206,3 +208,32 @@ def extract_instructor_name_from_pdf(filename, bucket_name, s3):
         instructor_name = "sorry not found"
 
     return instructor_name
+
+
+def sql_to_csv_s3(table, s3, bucket_name, s3_csv_file_path):
+    # Connect to your SQLite database
+    conn = sqlite3.connect("instance/project.db")
+    cursor = conn.cursor()
+
+    # Query the database to get the data you want to export
+    cursor.execute("SELECT * FROM " + table)
+    rows = cursor.fetchall()
+
+    # Choose a file name for your CSV file
+    csv_filename = "poc-data/" + table + "_data.csv"
+
+    # Open a CSV file for writing
+    with open(csv_filename, "w", newline="") as csvfile:
+        csvwriter = csv.writer(csvfile)
+
+        # Write the header
+        csvwriter.writerow([i[0] for i in cursor.description])
+
+        # Write the data
+        csvwriter.writerows(rows)
+
+    # Close the cursor and the database connection
+    cursor.close()
+    conn.close()
+    # Now you can use the AWS CLI to upload the CSV file
+    s3.upload_file(csv_filename, bucket_name, s3_csv_file_path)

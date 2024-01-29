@@ -4,6 +4,7 @@ import botocore
 import boto3
 from flask import Flask, render_template, request, Response, redirect, url_for
 import ast
+from flask_sqlalchemy import SQLAlchemy
 
 try:
     from helper import (
@@ -14,6 +15,7 @@ try:
         extract_emails_from_pdf,
         load_priority_model_from_s3,
         extract_instructor_name_from_pdf,
+        sql_to_csv_s3,
     )
 except ImportError:
     from .helper import (
@@ -24,18 +26,32 @@ except ImportError:
         extract_emails_from_pdf,
         load_priority_model_from_s3,
         extract_instructor_name_from_pdf,
+        sql_to_csv_s3,
     )
 
 
 app = Flask(__name__)
 
+db = SQLAlchemy()
 
 # Loading configs/global variables
 app.config.from_pyfile("config.py")
+
+# Set the base directory to the directory where app.py is located
+basedir = os.path.abspath(os.path.dirname(__file__))
+# Set the SQLALCHEMY_DATABASE_URI to point to your project.db file within the instance folder
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///" + os.path.join(
+    basedir, "instance", "project.db"
+)
+# app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///project.db"
 bucket_name = app.config["BUCKET_NAME"]
 mock_data_file = app.config["MOCK_DATA_POC_NAME"]
+topic_data_file = app.config["TOPIC_DATA_NAME"]
+comment_data_file = app.config["COMMENT_DATA_NAME"]
 model_file_path = app.config["PRIORITY_MODEL_PATH"]
 mock_tasks_data_file = app.config["MOCK_DATA_POC_TASKS"]
+
+db.init_app(app)
 
 # Setting global variables
 username = ""
@@ -48,6 +64,22 @@ s3 = boto3.client(
     aws_access_key_id=os.environ.get("AWS_ACCESS_KEY_ID"),
     aws_secret_access_key=os.environ.get("AWS_SECRET_ACCESS_KEY"),
 )
+
+
+class Topic(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(80), nullable=False)
+    description = db.Column(db.String(120))
+
+
+class Comment(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    text = db.Column(db.String, nullable=False)
+    topicId = db.Column(db.String)
+
+
+with app.app_context():
+    db.create_all()
 
 
 # Set up home page for the website
@@ -364,6 +396,45 @@ def upload_file(course_id):
                 username=username,
             )
         )
+
+    # Router to forum page
+
+
+@app.route("/forum_page", methods=["GET", "POST"])
+def forum_page():
+    global current_page
+    current_page = "forum_page"
+    # Render the forum page
+    if request.method == "POST":
+        # Add a new topic
+        topic = Topic(
+            title=request.form["title"],
+            description=request.form["description"],
+        )
+        db.session.add(topic)
+        db.session.commit()
+        sql_to_csv_s3("topic", s3, bucket_name, topic_data_file)
+
+    topics = db.session.execute(db.select(Topic)).scalars()
+
+    return render_template("forum_page.html", topics=topics)
+
+
+@app.route("/forum/topic/<int:id>", methods=["GET", "POST"])
+def topic(id):
+    if request.method == "POST":
+        # Add a new comment to the topic
+        comment = Comment(text=request.form["comment"], topicId=id)
+        db.session.add(comment)
+        db.session.commit()
+        sql_to_csv_s3("comment", s3, bucket_name, comment_data_file)
+
+    # pull the topic and comments
+    topic = db.get_or_404(Topic, id)
+    comments = Comment.query.filter_by(topicId=id).all()
+    return render_template(
+        "forum_topic_page.html", topic=topic, comments=comments
+    )
 
 
 if __name__ == "__main__":
