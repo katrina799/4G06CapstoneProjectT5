@@ -39,7 +39,7 @@ app.config.from_pyfile("config.py")
 
 # Set the base directory to the directory where app.py is located
 basedir = os.path.abspath(os.path.dirname(__file__))
-# Set the SQLALCHEMY_DATABASE_URI to point to your project.db file within the instance folder
+# Set the SQLALCHEMY_DATABASE_URI to point to your project.db file
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///" + os.path.join(
     basedir, "instance", "project.db"
 )
