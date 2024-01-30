@@ -14,11 +14,27 @@ from sklearn.preprocessing import StandardScaler, OneHotEncoder
 from sklearn.neural_network import MLPClassifier
 import csv
 import sqlite3
+from flask_sqlalchemy import SQLAlchemy
+
 
 try:
     from config import MOCK_COURSE_INFO_CSV
 except ImportError:
     from .config import MOCK_COURSE_INFO_CSV
+
+db = SQLAlchemy()
+
+
+class Topic(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(80), nullable=False)
+    description = db.Column(db.String(120))
+
+
+class Comment(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    text = db.Column(db.String, nullable=False)
+    topicId = db.Column(db.String)
 
 
 class SqueezeTransformer(TransformerMixin):
@@ -237,3 +253,57 @@ def sql_to_csv_s3(table, s3, bucket_name, s3_csv_file_path):
     conn.close()
     # Now you can use the AWS CLI to upload the CSV file
     s3.upload_file(csv_filename, bucket_name, s3_csv_file_path)
+
+
+def initialize_topic_db_from_s3(s3, bucket_name, s3_csv_file_path, db):
+    # Get the CSV file from S3
+    s3_obj = s3.get_object(Bucket=bucket_name, Key=s3_csv_file_path)
+    csv_content = s3_obj["Body"].read().decode("utf-8")
+
+    # Convert the CSV content to a StringIO object and then to a DataFrame
+    csv_stringio = io.StringIO(csv_content)
+    df = pd.read_csv(csv_stringio)
+
+    # Add the data to the database session
+    for _, row in df.iterrows():
+        # Check if the Topic with this ID already exists
+        existing_topic = db.session.query(Topic).get(row["id"])
+        if existing_topic:
+            # Update existing record if necessary
+            existing_topic.title = row["title"]
+            existing_topic.description = row["description"]
+        else:
+            # Or insert a new one if it does not exist
+            new_topic = Topic(
+                title=row["title"], description=row["description"]
+            )
+            db.session.add(new_topic)
+
+    # Commit the session to the database
+    db.session.commit()
+
+
+def initialize_comment_db_from_s3(s3, bucket_name, s3_csv_file_path, db):
+    # Get the CSV file from S3
+    s3_obj = s3.get_object(Bucket=bucket_name, Key=s3_csv_file_path)
+    csv_content = s3_obj["Body"].read().decode("utf-8")
+
+    # Convert the CSV content to a StringIO object and then to a DataFrame
+    csv_stringio = io.StringIO(csv_content)
+    df = pd.read_csv(csv_stringio)
+
+    # Add the data to the database session
+    for _, row in df.iterrows():
+        # Check if the Topic with this ID already exists
+        existing_comment = db.session.query(Comment).get(row["id"])
+        if existing_comment:
+            # Update existing record if necessary
+            existing_comment.text = row["text"]
+            existing_comment.topicId = row["topicId"]
+        else:
+            # Or insert a new one if it does not exist
+            new_comment = Comment(text=row["text"], topicId=row["topicId"])
+            db.session.add(new_comment)
+
+    # Commit the session to the database
+    db.session.commit()

@@ -4,7 +4,6 @@ import botocore
 import boto3
 from flask import Flask, render_template, request, Response, redirect, url_for
 import ast
-from flask_sqlalchemy import SQLAlchemy
 
 try:
     from helper import (
@@ -16,6 +15,11 @@ try:
         load_priority_model_from_s3,
         extract_instructor_name_from_pdf,
         sql_to_csv_s3,
+        initialize_topic_db_from_s3,
+        initialize_comment_db_from_s3,
+        Topic,
+        Comment,
+        db,
     )
 except ImportError:
     from .helper import (
@@ -27,12 +31,16 @@ except ImportError:
         load_priority_model_from_s3,
         extract_instructor_name_from_pdf,
         sql_to_csv_s3,
+        initialize_topic_db_from_s3,
+        initialize_comment_db_from_s3,
+        Topic,
+        Comment,
+        db,
     )
 
 
 app = Flask(__name__)
 
-db = SQLAlchemy()
 
 # Loading configs/global variables
 app.config.from_pyfile("config.py")
@@ -66,20 +74,10 @@ s3 = boto3.client(
 )
 
 
-class Topic(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(80), nullable=False)
-    description = db.Column(db.String(120))
-
-
-class Comment(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    text = db.Column(db.String, nullable=False)
-    topicId = db.Column(db.String)
-
-
 with app.app_context():
     db.create_all()
+    initialize_topic_db_from_s3(s3, bucket_name, topic_data_file, db)
+    initialize_comment_db_from_s3(s3, bucket_name, comment_data_file, db)
 
 
 # Set up home page for the website
