@@ -437,5 +437,29 @@ def topic(id):
     )
 
 
+@app.route("/search_forum")
+def search():
+    query = request.args.get("query", "")
+
+    # Naive matching from topics
+    matching_topics = Topic.query.filter(
+        Topic.title.contains(query) | Topic.description.contains(query)
+    ).all()
+
+    # Naive matching from comments
+    matching_comments = Comment.query.filter(
+        Comment.text.contains(query)
+    ).all()
+
+    # Combine the results
+    results = {"topics": matching_topics, "comments": matching_comments}
+    print(results)
+
+    # Render a template with the search results
+    return render_template(
+        "search_forum_results.html", results=results, query=query
+    )
+
+
 if __name__ == "__main__":
     app.run(debug=True)
