@@ -163,7 +163,7 @@ function editTask(taskId) {
     // Populate the form fields
     editForm.querySelector('input[name="course_name"]').value = courseName;
     editForm.querySelector('input[name="task_name"]').value = taskName;
-    editForm.querySelector('input[name="due_date"]').value = taskDueDate; 
+    editForm.querySelector('input[name="due_date"]').value = taskDueDate || ''; 
     editForm.querySelector('input[name="weight"]').value = taskWeight;
     editForm.querySelector('input[name="est_hours"]').value = taskEstHours;
    
@@ -221,3 +221,4 @@ function closeEditModal() {
     editModal.style.display = 'none';
     modalOverlay.style.display = 'none';
 }
+

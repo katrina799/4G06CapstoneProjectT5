@@ -471,17 +471,23 @@ def delete_task(task_id):
 
 @app.route("/edit_task/<int:task_id>", methods=["POST"])
 def edit_task(task_id):
+    tasks_df = get_df_from_csv_in_s3(s3, bucket_name, mock_tasks_data_file)
+
+    existing_task = tasks_df.loc[tasks_df["id"] == task_id].iloc[0]
     new_course_name = request.form.get("course_name")
     new_task_name = request.form.get("task_name")
     new_due_date_str = request.form.get("due_date")
     new_weight = request.form.get("weight")
     new_est_hours = request.form.get("est_hours")
 
-    new_due_date = datetime.strptime(new_due_date_str, "%Y-%m-%d")
-    days_until_due = (new_due_date - datetime.now()).days
-    new_priority = "high" if days_until_due < 7 else "low"
-
-    tasks_df = get_df_from_csv_in_s3(s3, bucket_name, mock_tasks_data_file)
+    if new_due_date_str:
+        new_due_date = datetime.strptime(new_due_date_str, "%Y-%m-%d").date()
+        days_until_due = (new_due_date - datetime.now().date()).days
+        new_priority = "high" if days_until_due < 7 else "low"
+        formatted_due_date = new_due_date.strftime("%Y-%m-%d")
+    else:
+        formatted_due_date = existing_task["due_date"]
+        new_priority = existing_task["priority"]
 
     if task_id not in tasks_df["id"].values:
         return jsonify({"message": "Task not found"}), 404
@@ -490,7 +496,7 @@ def edit_task(task_id):
         task_index = tasks_df.index[tasks_df["id"] == task_id].tolist()[0]
         tasks_df.at[task_index, "course"] = new_course_name
         tasks_df.at[task_index, "title"] = new_task_name
-        tasks_df.at[task_index, "due_date"] = new_due_date
+        tasks_df.at[task_index, "due_date"] = formatted_due_date
         tasks_df.at[task_index, "weight"] = new_weight
         tasks_df.at[task_index, "est_time"] = new_est_hours
         tasks_df.at[task_index, "priority"] = new_priority
