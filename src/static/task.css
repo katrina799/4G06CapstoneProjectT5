@@ -179,11 +179,12 @@
   overflow: auto;
   background-color: rgb(0,0,0); /* Fallback color */
   background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  z-index: 100;
+  display: none;
 }
 
 .modal {
   position: fixed;
-  z-index: 2;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
@@ -191,6 +192,8 @@
   background-color: #fefefe;
   padding: 20px;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  z-index: 101;
+  display: none;
 }
 
 .modal-content {
@@ -199,6 +202,7 @@
   padding: 20px;
   border: 1px solid #888;
   width: 80%;
+  margin: 0;
 }
 
 .close-button {
@@ -214,6 +218,8 @@
   text-decoration: none;
   cursor: pointer;
 }
+
+
 
 
 
