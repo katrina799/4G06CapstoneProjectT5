@@ -14,6 +14,10 @@ document.addEventListener('DOMContentLoaded', (event) => {
         column.addEventListener('drop', drop);
     });
 
+    document.addEventListener('click', function (event) {
+        contextMenu.style.display = 'none';
+    });
+
     document.querySelectorAll('.task-card').forEach(function (element) {
         element.addEventListener('contextmenu', function (event) {
             event.preventDefault();
@@ -46,6 +50,13 @@ document.addEventListener('DOMContentLoaded', (event) => {
             }).catch(error => {
                 alert('Error: ' + error);
             });
+        }
+    });
+
+    document.getElementById('editTask').addEventListener('click', function () {
+        const taskId = sessionStorage.getItem('selectedTaskId');
+        if (taskId) {
+            editTask(taskId);
         }
     });
 });
@@ -129,3 +140,4 @@ function updateTaskCount(columnId, change) {
     let currentCount = parseInt(taskCounter.textContent) || 0;
     taskCounter.textContent = currentCount + change;
 }
+
