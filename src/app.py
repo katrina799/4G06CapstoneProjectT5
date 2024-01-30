@@ -8,22 +8,24 @@ import ast
 try:
     from helper import (
         check_syllabus_exists,
-        update_csv,
         upload_df_to_s3,
         get_df_from_csv_in_s3,
-        extract_emails_from_pdf,
         load_priority_model_from_s3,
-        extract_instructor_name_from_pdf,
+        update_csv_after_deletion,
+        extract_text_from_pdf,
+        extract_course_work_details,
+        process_course_work_with_openai,
     )
 except ImportError:
     from .helper import (
         check_syllabus_exists,
-        update_csv,
         upload_df_to_s3,
         get_df_from_csv_in_s3,
-        extract_emails_from_pdf,
         load_priority_model_from_s3,
-        extract_instructor_name_from_pdf,
+        update_csv_after_deletion,
+        extract_text_from_pdf,
+        extract_course_work_details,
+        process_course_work_with_openai,
     )
 
 
@@ -175,22 +177,30 @@ def change_username():
     return redirect(url_for("start"))
 
 
-# Remove an existing course
 @app.route("/remove_course", methods=["POST"])
 def remove_course():
     global username, current_page, courses
     if request.method == "POST":
         index = request.form["index"]
-
         df = get_df_from_csv_in_s3(s3, bucket_name, mock_data_file)
-        user_courses_serires = df.loc[df["username"] == username, "courses"]
-        user_courses_str = user_courses_serires.tolist()[0]
+        user_courses_series = df.loc[df["username"] == username, "courses"]
+        user_courses_str = user_courses_series.tolist()[0]
         user_courses = ast.literal_eval(user_courses_str)
-        user_courses.pop(int(index))
 
+        # 获取要删除的课程ID
+        course_id = user_courses.pop(int(index))
+
+        # 检查并删除S3上的syllabus
+        syllabus_exists, pdf_name = check_syllabus_exists(
+            course_id, s3, bucket_name
+        )
+        if syllabus_exists:
+            s3.delete_object(Bucket=bucket_name, Key=pdf_name)
+            update_csv_after_deletion(course_id)
+
+        # 更新用户课程列表
         list_str = str(user_courses)
         df.loc[df["username"] == username, "courses"] = list_str
-
         upload_df_to_s3(df, s3, bucket_name, mock_data_file)
         courses = user_courses
         if current_page == "course_page":
@@ -231,20 +241,6 @@ def add_course():
     return redirect(url_for("start"))
 
 
-# Router to course detailed page
-@app.route("/course_page", methods=["GET", "POST"])
-def course_page():
-    global courses, current_page
-    current_page = "course_page"
-    # Render the course page, display the course content(name)
-    return render_template(
-        "course_page.html",
-        username=username,
-        courses=courses,
-        current_page=current_page,
-    )
-
-
 # Router to study plan detailed page
 @app.route("/plan_page", methods=["GET", "POST"])
 def plan_page():
@@ -267,35 +263,42 @@ def profile_page():
     )
 
 
+# Router to course page
+@app.route("/course_page", methods=["GET", "POST"])
+def course_page():
+    global courses, current_page
+    current_page = "course_page"
+    # Render the course page, display the course content(name)
+    return render_template(
+        "course_page.html",
+        username=username,
+        courses=courses,
+        current_page=current_page,
+    )
+
+
 # Router to course detail page
 @app.route("/course_detail_page/<course_id>")
 def course_detail(course_id):
     message = request.args.get("message", "")
-    bk = bucket_name
-    syllabus_exists, pdf_name = check_syllabus_exists(course_id, s3, bk)
+    syllabus_exists, pdf_name = check_syllabus_exists(
+        course_id, s3, bucket_name
+    )
 
     if syllabus_exists:
-        email_list = extract_emails_from_pdf(
-            pdf_name,
-            bucket_name,
-            s3,
-        )
-        instructor_name = extract_instructor_name_from_pdf(
-            pdf_name,
-            bucket_name,
-            s3,
-        )
+        pdf_text = extract_text_from_pdf(pdf_name, bucket_name, s3)
+        course_work_details = extract_course_work_details(pdf_text)
+        course_info = process_course_work_with_openai(course_work_details)
+        # 如果需要，可以在此处添加其他逻辑，例如提取email_list和instructor_name
     else:
-        email_list = []
-        instructor_name = ""
+        course_info = "Syllabus not found."
 
     return render_template(
         "course_detail_page.html",
         course_id=course_id,
         course=course_id,
         username=username,
-        email_list=email_list,
-        instructor_name=instructor_name,
+        course_info=course_info,
         message=message,
     )
 
@@ -319,38 +322,28 @@ def upload_file(course_id):
 
     file = request.files["file"]
     new_filename = f"{course_id}-syllabus.pdf"
-
     file.filename = new_filename
 
     try:
         s3.upload_fileobj(
-            file, bucket_name, file.filename, ExtraArgs={"ACL": "private"}
+            file, bucket_name, new_filename, ExtraArgs={"ACL": "private"}
         )
-
-        bk = bucket_name
-        syllabus_exists, pdf_name = check_syllabus_exists(course_id, s3, bk)
+        syllabus_exists, pdf_name = check_syllabus_exists(
+            course_id, s3, bucket_name
+        )
         if syllabus_exists:
-            # Extract email list
-            email_list = extract_emails_from_pdf(
-                pdf_name,
-                bucket_name,
-                s3,
-            )
-            # Extract instructor name
-            instructor_name = extract_instructor_name_from_pdf(
-                pdf_name,
-                bucket_name,
-                s3,
-            )
+            pdf_text = extract_text_from_pdf(pdf_name, bucket_name, s3)
+            course_work_details = extract_course_work_details(pdf_text)
+            course_info = process_course_work_with_openai(course_work_details)
         else:
-            email_list = []
-            instructor_name = ""
+            course_info = ""
 
-        update_csv(course_id, file.filename, email_list, instructor_name)
+        # update_csv(course_id, file.filename, course_info)
         return redirect(
             url_for(
                 "course_detail",
                 course_id=course_id,
+                course_info=course_info,
                 message="File uploaded successfully!",
                 username=username,
             )

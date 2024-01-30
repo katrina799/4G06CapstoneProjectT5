@@ -40,7 +40,11 @@
             </div>
             {% endif %}
             
-            <div>
+            <!-- Course Schedule -->
+            
+            
+            <!-- Instructor Name -->
+            <!-- <div>
 
                 <h2>Instructor</h2>
 
@@ -51,9 +55,11 @@
                 <p style="text-indent: 40px;"> cannot find instructor name</p>
 
                 {% endif %}
-            </div>
+            </div> -->
+            
+            <!-- Instructor Email -->
 
-            <div>
+            <!-- <div>
 
                 <h2>Instructor and TA Emails</h2>
 
@@ -67,7 +73,36 @@
                 <p style="text-indent: 40px;">no email has been found</p>
 
                 {% endif %}
+            </div> -->
+
+            <!-- Instructor Office Hour -->
+            
+
+            <!-- Course Introduction -->
+
+            
+
+            <div>
+                <h2>Course Information</h2>
+                {% if course_info %}
+                    {{ course_info|safe }}
+                {% else %}
+                    <p>Course information not available or could not be extracted.</p>
+                {% endif %}
             </div>
+            
+            <!-- Course Goal -->
+
+            
+
+            <!-- Course Score Distribution -->
+
+            
+
+            <!-- MSAP Policy -->
+            
+
+
 
         </div>
     </div>
