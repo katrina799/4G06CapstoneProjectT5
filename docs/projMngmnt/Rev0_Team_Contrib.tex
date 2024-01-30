@@ -1,0 +1,117 @@
+\documentclass{article}
+
+\usepackage{float}
+\restylefloat{table}
+
+\usepackage{booktabs}
+
+\title{Team Contributions: Rev 0\\\progname}
+
+\author{\authname}
+
+\date{}
+
+% \input{../Comments}
+% \input{../Common}
+
+\begin{document}
+
+\maketitle
+
+\section{Demo Plans}
+
+\wss{We will demo the new features of the application.  Pomodoro feature: show the user workflow for using Pomodoro to study. Course Page feature: demonstrate the mechanism of extract class information from the pdf user uploaded. To-do List feature: demonstrate the add/remove edit feature of the to-do list, drag and drop the different boxes on the kanban board. App integration feature: show user could redirect to other website/application pages by clicking the tiles }
+\section{Meeting Attendance}
+
+\wss{For each team member how many team meetings have they attended since the
+POC demo.  This number should be determined from the meeting issues in the
+team's repo.  The first entry in the table should be the total number of team
+meetings held by the team.}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{ll}
+\toprule
+\textbf{Student} & \textbf{Meetings}\\
+\midrule
+Total & 2\\
+Chenwei Song & 2\\
+Qiang Gao & 2\\
+Qianni Wang & 2\\
+Shuting Shi & 2\\
+Jingyao Qin & 2\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\wss{If needed, an explanation for the counts can be provided here.}
+
+\section{Lecture Attendance}
+
+\wss{For each team member how many lectures have they attended since the POC
+demo.  This number should be determined from the lecture issues in the team's
+repo.  The first entry in the table should be the total number of lectures since
+the POC demo.}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{ll}
+\toprule
+\textbf{Student} & \textbf{Lectures}\\
+\midrule
+Total & 2\\
+Chenwei Song & 2\\
+Qiang Gao & 2\\
+Qianni Wang & 2\\
+Shuting Shi & 2\\
+Jingyao Qin & 2\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\wss{If needed, an explanation for the lecture attendance can be provided here.}
+
+\section{Commits}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{lll}
+\toprule
+\textbf{Student} & \textbf{Commits} & \textbf{Percent}\\
+\midrule
+Total & 361 & 100\% \\
+Chenwei Song & 50 & 13.85\%\\
+Qiang Gao & 63 & 17.45\%\\
+Qianni Wang & 105 & 29.08\%\\
+Shuting Shi & 68 & 18.83\%\\
+Jingyao Qin & 75 & 20.77\%\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Issue Tracker}
+
+
+\begin{table}[H]
+\centering
+\begin{tabular}{lll}
+\toprule
+\textbf{Student} & \textbf{Authored (O+C)} & \textbf{Assigned (C only)}\\
+\midrule
+Chenwei Song & 16 & 34 \\
+Qiang Gao & 5 & 36 \\
+Qianni Wang & 52 & 62 \\
+Shuting Shi & 14 & 43 \\
+Jingyao Qin & 25 & 47 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+\section{CICD}
+
+\textbf{Continuous Integration}: As team members contribute code to our repository, each push triggers automated tests to run (using GitHub Actions, or GitLab CI). This ensures that new code does not break or degrade the functionality of the existing system.
+
+\textbf{Continuous Deployment}: Once the code passes all tests in the integration stage, it can be automatically deployed to a staging environment where it can be reviewed in a production-like setting. After approval, the code can be deployed to the production environment, making the changes live for our users.
+
+\end{document}
