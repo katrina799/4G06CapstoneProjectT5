@@ -469,5 +469,49 @@ def delete_task(task_id):
         )
 
 
+@app.route("/edit_task/<int:task_id>", methods=["POST"])
+def edit_task(task_id):
+    new_course_name = request.form.get("course_name")
+    new_task_name = request.form.get("task_name")
+    new_due_date_str = request.form.get("due_date")
+    new_weight = request.form.get("weight")
+    new_est_hours = request.form.get("est_hours")
+
+    new_due_date = datetime.strptime(new_due_date_str, "%Y-%m-%d")
+    days_until_due = (new_due_date - datetime.now()).days
+    new_priority = "high" if days_until_due < 7 else "low"
+
+    tasks_df = get_df_from_csv_in_s3(s3, bucket_name, mock_tasks_data_file)
+
+    if task_id not in tasks_df["id"].values:
+        return jsonify({"message": "Task not found"}), 404
+
+    try:
+        task_index = tasks_df.index[tasks_df["id"] == task_id].tolist()[0]
+        tasks_df.at[task_index, "course"] = new_course_name
+        tasks_df.at[task_index, "title"] = new_task_name
+        tasks_df.at[task_index, "due_date"] = new_due_date
+        tasks_df.at[task_index, "weight"] = new_weight
+        tasks_df.at[task_index, "est_time"] = new_est_hours
+        tasks_df.at[task_index, "priority"] = new_priority
+
+        csv_buffer = StringIO()
+        tasks_df.to_csv(csv_buffer, index=False)
+        csv_buffer.seek(0)
+        s3.put_object(
+            Bucket=bucket_name,
+            Key=mock_tasks_data_file,
+            Body=csv_buffer.getvalue(),
+            ContentType="text/csv",
+        )
+        return jsonify({"message": "Task updated successfully"}), 200
+    except Exception as e:
+        print(f"An error occurred when updating task: {e}")
+        return (
+            jsonify({"message": "An error occurred while updating the task"}),
+            500,
+        )
+
+
 if __name__ == "__main__":
     app.run(debug=True)
