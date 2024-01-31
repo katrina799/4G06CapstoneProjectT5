@@ -110,6 +110,5 @@ Jingyao Qin & 25 & 47 \\
 
 \section{CICD}
 
-CI/CD is employed through various GitHub Actions workflows to automate code integration and deployment. The CI part includes lint checks on pull requests and pushes to the main branch, ensuring coding standards are met. If a pull request lacks labels, which are crucial for tracking and categorization, an automated comment prompts for labeling. Additionally, the CI verifies linked issues for completeness. Successful completions of these checks suggest that code changes are ready for integration or deployment, exemplifying how CI/CD facilitates maintaining code quality and streamlines the development cycle.
-
+In the project's CI/CD pipeline, the Main CI GitHub Action is configured to validate that the Python code adheres to PEP 8 standards, ensuring consistent code style across the project. Additionally, the PR Checks Action verifies that each pull request is properly labeled and linked to relevant issues. This ensures that every PR is easily reviewable and contains sufficient context for team members, aligning with the project's quality expectations and contributing guidelines.
 \end{document}
