@@ -15,6 +15,10 @@ try:
         extract_text_from_pdf,
         extract_course_work_details,
         process_course_work_with_openai,
+        analyze_course_content,
+        update_csv,
+        convert_to_list_of_dicts,
+        write_course_work_to_csv,
     )
 except ImportError:
     from .helper import (
@@ -26,6 +30,10 @@ except ImportError:
         extract_text_from_pdf,
         extract_course_work_details,
         process_course_work_with_openai,
+        analyze_course_content,
+        update_csv,
+        convert_to_list_of_dicts,
+        write_course_work_to_csv,
     )
 
 
@@ -288,15 +296,17 @@ def course_detail(course_id):
     if syllabus_exists:
         pdf_text = extract_text_from_pdf(pdf_name, bucket_name, s3)
         course_work_details = extract_course_work_details(pdf_text)
-        course_info = process_course_work_with_openai(course_work_details)
-        # 如果需要，可以在此处添加其他逻辑，例如提取email_list和instructor_name
+        course_info = analyze_course_content(pdf_text)
+        course_work_info = process_course_work_with_openai(course_work_details)
     else:
         course_info = "Syllabus not found."
+        course_work_info = ""
 
     return render_template(
         "course_detail_page.html",
         course_id=course_id,
         course=course_id,
+        course_work_info=course_work_info,
         username=username,
         course_info=course_info,
         message=message,
@@ -334,16 +344,24 @@ def upload_file(course_id):
         if syllabus_exists:
             pdf_text = extract_text_from_pdf(pdf_name, bucket_name, s3)
             course_work_details = extract_course_work_details(pdf_text)
-            course_info = process_course_work_with_openai(course_work_details)
+            course_info = analyze_course_content(pdf_text)
+            course_work_info = process_course_work_with_openai(
+                course_work_details
+            )
         else:
             course_info = ""
+            course_work_info = ""
 
-        # update_csv(course_id, file.filename, course_info)
+        update_csv(course_id, file.filename, course_info)
+        course_work_list = convert_to_list_of_dicts(course_work_info)
+        write_course_work_to_csv(course_work_list, course_id)
+
         return redirect(
             url_for(
                 "course_detail",
                 course_id=course_id,
                 course_info=course_info,
+                course_work_info=course_work_info,
                 message="File uploaded successfully!",
                 username=username,
             )

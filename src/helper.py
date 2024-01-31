@@ -4,6 +4,8 @@ import os
 import io
 import botocore
 import pypdf
+import json
+import csv
 
 import re
 from joblib import load
@@ -32,9 +34,9 @@ title_to_column_mapping = {
 }
 
 try:
-    from config import MOCK_COURSE_INFO_CSV
+    from config import MOCK_COURSE_INFO_CSV, COURSE_WORK_EXTRACTED_INFO
 except ImportError:
-    from .config import MOCK_COURSE_INFO_CSV
+    from .config import MOCK_COURSE_INFO_CSV, COURSE_WORK_EXTRACTED_INFO
 
 
 class SqueezeTransformer(TransformerMixin):
@@ -301,6 +303,7 @@ def process_course_work_with_openai(syllabus_text):
         - "Due Time" with value of String "hh:mm" in 24 hours data type
         - "Score Distribution" with value of int data type
     
+    MOST IMPORTANT: you do not need to reply any words, but the Python list! 
     If any other information is missing, put 'N/A' in the corresponding value.
     Also, please exclude any course work library that do not have a score
     distribution. 
@@ -362,3 +365,48 @@ def process_text_in_segments(text, max_tokens):
         full_output += process_text_with_openai(segment) + "\n\n"
 
     return full_output
+
+
+def convert_to_list_of_dicts(course_work_data):
+    try:
+        # 尝试将字符串数据转换为 Python 对象
+        course_work_list = json.loads(course_work_data)
+        return course_work_list
+    except json.JSONDecodeError:
+        # 如果转换失败，返回空列表或错误信息
+        return []
+
+
+def write_course_work_to_csv(course_work_list, course_id):
+    csv_file_path = COURSE_WORK_EXTRACTED_INFO
+    headers = [
+        "course id",
+        "course work",
+        "start date",
+        "start time",
+        "due date",
+        "due time",
+        "score distribution",
+    ]
+
+    with open(csv_file_path, mode="a", newline="", encoding="utf-8") as file:
+        writer = csv.DictWriter(file, fieldnames=headers)
+
+        # 如果文件是空的，写入头部
+        if file.tell() == 0:
+            writer.writeheader()
+
+        # 遍历列表，写入每行数据
+        for item in course_work_list:
+            row = {
+                "course id": course_id,
+                "course work": item.get("Course Work Name", "N/A"),
+                "start date": item.get("Start Date", "N/A"),
+                "start time": item.get("Start Time", "N/A"),
+                "due date": item.get("Due Date", "N/A"),
+                "due time": item.get("Due Time", "N/A"),
+                "score distribution": str(
+                    item.get("Score Distribution", "N/A")
+                ),
+            }
+            writer.writerow(row)

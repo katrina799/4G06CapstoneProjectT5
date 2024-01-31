@@ -91,6 +91,15 @@
                 {% endif %}
             </div>
             
+            <div>
+                <h2>Course Work Information</h2>
+                {% if course_work_info %}
+                    {{ course_work_info|safe }}
+                {% else %}
+                    <p>Course information not available or could not be extracted.</p>
+                {% endif %}
+            </div>
+            
             <!-- Course Goal -->
 
             
