@@ -34,12 +34,12 @@ meetings held by the team.}
 \toprule
 \textbf{Student} & \textbf{Meetings}\\
 \midrule
-Total & 2\\
-Chenwei Song & 2\\
-Qiang Gao & 2\\
-Qianni Wang & 2\\
-Shuting Shi & 2\\
-Jingyao Qin & 2\\
+Total & 5\\
+Chenwei Song & 5\\
+Qiang Gao & 5\\
+Qianni Wang & 5\\
+Shuting Shi & 5\\
+Jingyao Qin & 5\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -99,7 +99,7 @@ Jingyao Qin & 75 & 20.77\%\\
 \textbf{Student} & \textbf{Authored (O+C)} & \textbf{Assigned (C only)}\\
 \midrule
 Chenwei Song & 16 & 34 \\
-Qiang Gao & 5 & 36 \\
+Qiang Gao & 5 & 37 \\
 Qianni Wang & 52 & 62 \\
 Shuting Shi & 14 & 43 \\
 Jingyao Qin & 25 & 47 \\
@@ -110,8 +110,6 @@ Jingyao Qin & 25 & 47 \\
 
 \section{CICD}
 
-\textbf{Continuous Integration}: As team members contribute code to our repository, each push triggers automated tests to run (using GitHub Actions, or GitLab CI). This ensures that new code does not break or degrade the functionality of the existing system.
-
-\textbf{Continuous Deployment}: Once the code passes all tests in the integration stage, it can be automatically deployed to a staging environment where it can be reviewed in a production-like setting. After approval, the code can be deployed to the production environment, making the changes live for our users.
+CI/CD is employed through various GitHub Actions workflows to automate code integration and deployment. The CI part includes lint checks on pull requests and pushes to the main branch, ensuring coding standards are met. If a pull request lacks labels, which are crucial for tracking and categorization, an automated comment prompts for labeling. Additionally, the CI verifies linked issues for completeness. Successful completions of these checks suggest that code changes are ready for integration or deployment, exemplifying how CI/CD facilitates maintaining code quality and streamlines the development cycle.
 
 \end{document}
