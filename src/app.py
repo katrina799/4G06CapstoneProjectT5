@@ -408,6 +408,7 @@ def forum_page():
         topic = Topic(
             title=request.form["title"],
             description=request.form["description"],
+            username=username,
         )
         db.session.add(topic)
         db.session.commit()
@@ -422,7 +423,9 @@ def forum_page():
 def topic(id):
     if request.method == "POST":
         # Add a new comment to the topic
-        comment = Comment(text=request.form["comment"], topicId=id)
+        comment = Comment(
+            text=request.form["comment"], topicId=id, username=username
+        )
         db.session.add(comment)
         db.session.commit()
         sql_to_csv_s3("comment", s3, bucket_name, comment_data_file)
@@ -431,7 +434,10 @@ def topic(id):
     topic = db.get_or_404(Topic, id)
     comments = Comment.query.filter_by(topicId=id).all()
     return render_template(
-        "forum_topic_page.html", topic=topic, comments=comments
+        "forum_topic_page.html",
+        topic=topic,
+        comments=comments,
+        username=username,
     )
 
 
@@ -455,7 +461,10 @@ def search():
 
     # Render a template with the search results
     return render_template(
-        "search_forum_results.html", results=results, query=query
+        "search_forum_results.html",
+        results=results,
+        query=query,
+        username=username,
     )
 
 

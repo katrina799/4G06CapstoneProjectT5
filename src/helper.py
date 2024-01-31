@@ -29,12 +29,14 @@ class Topic(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(80), nullable=False)
     description = db.Column(db.String(120))
+    username = db.Column(db.String)
 
 
 class Comment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     text = db.Column(db.String, nullable=False)
     topicId = db.Column(db.String)
+    username = db.Column(db.String)
 
 
 class SqueezeTransformer(TransformerMixin):
@@ -272,10 +274,13 @@ def initialize_topic_db_from_s3(s3, bucket_name, s3_csv_file_path, db):
             # Update existing record if necessary
             existing_topic.title = row["title"]
             existing_topic.description = row["description"]
+            existing_topic.username = row["username"]
         else:
             # Or insert a new one if it does not exist
             new_topic = Topic(
-                title=row["title"], description=row["description"]
+                title=row["title"],
+                description=row["description"],
+                username=row["username"],
             )
             db.session.add(new_topic)
 
@@ -300,9 +305,14 @@ def initialize_comment_db_from_s3(s3, bucket_name, s3_csv_file_path, db):
             # Update existing record if necessary
             existing_comment.text = row["text"]
             existing_comment.topicId = row["topicId"]
+            existing_comment.username = row["username"]
         else:
             # Or insert a new one if it does not exist
-            new_comment = Comment(text=row["text"], topicId=row["topicId"])
+            new_comment = Comment(
+                text=row["text"],
+                topicId=row["topicId"],
+                username=row["username"],
+            )
             db.session.add(new_comment)
 
     # Commit the session to the database

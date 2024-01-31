@@ -205,3 +205,10 @@ a:hover {
 .clearfix {
     clear: both;
 }
+
+.truncate {
+  max-width: 100%; /* Adjust the width as needed */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
