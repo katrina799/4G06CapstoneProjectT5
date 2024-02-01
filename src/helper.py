@@ -253,10 +253,12 @@ def analyze_course_content(pdf_text, max_tokens=4097):
 def process_text_with_openai(text):
     prompt = f"""
     human read the pdf_text and extract the following information from the 
-    course syllabus and strictly follow the format below 
-    (If you do not found, just put a "N/A" in the 
-    corresponding area of the return template. 
-    Strictly careful about that all info message should have "#" at the end to inform the ending):
+    course syllabus and strictly follow the format below
+    (MOST IMPORTATNT: Strictly careful about that 
+    all info message MUST have "#" at the end to inform the ending! 
+    If you do not found, just put a "N/A" 
+    at the corresponding area of the return template):
+
     1. Instructor Name:
     2. Instructor Email:
     3. Instructor Office Hour:
@@ -264,7 +266,8 @@ def process_text_with_openai(text):
     5. Lecture Schedule List with Location: 
     6. Tutorials Schedule List with Location: 
     7. Course Teaching Assistants (TAs) Name and Email List: 
-    (template: Jane Qin -- qinj15@mcmaster.ca; Qianni Wang -- qian12@mcmaster.ca#)
+    (template: Jane Qin -- qinj15@mcmaster.ca; Qianni Wang -- 
+    qian12@mcmaster.ca#)
     8. Course Introduction:
     9. Course Goal/Mission:
     10. MSAF Policy:

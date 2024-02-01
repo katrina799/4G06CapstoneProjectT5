@@ -1,15 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}" />
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <title>Course Details - {{ course}}</title>
+    <title>Course Details - {{ course }}</title>
 </head>
-
 <body>
     {% include 'header.html' %}
     <div class="banner-container" style="background-color: #f6fff8;">
@@ -18,14 +16,12 @@
         </div>
     </div>
     <div class="course-detail-container" style="margin: 20px;">
-        <h1>{{ course}}</h1>
-        <!-- <input type="hidden" name="course" value="{{ course}}"> -->
+        <h1>{{ course }}</h1>
 
+        <!-- File Upload Section -->
         <div class="panel-file" style="margin-top: 20px;">
             <h2>Upload Course Syllabus</h2>
-
-            <form method="POST" action="{{ url_for('upload_file', course_id=course) }}" enctype="multipart/form-data"
-                class="form-inline">
+            <form method="POST" action="{{ url_for('upload_file', course_id=course) }}" enctype="multipart/form-data" class="form-inline">
                 <div class="form-group mb-2">
                     <input type="file" name="file" class="form-control-file">
                 </div>
@@ -33,88 +29,64 @@
                     <i class="fa fa-upload" aria-hidden="true"></i> Upload File
                 </button>
             </form>
-
             {% if message %}
             <div class="alert alert-info">
                 {{ message }}
             </div>
             {% endif %}
-            
-            <!-- Course Schedule -->
-            
-            
-            <!-- Instructor Name -->
-            <!-- <div>
-
-                <h2>Instructor</h2>
-
-                {% if instructor_name %}
-                    <p style="text-indent: 40px;"> {{ instructor_name }}</p>
-
-                {% else %}
-                <p style="text-indent: 40px;"> cannot find instructor name</p>
-
-                {% endif %}
-            </div> -->
-            
-            <!-- Instructor Email -->
-
-            <!-- <div>
-
-                <h2>Instructor and TA Emails</h2>
-
-                {% if email_list %}
-                <ul>
-                    {% for email in email_list %}
-                    <li>{{ email }}</li>
-                    {% endfor %}
-                </ul>
-                {% else %}
-                <p style="text-indent: 40px;">no email has been found</p>
-
-                {% endif %}
-            </div> -->
-
-            <!-- Instructor Office Hour -->
-            
-
-            <!-- Course Introduction -->
-
-            
-
-            <div>
-                <h2>Course Information</h2>
-                {% if course_info %}
-                    {{ course_info|safe }}
-                {% else %}
-                    <p>Course information not available or could not be extracted.</p>
-                {% endif %}
-            </div>
-            
-            <div>
-                <h2>Course Work Information</h2>
-                {% if course_work_info %}
-                    {{ course_work_info|safe }}
-                {% else %}
-                    <p>Course information not available or could not be extracted.</p>
-                {% endif %}
-            </div>
-            
-            <!-- Course Goal -->
-
-            
-
-            <!-- Course Score Distribution -->
-
-            
-
-            <!-- MSAP Policy -->
-            
-
-
-
         </div>
+
+        <!-- Course Information -->
+        <div>
+            <h2>Course Information</h2>
+            {% if course_info %}
+                <!-- Display each field of course_info -->
+                <p><strong>Instructor Name:</strong> {{ course_info.instructor_name }}</p>
+                <p><strong>Instructor Email</strong>: {{ course_info.instructor_email }}</p>
+                <!-- 其他字段 -->
+                <p><strong>Office Hours:</strong> {{ course_info.instructor_office_hour_list }}</p>
+                <p><strong>Textbooks:</strong> {{ course_info.textbooks }}</p>
+                <p>Lecture Schedule: {{ course_info.lecture_schedule }}</p>
+                <p>Tutorial Schedule: {{ course_info.tutorial_schedule }}</p>
+                <p>Teaching Assistants: {{ course_info.TAs }}</p>
+                <p>Course Introduction: {{ course_info.course_introduction }}</p>
+                <p>Course Goal/Mission: {{ course_info.goal_mission }}</p>
+                <p>MSAF Policy: {{ course_info.MSAF }}</p>
+            {% else %}
+                <p>Course information not available or could not be extracted.</p>
+            {% endif %}
+        </div>
+
+        <!-- Course Work Information -->
+        <div>
+            <h2>Course Work Information</h2>
+            {% if course_works %}
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Work Name</th>
+                            <th>Start Date</th>
+                            <th>Due Date</th>
+                            <th>Score Distribution</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for work in course_works %}
+                            <tr>
+                                <td>{{ work.course_work }}</td>
+                                <td>{{ work.start_date }} {{ work.start_time }}</td>
+                                <td>{{ work.due_date }} {{ work.due_time }}</td>
+                                <td>{{ work.score_distribution }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p>Course work information not available.</p>
+            {% endif %}
+        </div>
+
     </div>
 </body>
-
 </html>
+                

@@ -36,6 +36,10 @@ except ImportError:
         write_course_work_to_csv,
     )
 
+try:
+    from config import MOCK_COURSE_INFO_CSV, COURSE_WORK_EXTRACTED_INFO
+except ImportError:
+    from .config import MOCK_COURSE_INFO_CSV, COURSE_WORK_EXTRACTED_INFO
 
 app = Flask(__name__)
 
@@ -285,7 +289,6 @@ def course_page():
     )
 
 
-# Router to course detail page
 @app.route("/course_detail_page/<course_id>")
 def course_detail(course_id):
     message = request.args.get("message", "")
@@ -293,27 +296,29 @@ def course_detail(course_id):
         course_id, s3, bucket_name
     )
 
-    if syllabus_exists:
-        pdf_text = extract_text_from_pdf(pdf_name, bucket_name, s3)
-        course_work_details = extract_course_work_details(pdf_text)
-        course_info = analyze_course_content(pdf_text)
-        course_work_info = process_course_work_with_openai(course_work_details)
-    else:
-        course_info = "Syllabus not found."
-        course_work_info = ""
+    # 从 MOCK_COURSE_INFO_CSV 中获取课程信息
+    course_info_df = pd.read_csv(MOCK_COURSE_INFO_CSV)
+    course_info_row = course_info_df[course_info_df["course"] == course_id]
+
+    # 从 COURSE_WORK_EXTRACTED_INFO 中获取课程作业信息
+    course_works_df = pd.read_csv(COURSE_WORK_EXTRACTED_INFO)
+    course_works = course_works_df[course_works_df["course"] == course_id]
 
     return render_template(
         "course_detail_page.html",
         course_id=course_id,
         course=course_id,
-        course_work_info=course_work_info,
-        username=username,
-        course_info=course_info,
+        course_info=course_info_row.to_dict(orient="records")[0]
+        if not course_info_row.empty
+        else None,
+        course_works=course_works.to_dict(orient="records")
+        if not course_works.empty
+        else [],
         message=message,
+        username=username,
     )
 
 
-# Upload the a pdf syllabus file to S3 and extract the course info in the file
 @app.route("/upload/<course_id>", methods=["POST"])
 def upload_file(course_id):
     if (
@@ -356,12 +361,23 @@ def upload_file(course_id):
         course_work_list = convert_to_list_of_dicts(course_work_info)
         write_course_work_to_csv(course_work_list, course_id)
 
+        # 新增部分：获取课程信息和课程作业信息
+        course_info_df = pd.read_csv(MOCK_COURSE_INFO_CSV)
+        course_info_row = course_info_df[course_info_df["course"] == course_id]
+
+        course_works_df = pd.read_csv(COURSE_WORK_EXTRACTED_INFO)
+        course_works = course_works_df[course_works_df["course"] == course_id]
+
         return redirect(
             url_for(
                 "course_detail",
                 course_id=course_id,
-                course_info=course_info,
-                course_work_info=course_work_info,
+                course_info=course_info_row.to_dict(orient="records")[0]
+                if not course_info_row.empty
+                else None,
+                course_works=course_works.to_dict(orient="records")
+                if not course_works.empty
+                else [],
                 message="File uploaded successfully!",
                 username=username,
             )
