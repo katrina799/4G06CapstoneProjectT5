@@ -77,34 +77,6 @@
 
             </div>
         </div>
-
-    <div class="app-grid">
-        <a href="https://avenue.mcmaster.ca/" target="_blank" class="app-tile">
-            <img src="{{ url_for('static', filename='images/d2l.png') }}" alt="Avenue To Learn">
-            <p>Avenue To Learn</p>
-        </a>
-        <a href="https://epprd.mcmaster.ca/" target="_blank" class="app-tile">
-            <img src="{{ url_for('static', filename='images/mosaic.png') }}" alt="Mosaic">
-            <p>Mosaic</p>
-        </a>
-        <a href="https://www.oscarplusmcmaster.ca/" target="_blank" class="app-tile">
-            <img src="{{ url_for('static', filename='images/tile.png') }}" alt="Google">
-            <p>OSCARplus</p>
-        </a>
-        <a href="https://www.microsoft365.com//" target="_blank" class="app-tile">
-            <img src="{{ url_for('static', filename='images/tile.png') }}" alt="365">
-            <p>Office 365 Hub</p>
-        </a>
-        <a href="https://www.childsmath.ca/childsa/forms/main_login.php" target="_blank" class="app-tile">
-            <img src="{{ url_for('static', filename='images/tile.png') }}" alt="Childsmath">
-            <p>childsmath</p>
-        </a>
-        <a href="https://library.mcmaster.ca/" target="_blank" class="app-tile">
-            <img src="{{ url_for('static', filename='images/tile.png') }}" alt="Library">
-            <p>McMaster Library</p>
-        </a>
-        
-        <!-- Add more tiles for other apps -->
     </div>
     <div class="tasks-calendar-container">
         <div class="task-board">
@@ -164,6 +136,22 @@
         -->
     </div>
 
+    <script>
+        // This code will run after the DOM is fully loaded
+        window.onload = function() {
+            var appGrid = document.getElementById('app-grid');
+            var toggleButton = document.getElementById('toggle-apps-btn');
+        
+            // This function toggles the visibility of the app grid
+            toggleButton.onclick = function() {
+                if (appGrid.style.display === 'none' || appGrid.style.display === '') {
+                    appGrid.style.display = 'block';
+                } else {
+                    appGrid.style.display = 'none';
+                }
+            };
+        };
+    </script>
 </body>
 
 

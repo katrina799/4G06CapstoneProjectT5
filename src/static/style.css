@@ -11,13 +11,6 @@
     color: #66b0bf;
 }
 
-.app-grid {
-    display: flex;
-    justify-content: space-around; 
-    flex-wrap: wrap;
-}
-
-
 .banner-image {
     width: 20px;
     height: 20px;
@@ -210,3 +203,56 @@ a:hover {
 .clearfix {
     clear: both;
 }
+
+/* Toggle button for app grid */
+#toggle-apps-btn {
+    cursor: pointer;
+    font-size: 24px;
+    margin-left: 20px;
+}
+
+/* App grid container */
+.app-grid-container {
+    position: fixed; /* or absolute */
+    top: 50px; /* Adjust according to your header's height */
+    right: 10px;
+    width: 300px; /* Adjust as needed */
+    background-color: white;
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: none; /* Hidden by default */
+    z-index: 1000; /* Ensure it's above other content */
+    /* Add more styling as needed */
+}
+
+/* Grid of app tiles */
+.app-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columns grid */
+    gap: 10px;
+    padding: 10px;
+}
+
+/* Individual app tiles */
+.app-tile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    border-radius: 8px;
+    background: #f0f0f0;
+    text-align: center;
+}
+
+.app-tile img {
+    width: 50px; /* Icon size */
+    height: 50px;
+    margin-bottom: 5px;
+}
+
+.app-tile p {
+    font-size: 14px;
+    color: #333;
+}
+
+/* Add any additional global styles you may have here */

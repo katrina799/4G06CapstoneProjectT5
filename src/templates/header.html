@@ -2,6 +2,9 @@
         <div class="app-name">Course Buddy</div>
         <div class="welcome-msg">Hello, {{ username }}! Welcome to Course Buddy!</div>
         <div class="icon-container">
+                <div id="toggle-apps-btn" class="app-toggle">
+                        <i class="glyphicon glyphicon-th" title="Mac Apps" style="font-size:24px;"></i>
+                </div>
                 <a class="home-image {{ 'active' if current_page == 'home' else '' }}" href="{{ url_for('start') }}"><i
                                 class="glyphicon glyphicon-home" title="home page"
                                 style="font-size:24px; margin-left: 430px;"></i></a>
@@ -30,6 +33,45 @@
 
         </div>
 
-
+<div id="app-grid" class="app-grid-container" style="display: none;">
+        <a href="https://avenue.mcmaster.ca/" target="_blank" class="app-tile">
+            <img src="{{ url_for('static', filename='images/d2l.png') }}" alt="Avenue To Learn">
+            <p>Avenue To Learn</p>
+        </a>
+        <a href="https://epprd.mcmaster.ca/" target="_blank" class="app-tile">
+            <img src="{{ url_for('static', filename='images/mosaic.png') }}" alt="Mosaic">
+            <p>Mosaic</p>
+        </a>
+        <a href="https://www.oscarplusmcmaster.ca/" target="_blank" class="app-tile">
+            <img src="{{ url_for('static', filename='images/tile.png') }}" alt="Google">
+            <p>OSCARplus</p>
+        </a>
+        <a href="https://teams.microsoft.com/" target="_blank" class="app-tile">
+            <img src="{{ url_for('static', filename='images/tile.png') }}" alt="Teams">
+            <p>Teams</p>
+        </a>
+        
+        <a href="https://www.onenote.com/" target="_blank" class="app-tile">
+            <img src="{{ url_for('static', filename='images/tile.png') }}" alt="OneNote">
+            <p>OneNote</p>
+        </a>
+        <a href="https://drive.google.com/" target="_blank" class="app-tile">
+            <img src="{{ url_for('static', filename='images/tile.png') }}" alt="GoogleDrive">
+            <p>Google Drive</p>
+        </a>
+        <a href="https://www.microsoft365.com//" target="_blank" class="app-tile">
+            <img src="{{ url_for('static', filename='images/tile.png') }}" alt="365">
+            <p>Office 365 Hub</p>
+        </a>
+        <a href="https://www.childsmath.ca/childsa/forms/main_login.php" target="_blank" class="app-tile">
+            <img src="{{ url_for('static', filename='images/tile.png') }}" alt="Childsmath">
+            <p>childsmath</p>
+        </a>
+        <a href="https://library.mcmaster.ca/" target="_blank" class="app-tile">
+            <img src="{{ url_for('static', filename='images/tile.png') }}" alt="Library">
+            <p>McMaster Library</p>
+        </a>
 
 </div>
+
+    
