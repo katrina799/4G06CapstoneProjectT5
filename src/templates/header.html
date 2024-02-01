@@ -1,13 +1,13 @@
 <div class="head">
         <div class="app-name">Course Buddy</div>
+        <div id="toggle-apps-btn" class="app-toggle">
+                <i class="glyphicon glyphicon-th" title="Mac Apps" style="font-size:24px;"></i>
+        </div>
         <div class="welcome-msg">Hello, {{ username }}! Welcome to Course Buddy!</div>
         <div class="icon-container">
-                <div id="toggle-apps-btn" class="app-toggle">
-                        <i class="glyphicon glyphicon-th" title="Mac Apps" style="font-size:24px;"></i>
-                </div>
                 <a class="home-image {{ 'active' if current_page == 'home' else '' }}" href="{{ url_for('start') }}"><i
                                 class="glyphicon glyphicon-home" title="home page"
-                                style="font-size:24px; margin-left: 430px;"></i></a>
+                                style="font-size:24px; margin-left: 30px;"></i></a>
                 <a class="model {{ 'active' if current_page == 'model_page' else '' }}"
                         href="{{ url_for('model_page') }}"><i class="glyphicon glyphicon-stats" title="model prediction"
                                 style="font-size:24px;"></i> </a>
@@ -30,8 +30,8 @@
                         href="{{ url_for('profile_page') }}">
                         <i class="glyphicon glyphicon-user" title="profile page" style="font-size:24px;"></i>
                 </a>
-
         </div>
+</div>
 
 <div id="app-grid" class="app-grid-container" style="display: none;">
         <a href="https://avenue.mcmaster.ca/" target="_blank" class="app-tile">
@@ -43,34 +43,47 @@
             <p>Mosaic</p>
         </a>
         <a href="https://www.oscarplusmcmaster.ca/" target="_blank" class="app-tile">
-            <img src="{{ url_for('static', filename='images/tile.png') }}" alt="Google">
+            <img src="{{ url_for('static', filename='images/oscarplus.png') }}" alt="Google">
             <p>OSCARplus</p>
         </a>
         <a href="https://teams.microsoft.com/" target="_blank" class="app-tile">
-            <img src="{{ url_for('static', filename='images/tile.png') }}" alt="Teams">
+            <img src="{{ url_for('static', filename='images/teams.png') }}" alt="Teams">
             <p>Teams</p>
         </a>
         
         <a href="https://www.onenote.com/" target="_blank" class="app-tile">
-            <img src="{{ url_for('static', filename='images/tile.png') }}" alt="OneNote">
+            <img src="{{ url_for('static', filename='images/onenote.png') }}" alt="OneNote">
             <p>OneNote</p>
         </a>
         <a href="https://drive.google.com/" target="_blank" class="app-tile">
-            <img src="{{ url_for('static', filename='images/tile.png') }}" alt="GoogleDrive">
+            <img src="{{ url_for('static', filename='images/googledrive.png') }}" alt="GoogleDrive">
             <p>Google Drive</p>
         </a>
-        <a href="https://www.microsoft365.com//" target="_blank" class="app-tile">
-            <img src="{{ url_for('static', filename='images/tile.png') }}" alt="365">
+        <a href="https://chat.openai.com/" target="_blank" class="app-tile">
+                <img src="{{ url_for('static', filename='images/chatgpt.png') }}" alt="chatgpt">
+                <p>ChatGPT</p>
+            </a>
+        <a href="https://www.microsoft365.com/" target="_blank" class="app-tile">
+            <img src="{{ url_for('static', filename='images/office.png') }}" alt="365">
             <p>Office 365 Hub</p>
         </a>
         <a href="https://www.childsmath.ca/childsa/forms/main_login.php" target="_blank" class="app-tile">
-            <img src="{{ url_for('static', filename='images/tile.png') }}" alt="Childsmath">
+            <img src="{{ url_for('static', filename='images/childsmath.png') }}" alt="Childsmath">
             <p>childsmath</p>
         </a>
         <a href="https://library.mcmaster.ca/" target="_blank" class="app-tile">
-            <img src="{{ url_for('static', filename='images/tile.png') }}" alt="Library">
+            <img src="{{ url_for('static', filename='images/maclibrary.png') }}" alt="Library">
             <p>McMaster Library</p>
         </a>
+        <a href="https://gitlab.cas.mcmaster.ca/" target="_blank" class="app-tile">
+                <img src="{{ url_for('static', filename='images/gitlab.png') }}" alt="GitLab">
+                <p>GitLab</p>
+        </a>
+        <a href="https://github.com/" target="_blank" class="app-tile">
+                <img src="{{ url_for('static', filename='images/github.png') }}" alt="GitHub">
+                <p>GitHub</p>
+        </a>
+        
 
 </div>
 

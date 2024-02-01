@@ -32,7 +32,6 @@
 
 }
 
-
 .head {
     display: flex;
     border-bottom: 4px rgba(143, 198, 201, 0.887);
@@ -47,7 +46,7 @@
     min-width: 0;
     justify-content: space-between;
     align-items: center;
-
+    padding: 0 15px;
 }
 
 .head>*:not(:last-child) {
@@ -63,7 +62,19 @@ a:hover {
     text-decoration: none;
 }
 
+.welcome-msg{
+    flex: 1; 
+    display: flex;
+    align-items: center; 
+    justify-content: center;
+}
 
+@media (max-width: 768px) {
+    .welcome-msg {
+        font-size: 12px; 
+        padding: 0 10px;
+    }
+}
 
 .panel-course {
     background-color: rgb(255, 255, 255);
@@ -203,49 +214,81 @@ a:hover {
 .clearfix {
     clear: both;
 }
+.app-toggle {
+    margin: 0 20px; 
+}
 
-/* Toggle button for app grid */
 #toggle-apps-btn {
     cursor: pointer;
-    font-size: 24px;
-    margin-left: 20px;
+    margin-right: 10px; 
 }
 
-/* App grid container */
-.app-grid-container {
-    position: fixed; /* or absolute */
-    top: 50px; /* Adjust according to your header's height */
-    right: 10px;
-    width: 300px; /* Adjust as needed */
+#app-grid {
+    display: none; 
+    position: absolute; 
+    top: 70px; 
+    left: 10px; 
+    right: 10px; 
+    width: auto; 
+    max-width: 50%; 
+    height: calc(1400vh / 36); 
     background-color: white;
+    border-radius: 8px; 
     border: 1px solid #ccc;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    display: none; /* Hidden by default */
-    z-index: 1000; /* Ensure it's above other content */
-    /* Add more styling as needed */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); 
+    z-index: 1000; 
+    border: 8px solid #cce3de;
+    
+    box-sizing: border-box; 
+    overflow-y: auto; 
+    transition: all 0.3s ease-in-out; 
 }
 
-/* Grid of app tiles */
-.app-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 columns grid */
-    gap: 10px;
-    padding: 10px;
-}
-
-/* Individual app tiles */
 .app-tile {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 10px;
-    border-radius: 8px;
-    background: #f0f0f0;
-    text-align: center;
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center;
+    align-items: center; 
+    width: calc((100% - 80px) / 4);  
+    margin: 10px; 
+    box-sizing: border-box; 
+    transition: transform 0.3s ease, box-shadow 0.3s ease; 
+    cursor: pointer; 
+    float: left;
+}
+
+.app-tile:hover {
+    transform: translateY(-5px); 
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); 
 }
 
 .app-tile img {
-    width: 50px; /* Icon size */
+    margin-top: 10px;
+    max-width: 80%; 
+    height: auto; 
+    transition: max-width 0.3s ease; 
+}
+
+.app-tile:hover img {
+    max-width: 100%; 
+}
+
+.app-tile p {
+    text-align: center; 
+    margin-top: 8px;
+    width: 100%; 
+    transition: margin-top 0.3s ease; 
+}
+
+.app-grid-container {
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content: space-around; 
+    align-items: flex-start; 
+}
+
+.app-tile img {
+    width: 50px; 
     height: 50px;
     margin-bottom: 5px;
 }
@@ -254,5 +297,3 @@ a:hover {
     font-size: 14px;
     color: #333;
 }
-
-/* Add any additional global styles you may have here */
