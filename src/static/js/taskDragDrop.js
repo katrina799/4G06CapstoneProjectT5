@@ -178,7 +178,7 @@ function editTask(taskId) {
             method: 'POST',
             body: formData,
             headers: {
-                'Accept': 'application/json', // Expecting JSON response
+                'Accept': 'application/json', 
             }
         })
         .then(response => {
@@ -189,8 +189,8 @@ function editTask(taskId) {
         })
         .then(data => {
             if (data.message) {
-                alert(data.message); // Alert the message from the server
-                location.reload(); // If you want to reload the page after successful update
+                alert(data.message);
+                location.reload(); 
             }
         })
         .catch(error => {

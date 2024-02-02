@@ -404,16 +404,15 @@ def update_task_status():
         return jsonify({"message": "Task not found"}), 404
 
 
-@app.route("/add_task", methods=["POST"])
-def add_task():
-    course_name = request.form.get("course_name")
-    task_name = request.form.get("task_name")
-    due_date = request.form.get("due_date")
-    weight = request.form.get("weight")
-    est_hours = request.form.get("est_hours")
-
-    due_date_obj = datetime.strptime(due_date, "%Y-%m-%d")
-    priority = "high" if (due_date_obj - datetime.now()).days < 7 else "low"
+def add_task_todo(course_name, task_name, due_date, weight, est_hours):
+    if due_date:
+        due_date_obj = datetime.strptime(due_date, "%Y-%m-%d")
+        priority = (
+            "high" if (due_date_obj - datetime.now()).days < 7 else "low"
+        )
+    else:
+        due_date = "0000-00-00"
+        priority = "unknown"
 
     tasks_df = get_df_from_csv_in_s3(s3, bucket_name, mock_tasks_data_file)
 
@@ -429,7 +428,6 @@ def add_task():
     }
     new_task_df = pd.DataFrame([new_task])
     tasks_df = pd.concat([tasks_df, new_task_df], ignore_index=True)
-    print("DataFrame after update:", tasks_df)
 
     csv_buffer = StringIO()
     tasks_df.to_csv(csv_buffer, index=False)
@@ -440,6 +438,17 @@ def add_task():
         Body=csv_buffer.getvalue(),
         ContentType="text/csv",
     )
+
+
+@app.route("/add_task", methods=["POST"])
+def add_task():
+    course_name = request.form.get("course_name")
+    task_name = request.form.get("task_name")
+    due_date = request.form.get("due_date")
+    weight = request.form.get("weight", 0)
+    est_hours = request.form.get("est_hours", 0)
+
+    add_task_todo(course_name, task_name, due_date, weight, est_hours)
     return redirect(url_for("start"))
 
 
