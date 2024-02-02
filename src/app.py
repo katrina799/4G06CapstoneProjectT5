@@ -407,9 +407,9 @@ def update_task_status():
 def add_task_todo(course_name, task_name, due_date, weight, est_hours):
     if due_date:
         due_date_obj = datetime.strptime(due_date, "%Y-%m-%d")
-        priority = (
-            "high" if (due_date_obj - datetime.now()).days < 7 else "low"
-        )
+        priority = ("high" if (due_date_obj - datetime.now()).days < 7
+                    else "low")
+
     else:
         due_date = "0000-00-00"
         priority = "unknown"
