@@ -206,15 +206,6 @@ a:hover {
     clear: both;
 }
 
-
-.timer {
-    font-size: 2em;
-    color: white;
-    background: rgba(0, 0, 0, 0.5);
-    padding: 20px;
-    border-radius: 10px;
-}
-
 .interval-selection {
     margin-bottom: 20px;
 }
