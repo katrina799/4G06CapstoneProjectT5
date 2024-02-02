@@ -1,17 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
+{% block title %}
+Course Page
+{% endblock %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}" />
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <title>Course Buddy</title>
-</head>
-
-<body>
-    {% include 'header.html' %}
+{% block content %}
     <div class="banner-container" style="background-color: #f6fff8;">
         <div id="banner" class="banner-bar">
             <div>This is course page!!!</div>
@@ -40,10 +32,10 @@
                     style="display: flex; flex-wrap: wrap; justify-content: flex-start; width: 100%; border-spacing: 10px;">
                     {% for course in courses %}
                     <a href="/course_detail_page/{{ course }}" class="course-detail-link" style="flex-basis: 256px;">
-                        <div id="{{ course.0.1 }}"" class=" course-detail">
+                        <div id="{{ course.0.1 }}" class=" course-detail">
                             <div class="course-image">
                                 <img style="vertical-align:middle; width: 256px;"
-                                    src="{{url_for('static', filename='books.png')}}" />
+                                    src="{{url_for('static', filename='images/books.png')}}" />
                             </div>
                             <div class="course-progress">
                                 <div class="progress-bar"></div>
@@ -81,8 +73,4 @@
         </div>
 
     </div>
-
-
-</body>
-
-</html>
+{% endblock %}
