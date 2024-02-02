@@ -11,14 +11,12 @@ function startTimer(duration, display) {
         diff = duration - (((Date.now() - start) / 1000) | 0);
         minutes = (diff / 60)| 0;
         seconds = (diff % 60)| 0;
-
         minutes = minutes < 10 ? "0" + minutes : minutes;
         seconds = seconds < 10 ? "0" + seconds : seconds;
-
         display.textContent = minutes + ":" + seconds; 
-
         if (diff <= 0) {
             clearInterval(timer);
+            addStar(); 
             isRunning = false;
         }
     };
@@ -30,8 +28,16 @@ function startTimer(duration, display) {
     }
 }
 
+function addStar() {
+    const starContainer = document.getElementById('starContainer');
+    const star = document.createElement('span');
+    star.className = 'star';
+    star.textContent = '🍅';
+    starContainer.appendChild(star);
+}
+
 window.onload = function () {
-    var twentyFiveMinutes = 60 * 25,
+    var twentyFiveMinutes = 5 * 1, //60 * 25
         display = document.querySelector('#time');
     document.querySelector('#startBtn').onclick = function() {
         startTimer(twentyFiveMinutes, display);
