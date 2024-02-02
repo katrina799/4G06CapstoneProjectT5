@@ -11,8 +11,6 @@
     color: #66b0bf;
 }
 
-
-
 .banner-image {
     width: 20px;
     height: 20px;
@@ -34,7 +32,6 @@
 
 }
 
-
 .head {
     display: flex;
     border-bottom: 4px rgba(143, 198, 201, 0.887);
@@ -49,7 +46,7 @@
     min-width: 0;
     justify-content: space-between;
     align-items: center;
-
+    padding: 0 15px;
 }
 
 .head>*:not(:last-child) {
@@ -65,7 +62,19 @@ a:hover {
     text-decoration: none;
 }
 
+.welcome-msg{
+    flex: 1; 
+    display: flex;
+    align-items: center; 
+    justify-content: center;
+}
 
+@media (max-width: 768px) {
+    .welcome-msg {
+        font-size: 12px; 
+        padding: 0 10px;
+    }
+}
 
 .panel-course {
     background-color: rgb(255, 255, 255);
@@ -204,4 +213,87 @@ a:hover {
 
 .clearfix {
     clear: both;
+}
+.app-toggle {
+    margin: 0 20px; 
+}
+
+#toggle-apps-btn {
+    cursor: pointer;
+    margin-right: 10px; 
+}
+
+#app-grid {
+    display: none; 
+    position: absolute; 
+    top: 70px; 
+    left: 10px; 
+    right: 10px; 
+    width: auto; 
+    max-width: 50%; 
+    height: calc(1400vh / 36); 
+    background-color: white;
+    border-radius: 8px; 
+    border: 1px solid #ccc;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); 
+    z-index: 1000; 
+    border: 8px solid #cce3de;
+    
+    box-sizing: border-box; 
+    overflow-y: auto; 
+    transition: all 0.3s ease-in-out; 
+}
+
+.app-tile {
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center;
+    align-items: center; 
+    width: calc((100% - 80px) / 4);  
+    margin: 10px; 
+    box-sizing: border-box; 
+    transition: transform 0.3s ease, box-shadow 0.3s ease; 
+    cursor: pointer; 
+    float: left;
+}
+
+.app-tile:hover {
+    transform: translateY(-5px); 
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); 
+}
+
+.app-tile img {
+    margin-top: 10px;
+    max-width: 80%; 
+    height: auto; 
+    transition: max-width 0.3s ease; 
+}
+
+.app-tile:hover img {
+    max-width: 100%; 
+}
+
+.app-tile p {
+    text-align: center; 
+    margin-top: 8px;
+    width: 100%; 
+    transition: margin-top 0.3s ease; 
+}
+
+.app-grid-container {
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content: space-around; 
+    align-items: flex-start; 
+}
+
+.app-tile img {
+    width: 50px; 
+    height: 50px;
+    margin-bottom: 5px;
+}
+
+.app-tile p {
+    font-size: 14px;
+    color: #333;
 }

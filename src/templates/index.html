@@ -16,7 +16,7 @@
     <div class="banner-container" style="background-color: #f6fff8;">
         <div id="banner" class="banner-bar">
             <img style="border-radius: 0; display: inline-block;" class="banner-image"
-                src="{{url_for('static', filename='fight.png')}}" />
+                src="{{url_for('static', filename='images/fight.png')}}" />
             <div>Lets start today's work with your course buddy!</div>
         </div>
     </div>
@@ -41,7 +41,7 @@
                     {% for course in courses %}
                     <div id="{{ course.0.1 }}" class=" course-detail">
                         <div class="course-image">
-                            <img style="vertical-align:middle " src="{{url_for('static', filename='books.png')}}" />
+                            <img style="vertical-align:middle " src="{{url_for('static', filename='images/books.png')}}" />
                         </div>
                         <div class="course-progress">
                             <div class="progress-bar"></div>
@@ -77,7 +77,6 @@
 
             </div>
         </div>
-
     </div>
     <div class="tasks-calendar-container">
         <div class="task-board">
@@ -189,6 +188,24 @@
     </div>
 
     <script src="{{ url_for('static', filename='js/taskDragDrop.js') }}"></script>
+
+    <script>
+        // This code will run after the DOM is fully loaded
+        window.onload = function() {
+            var appGrid = document.getElementById('app-grid');
+            var toggleButton = document.getElementById('toggle-apps-btn');
+        
+            // This function toggles the visibility of the app grid
+            toggleButton.onclick = function() {
+                if (appGrid.style.display === 'none' || appGrid.style.display === '') {
+                    appGrid.style.display = 'block';
+                } else {
+                    appGrid.style.display = 'none';
+                }
+            };
+        };
+    </script>
+  
 </body>
 
 
