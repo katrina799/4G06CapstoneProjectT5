@@ -25,18 +25,25 @@ except ImportError:
 db = SQLAlchemy()
 
 
+class User(db.Model):
+    userId = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(80), nullable=False)
+    topics = db.relationship("Topic", backref="author", lazy=True)
+    comments = db.relationship("Comment", backref="commenter", lazy=True)
+
+
 class Topic(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(80), nullable=False)
     description = db.Column(db.String(120))
-    username = db.Column(db.String)
+    userId = db.Column(db.Integer, db.ForeignKey("user.userId"))
 
 
 class Comment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     text = db.Column(db.String, nullable=False)
-    topicId = db.Column(db.String)
-    username = db.Column(db.String)
+    topicId = db.Column(db.Integer, db.ForeignKey("topic.id"))
+    userId = db.Column(db.Integer, db.ForeignKey("user.userId"))
 
 
 class SqueezeTransformer(TransformerMixin):
@@ -257,6 +264,30 @@ def sql_to_csv_s3(table, s3, bucket_name, s3_csv_file_path):
     s3.upload_file(csv_filename, bucket_name, s3_csv_file_path)
 
 
+def initialize_user_db_from_s3(s3, bucket_name, s3_csv_file_path, db):
+    # Get the CSV file from S3
+    s3_obj = s3.get_object(Bucket=bucket_name, Key=s3_csv_file_path)
+    csv_content = s3_obj["Body"].read().decode("utf-8")
+
+    # Convert the CSV content to a StringIO object and then to a DataFrame
+    csv_stringio = io.StringIO(csv_content)
+    df = pd.read_csv(csv_stringio)
+
+    # Add the data to the database session
+    for _, row in df.iterrows():
+        # Check if the Topic with this ID already exists
+        existing_user = db.session.query(User).get(row["userId"])
+        if existing_user:
+            existing_user.username = row["username"]
+        else:
+            # Or insert a new one if it does not exist
+            new_user = User(username=row["username"])
+            db.session.add(new_user)
+
+    # Commit the session to the database
+    db.session.commit()
+
+
 def initialize_topic_db_from_s3(s3, bucket_name, s3_csv_file_path, db):
     # Get the CSV file from S3
     s3_obj = s3.get_object(Bucket=bucket_name, Key=s3_csv_file_path)
@@ -274,13 +305,13 @@ def initialize_topic_db_from_s3(s3, bucket_name, s3_csv_file_path, db):
             # Update existing record if necessary
             existing_topic.title = row["title"]
             existing_topic.description = row["description"]
-            existing_topic.username = row["username"]
+            existing_topic.userId = row["userId"]
         else:
             # Or insert a new one if it does not exist
             new_topic = Topic(
                 title=row["title"],
                 description=row["description"],
-                username=row["username"],
+                userId=row["userId"],
             )
             db.session.add(new_topic)
 
@@ -305,13 +336,13 @@ def initialize_comment_db_from_s3(s3, bucket_name, s3_csv_file_path, db):
             # Update existing record if necessary
             existing_comment.text = row["text"]
             existing_comment.topicId = row["topicId"]
-            existing_comment.username = row["username"]
+            existing_comment.userId = row["userId"]
         else:
             # Or insert a new one if it does not exist
             new_comment = Comment(
                 text=row["text"],
                 topicId=row["topicId"],
-                username=row["username"],
+                userId=row["userId"],
             )
             db.session.add(new_comment)
 

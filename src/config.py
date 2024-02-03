@@ -1,6 +1,7 @@
 # A configuration file where all constants are defined
 BUCKET_NAME = "course-buddy"
 MOCK_DATA_POC_NAME = "mock_data_poc.csv"
+USER_DATA_NAME = "user_data.csv"
 TOPIC_DATA_NAME = "topic_data.csv"
 COMMENT_DATA_NAME = "comment_data.csv"
 PRIORITY_MODEL_FILE_NAME = "trained_priority_model.joblib"

@@ -17,6 +17,8 @@ try:
         sql_to_csv_s3,
         initialize_topic_db_from_s3,
         initialize_comment_db_from_s3,
+        initialize_user_db_from_s3,
+        User,
         Topic,
         Comment,
         db,
@@ -33,6 +35,8 @@ except ImportError:
         sql_to_csv_s3,
         initialize_topic_db_from_s3,
         initialize_comment_db_from_s3,
+        initialize_user_db_from_s3,
+        User,
         Topic,
         Comment,
         db,
@@ -54,6 +58,7 @@ app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///" + os.path.join(
 # app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///project.db"
 bucket_name = app.config["BUCKET_NAME"]
 mock_data_file = app.config["MOCK_DATA_POC_NAME"]
+user_data_file = app.config["USER_DATA_NAME"]
 topic_data_file = app.config["TOPIC_DATA_NAME"]
 comment_data_file = app.config["COMMENT_DATA_NAME"]
 model_file_path = app.config["PRIORITY_MODEL_PATH"]
@@ -63,6 +68,7 @@ db.init_app(app)
 
 # Setting global variables
 username = ""
+userId = 1
 courses = []
 model = None
 current_page = "home"
@@ -76,6 +82,7 @@ s3 = boto3.client(
 
 with app.app_context():
     db.create_all()
+    initialize_user_db_from_s3(s3, bucket_name, user_data_file, db)
     initialize_topic_db_from_s3(s3, bucket_name, topic_data_file, db)
     initialize_comment_db_from_s3(s3, bucket_name, comment_data_file, db)
 
@@ -83,9 +90,11 @@ with app.app_context():
 # Set up home page for the website
 @app.route("/")
 def start():
-    global username, courses, current_page, tasks
+    global username, userId, courses, current_page, tasks
     df = get_df_from_csv_in_s3(s3, bucket_name, mock_data_file)
     username = df.loc[0, "username"]  # For PoC purpose
+    userId = df.loc[0, "user_id"]  # For PoC purpose
+    print(userId)
     courses = df.loc[0, "courses"]  # For PoC purpose
     # Parsing it into a Python list
     courses = ast.literal_eval(courses)
@@ -408,15 +417,20 @@ def forum_page():
         topic = Topic(
             title=request.form["title"],
             description=request.form["description"],
-            username=username,
+            userId=userId,
         )
+        print("new topic by id: ", userId)
         db.session.add(topic)
         db.session.commit()
         sql_to_csv_s3("topic", s3, bucket_name, topic_data_file)
 
-    topics = db.session.execute(db.select(Topic)).scalars()
+    topics_username = (
+        db.session.query(Topic, User.username)
+        .join(User, Topic.userId == User.userId)
+        .all()
+    )
 
-    return render_template("forum_page.html", topics=topics)
+    return render_template("forum_page.html", topics=topics_username)
 
 
 @app.route("/forum/topic/<int:id>", methods=["GET", "POST"])
@@ -424,20 +438,33 @@ def topic(id):
     if request.method == "POST":
         # Add a new comment to the topic
         comment = Comment(
-            text=request.form["comment"], topicId=id, username=username
+            text=request.form["comment"], topicId=id, userId=userId
         )
         db.session.add(comment)
         db.session.commit()
         sql_to_csv_s3("comment", s3, bucket_name, comment_data_file)
 
     # pull the topic and comments
-    topic = db.get_or_404(Topic, id)
-    comments = Comment.query.filter_by(topicId=id).all()
+    topic_with_user = (
+        db.session.query(Topic, User.username)
+        .join(User, Topic.userId == User.userId)
+        .filter(Topic.id == id)
+        .first_or_404()
+    )
+    topic, author_username = topic_with_user
+
+    comments = (
+        db.session.query(Comment, User.username)
+        .join(User, Comment.userId == User.userId)
+        .all()
+    )
+    for comment, username in comments:
+        print(f"ID: {comment.id}, TEXT: {comment.text}, Author: {username}")
     return render_template(
         "forum_topic_page.html",
         topic=topic,
         comments=comments,
-        username=username,
+        author_username=author_username,
     )
 
 
@@ -464,7 +491,7 @@ def search():
         "search_forum_results.html",
         results=results,
         query=query,
-        username=username,
+        userId=userId,
     )
 
 
