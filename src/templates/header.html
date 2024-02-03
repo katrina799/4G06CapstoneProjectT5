@@ -8,21 +8,13 @@
                 <a class="home-image {{ 'active' if current_page == 'home' else '' }}" href="{{ url_for('start') }}"><i
                                 class="glyphicon glyphicon-home" title="home page"
                                 style="font-size:24px; margin-left: 30px;"></i></a>
-                <a class="model {{ 'active' if current_page == 'model_page' else '' }}"
-                        href="{{ url_for('model_page') }}"><i class="glyphicon glyphicon-stats" title="model prediction"
-                                style="font-size:24px;"></i> </a>
                 <div class="timer"><i class="glyphicon glyphicon-time" title="pomodoro timer"
                                 style="font-size:24px;"></i>
                 </div>
-                <a class="message {{ 'active' if current_page == 'plan_page' else '' }}"
-                        href="{{ url_for('plan_page') }}"><i class="glyphicon glyphicon-tasks"
-                                title="study plan schedule" style="font-size:24px;"></i> </a>
                 <a class="courses {{ 'active' if current_page == 'course_page' else '' }}"
                         href="{{ url_for('course_page') }}"><i class="glyphicon glyphicon-book" title="your course list"
                                 style="font-size:24px;"></i>
                 </a>
-                <div class="setting"><i class="glyphicon glyphicon-cog" style="font-size:24px;" title="setting"></i>
-                </div>
                 <div class="notification"><i class="glyphicon glyphicon-bell" style="font-size:24px;"
                                 title="notifications"></i>
                 </div>
