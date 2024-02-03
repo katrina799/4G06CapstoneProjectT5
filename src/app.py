@@ -87,72 +87,14 @@ def start():
     )
 
 
-# Predict priority using trained model based on user input
-@app.route("/priority_predict", methods=["GET", "POST"])
-def prority_predict():
-    if request.method == "POST":
-        # Load pipeline that has transformed processor and trained model
-        m_f_p = model_file_path
-        pipeline = load_priority_model_from_s3(s3, bucket_name, m_f_p)
-        # Retrieve input data
-        form_data = request.form
-        t_w_p = "task_weight_percent"
-        t_r_h = "time_required_hours"
-        input_data = {
-            "task_name": [form_data.get("task_name")],
-            "school_year": [int(form_data.get("school_year"))],
-            "course_name": [form_data.get("course_name")],
-            "credit": [int(form_data.get("credit"))],
-            "task_mode": [form_data.get("task_mode")],
-            "task_type": [form_data.get("task_type")],
-            t_w_p: [float(form_data.get(t_w_p))],
-            t_r_h: [float(form_data.get(t_r_h))],
-            "difficulty": [float(form_data.get("difficulty"))],
-            "current_progress_percent": [
-                float(form_data.get("current_progress_percent"))
-            ],
-            "time_spent_hours": [float(form_data.get("time_spent_hours"))],
-            "days_until_due": [int(form_data.get("days_until_due"))],
-        }
-
-        input_df = pd.DataFrame(input_data)
-
-        # Ensure that text columns are in the correct format
-        for text_col in ["task_name", "course_name"]:
-            input_df[text_col] = input_df[text_col].apply(
-                lambda x: [x] if isinstance(x, str) else x
-            )
-
-        # Give prediction on the input data
-        prediction = pipeline.predict(input_df).tolist()
-
-        priority_mapping = {1: "Low", 2: "Medium", 3: "High"}
-
-        # Replace values in the prediction list
-        mapped_prediction = [priority_mapping.get(n, n) for n in prediction]
-
-        pred_prob = pipeline.predict_proba(input_df).tolist()
-
-        model_params = pipeline.get_params()
-
-        # Return prediction
-        return render_template(
-            "model_prediction_page.html",
-            prediction=mapped_prediction,
-            prediction_prob=pred_prob,
-            model_params=model_params,
-        )
-    return render_template("model_page.html")
-
-
-# Router to model page
-@app.route("/model_page", methods=["GET", "POST"])
-def model_page():
+# Router to feedback bpx page
+@app.route("/feedback_page", methods=["GET", "POST"])
+def feedback_page():
     global current_page
-    current_page = "model_page"
-    # render the plan page
+    current_page = "feedback_page"
+    # render the feedback box page
     return render_template(
-        "model_page.html", username=username, current_page=current_page
+        "feedback_page.html", username=username, current_page=current_page
     )
 
 
@@ -252,17 +194,6 @@ def course_page():
         username=username,
         courses=courses,
         current_page=current_page,
-    )
-
-
-# Router to study plan detailed page
-@app.route("/plan_page", methods=["GET", "POST"])
-def plan_page():
-    global current_page
-    current_page = "plan_page"
-    # Render the plan page
-    return render_template(
-        "plan_page.html", username=username, current_page=current_page
     )
 
 
@@ -407,8 +338,9 @@ def update_task_status():
 def add_task_todo(course_name, task_name, due_date, weight, est_hours):
     if due_date:
         due_date_obj = datetime.strptime(due_date, "%Y-%m-%d")
-        priority = ("high" if (due_date_obj - datetime.now()).days < 7
-                    else "low")
+        priority = (
+            "high" if (due_date_obj - datetime.now()).days < 7 else "low"
+        )
 
     else:
         due_date = "0000-00-00"

@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Feedback Page
+{% endblock %}
+{% block content %}
+<div class="banner-container" style="background-color: #f6fff8;">
+    <div id="banner" class="banner-bar">
+        <div>This is feedback page!!!</div>
+    </div>
+</div>
+
+<div class="feedback-form-container">
+    <h2>Feedback & Suggestions</h2>
+    <form id="feedbackForm" action="your-server-side-script" method="POST">
+        <label for="name">Your Name:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="email">Your Email:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="feedback">Your Feedback:</label>
+        <textarea id="feedback" name="feedback" rows="5" required></textarea>
+
+        <button type="submit">Submit Feedback</button>
+    </form>
+</div>
+{% endblock %}
