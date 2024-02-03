@@ -81,24 +81,53 @@
     <div class="tasks-calendar-container">
         <div class="task-board">
             <!-- To Do Column -->
-            <div class="task-column" id="todo">
-                <h2>To Do</h2>
-                {% for task in tasks.todo %}
-                <div class="task-card" draggable="true" data-id="{{ task.id }}" data-status="todo">
-                    <div class="task-header">{{ task.course }} - {{ task.title }}</div>
-                    <div class="task-metadata">
-                        <span>Due: {{ task.due_date }}</span>
-                        <span>Weight: {{ task.weight }}</span>
-                        <span>Est. Time: {{ task.est_time }}</span>
+            <div class="task-column" id="todo" data-status="todo">
+                <h2>
+                    <span class="status-circle todo-circle"></span>
+                    To Do
+                    <span class="task-count">{{ tasks.todo|length }}</span>
+                </h2>
+                <div class="todo-container">
+                    <div class="task-container">
+                        {% for task in tasks.todo %}
+                        <div class="task-card" draggable="true" data-id="{{ task.id }}" data-status="todo">
+                            <div class="task-header">{{ task.course }} - {{ task.title }}</div>
+                            <div class="task-metadata">
+                                <span>Due: {{ task.due_date }}</span>
+                                <span>Weight: {{ task.weight }}</span>
+                                <span>Est. Time: {{ task.est_time }}</span>
+                            </div>
+                            <div class="task-priority {{ 'priority-' + task.priority|lower }}">{{ task.priority }} Priority</div>
+                        </div>
+                        {% endfor %}
                     </div>
-                    <div class="task-priority {{ 'priority-' + task.priority|lower }}">{{ task.priority }} Priority</div>
+                    <button id="add-task-btn" onclick="showAddTaskForm()">Add Task</button>
                 </div>
-                {% endfor %}
+                <div id="add-task-form" style="display:none;">
+                    <form action="/add_task" method="post">
+                        <input type="text" name="course_name" placeholder="Course Name" required>
+                        <input type="text" name="task_name" placeholder="Task Name" required>
+                        <input type="date" name="due_date" placeholder="Due Date">
+                        <input type="text" name="weight" placeholder="Weight">
+                        <input type="text" name="est_hours" placeholder="Estimated Hours">
+                        <button type="submit">Submit</button>
+                    </form>
+                </div>
+                <script>
+                    function showAddTaskForm() {
+                        var form = document.getElementById('add-task-form');
+                        form.style.display = form.style.display === 'none' ? 'block' : 'none';
+                    }
+                </script>
             </div>
 
             <!-- In Progress Column -->
-            <div class="task-column" id="in-progress">
-                <h2>In Progress</h2>
+            <div class="task-column" id="in-progress" data-status="in_progress">
+                <h2>
+                    <span class="status-circle in-progress-circle"></span>
+                    In Progress
+                    <span class="task-count">{{ tasks.in_progress|length }}</span>
+                </h2>
                 {% for task in tasks.in_progress %}
                 <div class="task-card" draggable="true" data-id="{{ task.id }}" data-status="in-progress">
                     <div class="task-header">{{ task.course }} - {{ task.title }}</div>
@@ -113,8 +142,12 @@
             </div>
 
             <!-- Done Column -->
-            <div class="task-column" id="done">
-                <h2>Done</h2>
+            <div class="task-column" id="done" data-status="done">
+                <h2>
+                    <span class="status-circle done-circle"></span>
+                    Done
+                    <span class="task-count">{{ tasks.done|length }}</span>
+                </h2>
                 {% for task in tasks.done %}
                 <div class="task-card" draggable="true" data-id="{{ task.id }}" data-status="done">
                     <div class="task-header">{{ task.course }} - {{ task.title }}</div>
@@ -128,13 +161,33 @@
                 {% endfor %}
             </div>
         </div>
-        <!--
-            <div class="calendar-container">
-            <div class="calendar-placeholder">
-                Calendar Widget Goes Here
-            </div>
-        -->
     </div>
+    <div id="contextMenu" class="context-menu" style="display: none;">
+        <ul>
+            <li id="editTask">Edit Task</li>
+            <li id="deleteTask">Delete Task</li>
+        </ul>
+    </div>
+
+    <div id="modal-overlay" class="modal-overlay" style="display:none;"></div>
+
+    <!-- Edit Task Modal -->
+    <div id="edit-task-modal" class="modal" style="display:none;">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeEditModal()">&times;</span>
+            <form id="edit-task" action="/edit_task" method="post">
+                <input type="hidden" name="task_id">
+                <input type="text" name="course_name" placeholder="Course Name" required>
+                <input type="text" name="task_name" placeholder="Task Name" required>
+                <input type="date" name="due_date" placeholder="Due Date" >
+                <input type="text" name="weight" placeholder="Weight" required>
+                <input type="text" name="est_hours" placeholder="Estimated Hours" required>
+                <button type="submit">Update Task</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/taskDragDrop.js') }}"></script>
 
     <script>
         // This code will run after the DOM is fully loaded
@@ -152,6 +205,7 @@
             };
         };
     </script>
+  
 </body>
 
 
