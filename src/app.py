@@ -458,8 +458,6 @@ def topic(id):
         .join(User, Comment.userId == User.userId)
         .all()
     )
-    for comment, username in comments:
-        print(f"ID: {comment.id}, TEXT: {comment.text}, Author: {username}")
     return render_template(
         "forum_topic_page.html",
         topic=topic,
@@ -484,7 +482,6 @@ def search():
 
     # Combine the results
     results = {"topics": matching_topics, "comments": matching_comments}
-    print(results)
 
     # Render a template with the search results
     return render_template(
