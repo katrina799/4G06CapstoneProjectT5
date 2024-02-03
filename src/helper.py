@@ -144,7 +144,6 @@ def parse_course_info(api_response):
     if not api_response:
         return {}
 
-    # 正则表达式匹配每个信息项
     pattern = r"\d+\.\s+([A-Za-z ]+):\s+((?:(?!#).)*)"
     matches = re.findall(pattern, api_response, re.DOTALL)
 
@@ -155,7 +154,6 @@ def parse_course_info(api_response):
         title = match[0].strip()
         if title in title_to_column_mapping and title not in found_titles:
             found_titles.add(title)
-            # 去除每个信息项末尾的 "#" 号和可能的空白
             info = match[1].rstrip(" #").strip()
             if info == "":
                 info = "N/A"
@@ -169,16 +167,12 @@ def update_csv(course_id, pdf_name, api_response):
     csv_file_path = MOCK_COURSE_INFO_CSV
     course_info = parse_course_info(api_response)
 
-    # 读取 CSV 文件
     df = pd.read_csv(csv_file_path).dropna(how="all")
 
-    # 检查课程 ID 是否存在
     if course_id in df["course"].dropna().values:
-        # 更新现有记录
         for column, value in course_info.items():
             df.loc[df["course"] == course_id, column] = value
     else:
-        # 添加新记录
         new_data = pd.DataFrame(
             [
                 {
@@ -189,7 +183,6 @@ def update_csv(course_id, pdf_name, api_response):
         )
         df = pd.concat([df, new_data], ignore_index=True)
 
-    # 保存更新后的 CSV 文件
     df.to_csv(csv_file_path, index=False)
 
 
@@ -226,10 +219,8 @@ def update_csv_after_deletion(course_id):
     csv_file_path = MOCK_COURSE_INFO_CSV
     df = pd.read_csv(csv_file_path)
 
-    # 删除与course_id匹配的行
     df = df[df["course"] != course_id]
 
-    # 保存更新后的CSV文件
     df.to_csv(csv_file_path, index=False)
 
 
@@ -309,7 +300,8 @@ def process_course_work_with_openai(syllabus_text):
     MOST IMPORTANT: you do not need to reply any words, but the Python list! 
     If any other information is missing, put 'N/A' in the corresponding value.
     Also, please exclude any course work library that do not have a score
-    distribution. 
+    distribution. All Date need to be in yyyy-mm-dd format, 
+    2024 as year if no year has been mentioned.
 
     Syllabus Content:
     {syllabus_text}
@@ -330,17 +322,14 @@ def process_course_work_with_openai(syllabus_text):
 
 
 def extract_course_work_details(syllabus_text, max_tokens=4097):
-    # 估计令牌数量
     if estimate_token_count(syllabus_text) <= max_tokens:
-        # 如果在令牌限制内，处理整个文本
         return process_course_work_with_openai(syllabus_text)
     else:
-        # 如果超过限制，分段处理
         return process_course_work_in_segments(syllabus_text, max_tokens)
 
 
 def process_course_work_in_segments(text, max_tokens):
-    segment_length = max_tokens * 4  # 根据令牌限制估计分段长度
+    segment_length = max_tokens * 4
     segments = [
         text[i : i + segment_length]
         for i in range(0, len(text), segment_length)
@@ -372,11 +361,9 @@ def process_text_in_segments(text, max_tokens):
 
 def convert_to_list_of_dicts(course_work_data):
     try:
-        # 尝试将字符串数据转换为 Python 对象
         course_work_list = json.loads(course_work_data)
         return course_work_list
     except json.JSONDecodeError:
-        # 如果转换失败，返回空列表或错误信息
         return []
 
 
@@ -395,11 +382,9 @@ def write_course_work_to_csv(course_work_list, course_id):
     with open(csv_file_path, mode="a", newline="", encoding="utf-8") as file:
         writer = csv.DictWriter(file, fieldnames=headers)
 
-        # 如果文件是空的，写入头部
         if file.tell() == 0:
             writer.writeheader()
 
-        # 遍历列表，写入每行数据
         for item in course_work_list:
             row = {
                 "course id": course_id,

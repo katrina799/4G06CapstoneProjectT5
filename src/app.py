@@ -199,10 +199,8 @@ def remove_course():
         user_courses_str = user_courses_series.tolist()[0]
         user_courses = ast.literal_eval(user_courses_str)
 
-        # 获取要删除的课程ID
         course_id = user_courses.pop(int(index))
 
-        # 检查并删除S3上的syllabus
         syllabus_exists, pdf_name = check_syllabus_exists(
             course_id, s3, bucket_name
         )
@@ -210,7 +208,6 @@ def remove_course():
             s3.delete_object(Bucket=bucket_name, Key=pdf_name)
             update_csv_after_deletion(course_id)
 
-        # 更新用户课程列表
         list_str = str(user_courses)
         df.loc[df["username"] == username, "courses"] = list_str
         upload_df_to_s3(df, s3, bucket_name, mock_data_file)
@@ -296,7 +293,6 @@ def course_detail(course_id):
         course_id, s3, bucket_name
     )
 
-    # 从 MOCK_COURSE_INFO_CSV 中获取课程信息
     course_info_df = pd.read_csv(MOCK_COURSE_INFO_CSV)
     course_info_row = course_info_df[course_info_df["course"] == course_id]
 

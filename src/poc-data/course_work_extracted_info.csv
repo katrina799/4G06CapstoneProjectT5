@@ -6,3 +6,12 @@ course,course_work,start_date,start_time,due_date,due_time,score_distribution
 4C03,A5: Mininet Lab (10%),Mar. 11,N/A,Mar. 15,N/A,10
 1AA3,Assignment 1,N/A,N/A,N/A,N/A,25
 1AA3,Assignment 2,N/A,N/A,N/A,N/A,25
+test,Assignment 1,2023-09-21,N/A,2023-10-05,N/A,8
+test,Assignment 2,2023-10-05,N/A,2023-10-25,N/A,8
+test,Midterm,2023-10-30,N/A,N/A,N/A,20
+test,Assignment 3,2023-11-02,N/A,2023-11-16,N/A,8
+test,Assignment 4,2023-11-16,N/A,2023-11-30,N/A,8
+test,Final exam,N/A,N/A,N/A,N/A,48
+4A03,Assignment 1,N/A,N/A,2024-09-25,N/A,5
+4A03,Assignment 2,N/A,N/A,2024-11-06,N/A,5
+4A03,Assignment 3,N/A,N/A,2024-12-04,N/A,22
