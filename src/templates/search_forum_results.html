@@ -16,7 +16,7 @@
       </head>
 <body>
   {% include 'header.html' %}
-  <div class="container my-4">
+  <div class="container my-4 truncate topicpage">
     <div class="my-3 p-3 bg-body rounded shadow-sm">
         <h4 class="border-bottom pb-2 mb-0">Topics</h4>
         {% for topic in results.topics %}
@@ -24,11 +24,11 @@
           <!-- ... other elements ... -->
           <div class="pb-3 mb-0 small lh-sm border-bottom w-100">
             <div class="d-flex justify-content-between">
-              <strong class="text-gray-dark">
+              <strong class="text-gray-dark truncate">
                 <a href="/forum/topic/{{ topic.id }}">{{ topic.title }}</a>
               </strong>
             </div>
-            <span class="d-block">{{ topic.description }}</span>
+            <span class="d-block truncate">{{ topic.description }}</span>
           </div>
         </div>
         {% else %}
@@ -39,10 +39,10 @@
       <div class="my-3 p-3 bg-body rounded shadow-sm">
         <h4 class="border-bottom pb-2 mb-0">Comments</h4>
         {% for comment in results.comments %}
-        <div class="d-flex text-muted pt-3">
+        <div class="d-flex text-muted pt-3 truncate">
           <!-- ... other elements ... -->
           <div class="pb-3 mb-0 small lh-sm border-bottom w-100">
-            <strong class="text-gray-dark">
+            <strong class="text-gray-dark truncate">
               {{ comment.text }}
             </strong>
             <a href="/forum/topic/{{ comment.topicId }}" class="d-block mt-1">Go to Topic</a>

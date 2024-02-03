@@ -4,6 +4,7 @@ import botocore
 import boto3
 from flask import Flask, render_template, request, Response, redirect, url_for
 import ast
+from sqlalchemy.sql import func
 
 try:
     from helper import (
@@ -411,32 +412,53 @@ def upload_file(course_id):
 def forum_page():
     global current_page
     current_page = "forum_page"
-    # Render the forum page
-    if request.method == "POST":
-        # Add a new topic
-        topic = Topic(
-            title=request.form["title"],
-            description=request.form["description"],
-            userId=userId,
-        )
-        print("new topic by id: ", userId)
-        db.session.add(topic)
-        db.session.commit()
-        sql_to_csv_s3("topic", s3, bucket_name, topic_data_file)
 
-    topics_username = (
-        db.session.query(Topic, User.username)
+    # Subquery to count comments for each topic
+    comment_count_subquery = (
+        db.session.query(
+            Comment.topicId, func.count(Comment.id).label("comment_count")
+        )
+        .group_by(Comment.topicId)
+        .subquery()
+    )
+
+    # Modify your existing query to include the comment count
+    topics_with_comment_count = (
+        db.session.query(
+            Topic, User.username, comment_count_subquery.c.comment_count
+        )
+        .outerjoin(
+            comment_count_subquery,
+            Topic.id == comment_count_subquery.c.topicId,
+        )
         .join(User, Topic.userId == User.userId)
         .all()
     )
 
-    return render_template("forum_page.html", topics=topics_username)
+    return render_template("forum_page.html", topics=topics_with_comment_count)
+
+
+@app.route("/add_topic", methods=["GET", "POST"])
+def add_topic():
+    if request.method == "POST":
+        # Process the form data and add the new topic
+        title = request.form["title"]
+        description = request.form["description"]
+        # Assume 'userId' is obtained from the session or a decorator
+        topic = Topic(title=title, description=description, userId=userId)
+        db.session.add(topic)
+        db.session.commit()
+        # Redirect to the forum page after adding the topic
+        return redirect(url_for("forum_page"))
+    # Render the add topic form if method is GET
+    return render_template("add_topic_page.html")
 
 
 @app.route("/forum/topic/<int:id>", methods=["GET", "POST"])
 def topic(id):
     if request.method == "POST":
         # Add a new comment to the topic
+        print("Current usser id: ", userId)
         comment = Comment(
             text=request.form["comment"], topicId=id, userId=userId
         )
@@ -451,17 +473,21 @@ def topic(id):
         .filter(Topic.id == id)
         .first_or_404()
     )
+
     topic, author_username = topic_with_user
 
-    comments = (
+    # Correct the query here to filter comments by topic.id
+    comments_with_users = (
         db.session.query(Comment, User.username)
         .join(User, Comment.userId == User.userId)
+        .filter(Comment.topicId == id)  # Filter by topic ID
         .all()
     )
+
     return render_template(
         "forum_topic_page.html",
         topic=topic,
-        comments=comments,
+        comments=comments_with_users,  # Pass the filtered comments
         author_username=author_username,
     )
 

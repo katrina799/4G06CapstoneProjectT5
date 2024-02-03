@@ -212,3 +212,23 @@ a:hover {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+
+  /* Enlarging the font size of topic titles */
+.topicpage strong {
+    font-size: 1.75rem; /* Adjust the size as needed */
+  }
+  
+  /* Optionally, if you want to enlarge the description text as well */
+.topicpage span {
+    font-size: 1.5rem; /* Adjust the size as needed */
+  }
+  /* Enlarge the topic ID, title, and author username */
+.topicpage h6 {
+    font-size: 1.75rem; /* Adjust the size as needed */
+}
+
+/* Enlarge the topic description */
+.topicpage p {
+    font-size: 1.5rem; /* Adjust the size as needed */
+}
+
