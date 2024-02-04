@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}" />
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Indie Flower' rel='stylesheet'>
+    <title>Course Buddy</title>
+    <style>
+        #control-panel {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #controls,
+        #musicPlayer {
+            margin: 0 10px;
+        }
+
+        #musicPlayer {
+            margin-top: 60px;
+            bottom: 10px;
+            left: 10px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        #musicSelect,
+        #playMusic {
+            margin: 5px;
+            padding: 5px;
+        }
+
+        #instructionPanel {
+            position: fixed;
+            top: 300px;
+            right: 100px;
+            width: 400px;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0);
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+            overflow-y: auto;
+            text-align: left;
+            z-index: 2;
+
+        }
+
+        #instructionPanel h2 {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 24px;
+            border-bottom: 1px solid #dcdcdc;
+            padding-bottom: 10px;
+        }
+
+        #instructionPanel h4 {
+            color: #555;
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+
+
+        #tomatoBox {
+            position: fixed;
+            top: 220px;
+            right: 150px;
+            padding: 10px;
+            background-color: #ffffff00;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        #tomatoBox::before {
+            position: fixed;
+            top: 300px;
+            right: 100px;
+            padding: 10px;
+            border: 2px solid #ccc;
+            background-color: #ffffff;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        #slogan {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .tomato {
+            display: inline-block;
+            font-size: 20px;
+            margin-left: 5px;
+        }
+
+        #startBtn #resetBtn {
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .instruction-icon {
+            max-height: 80px;
+            max-width: 60px;
+            vertical-align: middle;
+        }
+
+
+        #pomodoro-section {
+            position: relative;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+
+        #pomodoro-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('../static/images/tomato.png');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.3;
+            z-index: -1;
+        }
+
+        h1,
+        #time,
+        #controls {
+            position: relative;
+            z-index: 1;
+        }
+
+        h1 {
+            font-size: 5em;
+            margin-bottom: 150px;
+            font-weight: bold;
+        }
+
+        #time {
+            font-size: 8em;
+            margin-bottom: 150px;
+        }
+
+        #controls {
+            margin-top: 60px;
+        }
+
+        button {
+            background-color: #cce3de;
+            border: none;
+            border-radius: 10px;
+            border: 2px solid #ccc;
+            padding: 1em 1.5em;
+            font-size: 1.5em;
+            font-weight: bold;
+            margin: 20px 10px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: rgba(143, 198, 201, 0.887);
+            ;
+            color: white;
+        }
+
+        button:active {
+            transform: translateY(2px);
+        }
+
+        #achievementBoard {
+            position: fixed;
+            top: 200px;
+            right: 1200px;
+            padding: 10px;
+            background-color: #ffffff00;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        #achievementBoard h2 {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 24px;
+            border-bottom: 1px solid #dcdcdc;
+            padding-bottom: 10px;
+        }
+
+
+        .day-container {
+            margin-bottom: 10px;
+        }
+
+        .bar {
+            width: 0;
+            height: 20px;
+            background-color: #4caf50;
+            margin-bottom: 5px;
+            text-align: right;
+            color: white;
+            padding-right: 5px;
+            border-radius: 5px;
+        }
+
+        .day-container span {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    {% include 'header.html' %}
+    <div class="banner-container" style="background-color: #f6fff8;">
+        <div id="banner" class="banner-bar">
+            <div>This is pomodoro page!!!</div>
+        </div>
+    </div>
+    <div></div>
+    <div id="pomodoro-section" style="flex-grow: 1;">
+        <div id="instructionPanel" class="col-md-3">
+            <h2>Instructions</h2>
+            <h4>Step 1: Click start button. <img src="../static/images/startBtn.PNG" alt="Start Button Icon"
+                    class="instruction-icon"></h4>
+            <h4>Step 2: Choose a music and play. <img src="../static/images/playBtn.PNG" alt="Play Button Icon"
+                    class="instruction-icon"></h4>
+            <h4>Step 3: Deep Focus.</h4>
+            <h4>Step 4: Harvest tomato! 🍅</h4>
+            <!-- More instructions... -->
+        </div>
+        <h1>POMODORO TIMER</h1>
+        <div id="time">25:00</div>
+        <div id="control-panel">
+            <div id="controls">
+                <button id="startBtn">START</button>
+                <button id="resetBtn">RESET</button>
+            </div>
+            <div id="musicPlayer">
+                <select id="musicSelect">
+                    <option value="static/music/calm.mp3">Calm Music</option>
+                    <option value="static/music/smooth.mp3">Smooth Music</option>
+                    <option value="static/music/warm.mp3">Warm Music</option>
+                    <option value="static/music/rain.mp3">Nature Sounds</option>
+                    <option value="static/music/focus.mp3">Relaxing Music</option>
+                </select>
+                <button id="playMusic">Play Music</button>
+            </div>
+        </div>
+
+
+        <div id="tomatoBox">
+            <p id="slogan">Let's harvest your tomatoes!</p>
+            <div id="tomatoContainer">
+            </div>
+        </div>
+
+        <div id="achievementBoard">
+            <h2>Weekly Achievements</h3>
+            <div id="weeklyData">
+                <div class="day-container" id="monday">
+                    <div class="bar" id="monday-bar"></div>
+                    <span>Monday</span>
+                </div>
+                <div class="day-container" id="tuesday">
+                    <div class="bar" id="tuesday-bar"></div>
+                    <span>Tuesday</span>
+                </div>
+                <div class="day-container" id="wednesday">
+                    <div class="bar" id="wednesday-bar"></div>
+                    <span>Wendnesday</span>
+                </div>
+                <div class="day-container" id="thursday">
+                    <div class="bar" id="thursday-bar"></div>
+                    <span>Thursday</span>
+                </div>
+                <div class="day-container" id="friday">
+                    <div class="bar" id="friday-bar"></div>
+                    <span>Friday</span>
+                </div>
+                <div class="day-container" id="saturday">
+                    <div class="bar" id="saturday-bar"></div>
+                    <span>Saturday</span>
+                </div>
+                <div class="day-container" id="sunday">
+                    <div class="bar" id="sunday-bar"></div>
+                    <span>Sunday</span>
+                </div>
+            </div>
+        </div>
+
+
+
+
+    </div>
+
+    <script src="{{ url_for('static', filename='pomodoro.js') }}"></script>
+
+</body>
+
+</html>

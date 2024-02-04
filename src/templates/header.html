@@ -8,16 +8,17 @@
                 <a class="home-image {{ 'active' if current_page == 'home' else '' }}" href="{{ url_for('start') }}"><i
                                 class="glyphicon glyphicon-home" title="home page"
                                 style="font-size:24px; margin-left: 30px;"></i></a>
-                <div class="timer"><i class="glyphicon glyphicon-time" title="pomodoro timer"
+                <a class="timer {{ 'active' if current_page == 'pomodoro_page' else '' }}"
+                        href="{{ url_for('pomodoro_page') }}"><i class="glyphicon glyphicon-time" title="pomodoro timer"
                                 style="font-size:24px;"></i>
-                </div>
+                </a>
                 <a class="courses {{ 'active' if current_page == 'course_page' else '' }}"
                         href="{{ url_for('course_page') }}"><i class="glyphicon glyphicon-book" title="your course list"
                                 style="font-size:24px;"></i>
                 </a>
                 <a class="feedback {{ 'active' if current_page == 'feedback_page' else '' }}"
-                href="{{ url_for('feedback_page') }}"><i class="glyphicon glyphicon-comment" title="feedback box"
-                        style="font-size:24px;"></i>
+                        href="{{ url_for('feedback_page') }}"><i class="glyphicon glyphicon-comment"
+                                title="feedback box" style="font-size:24px;"></i>
                 </a>
                 <a class="user {{ 'active' if current_page == 'profile_page' else '' }}"
                         href="{{ url_for('profile_page') }}">
@@ -29,49 +30,50 @@
                         <i class="glyphicon glyphicon-fire" title="forum page" style="font-size:24px;"></i>
                 </a>
         </div>
-        </div>
+</div>
 </div>
 
 <div id="app-grid" class="app-grid-container" style="display: none;">
         <a href="https://avenue.mcmaster.ca/" target="_blank" class="app-tile" id="app-tile1">
-            <img src="{{ url_for('static', filename='images/d2l.png') }}" alt="Avenue To Learn">
-            <p>Avenue To Learn</p>
+                <img src="{{ url_for('static', filename='images/d2l.png') }}" alt="Avenue To Learn">
+                <p>Avenue To Learn</p>
         </a>
         <a href="https://epprd.mcmaster.ca/" target="_blank" class="app-tile" id="app-tile2">
-            <img src="{{ url_for('static', filename='images/mosaic.png') }}" alt="Mosaic">
-            <p>Mosaic</p>
+                <img src="{{ url_for('static', filename='images/mosaic.png') }}" alt="Mosaic">
+                <p>Mosaic</p>
         </a>
         <a href="https://www.oscarplusmcmaster.ca/" target="_blank" class="app-tile" id="app-tile3">
-            <img src="{{ url_for('static', filename='images/oscarplus.png') }}" alt="Google">
-            <p>OSCARplus</p>
+                <img src="{{ url_for('static', filename='images/oscarplus.png') }}" alt="Google">
+                <p>OSCARplus</p>
         </a>
         <a href="https://teams.microsoft.com/" target="_blank" class="app-tile" id="app-tile4">
-            <img src="{{ url_for('static', filename='images/teams.png') }}" alt="Teams">
-            <p>Teams</p>
+                <img src="{{ url_for('static', filename='images/teams.png') }}" alt="Teams">
+                <p>Teams</p>
         </a>
         <a href="https://www.onenote.com/" target="_blank" class="app-tile" id="app-tile5">
-            <img src="{{ url_for('static', filename='images/onenote.png') }}" alt="OneNote">
-            <p>OneNote</p>
+                <img src="{{ url_for('static', filename='images/onenote.png') }}" alt="OneNote">
+                <p>OneNote</p>
         </a>
         <a href="https://drive.google.com/" target="_blank" class="app-tile" id="app-tile6">
-            <img src="{{ url_for('static', filename='images/googledrive.png') }}" alt="GoogleDrive">
-            <p>Google Drive</p>
+                <img src="{{ url_for('static', filename='images/googledrive.png') }}" alt="GoogleDrive">
+                <p>Google Drive</p>
         </a>
         <a href="https://chat.openai.com/" target="_blank" class="app-tile" id="app-tile7">
                 <img src="{{ url_for('static', filename='images/chatgpt.png') }}" alt="chatgpt">
                 <p>ChatGPT</p>
         </a>
         <a href="https://www.microsoft365.com/" target="_blank" class="app-tile" id="app-tile8">
-            <img src="{{ url_for('static', filename='images/office.png') }}" alt="365">
-            <p>Office 365 Hub</p>
+                <img src="{{ url_for('static', filename='images/office.png') }}" alt="365">
+                <p>Office 365 Hub</p>
         </a>
-        <a href="https://www.childsmath.ca/childsa/forms/main_login.php" target="_blank" class="app-tile" id="app-tile9">
-            <img src="{{ url_for('static', filename='images/childsmath.png') }}" alt="Childsmath">
-            <p>childsmath</p>
+        <a href="https://www.childsmath.ca/childsa/forms/main_login.php" target="_blank" class="app-tile"
+                id="app-tile9">
+                <img src="{{ url_for('static', filename='images/childsmath.png') }}" alt="Childsmath">
+                <p>childsmath</p>
         </a>
         <a href="https://library.mcmaster.ca/" target="_blank" class="app-tile" id="app-tile10">
-            <img src="{{ url_for('static', filename='images/maclibrary.png') }}" alt="Library">
-            <p>McMaster Library</p>
+                <img src="{{ url_for('static', filename='images/maclibrary.png') }}" alt="Library">
+                <p>McMaster Library</p>
         </a>
         <a href="https://gitlab.cas.mcmaster.ca/" target="_blank" class="app-tile" id="app-tile11">
                 <img src="{{ url_for('static', filename='images/gitlab.png') }}" alt="GitLab">
