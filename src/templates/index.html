@@ -269,8 +269,14 @@
             dayCell.className = 'calendar-cell';
             dayCell.setAttribute('data-date', dateString);
             
+            const isToday = new Date().toISOString().split('T')[0] === dateString;
+    
             const dateLabel = document.createElement('div');
             dateLabel.className = 'date-label';
+
+            if (isToday) {
+                dayCell.classList.add('today');
+            }
             dateLabel.textContent = day;
             dayCell.appendChild(dateLabel);
 

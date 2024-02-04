@@ -367,6 +367,9 @@ body, html {
   display: block; /* Display on hover */
 }
 
-
+.calendar-cell.today {
+  background-color: #ffcccb; /* Light red, for example */
+  font-weight: bold;
+}
 
 
