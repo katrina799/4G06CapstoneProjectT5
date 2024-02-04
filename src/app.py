@@ -739,5 +739,16 @@ def submit_feedback():
     return redirect(url_for("feedback_page"))
 
 
+# Router to pomodoro page
+@app.route("/pomodoro_page", methods=["GET", "POST"])
+def pomodoro_page():
+    global current_page
+    current_page = "pomodoro_page"
+    # Render the profile page, showing username on pege
+    return render_template(
+        "pomodoro_page.html", username=username, current_page=current_page
+    )
+
+
 if __name__ == "__main__":
     app.run(debug=True)
