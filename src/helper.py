@@ -146,7 +146,7 @@ def parse_course_info(api_response):
     return info_dict
 
 
-# Upload a dataframe to s3
+# Upload a dataframe to AWS s3
 def upload_df_to_s3(df, s3, bucket_name, s3_csv_file_path):
     new_csv_file_path = "poc-data/tmp.csv"
     df.to_csv(new_csv_file_path)
