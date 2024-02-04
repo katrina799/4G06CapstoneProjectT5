@@ -79,18 +79,22 @@ def start():
     )
     today = datetime.now().date()
     end_date = today + timedelta(days=21)
-    tasks_df['due_date'] = pd.to_datetime(tasks_df['due_date'])
+    tasks_df["due_date"] = pd.to_datetime(tasks_df["due_date"])
     filtered_tasks = tasks_df[
-        (tasks_df['status'].isin(['todo', 'in_progress'])) &
-        (tasks_df['due_date'] >= pd.Timestamp(today)) &
-        (tasks_df['due_date'] <= pd.Timestamp(end_date))
+        (tasks_df["status"].isin(["todo", "in_progress"]))
+        & (tasks_df["due_date"] >= pd.Timestamp(today))
+        & (tasks_df["due_date"] <= pd.Timestamp(end_date))
     ]
 
     # Convert due dates to strings in 'YYYY-MM-DD' format
-    filtered_tasks['due_date'] = filtered_tasks['due_date'].dt.strftime('%Y-%m-%d')
+    filtered_tasks["due_date"] = filtered_tasks["due_date"].dt.strftime(
+        "%Y-%m-%d"
+    )
 
     # Convert tasks to a list of dictionaries for the frontend
-    tasks_for_calendar = filtered_tasks[['title', 'course', 'due_date']].to_dict(orient='records')
+    tasks_for_calendar = filtered_tasks[
+        ["title", "course", "due_date"]
+    ].to_dict(orient="records")
 
     c_p = current_page
     return render_template(
@@ -423,8 +427,9 @@ def update_task_status():
 def add_task_todo(course_name, task_name, due_date, weight, est_hours):
     if due_date:
         due_date_obj = datetime.strptime(due_date, "%Y-%m-%d")
-        priority = ("high" if (due_date_obj - datetime.now()).days < 7
-                    else "low")
+        priority = (
+            "high" if (due_date_obj - datetime.now()).days < 7 else "low"
+        )
 
     else:
         due_date = "0000-00-00"
