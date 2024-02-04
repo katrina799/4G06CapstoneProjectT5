@@ -458,6 +458,7 @@ def add_topic():
         topic = Topic(title=title, description=description, userId=userId)
         db.session.add(topic)
         db.session.commit()
+        sql_to_csv_s3("topic", s3, bucket_name, topic_data_file)
         # Redirect to the forum page after adding the topic
         return redirect(url_for("forum_page"))
     # Render the add topic form if method is GET
