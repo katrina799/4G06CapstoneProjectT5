@@ -195,7 +195,7 @@ def check_syllabus_exists(course_id, s3, bucket_name):
             raise e
 
 
-# Extract text from pdf
+# Extract text from pdf file
 def extract_text_from_pdf(filename, bucket_name, s3):
     response = s3.get_object(Bucket=bucket_name, Key=filename)
     pdf_file = response["Body"].read()
