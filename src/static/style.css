@@ -373,13 +373,13 @@ a:hover {
 
 .feedback-form-container form {
     display: grid;
-    grid-gap: 1rem; 
+    grid-gap: 1rem;
 }
 
 .feedback-form-container label {
-    font-weight: bold; /* Makes labels bold */
-    margin-bottom: .5rem; /* Adds space below the label */
-    display: block; /* Ensures label takes up its own line */
+    font-weight: bold;
+    margin-bottom: .5rem;
+    display: block;
 }
 
 .feedback-form-container input[type="text"],
@@ -419,4 +419,26 @@ a:hover {
     .feedback-form-container h2 {
         font-size: 1.5rem; 
     }
+}
+
+.feedback-success-message {
+    display: none; 
+    position: fixed; 
+    left: 50%;
+    transform: translateX(-50%);
+    top: 50px;
+    z-index: 10;
+    background-color: #dff0d8;
+    color: #3c763d;
+    border: 1px solid #d6e9c6;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    animation: fadeOut 3s forwards; 
+}
+
+@keyframes fadeOut {
+    0% { opacity: 1; }
+    80% { opacity: 1; }
+    100% { opacity: 0; display: none; }
 }

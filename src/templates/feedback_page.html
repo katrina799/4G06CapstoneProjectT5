@@ -31,5 +31,31 @@ Feedback Page
         <button type="submit">Submit Feedback</button>
     </form>
 </div>
+<script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+    document.getElementById('feedbackForm').addEventListener('submit', function(e) {
+        e.preventDefault(); 
+        const formData = new FormData(this);
+        fetch("{{ url_for('submit_feedback') }}", {
+            method: 'POST',
+            body: formData
+        })
+        const successMessageDiv = document.createElement('div');
+        successMessageDiv.classList.add('feedback-success-message');
+        successMessageDiv.textContent = 'Thank you for your feedback!';
+        document.body.appendChild(successMessageDiv);
+        successMessageDiv.style.display = 'block'; 
+
+        setTimeout(() => {
+            if (successMessageDiv) {
+                successMessageDiv.parentNode.removeChild(successMessageDiv);
+            }
+        }, 3000); 
+
+        this.reset();
+    });
+});
+
+</script>
 
 {% endblock %}
