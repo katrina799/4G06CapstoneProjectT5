@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Feedback Page
+{% endblock %}
+{% block content %}
+<div class="banner-container" style="background-color: #f6fff8;">
+    <div id="banner" class="banner-bar">
+        <div>Please take a moment to share your thoughts with us by filling out a feedback form for improving our website and university services</div>
+    </div>
+</div>
+
+<div class="feedback-form-container">
+    <h2>Feedback & Suggestions</h2>
+    <form id="feedbackForm" action="{{ url_for('submit_feedback') }}" method="POST">
+        <label for="name">Your Name (optional):</label>
+        <input type="text" id="name" name="name">
+
+        <label for="email">Your Email (optional):</label>
+        <input type="email" id="email" name="email">
+
+        <label for="feedback-type">Type of Feedback:</label>
+        <select id="feedback-type" name="feedback_type">
+            <option value="website">For our website</option>
+            <option value="university_services">For university services</option>
+        </select>
+
+        <label for="feedback">Your Feedback:</label>
+        <textarea id="feedback" name="feedback" rows="5" required></textarea>
+
+        <button type="submit">Submit Feedback</button>
+    </form>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+    document.getElementById('feedbackForm').addEventListener('submit', function(e) {
+        e.preventDefault(); 
+        const formData = new FormData(this);
+        fetch("{{ url_for('submit_feedback') }}", {
+            method: 'POST',
+            body: formData
+        })
+        const successMessageDiv = document.createElement('div');
+        successMessageDiv.classList.add('feedback-success-message');
+        successMessageDiv.textContent = 'Thank you for your feedback!';
+        document.body.appendChild(successMessageDiv);
+        successMessageDiv.style.display = 'block'; 
+
+        setTimeout(() => {
+            if (successMessageDiv) {
+                successMessageDiv.parentNode.removeChild(successMessageDiv);
+            }
+        }, 3000); 
+
+        this.reset();
+    });
+});
+
+</script>
+
+{% endblock %}
