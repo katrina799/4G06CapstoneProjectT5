@@ -231,7 +231,7 @@
     <script>
     // Get tasks data passed from Flask
     const tasksForCalendar = JSON.parse('{{ tasks_for_calendar | tojson | safe }}');
-    
+
     // Function to generate a calendar
     function generateCalendar(tasks) {
         const calendarElement = document.getElementById('calendar');
@@ -241,14 +241,13 @@
         // Set the month at the top of the calendar
         monthElement.textContent = currentDate.toLocaleDateString('default', { month: 'long', year: 'numeric' });
 
-        // Find the calendar-grid div. If it doesn't exist, create it.
+        // Find or create the calendar-grid div
         let calendarGrid = calendarElement.querySelector('.calendar-grid');
         if (!calendarGrid) {
             calendarGrid = document.createElement('div');
             calendarGrid.className = 'calendar-grid';
             calendarElement.appendChild(calendarGrid);
         } else {
-            // Clear existing calendar grid content if it exists
             calendarGrid.innerHTML = '';
         }
 
@@ -278,8 +277,11 @@
             // Add tasks due on this date
             tasks.filter(task => task.due_date === dateString).forEach(task => {
                 const taskDiv = document.createElement('div');
-                taskDiv.className = 'task-due';
+                taskDiv.className = 'task-due task-info';
                 taskDiv.textContent = task.title;
+                // Store additional info in data attributes
+                taskDiv.setAttribute('data-course', task.course);
+                taskDiv.setAttribute('data-title', task.title);
                 dayCell.appendChild(taskDiv);
             });
 
@@ -287,9 +289,32 @@
         }
     }
 
+    // Function to show tooltip
+    function showTooltip(event) {
+        const course = event.target.getAttribute('data-course');
+        const title = event.target.getAttribute('data-title');
+        const tooltip = document.createElement('div');
+        tooltip.className = 'task-tooltip';
+        tooltip.textContent = `Course: ${course}, Task: ${title}`;
+        event.target.appendChild(tooltip);
+    }
+
+    // Function to hide tooltip
+    function hideTooltip(event) {
+        const tooltip = event.target.querySelector('.task-tooltip');
+        if (tooltip) {
+            tooltip.remove();
+        }
+    }
+
     // Generate the calendar when the window loads
     window.onload = () => {
         generateCalendar(tasksForCalendar);
+        // Add event listeners to task elements for showing tooltips
+        document.querySelectorAll('.task-info').forEach(task => {
+            task.addEventListener('mouseenter', showTooltip);
+            task.addEventListener('mouseleave', hideTooltip);
+        });
     };
     </script>
 </body>

@@ -348,6 +348,24 @@ body, html {
   /* Add any additional styling for the month name here */
 }
 
+.task-tooltip {
+  position: absolute;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 5px 10px;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  z-index: 10;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  display: none; /* Initially don't display */
+}
+
+.task-info:hover .task-tooltip {
+  display: block; /* Display on hover */
+}
 
 
 

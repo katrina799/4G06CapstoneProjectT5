@@ -90,7 +90,7 @@ def start():
     filtered_tasks['due_date'] = filtered_tasks['due_date'].dt.strftime('%Y-%m-%d')
 
     # Convert tasks to a list of dictionaries for the frontend
-    tasks_for_calendar = filtered_tasks[['title', 'due_date']].to_dict(orient='records')
+    tasks_for_calendar = filtered_tasks[['title', 'course', 'due_date']].to_dict(orient='records')
 
     c_p = current_page
     return render_template(
