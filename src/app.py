@@ -15,6 +15,7 @@ from flask import (
     url_for,
 )
 import ast
+from sqlalchemy.sql import func
 
 try:
     from helper import (
@@ -22,6 +23,14 @@ try:
         update_csv,
         upload_df_to_s3,
         get_df_from_csv_in_s3,
+        sql_to_csv_s3,
+        initialize_topic_db_from_s3,
+        initialize_comment_db_from_s3,
+        initialize_user_db_from_s3,
+        User,
+        Topic,
+        Comment,
+        db,
         read_order_csv_from_s3,
         write_order_csv_to_s3,
         update_csv_after_deletion,
@@ -38,6 +47,14 @@ except ImportError:
         update_csv,
         upload_df_to_s3,
         get_df_from_csv_in_s3,
+        sql_to_csv_s3,
+        initialize_topic_db_from_s3,
+        initialize_comment_db_from_s3,
+        initialize_user_db_from_s3,
+        User,
+        Topic,
+        Comment,
+        db,
         update_csv_after_deletion,
         extract_text_from_pdf,
         extract_course_work_details,
@@ -58,13 +75,28 @@ except ImportError:
 
 # Loading configs/global variables
 app.config.from_pyfile("config.py")
+
+# Set the base directory to the directory where app.py is located
+basedir = os.path.abspath(os.path.dirname(__file__))
+# Set the SQLALCHEMY_DATABASE_URI to point to your project.db file
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///" + os.path.join(
+    basedir, "instance", "project.db"
+)
+# app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///project.db"
 bucket_name = app.config["BUCKET_NAME"]
 mock_data_file = app.config["MOCK_DATA_POC_NAME"]
+user_data_file = app.config["USER_DATA_NAME"]
+topic_data_file = app.config["TOPIC_DATA_NAME"]
+comment_data_file = app.config["COMMENT_DATA_NAME"]
 model_file_path = app.config["PRIORITY_MODEL_PATH"]
 mock_tasks_data_file = app.config["MOCK_DATA_POC_TASKS"]
+
+db.init_app(app)
+
 icon_order_path = app.config["ICON_ORDER_PATH"]
 # Setting global variables
 username = ""
+userId = 1
 courses = []
 model = None
 current_page = "home"
@@ -76,12 +108,21 @@ s3 = boto3.client(
 )
 
 
+with app.app_context():
+    db.create_all()
+    initialize_user_db_from_s3(s3, bucket_name, user_data_file, db)
+    initialize_topic_db_from_s3(s3, bucket_name, topic_data_file, db)
+    initialize_comment_db_from_s3(s3, bucket_name, comment_data_file, db)
+
+
 # Set up home page for the website
 @app.route("/")
 def start():
-    global username, courses, current_page, tasks
+    global username, userId, courses, current_page, tasks
     df = get_df_from_csv_in_s3(s3, bucket_name, mock_data_file)
     username = df.loc[0, "username"]  # For PoC purpose
+    userId = df.loc[0, "user_id"]  # For PoC purpose
+    print(userId)
     courses = df.loc[0, "courses"]  # For PoC purpose
     # Parsing it into a Python list
     courses = ast.literal_eval(courses)
@@ -377,6 +418,119 @@ def upload_file(course_id):
                 username=username,
             )
         )
+
+    # Router to forum page
+
+
+@app.route("/forum_page", methods=["GET", "POST"])
+def forum_page():
+    global current_page
+    current_page = "forum_page"
+
+    # Subquery to count comments for each topic
+    comment_count_subquery = (
+        db.session.query(
+            Comment.topicId, func.count(Comment.id).label("comment_count")
+        )
+        .group_by(Comment.topicId)
+        .subquery()
+    )
+
+    # Modify your existing query to include the comment count
+    topics_with_comment_count = (
+        db.session.query(
+            Topic, User.username, comment_count_subquery.c.comment_count
+        )
+        .outerjoin(
+            comment_count_subquery,
+            Topic.id == comment_count_subquery.c.topicId,
+        )
+        .join(User, Topic.userId == User.userId)
+        .all()
+    )
+
+    return render_template("forum_page.html", topics=topics_with_comment_count)
+
+
+@app.route("/add_topic", methods=["GET", "POST"])
+def add_topic():
+    if request.method == "POST":
+        # Process the form data and add the new topic
+        title = request.form["title"]
+        description = request.form["description"]
+        # Assume 'userId' is obtained from the session or a decorator
+        topic = Topic(title=title, description=description, userId=userId)
+        db.session.add(topic)
+        db.session.commit()
+        sql_to_csv_s3("topic", s3, bucket_name, topic_data_file)
+        # Redirect to the forum page after adding the topic
+        return redirect(url_for("forum_page"))
+    # Render the add topic form if method is GET
+    return render_template("add_topic_page.html")
+
+
+@app.route("/forum/topic/<int:id>", methods=["GET", "POST"])
+def topic(id):
+    if request.method == "POST":
+        # Add a new comment to the topic
+        print("Current usser id: ", userId)
+        comment = Comment(
+            text=request.form["comment"], topicId=id, userId=userId
+        )
+        db.session.add(comment)
+        db.session.commit()
+        sql_to_csv_s3("comment", s3, bucket_name, comment_data_file)
+
+    # pull the topic and comments
+    topic_with_user = (
+        db.session.query(Topic, User.username)
+        .join(User, Topic.userId == User.userId)
+        .filter(Topic.id == id)
+        .first_or_404()
+    )
+
+    topic, author_username = topic_with_user
+
+    # Correct the query here to filter comments by topic.id
+    comments_with_users = (
+        db.session.query(Comment, User.username)
+        .join(User, Comment.userId == User.userId)
+        .filter(Comment.topicId == id)  # Filter by topic ID
+        .all()
+    )
+
+    return render_template(
+        "forum_topic_page.html",
+        topic=topic,
+        comments=comments_with_users,  # Pass the filtered comments
+        author_username=author_username,
+    )
+
+
+@app.route("/search_forum")
+def search():
+    query = request.args.get("query", "")
+
+    # Naive matching from topics
+    matching_topics = Topic.query.filter(
+        Topic.title.contains(query) | Topic.description.contains(query)
+    ).all()
+
+    # Naive matching from comments
+    matching_comments = Comment.query.filter(
+        Comment.text.contains(query)
+    ).all()
+
+    # Combine the results
+    results = {"topics": matching_topics, "comments": matching_comments}
+
+    # Render a template with the search results
+    return render_template(
+        "search_forum_results.html",
+        results=results,
+        query=query,
+        userId=userId,
+    )
 
 
 # update tasks status after dragging
