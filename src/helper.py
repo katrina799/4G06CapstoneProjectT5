@@ -260,7 +260,7 @@ def extract_course_work_details(syllabus_text, max_tokens=4097):
 def process_course_work_in_segments(text, max_tokens):
     segment_length = max_tokens * 4
     segments = [
-        text[i: i + segment_length]
+        text[i : i + segment_length]
         for i in range(0, len(text), segment_length)
     ]
     full_output = ""
