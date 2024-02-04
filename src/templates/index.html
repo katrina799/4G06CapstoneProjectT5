@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='task.css') }}" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
     <title>Course Buddy</title>
 </head>
 
@@ -101,7 +102,7 @@
                         </div>
                         {% endfor %}
                     </div>
-                    <button id="add-task-btn" onclick="showAddTaskForm()">Add Task</button>
+                <button id="add-task-btn" onclick="showAddTaskForm()">Add Task</button>
                 </div>
                 <div id="add-task-form" style="display:none;">
                     <form action="/add_task" method="post">
@@ -205,7 +206,80 @@
             };
         };
     </script>
-  
+
+    <div class="calendar-wrapper">
+        <div id="calendar" class="calendar-container">
+            <!-- Calendar Header -->
+            <div class="calendar-header">
+                <div>Sun</div>
+                <div>Mon</div>
+                <div>Tue</div>
+                <div>Wed</div>
+                <div>Thu</div>
+                <div>Fri</div>
+                <div>Sat</div>
+            </div>
+            <!-- Calendar Grid -->
+            <div class="calendar-grid">
+                <!-- Week 1 -->
+                <div class="calendar-cell">1</div> <!-- Sunday -->
+                <div class="calendar-cell">2</div> <!-- Monday -->
+                <div class="calendar-cell">3</div> <!-- and so on... -->
+                <!-- Make sure to close the week and start the next week properly -->
+                <!-- Week 2 -->
+                <div class="calendar-cell">8</div> <!-- Next Sunday -->
+                <!-- Continue for all days -->
+            </div>
+        </div>
+    </div>
+    <script>
+    // Get tasks data passed from Flask
+    const tasksForCalendar = JSON.parse('{{ tasks_for_calendar | tojson | safe }}');
+    
+    // Function to generate a calendar
+    function generateCalendar(tasks) {
+        const calendarElement = document.getElementById('calendar');
+        const currentDate = new Date();
+        const startDay = currentDate.getDate() - currentDate.getDay(); // Start from the previous Sunday
+        const endDay = startDay + 21; // Show 3 weeks
+    
+        let html = '<div class="calendar-grid">';
+    
+        for (let day = startDay; day <= endDay; day++) {
+            const date = new Date(currentDate.getFullYear(), currentDate.getMonth(), day);
+            const dateString = date.toISOString().split('T')[0]; // 'yyyy-mm-dd'
+    
+            // Begin new row for each week
+            if (date.getDay() === 0) {
+                html += '<div class="calendar-row">';
+            }
+    
+            // Calendar cell
+            html += `<div class="calendar-cell" data-date="${dateString}">`;
+            html += `<div class="date-label">${date.getDate()}</div>`;
+    
+            // Add tasks due on this date
+            tasks.filter(task => task.due_date === dateString).forEach(task => {
+                html += `<div class="task-due">${task.title}</div>`;
+            });
+    
+            html += `</div>`; // Close cell
+    
+            // End row for each week
+            if (date.getDay() === 6) {
+                html += '</div>'; // Close row
+            }
+        }
+    
+        html += '</div>'; // Close grid
+        calendarElement.innerHTML = html;
+    }
+    
+    // Generate the calendar when the window loads
+    window.onload = () => {
+        generateCalendar(tasksForCalendar);
+    };
+    </script>
 </body>
 
 

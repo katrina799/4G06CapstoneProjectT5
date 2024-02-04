@@ -219,6 +219,128 @@
   cursor: pointer;
 }
 
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f4f7f6;
+    margin: 0;
+    padding: 20px;
+}
+
+.calendar-container {
+    max-width: 100%;
+    margin: 0 auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: #fff;
+}
+
+.calendar-header, .calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+}
+
+.calendar-header > div {
+  padding: 10px 0;
+  background-color: #4E4E50; /* Dark background */
+  color: #fff; /* Light text */
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.calendar-cell {
+    padding: 10px;
+    border-bottom: 1px solid #f0f0f0;
+    border-right: 1px solid #f0f0f0;
+    position: relative;
+    min-height: 80px;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+}
+
+.calendar-cell:last-child {
+    border-right: none;
+}
+
+.calendar-cell:nth-last-child(-n+7) {
+    border-bottom: none;
+}
+
+.calendar-cell:hover {
+    background-color: #f9f9f9;
+}
+
+.date-label {
+    background-color: #7881A1;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 5px;
+    display: inline-block;
+}
+
+.task-due {
+    background-color: #E9ECF2;
+    color: #5C5C5C;
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 0.85em;
+    margin-top: 5px;
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: background-color 0.3s ease;
+}
+
+.task-due:hover {
+    background-color: #D0D3D8;
+}
+
+@media (max-width: 768px) {
+    .calendar-container {
+        width: 90%;
+        border-radius: 0;
+        box-shadow: none;
+        margin-top: 20px;
+    }
+
+    .calendar-cell {
+        min-height: 60px;
+        padding: 5px;
+    }
+
+    .date-label {
+        padding: 3px 7px;
+        font-size: 0.75em;
+    }
+
+    .task-due {
+        font-size: 0.75em;
+    }
+}
+
+.calendar-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center; /* Use this line if you also want vertical centering */
+  height: 100vh; /* This sets the height of the wrapper to the full viewport height */
+}
+
+body, html {
+  height: 100%; /* Ensure the full height is available for centering */
+  margin: 0;
+  padding: 0;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr); /* 7 days of the week */
+}
+
+
 
 
 
