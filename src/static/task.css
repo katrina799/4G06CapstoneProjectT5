@@ -323,9 +323,11 @@ body {
 }
 
 .calendar-wrapper {
-  display: none; /* Initially hide the calendar */
+  display: flex;
+  justify-content: center;
+  align-items: center; /* Use this line if you also want vertical centering */
+  height: 100vh; /* This sets the height of the wrapper to the full viewport height */
 }
-
 
 body, html {
   height: 100%; /* Ensure the full height is available for centering */
