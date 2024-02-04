@@ -14,7 +14,7 @@ from sklearn.preprocessing import StandardScaler, OneHotEncoder
 from sklearn.neural_network import MLPClassifier
 
 try:
-    from config import MOCK_COURSE_INFO_CSV
+    from config import MOCK_COURSE_INFO_CSV, ICON_ORDER_PATH
 except ImportError:
     from .config import MOCK_COURSE_INFO_CSV
 
@@ -206,3 +206,33 @@ def extract_instructor_name_from_pdf(filename, bucket_name, s3):
         instructor_name = "sorry not found"
 
     return instructor_name
+
+
+def read_order_csv_from_s3(s3, username, bucket_name, key):
+    try:
+        response = s3.get_object(Bucket=bucket_name, Key=key)
+        df = pd.read_csv(response["Body"])
+        return df
+    except s3.exceptions.NoSuchKey:
+        default_order = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+        default_df = pd.DataFrame(
+            [{"username": username, "orders": default_order}]
+        )
+
+        write_order_csv_to_s3(s3, ICON_ORDER_PATH, default_df, bucket_name)
+
+        return default_df
+    except Exception as e:
+        print(f"An unexpected error occurred: {e}")
+        return pd.DataFrame(columns=["username", "orders"])
+
+
+def write_order_csv_to_s3(s3, icon_order_path, df, bucket_name):
+    new_csv_file_path = "poc-data/tmp.csv"
+    df.to_csv(new_csv_file_path, index=False)
+    s3.upload_file(
+        new_csv_file_path,
+        bucket_name,
+        icon_order_path,
+    )
+    os.remove(new_csv_file_path)

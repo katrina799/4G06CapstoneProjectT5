@@ -24,6 +24,8 @@ try:
         get_df_from_csv_in_s3,
         extract_emails_from_pdf,
         extract_instructor_name_from_pdf,
+        read_order_csv_from_s3,
+        write_order_csv_to_s3,
     )
 except ImportError:
     from .helper import (
@@ -45,7 +47,7 @@ bucket_name = app.config["BUCKET_NAME"]
 mock_data_file = app.config["MOCK_DATA_POC_NAME"]
 model_file_path = app.config["PRIORITY_MODEL_PATH"]
 mock_tasks_data_file = app.config["MOCK_DATA_POC_TASKS"]
-
+icon_order_path = app.config["ICON_ORDER_PATH"]
 # Setting global variables
 username = ""
 courses = []
@@ -83,6 +85,34 @@ def start():
         courses=courses,
         current_page=c_p,
         tasks=tasks,
+    )
+
+
+@app.route("/get-order")
+def get_order():
+    df = read_order_csv_from_s3(s3, username, bucket_name, icon_order_path)
+    existing_order = df.loc[df["username"] == username, "orders"].iloc[0]
+    return jsonify(existing_order)
+
+
+@app.route("/update-order", methods=["POST"])
+def update_order():
+    new_orders = request.json
+
+    df = get_df_from_csv_in_s3(s3, bucket_name, icon_order_path)
+
+    if username in df["username"].values:
+        df.loc[df["username"] == username, "orders"] = str(new_orders)
+    else:
+        new_row = pd.DataFrame(
+            {"username": [username], "orders": [str(new_orders)]}
+        )
+        df = pd.concat([df, new_row], ignore_index=True)
+
+    write_order_csv_to_s3(s3, icon_order_path, df, bucket_name)
+
+    return jsonify(
+        {"status": "success", "message": "Order updated successfully."}
     )
 
 
