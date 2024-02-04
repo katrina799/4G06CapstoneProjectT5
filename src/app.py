@@ -4,6 +4,7 @@ import os
 import pandas as pd
 import botocore
 import boto3
+import uuid
 from flask import (
     Flask,
     jsonify,
@@ -22,7 +23,6 @@ try:
         upload_df_to_s3,
         get_df_from_csv_in_s3,
         extract_emails_from_pdf,
-        load_priority_model_from_s3,
         extract_instructor_name_from_pdf,
     )
 except ImportError:
@@ -32,13 +32,12 @@ except ImportError:
         upload_df_to_s3,
         get_df_from_csv_in_s3,
         extract_emails_from_pdf,
-        load_priority_model_from_s3,
         extract_instructor_name_from_pdf,
     )
 
 
 app = Flask(__name__)
-
+app.secret_key = os.urandom(24)
 
 # Loading configs/global variables
 app.config.from_pyfile("config.py")
@@ -458,6 +457,59 @@ def edit_task(task_id):
             jsonify({"message": "An error occurred while updating the task"}),
             500,
         )
+
+
+# Store the feedback to our s3
+@app.route("/submit_feedback", methods=["POST"])
+def submit_feedback():
+    if request.method == "POST":
+        name = request.form.get("name", default=None)
+        email = request.form.get("email", default=None)
+        feedback_type = request.form["feedback_type"]
+        feedback = request.form["feedback"]
+
+        feedback_id = str(uuid.uuid4())
+
+        feedback_data = {
+            "feedback_id": [feedback_id],
+            "name": [name],
+            "email": [email],
+            "feedback_type": [feedback_type],
+            "feedback": [feedback],
+        }
+        new_feedback_df = pd.DataFrame(feedback_data)
+
+        feedback_data_path = "feedback.csv"
+
+        try:
+            response = s3.get_object(
+                Bucket=bucket_name, Key=feedback_data_path
+            )
+            feedback_df = pd.read_csv(response["Body"])
+        except s3.exceptions.NoSuchKey:
+            feedback_df = pd.DataFrame(
+                columns=[
+                    "feedback_id",
+                    "name",
+                    "email",
+                    "feedback_type",
+                    "feedback",
+                ]
+            )
+
+        feedback_df = pd.concat(
+            [feedback_df, new_feedback_df], ignore_index=True
+        )
+        new_csv_file_path = "poc-data/tmp.csv"
+        feedback_df.to_csv(new_csv_file_path, index=False)
+        s3.upload_file(
+            new_csv_file_path,
+            bucket_name,
+            feedback_data_path,
+        )
+        os.remove(new_csv_file_path)
+
+    return redirect(url_for("feedback_page"))
 
 
 if __name__ == "__main__":
