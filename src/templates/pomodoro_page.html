@@ -190,11 +190,12 @@
         #achievementBoard {
             position: fixed;
             top: 200px;
-            right: 1200px;
+            right: 1000px;
             padding: 10px;
             background-color: #ffffff00;
             border-radius: 5px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            width: 500px;
         }
 
         #achievementBoard h2 {
@@ -208,22 +209,33 @@
 
 
         .day-container {
+            display: flex;
+            align-items: center;
             margin-bottom: 10px;
         }
 
-        .bar {
-            width: 0;
-            height: 20px;
-            background-color: #4caf50;
-            margin-bottom: 5px;
-            text-align: right;
-            color: white;
-            padding-right: 5px;
-            border-radius: 5px;
+        .day-container span {
+            font-size: 14px;
+            margin-right: 10px;
         }
 
-        .day-container span {
-            display: block;
+
+        .day-label {
+            margin-right: 5px;
+        }
+
+        .bar {
+            background-color: #4caf50;
+            height: 20px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 5px;
+        }
+
+        .count {
+            color: white;
         }
     </style>
 </head>
@@ -256,11 +268,10 @@
             </div>
             <div id="musicPlayer">
                 <select id="musicSelect">
-                    <option value="static/music/calm.mp3">Calm Music</option>
+                    <option value="static/music/silence.mp3">Calm Music</option>
                     <option value="static/music/smooth.mp3">Smooth Music</option>
-                    <option value="static/music/warm.mp3">Warm Music</option>
-                    <option value="static/music/rain.mp3">Nature Sounds</option>
                     <option value="static/music/focus.mp3">Relaxing Music</option>
+                    <option value="static/music/peaceful.mp3">Peaceful Music</option>
                 </select>
                 <button id="playMusic">Play Music</button>
             </div>
@@ -274,11 +285,11 @@
         </div>
 
         <div id="achievementBoard">
-            <h2>Weekly Achievements</h3>
+            <h2>Weekly Achievements</h2>
             <div id="weeklyData">
                 <div class="day-container" id="monday">
-                    <div class="bar" id="monday-bar"></div>
                     <span>Monday</span>
+                    <div class="bar" id="monday-bar"></div>
                 </div>
                 <div class="day-container" id="tuesday">
                     <div class="bar" id="tuesday-bar"></div>

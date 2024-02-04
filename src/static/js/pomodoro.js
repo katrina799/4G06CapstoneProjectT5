@@ -39,22 +39,38 @@ function addStar() {
 
 function updateTomatoCount(day) {
     fetch(`/update_tomato/${day}`, { method: 'POST' })
-        .then(() => loadWeeklyData()) 
+        .then(() => loadWeeklyData())
         .catch(error => console.error('Error:', error));
 }
 
 
 function loadWeeklyData() {
-    fetch('/get_weekly_data')
-        .then(response => response.json())
-        .then(data => {
-            const weeklyDataList = document.getElementById('weeklyData');
-            weeklyDataList.innerHTML = '';
-            for (const [day, count] of Object.entries(data)) {
-                weeklyDataList.innerHTML += `<li>${day}: ${count} tomatoes</li>`;
-            }
-        })
-        .catch(error => console.error('Error:', error));
+    const staticWeeklyData = {
+        "Monday": 4,
+        "Tuesday": 3,
+        "Wednesday": 5,
+        "Thursday": 0,
+        "Friday": 3,
+        "Saturday": 0,
+        "Sunday": 1
+    };
+
+    const maxCount = Math.max(...Object.values(staticWeeklyData));
+    const weeklyDataContainer = document.getElementById('weeklyData');
+    weeklyDataContainer.innerHTML = '';
+
+    for (const [day, count] of Object.entries(staticWeeklyData)) {
+        const barWidth = (count / maxCount) * 80;
+        const barHtml = `
+            <div class="day-container">
+                <div class="bar" id="${day.toLowerCase()}-bar" style="width: ${barWidth}%;"></div>
+                <span> ${day}: ${count} </span>
+            </div>
+        `;
+
+        // Append the bar to the container
+        weeklyDataContainer.innerHTML += barHtml;
+    }
 }
 
 window.onload = function () {
@@ -92,9 +108,9 @@ window.onload = function () {
         }
     });
 
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
         loadWeeklyData();
     });
-    
+
 
 };
