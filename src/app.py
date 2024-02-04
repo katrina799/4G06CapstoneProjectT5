@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 from io import StringIO
 import os
 import pandas as pd
@@ -134,6 +134,25 @@ def start():
         .apply(lambda x: x.drop("status", axis=1).to_dict(orient="records"))
         .to_dict()
     )
+    today = datetime.now().date()
+    end_date = today + timedelta(days=21)
+    tasks_df["due_date"] = pd.to_datetime(tasks_df["due_date"])
+    filtered_tasks = tasks_df[
+        (tasks_df["status"].isin(["todo", "in_progress"]))
+        & (tasks_df["due_date"] >= pd.Timestamp(today))
+        & (tasks_df["due_date"] <= pd.Timestamp(end_date))
+    ]
+
+    # Convert due dates to strings in 'YYYY-MM-DD' format
+    filtered_tasks["due_date"] = filtered_tasks["due_date"].dt.strftime(
+        "%Y-%m-%d"
+    )
+
+    # Convert tasks to a list of dictionaries for the frontend
+    tasks_for_calendar = filtered_tasks[
+        ["title", "course", "due_date"]
+    ].to_dict(orient="records")
+
     c_p = current_page
     return render_template(
         "index.html",
@@ -141,6 +160,7 @@ def start():
         courses=courses,
         current_page=c_p,
         tasks=tasks,
+        tasks_for_calendar=tasks_for_calendar,
     )
 
 

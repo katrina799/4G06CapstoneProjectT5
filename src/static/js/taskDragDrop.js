@@ -222,3 +222,16 @@ function closeEditModal() {
     modalOverlay.style.display = 'none';
 }
 
+document.getElementById('show-add-task-modal-btn').onclick = function() {
+    showAddModal();
+}
+
+function showAddModal() {
+    document.getElementById('add-task-modal').style.display = 'block';
+    document.getElementById('modal-overlay').style.display = 'block';
+}
+
+function closeAddModal() {
+    document.getElementById('add-task-modal').style.display = 'none';
+    document.getElementById('modal-overlay').style.display = 'none';
+}
