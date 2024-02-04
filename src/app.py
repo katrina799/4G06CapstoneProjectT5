@@ -1,8 +1,18 @@
+from datetime import datetime
+from io import StringIO
 import os
 import pandas as pd
 import botocore
 import boto3
-from flask import Flask, render_template, request, Response, redirect, url_for
+from flask import (
+    Flask,
+    jsonify,
+    render_template,
+    request,
+    Response,
+    redirect,
+    url_for,
+)
 import ast
 from sqlalchemy.sql import func
 
@@ -516,6 +526,158 @@ def search():
         query=query,
         userId=userId,
     )
+
+
+# update tasks status after dragging
+@app.route("/update_task_status", methods=["POST"])
+def update_task_status():
+    data = request.get_json()
+
+    try:
+        task_id = int(data["id"])
+    except ValueError:
+        return jsonify({"message": "Invalid task ID format"}), 400
+    new_status = data["status"]
+
+    tasks_df = get_df_from_csv_in_s3(s3, bucket_name, mock_tasks_data_file)
+    if task_id in tasks_df["id"].tolist():
+        tasks_df.loc[tasks_df["id"] == task_id, "status"] = new_status
+        csv_buffer = StringIO()
+        tasks_df.to_csv(csv_buffer, index=False)
+        csv_buffer.seek(0)
+        s3.put_object(
+            Bucket=bucket_name,
+            Key=mock_tasks_data_file,
+            Body=csv_buffer.getvalue(),
+            ContentType="text/csv",
+        )
+        return jsonify({"message": "Task status updated successfully"})
+    else:
+        return jsonify({"message": "Task not found"}), 404
+
+
+def add_task_todo(course_name, task_name, due_date, weight, est_hours):
+    if due_date:
+        due_date_obj = datetime.strptime(due_date, "%Y-%m-%d")
+        priority = ("high" if (due_date_obj - datetime.now()).days < 7
+                    else "low")
+
+    else:
+        due_date = "0000-00-00"
+        priority = "unknown"
+
+    tasks_df = get_df_from_csv_in_s3(s3, bucket_name, mock_tasks_data_file)
+
+    new_task = {
+        "id": tasks_df["id"].max() + 1,
+        "title": task_name,
+        "course": course_name,
+        "due_date": due_date,
+        "weight": weight,
+        "est_time": est_hours,
+        "priority": priority,
+        "status": "todo",
+    }
+    new_task_df = pd.DataFrame([new_task])
+    tasks_df = pd.concat([tasks_df, new_task_df], ignore_index=True)
+
+    csv_buffer = StringIO()
+    tasks_df.to_csv(csv_buffer, index=False)
+    csv_buffer.seek(0)
+    s3.put_object(
+        Bucket=bucket_name,
+        Key=mock_tasks_data_file,
+        Body=csv_buffer.getvalue(),
+        ContentType="text/csv",
+    )
+
+
+@app.route("/add_task", methods=["POST"])
+def add_task():
+    course_name = request.form.get("course_name")
+    task_name = request.form.get("task_name")
+    due_date = request.form.get("due_date")
+    weight = request.form.get("weight", 0)
+    est_hours = request.form.get("est_hours", 0)
+
+    add_task_todo(course_name, task_name, due_date, weight, est_hours)
+    return redirect(url_for("start"))
+
+
+@app.route("/delete_task/<int:task_id>", methods=["POST"])
+def delete_task(task_id):
+    try:
+        tasks_df = get_df_from_csv_in_s3(s3, bucket_name, mock_tasks_data_file)
+        if task_id in tasks_df["id"].values:
+            tasks_df = tasks_df[tasks_df["id"] != task_id]
+            csv_buffer = StringIO()
+            tasks_df.to_csv(csv_buffer, index=False)
+            csv_buffer.seek(0)
+            s3.put_object(
+                Bucket=bucket_name,
+                Key=mock_tasks_data_file,
+                Body=csv_buffer.getvalue(),
+                ContentType="text/csv",
+            )
+            return jsonify({"message": "Task deleted successfully"}), 200
+        else:
+            return jsonify({"message": "Task not found"}), 404
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        return (
+            jsonify({"message": "An error occurred while deleting the task"}),
+            500,
+        )
+
+
+@app.route("/edit_task/<int:task_id>", methods=["POST"])
+def edit_task(task_id):
+    tasks_df = get_df_from_csv_in_s3(s3, bucket_name, mock_tasks_data_file)
+
+    existing_task = tasks_df.loc[tasks_df["id"] == task_id].iloc[0]
+    new_course_name = request.form.get("course_name")
+    new_task_name = request.form.get("task_name")
+    new_due_date_str = request.form.get("due_date")
+    new_weight = request.form.get("weight")
+    new_est_hours = request.form.get("est_hours")
+
+    if new_due_date_str:
+        new_due_date = datetime.strptime(new_due_date_str, "%Y-%m-%d").date()
+        days_until_due = (new_due_date - datetime.now().date()).days
+        new_priority = "high" if days_until_due < 7 else "low"
+        formatted_due_date = new_due_date.strftime("%Y-%m-%d")
+    else:
+        formatted_due_date = existing_task["due_date"]
+        new_priority = existing_task["priority"]
+
+    if task_id not in tasks_df["id"].values:
+        return jsonify({"message": "Task not found"}), 404
+
+    try:
+        task_index = tasks_df.index[tasks_df["id"] == task_id].tolist()[0]
+        tasks_df.at[task_index, "course"] = new_course_name
+        tasks_df.at[task_index, "title"] = new_task_name
+        tasks_df.at[task_index, "due_date"] = formatted_due_date
+        tasks_df.at[task_index, "weight"] = new_weight
+        tasks_df.at[task_index, "est_time"] = new_est_hours
+        tasks_df.at[task_index, "priority"] = new_priority
+
+        csv_buffer = StringIO()
+        tasks_df.to_csv(csv_buffer, index=False)
+        csv_buffer.seek(0)
+        s3.put_object(
+            Bucket=bucket_name,
+            Key=mock_tasks_data_file,
+            Body=csv_buffer.getvalue(),
+            ContentType="text/csv",
+        )
+        return jsonify({"message": "Task updated successfully"}), 200
+    except Exception as e:
+        print(f"An error occurred when updating task: {e}")
+        return (
+            jsonify({"message": "An error occurred while updating the task"}),
+            500,
+        )
 
 
 if __name__ == "__main__":

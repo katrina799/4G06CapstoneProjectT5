@@ -1,35 +1,34 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}" />
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <title>Course Buddy</title>
-</head>
-
-<body>
-    {% include 'header.html' %}
-    <div class="banner-container" style="background-color: #f6fff8;">
-        <div id="banner" class="banner-bar">
-            <div>This is profile page!!!</div>
+{% block content %}
+<div class="profile-page">
+    <div class="profile-banner">
+        <h1>Welcome to Your Profile, {{ username }}!</h1>
+    </div>
+    <div class="profile-content">
+        <div class="user-details">
+            <h2>User Details</h2>
+            <p><strong>Username:</strong> {{ username }}</p>
+        </div>
+        <div class="change-username">
+            <h2>Change Username</h2>
+            <form action="/change_username" method="post" class="username-form">
+                <div class="form-group">
+                    <label for="newusername">Enter New Username:</label>
+                    <input type="text" id="newusername" name="newusername" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
         </div>
     </div>
-    <div class="panel-name" style="margin: 5px;">
-        <h1>Change user name: {{ username }}</h1>
-        <form action="/change_username" method="post">
-            <label for="username">Enter New Username:</label>
-            <input type="text" id="newusername" name="newusername" required>
-            <button type="submit" class="btn btn-success">
-                <i class="fa fa-plus" aria-hidden="true">
-                </i>
-                Submit
-            </button>
-        </form>
-    </div>
+</div>
+<script>
+    var modal = document.getElementById('changeUsernameModal');
+    var btn = document.getElementById("changeUsernameBtn");
 
-</body>
+    btn.onclick = function() {
+        $(modal).modal('show');
+    }
+</script>
 
-</html>
+{% endblock %}
