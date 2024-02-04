@@ -341,13 +341,14 @@ def upload_file(course_id):
         course_works = course_works_df[course_works_df["course"] == course_id]
 
         for index, row in course_works.iterrows():
-            course_name = row["course"] 
-            task_name = row["course_work"]  
+            course_name = row["course"]
+            task_name = row["course_work"]
             due_date = row["due_date"]
-            weight = row["score_distribution"] 
+            weight = row["score_distribution"]
             est_hours = 3
-            add_task_todo(course_name, task_name, due_date, str(weight), est_hours) 
-
+            add_task_todo(
+                course_name, task_name, due_date, str(weight), est_hours
+            )
 
         return redirect(
             url_for(
