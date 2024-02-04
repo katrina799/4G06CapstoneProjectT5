@@ -1,9 +1,11 @@
 <div class="head">
-        <div class="app-name">Course Buddy</div>
+        <div class="app-icon">
+            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Mac One Logo" style="height: 50px;">
+        </div>
         <div id="toggle-apps-btn" class="app-toggle">
                 <i class="glyphicon glyphicon-th" title="Mac Apps" style="font-size:24px;"></i>
         </div>
-        <div class="welcome-msg">Hello, {{ username }}! Welcome to Course Buddy!</div>
+        <div class="welcome-msg">Hello, {{ username }}! Welcome to Mac One!</div>
         <div class="icon-container">
                 <a class="home-image {{ 'active' if current_page == 'home' else '' }}" href="{{ url_for('start') }}"><i
                                 class="glyphicon glyphicon-home" title="home page"
