@@ -276,12 +276,16 @@ def course_detail(course_id):
         "course_detail_page.html",
         course_id=course_id,
         course=course_id,
-        course_info=course_info_row.to_dict(orient="records")[0]
-        if not course_info_row.empty
-        else None,
-        course_works=course_works.to_dict(orient="records")
-        if not course_works.empty
-        else [],
+        course_info=(
+            course_info_row.to_dict(orient="records")[0]
+            if not course_info_row.empty
+            else None
+        ),
+        course_works=(
+            course_works.to_dict(orient="records")
+            if not course_works.empty
+            else []
+        ),
         message=message,
         username=username,
     )
@@ -340,12 +344,16 @@ def upload_file(course_id):
             url_for(
                 "course_detail",
                 course_id=course_id,
-                course_info=course_info_row.to_dict(orient="records")[0]
-                if not course_info_row.empty
-                else None,
-                course_works=course_works.to_dict(orient="records")
-                if not course_works.empty
-                else [],
+                course_info=(
+                    course_info_row.to_dict(orient="records")[0]
+                    if not course_info_row.empty
+                    else None
+                ),
+                course_works=(
+                    course_works.to_dict(orient="records")
+                    if not course_works.empty
+                    else []
+                ),
                 message="File uploaded successfully!",
                 username=username,
             )

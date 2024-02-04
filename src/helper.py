@@ -22,6 +22,7 @@ try:
         MOCK_COURSE_INFO_CSV,
         ICON_ORDER_PATH,
         COURSE_WORK_EXTRACTED_INFO,
+        TITLE_TO_COLUMN_MAPPING,
     )
 except ImportError:
     from .config import (
@@ -31,20 +32,7 @@ except ImportError:
     )
 
 # Initialize OpenAI API with your API key
-openai.api_key = "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"
-
-title_to_column_mapping = {
-    "Instructor Name": "instructor_name",
-    "Instructor Email": "instructor_email",
-    "Instructor Office Hour": "instructor_office_hour_list",
-    "Required and Optional Textbook List": "textbooks",
-    "Lecture Schedule List with Location": "lecture_schedule",
-    "Tutorials Schedule List with Location": "tutorial_schedule",
-    "Course Teaching Assistants (TAs) Name and Email List": "TAs",
-    "Course Introduction": "course_introduction",
-    "Course Goal/Mission": "goal_mission",
-    "MSAF Policy": "MSAF",
-}
+openai.api_key = os.environ.get("OPENAI_API_KEY")
 
 
 class SqueezeTransformer(TransformerMixin):
@@ -140,7 +128,6 @@ def parse_course_info(api_response):
     if not api_response:
         return {}
 
-    # 正则表达式匹配每个信息项
     pattern = r"\d+\.\s+([A-Za-z ]+):\s+((?:(?!#).)*)"
     matches = re.findall(pattern, api_response, re.DOTALL)
 
@@ -149,13 +136,12 @@ def parse_course_info(api_response):
 
     for match in matches:
         title = match[0].strip()
-        if title in title_to_column_mapping and title not in found_titles:
+        if title in TITLE_TO_COLUMN_MAPPING and title not in found_titles:
             found_titles.add(title)
-            # 去除每个信息项末尾的 "#" 号和可能的空白
             info = match[1].rstrip(" #").strip()
             if info == "":
                 info = "N/A"
-            info_dict[title_to_column_mapping[title]] = info
+            info_dict[TITLE_TO_COLUMN_MAPPING[title]] = info
 
     return info_dict
 
@@ -177,16 +163,12 @@ def update_csv(course_id, pdf_name, api_response):
     csv_file_path = MOCK_COURSE_INFO_CSV
     course_info = parse_course_info(api_response)
 
-    # 读取 CSV 文件
     df = pd.read_csv(csv_file_path).dropna(how="all")
 
-    # 检查课程 ID 是否存在
     if course_id in df["course"].dropna().values:
-        # 更新现有记录
         for column, value in course_info.items():
             df.loc[df["course"] == course_id, column] = value
     else:
-        # 添加新记录
         new_data = pd.DataFrame(
             [
                 {
@@ -197,7 +179,6 @@ def update_csv(course_id, pdf_name, api_response):
         )
         df = pd.concat([df, new_data], ignore_index=True)
 
-    # 保存更新后的 CSV 文件
     df.to_csv(csv_file_path, index=False)
 
 
@@ -235,7 +216,7 @@ def update_csv_after_deletion(course_id):
     course_work_csv_path = COURSE_WORK_EXTRACTED_INFO
 
     course_info_df = pd.read_csv(course_info_csv_path)
-    course_info_df = course_info_df[course_info_df["course"] != course_id]
+    course_info_df = course_info_df[course_info_df["course"]] != course_id
     course_info_df.to_csv(course_info_csv_path, index=False)
 
     course_work_df = pd.read_csv(course_work_csv_path)
@@ -251,7 +232,7 @@ def extract_course_work_details(syllabus_text, max_tokens=4097):
 
 
 def process_course_work_in_segments(text, max_tokens):
-    segment_length = max_tokens * 4  # 根据令牌限制估计分段长度
+    segment_length = max_tokens * 4
     segments = [
         text[i : i + segment_length]
         for i in range(0, len(text), segment_length)

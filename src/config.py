@@ -10,3 +10,15 @@ MOCK_COURSE_INFO_CSV = "./poc-data/mock_course_info.csv"
 MOCK_DATA_POC_TASKS = "mock_data_tasks.csv"
 ICON_ORDER_PATH = "icon_order.csv"
 COURSE_WORK_EXTRACTED_INFO = "./poc-data/extracted_course_works.csv"
+TITLE_TO_COLUMN_MAPPING = {
+    "Instructor Name": "instructor_name",
+    "Instructor Email": "instructor_email",
+    "Instructor Office Hour": "instructor_office_hour_list",
+    "Required and Optional Textbook List": "textbooks",
+    "Lecture Schedule List with Location": "lecture_schedule",
+    "Tutorials Schedule List with Location": "tutorial_schedule",
+    "Course Teaching Assistants (TAs) Name and Email List": "TAs",
+    "Course Introduction": "course_introduction",
+    "Course Goal/Mission": "goal_mission",
+    "MSAF Policy": "MSAF",
+}
