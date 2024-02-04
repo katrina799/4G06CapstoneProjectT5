@@ -212,16 +212,15 @@ def extract_text_from_pdf(filename, bucket_name, s3):
 
 
 def update_csv_after_deletion(course_id):
-    course_info_csv_path = MOCK_COURSE_INFO_CSV
-    course_work_csv_path = COURSE_WORK_EXTRACTED_INFO
+    mock_course_info_path = MOCK_COURSE_INFO_CSV
+    df_course_info = pd.read_csv(mock_course_info_path)
+    df_course_info = df_course_info[df_course_info["course"] != course_id]
+    df_course_info.to_csv(mock_course_info_path, index=False)
 
-    course_info_df = pd.read_csv(course_info_csv_path)
-    course_info_df = course_info_df[course_info_df["course"]] != course_id
-    course_info_df.to_csv(course_info_csv_path, index=False)
-
-    course_work_df = pd.read_csv(course_work_csv_path)
-    course_work_df = course_work_df[course_work_df["course"] != course_id]
-    course_work_df.to_csv(course_work_csv_path, index=False)
+    course_work_info_path = COURSE_WORK_EXTRACTED_INFO
+    df_course_works = pd.read_csv(course_work_info_path)
+    df_course_works = df_course_works[df_course_works["course"] != course_id]
+    df_course_works.to_csv(course_work_info_path, index=False)
 
 
 def extract_course_work_details(syllabus_text, max_tokens=4097):
@@ -234,7 +233,7 @@ def extract_course_work_details(syllabus_text, max_tokens=4097):
 def process_course_work_in_segments(text, max_tokens):
     segment_length = max_tokens * 4
     segments = [
-        text[i : i + segment_length]
+        text[i: i + segment_length]
         for i in range(0, len(text), segment_length)
     ]
     full_output = ""
@@ -318,11 +317,11 @@ def analyze_course_content(pdf_text, max_tokens=4097):
 def process_text_with_openai(text):
     prompt = f"""
     human read the pdf_text and extract the following information from the 
-    course syllabus and strictly follow the format below 
-    (If you do not found, just put a "N/A" in the 
-    corresponding area of the return template. 
-    Strictly careful about that all info message should have "#" at the end to 
-    inform the ending):
+    course syllabus and strictly follow the format mentioned below 
+    MOST IMPORTANT: all info message should have "#" at the end to 
+    inform the ending! If you do not found, put a "N/A" in the 
+    corresponding area of the return template!
+    Template:
     1. Instructor Name:
     2. Instructor Email:
     3. Instructor Office Hour:
@@ -330,8 +329,7 @@ def process_text_with_openai(text):
     5. Lecture Schedule List with Location: 
     6. Tutorials Schedule List with Location: 
     7. Course Teaching Assistants (TAs) Name and Email List: 
-    (template: Jane Qin -- qinj15@mcmaster.ca; Qianni Wang -- 
-    qian12@mcmaster.ca#)
+    (template: Jane Qin: qinj15@mcmaster.ca; Qianni Wang: qian12@mcmaster.ca#)
     8. Course Introduction:
     9. Course Goal/Mission:
     10. MSAF Policy:
@@ -353,24 +351,24 @@ def process_text_with_openai(text):
 
 def process_course_work_with_openai(syllabus_text):
     prompt = f"""
-    read and understand the syllabus_text content and extract all 
+    human read and understand the syllabus_text content and extract all 
     the courseworks, with their start date (if there is any), 
-    due date/deadline , and score distribution percentage.
+    due date/deadline, and score distribution percentage.
     If there is only one date displayed for a course work, 
     consider it as it's deadline.
-
-    Then I want you reformat and only return these course work details into a 
+    I want you reformat and only return these course work details into a 
     Python List of Python Dictionary format, and each course work is a 
     Python library in the list.
+
     All Library in the list have following Keys: 
         - "Course Work Name" with value of String data type
         - "Start Date" with value of String "yyyy-mm-dd" data format
         - "Due Date" with value of String "yyyy-mm-dd" data format
-        - "Score Distribution" with value of int data type
+        - "Score Distribution" with value of Int data type
     
     MOST IMPORTANT: you do not need to reply any other words, but the 
     Python list! If any other information is missing, put 'N/A' in the
-     corresponding value.
+    corresponding value.
     Also, please exclude any course work library that do not have a score
     distribution. All Date need to be in yyyy-mm-dd format, 
     2024 as year if no year has been mentioned!
