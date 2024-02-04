@@ -341,7 +341,12 @@ body, html {
   grid-auto-flow: row; /* Ensures that content flows from row to row */
 }
 
-
+.calendar-month {
+  grid-column: 1 / -1; /* This makes the month name span all columns */
+  text-align: center; /* Center the month name */
+  font-size: larger; /* Optional: Increase the size of the month name */
+  /* Add any additional styling for the month name here */
+}
 
 
 
