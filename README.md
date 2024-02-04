@@ -1,4 +1,4 @@
-# Course Buddy
+# Mac One
 
 Developer Names: Qianni Wang, Shuting Shi, Jingyao Qin, Qiang Gao, Chewnei Song
 
