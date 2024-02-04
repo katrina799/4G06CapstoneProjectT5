@@ -35,6 +35,13 @@ try:
         db,
         read_order_csv_from_s3,
         write_order_csv_to_s3,
+        update_csv_after_deletion,
+        extract_text_from_pdf,
+        extract_course_work_details,
+        process_course_work_with_openai,
+        analyze_course_content,
+        convert_to_list_of_dicts,
+        write_course_work_to_csv,
     )
 except ImportError:
     from .helper import (
@@ -52,11 +59,23 @@ except ImportError:
         Topic,
         Comment,
         db,
+        update_csv_after_deletion,
+        extract_text_from_pdf,
+        extract_course_work_details,
+        process_course_work_with_openai,
+        analyze_course_content,
+        convert_to_list_of_dicts,
+        write_course_work_to_csv,
     )
 
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
+
+try:
+    from config import MOCK_COURSE_INFO_CSV, COURSE_WORK_EXTRACTED_INFO
+except ImportError:
+    from .config import MOCK_COURSE_INFO_CSV, COURSE_WORK_EXTRACTED_INFO
 
 # Loading configs/global variables
 app.config.from_pyfile("config.py")
@@ -203,16 +222,22 @@ def remove_course():
     global username, current_page, courses
     if request.method == "POST":
         index = request.form["index"]
-
         df = get_df_from_csv_in_s3(s3, bucket_name, mock_data_file)
-        user_courses_serires = df.loc[df["username"] == username, "courses"]
-        user_courses_str = user_courses_serires.tolist()[0]
+        user_courses_series = df.loc[df["username"] == username, "courses"]
+        user_courses_str = user_courses_series.tolist()[0]
         user_courses = ast.literal_eval(user_courses_str)
-        user_courses.pop(int(index))
+
+        course_id = user_courses.pop(int(index))
+
+        syllabus_exists, pdf_name = check_syllabus_exists(
+            course_id, s3, bucket_name
+        )
+        if syllabus_exists:
+            s3.delete_object(Bucket=bucket_name, Key=pdf_name)
+            update_csv_after_deletion(course_id)
 
         list_str = str(user_courses)
         df.loc[df["username"] == username, "courses"] = list_str
-
         upload_df_to_s3(df, s3, bucket_name, mock_data_file)
         courses = user_courses
         if current_page == "course_page":
@@ -253,7 +278,7 @@ def add_course():
     return redirect(url_for("start"))
 
 
-# Router to course detailed page
+# Router to course page
 @app.route("/course_page", methods=["GET", "POST"])
 def course_page():
     global courses, current_page
@@ -282,32 +307,32 @@ def profile_page():
 @app.route("/course_detail_page/<course_id>")
 def course_detail(course_id):
     message = request.args.get("message", "")
-    bk = bucket_name
-    syllabus_exists, pdf_name = check_syllabus_exists(course_id, s3, bk)
+    syllabus_exists, pdf_name = check_syllabus_exists(
+        course_id, s3, bucket_name
+    )
 
-    if syllabus_exists:
-        email_list = extract_emails_from_pdf(
-            pdf_name,
-            bucket_name,
-            s3,
-        )
-        instructor_name = extract_instructor_name_from_pdf(
-            pdf_name,
-            bucket_name,
-            s3,
-        )
-    else:
-        email_list = []
-        instructor_name = ""
+    course_info_df = pd.read_csv(MOCK_COURSE_INFO_CSV)
+    course_info_row = course_info_df[course_info_df["course"] == course_id]
+
+    course_works_df = pd.read_csv(COURSE_WORK_EXTRACTED_INFO)
+    course_works = course_works_df[course_works_df["course"] == course_id]
 
     return render_template(
         "course_detail_page.html",
         course_id=course_id,
         course=course_id,
-        username=username,
-        email_list=email_list,
-        instructor_name=instructor_name,
+        course_info=(
+            course_info_row.to_dict(orient="records")[0]
+            if not course_info_row.empty
+            else None
+        ),
+        course_works=(
+            course_works.to_dict(orient="records")
+            if not course_works.empty
+            else []
+        ),
         message=message,
+        username=username,
     )
 
 
@@ -330,38 +355,60 @@ def upload_file(course_id):
 
     file = request.files["file"]
     new_filename = f"{course_id}-syllabus.pdf"
-
     file.filename = new_filename
 
     try:
         s3.upload_fileobj(
-            file, bucket_name, file.filename, ExtraArgs={"ACL": "private"}
+            file, bucket_name, new_filename, ExtraArgs={"ACL": "private"}
         )
-
-        bk = bucket_name
-        syllabus_exists, pdf_name = check_syllabus_exists(course_id, s3, bk)
+        syllabus_exists, pdf_name = check_syllabus_exists(
+            course_id, s3, bucket_name
+        )
         if syllabus_exists:
-            # Extract email list
-            email_list = extract_emails_from_pdf(
-                pdf_name,
-                bucket_name,
-                s3,
-            )
-            # Extract instructor name
-            instructor_name = extract_instructor_name_from_pdf(
-                pdf_name,
-                bucket_name,
-                s3,
+            pdf_text = extract_text_from_pdf(pdf_name, bucket_name, s3)
+            course_work_details = extract_course_work_details(pdf_text)
+            course_info = analyze_course_content(pdf_text)
+            course_work_info = process_course_work_with_openai(
+                course_work_details
             )
         else:
-            email_list = []
-            instructor_name = ""
+            course_info = ""
+            course_work_info = ""
 
-        update_csv(course_id, file.filename, email_list, instructor_name)
+        update_csv(course_id, file.filename, course_info)
+        course_work_list = convert_to_list_of_dicts(course_work_info)
+        write_course_work_to_csv(course_work_list, course_id)
+
+        course_info_df = pd.read_csv(MOCK_COURSE_INFO_CSV)
+        course_info_row = course_info_df[course_info_df["course"] == course_id]
+
+        course_works_df = pd.read_csv(COURSE_WORK_EXTRACTED_INFO)
+        course_works = course_works_df[course_works_df["course"] == course_id]
+
+        for index, row in course_works.iterrows():
+            course_name = row["course"]
+            task_name = row["course_work"]
+            due_date = row["due_date"]
+            weight = row["score_distribution"]
+            est_hours = 3
+            add_task_todo(
+                course_name, task_name, due_date, str(weight), est_hours
+            )
+
         return redirect(
             url_for(
                 "course_detail",
                 course_id=course_id,
+                course_info=(
+                    course_info_row.to_dict(orient="records")[0]
+                    if not course_info_row.empty
+                    else None
+                ),
+                course_works=(
+                    course_works.to_dict(orient="records")
+                    if not course_works.empty
+                    else []
+                ),
                 message="File uploaded successfully!",
                 username=username,
             )
