@@ -157,7 +157,8 @@
 .todo-container {
   display: flex;
   flex-direction: column;
-  height: 100%;  /* Adjust the height as needed, or make it responsive */
+  justify-content: space-between; 
+  height: 100%; 
 }
 
 .task-container {
@@ -249,14 +250,13 @@ body {
 }
 
 .calendar-cell {
-    padding: 10px;
-    border-bottom: 1px solid #f0f0f0;
-    border-right: 1px solid #f0f0f0;
-    position: relative;
-    min-height: 80px;
-    transition: background-color 0.3s ease;
-    cursor: pointer;
+  padding: 10px;
+  border-bottom: 1px solid #f0f0f0;
+  border-right: 1px solid #f0f0f0;
+  position: relative;
+  min-height: 80px; /* Adjust as needed */
 }
+
 
 .calendar-cell:last-child {
     border-right: none;
@@ -337,8 +337,10 @@ body, html {
 
 .calendar-grid {
   display: grid;
-  grid-template-columns: repeat(7, 1fr); /* 7 days of the week */
+  grid-template-columns: repeat(7, 1fr); /* 7 days in a week */
+  grid-auto-flow: row; /* Ensures that content flows from row to row */
 }
+
 
 
 
