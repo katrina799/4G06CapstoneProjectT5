@@ -4,6 +4,7 @@ import os
 import pandas as pd
 import botocore
 import boto3
+import uuid
 from flask import (
     Flask,
     jsonify,
@@ -23,7 +24,6 @@ try:
         upload_df_to_s3,
         get_df_from_csv_in_s3,
         extract_emails_from_pdf,
-        load_priority_model_from_s3,
         extract_instructor_name_from_pdf,
         sql_to_csv_s3,
         initialize_topic_db_from_s3,
@@ -33,6 +33,8 @@ try:
         Topic,
         Comment,
         db,
+        read_order_csv_from_s3,
+        write_order_csv_to_s3,
     )
 except ImportError:
     from .helper import (
@@ -41,7 +43,6 @@ except ImportError:
         upload_df_to_s3,
         get_df_from_csv_in_s3,
         extract_emails_from_pdf,
-        load_priority_model_from_s3,
         extract_instructor_name_from_pdf,
         sql_to_csv_s3,
         initialize_topic_db_from_s3,
@@ -55,7 +56,7 @@ except ImportError:
 
 
 app = Flask(__name__)
-
+app.secret_key = os.urandom(24)
 
 # Loading configs/global variables
 app.config.from_pyfile("config.py")
@@ -77,6 +78,7 @@ mock_tasks_data_file = app.config["MOCK_DATA_POC_TASKS"]
 
 db.init_app(app)
 
+icon_order_path = app.config["ICON_ORDER_PATH"]
 # Setting global variables
 username = ""
 userId = 1
@@ -127,72 +129,42 @@ def start():
     )
 
 
-# Predict priority using trained model based on user input
-@app.route("/priority_predict", methods=["GET", "POST"])
-def prority_predict():
-    if request.method == "POST":
-        # Load pipeline that has transformed processor and trained model
-        m_f_p = model_file_path
-        pipeline = load_priority_model_from_s3(s3, bucket_name, m_f_p)
-        # Retrieve input data
-        form_data = request.form
-        t_w_p = "task_weight_percent"
-        t_r_h = "time_required_hours"
-        input_data = {
-            "task_name": [form_data.get("task_name")],
-            "school_year": [int(form_data.get("school_year"))],
-            "course_name": [form_data.get("course_name")],
-            "credit": [int(form_data.get("credit"))],
-            "task_mode": [form_data.get("task_mode")],
-            "task_type": [form_data.get("task_type")],
-            t_w_p: [float(form_data.get(t_w_p))],
-            t_r_h: [float(form_data.get(t_r_h))],
-            "difficulty": [float(form_data.get("difficulty"))],
-            "current_progress_percent": [
-                float(form_data.get("current_progress_percent"))
-            ],
-            "time_spent_hours": [float(form_data.get("time_spent_hours"))],
-            "days_until_due": [int(form_data.get("days_until_due"))],
-        }
+@app.route("/get-order")
+def get_order():
+    df = read_order_csv_from_s3(s3, username, bucket_name, icon_order_path)
+    existing_order = df.loc[df["username"] == username, "orders"].iloc[0]
+    return jsonify(existing_order)
 
-        input_df = pd.DataFrame(input_data)
 
-        # Ensure that text columns are in the correct format
-        for text_col in ["task_name", "course_name"]:
-            input_df[text_col] = input_df[text_col].apply(
-                lambda x: [x] if isinstance(x, str) else x
-            )
+@app.route("/update-order", methods=["POST"])
+def update_order():
+    new_orders = request.json
 
-        # Give prediction on the input data
-        prediction = pipeline.predict(input_df).tolist()
+    df = get_df_from_csv_in_s3(s3, bucket_name, icon_order_path)
 
-        priority_mapping = {1: "Low", 2: "Medium", 3: "High"}
-
-        # Replace values in the prediction list
-        mapped_prediction = [priority_mapping.get(n, n) for n in prediction]
-
-        pred_prob = pipeline.predict_proba(input_df).tolist()
-
-        model_params = pipeline.get_params()
-
-        # Return prediction
-        return render_template(
-            "model_prediction_page.html",
-            prediction=mapped_prediction,
-            prediction_prob=pred_prob,
-            model_params=model_params,
+    if username in df["username"].values:
+        df.loc[df["username"] == username, "orders"] = str(new_orders)
+    else:
+        new_row = pd.DataFrame(
+            {"username": [username], "orders": [str(new_orders)]}
         )
-    return render_template("model_page.html")
+        df = pd.concat([df, new_row], ignore_index=True)
+
+    write_order_csv_to_s3(s3, icon_order_path, df, bucket_name)
+
+    return jsonify(
+        {"status": "success", "message": "Order updated successfully."}
+    )
 
 
-# Router to model page
-@app.route("/model_page", methods=["GET", "POST"])
-def model_page():
+# Router to feedback bpx page
+@app.route("/feedback_page", methods=["GET", "POST"])
+def feedback_page():
     global current_page
-    current_page = "model_page"
-    # render the plan page
+    current_page = "feedback_page"
+    # render the feedback box page
     return render_template(
-        "model_page.html", username=username, current_page=current_page
+        "feedback_page.html", username=username, current_page=current_page
     )
 
 
@@ -292,17 +264,6 @@ def course_page():
         username=username,
         courses=courses,
         current_page=current_page,
-    )
-
-
-# Router to study plan detailed page
-@app.route("/plan_page", methods=["GET", "POST"])
-def plan_page():
-    global current_page
-    current_page = "plan_page"
-    # Render the plan page
-    return render_template(
-        "plan_page.html", username=username, current_page=current_page
     )
 
 
@@ -560,8 +521,9 @@ def update_task_status():
 def add_task_todo(course_name, task_name, due_date, weight, est_hours):
     if due_date:
         due_date_obj = datetime.strptime(due_date, "%Y-%m-%d")
-        priority = ("high" if (due_date_obj - datetime.now()).days < 7
-                    else "low")
+        priority = (
+            "high" if (due_date_obj - datetime.now()).days < 7 else "low"
+        )
 
     else:
         due_date = "0000-00-00"
@@ -679,6 +641,59 @@ def edit_task(task_id):
             jsonify({"message": "An error occurred while updating the task"}),
             500,
         )
+
+
+# Store the feedback to our s3
+@app.route("/submit_feedback", methods=["POST"])
+def submit_feedback():
+    if request.method == "POST":
+        name = request.form.get("name", default=None)
+        email = request.form.get("email", default=None)
+        feedback_type = request.form["feedback_type"]
+        feedback = request.form["feedback"]
+
+        feedback_id = str(uuid.uuid4())
+
+        feedback_data = {
+            "feedback_id": [feedback_id],
+            "name": [name],
+            "email": [email],
+            "feedback_type": [feedback_type],
+            "feedback": [feedback],
+        }
+        new_feedback_df = pd.DataFrame(feedback_data)
+
+        feedback_data_path = "feedback.csv"
+
+        try:
+            response = s3.get_object(
+                Bucket=bucket_name, Key=feedback_data_path
+            )
+            feedback_df = pd.read_csv(response["Body"])
+        except s3.exceptions.NoSuchKey:
+            feedback_df = pd.DataFrame(
+                columns=[
+                    "feedback_id",
+                    "name",
+                    "email",
+                    "feedback_type",
+                    "feedback",
+                ]
+            )
+
+        feedback_df = pd.concat(
+            [feedback_df, new_feedback_df], ignore_index=True
+        )
+        new_csv_file_path = "poc-data/tmp.csv"
+        feedback_df.to_csv(new_csv_file_path, index=False)
+        s3.upload_file(
+            new_csv_file_path,
+            bucket_name,
+            feedback_data_path,
+        )
+        os.remove(new_csv_file_path)
+
+    return redirect(url_for("feedback_page"))
 
 
 if __name__ == "__main__":

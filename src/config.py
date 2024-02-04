@@ -13,3 +13,4 @@ MOCK_COURSE_INFO_CSV = "./poc-data/mock_course_info.csv"
 MOCK_DATA_POC_TASKS = "mock_data_tasks.csv"
 SQLALCHEMY_DATABASE_URI = "sqlite:///project.db"
 TEMPLATES_AUTO_RELOAD = True
+ICON_ORDER_PATH = "icon_order.csv"
