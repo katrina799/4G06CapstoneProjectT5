@@ -234,6 +234,7 @@ def extract_instructor_name_from_pdf(filename, bucket_name, s3):
 
     return instructor_name
 
+
 def sql_to_csv_s3(table, s3, bucket_name, s3_csv_file_path):
     # Connect to your SQLite database
     conn = sqlite3.connect("instance/project.db")
@@ -347,6 +348,8 @@ def initialize_comment_db_from_s3(s3, bucket_name, s3_csv_file_path, db):
 
     # Commit the session to the database
     db.session.commit()
+
+
 def read_order_csv_from_s3(s3, username, bucket_name, key):
     try:
         response = s3.get_object(Bucket=bucket_name, Key=key)
