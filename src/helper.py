@@ -397,11 +397,11 @@ def process_course_work_with_openai(syllabus_text):
         - "Score Distribution" with value of Int data type
 
     MOST IMPORTANT: you do not need to reply any other words, but the
-    Python list! If any other information is missing, put String 'Not Found' 
+    Python list! If any other information is missing, put String 'Not Found'
     in the corresponding value.
     Also, please exclude any course work library that do not have a score
-    distribution. All Date need to be in yyyy-mm-dd format or 
-    a String "Not Found",2024 as year if there is a due date but no year 
+    distribution. All Date need to be in yyyy-mm-dd format or
+    a String "Not Found",2024 as year if there is a due date but no year
     has been mentioned!
 
     Syllabus Content:
