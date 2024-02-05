@@ -409,14 +409,13 @@ def process_course_work_with_openai(syllabus_text):
     in the corresponding value. Exclude all the course works that does not have
     a score distribution. If there is only one date displayed, consider
     it as it's deadline. All the value of "Start Date" or "End Date" must be
-    in yyyy-mm-dd format or a String "Not Found". Put 2024 as year if a due 
-    date does not has year! 
+    in yyyy-mm-dd format or a String "Not Found". Put 2024 as year if a due
+    date does not has year!
     If there is no due date, just put String "Not Found"!
     All your response text will be transfer to python code by json.loads,
-    so return only the Python list without any other words! 
+    so return only the Python list without any other words!
     Only respond me the list, no explanation!
     Your response should start with "[{" and end with "}]"!
-    
 
     Syllabus Content:
     {syllabus_text}
