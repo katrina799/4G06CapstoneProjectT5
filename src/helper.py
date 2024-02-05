@@ -401,8 +401,8 @@ def process_course_work_with_openai(syllabus_text):
     in the corresponding value.
     Also, please exclude any course work library that do not have a score
     distribution. All Date need to be in yyyy-mm-dd format or
-    a String "Not Found",2024 as year if there is a due date but no year
-    has been mentioned!
+    a String "Not Found". Put 2024 as year if there is a due date but no year
+    has been mentioned! If there is no due date, just put String "Not Found"!
 
     Syllabus Content:
     {syllabus_text}
