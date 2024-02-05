@@ -389,21 +389,21 @@ def upload_file(course_id):
         if syllabus_exists:
             pdf_text = extract_text_from_pdf(pdf_name, bucket_name, s3)
             course_work_details = extract_course_work_details(pdf_text)
-            print(
-                "!!!!!!!!!course_work_details!!!!!!!!!!: ", course_work_details
-            )
+            # print(
+            #     "!!!!!!!!!course_work_details!!!!!!!!!!: ", course_work_details
+            # )
             course_info = analyze_course_content(pdf_text)
             course_work_info = process_course_work_with_openai(
                 course_work_details
             )
-            print("!!!!!!!!!course_work_info!!!!!!!!!!: ", course_work_info)
+            # print("!!!!!!!!!course_work_info!!!!!!!!!!: ", course_work_info)
         else:
             course_info = ""
             course_work_info = ""
 
         update_csv(course_id, file.filename, course_info)
         course_work_list = convert_to_list_of_dicts(course_work_info)
-        print("!!!!!!!!!course_work_list!!!!!!!!!!: ", course_work_list)
+        # print("!!!!!!!!!course_work_list!!!!!!!!!!: ", course_work_list)
         write_course_work_to_csv(course_work_list, course_id)
 
         course_info_df = pd.read_csv(MOCK_COURSE_INFO_CSV)
@@ -504,7 +504,7 @@ def add_topic():
 def topic(id):
     if request.method == "POST":
         # Add a new comment to the topic
-        print("Current usser id: ", userId)
+        # print("Current usser id: ", userId)
         comment = Comment(
             text=request.form["comment"], topicId=id, userId=userId
         )
@@ -593,7 +593,7 @@ def update_task_status():
 
 
 def add_task_todo(course_name, task_name, due_date, weight, est_hours):
-    print("check due date", due_date)
+    # print("check due date", due_date)
 
     if due_date == "" or due_date == "Not Found":
         due_date = "0000-00-00"
