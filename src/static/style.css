@@ -480,13 +480,13 @@ a:hover {
     display: flex;
     align-items: center;
     justify-content: start;
-    gap: 10px; /* Adjust the gap as needed */
+    gap: 10px;
 }
 
 .upload-form {
     display: flex;
     align-items: center;
-    gap: 5px; /* Adjust the gap as needed */
+    gap: 5px;
 }
 
 .upload-form input[type="file"] {
@@ -494,6 +494,6 @@ a:hover {
 }
 
 .upload-form button {
-    padding: 5px 10px; /* Adjust padding as needed */
-    margin-left: 10px; /* Adjust margin as needed */
+    padding: 5px 10px;
+    margin-left: 10px;
 }
