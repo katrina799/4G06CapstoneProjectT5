@@ -166,7 +166,7 @@ def parse_course_info(api_response):
             found_titles.add(title)
             info = match[1].rstrip(" #").strip()
             if info == "":
-                info = "N/A"
+                info = "Not Found"
             info_dict[TITLE_TO_COLUMN_MAPPING[title]] = info
 
     return info_dict
@@ -186,10 +186,9 @@ def upload_df_to_s3(df, s3, bucket_name, s3_csv_file_path):
 
 # Update the record in mock_course_info.csv file
 def update_csv(course_id, pdf_name, api_response):
-    csv_file_path = MOCK_COURSE_INFO_CSV
     course_info = parse_course_info(api_response)
 
-    df = pd.read_csv(csv_file_path).dropna(how="all")
+    df = pd.read_csv(MOCK_COURSE_INFO_CSV).dropna(how="all")
 
     if course_id in df["course"].dropna().values:
         for column, value in course_info.items():
@@ -205,7 +204,9 @@ def update_csv(course_id, pdf_name, api_response):
         )
         df = pd.concat([df, new_data], ignore_index=True)
 
-    df.to_csv(csv_file_path, index=False)
+    df.fillna("Not Found", inplace=True)
+
+    df.to_csv(MOCK_COURSE_INFO_CSV, index=False)
 
 
 # Check if the syllabus pdf is exist in S3 folder or not
@@ -251,8 +252,11 @@ def update_csv_after_deletion(course_id):
 
 def extract_course_work_details(syllabus_text, max_tokens=4097):
     if estimate_token_count(syllabus_text) <= max_tokens:
-        return process_course_work_with_openai(syllabus_text)
+        api_result = process_course_work_with_openai(syllabus_text)
+        # print("check course work detail api result: ", api_result)
+        return api_result
     else:
+        # print("course_work_api go to segments")
         return process_course_work_in_segments(syllabus_text, max_tokens)
 
 
@@ -313,11 +317,11 @@ def write_course_work_to_csv(course_work_list, course_id):
         for item in course_work_list:
             row = {
                 "course id": course_id,
-                "course work": item.get("Course Work Name", "N/A"),
-                "start date": item.get("Start Date", "N/A"),
-                "due date": item.get("Due Date", "N/A"),
+                "course work": item.get("Course Work Name", "Not Found"),
+                "start date": item.get("Start Date", "Not Found"),
+                "due date": item.get("Due Date", "Not Found"),
                 "score distribution": str(
-                    item.get("Score Distribution", "N/A")
+                    item.get("Score Distribution", "Not Found")
                 ),
             }
             writer.writerow(row)
@@ -345,7 +349,7 @@ def process_text_with_openai(text):
     human read the pdf_text and extract the following information from the
     course syllabus and strictly follow the format mentioned below
     MOST IMPORTANT: all info message should have "#" at the end to
-    inform the ending! If you do not found, put a "N/A" in the
+    inform the ending! If you do not found, put a String "Not Found" in the
     corresponding area of the return template!
     Template:
     1. Instructor Name:
@@ -393,11 +397,12 @@ def process_course_work_with_openai(syllabus_text):
         - "Score Distribution" with value of Int data type
 
     MOST IMPORTANT: you do not need to reply any other words, but the
-    Python list! If any other information is missing, put 'N/A' in the
-    corresponding value.
+    Python list! If any other information is missing, put String 'Not Found'
+    in the corresponding value.
     Also, please exclude any course work library that do not have a score
-    distribution. All Date need to be in yyyy-mm-dd format,
-    2024 as year if no year has been mentioned!
+    distribution. All Date need to be in yyyy-mm-dd format or
+    a String "Not Found". Put 2024 as year if there is a due date but no year
+    has been mentioned! If there is no due date, just put String "Not Found"!
 
     Syllabus Content:
     {syllabus_text}
