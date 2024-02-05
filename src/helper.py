@@ -263,7 +263,7 @@ def extract_course_work_details(syllabus_text, max_tokens=4097):
 def process_course_work_in_segments(text, max_tokens):
     segment_length = max_tokens * 4
     segments = [
-        text[i : i + segment_length]
+        text[i: i + segment_length]
         for i in range(0, len(text), segment_length)
     ]
     full_output = ""
@@ -397,11 +397,12 @@ def process_course_work_with_openai(syllabus_text):
         - "Score Distribution" with value of Int data type
 
     MOST IMPORTANT: you do not need to reply any other words, but the
-    Python list! If any other information is missing, put String 'Not Found' in the
-    corresponding value.
+    Python list! If any other information is missing, put String 'Not Found' 
+    in the corresponding value.
     Also, please exclude any course work library that do not have a score
-    distribution. All Date need to be in yyyy-mm-dd format or a String "Not Found",
-    2024 as year if there is a due date but no year has been mentioned!
+    distribution. All Date need to be in yyyy-mm-dd format or 
+    a String "Not Found",2024 as year if there is a due date but no year 
+    has been mentioned!
 
     Syllabus Content:
     {syllabus_text}
