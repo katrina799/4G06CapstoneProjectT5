@@ -40,6 +40,7 @@ try:
         analyze_course_content,
         convert_to_list_of_dicts,
         write_course_work_to_csv,
+        process_transcript_pdf,
     )
 except ImportError:
     from .helper import (
@@ -55,6 +56,8 @@ except ImportError:
         Topic,
         Comment,
         db,
+        read_order_csv_from_s3,
+        write_order_csv_to_s3,
         update_csv_after_deletion,
         extract_text_from_pdf,
         extract_course_work_details,
@@ -62,6 +65,7 @@ except ImportError:
         analyze_course_content,
         convert_to_list_of_dicts,
         write_course_work_to_csv,
+        process_transcript_pdf,
     )
 
 
@@ -90,6 +94,7 @@ topic_data_file = app.config["TOPIC_DATA_NAME"]
 comment_data_file = app.config["COMMENT_DATA_NAME"]
 model_file_path = app.config["PRIORITY_MODEL_PATH"]
 mock_tasks_data_file = app.config["MOCK_DATA_POC_TASKS"]
+Transcript_path = app.config["UPLOAD_FOLDER"]
 
 db.init_app(app)
 
@@ -100,6 +105,7 @@ userId = 1
 courses = []
 model = None
 current_page = "home"
+cGPA = "None (Please upload your transcript)"
 
 s3 = boto3.client(
     "s3",
@@ -321,7 +327,10 @@ def profile_page():
     current_page = "profile_page"
     # Render the profile page, showing username on pege
     return render_template(
-        "profile_page.html", username=username, current_page=current_page
+        "profile_page.html",
+        username=username,
+        current_page=current_page,
+        cGPA=cGPA,
     )
 
 
@@ -798,6 +807,34 @@ def pomodoro_page():
     # Render the profile page, showing username on pege
     return render_template(
         "pomodoro_page.html", username=username, current_page=current_page
+    )
+
+
+@app.route("/upload_transcript", methods=["GET", "POST"])
+def upload_transcript():
+    if request.method == "POST":
+        file = request.files["transcript"]
+        os.makedirs(Transcript_path, exist_ok=True)
+        if file:
+            filename = file.filename
+            file.save(os.path.join(Transcript_path, filename))
+            global cGPA
+            cGPA = process_transcript_pdf(
+                os.path.join(Transcript_path, filename)
+            )
+            return render_template(
+                "profile_page.html",
+                username=username,
+                current_page=current_page,
+                cGPA=str(cGPA),
+            )
+
+    # If it's a GET request, just render the upload form
+    return render_template(
+        "profile_page.html",
+        username=username,
+        current_page=current_page,
+        cGPA=cGPA,
     )
 
 

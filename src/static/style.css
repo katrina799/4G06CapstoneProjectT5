@@ -475,3 +475,25 @@ a:hover {
     80% { opacity: 1; }
     100% { opacity: 0; display: none; }
 }
+
+.cgpa-upload-container {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 10px;
+}
+
+.upload-form {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.upload-form input[type="file"] {
+    display: inline-block;
+}
+
+.upload-form button {
+    padding: 5px 10px;
+    margin-left: 10px;
+}

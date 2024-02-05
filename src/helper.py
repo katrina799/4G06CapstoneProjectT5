@@ -565,3 +565,20 @@ def write_order_csv_to_s3(s3, icon_order_path, df, bucket_name):
         icon_order_path,
     )
     os.remove(new_csv_file_path)
+
+
+def process_transcript_pdf(path_to_pdf):
+    reader = pypdf.PdfReader(path_to_pdf)
+    text = ""
+    points = []
+    units = []
+    for page in reader.pages:
+        text = page.extract_text()
+        if text:
+            for line in text.split("\n"):
+                if line.startswith("Term Totals"):
+                    points.append(float(line.split()[-2]))
+                    units.append(float(line.split()[-3]))
+    cGPA = sum(points) / sum(units)
+    os.remove(path_to_pdf)
+    return cGPA
