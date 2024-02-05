@@ -76,7 +76,7 @@ function loadWeeklyData() {
 window.onload = function () {
 
     loadWeeklyData()
-    var timeInvertal = 60 * 25, //60 * 25
+    var timeInvertal = 5 * 1, //60 * 25
         display = document.querySelector('#time');
     document.querySelector('#startBtn').onclick = function () {
         startTimer(timeInvertal, display);
