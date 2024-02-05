@@ -1,80 +1,82 @@
 {% extends 'base.html' %}
 {% block title %}
-Course Details - {{ course}}
+Course Details - {{ course }}
 {% endblock %}
 
 {% block content %}
-
+    <!-- Unchanged Banner and Course Title Section -->
+    <div class="banner-container" style="background-color: #f6fff8;">
+        <div id="banner" class="banner-bar">
+            <div>This is course detail page!!! You can upload course syllabus here and automatically extract course infomation and course tasks!</div>
+        </div>
+    </div>
     <div class="course-detail-container" style="margin: 20px;">
-        <h1>{{ course }}</h1>
+        <h1 style="color: #941035; margin-bottom: 15px;"> <strong>{{ course }}</strong> </h1>
 
-        <!-- File Upload Section -->
-        <div class="panel-file" style="margin-top: 20px;">
-            <h2>Upload Course Syllabus</h2>
+        <!-- File Upload Section always visible -->
+        <div class="panel-file" style="margin-top: 20px; background-color: #fff; padding: 20px; border-radius: 5px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+            <h2 style="color: #941035; margin-bottom: 15px;">Please Upload or Update Course Syllabus Here</h2>
             <form method="POST" action="{{ url_for('upload_file', course_id=course) }}" enctype="multipart/form-data" class="form-inline">
                 <div class="form-group mb-2">
                     <input type="file" name="file" class="form-control-file">
                 </div>
-                <button type="submit" class="btn btn-primary mb-2">
-                    <i class="fa fa-upload" aria-hidden="true"></i> Upload File
-                </button>
+                <button type="submit" class="btn btn-primary mb-2" style="background-color: #941035; border-color: #941035;">Upload File</button>
+
             </form>
             {% if message %}
-            <div class="alert alert-info">
-                {{ message }}
+            <div class="alert alert-info">{{ message }}</div>
+            {% endif %}
+        </div>
+
+        <!-- Conditionally Display Course Information -->
+        {% if course_info %}
+        <div style="margin-top: 20px; background-color: #fff; padding: 20px; border-radius: 5px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+            <h2 style="color: #941035; margin-bottom: 15px;">Course Information</h2>
+            <div style="border-left: 3px solid #941035; padding-left: 15px; margin-bottom: 15px;">
+                <p style="margin-bottom: 10px;"><strong style="color: #333;">Instructor Name:</strong> <span style="color: #555;">{{ course_info.instructor_name }}</span></p>
+                <p style="margin-bottom: 10px;"><strong style="color: #333;">Instructor Email:</strong> <span style="color: #555;">{{ course_info.instructor_email }}</span></p>
+                <p style="margin-bottom: 10px;"><strong style="color: #333;">Office Hours:</strong> <span style="color: #555;">{{ course_info.instructor_office_hour_list }}</span></p>
+                <p style="margin-bottom: 10px;"><strong style="color: #333;">Teaching Assistants:</strong> <span style="color: #555;">{{ course_info.TAs }}</span></p>
             </div>
-            {% endif %}
+            <div style="border-left: 3px solid #941035; padding-left: 15px; margin-bottom: 15px;">
+                <p style="margin-bottom: 10px;"><strong style="color: #333;">Lecture Schedule:</strong> <span style="color: #555;">{{ course_info.lecture_schedule }}</span></p>
+                <p style="margin-bottom: 10px;"><strong style="color: #333;">Tutorial Schedule:</strong> <span style="color: #555;">{{ course_info.tutorial_schedule }}</span></p>
+            </div>
+            <div style="border-left: 3px solid #941035; padding-left: 15px;">
+                <p style="margin-bottom: 10px;"><strong style="color: #333;">Course Introduction:</strong> <span style="color: #555;">{{ course_info.course_introduction }}</span></p>
+                <p><strong style="color: #333;">Course Goal/Mission:</strong> <span style="color: #555;">{{ course_info.goal_mission }}</span></p>
+                <p style="margin-bottom: 10px;"><strong style="color: #333;">Textbooks:</strong> <span style="color: #555;">{{ course_info.textbooks }}</span></p>
+                <p><strong style="color: #333;">MSAF Policy:</strong> <span style="color: #555;">{{ course_info.MSAF }}</span></p>
+            </div>
         </div>
+        {% endif %}
 
-        <!-- Course Information -->
-        <div>
-            <h2>Course Information</h2>
-            {% if course_info %}
-                <!-- Display each field of course_info -->
-                <p>Instructor Name: {{ course_info.instructor_name }}</p>
-                <p>Instructor Email: {{ course_info.instructor_email }}</p>
-                <p>Office Hours: {{ course_info.instructor_office_hour_list }}</p>
-                <p>Textbooks: {{ course_info.textbooks }}</p>
-                <p>Lecture Schedule: {{ course_info.lecture_schedule }}</p>
-                <p>Tutorial Schedule: {{ course_info.tutorial_schedule }}</p>
-                <p>Teaching Assistants: {{ course_info.TAs }}</p>
-                <p>Course Introduction: {{ course_info.course_introduction }}</p>
-                <p>Course Goal/Mission: {{ course_info.goal_mission }}</p>
-                <p>MSAF Policy: {{ course_info.MSAF }}</p>
-            {% else %}
-                <p>Course information not available or could not be extracted.</p>
-            {% endif %}
+        <!-- Conditionally Display Course Work Information -->
+        {% if course_works and course_works|length > 0 %}
+        <div style="margin-top: 20px; background-color: #fff; padding: 20px; border-radius: 5px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+            <h2 style="color: #941035; margin-bottom: 15px;">Course Work Distribution </h2>
+            <table class="table" style="width: 100%; margin-top: 10px; border-collapse: collapse;">
+                <thead>
+                    <tr style="background-color: #941035; color: #ffffff;">
+                        <th>Work Name</th>
+                        <th>Start Date</th>
+                        <th>Due Date</th>
+                        <th>Score Distribution</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for work in course_works %}
+                    <tr>
+                        <td>{{ work.course_work }}</td>
+                        <td>{{ work.start_date }}</td>
+                        <td>{{ work.due_date }}</td>
+                        <td>{{ work.score_distribution }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         </div>
-
-        <!-- Course Work Information -->
-        <div>
-            <h2>Course Work Information</h2>
-            {% if course_works %}
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>Work Name</th>
-                            <th>Start Date</th>
-                            <th>Due Date</th>
-                            <th>Score Distribution</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for work in course_works %}
-                            <tr>
-                                <td>{{ work.course_work }}</td>
-                                <td>{{ work.start_date }}</td>
-                                <td>{{ work.due_date }}</td>
-                                <td>{{ work.score_distribution }}</td>
-                            </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            {% else %}
-                <p>Course work information not available.</p>
-            {% endif %}
-        </div>
-
+        {% endif %}
     </div>
 
 {% endblock %}
