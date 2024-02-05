@@ -27,3 +27,4 @@ TITLE_TO_COLUMN_MAPPING = {
     "Course Goal/Mission": "goal_mission",
     "MSAF Policy": "MSAF",
 }
+UPLOAD_FOLDER = "poc-data/"

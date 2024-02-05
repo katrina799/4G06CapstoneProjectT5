@@ -9,6 +9,13 @@
         <div class="user-details">
             <h2 style="color: #941035; margin-bottom: 15px;">User Details</h2>
             <p><strong>Username:</strong> {{ username }}</p>
+            <div class="cgpa-upload-container" style="display: flex; align-items: center; gap: 10px;">
+                <p><strong>cGPA:</strong> {{ cGPA }}</p>
+                <form action="/upload_transcript" method="post" enctype="multipart/form-data" class="upload-form" style="display: flex; align-items: center; gap: 10px;">
+                    <button type="submit" class="btn btn-primary">Upload Transcript</button>
+                    <input type="file" name="transcript" accept="application/pdf" required>
+                </form>
+            </div>
         </div>
         <div class="change-username">
             <h2 style="color: #941035; margin-bottom: 15px;">Change Username</h2>
