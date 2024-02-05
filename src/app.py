@@ -115,7 +115,6 @@ with app.app_context():
     initialize_comment_db_from_s3(s3, bucket_name, comment_data_file, db)
 
 
-# Set up home page for the website
 @app.route("/")
 def start():
     global username, userId, courses, current_page, tasks
@@ -128,6 +127,13 @@ def start():
     courses = ast.literal_eval(courses)
     current_page = "home"
     tasks_df = get_df_from_csv_in_s3(s3, bucket_name, mock_tasks_data_file)
+
+    # Replace invalid dates and convert to datetime
+    tasks_df["due_date"] = tasks_df["due_date"].replace("0000-00-00", pd.NaT)
+    tasks_df["due_date"] = pd.to_datetime(
+        tasks_df["due_date"], errors="coerce"
+    )
+
     # Convert the tasks DataFrame to a list of dictionaries
     tasks = (
         tasks_df.groupby("status")
@@ -383,16 +389,21 @@ def upload_file(course_id):
         if syllabus_exists:
             pdf_text = extract_text_from_pdf(pdf_name, bucket_name, s3)
             course_work_details = extract_course_work_details(pdf_text)
+            print(
+                "!!!!!!!!!course_work_details!!!!!!!!!!: ", course_work_details
+            )
             course_info = analyze_course_content(pdf_text)
             course_work_info = process_course_work_with_openai(
                 course_work_details
             )
+            print("!!!!!!!!!course_work_info!!!!!!!!!!: ", course_work_info)
         else:
             course_info = ""
             course_work_info = ""
 
         update_csv(course_id, file.filename, course_info)
         course_work_list = convert_to_list_of_dicts(course_work_info)
+        print("!!!!!!!!!course_work_list!!!!!!!!!!: ", course_work_list)
         write_course_work_to_csv(course_work_list, course_id)
 
         course_info_df = pd.read_csv(MOCK_COURSE_INFO_CSV)
@@ -582,15 +593,17 @@ def update_task_status():
 
 
 def add_task_todo(course_name, task_name, due_date, weight, est_hours):
-    if due_date:
+    print("check due date", due_date)
+
+    if due_date == "" or due_date == "Not Found":
+        due_date = "0000-00-00"
+        priority = "unknown"
+
+    else:
         due_date_obj = datetime.strptime(due_date, "%Y-%m-%d")
         priority = (
             "high" if (due_date_obj - datetime.now()).days < 7 else "low"
         )
-
-    else:
-        due_date = "0000-00-00"
-        priority = "unknown"
 
     tasks_df = get_df_from_csv_in_s3(s3, bucket_name, mock_tasks_data_file)
 
