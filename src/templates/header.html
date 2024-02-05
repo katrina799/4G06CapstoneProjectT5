@@ -22,18 +22,17 @@
                         href="{{ url_for('feedback_page') }}"><i class="glyphicon glyphicon-comment"
                                 title="feedback box" style="font-size:24px;"></i>
                 </a>
+                <a class="forum {{ 'active' if current_page == 'forum_page' else '' }}"
+                href="{{ url_for('forum_page') }}">
+                <i class="glyphicon glyphicon-fire" title="forum page" style="font-size:24px;"></i>
+                </a>
                 <a class="user {{ 'active' if current_page == 'profile_page' else '' }}"
                         href="{{ url_for('profile_page') }}">
                         <i class="glyphicon glyphicon-user" title="profile page" style="font-size:24px;"></i>
                 </a>
-
-                <a class="forum {{ 'active' if current_page == 'forum_page' else '' }}"
-                        href="{{ url_for('forum_page') }}">
-                        <i class="glyphicon glyphicon-fire" title="forum page" style="font-size:24px;"></i>
-                </a>
         </div>
 </div>
-</div>
+
 
 <div id="app-grid" class="app-grid-container" style="display: none;">
         <a href="https://avenue.mcmaster.ca/" target="_blank" class="app-tile" id="app-tile1">
