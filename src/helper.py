@@ -404,9 +404,8 @@ def process_course_work_with_openai(syllabus_text):
     distribution. All Date need to be in yyyy-mm-dd format or
     a String "Not Found". Put 2024 as year if there is a due date but no year
     has been mentioned! If there is no due date, just put String "Not Found"!
-    Reply with only Python list. 
+    Reply with only Python list.
     Your response should start with "[{" and end with "}]"!
-    
     Syllabus Content:
     {syllabus_text}
     """

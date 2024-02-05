@@ -263,7 +263,6 @@ def remove_course():
         if syllabus_exists:
             s3.delete_object(Bucket=bucket_name, Key=pdf_name)
             update_csv_after_deletion(course_id)
-        
         delete_task_by_course(course_id)
 
         list_str = str(user_courses)
