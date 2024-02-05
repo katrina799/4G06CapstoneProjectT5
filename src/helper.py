@@ -239,15 +239,16 @@ def extract_text_from_pdf(filename, bucket_name, s3):
 
 
 def update_csv_after_deletion(course_id):
-    mock_course_info_path = MOCK_COURSE_INFO_CSV
-    df_course_info = pd.read_csv(mock_course_info_path)
-    df_course_info = df_course_info[df_course_info["course"] != course_id]
-    df_course_info.to_csv(mock_course_info_path, index=False)
+    # mock_course_info_path = MOCK_COURSE_INFO_CSV
+    # df_course_info = pd.read_csv(mock_course_info_path)
+    # df_course_info = df_course_info[df_course_info["course"] != course_id]
+    # df_course_info.to_csv(mock_course_info_path, index=False)
 
-    course_work_info_path = COURSE_WORK_EXTRACTED_INFO
-    df_course_works = pd.read_csv(course_work_info_path)
-    df_course_works = df_course_works[df_course_works["course"] != course_id]
-    df_course_works.to_csv(course_work_info_path, index=False)
+    # course_work_info_path = COURSE_WORK_EXTRACTED_INFO
+    # df_course_works = pd.read_csv(course_work_info_path)
+    # df_course_works = df_course_works[df_course_works["course"] != course_id]
+    # df_course_works.to_csv(course_work_info_path, index=False)
+    pass
 
 
 def extract_course_work_details(syllabus_text, max_tokens=4097):
@@ -403,7 +404,8 @@ def process_course_work_with_openai(syllabus_text):
     distribution. All Date need to be in yyyy-mm-dd format or
     a String "Not Found". Put 2024 as year if there is a due date but no year
     has been mentioned! If there is no due date, just put String "Not Found"!
-
+    Reply with only Python list.
+    Your response should start with "[{" and end with "}]"!
     Syllabus Content:
     {syllabus_text}
     """

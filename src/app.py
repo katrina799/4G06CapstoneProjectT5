@@ -263,6 +263,7 @@ def remove_course():
         if syllabus_exists:
             s3.delete_object(Bucket=bucket_name, Key=pdf_name)
             update_csv_after_deletion(course_id)
+        delete_task_by_course(course_id)
 
         list_str = str(user_courses)
         df.loc[df["username"] == username, "courses"] = list_str
@@ -347,6 +348,16 @@ def course_detail(course_id):
 
     course_works_df = pd.read_csv(COURSE_WORK_EXTRACTED_INFO)
     course_works = course_works_df[course_works_df["course"] == course_id]
+
+    for index, row in course_works.iterrows():
+        course_name = row["course"]
+        task_name = row["course_work"]
+        due_date = row["due_date"]
+        weight = row["score_distribution"]
+        est_hours = 3
+        add_task_todo(
+            course_name, task_name, due_date, str(weight), est_hours
+        )
 
     return render_template(
         "course_detail_page.html",
@@ -620,22 +631,27 @@ def update_task_status():
 
 
 def add_task_todo(course_name, task_name, due_date, weight, est_hours):
-    # print("check due date", due_date)
-
-    if due_date == "" or due_date == "Not Found":
+    # 检查 due_date 是否是有效的日期格式
+    try:
+        # 尝试将 due_date 解析为 datetime 对象
+        if due_date not in ["", "Not Found", "0"]:
+            due_date_obj = datetime.strptime(due_date, "%Y-%m-%d")
+            days_until_due = (due_date_obj - datetime.now()).days
+            # 根据截止日期距今天数设置任务优先级
+            priority = "high" if days_until_due < 7 else "low"
+        else:
+            # 对于无效的 due_date，将其设置为特殊值，并标记优先级为 "unknown"
+            due_date = "0000-00-00"
+            priority = "unknown"
+    except ValueError:
+        # 如果 due_date 格式不正确，也将其设置为特殊值，并标记优先级为 "unknown"
         due_date = "0000-00-00"
         priority = "unknown"
-
-    else:
-        due_date_obj = datetime.strptime(due_date, "%Y-%m-%d")
-        priority = (
-            "high" if (due_date_obj - datetime.now()).days < 7 else "low"
-        )
 
     tasks_df = get_df_from_csv_in_s3(s3, bucket_name, mock_tasks_data_file)
 
     new_task = {
-        "id": tasks_df["id"].max() + 1,
+        "id": tasks_df["id"].max() + 1 if not tasks_df.empty else 1,
         "title": task_name,
         "course": course_name,
         "due_date": due_date,
@@ -656,6 +672,31 @@ def add_task_todo(course_name, task_name, due_date, weight, est_hours):
         Body=csv_buffer.getvalue(),
         ContentType="text/csv",
     )
+
+
+def delete_task_by_course(course_name):
+    try:
+        tasks_df = get_df_from_csv_in_s3(s3, bucket_name, mock_tasks_data_file)
+        if course_name in tasks_df["course"].values:
+            tasks_df = tasks_df[tasks_df["course"] != course_name]
+            csv_buffer = StringIO()
+            tasks_df.to_csv(csv_buffer, index=False)
+            csv_buffer.seek(0)
+            s3.put_object(
+                Bucket=bucket_name,
+                Key=mock_tasks_data_file,
+                Body=csv_buffer.getvalue(),
+                ContentType="text/csv",
+            )
+            return jsonify({"message": "Task deleted successfully"}), 200
+        else:
+            return jsonify({"message": "Task not found"}), 404
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        return (
+            jsonify({"message": "An error occurred while deleting the task"}),
+            500,
+        )
 
 
 @app.route("/add_task", methods=["POST"])
