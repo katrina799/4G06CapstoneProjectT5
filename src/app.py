@@ -156,7 +156,7 @@ def start():
     ]
 
     # Convert due dates to strings in 'YYYY-MM-DD' format
-    filtered_tasks["due_date"] = filtered_tasks["due_date"].dt.strftime(
+    filtered_tasks.loc[:, "due_date"] = filtered_tasks["due_date"].dt.strftime(
         "%Y-%m-%d"
     )
 
@@ -263,6 +263,7 @@ def remove_course():
         if syllabus_exists:
             s3.delete_object(Bucket=bucket_name, Key=pdf_name)
             update_csv_after_deletion(course_id)
+            delete_task_by_course(course_id)
 
         list_str = str(user_courses)
         df.loc[df["username"] == username, "courses"] = list_str
@@ -345,8 +346,19 @@ def course_detail(course_id):
     course_info_df = pd.read_csv(MOCK_COURSE_INFO_CSV)
     course_info_row = course_info_df[course_info_df["course"] == course_id]
 
-    course_works_df = pd.read_csv(COURSE_WORK_EXTRACTED_INFO)
+    course_works_df = pd.read_csv(
+        COURSE_WORK_EXTRACTED_INFO, on_bad_lines="skip"
+    )
+
     course_works = course_works_df[course_works_df["course"] == course_id]
+
+    for index, row in course_works.iterrows():
+        course_name = row["course"]
+        task_name = row["course_work"]
+        due_date = row["due_date"]
+        weight = row["score_distribution"]
+        est_hours = 3
+        add_task_todo(course_name, task_name, due_date, str(weight), est_hours)
 
     return render_template(
         "course_detail_page.html",
@@ -413,7 +425,7 @@ def upload_file(course_id):
 
         update_csv(course_id, file.filename, course_info)
         course_work_list = convert_to_list_of_dicts(course_work_info)
-        print("!!!!!!!!!course_work_list!!!!!!!!!!: ", course_work_list)
+        # print("!!!!!!!!!course_work_list!!!!!!!!!!: ", course_work_list)
         write_course_work_to_csv(course_work_list, course_id)
 
         course_info_df = pd.read_csv(MOCK_COURSE_INFO_CSV)
@@ -656,6 +668,31 @@ def add_task_todo(course_name, task_name, due_date, weight, est_hours):
         Body=csv_buffer.getvalue(),
         ContentType="text/csv",
     )
+
+
+def delete_task_by_course(course_name):
+    try:
+        tasks_df = get_df_from_csv_in_s3(s3, bucket_name, mock_tasks_data_file)
+        if course_name in tasks_df["course"].values:
+            tasks_df = tasks_df[tasks_df["course"] != course_name]
+            csv_buffer = StringIO()
+            tasks_df.to_csv(csv_buffer, index=False)
+            csv_buffer.seek(0)
+            s3.put_object(
+                Bucket=bucket_name,
+                Key=mock_tasks_data_file,
+                Body=csv_buffer.getvalue(),
+                ContentType="text/csv",
+            )
+            return jsonify({"message": "Task deleted successfully"}), 200
+        else:
+            return jsonify({"message": "Task not found"}), 404
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        return (
+            jsonify({"message": "An error occurred while deleting the task"}),
+            500,
+        )
 
 
 @app.route("/add_task", methods=["POST"])

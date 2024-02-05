@@ -239,15 +239,20 @@ def extract_text_from_pdf(filename, bucket_name, s3):
 
 
 def update_csv_after_deletion(course_id):
-    mock_course_info_path = MOCK_COURSE_INFO_CSV
-    df_course_info = pd.read_csv(mock_course_info_path)
-    df_course_info = df_course_info[df_course_info["course"] != course_id]
-    df_course_info.to_csv(mock_course_info_path, index=False)
+    if course_id == "4IC3":
+        mock_course_info_path = MOCK_COURSE_INFO_CSV
+        df_course_info = pd.read_csv(mock_course_info_path)
+        df_course_info = df_course_info[df_course_info["course"] != course_id]
+        df_course_info.to_csv(mock_course_info_path, index=False)
 
-    course_work_info_path = COURSE_WORK_EXTRACTED_INFO
-    df_course_works = pd.read_csv(course_work_info_path)
-    df_course_works = df_course_works[df_course_works["course"] != course_id]
-    df_course_works.to_csv(course_work_info_path, index=False)
+        course_work_info_path = COURSE_WORK_EXTRACTED_INFO
+        df_course_works = pd.read_csv(course_work_info_path)
+        df_course_works = df_course_works[
+            df_course_works["course"] != course_id
+        ]
+        df_course_works.to_csv(course_work_info_path, index=False)
+    else:
+        pass
 
 
 def extract_course_work_details(syllabus_text, max_tokens=4097):
@@ -263,7 +268,7 @@ def extract_course_work_details(syllabus_text, max_tokens=4097):
 def process_course_work_in_segments(text, max_tokens):
     segment_length = max_tokens * 4
     segments = [
-        text[i: i + segment_length]
+        text[i : i + segment_length]
         for i in range(0, len(text), segment_length)
     ]
     full_output = ""
@@ -271,7 +276,7 @@ def process_course_work_in_segments(text, max_tokens):
     for segment in segments:
         full_output += process_course_work_with_openai(segment) + "\n\n"
 
-    return full_output
+    return process_course_work_with_openai(full_output)
 
 
 def process_text_in_segments(text, max_tokens):
@@ -287,7 +292,7 @@ def process_text_in_segments(text, max_tokens):
         full_output += process_text_with_openai(segment) + "\n\n"
         start_index += segment_length
 
-    return full_output
+    return process_text_with_openai(full_output)
 
 
 def convert_to_list_of_dicts(course_work_data):
@@ -295,7 +300,14 @@ def convert_to_list_of_dicts(course_work_data):
         course_work_list = json.loads(course_work_data)
         return course_work_list
     except json.JSONDecodeError:
-        return []
+        return [
+            {
+                "Course Work Name": "Not Found",
+                "Start Date": "Not Found",
+                "Due Date": "Not Found",
+                "Score Distribution": "Not Found",
+            }
+        ]
 
 
 def write_course_work_to_csv(course_work_list, course_id):
@@ -382,13 +394,10 @@ def process_text_with_openai(text):
 def process_course_work_with_openai(syllabus_text):
     prompt = f"""
     human read and understand the syllabus_text content and extract all
-    the courseworks, with their start date (if there is any),
-    due date/deadline, and score distribution percentage.
-    If there is only one date displayed for a course work,
-    consider it as it's deadline.
-    I want you reformat and only return these course work details into a
-    Python List of Python Dictionary format, and each course work is a
-    Python library in the list.
+    the courseworks with their start date (if there is any),
+    due date, and score distribution percentage.
+    Reply these course work informations into a Python List of Dictionary
+    format, and each course work is a Python library in the list.
 
     All Library in the list have following Keys:
         - "Course Work Name" with value of String data type
@@ -396,13 +405,18 @@ def process_course_work_with_openai(syllabus_text):
         - "Due Date" with value of String "yyyy-mm-dd" data format
         - "Score Distribution" with value of Int data type
 
-    MOST IMPORTANT: you do not need to reply any other words, but the
-    Python list! If any other information is missing, put String 'Not Found'
-    in the corresponding value.
-    Also, please exclude any course work library that do not have a score
-    distribution. All Date need to be in yyyy-mm-dd format or
-    a String "Not Found". Put 2024 as year if there is a due date but no year
-    has been mentioned! If there is no due date, just put String "Not Found"!
+    MOST IMPORTANT: If any other information is missing, put String 'Not Found'
+    in the corresponding value. Exclude all the course works that does not have
+    a score distribution. If there is only one date displayed, consider
+    it as it's deadline. All the value of "Start Date" or "End Date" must be
+    in yyyy-mm-dd format or a String "Not Found". Put 2024 as year if a due 
+    date does not has year! 
+    If there is no due date, just put String "Not Found"!
+    All your response text will be transfer to python code by json.loads,
+    so return only the Python list without any other words! 
+    Only respond me the list, no explanation!
+    Your response should start with "[{" and end with "}]"!
+    
 
     Syllabus Content:
     {syllabus_text}
