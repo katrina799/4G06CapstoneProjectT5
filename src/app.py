@@ -63,6 +63,7 @@ except ImportError:
         analyze_course_content,
         convert_to_list_of_dicts,
         write_course_work_to_csv,
+        process_transcript_pdf,
     )
 
 
