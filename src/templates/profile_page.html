@@ -3,15 +3,15 @@
 {% block content %}
 <div class="profile-page">
     <div class="profile-banner">
-        <h1>Welcome to Your Profile, {{ username }}!</h1>
+        <h1 style="color: #941035; margin-bottom: 15px;">Welcome to Your Profile, {{ username }}!</h1>
     </div>
     <div class="profile-content">
         <div class="user-details">
-            <h2>User Details</h2>
+            <h2 style="color: #941035; margin-bottom: 15px;">User Details</h2>
             <p><strong>Username:</strong> {{ username }}</p>
         </div>
         <div class="change-username">
-            <h2>Change Username</h2>
+            <h2 style="color: #941035; margin-bottom: 15px;">Change Username</h2>
             <form action="/change_username" method="post" class="username-form">
                 <div class="form-group">
                     <label for="newusername">Enter New Username:</label>
