@@ -439,9 +439,8 @@ def upload_file(course_id):
             )
         )
 
-    # Router to forum page
 
-
+# Router to forum page
 @app.route("/forum_page", methods=["GET", "POST"])
 def forum_page():
     global current_page
@@ -468,12 +467,18 @@ def forum_page():
         .join(User, Topic.userId == User.userId)
         .all()
     )
-
-    return render_template("forum_page.html", topics=topics_with_comment_count)
+    return render_template(
+        "forum_page.html",
+        topics=topics_with_comment_count,
+        current_page=current_page,
+        username=username,
+    )
 
 
 @app.route("/add_topic", methods=["GET", "POST"])
 def add_topic():
+    global current_page
+    current_page = "forum_page"
     if request.method == "POST":
         # Process the form data and add the new topic
         title = request.form["title"]
@@ -486,11 +491,18 @@ def add_topic():
         # Redirect to the forum page after adding the topic
         return redirect(url_for("forum_page"))
     # Render the add topic form if method is GET
-    return render_template("add_topic_page.html")
+
+    return render_template(
+        "add_topic_page.html",
+        current_page=current_page,
+        username=username,
+    )
 
 
 @app.route("/forum/topic/<int:id>", methods=["GET", "POST"])
 def topic(id):
+    global current_page
+    current_page = "forum_page"
     if request.method == "POST":
         # Add a new comment to the topic
         print("Current usser id: ", userId)
@@ -518,17 +530,20 @@ def topic(id):
         .filter(Comment.topicId == id)  # Filter by topic ID
         .all()
     )
-
     return render_template(
         "forum_topic_page.html",
         topic=topic,
         comments=comments_with_users,  # Pass the filtered comments
         author_username=author_username,
+        current_page=current_page,
+        username=username,
     )
 
 
 @app.route("/search_forum")
 def search():
+    global current_page
+    current_page = "forum_page"
     query = request.args.get("query", "")
 
     # Naive matching from topics
@@ -550,6 +565,8 @@ def search():
         results=results,
         query=query,
         userId=userId,
+        current_page=current_page,
+        username=username,
     )
 
 
