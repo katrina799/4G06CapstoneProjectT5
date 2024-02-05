@@ -56,6 +56,8 @@ except ImportError:
         Topic,
         Comment,
         db,
+        read_order_csv_from_s3,
+        write_order_csv_to_s3,
         update_csv_after_deletion,
         extract_text_from_pdf,
         extract_course_work_details,
