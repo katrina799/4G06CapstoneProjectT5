@@ -907,7 +907,7 @@ def update_tomato(day):
         except s3.exceptions.NoSuchKey:
             tomato_df = pd.DataFrame({
                 'day': [
-                    'Saturday', 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 
+                    'Saturday', 'Sunday', 'Monday', 'Tuesday', 'Wednesday',
                     'Thursday', 'Friday'
                 ],
                 'count': [0, 0, 0, 0, 0, 0, 0],
@@ -944,14 +944,11 @@ def initialize_weekly_data():
 def get_weekly_data():
     utc_now = datetime.now(timezone.utc)
     current_week = utc_now.isocalendar()[1]
-    
     tomato_df = get_df_from_csv_in_s3(s3, bucket_name, tomato_data_key)
-    
     if tomato_df['week_of_year'].iloc[0] != current_week:
         # Reset the weekly data since it's a new week
         tomato_df = initialize_weekly_data()
         write_df_to_csv_in_s3(s3, bucket_name, tomato_data_key, tomato_df)
-    
     # Convert DataFrame to JSON response
     return jsonify(tomato_df.to_dict(orient='records'))
 
