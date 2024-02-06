@@ -235,3 +235,7 @@ function closeAddModal() {
     document.getElementById('add-task-modal').style.display = 'none';
     document.getElementById('modal-overlay').style.display = 'none';
 }
+
+function startStudy(estTime) {
+    window.location.href = '/pomodoro_page?est_time=' + encodeURIComponent(estTime);
+}

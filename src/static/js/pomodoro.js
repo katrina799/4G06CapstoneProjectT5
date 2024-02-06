@@ -5,6 +5,12 @@ var start;
 let currentAudio = null;
 let isPlaying = false;
 
+function updateTomatoCount(day) {
+    fetch(`/update_tomato/${day}`, { method: 'POST' })
+        .then(() => loadWeeklyData())
+        .catch(error => console.error('Error:', error));
+}
+
 function startTimer(duration, display) {
     start = Date.now();
     var diff, minutes, seconds;
@@ -35,48 +41,56 @@ function addStar() {
     tomato.className = 'tomato';
     tomato.textContent = '🍅';
     tomatoContainer.appendChild(tomato);
+    //update the day on wwklyMap
+    const dayOfWeek = new Date().getUTCDay();
+    console.log(dayOfWeek)
+    const daysMap =  ['Saturday', 'Sunday', 'Monday', 'Tuesday', 'Wednesday',
+    'Thursday', 'Friday']
+    const day = daysMap[dayOfWeek];
+    updateTomatoCount(day);
 }
 
 function updateTomatoCount(day) {
     fetch(`/update_tomato/${day}`, { method: 'POST' })
-        .then(() => loadWeeklyData())
+        .then(response => {
+            if (response.ok) {
+                // After updating the count, reload the weekly data to update the visualization
+                loadWeeklyData();
+            } else {
+                console.error('Error updating tomato count:', response);
+            }
+        })
         .catch(error => console.error('Error:', error));
 }
 
-
 function loadWeeklyData() {
-    const staticWeeklyData = {
-        "Monday": 4,
-        "Tuesday": 3,
-        "Wednesday": 5,
-        "Thursday": 0,
-        "Friday": 3,
-        "Saturday": 0,
-        "Sunday": 1
-    };
 
-    const maxCount = Math.max(...Object.values(staticWeeklyData));
-    const weeklyDataContainer = document.getElementById('weeklyData');
-    weeklyDataContainer.innerHTML = '';
+    fetch('/get_weekly_data')
+        .then(response => response.json())
+        .then(data => {
+            const maxCount = Math.max(...data.map(item => item.count));
+            const weeklyDataContainer = document.getElementById('weeklyDataContainer');
+            weeklyDataContainer.innerHTML = '';
 
-    for (const [day, count] of Object.entries(staticWeeklyData)) {
-        const barWidth = (count / maxCount) * 80;
-        const barHtml = `
+            for (const item of data) {
+                // Use percentage for width
+                const barWidth = (item.count / maxCount) * 100;
+                const barHtml = `
             <div class="day-container">
-                <div class="bar" id="${day.toLowerCase()}-bar" style="width: ${barWidth}%;"></div>
-                <span> ${day}: ${count} </span>
+                <span class="day-label">${item.day}</span>
+                <div class="bar" style="width: ${barWidth}%;">${item.count}</div>
             </div>
         `;
-
-        // Append the bar to the container
-        weeklyDataContainer.innerHTML += barHtml;
-    }
+                weeklyDataContainer.innerHTML += barHtml;
+            }
+        })
+        .catch(error => console.error('Error:', error));
 }
 
 window.onload = function () {
 
     loadWeeklyData()
-    var timeInvertal = 60 * 25, //60 * 25
+    var timeInvertal = 5 * 1, //60 * 25
         display = document.querySelector('#time');
     document.querySelector('#startBtn').onclick = function () {
         startTimer(timeInvertal, display);
