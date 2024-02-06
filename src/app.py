@@ -843,11 +843,13 @@ def submit_feedback():
 # Router to pomodoro page
 @app.route("/pomodoro_page", methods=["GET", "POST"])
 def pomodoro_page():
+    est_time = request.args.get('est_time', default=None)
     global current_page
     current_page = "pomodoro_page"
     # Render the profile page, showing username on pege
     return render_template(
-        "pomodoro_page.html", username=username, current_page=current_page
+        "pomodoro_page.html", username=username, current_page=current_page,
+        est_time=est_time
     )
 
 

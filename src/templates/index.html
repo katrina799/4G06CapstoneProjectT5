@@ -89,7 +89,10 @@
                                 <span>Weight: {{ task.weight }}</span>
                                 <span>Est. Time: {{ task.est_time }}</span>
                             </div>
-                            <div class="task-priority {{ 'priority-' + task.priority|lower }}">{{ task.priority }} Priority</div>
+                            <div class="priority-row">
+                                <div class="task-priority {{ 'priority-' + task.priority|lower }}">{{ task.priority }} Priority</div>
+                                <button onclick="startStudy('{{ task.est_time }}')">start study</button>
+                            </div>
                         </div>
                         {% endfor %}
                     </div>
@@ -126,7 +129,10 @@
                         <span>Weight: {{ task.weight }}</span>
                         <span>Est. Time: {{ task.est_time }}</span>
                     </div>
-                    <div class="task-priority {{ 'priority-' + task.priority|lower }}">{{ task.priority }} Priority</div>
+                    <div class="priority-row">
+                        <div class="task-priority {{ 'priority-' + task.priority|lower }}">{{ task.priority }} Priority</div>
+                        <button onclick="startStudy('{{ task.est_time }}')">start study</button>
+                    </div>
                 </div>
                 {% endfor %}
             </div>
