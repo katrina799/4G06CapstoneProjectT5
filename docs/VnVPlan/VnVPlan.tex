@@ -942,7 +942,7 @@ Input/Condition: Users are asked to navigate to a required page.
 					
 Output/Result: \hyperref[MIN_UNDERSTAND]{\texttt{MIN\_UNDERSTAND\%}} of users able to navigate to a required page without confusion.
 					
-How test will be performed: \hyperref[MIN_TESTER_NUM]{\texttt{MIN\_TESTER\_NUM}} users are asked to navigate to a required page without assistance within a reasonable amount of time undergoing minimum trial and error.
+How test will be performed: In an obeservational study, \hyperref[MIN_TESTER_NUM]{\texttt{MIN\_TESTER\_NUM}} users are asked to navigate to a required page without assistance within a reasonable amount of time undergoing minimum trial and error.
 
 \item{TUHR-2\\}\label{TUHR-2}
 
@@ -954,7 +954,7 @@ Input/Condition: Users are asked to perform a core function.
 					
 Output/Result: \hyperref[MIN_UNDERSTAND]{\texttt{MIN\_UNDERSTAND\%}} of users able to perform a core function.
 					
-How the test will be performed: \hyperref[MIN_TESTER_NUM]{\texttt{MIN\_TESTER\_NUM}} users are asked to perform a core function like generating a study plan without assistance within a reasonable amount of time undergoing minimum trial and error.
+How the test will be performed: In an obeservational study,\hyperref[MIN_TESTER_NUM]{\texttt{MIN\_TESTER\_NUM}} users are asked to perform a core function within a reasonable amount of time undergoing minimum trial and error.
 \item{TUHR-3\\}\label{TUHR-3}
 
 Type: Dynamic, Manual
@@ -965,7 +965,7 @@ Input/Condition: Users are asked to inspect the grammar of texts on the page.
 					
 Output/Result: \hyperref[MAX_BAD_GRAMMAR]{\texttt{MAX\_BAD\_GRAMMAR}} grammar mistakes found.
 					
-How test will be performed: \hyperref[MIN_TESTER_NUM]{\texttt{MIN\_TESTER\_NUM}} users are asked to report grammar mistakes in all the text visible in this web application.
+How test will be performed: In an obeservational study, \hyperref[MIN_TESTER_NUM]{\texttt{MIN\_TESTER\_NUM}} users are asked to report grammar mistakes in all the text visible in this web application.
 
 \item{TUHR-4\\}\label{TUHR-4}
 
@@ -977,7 +977,7 @@ Input/Condition: Users are asked to inspect for offensive messages on the page.
 					
 Output/Result: \hyperref[MAX_OFFENSIVE]{\texttt{MAX\_OFFENSIVE}} offensive messages found.
 					
-How test will be performed: \hyperref[MIN_TESTER_NUM]{\texttt{MIN\_TESTER\_NUM}} users are asked to report offensive messages in all the text visible in this web application.
+How test will be performed: In an obeservational study, \hyperref[MIN_TESTER_NUM]{\texttt{MIN\_TESTER\_NUM}} users are asked to report offensive messages in all the text visible in this web application.
 
 \item{TUHR-5\\}\label{TUHR-5}
 
@@ -989,7 +989,7 @@ Input/Condition: Users are asked to observe color combinations on the page.
 					
 Output/Result: \hyperref[MAX_COLOR_AMBIGUOUS]{\texttt{MAX\_COLOR\_AMBIGUOUS}} indistinguishable color combinations found.
 					
-How test will be performed: \hyperref[MIN_TESTER_NUM]{\texttt{MIN\_TESTER\_NUM}} users are asked to report indistinguishable color combinations in this web application. This user group should include people with color blindness.
+How test will be performed: In an obeservational study, \hyperref[MIN_TESTER_NUM]{\texttt{MIN\_TESTER\_NUM}} users are asked to report indistinguishable color combinations in this web application. This user group should include people with color blindness.
 
 
 \end{enumerate}
@@ -1031,15 +1031,15 @@ How test will be performed: An automated script is used to add a pair of new cre
 \begin{enumerate}
 \item{TPAR-1\\}\label{TPAR-1}
 
-Type: Dynamic, Manual, Automated
+Type: Dynamic, Manual
 					
 Initial State: The web application is launched.
 					
-Input/Condition: A course outline is uploaded.
+Input/Condition:  Course outlines in PDF are uploaded
 					
 Output/Result: \hyperref[MIN_PRECISION]{\texttt{MIN\_PRECISION\%}} of coincidence between algorithm result and human result.
 					
-How test will be performed: An automated script is used to upload a course outline and categorize and prioritize extracted tasks. \hyperref[MIN_TESTER_NUM]{\texttt{MIN\_TESTER\_NUM}} users are asked to categorize and prioritize extracted tasks from the same course outline.  The computed result is compared with human decisions.
+How test will be performed: A manual test is performed by one of our developers to upload multiple course outlines and manually record the percentage of course information that are correctly extracted. 
 
 \end{enumerate}
 
@@ -1402,15 +1402,15 @@ This is where you can place additional information.
 \hline
 parameter & value & unit & description\\
 \hline
-\texttt{MIN\_UNDERSTAND\%}\label{MIN_UNDERSTAND} & 95 & N/A & the minimum percentage of testers who can understand among all testers\\
+\texttt{MIN\_UNDERSTAND\%}\label{MIN_UNDERSTAND} & 90 & N/A & the minimum percentage of testers who can understand among all testers\\
 \hline
 \texttt{MAX\_UNSATISFIED\%}\label{MAX_UNSATISFIED} & 5 & N/A & the maximum percentage of testers reporting uncomfortable\\
 \hline
 \texttt{MAX\_TRIAL\_TIME}\label{MAX_TRIAL_TIME} & 1200 & \texttt{s} & the maximum allowed trial time\\
 \hline
-\texttt{MIN\_TESTER\_NUM}\label{MIN_TESTER_NUM} &  20& N/A & the minimum number of testers needed\\
+\texttt{MIN\_TESTER\_NUM}\label{MIN_TESTER_NUM} &  10 & N/A & the minimum number of testers needed\\
 \hline
-\texttt{MAX\_BAD\_GRAMMAR}\label{MAX_BAD_GRAMMAR} & 0& N/A & the maximum occurrence of grammar mistakes allowed \\
+\texttt{MAX\_BAD\_GRAMMAR}\label{MAX_BAD_GRAMMAR} & 0 & N/A & the maximum occurrence of grammar mistakes allowed \\
 \hline
 \texttt{MAX\_OFFENSIVE}\label{MAX_OFFENSIVE} & 0& N/A & the maximum occurrence of offensive messages allowed\\
 \hline
@@ -1423,7 +1423,7 @@ parameter & value & unit & description\\
 \hline
 \texttt{MAX\_TIME\_PROCESS}\label{MAX_TIME_PROCESS} & 2& s & the maximum processing time for a core function\\
 \hline
-\texttt{MIN\_PRECISION\%}\label{MIN_PRECISION} & 95 & N/A & the minimum precision of the algorithm\\
+\texttt{MIN\_PRECISION\%}\label{MIN_PRECISION} & 90 & N/A & the minimum precision of the algorithm\\
 \hline
 \texttt{MIN\_OPERABLE\%}\label{MIN_OPERABLE} & 95 & N/A & the minimum percentage of system being operable \\
 \hline
@@ -1440,25 +1440,21 @@ parameter & value & unit & description\\
 \hline
 \end{longtable}
 
-\subsection{Usability Survey Questions}
+\subsection{Survey Questions}
 
 \begin{enumerate}
-  \item Which part of the typography do you find confusing?
-  \item Do you like the color choice of the page?
-  \item What do you think this icon/graphic means?
-  \item Which part of the layout do you find awkward?
-  \item Could you point at the menu/navigation tool on this page?
-  \item Which element do you think is inconsistent with the rest?
-  \item Which interactive element do you find unresponsive?
-  \item Are you comfortable with the default font size? If not, could you adjust it to your preference?
-  \item Do you find this animation intrusive or distracting?
-  \item Could you navigate to the progress page?
-  \item Could you make a schedule with this course outline?
-  \item What grammar mistakes could you find?
-  \item What offensive message could you find?
-  \item Which color combination on the page do you find indistinguishable?
-  \item How many steps do you need to reach support?
-  \item Are you able to modify this database?
+  \item Are you a student? If so, are you from McMaster?
+  \item Which following current feature in the website attracts you the most?
+  \item Please select from the options below that you think may be used less often?
+  \item We are considering adding some new features to the website to improve your experience. Please select from the options below the features that you think will make you use our site more frequently.
+  \item Is the content on our website clear and understandable?
+  \item On a scale of 1 to 5, how easy was it to navigate our website overall?
+  \item On a scale of 1 to 5, how would you rate the ease of the priority generation feature?
+  \item On a scale of 1 to 5, how visually appealing do you find our website?
+  \item Were you able to find all the current features we have? if not, please describe the problem you met.
+  \item On a scale of 1 to 5, how would you rate the accuracy of the information provided on our website overall?
+  \item On a scale of 1 to 5, how would you rate the task priority feature?
+  \item have you encountered any other inaccuracies while using our website? if yes, please provide examples.
 \end{enumerate}
 
 \newpage{}
