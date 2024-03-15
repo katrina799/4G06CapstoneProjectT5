@@ -4,11 +4,11 @@
 }
 
 .glyphicon {
-    color: #b4c8cc;
+    color: #f9f3f5;
 }
 
 .glyphicon:hover {
-    color: #66b0bf;
+    color: #be7a8b;
 }
 
 .banner-image {
@@ -34,8 +34,8 @@
 
 .head {
     display: flex;
-    border-bottom: 4px rgba(143, 198, 201, 0.887);
-    background-color: #cce3de;
+    border-bottom: 4px rgb(240,223,227);
+    background-color: #941035;
     margin: 5px;
     position: sticky;
     top: 0;
@@ -63,6 +63,7 @@ a:hover {
 }
 
 .welcome-msg{
+    color: #ffffff;
     flex: 1; 
     display: flex;
     align-items: center; 
@@ -124,7 +125,7 @@ a:hover {
 }
 
 .active i {
-    color: #66b0bf;
+    color: #efb255;
 
 }
 
@@ -333,7 +334,7 @@ a:hover {
 }
 
 .profile-banner {
-    background-color: #f6fff8;
+    background-color: #f5eaed;
     padding: 20px;
     text-align: center;
     margin-bottom: 30px;
@@ -496,4 +497,17 @@ a:hover {
 .upload-form button {
     padding: 5px 10px;
     margin-left: 10px;
+}
+
+.btn.btn-primary {
+    background-color: #941035;
+    color: white;
+    border-radius: 5px;
+}
+
+
+.btn.btn-primary:hover {
+    background-color: #a53045; 
+    color: #fff; 
+    cursor: pointer; 
 }
