@@ -378,5 +378,6 @@ body, html {
   justify-content: space-between; 
 }
 
-
-
+.calendar-wrapper {
+  display: none;
+}

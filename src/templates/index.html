@@ -70,6 +70,28 @@
             </div>
         </div>
     </div>
+
+    <button id="viewToggleBtn" class="btn btn-primary">Switch View</button>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var viewToggleBtn = document.getElementById('viewToggleBtn');
+            var taskCalendarContainer = document.querySelector('.tasks-calendar-container');
+            var calendarWrapper = document.querySelector('.calendar-wrapper');
+    
+            viewToggleBtn.onclick = function() {
+                if (taskCalendarContainer.style.display === 'none') {
+                    taskCalendarContainer.style.display = 'block';
+                    calendarWrapper.style.display = 'none';
+                    viewToggleBtn.textContent = 'Switch to Calendar View';
+                } else {
+                    taskCalendarContainer.style.display = 'none';
+                    calendarWrapper.style.display = 'block';
+                    viewToggleBtn.textContent = 'Switch to Task Board View';
+                }
+            };
+        });
+    </script>
+    
     <div class="tasks-calendar-container">
         <div class="task-board">
             <!-- To Do Column -->
