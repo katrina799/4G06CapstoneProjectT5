@@ -122,9 +122,44 @@ window.onload = function () {
         }
     });
 
-    document.addEventListener('DOMContentLoaded', function () {
-        loadWeeklyData();
-    });
+    // Extract 'task_id' from URL query parameters
+    const params = new URLSearchParams(window.location.search);
+    console.log(params);
+    const taskId = params.get("task_id");
+    console.log(taskId);
+  
+    if (taskId) {
+      // Fetch task details from the backend using the 'taskId'
+      fetch(`/get_task/${taskId}`)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          return response.json();
+        })
+        .then(data => {
+          // Display the task details in 'taskDetailsBox'
+          const taskDetailsBox = document.getElementById("taskDetailsBox");
+          taskDetailsBox.innerHTML = `
+          <h2>Task Details</h2>
+          <p><strong>Course:</strong> ${data.course}</p>
+          <p><strong>Title:</strong> ${data.title}</p>
+          <p><strong>Due Date:</strong> ${data.due_date}</p>
+          <p><strong>Estimated Time:</strong> ${data.est_time}</p>
+          <p><strong>Priority:</strong> ${data.priority}</p>
+          <p><strong>Status:</strong> ${data.status}</p>
+          <p><strong>Weight:</strong> ${data.weight}</p>
+          `;
+          taskDetailsBox.style.display = "block";
+        })
+        .catch(error => {
+          console.error('Error fetching task details:', error);
+          const taskDetailsBox = document.getElementById("taskDetailsBox");
+          taskDetailsBox.innerHTML = `<p>Error loading task details.</p>`;
+          taskDetailsBox.style.display = "block";
+        });
+    }
+
 
 
 };

@@ -239,3 +239,5 @@ function closeAddModal() {
 function startStudy(estTime) {
     window.location.href = '/pomodoro_page?est_time=' + encodeURIComponent(estTime);
 }
+
+
