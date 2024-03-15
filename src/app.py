@@ -13,23 +13,16 @@ from flask import (
     Response,
     redirect,
     url_for,
+    abort,
 )
 import ast
-from sqlalchemy.sql import func
+
 try:
     from helper import (
         check_syllabus_exists,
         update_csv,
         upload_df_to_s3,
         get_df_from_csv_in_s3,
-        sql_to_csv_s3,
-        initialize_topic_db_from_s3,
-        initialize_comment_db_from_s3,
-        initialize_user_db_from_s3,
-        User,
-        Topic,
-        Comment,
-        db,
         read_order_csv_from_s3,
         write_order_csv_to_s3,
         update_csv_after_deletion,
@@ -47,14 +40,6 @@ except ImportError:
         update_csv,
         upload_df_to_s3,
         get_df_from_csv_in_s3,
-        sql_to_csv_s3,
-        initialize_topic_db_from_s3,
-        initialize_comment_db_from_s3,
-        initialize_user_db_from_s3,
-        User,
-        Topic,
-        Comment,
-        db,
         read_order_csv_from_s3,
         write_order_csv_to_s3,
         update_csv_after_deletion,
@@ -79,13 +64,6 @@ except ImportError:
 # Loading configs/global variables
 app.config.from_pyfile("config.py")
 
-# Set the base directory to the directory where app.py is located
-basedir = os.path.abspath(os.path.dirname(__file__))
-# Set the SQLALCHEMY_DATABASE_URI to point to your project.db file
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///" + os.path.join(
-    basedir, "instance", "project.db"
-)
-# app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///project.db"
 bucket_name = app.config["BUCKET_NAME"]
 mock_data_file = app.config["MOCK_DATA_POC_NAME"]
 user_data_file = app.config["USER_DATA_NAME"]
@@ -95,7 +73,6 @@ model_file_path = app.config["PRIORITY_MODEL_PATH"]
 mock_tasks_data_file = app.config["MOCK_DATA_POC_TASKS"]
 Transcript_path = app.config["UPLOAD_FOLDER"]
 
-db.init_app(app)
 
 icon_order_path = app.config["ICON_ORDER_PATH"]
 # Setting global variables
@@ -112,13 +89,7 @@ s3 = boto3.client(
     aws_secret_access_key=os.environ.get("AWS_SECRET_ACCESS_KEY"),
 )
 
-tomato_data_key = 'weekly_tomato_data.csv'
-
-with app.app_context():
-    db.create_all()
-    initialize_user_db_from_s3(s3, bucket_name, user_data_file, db)
-    initialize_topic_db_from_s3(s3, bucket_name, topic_data_file, db)
-    initialize_comment_db_from_s3(s3, bucket_name, comment_data_file, db)
+tomato_data_key = "weekly_tomato_data.csv"
 
 
 @app.route("/")
@@ -355,9 +326,7 @@ def course_detail(course_id):
         due_date = row["due_date"]
         weight = row["score_distribution"]
         est_hours = 3
-        add_task_todo(
-            course_name, task_name, due_date, str(weight), est_hours
-        )
+        add_task_todo(course_name, task_name, due_date, str(weight), est_hours)
 
     return render_template(
         "course_detail_page.html",
@@ -472,36 +441,58 @@ def upload_file(course_id):
         )
 
 
-# Router to forum page
-@app.route("/forum_page", methods=["GET", "POST"])
+@app.route("/forum_page", methods=["GET"])
 def forum_page():
     global current_page
     current_page = "forum_page"
+    try:
+        # Fetch topics, comments, and users data from CSV
+        topics_df = get_df_from_csv_in_s3(s3, bucket_name, topic_data_file)
+        comments_df = get_df_from_csv_in_s3(s3, bucket_name, comment_data_file)
+        users_df = get_df_from_csv_in_s3(s3, bucket_name, user_data_file)
 
-    # Subquery to count comments for each topic
-    comment_count_subquery = (
-        db.session.query(
-            Comment.topicId, func.count(Comment.id).label("comment_count")
-        )
-        .group_by(Comment.topicId)
-        .subquery()
-    )
+        # Ensure 'userId' in topics_df is the same type as 'userId' in users_df
+        topics_df["userId"] = topics_df["userId"].astype(str)
+        users_df["userId"] = users_df["userId"].astype(str)
 
-    # Modify your existing query to include the comment count
-    topics_with_comment_count = (
-        db.session.query(
-            Topic, User.username, comment_count_subquery.c.comment_count
+        # Aggregate comments by topicId to count them
+        comments_count = (
+            comments_df.groupby("topicId")
+            .size()
+            .reset_index(name="comment_count")
         )
-        .outerjoin(
-            comment_count_subquery,
-            Topic.id == comment_count_subquery.c.topicId,
+
+        # Merge topics with comments count based on topic ID
+        topics_with_comments = pd.merge(
+            topics_df,
+            comments_count,
+            how="left",
+            left_on="id",
+            right_on="topicId",
+        ).fillna(0)
+
+        # Merge topics with user data to get usernames
+        topics_with_usernames = pd.merge(
+            topics_with_comments,
+            users_df[["userId", "username"]],
+            how="left",
+            left_on="userId",
+            right_on="userId",
         )
-        .join(User, Topic.userId == User.userId)
-        .all()
-    )
+
+        # Prepare the topics list as expected by the template
+        topics = [
+            (row.to_dict(), row["username"], int(row["comment_count"]))
+            for _, row in topics_with_usernames.iterrows()
+        ]
+
+    except Exception as e:
+        print(f"An error occurred while fetching forum data: {e}")
+        topics = []
+
     return render_template(
         "forum_page.html",
-        topics=topics_with_comment_count,
+        topics=topics,
         current_page=current_page,
         username=username,
     )
@@ -509,66 +500,154 @@ def forum_page():
 
 @app.route("/add_topic", methods=["GET", "POST"])
 def add_topic():
-    global current_page
-    current_page = "forum_page"
+    global current_page, username, userId, bucket_name
+    current_page = "add_topic"
+
     if request.method == "POST":
-        # Process the form data and add the new topic
-        title = request.form["title"]
-        description = request.form["description"]
-        # Assume 'userId' is obtained from the session or a decorator
-        topic = Topic(title=title, description=description, userId=userId)
-        db.session.add(topic)
-        db.session.commit()
-        sql_to_csv_s3("topic", s3, bucket_name, topic_data_file)
-        # Redirect to the forum page after adding the topic
-        return redirect(url_for("forum_page"))
-    # Render the add topic form if method is GET
+        title = request.form.get("title")
+        description = request.form.get("description")
 
-    return render_template(
-        "add_topic_page.html",
-        current_page=current_page,
-        username=username,
-    )
+        # Fetch current topics DataFrame from S3
+        topics_df = get_df_from_csv_in_s3(s3, bucket_name, topic_data_file)
+        if not topics_df.empty:
+            topics_df["id"] = topics_df["id"].astype(
+                int
+            )  # Ensure 'id' is an integer
+            new_id = topics_df["id"].max() + 1
+        else:
+            new_id = 1  # Start with 1 if there are no topics
 
-
-@app.route("/forum/topic/<int:id>", methods=["GET", "POST"])
-def topic(id):
-    global current_page
-    current_page = "forum_page"
-    if request.method == "POST":
-        # Add a new comment to the topic
-        # print("Current usser id: ", userId)
-        comment = Comment(
-            text=request.form["comment"], topicId=id, userId=userId
+        new_topic = pd.DataFrame(
+            {
+                "id": [new_id],  # Ensure 'id' is a string to match types.
+                "title": [title],
+                "description": [description],
+                "userId": [
+                    userId
+                ],  # Convert userId to a list to match DataFrame structure.
+            }
         )
-        db.session.add(comment)
-        db.session.commit()
-        sql_to_csv_s3("comment", s3, bucket_name, comment_data_file)
 
-    # pull the topic and comments
-    topic_with_user = (
-        db.session.query(Topic, User.username)
-        .join(User, Topic.userId == User.userId)
-        .filter(Topic.id == id)
-        .first_or_404()
-    )
+        topics_df["id"] = topics_df["id"].astype(str)
+        print("topics_df")
+        print(topics_df)
 
-    topic, author_username = topic_with_user
+        # Use pd.concat for appending the new record
+        updated_topics_df = pd.concat(
+            [topics_df, new_topic], ignore_index=True
+        )
+        print("updated_topics_df")
+        print(updated_topics_df)
 
-    # Correct the query here to filter comments by topic.id
-    comments_with_users = (
-        db.session.query(Comment, User.username)
-        .join(User, Comment.userId == User.userId)
-        .filter(Comment.topicId == id)  # Filter by topic ID
-        .all()
-    )
+        # Upload the updated DataFrame back to S3
+        csv_buffer = StringIO()
+        updated_topics_df.to_csv(csv_buffer, index=False)
+        csv_buffer.seek(0)
+        s3.put_object(
+            Bucket=bucket_name,
+            Key=topic_data_file,
+            Body=csv_buffer.getvalue(),
+            ContentType="text/csv",
+        )
+
+        return redirect(url_for("forum_page"))
+    else:
+        return render_template(
+            "add_topic_page.html", current_page=current_page, username=username
+        )
+
+
+@app.route("/forum/topic/<topic_id>", methods=["GET", "POST"])
+def topic(topic_id):
+    global current_page
+    current_page = "forum_topic"  # Set the current page context
+
+    if request.method == "POST":
+        # Handle new comment submission
+        comment_text = request.form.get("comment")
+        # Fetch current comments DataFrame from S3
+        comments_df = get_df_from_csv_in_s3(s3, bucket_name, comment_data_file)
+        if not comments_df.empty:
+            comments_df["id"] = comments_df["id"].astype(
+                int
+            )  # Ensure 'id' is an integer
+            new_comment_id = comments_df["id"].max() + 1
+        else:
+            new_comment_id = 1  # Start with 1 if there are no comments yet
+
+        new_comment = pd.DataFrame(
+            {
+                "id": [new_comment_id],
+                "text": [comment_text],
+                "topicId": [
+                    int(topic_id)
+                ],  # Ensure the topicId is correctly typed as int
+                "userId": [userId],
+            }
+        )
+
+        # Append the new comment to the DataFrame and upload to S3
+        updated_comments_df = pd.concat(
+            [comments_df, new_comment], ignore_index=True
+        )
+        upload_df_to_s3(
+            updated_comments_df, s3, bucket_name, comment_data_file
+        )
+
+        # Redirect to the same topic page to display the new comment
+        return redirect(url_for("topic", topic_id=topic_id))
+
+    # Initialize
+    topic_dict = {}
+    comments_with_usernames = []
+
+    try:
+        # Fetch all necessary data from CSV
+        topics_df = get_df_from_csv_in_s3(s3, bucket_name, "topic_data.csv")
+        comments_df = get_df_from_csv_in_s3(
+            s3, bucket_name, "comment_data.csv"
+        )
+        users_df = get_df_from_csv_in_s3(s3, bucket_name, "user_data.csv")
+
+        # Fetch topic data
+        topic_data = topics_df[topics_df["id"].astype(str) == str(topic_id)]
+        if topic_data.empty:
+            abort(404)  # Topic not found
+        topic_dict = topic_data.iloc[0].to_dict()
+
+        author_id = topic_dict["userId"]
+        author_username = users_df[
+            users_df["userId"].astype(str) == str(author_id)
+        ].iloc[0]["username"]
+
+        # Prepare comments with usernames
+        comments_df = comments_df[
+            comments_df["topicId"].astype(str) == str(topic_id)
+        ]
+        comments_with_users = pd.merge(
+            comments_df,
+            users_df,
+            left_on="userId",
+            right_on="userId",
+            how="left",
+        )
+
+        comments_with_usernames = [
+            ({"text": row["text"]}, row["username"])
+            for _, row in comments_with_users.iterrows()
+        ]
+
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        abort(500)
+
     return render_template(
         "forum_topic_page.html",
-        topic=topic,
-        comments=comments_with_users,  # Pass the filtered comments
-        author_username=author_username,
+        topic=topic_dict,
+        comments=comments_with_usernames,
         current_page=current_page,
-        username=username,
+        username=username,  # Assuming username is correctly set elsewhere
+        author_username=author_username,
     )
 
 
@@ -576,29 +655,61 @@ def topic(id):
 def search():
     global current_page
     current_page = "forum_page"
-    query = request.args.get("query", "")
+    query = request.args.get("query", "").strip()
 
-    # Naive matching from topics
-    matching_topics = Topic.query.filter(
-        Topic.title.contains(query) | Topic.description.contains(query)
-    ).all()
+    try:
+        # Fetch topics and comments data from CSV
+        topics_df = get_df_from_csv_in_s3(s3, bucket_name, topic_data_file)
+        comments_df = get_df_from_csv_in_s3(s3, bucket_name, comment_data_file)
+        users_df = get_df_from_csv_in_s3(s3, bucket_name, user_data_file)
 
-    # Naive matching from comments
-    matching_comments = Comment.query.filter(
-        Comment.text.contains(query)
-    ).all()
+        # Filter topics and comments based on the search query
+        matching_topics = topics_df[
+            topics_df["title"].str.contains(query, case=False, na=False)
+            | topics_df["description"].str.contains(
+                query, case=False, na=False
+            )
+        ]
+        matching_comments = comments_df[
+            comments_df["text"].str.contains(query, case=False, na=False)
+        ]
 
-    # Combine the results
-    results = {"topics": matching_topics, "comments": matching_comments}
+        # Join matching topics and comments with user data to include usernames
+        matching_topics_with_usernames = pd.merge(
+            matching_topics,
+            users_df[["userId", "username"]],
+            how="left",
+            left_on="userId",
+            right_on="userId",
+        )
+        matching_comments_with_usernames = pd.merge(
+            matching_comments,
+            users_df[["userId", "username"]],
+            how="left",
+            left_on="userId",
+            right_on="userId",
+        )
 
-    # Render a template with the search results
+        # Prepare results to pass to the template
+        topics_results = matching_topics_with_usernames.to_dict(
+            orient="records"
+        )
+        comments_results = [
+            {
+                "text": row["text"],
+                "topicId": row["topicId"],
+                "username": row["username"],
+            }
+            for _, row in matching_comments_with_usernames.iterrows()
+        ]
+
+        results = {"topics": topics_results, "comments": comments_results}
+    except Exception as e:
+        print(f"An error occurred while searching: {e}")
+        results = {"topics": [], "comments": []}
+
     return render_template(
-        "search_forum_results.html",
-        results=results,
-        query=query,
-        userId=userId,
-        current_page=current_page,
-        username=username,
+        "search_forum_results.html", results=results, query=query
     )
 
 
@@ -843,13 +954,15 @@ def submit_feedback():
 # Router to pomodoro page
 @app.route("/pomodoro_page", methods=["GET", "POST"])
 def pomodoro_page():
-    est_time = request.args.get('est_time', default=None)
+    est_time = request.args.get("est_time", default=None)
     global current_page
     current_page = "pomodoro_page"
     # Render the profile page, showing username on pege
     return render_template(
-        "pomodoro_page.html", username=username, current_page=current_page,
-        est_time=est_time
+        "pomodoro_page.html",
+        username=username,
+        current_page=current_page,
+        est_time=est_time,
     )
 
 
@@ -888,12 +1001,12 @@ def write_df_to_csv_in_s3(client, bucket, key, dataframe):
         Bucket=bucket,
         Key=key,
         Body=csv_buffer.getvalue(),
-        ContentType='text/csv'
+        ContentType="text/csv",
     )
 
 
 # Update Tomato count for weekly achievements form
-@app.route('/update_tomato/<day>', methods=['POST'])
+@app.route("/update_tomato/<day>", methods=["POST"])
 def update_tomato(day):
     utc_now = datetime.now(timezone.utc)
     current_week = utc_now.isocalendar()[1]
@@ -903,22 +1016,29 @@ def update_tomato(day):
         try:
             tomato_df = get_df_from_csv_in_s3(s3, bucket_name, tomato_data_key)
             # Check if it's a new week
-            if tomato_df['week_of_year'].iloc[0] != current_week:
-                tomato_df['count'] = 0
-                tomato_df['week_of_year'] = current_week
+            if tomato_df["week_of_year"].iloc[0] != current_week:
+                tomato_df["count"] = 0
+                tomato_df["week_of_year"] = current_week
         except s3.exceptions.NoSuchKey:
-            tomato_df = pd.DataFrame({
-                'day': [
-                    'Saturday', 'Sunday', 'Monday', 'Tuesday', 'Wednesday',
-                    'Thursday', 'Friday'
-                ],
-                'count': [0, 0, 0, 0, 0, 0, 0],
-                'week_of_year': [current_week] * 7
-            })
+            tomato_df = pd.DataFrame(
+                {
+                    "day": [
+                        "Saturday",
+                        "Sunday",
+                        "Monday",
+                        "Tuesday",
+                        "Wednesday",
+                        "Thursday",
+                        "Friday",
+                    ],
+                    "count": [0, 0, 0, 0, 0, 0, 0],
+                    "week_of_year": [current_week] * 7,
+                }
+            )
 
         # Update count for the specified day
-        if day in tomato_df['day'].values:
-            tomato_df.loc[tomato_df['day'] == day, 'count'] += 1
+        if day in tomato_df["day"].values:
+            tomato_df.loc[tomato_df["day"] == day, "count"] += 1
             write_df_to_csv_in_s3(s3, bucket_name, tomato_data_key, tomato_df)
             return jsonify({"message": "Tomato count updated successfully"})
         else:
@@ -926,33 +1046,43 @@ def update_tomato(day):
 
     except Exception as e:
         print(f"An error occurred: {e}")
-        return jsonify(
-            {"message": "An error occurred while updating tomato count"}
-        ), 500
+        return (
+            jsonify(
+                {"message": "An error occurred while updating tomato count"}
+            ),
+            500,
+        )
 
 
 # Initialize the weekly data for no record for this week
 def initialize_weekly_data():
     # Initialize the weekly data for each day to zero
-    days = ['Saturday', 'Sunday', 'Monday', 'Tuesday', 'Wednesday',
-            'Thursday', 'Friday']
+    days = [
+        "Saturday",
+        "Sunday",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+    ]
     week_of_year = datetime.now().isocalendar()[1]
-    data = {'day': days, 'count': [0]*7, 'week_of_year': [week_of_year]*7}
+    data = {"day": days, "count": [0] * 7, "week_of_year": [week_of_year] * 7}
     return pd.DataFrame(data)
 
 
 # Router for getting weekly data from s3
-@app.route('/get_weekly_data', methods=['GET'])
+@app.route("/get_weekly_data", methods=["GET"])
 def get_weekly_data():
     utc_now = datetime.now(timezone.utc)
     current_week = utc_now.isocalendar()[1]
     tomato_df = get_df_from_csv_in_s3(s3, bucket_name, tomato_data_key)
-    if tomato_df['week_of_year'].iloc[0] != current_week:
+    if tomato_df["week_of_year"].iloc[0] != current_week:
         # Reset the weekly data since it's a new week
         tomato_df = initialize_weekly_data()
         write_df_to_csv_in_s3(s3, bucket_name, tomato_data_key, tomato_df)
     # Convert DataFrame to JSON response
-    return jsonify(tomato_df.to_dict(orient='records'))
+    return jsonify(tomato_df.to_dict(orient="records"))
 
 
 if __name__ == "__main__":
