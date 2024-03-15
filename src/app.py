@@ -711,6 +711,26 @@ def add_task():
     return redirect(url_for("start"))
 
 
+@app.route("/get_task/<int:task_id>", methods=["GET"])
+def get_task(task_id):
+    try:
+        # Load the tasks DataFrame from CSV in S3
+        tasks_df = get_df_from_csv_in_s3(s3, bucket_name, mock_tasks_data_file)
+
+        # Find the task by task_id
+        task_row = tasks_df.loc[tasks_df['id'] == task_id]
+
+        if not task_row.empty:
+            # Convert the task_row DataFrame to a dictionary
+            task_details = task_row.to_dict(orient='records')[0]
+            return jsonify(task_details)
+        else:
+            return jsonify({"error": "Task not found"}), 404
+    except Exception as e:
+        print(f"An error occurred while fetching task details: {e}")
+        return jsonify({"error": "An internal server error occurred"}), 500
+
+
 @app.route("/delete_task/<int:task_id>", methods=["POST"])
 def delete_task(task_id):
     try:

@@ -91,7 +91,12 @@
                             </div>
                             <div class="priority-row">
                                 <div class="task-priority {{ 'priority-' + task.priority|lower }}">{{ task.priority }} Priority</div>
-                                <button onclick="startStudy('{{ task.est_time }}')">start study</button>
+                                <!-- <button onclick="startStudy('{{ task.est_time }}')">start study</button>
+                                 -->
+
+                                 <!-- Example of a task with a button/link -->
+                                <a href="/pomodoro_page?task_id={{ task.id }}">Start Pomodoro for Task 123</a>
+
                             </div>
                         </div>
                         {% endfor %}
