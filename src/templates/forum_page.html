@@ -25,8 +25,22 @@
         <div class="col">
           <a href="{{ url_for('add_topic') }}" class="btn btn-primary">Add Topic</a>
         </div>
+        <div class="filter-by-tag">
+          <form action="{{ url_for('forum_page') }}" method="get">
+            <label for="tag">Filter by tag:</label>
+            <select name="tag" onchange="this.form.submit()">
+              <option value="All" {% if current_tag == 'All' %}selected{% endif %}>All</option>
+              <option value="Academics" {% if current_tag == 'Academics' %}selected{% endif %}>Academics</option>
+              <!-- Dynamically generate tag options based on available tags -->
+              <option value="Advice" {% if current_tag == 'Advice' %}selected{% endif %}>Advice</option>
+              <option value="Exchange" {% if current_tag == 'Exchange' %}selected{% endif %}>Exchange</option>
+              <!-- ... other tag options ... -->
+            </select>
+          </form>
+        </div>
+        
         <div class="my-3 p-3 bg-body rounded shadow-sm">
-            <h5 class="border-bottom pb-2 mb-0">Recent topics</h5>
+            <h5 class="border-bottom pb-2 mb-0">Recent topics</h>
             {% for topic, username, comment_count in topics %}
             <div class="topic-item-container">
               <div class="topic-meta">

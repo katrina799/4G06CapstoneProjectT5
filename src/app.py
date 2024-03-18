@@ -445,11 +445,17 @@ def upload_file(course_id):
 def forum_page():
     global current_page
     current_page = "forum_page"
+    current_tag = request.args.get("tag", "All")
     try:
         # Fetch topics, comments, and users data from CSV
         topics_df = get_df_from_csv_in_s3(s3, bucket_name, topic_data_file)
         comments_df = get_df_from_csv_in_s3(s3, bucket_name, comment_data_file)
         users_df = get_df_from_csv_in_s3(s3, bucket_name, user_data_file)
+
+        if current_tag and current_tag != "All":
+            topics_df = topics_df[topics_df["tag"] == current_tag]
+        else:
+            topics_df = get_df_from_csv_in_s3(s3, bucket_name, topic_data_file)
 
         # Ensure 'userId' in topics_df is the same type as 'userId' in users_df
         topics_df["userId"] = topics_df["userId"].astype(str)
@@ -495,6 +501,7 @@ def forum_page():
         topics=topics,
         current_page=current_page,
         username=username,
+        current_tag=current_tag,
     )
 
 
