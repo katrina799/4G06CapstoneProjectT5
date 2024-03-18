@@ -26,13 +26,21 @@
           <a href="{{ url_for('add_topic') }}" class="btn btn-primary">Add Topic</a>
         </div>
         <div class="my-3 p-3 bg-body rounded shadow-sm">
-            <h6 class="border-bottom pb-2 mb-0">Recent topics</h6>
+            <h5 class="border-bottom pb-2 mb-0">Recent topics</h5>
             {% for topic, username, comment_count in topics %}
-            <div class="d-flex text-body-secondary pt-3">
-                <p class="pb-3 mb-0 small lh-sm border-bottom truncate topicpage">
-                    <strong class="d-block text-gray-dark truncate topicpage"> <a href="/forum/topic/{{topic.id}}">{{topic.id}}. {{topic.title}} @{{username}} # Comments: {{ comment_count or 0 }}</a></strong>
-                    <span class="truncate topicpage">{{topic.description}}</span>
-                </p>
+            <div class="topic-item-container">
+              <div class="topic-meta">
+                Posted by <span class="topic-author">@{{username}}</span>
+              </div>
+              <h2 class="topic-title">
+                <a href="/forum/topic/{{ topic.id }}">{{ topic.title }}</a>
+              </h2>
+              <div class="topic-tag">{{ topic.tag }}</div>
+              <p class="topic-description truncate">{{ topic.description }}</p>
+              <div class="topic-stats">
+                <span class="topic-comment-count">{{ topic.comment_count }} Comments</span>
+
+              </div>
             </div>
             {% endfor %}
         </div>

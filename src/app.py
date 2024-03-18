@@ -506,6 +506,7 @@ def add_topic():
     if request.method == "POST":
         title = request.form.get("title")
         description = request.form.get("description")
+        tag = request.form.get("tag")
 
         # Fetch current topics DataFrame from S3
         topics_df = get_df_from_csv_in_s3(s3, bucket_name, topic_data_file)
@@ -525,6 +526,7 @@ def add_topic():
                 "userId": [
                     userId
                 ],  # Convert userId to a list to match DataFrame structure.
+                "tag": tag,
             }
         )
 
