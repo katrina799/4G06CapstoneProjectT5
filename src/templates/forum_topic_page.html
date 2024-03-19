@@ -1,5 +1,32 @@
 {% extends 'base.html' %}
 
+{% macro render_comments(comments_with_layers) %}
+  {% for comment_with_username, layer in comments_with_layers %}
+    {% set comment = comment_with_username[0] %}
+    {% set username = comment_with_username[1] %}
+    <div class="comment" id="comment-{{ comment.id }}" style="margin-left: {{ comment.layer * 20 }}px;">
+      <div class="d-flex text-body-secondary pt-3">
+        <div class="pb-3 mb-0 small lh-sm border-bottom w-100 topicpage">
+          <div class="d-flex justify-content-between">
+            <strong class="text-gray-dark">@{{ username }}</strong>
+            <button class="btn btn-sm btn-primary" onclick="toggleReplyForm('replyForm-{{ comment.id }}')">Reply</button>
+          </div>
+          <span class="d-block topicpage">{{ comment.text }}</span>
+        </div>
+      </div>
+      <div id="replyForm-{{ comment.id }}" class="reply-form" style="display:none;">
+        <form action="/forum/topic/{{ topic.id }}" method="post">
+          <input type="hidden" name="parentId" value="{{ comment.id }}">
+          <textarea name="comment" class="form-control" rows="2" placeholder="What are your thoughts?"></textarea>
+          <div class="mt-2">
+            <button type="submit" class="btn btn-primary">Post Reply</button>
+            <button type="button" class="btn btn-secondary" onclick="toggleReplyForm('replyForm-{{ comment.id }}')">Cancel</button>
+          </div>
+        </form>
+      </div>
+</div>
+{% endfor %}
+{% endmacro %}
 {% block content %}
   <head>
     <title>MacForum - The McMaster community dissussion board</title>
@@ -22,19 +49,15 @@
     </div>
 
     <div class="my-3 p-3 bg-body rounded shadow-sm">
-      <h6 class="border-bottom pb-2 mb-0">Comments ({{comments|length}})</h6>
-      {% for comment, username in comments %}
-      <div class="d-flex text-body-secondary pt-3">
-        <div class="pb-3 mb-0 small lh-sm border-bottom w-100 topicpage">
-          <div class="d-flex justify-content-between">
-            <strong class="text-gray-dark">@{{username}}</strong>
-          </div>
-          <span class="d-block topicpage">{{comment.text}}</span>
-        </div>
-      </div>
-      {% endfor %}
-
-  </div>
+      <h6 class="border-bottom pb-2 mb-0">Comments ({{ comments|length }})</h6>
+      {{ render_comments(comments) }} <!-- This will render comments recursively -->
+      <script>
+        function toggleReplyForm(formId) {
+          var form = document.getElementById(formId);
+          form.style.display = form.style.display === 'none' ? 'block' : 'none';
+        }
+      </script>
+    </div>
 
     <h1 class="fs-4 text my-4">Add a comment</h1>
     <form accept="/forum/topic/{{topic.id}}" method="post">

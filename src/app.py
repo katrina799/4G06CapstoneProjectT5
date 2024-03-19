@@ -33,6 +33,7 @@ try:
         convert_to_list_of_dicts,
         write_course_work_to_csv,
         process_transcript_pdf,
+        build_comment_hierarchy,
     )
 except ImportError:
     from .helper import (
@@ -50,6 +51,7 @@ except ImportError:
         convert_to_list_of_dicts,
         write_course_work_to_csv,
         process_transcript_pdf,
+        build_comment_hierarchy,
     )
 
 
@@ -572,40 +574,47 @@ def topic(topic_id):
     current_page = "forum_topic"  # Set the current page context
 
     if request.method == "POST":
-        # Handle new comment submission
         comment_text = request.form.get("comment")
-        # Fetch current comments DataFrame from S3
+        parent_id = request.form.get(
+            "parentId", None
+        )  # Might be part of the form if it's a reply
+        layer = 0
+
         comments_df = get_df_from_csv_in_s3(s3, bucket_name, comment_data_file)
-        if not comments_df.empty:
-            comments_df["id"] = comments_df["id"].astype(
-                int
-            )  # Ensure 'id' is an integer
-            new_comment_id = comments_df["id"].max() + 1
-        else:
-            new_comment_id = 1  # Start with 1 if there are no comments yet
 
-        new_comment = pd.DataFrame(
-            {
-                "id": [new_comment_id],
-                "text": [comment_text],
-                "topicId": [
-                    int(topic_id)
-                ],  # Ensure the topicId is correctly typed as int
-                "userId": [userId],
-            }
+        # Determine layer based on parent_id
+        if parent_id is not None and parent_id != "0":
+            parent_comment = comments_df[
+                comments_df["id"] == int(parent_id)
+            ].iloc[0]
+            layer = int(parent_comment["layer"]) + 1
+
+        # Create new comment entry
+        new_comment_id = (
+            comments_df["id"].max() + 1 if not comments_df.empty else 1
         )
-
-        # Append the new comment to the DataFrame and upload to S3
+        new_comment = {
+            "id": new_comment_id,
+            "text": comment_text,
+            "topicId": int(topic_id),
+            "userId": userId,
+            "parentId": parent_id if parent_id and parent_id != "0" else 0,
+            "layer": layer,
+        }
+        # Append new comment to the dataframe and update CSV
+        new_comment_df = pd.DataFrame([new_comment])
         updated_comments_df = pd.concat(
-            [comments_df, new_comment], ignore_index=True
+            [comments_df, new_comment_df], ignore_index=True
         )
-        upload_df_to_s3(
-            updated_comments_df, s3, bucket_name, comment_data_file
+        csv_buffer = StringIO()
+        updated_comments_df.to_csv(csv_buffer, index=False)
+        s3.put_object(
+            Bucket=bucket_name,
+            Key=comment_data_file,
+            Body=csv_buffer.getvalue(),
         )
 
-        # Redirect to the same topic page to display the new comment
         return redirect(url_for("topic", topic_id=topic_id))
-
     # Initialize
     topic_dict = {}
     comments_with_usernames = []
@@ -642,9 +651,19 @@ def topic(topic_id):
         )
 
         comments_with_usernames = [
-            ({"text": row["text"]}, row["username"])
+            (
+                {
+                    "text": row["text"],
+                    "id": row["id"],
+                    "parentId": row["parentId"],
+                    "layer": row["layer"],
+                },
+                row["username"],
+            )
             for _, row in comments_with_users.iterrows()
         ]
+
+        comment_hierarchy = build_comment_hierarchy(comments_with_usernames)
 
     except Exception as e:
         print(f"An error occurred: {e}")
@@ -653,10 +672,10 @@ def topic(topic_id):
     return render_template(
         "forum_topic_page.html",
         topic=topic_dict,
-        comments=comments_with_usernames,
         current_page=current_page,
         username=username,  # Assuming username is correctly set elsewhere
         author_username=author_username,
+        comments=comment_hierarchy,
     )
 
 

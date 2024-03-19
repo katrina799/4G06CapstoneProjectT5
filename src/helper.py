@@ -16,6 +16,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.compose import ColumnTransformer
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
 from sklearn.neural_network import MLPClassifier
+from collections import defaultdict
 
 try:
     from config import (
@@ -238,7 +239,7 @@ def extract_course_work_details(syllabus_text, max_tokens=4097):
 def process_course_work_in_segments(text, max_tokens):
     segment_length = max_tokens * 4
     segments = [
-        text[i: i + segment_length]
+        text[i : i + segment_length]
         for i in range(0, len(text), segment_length)
     ]
     full_output = ""
@@ -443,3 +444,22 @@ def process_transcript_pdf(path_to_pdf):
     cGPA = sum(points) / sum(units)
     os.remove(path_to_pdf)
     return cGPA
+
+
+def build_comment_hierarchy(comments_with_usernames, parent_id=0, layer=0):
+    """
+    Flatten comment hierarchy into a list with context about each comment's layer,
+    starting with top-level comments having parentId=0.
+    Each item in the hierarchy list is a tuple: ((comment, username), layer).
+    """
+    hierarchy = []
+    for comment_with_username in comments_with_usernames:
+        comment, username = comment_with_username
+        if comment["parentId"] == parent_id:
+            # Add the comment with its layer information
+            hierarchy.append(((comment, username), layer))
+            # Recursively find and append replies, increasing the layer
+            hierarchy += build_comment_hierarchy(
+                comments_with_usernames, comment["id"], layer + 1
+            )
+    return hierarchy
