@@ -132,6 +132,20 @@ def start():
     # Parsing it into a Python list
     courses = ast.literal_eval(courses)
     current_page = "home"
+    c_p = current_page
+    return render_template(
+        "index.html",
+        username=username,
+        courses=courses,
+        current_page=c_p
+    )
+
+
+# Router to tasks page
+@app.route("/tasks", methods=["GET", "POST"])
+def tasks_page():
+    global current_page
+    current_page = "tasks"
     tasks_df = get_df_from_csv_in_s3(s3, bucket_name, mock_tasks_data_file)
 
     # Replace invalid dates and convert to datetime
@@ -164,15 +178,11 @@ def start():
     tasks_for_calendar = filtered_tasks[
         ["title", "course", "due_date"]
     ].to_dict(orient="records")
-
-    c_p = current_page
     return render_template(
-        "index.html",
-        username=username,
-        courses=courses,
-        current_page=c_p,
+        "tasks.html",
         tasks=tasks,
         tasks_for_calendar=tasks_for_calendar,
+        current_page=current_page
     )
 
 
