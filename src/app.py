@@ -16,6 +16,7 @@ from flask import (
     abort,
 )
 import ast
+from werkzeug.utils import secure_filename
 
 try:
     from helper import (
@@ -34,6 +35,8 @@ try:
         write_course_work_to_csv,
         process_transcript_pdf,
         build_comment_hierarchy,
+        allowed_file,
+        create_presigned_url,
     )
 except ImportError:
     from .helper import (
@@ -52,6 +55,8 @@ except ImportError:
         write_course_work_to_csv,
         process_transcript_pdf,
         build_comment_hierarchy,
+        allowed_file,
+        create_presigned_url,
     )
 
 
@@ -89,6 +94,7 @@ s3 = boto3.client(
     "s3",
     aws_access_key_id=os.environ.get("AWS_ACCESS_KEY_ID"),
     aws_secret_access_key=os.environ.get("AWS_SECRET_ACCESS_KEY"),
+    region_name="us-east-2",
 )
 
 tomato_data_key = "weekly_tomato_data.csv"
@@ -517,6 +523,24 @@ def add_topic():
         description = request.form.get("description")
         tag = request.form.get("tag")
 
+        image_url = None  # Or handle the case where there is no valid file
+
+        if "image" in request.files:
+            file = request.files["image"]
+            if file and allowed_file(file.filename):
+                print("yeah image")
+                # Handle the file upload, e.g., save to your server or upload to S3
+                filename = secure_filename(file.filename)
+                image_key = f"uploads/{filename}"
+                s3.upload_fileobj(
+                    file,
+                    bucket_name,
+                    image_key,
+                    ExtraArgs={"ACL": "private"},
+                )
+
+                image_url = create_presigned_url(s3, bucket_name, image_key)
+
         # Fetch current topics DataFrame from S3
         topics_df = get_df_from_csv_in_s3(s3, bucket_name, topic_data_file)
         if not topics_df.empty:
@@ -535,20 +559,17 @@ def add_topic():
                 "userId": [
                     userId
                 ],  # Convert userId to a list to match DataFrame structure.
-                "tag": tag,
+                "tag": [tag],
+                "imageUrl": [image_url],
             }
         )
 
         topics_df["id"] = topics_df["id"].astype(str)
-        print("topics_df")
-        print(topics_df)
 
         # Use pd.concat for appending the new record
         updated_topics_df = pd.concat(
             [topics_df, new_topic], ignore_index=True
         )
-        print("updated_topics_df")
-        print(updated_topics_df)
 
         # Upload the updated DataFrame back to S3
         csv_buffer = StringIO()

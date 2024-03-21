@@ -22,7 +22,7 @@
             </form>
           </div>
         </div>
-        <form accept="/forum_page" method="post">
+        <form accept="/forum_page" method="post" enctype="multipart/form-data">
             <div class="mb-3">
               <label for="title" class="form-label">Title</label>
               <input type="text" name="title" class="form-control" id="title">
@@ -32,6 +32,9 @@
               <textarea  type="text" name="description" class="form-control" id="description"></textarea>
             </div>
             <div class="mb-3">
+              <input type="file" name="image">
+            </div>
+            <div class="mb-3">
               <label for="tag" class="form-label">Tag</label>
               <select name="tag" class="form-control" id="tag">
                   <option value="Academics">Academics</option>
@@ -39,7 +42,7 @@
                   <option value="Advice">Advice</option>
                   <!-- Add more options as needed -->
               </select>
-          </div>
+            </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>

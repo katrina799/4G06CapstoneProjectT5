@@ -34,6 +34,8 @@ except ImportError:
 # Initialize OpenAI API with your API key
 openai.api_key = os.environ.get("OPENAI_API_KEY")
 
+ALLOWED_EXTENSIONS = {"png", "jpg", "jpeg", "gif"}
+
 
 class SqueezeTransformer(TransformerMixin):
     def fit(self, X, y=None):
@@ -238,7 +240,7 @@ def extract_course_work_details(syllabus_text, max_tokens=4097):
 def process_course_work_in_segments(text, max_tokens):
     segment_length = max_tokens * 4
     segments = [
-        text[i: i + segment_length]
+        text[i : i + segment_length]
         for i in range(0, len(text), segment_length)
     ]
     full_output = ""
@@ -463,3 +465,23 @@ def build_comment_hierarchy(comments_with_usernames, parent_id=0, layer=0):
                 comments_with_usernames, comment["id"], layer + 1
             )
     return hierarchy
+
+
+def allowed_file(filename):
+    return (
+        "." in filename
+        and filename.rsplit(".", 1)[1].lower() in ALLOWED_EXTENSIONS
+    )
+
+
+def create_presigned_url(s3, bucket_name, object_name, expiration=3600):
+    try:
+        response = s3.generate_presigned_url(
+            "get_object",
+            Params={"Bucket": bucket_name, "Key": object_name},
+            ExpiresIn=expiration,
+        )
+    except botocore.exceptions.ClientError as e:
+        print(f"Error generating presigned URL: {e}")
+        return None
+    return response
