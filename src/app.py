@@ -529,7 +529,7 @@ def add_topic():
             file = request.files["image"]
             if file and allowed_file(file.filename):
                 print("yeah image")
-                # Handle the file upload, e.g., save to your server or upload to S3
+                # Handle the file upload
                 filename = secure_filename(file.filename)
                 image_key = f"uploads/{filename}"
                 s3.upload_fileobj(
