@@ -35,20 +35,33 @@ function startTimer(duration, display) {
     }
 }
 
+function getSimulatedDayOfWeek(simulatedDay) {
+    const daysMap = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    if (simulatedDay !== undefined && daysMap.includes(simulatedDay)) {
+        return daysMap.indexOf(simulatedDay);
+    } else {
+        // If no simulatedDay is provided or if it's not valid, use the current day of the week
+        return new Date().getDay();
+    }
+}
+
 function addStar() {
     const tomatoContainer = document.getElementById('tomatoContainer');
     const tomato = document.createElement('span');
     tomato.className = 'tomato';
     tomato.textContent = '🍅';
     tomatoContainer.appendChild(tomato);
-    //update the day on wwklyMap
-    const dayOfWeek = new Date().getUTCDay();
-    console.log(dayOfWeek)
-    const daysMap =  ['Saturday', 'Sunday', 'Monday', 'Tuesday', 'Wednesday',
-    'Thursday', 'Friday']
+    const simulatedDay = 'Monday'; // Example: Change this to test different days
+    const dayOfWeek = getSimulatedDayOfWeek(simulatedDay);
+    // //update the day on weeklyMap
+    // const dayOfWeek = new Date().getDay(); // Use getDay() instead of getUTCDay() if you want the local day
+    // console.log(dayOfWeek);
+    // // Ensure the daysMap aligns with JavaScript's getDay(), where 0 is Sunday, 1 is Monday, etc.
+    const daysMap = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     const day = daysMap[dayOfWeek];
     updateTomatoCount(day);
 }
+
 
 function updateTomatoCount(day) {
     fetch(`/update_tomato/${day}`, { method: 'POST' })
