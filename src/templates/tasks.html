@@ -52,8 +52,8 @@ href="{{ url_for('tasks') }}"><i class="glyphicon glyphicon-task" title="tasks"
                             <span>Est. Time: {{ task.est_time }}</span>
                         </div>
                         <div class="priority-row">
-                            <div class="task-priority {{ 'priority-' + task.priority|lower }}">{{ task.priority }} Priority</div>
-                            <button onclick="startStudy('{{ task.est_time }}')">start study</button>
+                            <div class="task-priority {{ 'priority-' + task.priority|lower }}">{{ task.priority|capitalize }} Priority</div>
+                            <button onclick="startStudy('{{ task.est_time }}')">Start Study</button>
                         </div>
                     </div>
                     {% endfor %}
@@ -92,8 +92,8 @@ href="{{ url_for('tasks') }}"><i class="glyphicon glyphicon-task" title="tasks"
                     <span>Est. Time: {{ task.est_time }}</span>
                 </div>
                 <div class="priority-row">
-                    <div class="task-priority {{ 'priority-' + task.priority|lower }}">{{ task.priority }} Priority</div>
-                    <button onclick="startStudy('{{ task.est_time }}')">start study</button>
+                    <div class="task-priority {{ 'priority-' + task.priority|lower }}">{{ task.priority|capitalize }} Priority</div>
+                    <button onclick="startStudy('{{ task.est_time }}')">Start Study</button>
                 </div>
             </div>
             {% endfor %}
@@ -114,7 +114,6 @@ href="{{ url_for('tasks') }}"><i class="glyphicon glyphicon-task" title="tasks"
                     <span>Weight: {{ task.weight }}</span>
                     <span>Est. Time: {{ task.est_time }}</span>
                 </div>
-                <div class="task-priority {{ 'priority-' + task.priority|lower }}">{{ task.priority }} Priority</div>
             </div>
             {% endfor %}
         </div>
@@ -227,9 +226,9 @@ function generateCalendar(tasks) {
             const taskDiv = document.createElement('div');
             taskDiv.className = 'task-due task-info';
             taskDiv.textContent = task.title;
-            // Store additional info in data attributes
             taskDiv.setAttribute('data-course', task.course);
             taskDiv.setAttribute('data-title', task.title);
+            taskDiv.setAttribute('data-weight', task.weight);
             dayCell.appendChild(taskDiv);
         });
 
@@ -241,9 +240,11 @@ function generateCalendar(tasks) {
 function showTooltip(event) {
     const course = event.target.getAttribute('data-course');
     const title = event.target.getAttribute('data-title');
+    let weight = event.target.getAttribute('data-weight');
+    weight = weight === 'null' ? 'Not specified' : weight;
     const tooltip = document.createElement('div');
     tooltip.className = 'task-tooltip';
-    tooltip.textContent = `Course: ${course}, Task: ${title}`;
+    tooltip.innerHTML = `<strong>Course:</strong> ${course}, <strong>Task:</strong> ${title}, <strong>Weight:</strong> ${weight}`;
     event.target.appendChild(tooltip);
 }
 

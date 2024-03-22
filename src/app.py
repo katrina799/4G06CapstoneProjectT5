@@ -16,6 +16,7 @@ from flask import (
 )
 import ast
 from sqlalchemy.sql import func
+
 try:
     from helper import (
         check_syllabus_exists,
@@ -112,7 +113,7 @@ s3 = boto3.client(
     aws_secret_access_key=os.environ.get("AWS_SECRET_ACCESS_KEY"),
 )
 
-tomato_data_key = 'weekly_tomato_data.csv'
+tomato_data_key = "weekly_tomato_data.csv"
 
 with app.app_context():
     db.create_all()
@@ -134,10 +135,7 @@ def start():
     current_page = "home"
     c_p = current_page
     return render_template(
-        "index.html",
-        username=username,
-        courses=courses,
-        current_page=c_p
+        "index.html", username=username, courses=courses, current_page=c_p
     )
 
 
@@ -176,13 +174,18 @@ def tasks_page():
 
     # Convert tasks to a list of dictionaries for the frontend
     tasks_for_calendar = filtered_tasks[
-        ["title", "course", "due_date"]
+        ["title", "course", "due_date", "weight"]
     ].to_dict(orient="records")
+
+    for task in tasks_for_calendar:
+        if pd.isna(task["weight"]):
+            task["weight"] = None
+
     return render_template(
         "tasks.html",
         tasks=tasks,
         tasks_for_calendar=tasks_for_calendar,
-        current_page=current_page
+        current_page=current_page,
     )
 
 
@@ -365,9 +368,7 @@ def course_detail(course_id):
         due_date = row["due_date"]
         weight = row["score_distribution"]
         est_hours = 3
-        add_task_todo(
-            course_name, task_name, due_date, str(weight), est_hours
-        )
+        add_task_todo(course_name, task_name, due_date, str(weight), est_hours)
 
     return render_template(
         "course_detail_page.html",
@@ -853,13 +854,15 @@ def submit_feedback():
 # Router to pomodoro page
 @app.route("/pomodoro_page", methods=["GET", "POST"])
 def pomodoro_page():
-    est_time = request.args.get('est_time', default=None)
+    est_time = request.args.get("est_time", default=None)
     global current_page
     current_page = "pomodoro_page"
     # Render the profile page, showing username on pege
     return render_template(
-        "pomodoro_page.html", username=username, current_page=current_page,
-        est_time=est_time
+        "pomodoro_page.html",
+        username=username,
+        current_page=current_page,
+        est_time=est_time,
     )
 
 
@@ -898,12 +901,12 @@ def write_df_to_csv_in_s3(client, bucket, key, dataframe):
         Bucket=bucket,
         Key=key,
         Body=csv_buffer.getvalue(),
-        ContentType='text/csv'
+        ContentType="text/csv",
     )
 
 
 # Update Tomato count for weekly achievements form
-@app.route('/update_tomato/<day>', methods=['POST'])
+@app.route("/update_tomato/<day>", methods=["POST"])
 def update_tomato(day):
     utc_now = datetime.now(timezone.utc)
     current_week = utc_now.isocalendar()[1]
@@ -913,22 +916,29 @@ def update_tomato(day):
         try:
             tomato_df = get_df_from_csv_in_s3(s3, bucket_name, tomato_data_key)
             # Check if it's a new week
-            if tomato_df['week_of_year'].iloc[0] != current_week:
-                tomato_df['count'] = 0
-                tomato_df['week_of_year'] = current_week
+            if tomato_df["week_of_year"].iloc[0] != current_week:
+                tomato_df["count"] = 0
+                tomato_df["week_of_year"] = current_week
         except s3.exceptions.NoSuchKey:
-            tomato_df = pd.DataFrame({
-                'day': [
-                    'Saturday', 'Sunday', 'Monday', 'Tuesday', 'Wednesday',
-                    'Thursday', 'Friday'
-                ],
-                'count': [0, 0, 0, 0, 0, 0, 0],
-                'week_of_year': [current_week] * 7
-            })
+            tomato_df = pd.DataFrame(
+                {
+                    "day": [
+                        "Saturday",
+                        "Sunday",
+                        "Monday",
+                        "Tuesday",
+                        "Wednesday",
+                        "Thursday",
+                        "Friday",
+                    ],
+                    "count": [0, 0, 0, 0, 0, 0, 0],
+                    "week_of_year": [current_week] * 7,
+                }
+            )
 
         # Update count for the specified day
-        if day in tomato_df['day'].values:
-            tomato_df.loc[tomato_df['day'] == day, 'count'] += 1
+        if day in tomato_df["day"].values:
+            tomato_df.loc[tomato_df["day"] == day, "count"] += 1
             write_df_to_csv_in_s3(s3, bucket_name, tomato_data_key, tomato_df)
             return jsonify({"message": "Tomato count updated successfully"})
         else:
@@ -936,33 +946,43 @@ def update_tomato(day):
 
     except Exception as e:
         print(f"An error occurred: {e}")
-        return jsonify(
-            {"message": "An error occurred while updating tomato count"}
-        ), 500
+        return (
+            jsonify(
+                {"message": "An error occurred while updating tomato count"}
+            ),
+            500,
+        )
 
 
 # Initialize the weekly data for no record for this week
 def initialize_weekly_data():
     # Initialize the weekly data for each day to zero
-    days = ['Saturday', 'Sunday', 'Monday', 'Tuesday', 'Wednesday',
-            'Thursday', 'Friday']
+    days = [
+        "Saturday",
+        "Sunday",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+    ]
     week_of_year = datetime.now().isocalendar()[1]
-    data = {'day': days, 'count': [0]*7, 'week_of_year': [week_of_year]*7}
+    data = {"day": days, "count": [0] * 7, "week_of_year": [week_of_year] * 7}
     return pd.DataFrame(data)
 
 
 # Router for getting weekly data from s3
-@app.route('/get_weekly_data', methods=['GET'])
+@app.route("/get_weekly_data", methods=["GET"])
 def get_weekly_data():
     utc_now = datetime.now(timezone.utc)
     current_week = utc_now.isocalendar()[1]
     tomato_df = get_df_from_csv_in_s3(s3, bucket_name, tomato_data_key)
-    if tomato_df['week_of_year'].iloc[0] != current_week:
+    if tomato_df["week_of_year"].iloc[0] != current_week:
         # Reset the weekly data since it's a new week
         tomato_df = initialize_weekly_data()
         write_df_to_csv_in_s3(s3, bucket_name, tomato_data_key, tomato_df)
     # Convert DataFrame to JSON response
-    return jsonify(tomato_df.to_dict(orient='records'))
+    return jsonify(tomato_df.to_dict(orient="records"))
 
 
 if __name__ == "__main__":
