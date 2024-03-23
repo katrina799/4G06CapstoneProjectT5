@@ -40,9 +40,9 @@
     <h1 class="my-4 fs-4" text>Discuss</h1>
     <div class="my-3 p-3 bg-body rounded shadow-sm topicpage">
         <h6 style="color: #941035; margin-bottom: 15px;" class="border-bottom pb-2 mb-0">{{topic.id}}.{{topic.title}} @{{ author_username }}</h6>
-        {% if topic.imageUrl %}
+        {% if topic.imageUrl and topic.imageUrl != 'none' %}
           <div class="topic-image">
-          `<img src="{{ topic.imageUrl }}" alt="Topic Image" style="max-width: 100%; height: auto;">
+          <img src="{{ topic.imageUrl }}" alt="Topic Image" style="max-width: 100%; height: auto;">
           </div>
         {% endif %}
         <div class="d-flex text-body-secondary pt-3 topicpage">

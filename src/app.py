@@ -513,6 +513,17 @@ def forum_page():
     )
 
 
+@app.route("/forum_page/reverse_order", methods=["POST"])
+def reverse_forum_order():
+    global topics  # Assuming 'topics' is a global variable that stores your topics
+
+    # Reverse the order of the topics
+    topics = list(reversed(topics))
+
+    # Redirect back to the forum page
+    return redirect(url_for("forum_page"))
+
+
 @app.route("/add_topic", methods=["GET", "POST"])
 def add_topic():
     global current_page, username, userId, bucket_name
@@ -643,6 +654,8 @@ def topic(topic_id):
     try:
         # Fetch all necessary data from CSV
         topics_df = get_df_from_csv_in_s3(s3, bucket_name, "topic_data.csv")
+        topics_df["imageUrl"] = topics_df["imageUrl"].fillna("none")
+        topics_df["imageUrl"] = topics_df["imageUrl"].astype(str)
         comments_df = get_df_from_csv_in_s3(
             s3, bucket_name, "comment_data.csv"
         )
