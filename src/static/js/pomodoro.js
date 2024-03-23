@@ -50,9 +50,9 @@ function addStar() {
     const tomato = document.createElement('span');
     tomato.className = 'tomato';
     tomato.textContent = '🍅';
-    tomatoContainer.appendChild(tomato);
-    const simulatedDay = 'Monday'; // Example: Change this to test different days
+    tomatoContainer.appendChild(tomato); const simulatedDay = 'Monday'; // Example: Change this to test different days
     const dayOfWeek = getSimulatedDayOfWeek(simulatedDay);
+   
     // //update the day on weeklyMap
     // const dayOfWeek = new Date().getDay(); // Use getDay() instead of getUTCDay() if you want the local day
     // console.log(dayOfWeek);
@@ -135,6 +135,16 @@ window.onload = function () {
         }
     });
 
+    document.getElementById('finishTaskBtn').addEventListener('click', function() {
+        fetch(`/update_task_status/${{ task_id }}/finished`, { method: 'POST' })
+        .then(response => response.json())
+        .then(data => {
+            alert(data.message);
+            // Optionally, redirect to another page or update the UI
+        })
+        .catch(error => console.error('Error:', error));
+    });
+
     // Extract 'task_id' from URL query parameters
     const params = new URLSearchParams(window.location.search);
     console.log(params);
@@ -171,7 +181,26 @@ window.onload = function () {
           taskDetailsBox.innerHTML = `<p>Error loading task details.</p>`;
           taskDetailsBox.style.display = "block";
         });
+
+        const finishTaskBtn = document.getElementById('finishTaskBtn');
+        finishTaskBtn.style.display = 'block'; // Make the button visible
+
+        document.getElementById('finishTaskBtn').addEventListener('click', function() {
+            const params = new URLSearchParams(window.location.search);
+            const taskId = params.get("task_id");
+            if(taskId) {
+                fetch(`/update_task_status/${taskId}/done`, { method: 'POST' })
+                    .then(response => response.json())
+                    .then(data => {
+                        alert(data.message);
+                        window.location.href = '/';
+                    })
+                    .catch(error => console.error('Error:', error));
+            }
+        });
+        
     }
+
 
 
 

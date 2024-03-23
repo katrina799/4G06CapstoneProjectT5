@@ -95,7 +95,7 @@
                                  -->
 
                                  <!-- Example of a task with a button/link -->
-                                <a href="/pomodoro_page?task_id={{ task.id }}">Start Pomodoro</a>
+                                 <a href="{{ url_for('pomodoro_page', task_id=task.id, status='todo') }}">Start Pomodoro</a>
 
                             </div>
                         </div>
@@ -136,7 +136,7 @@
                     </div>
                     <div class="priority-row">
                         <div class="task-priority {{ 'priority-' + task.priority|lower }}">{{ task.priority }} Priority</div>
-                        <button onclick="startStudy('{{ task.est_time }}')">start study</button>
+                        <a href="{{ url_for('pomodoro_page', task_id=task.id, status='in_progress') }}">Start Pomodoro</a>
                     </div>
                 </div>
                 {% endfor %}
