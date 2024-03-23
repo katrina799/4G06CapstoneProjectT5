@@ -512,6 +512,7 @@ a:hover {
     cursor: pointer; 
 }
 
+
 .topic-item-container {
     background: #FFFFFF;
     border: 1px solid #DDDDDD;
@@ -562,4 +563,18 @@ a:hover {
     cursor: pointer;
     color: #a53045;
   }
+
+
+.btn.btn-primary {
+    background-color: #941035;
+    color: white;
+    border-radius: 5px;
+}
+
+
+.btn.btn-primary:hover {
+    background-color: #a53045; 
+    color: #fff; 
+    cursor: pointer; 
+}
 
