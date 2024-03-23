@@ -48,8 +48,8 @@ href="{{ url_for('tasks') }}"><i class="glyphicon glyphicon-task" title="tasks"
                         <div class="task-header">{{ task.course }} - {{ task.title }}</div>
                         <div class="task-metadata">
                             <span>Due: {{ task.due_date }}</span>
-                            <span>Weight: {{ task.weight }}</span>
-                            <span>Est. Time: {{ task.est_time }}</span>
+                            <span>Weight: {% set weight_str = task.weight|string %}{{ weight_str }}{% if not weight_str.endswith('%') %}%{% endif %}</span>
+                            <span>Est. Time: {% set est_time_str = task.est_time|string %}{{ est_time_str }}{% if not est_time_str.endswith('hour') %} hours{% endif %}</span>
                         </div>
                         <div class="priority-row">
                             <div class="task-priority {{ 'priority-' + task.priority|lower }}">{{ task.priority|capitalize }} Priority</div>
@@ -89,8 +89,8 @@ href="{{ url_for('tasks') }}"><i class="glyphicon glyphicon-task" title="tasks"
                 <div class="task-header">{{ task.course }} - {{ task.title }}</div>
                 <div class="task-metadata">
                     <span>Due: {{ task.due_date }}</span>
-                    <span>Weight: {{ task.weight }}</span>
-                    <span>Est. Time: {{ task.est_time }}</span>
+                    <span>Weight: {% set weight_str = task.weight|string %}{{ weight_str }}{% if not weight_str.endswith('%') %}%{% endif %}</span>
+                    <span>Est. Time: {% set est_time_str = task.est_time|string %}{{ est_time_str }}{% if not est_time_str.endswith('hour') %} hours{% endif %}</span>
                 </div>
                 <div class="priority-row">
                     <div class="task-priority {{ 'priority-' + task.priority|lower }}">{{ task.priority|capitalize }} Priority</div>
@@ -112,8 +112,8 @@ href="{{ url_for('tasks') }}"><i class="glyphicon glyphicon-task" title="tasks"
                 <div class="task-header">{{ task.course }} - {{ task.title }}</div>
                 <div class="task-metadata">
                     <span>Due: {{ task.due_date }}</span>
-                    <span>Weight: {{ task.weight }}</span>
-                    <span>Est. Time: {{ task.est_time }}</span>
+                    <span>Weight: {% set weight_str = task.weight|string %}{{ weight_str }}{% if not weight_str.endswith('%') %}%{% endif %}</span>
+                    <span>Est. Time: {% set est_time_str = task.est_time|string %}{{ est_time_str }}{% if not est_time_str.endswith('hour') %} hours{% endif %}</span>
                 </div>
             </div>
             {% endfor %}
