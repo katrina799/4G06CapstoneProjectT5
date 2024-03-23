@@ -12,6 +12,7 @@
             <input onclick="toggleReplyForm('replyForm-{{ comment.id }}')" value="Reply" class="btn" style="background-color: #a53045; color: white; border: none;">
           </div>
           <span class="d-block topicpage">{{ comment.text }}</span>
+          <div class="comment-date">{{ comment.date[2:-2] }}</div>
         </div>
       </div>
       <div id="replyForm-{{ comment.id }}" class="reply-form" style="display:none;">

@@ -535,6 +535,7 @@ def add_topic():
         title = request.form.get("title")
         description = request.form.get("description")
         tag = request.form.get("tag")
+        current_timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
         image_url = None  # Or handle the case where there is no valid file
 
@@ -574,6 +575,7 @@ def add_topic():
                 ],  # Convert userId to a list to match DataFrame structure.
                 "tag": [tag],
                 "imageUrl": [image_url],
+                "date": [current_timestamp],
             }
         )
 
@@ -613,6 +615,7 @@ def topic(topic_id):
             "parentId", None
         )  # Might be part of the form if it's a reply
         layer = 0
+        current_timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
         comments_df = get_df_from_csv_in_s3(s3, bucket_name, comment_data_file)
 
@@ -634,6 +637,7 @@ def topic(topic_id):
             "userId": userId,
             "parentId": parent_id if parent_id and parent_id != "0" else 0,
             "layer": layer,
+            "date": [current_timestamp],
         }
         # Append new comment to the dataframe and update CSV
         new_comment_df = pd.DataFrame([new_comment])
@@ -694,6 +698,7 @@ def topic(topic_id):
                     "id": row["id"],
                     "parentId": row["parentId"],
                     "layer": row["layer"],
+                    "date": row["date"],
                 },
                 row["username"],
             )
