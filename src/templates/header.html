@@ -10,6 +10,10 @@
                 <a class="home-image {{ 'active' if current_page == 'home' else '' }}" href="{{ url_for('start') }}"><i
                                 class="glyphicon glyphicon-home" title="home page"
                                 style="font-size:24px; margin-left: 30px;"></i></a>
+                <a class="tasks {{ 'active' if current_page == 'tasks' else '' }}"
+                        href="{{ url_for('tasks_page') }}"><i class="glyphicon glyphicon-list-alt" title="tasks"
+                                style="font-size:24px;"></i>
+                </a>
                 <a class="timer {{ 'active' if current_page == 'pomodoro_page' else '' }}"
                         href="{{ url_for('pomodoro_page') }}"><i class="glyphicon glyphicon-time" title="pomodoro timer"
                                 style="font-size:24px;"></i>

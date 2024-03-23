@@ -193,7 +193,7 @@ window.onload = function () {
                     .then(response => response.json())
                     .then(data => {
                         alert(data.message);
-                        window.location.href = '/';
+                        window.location.href = '/tasks';
                     })
                     .catch(error => console.error('Error:', error));
             }

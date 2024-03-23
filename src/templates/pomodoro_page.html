@@ -97,7 +97,7 @@
         margin-left: 5px;
     }
 
-    #startBtn #resetBtn {
+    #startBtn #resetBtn #taskdoneBtn {
         font-size: 16px;
         font-weight: bold;
     }
@@ -230,7 +230,7 @@
         color: white;
     }
 
-    #taskDetailsBox {
+    #taskDetailsAndActionButton {
         position: fixed;
         top: 100px;
         left: 50px;
@@ -242,7 +242,7 @@
         text-align: left;
     }
 
-    #taskDetailsBox h2 {
+    #taskDetailsAndActionButton h2 {
         font-weight: bold;
         color: #941035; 
         margin-bottom: 15px;
@@ -286,6 +286,29 @@
         font-weight: bold;
         margin-right: 10px;
     }
+
+    button {
+    background-color: #cce3de;
+    border: none;
+    border-radius: 10px;
+    padding: 1em 1.5em;
+    font-size: 1.5em;
+    font-weight: bold;
+    margin: 20px 10px;
+    cursor: pointer;
+}
+
+    button:hover {
+        background-color: rgba(143, 198, 201, 0.887);
+        color: white;
+    }
+
+    button:active {
+        transform: translateY(2px);
+    }
+
+
+
 </style>
 <div></div>
 <div id="pomodoro-section" style="flex-grow: 1;">
@@ -330,16 +353,16 @@
         </div>
     </div>
 
-    <div id="taskDetailsBox" style="display: none;">
-        <!-- Task details will be dynamically inserted here -->
+    <div id="taskDetailsAndActionButton" style="display: flex; align-items: start; gap: 20px;">
+        <div id="taskDetailsBox" style="display: none;">
+            <!-- Task details will be dynamically inserted here -->
+        </div>
+        <button id="finishTaskBtn" style="display: none;">Task Done</button>
+    </div>
 
         
     </div>
     <span id="taskStatusMessage" style="display: none;"></span>
-
-    <!-- Finish Task button -->
-    <button id="finishTaskBtn" style="display: none;">Task Done</button>
-
 
 
 

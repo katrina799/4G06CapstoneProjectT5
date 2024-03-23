@@ -189,7 +189,6 @@ function editTask(taskId) {
         })
         .then(data => {
             if (data.message) {
-                alert(data.message);
                 location.reload(); 
             }
         })
