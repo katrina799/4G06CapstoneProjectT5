@@ -16,9 +16,6 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.compose import ColumnTransformer
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
 from sklearn.neural_network import MLPClassifier
-import sqlite3
-from flask_sqlalchemy import SQLAlchemy
-
 
 try:
     from config import (
@@ -37,28 +34,7 @@ except ImportError:
 # Initialize OpenAI API with your API key
 openai.api_key = os.environ.get("OPENAI_API_KEY")
 
-db = SQLAlchemy()
-
-
-class User(db.Model):
-    userId = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(80), nullable=False)
-    topics = db.relationship("Topic", backref="author", lazy=True)
-    comments = db.relationship("Comment", backref="commenter", lazy=True)
-
-
-class Topic(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(80), nullable=False)
-    description = db.Column(db.String(120))
-    userId = db.Column(db.Integer, db.ForeignKey("user.userId"))
-
-
-class Comment(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    text = db.Column(db.String, nullable=False)
-    topicId = db.Column(db.Integer, db.ForeignKey("topic.id"))
-    userId = db.Column(db.Integer, db.ForeignKey("user.userId"))
+ALLOWED_EXTENSIONS = {"png", "jpg", "jpeg", "gif"}
 
 
 class SqueezeTransformer(TransformerMixin):
@@ -424,121 +400,6 @@ def process_course_work_with_openai(syllabus_text):
     return response["choices"][0]["message"]["content"].strip()
 
 
-def sql_to_csv_s3(table, s3, bucket_name, s3_csv_file_path):
-    # Connect to your SQLite database
-    conn = sqlite3.connect("instance/project.db")
-    cursor = conn.cursor()
-
-    # Query the database to get the data you want to export
-    cursor.execute("SELECT * FROM " + table)
-    rows = cursor.fetchall()
-
-    # Choose a file name for your CSV file
-    csv_filename = "poc-data/" + table + "_data.csv"
-
-    # Open a CSV file for writing
-    with open(csv_filename, "w", newline="") as csvfile:
-        csvwriter = csv.writer(csvfile)
-
-        # Write the header
-        csvwriter.writerow([i[0] for i in cursor.description])
-
-        # Write the data
-        csvwriter.writerows(rows)
-
-    # Close the cursor and the database connection
-    cursor.close()
-    conn.close()
-    # Now you can use the AWS CLI to upload the CSV file
-    s3.upload_file(csv_filename, bucket_name, s3_csv_file_path)
-
-
-def initialize_user_db_from_s3(s3, bucket_name, s3_csv_file_path, db):
-    # Get the CSV file from S3
-    s3_obj = s3.get_object(Bucket=bucket_name, Key=s3_csv_file_path)
-    csv_content = s3_obj["Body"].read().decode("utf-8")
-
-    # Convert the CSV content to a StringIO object and then to a DataFrame
-    csv_stringio = io.StringIO(csv_content)
-    df = pd.read_csv(csv_stringio)
-
-    # Add the data to the database session
-    for _, row in df.iterrows():
-        # Check if the Topic with this ID already exists
-        existing_user = db.session.query(User).get(row["userId"])
-        if existing_user:
-            existing_user.username = row["username"]
-        else:
-            # Or insert a new one if it does not exist
-            new_user = User(username=row["username"])
-            db.session.add(new_user)
-
-    # Commit the session to the database
-    db.session.commit()
-
-
-def initialize_topic_db_from_s3(s3, bucket_name, s3_csv_file_path, db):
-    # Get the CSV file from S3
-    s3_obj = s3.get_object(Bucket=bucket_name, Key=s3_csv_file_path)
-    csv_content = s3_obj["Body"].read().decode("utf-8")
-
-    # Convert the CSV content to a StringIO object and then to a DataFrame
-    csv_stringio = io.StringIO(csv_content)
-    df = pd.read_csv(csv_stringio)
-
-    # Add the data to the database session
-    for _, row in df.iterrows():
-        # Check if the Topic with this ID already exists
-        existing_topic = db.session.query(Topic).get(row["id"])
-        if existing_topic:
-            # Update existing record if necessary
-            existing_topic.title = row["title"]
-            existing_topic.description = row["description"]
-            existing_topic.userId = row["userId"]
-        else:
-            # Or insert a new one if it does not exist
-            new_topic = Topic(
-                title=row["title"],
-                description=row["description"],
-                userId=row["userId"],
-            )
-            db.session.add(new_topic)
-
-    # Commit the session to the database
-    db.session.commit()
-
-
-def initialize_comment_db_from_s3(s3, bucket_name, s3_csv_file_path, db):
-    # Get the CSV file from S3
-    s3_obj = s3.get_object(Bucket=bucket_name, Key=s3_csv_file_path)
-    csv_content = s3_obj["Body"].read().decode("utf-8")
-
-    # Convert the CSV content to a StringIO object and then to a DataFrame
-    csv_stringio = io.StringIO(csv_content)
-    df = pd.read_csv(csv_stringio)
-
-    # Add the data to the database session
-    for _, row in df.iterrows():
-        # Check if the Topic with this ID already exists
-        existing_comment = db.session.query(Comment).get(row["id"])
-        if existing_comment:
-            # Update existing record if necessary
-            existing_comment.text = row["text"]
-            existing_comment.topicId = row["topicId"]
-            existing_comment.userId = row["userId"]
-        else:
-            # Or insert a new one if it does not exist
-            new_comment = Comment(
-                text=row["text"],
-                topicId=row["topicId"],
-                userId=row["userId"],
-            )
-            db.session.add(new_comment)
-
-    # Commit the session to the database
-    db.session.commit()
-
-
 def read_order_csv_from_s3(s3, username, bucket_name, key):
     try:
         response = s3.get_object(Bucket=bucket_name, Key=key)
@@ -584,3 +445,43 @@ def process_transcript_pdf(path_to_pdf):
     cGPA = sum(points) / sum(units)
     os.remove(path_to_pdf)
     return cGPA
+
+
+def build_comment_hierarchy(comments_with_usernames, parent_id=0, layer=0):
+    """
+    Flatten comment hierarchy into a list with context about each comment's
+    layer,
+    starting with top-level comments having parentId=0.
+    Each item in the hierarchy list is a tuple: ((comment, username), layer).
+    """
+    hierarchy = []
+    for comment_with_username in comments_with_usernames:
+        comment, username = comment_with_username
+        if comment["parentId"] == parent_id:
+            # Add the comment with its layer information
+            hierarchy.append(((comment, username), layer))
+            # Recursively find and append replies, increasing the layer
+            hierarchy += build_comment_hierarchy(
+                comments_with_usernames, comment["id"], layer + 1
+            )
+    return hierarchy
+
+
+def allowed_file(filename):
+    return (
+        "." in filename
+        and filename.rsplit(".", 1)[1].lower() in ALLOWED_EXTENSIONS
+    )
+
+
+def create_presigned_url(s3, bucket_name, object_name, expiration=604800):
+    try:
+        response = s3.generate_presigned_url(
+            "get_object",
+            Params={"Bucket": bucket_name, "Key": object_name},
+            ExpiresIn=expiration,
+        )
+    except botocore.exceptions.ClientError as e:
+        print(f"Error generating presigned URL: {e}")
+        return None
+    return response
