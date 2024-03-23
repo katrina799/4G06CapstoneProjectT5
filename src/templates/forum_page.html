@@ -23,9 +23,9 @@
           </div>
         </div>
         <div class="col">
-          <a href="{{ url_for('add_topic') }}" class="btn" style="background-color: #a53045; color: white; text-decoration: none; border: none;">Add Topic</a>
-        </div>
-        <div class="filter-by-tag">
+          <a href="{{ url_for('add_topic') }}" class="btn" style="background-color: #a53045; color: white; text-decoration: none; border: none; padding: 10px 20px; font-size: 18px;">Add Topic</a>
+        </div>        
+        <div style = "padding: 10px 20px; font-size: 16px;" class="filter-by-tag">
           <form action="{{ url_for('forum_page') }}" method="get">
             <label for="tag">Filter by tag:</label>
             <select name="tag" onchange="this.form.submit()">
@@ -40,8 +40,7 @@
         </div>
         
         <div class="my-3 p-3 bg-body rounded shadow-sm">
-            <h4 style="color: #941035;" class="border-bottom pb-2 mb-0">Recent topics</h>
-            <button id="reverse-order-btn">Reverse Order</button>
+            <input id="reverse-order-btn" value="Reverse Order" class="btn" style="background-color: #a53045; color: white; border: none; font-size: 16px;">
             <div id="topics-container" >
               {% for topic, username, comment_count in topics %}
               <div class="topic-item-container">
