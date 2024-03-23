@@ -499,6 +499,7 @@ def forum_page():
             (row.to_dict(), row["username"], int(row["comment_count"]))
             for _, row in topics_with_usernames.iterrows()
         ]
+        topics = topics[::-1]
 
     except Exception as e:
         print(f"An error occurred while fetching forum data: {e}")
