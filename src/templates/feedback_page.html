@@ -16,9 +16,9 @@ Feedback Page
         <div class="feedback-form-container">
             <button style="cursor: pointer; float:right;" id="detailsToView" class="dropbtn">View Submitted Feedback →</button>
             <h2 style="color: #941035; margin-bottom: 15px;">Feedback Entry</h2>
-            <h4 style="margin-bottom: 15px;">Feedback</h2>
+            <h4 class="title-color" style="margin-bottom: 15px;">Feedback</h2>
             <div id="feedbackResponse"></div>
-            <h4 style="margin-bottom: 15px;">Developer Feedback</h2>
+            <h4 class="title-color" style="margin-bottom: 15px;">Developer Feedback</h2>
             <div id="developerFeedbackResponse"></div>
         </div>
     </div>
@@ -28,34 +28,36 @@ Feedback Page
             <button style="cursor: pointer; float:right;" id="viewToCreate" class="dropbtn">Create New Feedback →</button>
             <h2 style="color: #941035; margin-bottom: 15px;">Submitted Feedback</h2>
 
-            <button class="dropbtn" id="viewed-feedback-trigger">Viewed Feedback</button>
+            <button class="dropbtn" id="viewed-feedback-trigger">Viewed Feedback ↓</button>
             <div class="past-user-feedback">
-                <div id="viewed-feedback" class="feedback-list" style="display:none;">
+                <div id="viewed-feedback" class="feedback-list">
                     <div class="feedbackElement" style="font-weight: bold;">
                         <div class="colored-bullet"></div>
-                        <div class="vFeedback-list-0">Feedback</div>
-                        <div class="vFeedback-list-1">Developer Feedback</div>
+                        <div class="vFeedback-list-0 title-color">Feedback</div>
+                        <div class="vFeedback-list-1 title-color">Developer Feedback</div>
                     </div> 
                     {% for item in viewed_feedback_list %}
                         <div class="feedbackElement">
                             <div class="colored-bullet green-bullet">•</div>
                             <div class="vFeedback-list-0">{{ item.feedback }}</div>
                             <div class="vFeedback-list-1">{{ item.developer_feedback }}</div>
+                            <div class="feedback_view_details">View Details</div>
                         </div> 
                     {% endfor %}
                 </div>
                 <br>
             
-                <button class="dropbtn" id="pending-feedback-trigger">Pending Feedback</button>
-                <div id="pending-feedback" class="feedback-list" style="display:none;">
+                <button class="dropbtn" id="pending-feedback-trigger">Pending Feedback ↓</button>
+                <div id="pending-feedback" class="feedback-list">
                     <div class="feedbackElement" style="font-weight: bold;">
                         <div class="colored-bullet"></div>
-                        <div class="pFeedback-list-0">Feedback</div>
+                        <div class="pFeedback-list-0 title-color">Feedback</div>
                     </div> 
                     {% for item in pending_feedback_list %}
                         <div class="feedbackElement">
                             <div class="colored-bullet red-bullet">•</div>
                             <div class="pFeedback-list-0">{{ item.feedback }}</div>
+                            <div class="feedback_view_details">View Details</div>
                         </div> 
                     {% endfor %}
                 </div>
@@ -94,15 +96,18 @@ Feedback Page
 <script>
     document.addEventListener('DOMContentLoaded', (event) => {
 
+        // Get all elements with the class 'li'
         var elements = document.getElementsByClassName('feedbackElement');
         console.log(elements);
 
         console.log(elements.length);
+        // Loop through the elements and add event listeners to each
         for (var i = 0; i < elements.length; i++) {
             console.log(elements[i]);
             elements[i].addEventListener('click', function(event) {
                 event.preventDefault();
 
+                    // Find child elements within the clicked feedbackElement
                 let vFeedbackList0 = this.querySelector('.vFeedback-list-0');
                 let vFeedbackList1 = this.querySelector('.vFeedback-list-1');
                 let pFeedbackList0 = this.querySelector('.pFeedback-list-0');
@@ -110,6 +115,7 @@ Feedback Page
                 let feedback = "";
                 let devFeedback = "";
 
+                // Check if elements exist and log their text content
                 if (vFeedbackList0 && vFeedbackList1) {
                     feedback = vFeedbackList0.textContent;
                     devFeedback = vFeedbackList1.textContent;
@@ -125,10 +131,12 @@ Feedback Page
                 let mid = document.getElementById("middle");
                 let right = document.getElementById("right");
 
+                // Apply the transitions
                 left.style.transition = "all 1.5s cubic-bezier(.51,.22,.79,.53)";
                 mid.style.transition = "all 1.5s cubic-bezier(.17,.3,.54,.71)";
-                right.style.transition = "all 1.5s ease";
+                right.style.transition = "all 1.5s ease"; // Assuming you want some transition for 'right' as well
 
+                // Change the positions
                 left.style.left = "0%";
                 mid.style.left = "100%";
                 right.style.left = "200%";
@@ -189,44 +197,77 @@ Feedback Page
         document.getElementById('viewed-feedback-trigger').addEventListener('click', function(event) {
             event.preventDefault();
             var feedbackDiv = document.getElementById('viewed-feedback');
+
+            if(feedbackDiv.style.display === 'none') {
+                document.getElementById('viewed-feedback-trigger').innerText = "Viewed Feedback ↓"
+            } else {
+                document.getElementById('viewed-feedback-trigger').innerText = "Viewed Feedback ↑"
+            }
+
             feedbackDiv.style.display = feedbackDiv.style.display === 'none' ? 'block' : 'none';
         });
 
         document.getElementById('pending-feedback-trigger').addEventListener('click', function(event) {
             event.preventDefault();
             var feedbackDiv = document.getElementById('pending-feedback');
+
+            if(feedbackDiv.style.display === 'none') {
+                document.getElementById('pending-feedback-trigger').innerText = "Pending Feedback ↓"
+            } else {
+                document.getElementById('pending-feedback-trigger').innerText = "Pending Feedback ↑"
+            }
+
             feedbackDiv.style.display = feedbackDiv.style.display === 'none' ? 'block' : 'none';
         });
 
-    document.getElementById('feedbackForm').addEventListener('submit', function(e) {
-        e.preventDefault(); 
-        const formData = new FormData(this);
-        fetch("{{ url_for('submit_feedback') }}", {
-            method: 'POST',
-            body: formData
-        })
-        const successMessageDiv = document.createElement('div');
-        successMessageDiv.classList.add('feedback-success-message');
-        successMessageDiv.textContent = 'Thank you for your feedback!';
-        document.body.appendChild(successMessageDiv);
-        successMessageDiv.style.display = 'block'; 
+        document.getElementById('feedbackForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+            
+            fetch("{{ url_for('submit_feedback') }}", {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                const successMessageDiv = document.createElement('div');
+                successMessageDiv.classList.add('feedback-success-message');
+                successMessageDiv.textContent = 'Thank you for your feedback! Redirecting...';
+                document.body.appendChild(successMessageDiv);
+                successMessageDiv.style.display = 'block';
 
-        setTimeout(() => {
-            if (successMessageDiv) {
-                successMessageDiv.parentNode.removeChild(successMessageDiv);
-            }
-        }, 3000); 
+                setTimeout(() => {
+                    if (successMessageDiv) {
+                        successMessageDiv.parentNode.removeChild(successMessageDiv);
+                        if (response.redirected) {
+                            window.location.href = response.url;
+                        }
+                    }
+                }, 2000);
 
-        this.reset();
-    });
+                this.reset();
+            })
+            .catch(error => console.error('Error:', error));
+        });
 });
 
 </script>
 
 <style>
 
+    .title-color {
+        color: #941035;
+    }
+
+    .feedbackElement:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
     #viewToCreate, #createToView, #detailsToView {
-        font-size: 1.2rem;
+        font-size: 1.8rem;
+    }
+
+    #viewed-feedback-trigger, #pending-feedback-trigger {
+        font-size: 1.8rem;
     }
 
     .feedback-form-container {
@@ -263,6 +304,7 @@ Feedback Page
 
 <style>
 
+/* When float is applied to the li, it causes the ul to not calculate the height properly so we use ::after to clear it */
     .feedback-list::after {
         content: "";
         clear: both;
@@ -271,26 +313,26 @@ Feedback Page
 
     .pFeedback-list-0 {
         float: left;
-        width: 98%;
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
+        width: 83%;
+        overflow: hidden;        /* Ensures the overflow text is hidden */
+        white-space: nowrap;     /* Keeps the text on a single line */
+        text-overflow: ellipsis; /* Adds an ellipsis to indicate text overflow */
     }
 
     .pFeedback-list-0, .vFeedback-list-0, .vFeedback-list-1{
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
+        overflow: hidden;        /* Ensures the overflow text is hidden */
+        white-space: nowrap;     /* Keeps the text on a single line */
+        text-overflow: ellipsis; /* Adds an ellipsis to indicate text overflow */
     }
 
     .vFeedback-list-0 {
         float: left;
-        width: 65%;
+        width: 55%;
     }
 
     .vFeedback-list-1 {
         float: left;
-        width: 33%;
+        width: 28%;
     }
 
     .feedbackElement {
@@ -298,6 +340,14 @@ Feedback Page
         width: 100%;
         height: 30px;
         border-radius: 3px;
+    }
+
+    .feedback_view_details {
+        float: left;
+        font-size: 1em;
+        width: 15%;
+        color: #0000EE;
+        text-decoration: underline;
     }
 
     .feedbackElement div {
@@ -362,19 +412,18 @@ Feedback Page
       text-decoration: none;
       display: block;
     }
-
+    
+    /* Change color of dropdown links on hover */
     .dropdown-content a:hover {background-color: #f1f1f1}
     
+    /* Show the dropdown menu on hover */
     .dropdown:hover .dropdown-content {
       display: block;
     }
     
+    /* Change the background color of the dropdown button when the dropdown content is shown */
     .dropdown:hover .dropbtn {
       background-color: #3e8e41;
-    }
-    
-    .feedback-list {
-      display: none;
     }
     </style>
 

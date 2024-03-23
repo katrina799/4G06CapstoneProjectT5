@@ -210,9 +210,27 @@ def feedback_page():
     global current_page
     current_page = "feedback_page"
     # render the feedback box page
+
+    df = read_feedback_csv_from_s3(s3, bucket_name, "feedback.csv")
+    viewed_feedbacks = df.loc[(df["username"] == username) & (df["status"] == 1)]
+    pending_feedbacks = df.loc[(df["username"] == username) & (df["status"] == 0)]
+    viewed_feedback_list = viewed_feedbacks.to_dict('records')
+    pending_feedback_list = pending_feedbacks.to_dict('records')
+
     return render_template(
-        "feedback_page.html", username=username, current_page=current_page
+        "feedback_page.html", username=username, current_page=current_page, viewed_feedback_list=viewed_feedback_list, pending_feedback_list=pending_feedback_list
     )
+
+
+def read_feedback_csv_from_s3(s3, bucket_name, key):
+    try:
+        response = s3.get_object(Bucket=bucket_name, Key=key)
+        df = pd.read_csv(response["Body"])
+        df.fillna('', inplace=True)
+        return df
+    except Exception as e:
+        print(f"An unexpected error occurred: {e}")
+        return pd.DataFrame(columns=["username", "orders"])
 
 
 # Download a file from s3
@@ -800,10 +818,13 @@ def submit_feedback():
 
         feedback_data = {
             "feedback_id": [feedback_id],
+            "username": [username],
             "name": [name],
             "email": [email],
             "feedback_type": [feedback_type],
             "feedback": [feedback],
+            "status": [0],
+            "developer_feedback": [""]
         }
         new_feedback_df = pd.DataFrame(feedback_data)
 
@@ -818,10 +839,13 @@ def submit_feedback():
             feedback_df = pd.DataFrame(
                 columns=[
                     "feedback_id",
+                    "username",
                     "name",
                     "email",
                     "feedback_type",
                     "feedback",
+                    "status",
+                    "developer_feedback"
                 ]
             )
 
