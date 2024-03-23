@@ -10,52 +10,423 @@ Feedback Page
     </div>
 </div>
 
-<div class="feedback-form-container">
-    <h2 style="color: #941035; margin-bottom: 15px;">Feedback & Suggestions</h2>
-    <form id="feedbackForm" action="{{ url_for('submit_feedback') }}" method="POST">
-        <label for="name" style="color: #941035; margin-bottom: 15px;">Your Name (optional):</label>
-        <input type="text" id="name" name="name">
 
-        <label for="email" style="color: #941035; margin-bottom: 15px;">Your Email (optional):</label>
-        <input type="email" id="email" name="email">
+<div id="flipper">
 
-        <label for="feedback-type" style="color: #941035; margin-bottom: 15px;">Type of Feedback:</label>
-        <select id="feedback-type" name="feedback_type">
-            <option value="website">For our website</option>
-            <option value="university_services">For university services</option>
-        </select>
+    <div id="left">
+        <div class="feedback-form-container">
+            <button style="cursor: pointer; float:right;" id="detailsToView" class="dropbtn">View Submitted Feedback →</button>
+            <h2 style="color: #941035; margin-bottom: 15px;">Feedback Entry</h2>
+            <h4 class="title-color" style="margin-bottom: 15px;">Feedback</h2>
+            <div id="feedbackResponse"></div>
+            <h4 class="title-color" style="margin-bottom: 15px;">Developer Feedback</h2>
+            <div id="developerFeedbackResponse"></div>
+        </div>
+    </div>
+    
+    <div id="middle">
+        <div class="feedback-form-container">
+            <button style="cursor: pointer; float:right;" id="viewToCreate" class="dropbtn">Create New Feedback →</button>
+            <h2 style="color: #941035; margin-bottom: 15px;">Submitted Feedback</h2>
 
-        <label for="feedback" style="color: #941035; margin-bottom: 15px;">Your Feedback:</label>
-        <textarea id="feedback" name="feedback" rows="5" required></textarea>
+            <button class="dropbtn" id="viewed-feedback-trigger">Viewed Feedback ↓</button>
+            <div class="past-user-feedback">
+                <div id="viewed-feedback" class="feedback-list">
+                    <div class="feedbackElement" style="font-weight: bold;">
+                        <div class="colored-bullet"></div>
+                        <div class="vFeedback-list-0 title-color">Feedback</div>
+                        <div class="vFeedback-list-1 title-color">Developer Feedback</div>
+                    </div> 
+                    {% for item in viewed_feedback_list %}
+                        <div class="feedbackElement">
+                            <div class="colored-bullet green-bullet">•</div>
+                            <div class="vFeedback-list-0">{{ item.feedback }}</div>
+                            <div class="vFeedback-list-1">{{ item.developer_feedback }}</div>
+                            <div class="feedback_view_details">View Details</div>
+                        </div> 
+                    {% endfor %}
+                </div>
+                <br>
+            
+                <button class="dropbtn" id="pending-feedback-trigger">Pending Feedback ↓</button>
+                <div id="pending-feedback" class="feedback-list">
+                    <div class="feedbackElement" style="font-weight: bold;">
+                        <div class="colored-bullet"></div>
+                        <div class="pFeedback-list-0 title-color">Feedback</div>
+                    </div> 
+                    {% for item in pending_feedback_list %}
+                        <div class="feedbackElement">
+                            <div class="colored-bullet red-bullet">•</div>
+                            <div class="pFeedback-list-0">{{ item.feedback }}</div>
+                            <div class="feedback_view_details">View Details</div>
+                        </div> 
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
 
-        <button type="submit" class="btn btn-primary">Submit Feedback</button>
-    </form>
+    <div id="right">
+        <div class="feedback-form-container">
+            <button style="cursor: pointer;" id="createToView">← View Submitted Feedback</button>
+            <h2 style="color: #941035; margin-bottom: 15px;">Feedback & Suggestions</h2>
+            <form id="feedbackForm" action="{{ url_for('submit_feedback') }}" method="POST">
+                <label for="name" style="color: #941035; margin-bottom: 15px;">Your Name (optional):</label>
+                <input type="text" id="name" name="name">
+        
+                <label for="email" style="color: #941035; margin-bottom: 15px;">Your Email (optional):</label>
+                <input type="email" id="email" name="email">
+        
+                <label for="feedback-type" style="color: #941035; margin-bottom: 15px;">Type of Feedback:</label>
+                <select id="feedback-type" name="feedback_type">
+                    <option value="website">For our website</option>
+                    <option value="university_services">For university services</option>
+                </select>
+        
+                <label for="feedback" style="color: #941035; margin-bottom: 15px;">Your Feedback:</label>
+                <textarea id="feedback" name="feedback" rows="5" required></textarea>
+        
+                <button type="submit">Submit Feedback</button>
+            </form>
+        </div>
+    </div>
+
 </div>
+
+
+
 <script>
     document.addEventListener('DOMContentLoaded', (event) => {
-    document.getElementById('feedbackForm').addEventListener('submit', function(e) {
-        e.preventDefault(); 
-        const formData = new FormData(this);
-        fetch("{{ url_for('submit_feedback') }}", {
-            method: 'POST',
-            body: formData
-        })
-        const successMessageDiv = document.createElement('div');
-        successMessageDiv.classList.add('feedback-success-message');
-        successMessageDiv.textContent = 'Thank you for your feedback!';
-        document.body.appendChild(successMessageDiv);
-        successMessageDiv.style.display = 'block'; 
 
-        setTimeout(() => {
-            if (successMessageDiv) {
-                successMessageDiv.parentNode.removeChild(successMessageDiv);
+        // Get all elements with the class 'li'
+        var elements = document.getElementsByClassName('feedbackElement');
+        console.log(elements);
+
+        console.log(elements.length);
+        // Loop through the elements and add event listeners to each
+        for (var i = 0; i < elements.length; i++) {
+            console.log(elements[i]);
+            elements[i].addEventListener('click', function(event) {
+                event.preventDefault();
+
+                    // Find child elements within the clicked feedbackElement
+                let vFeedbackList0 = this.querySelector('.vFeedback-list-0');
+                let vFeedbackList1 = this.querySelector('.vFeedback-list-1');
+                let pFeedbackList0 = this.querySelector('.pFeedback-list-0');
+                
+                let feedback = "";
+                let devFeedback = "";
+
+                // Check if elements exist and log their text content
+                if (vFeedbackList0 && vFeedbackList1) {
+                    feedback = vFeedbackList0.textContent;
+                    devFeedback = vFeedbackList1.textContent;
+                } else if (pFeedbackList0) {
+                    feedback = pFeedbackList0.textContent;
+                    devFeedback = "Feedback not yet reviewed.";
+                }
+
+                document.getElementById("feedbackResponse").textContent = feedback;
+                document.getElementById("developerFeedbackResponse").textContent = devFeedback;
+
+                let left = document.getElementById("left");
+                let mid = document.getElementById("middle");
+                let right = document.getElementById("right");
+
+                // Apply the transitions
+                left.style.transition = "all 1.5s cubic-bezier(.51,.22,.79,.53)";
+                mid.style.transition = "all 1.5s cubic-bezier(.17,.3,.54,.71)";
+                right.style.transition = "all 1.5s ease"; // Assuming you want some transition for 'right' as well
+
+                // Change the positions
+                left.style.left = "0%";
+                mid.style.left = "100%";
+                right.style.left = "200%";
+            });
+        }
+
+        document.getElementById('detailsToView').addEventListener('click', function(event) {
+            event.preventDefault();
+
+            let left = document.getElementById("left");
+            let mid = document.getElementById("middle");
+            let right = document.getElementById("right");
+
+            left.style.transition = "all 1.5s cubic-bezier(.51,.22,.79,.53)";
+            mid.style.transition = "all 1.5s cubic-bezier(.17,.3,.54,.71)";
+
+
+            left.style.left = "-100%";
+            mid.style.left = "0%";
+            right.style.left = "100%%";
+
+        });
+
+        document.getElementById('createToView').addEventListener('click', function(event) {
+            event.preventDefault();
+
+            let left = document.getElementById("left");
+            let mid = document.getElementById("middle");
+            let right = document.getElementById("right");
+
+            right.style.transition = "all 1.5s cubic-bezier(.51,.22,.79,.53)";
+            mid.style.transition = "all 1.5s cubic-bezier(.17,.3,.54,.71)";
+
+
+            left.style.left = "-100%";
+            mid.style.left = "0%";
+            right.style.left = "100%";
+
+        });
+
+        document.getElementById('viewToCreate').addEventListener('click', function(event) {
+            event.preventDefault();
+
+            let left = document.getElementById("left");
+            let mid = document.getElementById("middle");
+            let right = document.getElementById("right");
+
+            mid.style.transition = "all 1.5s cubic-bezier(.51,.22,.79,.53)";
+            right.style.transition = "all 1.5s cubic-bezier(.17,.3,.54,.71)";
+
+
+            left.style.left = "-200%";
+            mid.style.left = "-100%";
+            right.style.left = "0%";
+
+        });
+
+        document.getElementById('viewed-feedback-trigger').addEventListener('click', function(event) {
+            event.preventDefault();
+            var feedbackDiv = document.getElementById('viewed-feedback');
+
+            if(feedbackDiv.style.display === 'none') {
+                document.getElementById('viewed-feedback-trigger').innerText = "Viewed Feedback ↓"
+            } else {
+                document.getElementById('viewed-feedback-trigger').innerText = "Viewed Feedback ↑"
             }
-        }, 3000); 
 
-        this.reset();
-    });
+            feedbackDiv.style.display = feedbackDiv.style.display === 'none' ? 'block' : 'none';
+        });
+
+        document.getElementById('pending-feedback-trigger').addEventListener('click', function(event) {
+            event.preventDefault();
+            var feedbackDiv = document.getElementById('pending-feedback');
+
+            if(feedbackDiv.style.display === 'none') {
+                document.getElementById('pending-feedback-trigger').innerText = "Pending Feedback ↓"
+            } else {
+                document.getElementById('pending-feedback-trigger').innerText = "Pending Feedback ↑"
+            }
+
+            feedbackDiv.style.display = feedbackDiv.style.display === 'none' ? 'block' : 'none';
+        });
+
+        document.getElementById('feedbackForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+            
+            fetch("{{ url_for('submit_feedback') }}", {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                const successMessageDiv = document.createElement('div');
+                successMessageDiv.classList.add('feedback-success-message');
+                successMessageDiv.textContent = 'Thank you for your feedback! Redirecting...';
+                document.body.appendChild(successMessageDiv);
+                successMessageDiv.style.display = 'block';
+
+                setTimeout(() => {
+                    if (successMessageDiv) {
+                        successMessageDiv.parentNode.removeChild(successMessageDiv);
+                        if (response.redirected) {
+                            window.location.href = response.url;
+                        }
+                    }
+                }, 2000);
+
+                this.reset();
+            })
+            .catch(error => console.error('Error:', error));
+        });
 });
 
 </script>
+
+<style>
+
+    .title-color {
+        color: #941035;
+    }
+
+    .feedbackElement:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    #viewToCreate, #createToView, #detailsToView {
+        font-size: 1.8rem;
+    }
+
+    #viewed-feedback-trigger, #pending-feedback-trigger {
+        font-size: 1.8rem;
+    }
+
+    .feedback-form-container {
+        max-width: 69%;
+        left: 0;
+    }
+
+    #flipper {
+        transition: 3s;
+        transform-style: preserve-3d;
+        position: relative;
+    }
+    #left, #middle, #right {
+        backface-visibility: hidden;
+        position: absolute;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        transition: 5s;
+        transform-style: preserve-3d;
+    }
+    #left {
+        left: -100%;
+    }
+
+    #middle {
+        left: 0%;
+    }
+
+    #right {
+        left: 100%;
+    }
+    </style>
+
+<style>
+
+/* When float is applied to the li, it causes the ul to not calculate the height properly so we use ::after to clear it */
+    .feedback-list::after {
+        content: "";
+        clear: both;
+        display: table;
+    }
+
+    .pFeedback-list-0 {
+        float: left;
+        width: 83%;
+        overflow: hidden;        /* Ensures the overflow text is hidden */
+        white-space: nowrap;     /* Keeps the text on a single line */
+        text-overflow: ellipsis; /* Adds an ellipsis to indicate text overflow */
+    }
+
+    .pFeedback-list-0, .vFeedback-list-0, .vFeedback-list-1{
+        overflow: hidden;        /* Ensures the overflow text is hidden */
+        white-space: nowrap;     /* Keeps the text on a single line */
+        text-overflow: ellipsis; /* Adds an ellipsis to indicate text overflow */
+    }
+
+    .vFeedback-list-0 {
+        float: left;
+        width: 55%;
+    }
+
+    .vFeedback-list-1 {
+        float: left;
+        width: 28%;
+    }
+
+    .feedbackElement {
+        float: left;
+        width: 100%;
+        height: 30px;
+        border-radius: 3px;
+    }
+
+    .feedback_view_details {
+        float: left;
+        font-size: 1em;
+        width: 15%;
+        color: #0000EE;
+        text-decoration: underline;
+    }
+
+    .feedbackElement div {
+        /* display: flex; */
+        line-height: 30px;
+        height: 100%;
+        align-items: center; /* Center vertically */
+    }
+
+    .feedbackElement div:not(:first-child) {
+        /* border-left: solid 1px black; */
+        padding-left: 3px;
+    }
+
+    .colored-bullet {
+        float: left;
+        width: 2%;
+        font-size: 2vw;
+        height: 100%;
+        display: flex;
+        justify-content: center; /* Center horizontally */
+        align-items: center; /* Center vertically */
+    }
+
+    .red-bullet {
+        color: gold;
+    }
+
+    .green-bullet {
+        color: green;
+    }
+
+    .feedback-list .feedbackElement:not(:first-child):hover {
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+    }
+
+    .feedback-list .feedbackElement:not(:first-child):hover {
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+    }
+
+    /* The container <div> - needed to position the dropdown content */
+    .dropdown {
+      margin-top: 10px;
+    }
+    
+    /* Dropdown Content (Hidden by Default) */
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #f9f9f9;
+      min-width: 160px;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      z-index: 1;
+    }
+    
+    /* Links inside the dropdown */
+    .dropdown-content a {
+      color: black;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+    }
+    
+    /* Change color of dropdown links on hover */
+    .dropdown-content a:hover {background-color: #f1f1f1}
+    
+    /* Show the dropdown menu on hover */
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+    
+    /* Change the background color of the dropdown button when the dropdown content is shown */
+    .dropdown:hover .dropbtn {
+      background-color: #3e8e41;
+    }
+    </style>
 
 {% endblock %}

@@ -511,3 +511,55 @@ a:hover {
     color: #fff; 
     cursor: pointer; 
 }
+
+.topic-item-container {
+    background: #FFFFFF;
+    border: 1px solid #DDDDDD;
+    border-radius: 4px;
+    padding: 15px;
+    margin-bottom: 20px;
+  }
+  
+  .topic-meta {
+    font-size: 1.5em;
+    color: #555555;
+    margin-bottom: 10px;
+  }
+  
+  .topic-author {
+    color: #a53045;
+  }
+  
+  
+  .topic-title {
+    color: #941035;
+    margin-bottom: 10px;
+  }
+  
+  .topic-tag {
+    display: inline-block;
+    background: #F6F7F8;
+    color: #555555;
+    border-radius: 4px;
+    padding: 2px 6px;
+    font-size: 1.5em;
+    margin-bottom: 10px;
+  }
+  
+  .topic-description {
+    font-size: 1.6em;
+    line-height: 1.4;
+    color: #333333;
+    margin-bottom: 20px;
+  }
+  
+  .topic-stats {
+    font-size: 1.2em;
+    color: #555555;
+  }
+  
+  .topic-comment-count {
+    cursor: pointer;
+    color: #a53045;
+  }
+
