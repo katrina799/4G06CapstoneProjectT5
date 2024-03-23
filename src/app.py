@@ -144,9 +144,6 @@ def start():
 def tasks_page():
     global current_page
     current_page = "tasks"
-    df = get_df_from_csv_in_s3(s3, bucket_name, mock_data_file)
-    courses = df.loc[0, "courses"]
-    courses = ast.literal_eval(courses)
     tasks_df = get_df_from_csv_in_s3(s3, bucket_name, mock_tasks_data_file)
 
     # Replace invalid dates and convert to datetime
@@ -187,7 +184,6 @@ def tasks_page():
     return render_template(
         "tasks.html",
         tasks=tasks,
-        courses=courses,
         tasks_for_calendar=tasks_for_calendar,
         current_page=current_page,
     )

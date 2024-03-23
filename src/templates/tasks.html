@@ -66,12 +66,7 @@ href="{{ url_for('tasks') }}"><i class="glyphicon glyphicon-task" title="tasks"
                 <div class="modal-content">
                     <span class="close-button" onclick="closeAddModal()">&times;</span>
                     <form id="add-task-form" action="/add_task" method="post">
-                        <select name="course_name" required>
-                            <option value="">Select Course</option>
-                            {% for course in courses %}
-                            <option value="{{ course }}">{{ course }}</option>
-                            {% endfor %}
-                        </select>
+                        <input type="text" name="course_name" placeholder="Course Name" required>
                         <input type="text" name="task_name" placeholder="Task Name" required>
                         <input type="date" name="due_date" placeholder="Due Date">
                         <input type="text" name="weight" placeholder="Weight">
