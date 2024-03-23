@@ -66,31 +66,20 @@ href="{{ url_for('tasks') }}"><i class="glyphicon glyphicon-task" title="tasks"
                 <div class="modal-content">
                     <span class="close-button" onclick="closeAddModal()">&times;</span>
                     <form id="add-task-form" action="/add_task" method="post">
-                        <div class="form-row">
-                            <select name="course_name" required class="form-control">
-                                <option value="">Select Course</option>
-                                {% for course in courses %}
-                                <option value="{{ course }}">{{ course }}</option>
-                                {% endfor %}
-                            </select>
-                        </div>
-                        <div class="form-row">
-                            <input type="text" name="task_name" placeholder="Task Name" required class="form-control">
-                        </div>
-                        <div class="form-row">
-                            <input type="date" name="due_date" placeholder="Due Date" class="form-control">
-                        </div>
-                        <div class="form-row">
-                            <input type="text" name="weight" placeholder="Weight" class="form-control">
-                            <input type="text" name="est_hours" placeholder="Estimated Hours" class="form-control">
-                        </div>
-                        <div class="form-row form-row-button">
-                            <button type="submit" class="btn btn-primary">Add Task</button>
-                        </div>
+                        <select name="course_name" required>
+                            <option value="">Select Course</option>
+                            {% for course in courses %}
+                            <option value="{{ course }}">{{ course }}</option>
+                            {% endfor %}
+                        </select>
+                        <input type="text" name="task_name" placeholder="Task Name" required>
+                        <input type="date" name="due_date" placeholder="Due Date">
+                        <input type="text" name="weight" placeholder="Weight">
+                        <input type="text" name="est_hours" placeholder="Estimated Hours">
+                        <button type="submit">Add Task</button>
                     </form>
                 </div>
             </div>
-
         </div>
 
         <!-- In Progress Column -->
