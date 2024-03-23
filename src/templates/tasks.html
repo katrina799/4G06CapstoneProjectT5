@@ -60,6 +60,7 @@ href="{{ url_for('tasks') }}"><i class="glyphicon glyphicon-task" title="tasks"
                 </div>
             <button id="show-add-task-modal-btn" class="btn btn-primary">Add Task</button>
             </div>
+
             <!-- Add Task Modal -->
             <div id="add-task-modal" class="modal" style="display:none;">
                 <div class="modal-content">
@@ -146,13 +147,12 @@ href="{{ url_for('tasks') }}"><i class="glyphicon glyphicon-task" title="tasks"
 
 <script src="{{ url_for('static', filename='js/taskDragDrop.js') }}"></script>
 
-<!-- Calendar Navigation Buttons -->
-<div class="calendar-navigation">
-    <button id="prevMonthBtn" class="btn btn-default" disabled>&lt; Prev</button>
-    <button id="nextMonthBtn" class="btn btn-default">Next &gt;</button>
-</div>
-
 <div class="calendar-wrapper">
+    <!-- Calendar Navigation Buttons -->
+    <div class="calendar-navigation">
+        <button id="prevMonthBtn" class="btn btn-default" disabled>&lt; Prev</button>
+        <button id="nextMonthBtn" class="btn btn-default">Next &gt;</button>
+    </div>
     <div id="calendar" class="calendar-container">
         <div class="calendar-header">
             <div id="calendar-month" class="calendar-month"></div> 
@@ -175,6 +175,7 @@ href="{{ url_for('tasks') }}"><i class="glyphicon glyphicon-task" title="tasks"
         </div>
     </div>
 </div>
+
 <script>
 const tasksForCalendar = JSON.parse('{{ tasks_for_calendar | tojson | safe }}');
 let currentDate = new Date();
@@ -192,6 +193,7 @@ function generateCalendar(tasks, year, month) {
 
     let firstDayOfMonth = new Date(year, month, 1).getDay();
     let daysInMonth = new Date(year, month + 1, 0).getDate();
+    let today = new Date();
 
     // Fill the first row with empty cells if the month doesn't start on Monday
     for (let i = 0; i < firstDayOfMonth; i++) {
@@ -206,6 +208,10 @@ function generateCalendar(tasks, year, month) {
         cell.className = 'calendar-cell';
         cell.textContent = day;
         let fullDate = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+        if (today.getDate() === day && today.getMonth() === month && today.getFullYear() === year) {
+            cell.classList.add('today-highlight'); // Add a class to highlight today's date
+        }
+
         appendTasksToCell(cell, tasks, fullDate);
         calendarGrid.appendChild(cell);
     }

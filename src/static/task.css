@@ -367,11 +367,6 @@ body, html {
   display: block; /* Display on hover */
 }
 
-.calendar-cell.today {
-  background-color: #98a5d1; /* Light red, for example */
-  font-weight: bold;
-}
-
 .priority-row {
   display: flex;
   align-items: center; 
@@ -385,4 +380,8 @@ body, html {
 .button-container {
   display: flex;
   margin: 20px 0 20px 30px; /* Top, Right, Bottom, Left margins */
+}
+
+.today-highlight {
+  background-color: #be7a8b
 }

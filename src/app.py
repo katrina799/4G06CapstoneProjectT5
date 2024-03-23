@@ -719,7 +719,7 @@ def add_task():
     est_hours = request.form.get("est_hours", 0)
 
     add_task_todo(course_name, task_name, due_date, weight, est_hours)
-    return redirect(url_for("start"))
+    return redirect(url_for("tasks_page"))
 
 
 @app.route("/delete_task/<int:task_id>", methods=["POST"])
