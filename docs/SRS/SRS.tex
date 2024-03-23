@@ -108,12 +108,12 @@ Nov 1, 2023 & Revision 0.1 & Security update \\
 \subsection{User Business}
 The users would be students in high school to college institutes all over the world dealing with multiple courses.
 \subsection{Goals of the Project}
-We aim to develop a tool to help students integrate multiple course information with their personal schedules to generate a customized study plan. The plan should dynamically self-adjust according to the user's preference and study efficiency so that students can finish their deliverables before the deadline at their own pace with minimal pressure.
+MacOne is a tailored online platform aimed at streamlining and enhancing the McMaster student experience. It enables students to directly extract and integrate course information into their personal schedules, creating an individualized to-do list. Additionally, MacOne provides easy access to vital university resources, a forum for student interaction, and a Pomodoro timer for effective study sessions, feedback box for users to share their insights directly with developers, and a function allowing students to calculate their cumulative GPA by uploading their transcripts, all designed to simplify student life at McMaster University.
 \section{Stakeholders}
 \subsection{Client}
 N/A
 \subsection{Customer}
-The primary customers are students across various levels of education, from high school to college institutions. These students are in need of a comprehensive solution to manage their overwhelming schoolwork, deadlines, and tests.
+The target audience includes students from diverse programs and years of study at McMaster University.
 \subsection{Other Stakeholders}
 \begin{itemize}
   \item \textbf{Educational Institutions}: Schools, colleges, and universities that may use this app as part of their academic toolkit.
@@ -258,8 +258,8 @@ N/A
 \subsection{The Current Situation}
 Currently, students across various educational levels face significant challenges in managing their academic tasks and schedules effectively due to the overwhelming schoolwork. Teachers and educational institutions also seek innovative solutions to foster management skills among students and enhance their learning experiences. The existing solutions are often not comprehensive, lacking intelligent task prioritization, progress visualization, and effective time management tools.
 
-\subsection{The Context of the Work}
-The Smart Study Helper App is designed to bridge this gap by providing a user-friendly platform that combines automated task generation, intelligent task prioritization, progress visualization, and various other features. The development of this application intends to improve students' academic performance and mental well-being by reducing stress and enhancing learning experiences.
+\subsection{The Context of the Work} 
+[NEED TO CHANGE]The MacOne is designed to bridge this gap by providing a user-friendly platform that combines automated task generation, intelligent task prioritization, progress visualization, and various other features. The development of this application intends to improve students' academic performance and mental well-being by reducing stress and enhancing learning experiences. 
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.7\linewidth]{Context Diagram.drawio.png} 
@@ -267,6 +267,7 @@ The Smart Study Helper App is designed to bridge this gap by providing a user-fr
 \end{figure}
 
 \subsection{Specifying a Business Use Case (BUC)}
+[NEED TO CHANGE]
 \begin{itemize}
     \item \textbf{BUC Name:} Integrated Study Management
     \item \textbf{Goal:} To provide a comprehensive solution that allows students to manage their academic tasks, schedules, and study sessions effectively.
@@ -453,24 +454,33 @@ The Smart Study Helper App aims to serve as a comprehensive solution for student
     \hline
     Task Generation & Application & Automatically generates tasks based on uploaded syllabus \\
     \hline
-    Task Prioritization & Application & Prioritizes tasks based on ML algorithms \\
-    \hline
     Progress Visualization & Student & Users can view the status of their tasks \\
     \hline
-    Facial Recognition & Application & Detect users' stress levels by recognizing users' face \\
+    Task Management & Student & Users can use the Kanban Board to manage the tasks\\
     \hline
-    Classmates Lookup & Student & Users can look up online classmates who register the same course \\
+    Calendar Visualization & Student & Users can view the Calendar visualization with tasks\\
     \hline
-    Connected Learning & Student & Users can connect with their friends or classmates to study together \\
+    Customize App Quick Links & Student & Allows users to customize the order of app icons based on their preferences \\
     \hline
-    User Login & Student & Allows users to log into their accounts using username and password \\
+    Submit Feedback & Student & Enables users to provide feedback on the website or university services \\
     \hline
-    Friend List Management & Student & Supports friend list for sending/rejecting/accepting friend requests \\
+    Profile Management & Student & Allows users to change their username and view their cGPA from the transcript \\
     \hline
-    Export to Other Calendars & Application, Student & Exports event and schedule data to third-party calendar apps \\
+    Extract Course Information & Application & Uses the OpenAI API to extract key course information from uploaded files \\
     \hline
-    Estimate Task Duration & Application & Calculates the estimated time for each task from course outlines \\
+    Display Course Information & Student & Allows users to view course details and automatically created tasks for course assignments \\
     \hline
+    Delete Course & Student & Enables users to delete a course and its related assignments \\
+    \hline
+    Start Pomodoro Timer & Student & Allows users to start a Pomodoro timer for focused study sessions \\
+    \hline
+    Play Background Music & Student & Users can choose and play different background music during the Pomodoro timer \\
+    \hline
+    Harvest Tomatoes & Application & Generates a tomato in the "harvest blanket" after completing a study period \\
+    \hline
+    Track Weekly Achievements & Student & Provides a visualization of Pomodoro usage over the week \\
+    \hline
+    
 \end{longtable}
 
 \subsection{Individual Product Use Cases (PUC’s)}
@@ -480,14 +490,6 @@ The Smart Study Helper App aims to serve as a comprehensive solution for student
     \caption{Use Case Diagram}
 \end{figure}
 
-\subsubsection{User Registration}
-\begin{itemize}
-    \item \textbf{Goal:} Enable students to create a unique account.
-    \item \textbf{Actors:} Student.
-    \item \textbf{Preconditions:} Student has accessed the application or web.
-    \item \textbf{Postconditions:} Student has an active account and can access the app's features.
-    \item \textbf{Main Flow:} Student enters required information, sets a password, and completes registration.
-\end{itemize}
 
 \subsubsection{Upload Syllabus}
 \begin{itemize}
@@ -507,294 +509,208 @@ The Smart Study Helper App aims to serve as a comprehensive solution for student
     \item \textbf{Main Flow:} Application processes the syllabus and generates relevant tasks.
 \end{itemize}
 
-\subsubsection{Task Prioritization}
+
+\subsubsection{Customize App Quick Links}
 \begin{itemize}
-    \item \textbf{Goal:} Rank tasks based on importance.
+    \item \textbf{Goal:} Enable students to customize the order of app icons based on their preferences.
+    \item \textbf{Actors:} Student.
+    \item \textbf{Preconditions:} Student is on the main page.
+    \item \textbf{Postconditions:} The order of app icons is customized according to the student's preferences.
+    \item \textbf{Main Flow:} The student drags and drops the app icons to rearrange them. The new order is saved automatically.
+\end{itemize}
+
+\subsubsection{Submit Feedback}
+\begin{itemize}
+    \item \textbf{Goal:} Collect feedback from students to improve the website and university services.
+    \item \textbf{Actors:} Student.
+    \item \textbf{Preconditions:} Student navigates to the Feedback page.
+    \item \textbf{Postconditions:} Feedback is submitted and stored for review.
+    \item \textbf{Main Flow:} Student fills out a feedback form with their comments and suggestions, then submits it. 
+\end{itemize}
+
+
+
+\subsubsection{Profile Management}
+\begin{itemize}
+    \item \textbf{Goal:} Allow students to manage their profile settings, including username changes and viewing their cGPA.
+    \item \textbf{Actors:} Student.
+    \item \textbf{Preconditions:} Student is on their Profile page.
+    \item \textbf{Postconditions:} Profile information is updated based on student input.
+    \item \textbf{Main Flow:} Student can change their username or upload a transcript to view their cGPA. Changes are saved upon submission.
+\end{itemize}
+
+\subsubsection{Start Pomodoro Timer}
+\begin{itemize}
+    \item \textbf{Goal:} Facilitate focused study sessions using the Pomodoro technique.
+    \item \textbf{Actors:} Student.
+    \item \textbf{Preconditions:} Student is on the Pomodoro page.
+    \item \textbf{Postconditions:} Pomodoro timer is started for a study session.
+    \item \textbf{Main Flow:} Student clicks the start button to begin a 25-minute focused study period.
+\end{itemize}
+
+\subsubsection{Play Background Music}
+\begin{itemize}
+    \item \textbf{Goal:} Enhance concentration by allowing students to play background music during Pomodoro sessions.
+    \item \textbf{Actors:} Student.
+    \item \textbf{Preconditions:} Student is using the Pomodoro timer.
+    \item \textbf{Postconditions:} Selected music plays in the background during the study session.
+    \item \textbf{Main Flow:} Student selects a music track and clicks play. Music can be paused or changed anytime.
+\end{itemize}
+
+\subsubsection{Harvest Tomatoes}
+\begin{itemize}
+    \item \textbf{Goal:} Reward students with a visual representation of their focus time after completing a Pomodoro session.
     \item \textbf{Actors:} Application.
-    \item \textbf{Preconditions:} Tasks have been generated.
-    \item \textbf{Postconditions:} Tasks are prioritized and presented in an organized manner.
-    \item \textbf{Main Flow:} Application uses ML algorithms to analyze and prioritize tasks.
+    \item \textbf{Preconditions:} A Pomodoro session is completed.
+    \item \textbf{Postconditions:} A tomato is generated in the harvest blanket.
+    \item \textbf{Main Flow:} Upon completion of a 25-minute Pomodoro session, the application automatically adds a tomato to the student's harvest blanket as a symbol of their productivity.
 \end{itemize}
 
-\subsubsection{Progress Visualization}
+\subsubsection{Track Weekly Achievements}
 \begin{itemize}
-    \item \textbf{Goal:} Offer students a view of their task progress.
+    \item \textbf{Goal:} Provide students with a visualization of their weekly Pomodoro usage.
     \item \textbf{Actors:} Student.
-    \item \textbf{Preconditions:} Tasks have been generated and prioritized.
-    \item \textbf{Postconditions:} Student can visually assess task status.
-    \item \textbf{Main Flow:} Student accesses a dashboard or progress section to view status of tasks.
+    \item \textbf{Preconditions:} Student has completed one or more Pomodoro sessions within the week.
+    \item \textbf{Postconditions:} A bar chart displays the student's Pomodoro session count for the week.
+    \item \textbf{Main Flow:} The application tracks each completed Pomodoro session and updates the weekly achievements chart accordingly.
 \end{itemize}
 
-\subsubsection{Facial Recognition}
-\begin{itemize}
-    \item \textbf{Goal:} Identify student stress levels using facial cues.
-    \item \textbf{Actors:} Application.
-    \item \textbf{Preconditions:} Student grants camera access.
-    \item \textbf{Postconditions:} App detects potential stress indicators.
-    \item \textbf{Main Flow:} Application uses facial recognition technology to analyze student's face for stress signs.
-\end{itemize}
-
-\subsubsection{Classmates Lookup}
-\begin{itemize}
-    \item \textbf{Goal:} Allow students to find classmates in the same course.
-    \item \textbf{Actors:} Student.
-    \item \textbf{Preconditions:} Student is registered in a course.
-    \item \textbf{Postconditions:} Student views a list of classmates in the same course.
-    \item \textbf{Main Flow:} Student accesses course section and views registered classmates.
-\end{itemize}
-
-\subsubsection{Connected Learning}
-\begin{itemize}
-    \item \textbf{Goal:} Provide students with a platform to study collaboratively.
-    \item \textbf{Actors:} Students.
-    \item \textbf{Preconditions:} Students have active accounts.
-    \item \textbf{Postconditions:} Students can connect and study together.
-    \item \textbf{Main Flow:} A student sends a connection request to another student. Once accepted, they can access video chat with joint study tools and features.
-\end{itemize}
-
-\subsubsection{User Login}
-\begin{itemize}
-    \item \textbf{Goal:} Allow students to log into their account.
-    \item \textbf{Actors:} Student.
-    \item \textbf{Preconditions:} Student has an active account.
-    \item \textbf{Postconditions:} Student is logged in and can access personalized data.
-    \item \textbf{Main Flow:} Student provides username and password; if credentials match, access is granted.
-\end{itemize}
-
-\subsubsection{Friend List Management}
-\begin{itemize}
-    \item \textbf{Goal:} Manage friend connections within the application.
-    \item \textbf{Actors:} Student.
-    \item \textbf{Preconditions:} Student is logged in.
-    \item \textbf{Postconditions:} Updated friend list status (friend request sent/received/accepted/rejected).
-    \item \textbf{Main Flow:} Student navigates to the friend list section, sends/receives/accepts/rejects friend requests.
-\end{itemize}
-
-\subsubsection{Export to Other Calendars}
-\begin{itemize}
-    \item \textbf{Goal:} Export event and schedule data to third-party calendar apps.
-    \item \textbf{Actors:} Application, Student.
-    \item \textbf{Preconditions:} Student has events or schedules in the application.
-    \item \textbf{Postconditions:} Events and schedules are exported and viewable in third-party apps.
-    \item \textbf{Main Flow:} With authentication, the student initiates export to a chosen calendar app; data is formatted and transferred.
-\end{itemize}
-
-\subsubsection{Estimate Task Duration}
-\begin{itemize}
-    \item \textbf{Goal:} Calculate the estimated time needed for each task from course outlines.
-    \item \textbf{Actors:} Application.
-    \item \textbf{Preconditions:} Tasks have been extracted from course outlines.
-    \item \textbf{Postconditions:} Each task has an associated time estimate.
-    \item \textbf{Main Flow:} Application processes tasks from course outlines and estimates time requirements for each.
-\end{itemize}
 
 
 \section{Functional Requirements}
-\subsection{Authentication}
+\subsection{Course Information Extraction}
 \begin{itemize}[leftmargin=16.5mm,labelsep=4mm,label=\rthereqnum]
 
 \item
-The user could create an account with a username and a password.
-
-\textbf{Rationale:} Users would need an account protected by a password to keep their schedule personal and private.
+Users should be able to extract key details such as the professor's email addresses, the weighting of assignments, and the policy on missed work due to legitimate reasons (MSAF policy) by uploading their course syllabi.
 
 \textbf{Priority:} HIGH
 \item
-The user could log in to their account by providing a corresponding username and password.
 
-\textbf{Rationale:} Users would need to access their accounts.
+The system will automatically create tasks and add them to the to-do list once it extracts course information from the uploaded course outline.
+
+\textbf{Priority:} HIGH
+
+\item
+Users should be able to add a new a course by providing valid course code.
 
 \textbf{Priority:} HIGH
 \item
-The user should be able to log out of the account.
-
-\textbf{Rationale:} Users do not have to stay logged in.
-
-\textbf{Priority:} HIGH
-\item
-The user should have access to their scheduling information once logged in.
-
-\textbf{Rationale:} User's scheduling information should be available to them.
-
-\textbf{Priority:} HIGH
-
-\item 
-The system should provide a mechanism for users to retrieve their passwords in case they forget them.
-
-\textbf{Rationale:} A user who has forgotten their password should be able to recover their account.
+Users should have the capability to remove a course from their profile.
 
 \textbf{Priority:} HIGH
 
 \end{itemize}
 
 
-\subsection{User input}
+\subsection{Pomodoro Timer}
 \begin{itemize}[leftmargin=16.5mm,labelsep=4mm,label=\rthereqnum]
 
-\item[\rthereqnum \label{R_upload_pdf}]
-The user could upload multiple PDF files containing course outlines to the system.
-
-\textbf{Rationale:} Multiple courses would have multiple course outlines.
+\item
+The user should be able to start a study session using Pomodoro timer by going to the Pomodoro page.
 
 \textbf{Priority:} HIGH
 \item
-The system prompts users to choose their preferred study interval at which the system tends to allocate study sessions.
-
-\textbf{Rationale:} The user would want to have their study session schedules at their preferred time.
-
-\textbf{Priority:} MEDIUM
-\item
-The user could change their preferred study interval.
-
-\textbf{Rationale:} The user's preferred study interval could change over time. 
-
-\textbf{Priority:} MEDIUM
-\item
-The system prompts users to set their preferred Pomodoro intervals. 
-
-\textbf{Rationale:} The user might have preferred Pomodoro intervals.
-
-\textbf{Priority:} MEDIUM
-\item
-The user could change their Pomodoro interval.
-
-\textbf{Rationale:} The user's preferred Pomodoro intervals could change over time.
-
-\textbf{Priority:} MEDIUM
-\item
-The system supports a friend list allowing users to send friend requests.
-
-\textbf{Rationale:} The user needs to send friend requests to add friends.
-
-\textbf{Priority:} LOW
-\item
-The user could accept an incoming friend request.
-
-\textbf{Rationale:} The user could accept the friend request if they wish to befriend the request sender.
-
-\textbf{Priority:} LOW
-\item
-The user could reject an incoming friend request.
-
-\textbf{Rationale:} The user could reject the friend request if they wish not to befriend the request sender.
-
-\textbf{Priority:} LOW
-\item
-The user could change the progress of each task
-
-\textbf{Rationale:} The progress of each task should align with reality.
+The user should be able to start a study session using Pomodoro timer by clicking a specific task from the to-do list.
 
 \textbf{Priority:} HIGH
 \item
-On finishing each sub-task, the system should ask for the user's feedback on whether the pace is comfortable.
+The user should be able to choose different music to play as backgroup during the study session.
 
-\textbf{Rationale:} The schedule needs feedback to adjust the pace.
+\textbf{Priority:} MEDIUM
+\item
+A tomato should be generated and displayed in the "harvest bucket" once the user finishs a study session.
+
+\textbf{Priority:} MEDIUM
+
+\end{itemize}
+\subsection{To Do list}
+\begin{itemize}[leftmargin=16.5mm,labelsep=4mm,label=\rthereqnum]
+\item
+The user should be able to add a task to the to-do list.
 
 \textbf{Priority:} HIGH
+\item
+The user should have the capability to see details for each task, including the due date, associated course, weight, and other relevant information.
+
+\textbf{Priority:} HIGH
+\item
+The user should be able to edit an existing task in the to-do list.
+
+\textbf{Priority:} HIGH
+\item
+Tasks should be organized and shown in three separate columns: To Do, In Progress, and Done.
+
+\textbf{Priority:} HIGH
+\item The system should offer both a Kanban-style and a calendar layout for the to-do list.
 \end{itemize}
 
-\subsection{Data}
+\subsection{Forum}
 \begin{itemize}[leftmargin=16.5mm,labelsep=4mm,label=\rthereqnum]
 \item
-The system could extract information including \texttt{courseName, taskType, taskName, weight, deadline} from the uploaded course outline PDF files.
-
-\textbf{Rationale:} Course outlines would be provided as PDF files containing course information.
+The user should be able to create a topic for people to discuss.
 
 \textbf{Priority:} HIGH
-\item
-The system could generate a list of tasks from uploaded PDFs.
 
-\textbf{Rationale:} To generate a study plan, tasks to be finished are needed.
+\item
+The user should have the ability to search for a topic using keyword matching.
 
 \textbf{Priority:} HIGH
-\item[\rthereqnum \label{R_prioritize_task}]
-The system could assign priority to each task generated.
 
-\textbf{Rationale:} From priority the system could allocate adequate time to finish each task.
+\item
+The user should be able to make comments for a specific topic.
 
 \textbf{Priority:} HIGH
-\item
-The system could detect the user's attention level.
 
-\textbf{Rationale:} The user's attention level is needed to allocate rest time.
+\item
+The user should be able to reply to any comment.
 
 \textbf{Priority:} MEDIUM
-\item
-The system should notify the user when the user's attention level is low.
 
-\textbf{Rationale:} The system would keep the user engaged in their study task.
-
-\textbf{Priority:} MEDIUM
-\item[\rthereqnum \label{R_check_task_progress}]
-The user should be able to view the progress of each task.
-
-\textbf{Rationale:} The user would want to see their progress.
-
-\textbf{Priority:} HIGH
-\item
-With authentication, the system could import event and schedule data from other calendar apps including Calendar, Outlook, and Google Calendar.
-
-\textbf{Rationale:} Study session allocation would consider avoiding conflicts with existing events.
-
-\textbf{Priority:} MEDIUM
-\item
-With authentication, the system could export event and schedule data to other calendar apps including Calendar, Outlook, and Google Calendar.
-
-\textbf{Rationale:} The user would want to use their own calendar of choice.
-
-\textbf{Priority:} MEDIUM
-\item
-The user should be able to export their study plan as a PDF.
-
-\textbf{Rationale:} The user could want to have an overview of their study plan offline.
-
-\textbf{Priority:} LOW
 \end{itemize}
 
-\subsection{Scheduling}
+\subsection{Quick links}
 \begin{itemize}[leftmargin=16.5mm,labelsep=4mm,label=\rthereqnum]
 \item
-The system could calculate the estimated time needed to finish each task. 
-
-\textbf{Rationale:} Total required tie is needed to decide the amount of subtasks needed.
+The system should provide a way for users to access key university websites and other relevant tools website.
 
 \textbf{Priority:} HIGH
 \item
-The user could regenerate a study plan accordingly once a task's progress is changed by the user.
+The user should have the ability to drag and rearrange the website links to customize their order.
 
-\textbf{Rationale:} Previously generated study plans could be outdated.
+\textbf{Priority:} MEDIUM
+\end{itemize}
+
+\subsection{Feedback box}
+\begin{itemize}[leftmargin=16.5mm,labelsep=4mm,label=\rthereqnum]
+\item
+The system should provide a way for users to submit their feedback for developers to improve the website.
 
 \textbf{Priority:} HIGH
 \item
-The estimated time needed to finish each task would dynamically adjust based on user feedback on past task completion progress.
-
-\textbf{Rationale:} Estimated time needed may not be perfect.
-
-\textbf{Priority:} HIGH
-\item
-The system could prioritize tasks extracted based on \texttt{taskType, weight} and \texttt{deadline}.
-
-\textbf{Rationale:} The system would ensure high-priority tasks are finished on time.
-
-\textbf{Priority:} HIGH
-\item
-With data containing task information, preferred study time, schedule, and Pomodoro intervals gathered the system could generate a detailed study plan containing multiple sub-tasks for each task in the course outline available in-app and export it to other calendars.
-
-\textbf{Rationale:} A detailed study plan contains all the sub-tasks and their settings.
-
-\textbf{Priority:} HIGH
-\item
-The system would have a Pomodoro clock ready for each sub-task.
-
-\textbf{Rationale:} A Pomodoro clock would help the user balance their study and rest.
+The user should be able to view past feedback.
 
 \textbf{Priority:} MEDIUM
 \item
-With a detailed study plan, the system could pair friends from the friend list with similar study plans to have video-based online study sessions.
+The user should have the capability to check the status of each submitted feedback.
 
-\textbf{Rationale:} Friends with similar tasks at similar times could collaborate and inspire each other.
+\textbf{Priority:} MEDIUM
+\end{itemize}
 
-\textbf{Priority:} LOW
+\subsection{Profile}
+\begin{itemize}[leftmargin=16.5mm,labelsep=4mm,label=\rthereqnum]
+\item
+The system should provide a way for user to change their username.
+
+\textbf{Priority:} MEDIUM
+\end{itemize}
+
+\subsection{GPA Calculatation}
+\begin{itemize}[leftmargin=16.5mm,labelsep=4mm,label=\rthereqnum]
+\item
+The system should provide a way for user to calculate their cumulated GPA.
+
+\textbf{Priority:} MEDIUM
 \end{itemize}
 \section{Look and Feel Requirements}
 
