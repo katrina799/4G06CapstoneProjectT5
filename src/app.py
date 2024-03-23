@@ -212,13 +212,16 @@ def feedback_page():
     # render the feedback box page
 
     df = read_feedback_csv_from_s3(s3, bucket_name, "feedback.csv")
-    viewed_feedbacks = df.loc[(df["username"] == username) & (df["status"] == 1)]
-    pending_feedbacks = df.loc[(df["username"] == username) & (df["status"] == 0)]
-    viewed_feedback_list = viewed_feedbacks.to_dict('records')
-    pending_feedback_list = pending_feedbacks.to_dict('records')
+    viewed = df.loc[(df["username"] == username) & (df["status"] == 1)]
+    pending = df.loc[(df["username"] == username) & (df["status"] == 0)]
+    viewed_feedback_list = viewed.to_dict('records')
+    pending_feedback_list = pending.to_dict('records')
 
     return render_template(
-        "feedback_page.html", username=username, current_page=current_page, viewed_feedback_list=viewed_feedback_list, pending_feedback_list=pending_feedback_list
+        "feedback_page.html",
+        username=username, current_page=current_page,
+        viewed_feedback_list=viewed_feedback_list,
+        pending_feedback_list=pending_feedback_list
     )
 
 
