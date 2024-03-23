@@ -53,7 +53,7 @@ href="{{ url_for('tasks') }}"><i class="glyphicon glyphicon-task" title="tasks"
                         </div>
                         <div class="priority-row">
                             <div class="task-priority {{ 'priority-' + task.priority|lower }}">{{ task.priority|capitalize }} Priority</div>
-                            <button onclick="startStudy('{{ task.est_time }}')">Start Study</button>
+                            <a href="{{ url_for('pomodoro_page', task_id=task.id, status='todo') }}">Start Pomodoro</a>
                         </div>
                     </div>
                     {% endfor %}
@@ -93,7 +93,7 @@ href="{{ url_for('tasks') }}"><i class="glyphicon glyphicon-task" title="tasks"
                 </div>
                 <div class="priority-row">
                     <div class="task-priority {{ 'priority-' + task.priority|lower }}">{{ task.priority|capitalize }} Priority</div>
-                    <button onclick="startStudy('{{ task.est_time }}')">Start Study</button>
+                    <a href="{{ url_for('pomodoro_page', task_id=task.id, status='in_progress') }}">Start Pomodoro</a>
                 </div>
             </div>
             {% endfor %}
