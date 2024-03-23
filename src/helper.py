@@ -474,7 +474,7 @@ def allowed_file(filename):
     )
 
 
-def create_presigned_url(s3, bucket_name, object_name, expiration=3600):
+def create_presigned_url(s3, bucket_name, object_name, expiration=604800):
     try:
         response = s3.generate_presigned_url(
             "get_object",

@@ -657,6 +657,7 @@ def topic(topic_id):
         topics_df = get_df_from_csv_in_s3(s3, bucket_name, "topic_data.csv")
         topics_df["imageUrl"] = topics_df["imageUrl"].fillna("none")
         topics_df["imageUrl"] = topics_df["imageUrl"].astype(str)
+
         comments_df = get_df_from_csv_in_s3(
             s3, bucket_name, "comment_data.csv"
         )
