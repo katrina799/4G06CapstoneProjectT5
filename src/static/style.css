@@ -512,12 +512,12 @@ a:hover {
   }
   
   .topic-author {
-    color: #0079D3;
+    color: #a53045;
   }
   
   
   .topic-title {
-    color: #000000;
+    color: #941035;
     margin-bottom: 10px;
   }
   
@@ -545,6 +545,5 @@ a:hover {
   
   .topic-comment-count {
     cursor: pointer;
-    color: #0079D3;
+    color: #a53045;
   }
-  

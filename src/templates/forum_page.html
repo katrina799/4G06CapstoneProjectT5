@@ -2,7 +2,7 @@
 <!-- Credit: Akamai Developer https://www.youtube.com/watch?v=NDYhGH586w4 -->
 {% block content %}
   <head>
-    <title>MacForum - The McMaster community dissussion board</title>
+    <title>MacForum - The McMaster community discussion board</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     
 
@@ -18,12 +18,12 @@
           <div class="col-auto">
             <form action="/search_forum" method="get" class="d-flex">
               <input type="text" name="query" placeholder="Search topics ..." required class="form-control me-2">
-              <input type="submit" value="Search" class="btn btn-outline-primary">
+              <input type="submit" value="Search" class="btn" style="background-color: #a53045; color: white; border: none;">
             </form>
           </div>
         </div>
         <div class="col">
-          <a href="{{ url_for('add_topic') }}" class="btn btn-primary">Add Topic</a>
+          <a href="{{ url_for('add_topic') }}" class="btn" style="background-color: #a53045; color: white; text-decoration: none; border: none;">Add Topic</a>
         </div>
         <div class="filter-by-tag">
           <form action="{{ url_for('forum_page') }}" method="get">
@@ -40,7 +40,7 @@
         </div>
         
         <div class="my-3 p-3 bg-body rounded shadow-sm">
-            <h5 class="border-bottom pb-2 mb-0">Recent topics</h>
+            <h4 style="color: #941035;" class="border-bottom pb-2 mb-0">Recent topics</h>
             <button id="reverse-order-btn">Reverse Order</button>
             <div id="topics-container" >
               {% for topic, username, comment_count in topics %}
@@ -49,7 +49,7 @@
                   Posted by <span class="topic-author">@{{username}}</span>
                 </div>
                 <h2 class="topic-title">
-                  <a href="/forum/topic/{{ topic.id }}">{{ topic.title }}</a>
+                  <a style="color: #941035;" href="/forum/topic/{{ topic.id }}">{{ topic.title }}</a>
                 </h2>
                 <div class="topic-tag">{{ topic.tag }}</div>
                 {% if topic.imageUrl and topic.imageUrl != 'none' %}
