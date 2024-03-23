@@ -23,9 +23,11 @@
         <div class="d-flex text-muted pt-3">
           <!-- ... other elements ... -->
           <div class="pb-3 mb-0 small lh-sm border-bottom w-100">
-            <h2 class="topic-title">
-              <a style="color: #941035;" href="/forum/topic/{{ topic.id }}">{{ topic.title }}</a>
-            </h2>
+            <div class="d-flex justify-content-between">
+              <strong class="text-gray-dark truncate">
+                <a href="/forum/topic/{{ topic.id }}">{{ topic.title }}</a>
+              </strong>
+            </div>
             <span class="d-block truncate">{{ topic.description }}</span>
           </div>
         </div>

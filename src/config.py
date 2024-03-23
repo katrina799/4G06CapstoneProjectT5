@@ -28,4 +28,3 @@ TITLE_TO_COLUMN_MAPPING = {
     "MSAF Policy": "MSAF",
 }
 UPLOAD_FOLDER = "poc-data/"
-REGION_NAME = "us-east-2"
