@@ -146,6 +146,12 @@ href="{{ url_for('tasks') }}"><i class="glyphicon glyphicon-task" title="tasks"
 
 <script src="{{ url_for('static', filename='js/taskDragDrop.js') }}"></script>
 
+<!-- Calendar Navigation Buttons -->
+<div class="calendar-navigation">
+    <button id="prevMonthBtn" class="btn btn-default" disabled>&lt; Prev</button>
+    <button id="nextMonthBtn" class="btn btn-default">Next &gt;</button>
+</div>
+
 <div class="calendar-wrapper">
     <div id="calendar" class="calendar-container">
         <div class="calendar-header">
@@ -170,71 +176,84 @@ href="{{ url_for('tasks') }}"><i class="glyphicon glyphicon-task" title="tasks"
     </div>
 </div>
 <script>
-// Get tasks data passed from Flask
 const tasksForCalendar = JSON.parse('{{ tasks_for_calendar | tojson | safe }}');
+let currentDate = new Date();
+let currentMonth = currentDate.getMonth();
+let currentYear = currentDate.getFullYear();
 
 // Function to generate a calendar
-function generateCalendar(tasks) {
+function generateCalendar(tasks, year, month) {
     const calendarElement = document.getElementById('calendar');
     const monthElement = document.getElementById('calendar-month');
-    const currentDate = new Date();
-    
-    // Set the month at the top of the calendar
-    monthElement.textContent = currentDate.toLocaleDateString('default', { month: 'long', year: 'numeric' });
+    monthElement.textContent = new Date(year, month).toLocaleDateString('default', { month: 'long', year: 'numeric' });
 
-    // Find or create the calendar-grid div
     let calendarGrid = calendarElement.querySelector('.calendar-grid');
-    if (!calendarGrid) {
-        calendarGrid = document.createElement('div');
-        calendarGrid.className = 'calendar-grid';
-        calendarElement.appendChild(calendarGrid);
-    } else {
-        calendarGrid.innerHTML = '';
+    calendarGrid.innerHTML = '';
+
+    let firstDayOfMonth = new Date(year, month, 1).getDay();
+    let daysInMonth = new Date(year, month + 1, 0).getDate();
+
+    // Fill the first row with empty cells if the month doesn't start on Monday
+    for (let i = 0; i < firstDayOfMonth; i++) {
+        let cell = document.createElement('div');
+        cell.className = 'calendar-cell empty';
+        calendarGrid.appendChild(cell);
     }
 
-    const firstDayOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
-    const startDay = firstDayOfMonth.getDay() === 0 ? 6 : firstDayOfMonth.getDay() - 1; // Adjust for Monday start
-    const lastDayOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0).getDate();
-
-    // Adjust for starting day of the week
-    for (let i = 0; i < startDay; i++) {
-        const emptyCell = document.createElement('div');
-        emptyCell.className = 'calendar-cell';
-        calendarGrid.appendChild(emptyCell);
+    // Fill the cells with days
+    for (let day = 1; day <= daysInMonth; day++) {
+        let cell = document.createElement('div');
+        cell.className = 'calendar-cell';
+        cell.textContent = day;
+        let fullDate = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+        appendTasksToCell(cell, tasks, fullDate);
+        calendarGrid.appendChild(cell);
     }
+}
 
-    for (let day = 1; day <= lastDayOfMonth; day++) {
-        const date = new Date(currentDate.getFullYear(), currentDate.getMonth(), day);
-        const dateString = date.toISOString().split('T')[0]; // 'yyyy-mm-dd'
-        const dayCell = document.createElement('div');
-        dayCell.className = 'calendar-cell';
-        dayCell.setAttribute('data-date', dateString);
-        
-        const isToday = new Date().toISOString().split('T')[0] === dateString;
-
-        const dateLabel = document.createElement('div');
-        dateLabel.className = 'date-label';
-
-        if (isToday) {
-            dayCell.classList.add('today');
-        }
-        dateLabel.textContent = day;
-        dayCell.appendChild(dateLabel);
-
-        // Add tasks due on this date
-        tasks.filter(task => task.due_date === dateString).forEach(task => {
-            const taskDiv = document.createElement('div');
+// Function to append tasks to calendar cell
+function appendTasksToCell(cell, tasks, date) {
+    tasks.forEach(task => {
+        if (task.due_date === date) {
+            let taskDiv = document.createElement('div');
             taskDiv.className = 'task-due task-info';
             taskDiv.textContent = task.title;
             taskDiv.setAttribute('data-course', task.course);
             taskDiv.setAttribute('data-title', task.title);
             taskDiv.setAttribute('data-weight', task.weight);
-            dayCell.appendChild(taskDiv);
-        });
-
-        calendarGrid.appendChild(dayCell);
-    }
+            cell.appendChild(taskDiv);
+            // Attach the tooltip event listeners to this taskDiv
+            taskDiv.addEventListener('mouseenter', showTooltip);
+            taskDiv.addEventListener('mouseleave', hideTooltip);
+        }
+    });
 }
+
+// Navigation event handlers
+document.getElementById('prevMonthBtn').addEventListener('click', function() {
+    if (currentMonth > currentDate.getMonth() || currentYear > currentDate.getFullYear()) {
+        currentMonth--;
+        if (currentMonth < 0) {
+            currentMonth = 11;
+            currentYear--;
+        }
+        generateCalendar(tasksForCalendar, currentYear, currentMonth);
+    }
+    this.disabled = currentMonth === currentDate.getMonth();
+    document.getElementById('nextMonthBtn').disabled = false;
+});
+
+document.getElementById('nextMonthBtn').addEventListener('click', function() {
+    currentMonth++;
+    if (currentMonth > 11) {
+        currentMonth = 0;
+        currentYear++;
+    }
+    generateCalendar(tasksForCalendar, currentYear, currentMonth);
+    this.disabled = currentYear === currentDate.getFullYear() && currentMonth === currentDate.getMonth() + 1;
+    document.getElementById('prevMonthBtn').disabled = false;
+});
+
 
 // Function to show tooltip
 function showTooltip(event) {
@@ -258,7 +277,7 @@ function hideTooltip(event) {
 
 // Generate the calendar when the window loads
 window.onload = () => {
-    generateCalendar(tasksForCalendar);
+    generateCalendar(tasksForCalendar, currentYear, currentMonth);
     // Add event listeners to task elements for showing tooltips
     document.querySelectorAll('.task-info').forEach(task => {
         task.addEventListener('mouseenter', showTooltip);
