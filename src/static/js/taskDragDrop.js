@@ -189,7 +189,6 @@ function editTask(taskId) {
         })
         .then(data => {
             if (data.message) {
-                alert(data.message);
                 location.reload(); 
             }
         })
@@ -239,3 +238,5 @@ function closeAddModal() {
 function startStudy(estTime) {
     window.location.href = '/pomodoro_page?est_time=' + encodeURIComponent(estTime);
 }
+
+

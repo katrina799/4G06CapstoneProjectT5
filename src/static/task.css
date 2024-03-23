@@ -368,7 +368,7 @@ body, html {
 }
 
 .calendar-cell.today {
-  background-color: #ffcccb; /* Light red, for example */
+  background-color: #98a5d1; /* Light red, for example */
   font-weight: bold;
 }
 
@@ -378,5 +378,11 @@ body, html {
   justify-content: space-between; 
 }
 
+.calendar-wrapper {
+  display: none;
+}
 
-
+.button-container {
+  display: flex;
+  margin: 20px 0 20px 30px; /* Top, Right, Bottom, Left margins */
+}
