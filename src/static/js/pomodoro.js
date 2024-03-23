@@ -35,20 +35,33 @@ function startTimer(duration, display) {
     }
 }
 
+function getSimulatedDayOfWeek(simulatedDay) {
+    const daysMap = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    if (simulatedDay !== undefined && daysMap.includes(simulatedDay)) {
+        return daysMap.indexOf(simulatedDay);
+    } else {
+        // If no simulatedDay is provided or if it's not valid, use the current day of the week
+        return new Date().getDay();
+    }
+}
+
 function addStar() {
     const tomatoContainer = document.getElementById('tomatoContainer');
     const tomato = document.createElement('span');
     tomato.className = 'tomato';
     tomato.textContent = '🍅';
-    tomatoContainer.appendChild(tomato);
-    //update the day on wwklyMap
-    const dayOfWeek = new Date().getUTCDay();
-    console.log(dayOfWeek)
-    const daysMap =  ['Saturday', 'Sunday', 'Monday', 'Tuesday', 'Wednesday',
-    'Thursday', 'Friday']
+    tomatoContainer.appendChild(tomato); const simulatedDay = 'Monday'; // Example: Change this to test different days
+    const dayOfWeek = getSimulatedDayOfWeek(simulatedDay);
+   
+    // //update the day on weeklyMap
+    // const dayOfWeek = new Date().getDay(); // Use getDay() instead of getUTCDay() if you want the local day
+    // console.log(dayOfWeek);
+    // // Ensure the daysMap aligns with JavaScript's getDay(), where 0 is Sunday, 1 is Monday, etc.
+    const daysMap = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     const day = daysMap[dayOfWeek];
     updateTomatoCount(day);
 }
+
 
 function updateTomatoCount(day) {
     fetch(`/update_tomato/${day}`, { method: 'POST' })
@@ -122,9 +135,73 @@ window.onload = function () {
         }
     });
 
-    document.addEventListener('DOMContentLoaded', function () {
-        loadWeeklyData();
+    document.getElementById('finishTaskBtn').addEventListener('click', function() {
+        fetch(`/update_task_status/${{ task_id }}/finished`, { method: 'POST' })
+        .then(response => response.json())
+        .then(data => {
+            alert(data.message);
+            // Optionally, redirect to another page or update the UI
+        })
+        .catch(error => console.error('Error:', error));
     });
+
+    // Extract 'task_id' from URL query parameters
+    const params = new URLSearchParams(window.location.search);
+    console.log(params);
+    const taskId = params.get("task_id");
+    console.log(taskId);
+  
+    if (taskId) {
+      // Fetch task details from the backend using the 'taskId'
+      fetch(`/get_task/${taskId}`)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          return response.json();
+        })
+        .then(data => {
+          // Display the task details in 'taskDetailsBox'
+          const taskDetailsBox = document.getElementById("taskDetailsBox");
+          taskDetailsBox.innerHTML = `
+          <h2>Task Details</h2>
+          <p><strong>Course:</strong> ${data.course}</p>
+          <p><strong>Title:</strong> ${data.title}</p>
+          <p><strong>Due Date:</strong> ${data.due_date}</p>
+          <p><strong>Estimated Time:</strong> ${data.est_time}</p>
+          <p><strong>Priority:</strong> ${data.priority}</p>
+          <p><strong>Status:</strong> ${data.status}</p>
+          <p><strong>Weight:</strong> ${data.weight}</p>
+          `;
+          taskDetailsBox.style.display = "block";
+        })
+        .catch(error => {
+          console.error('Error fetching task details:', error);
+          const taskDetailsBox = document.getElementById("taskDetailsBox");
+          taskDetailsBox.innerHTML = `<p>Error loading task details.</p>`;
+          taskDetailsBox.style.display = "block";
+        });
+
+        const finishTaskBtn = document.getElementById('finishTaskBtn');
+        finishTaskBtn.style.display = 'block'; // Make the button visible
+
+        document.getElementById('finishTaskBtn').addEventListener('click', function() {
+            const params = new URLSearchParams(window.location.search);
+            const taskId = params.get("task_id");
+            if(taskId) {
+                fetch(`/update_task_status/${taskId}/done`, { method: 'POST' })
+                    .then(response => response.json())
+                    .then(data => {
+                        alert(data.message);
+                        window.location.href = '/tasks';
+                    })
+                    .catch(error => console.error('Error:', error));
+            }
+        });
+        
+    }
+
+
 
 
 };

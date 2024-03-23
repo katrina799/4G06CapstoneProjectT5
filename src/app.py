@@ -719,7 +719,27 @@ def add_task():
     est_hours = request.form.get("est_hours", 0)
 
     add_task_todo(course_name, task_name, due_date, weight, est_hours)
-    return redirect(url_for("start"))
+    return redirect(url_for("tasks_page"))
+
+
+@app.route("/get_task/<int:task_id>", methods=["GET"])
+def get_task(task_id):
+    try:
+        # Load the tasks DataFrame from CSV in S3
+        tasks_df = get_df_from_csv_in_s3(s3, bucket_name, mock_tasks_data_file)
+
+        # Find the task by task_id
+        task_row = tasks_df.loc[tasks_df['id'] == task_id]
+
+        if not task_row.empty:
+            # Convert the task_row DataFrame to a dictionary
+            task_details = task_row.to_dict(orient='records')[0]
+            return jsonify(task_details)
+        else:
+            return jsonify({"error": "Task not found"}), 404
+    except Exception as e:
+        print(f"An error occurred while fetching task details: {e}")
+        return jsonify({"error": "An internal server error occurred"}), 500
 
 
 @app.route("/delete_task/<int:task_id>", methods=["POST"])
@@ -851,19 +871,44 @@ def submit_feedback():
     return redirect(url_for("feedback_page"))
 
 
-# Router to pomodoro page
-@app.route("/pomodoro_page", methods=["GET", "POST"])
+@app.route("/pomodoro_page", methods=["GET"])
 def pomodoro_page():
+    task_id = request.args.get('task_id', None)
     est_time = request.args.get("est_time", default=None)
     global current_page
     current_page = "pomodoro_page"
-    # Render the profile page, showing username on pege
+    if task_id:
+        task_id = int(task_id)  # Ensure task_id is an integer
+        if update_task_status_endpoint(task_id, 'in_progress'):
+            print(f"Task {task_id} updated to in_progress")
     return render_template(
         "pomodoro_page.html",
         username=username,
         current_page=current_page,
         est_time=est_time,
+        task_id=task_id
     )
+
+
+@app.route(
+    "/update_task_status/<int:task_id>/<string:new_status>",
+    methods=['POST']
+)
+def update_task_status_endpoint(task_id, new_status):
+    # Fetch the current tasks from S3
+    tasks_df = get_df_from_csv_in_s3(s3, bucket_name, mock_tasks_data_file)
+    # Check if the task exists
+    if task_id in tasks_df["id"].values:
+        # Update the status of the task
+        tasks_df.loc[tasks_df["id"] == task_id, "status"] = new_status
+        # Write the updated DataFrame back to S3
+        write_df_to_csv_in_s3(s3, bucket_name, mock_tasks_data_file, tasks_df)
+        return jsonify({
+            "message": "Task status updated successfully",
+            "status": new_status
+        })
+    else:
+        return jsonify({"error": "Task not found"}), 404
 
 
 @app.route("/upload_transcript", methods=["GET", "POST"])
