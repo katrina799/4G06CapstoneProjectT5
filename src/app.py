@@ -515,7 +515,8 @@ def forum_page():
 
 @app.route("/forum_page/reverse_order", methods=["POST"])
 def reverse_forum_order():
-    global topics  # Assuming 'topics' is a global variable that stores your topics
+    global topics
+    # Assuming 'topics' is a global variable that stores your topics
 
     # Reverse the order of the topics
     topics = list(reversed(topics))
