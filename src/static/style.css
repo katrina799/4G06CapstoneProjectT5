@@ -260,8 +260,7 @@ a:hover {
     display: none; 
     position: absolute; 
     top: 70px; 
-    left: 10spx; 
-    right: 10px; 
+    left: 10px;
     width: auto; 
     max-width: 50%; 
     height: calc(1400vh / 36); 
@@ -270,7 +269,7 @@ a:hover {
     border: 1px solid #ccc;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); 
     z-index: 1000; 
-    border: 8px solid #cce3de;
+    border: 8px solid #8d6565;
     
     box-sizing: border-box; 
     overflow-y: auto; 

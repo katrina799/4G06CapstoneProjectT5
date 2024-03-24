@@ -105,21 +105,6 @@
         </div>
     </div>
 
-    <script>
-        // This code will run after the DOM is fully loaded
-        window.onload = function() {
-            var appGrid = document.getElementById('app-grid');
-            var toggleButton = document.getElementById('toggle-apps-btn');
-        
-            // This function toggles the visibility of the app grid
-            toggleButton.onclick = function() {
-                if (appGrid.style.display === 'none' || appGrid.style.display === '') {
-                    appGrid.style.display = 'block';
-                } else {
-                    appGrid.style.display = 'none';
-                }
-            };
-        };
-    </script>
+
 
 {% endblock %}
