@@ -407,6 +407,14 @@ def upload_file(course_id):
         )
 
     file = request.files["file"]
+    if not file.filename.lower().endswith('.pdf'):
+        return redirect(
+            url_for(
+                "course_detail",
+                course_id=course_id,
+                message="File format is not PDF. Please upload a PDF file.",
+            )
+        )
     new_filename = f"{course_id}-syllabus.pdf"
     file.filename = new_filename
 
@@ -846,20 +854,15 @@ def update_task_status():
 
 
 def add_task_todo(course_name, task_name, due_date, weight, est_hours):
-    # 检查 due_date 是否是有效的日期格式
     try:
-        # 尝试将 due_date 解析为 datetime 对象
         if due_date not in ["", "Not Found", "0"]:
             due_date_obj = datetime.strptime(due_date, "%Y-%m-%d")
             days_until_due = (due_date_obj - datetime.now()).days
-            # 根据截止日期距今天数设置任务优先级
             priority = "high" if days_until_due < 7 else "low"
         else:
-            # 对于无效的 due_date，将其设置为特殊值，并标记优先级为 "unknown"
             due_date = "0000-00-00"
             priority = "unknown"
     except ValueError:
-        # 如果 due_date 格式不正确，也将其设置为特殊值，并标记优先级为 "unknown"
         due_date = "0000-00-00"
         priority = "unknown"
 

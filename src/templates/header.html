@@ -1,6 +1,6 @@
 <div class="head">
         <div class="app-icon">
-            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Mac One Logo" style="height: 50px;">
+            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Mac One Logo" style="height: 85px; margin-left:20px; margin-top:5px">
         </div>
         <div id="toggle-apps-btn" class="app-toggle">
                 <i class="glyphicon glyphicon-th" title="Mac Apps" style="font-size:24px;"></i>
@@ -37,7 +37,42 @@
         </div>
 </div>
 
+<!-- new add -->
+<nav id="myNavbar" class="navbar navbar-expand-lg navbar-light bg-light">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item {{ 'active' if request.path == url_for('start') else '' }}">
+              <a class="nav-link" href="{{ url_for('start') }}">Home</a>
+            </li>
+            <li class="nav-item {{ 'active' if request.path == url_for('course_page') else '' }}">
+                <a class="nav-link" href="{{ url_for('course_page') }}">Courses</a>
+              </li>
+            <li class="nav-item {{ 'active' if request.path == url_for('tasks_page') else '' }}">
+                <a class="nav-link" href="{{ url_for('tasks_page') }}"> Tasks</a>
+              </li>
+            <li class="nav-item {{ 'active' if request.path == url_for('pomodoro_page') else '' }}">
+              <a class="nav-link" href="{{ url_for('pomodoro_page') }}">Pomodoro Timer</a>
+            </li>
+            <li class="nav-item {{ 'active' if request.path == url_for('feedback_page') else '' }}">
+              <a class="nav-link" href="{{ url_for('feedback_page') }}">Feedback</a>
+            </li>
+            <li class="nav-item {{ 'active' if request.path == url_for('forum_page') else '' }}">
+              <a class="nav-link" href="{{ url_for('forum_page') }}">Forum</a>
+            </li>
+            <li class="nav-item {{ 'active' if request.path == url_for('profile_page') else '' }}">
+              <a class="nav-link" href="{{ url_for('profile_page') }}">Profile</a>
+            </li>
+          </ul>
+        </div>
+    </nav>
+    
+      
+    
 
+<!-- new add -->
 <div id="app-grid" class="app-grid-container" style="display: none;">
         <a href="https://avenue.mcmaster.ca/" target="_blank" class="app-tile" id="app-tile1">
                 <img src="{{ url_for('static', filename='images/d2l.png') }}" alt="Avenue To Learn">
