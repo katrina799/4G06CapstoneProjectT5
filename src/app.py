@@ -407,6 +407,14 @@ def upload_file(course_id):
         )
 
     file = request.files["file"]
+    if not file.filename.lower().endswith('.pdf'):
+        return redirect(
+            url_for(
+                "course_detail",
+                course_id=course_id,
+                message="File format is not PDF. Please upload a PDF file.",
+            )
+        )
     new_filename = f"{course_id}-syllabus.pdf"
     file.filename = new_filename
 
