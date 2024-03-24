@@ -6,11 +6,11 @@
 }
 
 .glyphicon {
-    color: #b4c8cc;
+    color: #727272;
 }
 
 .glyphicon:hover {
-    color: #66b0bf;
+    color: #784552;
 }
 
 .banner-image {
@@ -36,12 +36,13 @@
 
 .head {
     display: flex;
-    border-bottom: 4px rgba(143, 198, 201, 0.887);
-    background-color: #cce3de;
+    border-bottom: 4px rgb(240,223,227);
+    background-color: #f6f6f6;
     margin: 5px;
     position: sticky;
     top: 0;
-    height: 50px;
+    height: 80px;
+    font-weight:bold;
     font-size: 16px;
     overflow: hidden;
     word-wrap: break-word;
@@ -65,10 +66,12 @@ a:hover {
 }
 
 .welcome-msg{
+    color: #000000;
     flex: 1; 
     display: flex;
     align-items: center; 
     justify-content: center;
+    font-size: large;
 }
 
 @media (max-width: 768px) {
@@ -77,6 +80,7 @@ a:hover {
         padding: 0 10px;
     }
 }
+
 
 .panel-course {
     background-color: rgb(255, 255, 255);
@@ -126,7 +130,7 @@ a:hover {
 }
 
 .active i {
-    color: #66b0bf;
+    color: #efb255;
 
 }
 
@@ -267,7 +271,7 @@ a:hover {
     border: 1px solid #ccc;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); 
     z-index: 1000; 
-    border: 8px solid #8d6565;
+    border: 8px solid #996a66;
     
     box-sizing: border-box; 
     overflow-y: auto; 
@@ -334,7 +338,7 @@ a:hover {
 }
 
 .profile-banner {
-    background-color: #f6fff8;
+    background-color: #f5eaed;
     padding: 20px;
     text-align: center;
     margin-bottom: 30px;
@@ -498,6 +502,21 @@ a:hover {
     padding: 5px 10px;
     margin-left: 10px;
 }
+
+.btn.btn-primary {
+    background-color: #941035;
+    color: white;
+    border-radius: 5px;
+}
+
+
+.btn.btn-primary:hover {
+    background-color: #a53045; 
+    color: #fff; 
+    cursor: pointer; 
+}
+
+
 .topic-item-container {
     background: #FFFFFF;
     border: 1px solid #DDDDDD;
@@ -591,12 +610,12 @@ a:hover {
     color: white !important;
     font-size: large;
     padding-left: 20px;
-    padding-right: 50px; /* 你已经设置了这部分 */
+    padding-right: 50px; 
     height: 60px;
     
-    /* 为了在文字两边添加更多空白空间，你可以调整padding-left和padding-right的值 */
-    padding-left: 50px; /* 增加左侧的空白空间 */
-    padding-right: 50px; /* 增加右侧的空白空间 */
+  
+    padding-left: 50px;
+    padding-right: 50px; 
 }
 
 
@@ -613,25 +632,21 @@ a:hover {
     
 }
 
-
-
-/* 修改#myCarousel的CSS，以确保它水平居中 */
 #myCarousel {
-    margin: 0 auto; /* 确保上下保持为0，左右自动调整，从而实现水平居中 */
-    width: 90%; /* 或者任何具体的宽度 */
-    max-width: 2000px; /* 限制最大宽度 */
+    margin: 0 auto;
+    width: 90%;
+    max-width: 2000px;
 }
 
 .carousel-inner {
     max-width: 100%;
-    margin: 0 auto; /* 如果.carousel-inner需要单独居中，这行代码可以保留 */
-    height: 800px; /* 固定高度 */
+    margin: 0 auto;
+    height: 800px;
     overflow: hidden;
 }
 
 .carousel-item img {
-    width: 100%; /* 改为100%保证图片宽度不超过容器宽度 */
-    height: auto; /* 调整为auto以保持图片比例 */
+    width: 100%; 
+    height: auto;
     max-height: 800px;
 }
-
