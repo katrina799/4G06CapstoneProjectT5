@@ -121,10 +121,7 @@
 </div>
 
 
-
-
-
-    <div class="course-panel-container">
+    <div class="course-panel-container" style="margin-left: 25px; margin-right: 25px;">
         <div class="course-list">
             <div class="panel-course" style="margin: 5px;">
                 <div style="display: flex; margin: 5px; align-items: center; ">
@@ -133,11 +130,12 @@
                     <form action="/add_course" method="post" style="margin-top: 15px; margin-left: 15px;">
                         <label for="newcourse">Add a New Course:</label>
                         <input type="text" id="newcourse" name="newcourse" required>
-                        <button type="submit" class="btn btn-success btn-xs">
+                        <button type="submit" class="btn btn-success btn-xs" style="background-color: #941035; border-color:#941035;">
                             <i class="fa fa-plus" aria-hidden="true">
                             </i>
                             Add
                         </button>
+                        <label for="newcourse">Notice: Input Course Code Here (e.g. SFWRENG 4G06)</label>
                     </form>
                 </div>
 
