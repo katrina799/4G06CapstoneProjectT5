@@ -21,6 +21,9 @@
     urlcolor=cyan           % color of external links
 }
 
+\input{Comments}
+\input{Common}
+
 \newcommand{\lips}{\textit{Insert your content here.}}
 \newcounter{reqnum} %Functional requirement number
 \newcommand{\rthereqnum}{FR\refstepcounter{reqnum}\thereqnum:}
@@ -46,8 +49,6 @@
 \newcommand{\rthecprnum}{CPR\refstepcounter{cprnum}\thecprnum:}
 \newcommand{\cprref}[1]{CR\ref{#1}}
 
-\input{../Comments}
-\input{../Common}
 
 \newcounter{udreqnum} %User documentation requirement number
 \newcommand{\rtheudreqnum}{UDR\refstepcounter{udreqnum}\theudreqnum:}
@@ -98,6 +99,8 @@
 \midrule
 Oct 11, 2023 & Revision 0 & First draft of SRS \\
 Nov 1, 2023 & Revision 0.1 & Security update \\
+Mar 23, 2023 & Revision 1.0 & Update after VnV \\
+Mar 31, 2023 & Revision 1.1 & Update for final doc \\
 \bottomrule
 \end{tabularx}
 
@@ -106,9 +109,9 @@ Nov 1, 2023 & Revision 0.1 & Security update \\
 ~\newpage
 \section{Purpose of the Project}
 \subsection{User Business}
-The users would be students in high school to college institutes all over the world dealing with multiple courses.
+The primary users of MacONE will be students from McMaster University. MacONE aims to be an integral tool for academic organization and success, paving the way for a more efficient and engaged student community at McMaster University and beyond.
 \subsection{Goals of the Project}
-MacOne is a tailored online platform aimed at streamlining and enhancing the McMaster student experience. It enables students to directly extract and integrate course information into their personal schedules, creating an individualized to-do list. Additionally, MacOne provides easy access to vital university resources, a forum for student interaction, and a Pomodoro timer for effective study sessions, feedback box for users to share their insights directly with developers, and a function allowing students to calculate their cumulative GPA by uploading their transcripts, all designed to simplify student life at McMaster University.
+MacONE is a tailored online platform aimed at streamlining and enhancing the McMaster student experience. It enables students to directly extract and integrate course information into their schedules, creating an individualized to-do list. Additionally, MacONE provides easy access to vital university resources, a forum for student interaction, a Pomodoro timer for effective study sessions, a feedback box for users to share their insights directly with developers, and a function allowing students to calculate their cumulative GPA by uploading their transcripts, all designed to simplify student life at McMaster University.
 \section{Stakeholders}
 \subsection{Client}
 N/A
@@ -152,12 +155,10 @@ The project implementation would be done through \textit{VS Code} in the beginni
 \subsection{Partner or Collaborative Applications}
 Our system would import event data from and export generated study plans to popular calendar applications like \textit{Google Calendar} and \textit{Outlook Calendar}. 
 \subsection{Off-the-Shelf Software}
-\subsubsection{StudySchedule.org}
-StudySchedule is a free scheduling software dedicated to generating customized daily schedules for students to study for MCAT. They would ask the user to set up an account, pick study material from their MCAT resource library, and take a questionnaire on time constraints and pace preference. Students could view their progress and make adjustments as they wish.
-\subsubsection{Taskade AI Genrator}
-Taskade is a powerful team project management tool. The component \textit{Taskade AI} is capable of generating tasks for given project topics and creating checklists, project plans, and calendar schedules. \textit{Taskade AI} is also capable of summarising \textit{PDF} files.
-\subsection{Anticipated Workplace Environment}
-Our web-based app is anticipated to be compatible with mainstream browsers including \textit{Chrome, Safari, Microsoft Edge}, and \textit{Firefox} on the latest version of \textit{Windows, Linux} and \textit{macOS}.
+
+\subsubsection{OpenAI API Integration}
+Incorporating OpenAI's cutting-edge API, MacONE elevates its adaptive learning environment to new heights. This integration brings to the platform sophisticated natural language processing tools that can assist students in extracting important course information from course outlines.
+
 \subsection{Schedule Constraints}
 Each member of our team would devote 8 hours per week to work on the project making a total of 40 hours per week.
 \subsection{Budget Constraints}
@@ -169,8 +170,6 @@ N/A
 \subsection{Glossary of All Terms, Including Acronyms, Used by Stakeholders involved in the Project}
 \begin{itemize}
     \item \textbf{UI:} User Interface - the space where interactions between humans and machines occur.
-    \item \textbf{ML:} Machine Learning - a field of artificial intelligence that uses statistical techniques to give computer systems the ability to "learn" from data.
-    \item \textbf{Pipeline (in ML):} A series of automated processes that allow for the streamlining of data from ingestion to processing, transformation, training, and evaluation in machine learning models.
     \item \textbf{API:} Application Programming Interface - a set of tools and definitions used to implement software applications.
     \item \textbf{HTTP:} Hypertext Transfer Protocol - an application protocol used for transferring hypermedia documents, such as HTML. It is the foundation of any data exchange on the Web.
     \item \textbf{Database:} Centralized collection of data, which can be stored, accessed, and managed easily.
@@ -238,7 +237,7 @@ parameter & value & unit & description\\
 
 \section{Relevant Facts And Assumptions}
 \subsection{Relevant Facts}
-Manually reading through multiple course outlines, inputting all the deliverable information into the calendar, and crunch time has always been an inefficient part of academic life. Students wish to have a seamless tool integrating deadline management into their everyday lives without risking overdue penalties.
+Our survey has shown that McMaster students spend at least an hour per week organizing their academic schedules and tasks manually. It also revealed that 80\% of McMaster students reported missing at least one deadline per semester due to poor time management or calendar disorganization. Furthermore, around 75\% of students find integrating multiple course outlines into their personal calendars challenging and time-consuming. These difficulties have a tangible impact, many students experience stress-related symptoms during crunch times, which could be alleviated with better deadline management tools. By addressing these specific issues, the MacONE platform seeks to provide a seamless tool that can integrate crucial academic deadlines into students' calendars efficiently, thereby reducing the risk of penalties due to missed deadlines and decreasing stress levels among the student population.
 \subsection{Business Rules}
 N/A
 \subsection{Assumptions}
@@ -256,36 +255,26 @@ N/A
 \section{The Scope of the Work}
 
 \subsection{The Current Situation}
-Currently, students across various educational levels face significant challenges in managing their academic tasks and schedules effectively due to the overwhelming schoolwork. Teachers and educational institutions also seek innovative solutions to foster management skills among students and enhance their learning experiences. The existing solutions are often not comprehensive, lacking intelligent task prioritization, progress visualization, and effective time management tools.
+Currently, students across various educational levels face significant challenges in managing their academic tasks and schedules effectively due to the overwhelming schoolwork. Teachers and educational institutions also seek innovative solutions to foster management skills among students and enhance their learning experiences. The existing solutions are often not comprehensive, lacking progress visualization, and effective time management tools.
 
 \subsection{The Context of the Work} 
-[NEED TO CHANGE]The MacOne is designed to bridge this gap by providing a user-friendly platform that combines automated task generation, intelligent task prioritization, progress visualization, and various other features. The development of this application intends to improve students' academic performance and mental well-being by reducing stress and enhancing learning experiences. 
+The MacONE is designed to bridge this gap by providing a user-friendly platform that combines automated task generation, progress visualization, and various other features. The development of this application intends to improve students' academic performance and mental well-being by reducing stress and enhancing learning experiences. 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.7\linewidth]{Context Diagram.drawio.png} 
+    \includegraphics[width=0.9\linewidth]{Context Diagram.drawio.png} 
     \caption{Context Diagram}
 \end{figure}
 
-\subsection{Specifying a Business Use Case (BUC)}
-[NEED TO CHANGE]
-\begin{itemize}
-    \item \textbf{BUC Name:} Integrated Study Management
-    \item \textbf{Goal:} To provide a comprehensive solution that allows students to manage their academic tasks, schedules, and study sessions effectively.
-    \item \textbf{Actors:} Students, Educational Institutions, Teachers.
-    \item \textbf{Preconditions:} User registration and course information uploaded or inputted.
-    \item \textbf{Postconditions:} Enhanced student learning experiences, improved academic performance, reduced stress levels.
-    \item \textbf{Main Success Scenario:} Students effectively use the app to manage their study tasks, leading to improved academic outcomes and reduced stress. Educational institutions and teachers observe enhanced student management skills and learning experiences.
-    \item \textbf{Extensions:} Development of additional features based on user's feedback, improvement of machine learning model, larger user base.
-\end{itemize}
 
 \section{Business Data Model and Data Dictionary}
 \subsection{Business Data Model}
-\begin{figure}[htbp]
+\begin{figure}[h]
   \centering
-  \includegraphics[width=1.2\textwidth]{DFD.png}
+  \includegraphics[width=1\linewidth]{DFD.png}
   \caption{Data Flow Diagram} 
   \label{fig:dfd} 
 \end{figure}
+\\
 
 \subsection{Data Dictionary}
 \subsubsection{Users}
@@ -441,7 +430,7 @@ Usage & Record course information & \\
 \section{The Scope of the Product}
 
 \subsection{Product Boundary}
-The Smart Study Helper App aims to serve as a comprehensive solution for students to manage their study schedules and tasks effectively. Its boundary extends from user registration, task generation, and prioritization, to progress visualization and study planning. It will interact with external calendar services and will allow users to collaborate with peers through its social network component. However, the app’s boundary does not extend to managing non-academic tasks or any other aspects of a user’s daily life not related to their study.
+MacONE aims to serve as a comprehensive solution for students to manage their study schedules and tasks effectively. Its boundary extends from user registration, task generation, and prioritization, to progress visualization. It will interact with external calendar services and will allow users to collaborate with peers through its social network component. However, the app’s boundary does not extend to managing non-academic tasks or any other aspects of a user’s daily life not related to their study.
 
 \subsection{Product Use Case Table}
 \begin{longtable}{ |p{3cm}|p{5cm}|p{5cm}|}
@@ -484,12 +473,6 @@ The Smart Study Helper App aims to serve as a comprehensive solution for student
 \end{longtable}
 
 \subsection{Individual Product Use Cases (PUC’s)}
-\begin{figure}[htbp]
-    \centering
-    \includegraphics[width=1.0\linewidth]{Use Case Diagram.drawio.png} 
-    \caption{Use Case Diagram}
-\end{figure}
-
 
 \subsubsection{Upload Syllabus}
 \begin{itemize}
@@ -801,7 +784,7 @@ The language in the app must be non-offensive.
 \section{Performance Requirements}
 
 \subsection{Speed and Latency Requirements}
-\paragraph{SLR1:} Major actions, such as uploading syllabuses, generating tasks, and prioritizing tasks, should be completed in a timely manner.
+\paragraph{SLR1:} Major actions, such as uploading syllabuses, generating tasks, and calculating cumulative GPA should be completed in a timely manner.
 \paragraph{Fit Criteria:} During testing under normal load conditions, major actions are executed within a 2-second threshold.
 
 \subsection{Safety-Critical Requirements}
@@ -809,8 +792,8 @@ The language in the app must be non-offensive.
 \paragraph{Fit Criteria:} Throughout security testing, no incidents of data breaches or unauthorized data accesses are observed.
 
 \subsection{Precision or Accuracy Requirements}
-\paragraph{PAR1:} ML-based features, particularly task prioritization, must achieve a high degree of accuracy.
-\paragraph{Fit Criteria:} When tested against predefined scenarios, ML algorithms show an accuracy rate of 90\% in task categorization and prioritization.
+\paragraph{PAR1:} Calculations such as getting a cumulative GPA, must achieve a high degree of accuracy.
+\paragraph{Fit Criteria:} When tested against predefined scenarios, cGPA calculation algorithms show an accuracy rate of 90\%.
 
 \subsection{Robustness or Fault-Tolerance Requirements}
 \paragraph{RFTR1:} The application must demonstrate resilience against unexpected inputs or actions and provide means of efficient data recovery.
@@ -954,7 +937,7 @@ Provide regular security patches and updates to the software to rectify known vu
 
 \textbf{Fit Criteria:} No known vulnerability should persist in the system for more than a month without a patch.
 \item
-The system should protect authentication data from brute force attacks.
+The system should protect authentication data from brute-force attacks.
 
 \textbf{Fit Criteria:} Restriction after a certain number of failed login attempts; option for the user to unlock account via email or phone.
 \end{itemize}
@@ -964,7 +947,7 @@ The system should protect authentication data from brute force attacks.
     \item The application shall be easily translatable into various languages without causing ambiguity in meaning.\\
     \textbf{Fit Criteria}: The application can be translated into at least \texttt{MIN\_LANGUAGE} languages(Spanish, French, Chinese, Italian and German).\\
     \item The product shall avoid elements such as confusing icons, symbols, or offensive images that might cause controversy in different cultural environments.\\
-    \textbf{Fit Criteria}: Users are able to feel comfortable and respected.\\
+    \textbf{Fit Criteria}:  User Interface (UI) elements, including icons and symbols, will undergo usability testing with a diverse group of at least 100 participants across different cultural backgrounds to ensure clarity and cultural appropriateness. The acceptable threshold for misunderstanding or offence will be less than 2\% of participants.\\
 \end{itemize}
 
 \section{Compliance Requirements}
@@ -1012,25 +995,14 @@ The configuration location and integrated module should be clearly defined in th
 This section specifies the interfaces between the new system and existing systems or components.
 \begin{itemize}
     \item \textbf{Interface with Google Calendar}: The system should integrate with Google Calendar to synchronize and visualize task deadlines. The interface will involve certification, data exchange, and event management.
-    
-    \item \textbf{Interface with Outlook Calendar}: Similar to Google Calendar, the system shall integrate with Outlook Calendar to synchronize events. The interface will involve certification and event management.
 
-    \item \textbf{Interface with Machine Learning Server}: The system relies on machine learning algorithms to prioritize tasks. This interface includes sending data to the machine learning server, processing suggestions, and integrating them into the user interface.
+
 
     \item \textbf{Interface to connect with users}: To facilitate collaborative learning, the system should enable users to connect with their peers. This interface includes user authentication, data exchange, and video chat integration.
 
-    \item \textbf{Interface with videoconferencing hardware} Users will use webcams, microphones, and speakers for video chat during collaborative learning. This interface is required to access these hardware components and manage live video conferencing.
 \end{itemize}
 \subsection{Potential User Problems}
 \begin{itemize}
-    \item \textbf{User Confusion}:
-    The addition of machine learning-driven task prioritization, facial recognition, and online collaborative learning session features may confuse or create resistance from some users who are unfamiliar with these concepts.
-    
-    \textbf{Prevention and mitigation measures:}
-    \begin{itemize}
-        \item Develop a user-friendly onboarding process and provide extensive training materials to ensure users can easily understand and use the new features.
-        \item Provide customization options that allow users to customize the system to their preferences. This flexibility will help users take better control of their experience.
-    \end{itemize}
     
     \item \textbf{Privacy Concerns}:
     Users may have privacy concerns, especially with attention-monitoring features such as facial recognition. They may be concerned that their facial data will be collected and used.
@@ -1057,8 +1029,6 @@ Inhibit the New Product}
     \item Available network bandwidth may not be sufficient to support real-time videoconferencing for collaborative learning sessions, leading to potential performance issues.
     
     \item Implementing system integration with external calendaring platforms (e.g., Google Calendar, Outlook) takes into account that these platforms may have limitations or constraints that affect the quality of the integration.
-    
-    \item Hardware for facial recognition may not be readily available or may not meet the accuracy requirements for detecting the user's level of attention.
     
     \item The implementation environment may be subject to specific data privacy regulations that may affect the collection and storage of user data.
 \end{itemize}
@@ -1108,33 +1078,33 @@ The following are some of the major cost items that may need to be considered:
 
 \section{Waiting Room}
 \begin{itemize}
+  \item Integrate Google Calendar events into the website's task calendar
   \item Add a dark mode support for the website
   \item Add a colour blind support for the website
-  \item Add sound effects to the website to make it more user friendly and interesting
-  \item Implement a feature where the users are able to integrate with other popular music apps like Spotify to play their favourite playlists while studying
-  \item Implement a badges or achievements system such as points for completing tasks which can make the use of the website more engaging and rewarding 
-  \item Provide data analysis and insight on how the user performs within a period of time and provide feedback on how to improve their way of study
+  \item Add sound effects to the website to make it more user-friendly and interesting
+  \item Implement a feature where the users can integrate with other popular music apps like Spotify to play their favourite playlists while studying
+  \item Implement a badge or achievements system such as points for completing tasks which can make the use of the website more engaging and rewarding 
   \item Add support to other platforms such as mobile applications and desktop applications
 \end{itemize}
 
 \section{Ideas for Solution}
 \subsection{Idea 1}
-\textbf{Requirement}: \frref{R_upload_pdf}, The user could upload multiple PDF files containing course outlines to the system. \\
+\textbf{Requirement}: The user could upload multiple PDF files containing course outlines to the system. \\
 \textbf{Potential solution}: We could use a \textit{Python} web framework \textit{Flask} to set up a web app which supports accessing and uploading multiple files with PDF extensions.\\
-\textbf{Advantages}: This will allow users to upload their PDF easily and more securely, and with no additional effort required for developers to implement and test these features, as \textit{Flask} has already taken care of it for us.\\
+\textbf{Advantages}: This will allow users to upload their PDF easily and more securely and with no additional effort required for developers to implement and test these features, as \textit{Flask} has already taken care of it for us.\\
 \textbf{Disadvantages}: Using \textit{Flask} to support this feature doesn't present any foreseeable disadvantages in the near future. \\
 
 \subsection{Idea 2}
-\textbf{Requirement}: \frref{R_prioritize_task}, The system could assign priority to each task generated. \\
-\textbf{Potential solution}: A inference pipeline could be set up to give inference on the unclassified tasks using type of task, weight, and deadline as the inputs. The inference pipeline could use a trained model of task priority classification.\\
-\textbf{Advantages}: Setting an inference pipeline could be more flexible and could potentially give better results than implementing an fixed algorithm for giving predictions. Several steps for the inference pipeline could be constructed and it will be easier to make changes once it gets set up, simply adding, changing or removing steps when there is a future requirement.\\
+\textbf{Requirement}: The system could assign priority to each task generated. \\
+\textbf{Potential solution}: An inference pipeline could be set up to give inference on the unclassified tasks using type of task, weight, and deadline as the inputs. The inference pipeline could use a trained model of task priority classification.\\
+\textbf{Advantages}: Setting an inference pipeline could be more flexible and could potentially give better results than implementing a fixed algorithm for giving predictions. Several steps for the inference pipeline could be constructed and it will be easier to make changes once it gets set up, simply adding, changing or removing steps when there is a future requirement.\\
 \textbf{Disadvantages}: There will be an overload of defining each step and connecting them. \\
 
 \subsection{Idea 3}
-\textbf{Requirement}: \frref{R_check_task_progress}, The user should be able to view the progress of each task. \\
-\textbf{Potential solution}: Could implement a cloud based solution for holding and retrieving data of task, time, etc. A potential choice could be using \textit{AWS S3}\\
-\textbf{Advantages}: This would allow users to check their progress of task and time in a more available, reliable, and well-managed service. The data can be well secured and can be accessed in many ways for example using \textit{AWS S3}, \textit{AWS console}, \textit{AWS Command Line}, providing multiple ways for developers to implement  \\
-\textbf{Disadvantages}: There is a cost associated with it when using third party cloud services
+\textbf{Requirement}: The user should be able to view the progress of each task. \\
+\textbf{Potential solution}: Could implement a cloud-based solution for holding and retrieving data of task, time, etc. A potential choice could be using \textit{AWS S3}\\
+\textbf{Advantages}: This would allow users to check their progress of tasks and time in a more available, reliable, and well-managed service. The data can be well secured and can be accessed in many ways for example using \textit{AWS S3}, \textit{AWS console}, \textit{AWS Command Line}, providing multiple ways for developers to implement  \\
+\textbf{Disadvantages}: There is a cost associated with it when using third-party cloud services
 \newpage{}
 \section*{Appendix --- Reflection}
 
