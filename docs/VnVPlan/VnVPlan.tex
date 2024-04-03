@@ -289,13 +289,13 @@ The Software Validation Plan will focus on ensuring that the final product meets
 
 Type: Functional, Manual, Dynamic
 
-Initial State: User is logged into the system and on the course information extraction page.
+Initial State: Tester is on the course information extraction page.
 
-Input/Condition: User uploads their course syllabi in PDF format.
+Input/Condition: Tester uploads their course syllabi in PDF format.
 
-Output/Result: The system extracts key details such as professor's email addresses, assignment weightings, and MSAF policy, displaying them to the user.
+Output/Result: The system extracts key details such as professor's email addresses, assignment weightings, and MSAF policy, displaying them to the tester.
 
-How test will be performed: A user uploads multiple course syllabi PDFs, and the system's ability to accurately extract and display the specified information is evaluated.
+How test will be performed: A tester uploads multiple course syllabi PDFs, and the system's ability to accurately extract and display the specified information is evaluated.
 
 \item{TFR2-TASK1\\}\label{TFR2-TASK1}
 
@@ -304,7 +304,7 @@ Initial State: The system has successfully extracted course information from an 
 
 Input/Condition: Course information is processed by the system.
 
-Output/Result: Tasks are automatically created and added to the user's to-do list based on the extracted course information.
+Output/Result: Tasks are automatically created and added to the tester's to-do list based on the extracted course information.
 
 How test will be performed: Course outlines are uploaded, and the automatic generation of tasks in the to-do list is verified for correctness and completeness.
 
@@ -312,48 +312,48 @@ How test will be performed: Course outlines are uploaded, and the automatic gene
 
 Type: Functional, Manual, Dynamic
 
-Initial State: User is on the course addition page.
+Initial State: Tester is on the course addition page.
 
-Input/Condition: User inputs a valid course code to add a new course.
+Input/Condition: Tester inputs a valid course code to add a new course.
 
-Output/Result: The course is successfully added to the user's profile.
+Output/Result: The course is successfully added to the tester's profile.
 
-How test will be performed: Users attempt to add various courses by providing valid course codes, and the system's response to correctly add those courses is assessed.
+How test will be performed: Tester attempt to add various courses by providing valid course codes, and the system's response to correctly add those courses is assessed.
 
 \item{TFR4-REMOVE1\\}\label{TFR4-REMOVE1}
 
 Type: Functional, Manual, Dynamic
 
-Initial State: User's profile contains one or more courses.
+Initial State: Tester's profile contains one or more courses.
 
-Input/Condition: User selects a course to remove from their profile.
+Input/Condition: Tester selects a course to remove from their profile.
 
-Output/Result: The selected course is removed from the user's profile.
+Output/Result: The selected course is removed from the tester's profile.
 
-How test will be performed: A user with multiple courses on their profile attempts to remove one, and the successful removal and profile update are verified.
+How test will be performed: Tester with multiple courses on their profile attempts to remove one, and the successful removal and profile update are verified.
 
 \item{TFR5-POMODORO1\\}\label{TFR5-POMODORO1}
 
 Type: Functional, Manual, Dynamic
 
-Initial State: User is on the Pomodoro timer page.
+Initial State: Tester is on the Pomodoro timer page.
 
-Input/Condition: User initiates a study session using the Pomodoro timer.
+Input/Condition: Tester initiates a study session using the Pomodoro timer.
 
 Output/Result: A Pomodoro study session starts.
 
-How test will be performed: The user navigates to the Pomodoro page and starts a study session, verifying the timer's functionality and session tracking.
+How test will be performed: Tester navigates to the Pomodoro page and starts a study session, verifying the timer's functionality and session tracking.
 
 \item{TFR6-POMODORO2\\}\label{TFR6-POMODORO2}
 
 Type: Functional, Manual, Dynamic
 
-Initial State: User's to-do list contains at least one task.
+Initial State: Tester's to-do list contains at least one task.
 
-Input/Condition: User starts a Pomodoro timer by selecting a specific task from the to-do list.
+Input/Condition: Tester starts a Pomodoro timer by selecting a specific task from the to-do list.
 Output/Result: A Pomodoro study session specific to the selected task begins.
 
-How test will be performed: The user selects a task from their to-do list to start a Pomodoro session, and the system's ability to associate the session with the selected task is evaluated.
+How test will be performed: Tester selects a task from their to-do list to start a Pomodoro session, and the system's ability to associate the session with the selected task is evaluated.
 
 \item{TFR7-MUSIC1\\}\label{TFR7-MUSIC1}
 
@@ -361,11 +361,11 @@ Type: Functional, Manual, Dynamic
 
 Initial State: A Pomodoro study session is active.
 
-Input/Condition: User selects to play background music during the study session.
+Input/Condition: Tester selects to play background music during the study session.
 
 Output/Result: Chosen background music plays during the Pomodoro session.
 
-How test will be performed: During an active Pomodoro session, the user selects different music options to play in the background, and the system's ability to play and manage music selection is assessed.
+How test will be performed: During an active Pomodoro session, the tester selects different music options to play in the background, and the system's ability to play and manage music selection is assessed.
 
 \item{TFR8-TOMATO1\\}\label{TFR8-TOMATO1}
 
@@ -375,7 +375,7 @@ Initial State: A Pomodoro study session has just been completed.
 
 Input/Condition: Completion of a Pomodoro study session.
 
-Output/Result: A tomato icon is generated and displayed in the user's "harvest bucket".
+Output/Result: A tomato icon is generated and displayed in the tester's "harvest bucket".
 
 How test will be performed: After completing a Pomodoro session, the presence of a new tomato icon in the harvest bucket is verified to assess the system's reward mechanism.
 
@@ -383,74 +383,74 @@ How test will be performed: After completing a Pomodoro session, the presence of
 
 Type: Functional, Manual, Dynamic
 
-Initial State: User is on the to-do list page.
-Input/Condition: User adds a new task to the to-do list.
+Initial State: Tester is on the to-do list page.
+Input/Condition: Tester adds a new task to the to-do list.
 
 Output/Result: The new task appears on the to-do list.
 
-How test will be performed: User attempts to add a task by specifying task details, and the addition of the task to the list is confirmed.
+How test will be performed: Tester attempts to add a task by specifying task details, and the addition of the task to the list is confirmed.
 
 \item{TFR10-TODO2\\}\label{TFR10-TODO2}
 Type: Functional, Manual, Dynamic
 
-Initial State: User's to-do list contains at least one task.
+Initial State: Tester's to-do list contains at least one task.
 
-Input/Condition: User selects a task to view its details.
+Input/Condition: Tester selects a task to view its details.
 
 Output/Result: Details of the selected task are displayed, including due date, associated course, weight, and other relevant information.
 
-How test will be performed: User clicks on various tasks to view their details, verifying that all relevant information is accurately presented.
+How test will be performed: Tester clicks on various tasks to view their details, verifying that all relevant information is accurately presented.
 
 
 \item{TFR11-TODO3\\}\label{TFR11-TODO3}
 Type: Functional, Manual, Dynamic
 
-Initial State: User's to-do list contains at least one task.
+Initial State: Tester's to-do list contains at least one task.
 
-Input/Condition: User selects an existing task to edit in the to-do list.
+Input/Condition: Tester selects an existing task to edit in the to-do list.
 
-Output/Result: The task is updated with new information as provided by the user.
+Output/Result: The task is updated with new information as provided by the tester.
 
-How test will be performed: User edits multiple tasks with different pieces of information, confirming that each change is reflected in the to-do list.
+How test will be performed: Tester edits multiple tasks with different pieces of information, confirming that each change is reflected in the to-do list.
 
 
 \item{TFR12-TODO4\\}\label{TFR12-TODO4}
 
 Type: Functional, Manual, Dynamic
 
-Initial State: User's to-do list contains several tasks.
+Initial State: Tester's to-do list contains several tasks.
 
-Input/Condition: User views the to-do list.
+Input/Condition: Tester views the to-do list.
 
 Output/Result: Tasks are organized and displayed in three separate columns: To Do, In Progress, and Done.
 
-How test will be performed: User verifies the organization of tasks into the specified columns and assesses the ease of understanding the task's status.
+How test will be performed: Tester verifies the organization of tasks into the specified columns and assesses the ease of understanding the task's status.
 
 
 \item{TFR13-TODO5\\}\label{TFR13-TODO5}
 
 Type: Functional, Manual, Dynamic
 
-Initial State: User is on the to-do list page.
+Initial State: Tester is on the to-do list page.
 
-Input/Condition: User toggles between Kanban-style and calendar layout views.
+Input/Condition: Tester toggles between Kanban-style and calendar layout views.
 
 Output/Result: The to-do list is displayed according to the selected layout preference.
 
-How test will be performed: User switches between the two layout options multiple times to ensure the layout changes are applied correctly and persistently.
+How test will be performed: Tester switches between the two layout options multiple times to ensure the layout changes are applied correctly and persistently.
 
 
 \item{TFR14-FORUM1\\}\label{TFR14-FORUM1}
 
 Type: Functional, Manual, Dynamic
 
-Initial State: User is on the forum page.
+Initial State: Tester is on the forum page.
 
-Input/Condition: User creates a new discussion topic.
+Input/Condition: Tester creates a new discussion topic.
 
 Output/Result: The new topic is successfully created and visible in the forum.
 
-How test will be performed: User attempts to create multiple discussion topics with different themes, verifying that each is added to the forum.
+How test will be performed: Tester attempts to create multiple discussion topics with different themes, verifying that each is added to the forum.
 
 \item{TFR15-FORUM2\\}\label{TFR15-FORUM2}
 
@@ -458,121 +458,121 @@ Type: Functional, Manual, Dynamic
 
 Initial State: Forum contains multiple discussion topics.
 
-Input/Condition: User searches for a topic using keywords.
+Input/Condition: Tester searches for a topic using keywords.
 
-Output/Result: Topics matching the keywords are displayed to the user.
+Output/Result: Topics matching the keywords are displayed to the tester.
 
-How test will be performed: User performs several searches using different keywords, and the accuracy and relevance of search results are evaluated.
+How test will be performed: Tester performs several searches using different keywords, and the accuracy and relevance of search results are evaluated.
 
 
 \item{TFR15-FORUM3\\}\label{TFR16-FORUM3}
 
 Type: Functional, Manual, Dynamic
 
-Initial State: User is viewing a specific discussion topic in the forum.
+Initial State: Tester is viewing a specific discussion topic in the forum.
 
-Input/Condition: User submits a comment on the topic.
+Input/Condition: Tester submits a comment on the topic.
 
 Output/Result: The comment is added to the discussion.
 
-How test will be performed: User comments on various topics and verifies that their comments are correctly posted and visible to others.
+How test will be performed: Tester comments on various topics and verifies that their comments are correctly posted and visible to others.
 
 \item{TFR17-FORUM4\\}\label{TFR17-FORUM4}
 
 Type: Functional, Manual, Dynamic
 
-Initial State: User is viewing a comment within a discussion topic in the forum.
+Initial State: Tester is viewing a comment within a discussion topic in the forum.
 
-Input/Condition: User replies to a comment.
+Input/Condition: Tester replies to a comment.
 Output/Result: The reply is posted as part of the discussion thread.
 
-How test will be performed: User replies to multiple comments in different discussion threads, checking for the proper organization and visibility of their replies.
+How test will be performed: Tester replies to multiple comments in different discussion threads, checking for the proper organization and visibility of their replies.
 
 \item{TFR18-QUICKLINKS1\\}\label{TFR18-QUICKLINKS1}
 
 Type: Functional, Manual, Dynamic
 
-Initial State: User is on the dashboard or home page.
+Initial State: Tester is on the dashboard or home page.
 
-Input/Condition: User navigates to the quick links section.
+Input/Condition: Tester navigates to the quick links section.
 
 Output/Result: The system displays key university websites and other relevant tools.
 
-How test will be performed: User checks the quick links section for accessibility and relevance of the provided links to university websites and other educational tools.
+How test will be performed: Tester checks the quick links section for accessibility and relevance of the provided links to university websites and other educational tools.
 
 
 \item{TFR19-QUICKLINKS2\\}\label{TFR19-QUICKLINKS2}
 
 Type: Functional, Manual, Dynamic
 
-Initial State: Quick links are displayed on the user's dashboard or home page.
+Initial State: Quick links are displayed on the tester's dashboard or home page.
 
-Input/Condition: User attempts to drag and rearrange the order of website links.
+Input/Condition: Tester attempts to drag and rearrange the order of website links.
 
-Output/Result: The order of the links changes according to the user's customization.
+Output/Result: The order of the links changes according to the tester's customization.
 
-How test will be performed: User rearranges the quick links in a new order, verifies the order is saved and persists across sessions.
+How test will be performed: Tester rearranges the quick links in a new order, verifies the order is saved and persists across sessions.
 
 \item{TFR20-FEEDBACK1\\}\label{TFR20-FEEDBACK1}
 
 Type: Functional, Manual, Dynamic
 
-Initial State: User is logged in and on the feedback submission page.
+Initial State: Tester is logged in and on the feedback submission page.
 
-Input/Condition: User submits feedback through the feedback form.
+Input/Condition: Tester submits feedback through the feedback form.
 
 Output/Result: Feedback is successfully submitted to the developers.
 
-How test will be performed: User fills out and submits the feedback form with various types of feedback, confirming submission success and receipt by the development team.
+How test will be performed: Tester fills out and submits the feedback form with various types of feedback, confirming submission success and receipt by the development team.
 
 
 \item{TFR21-FEEDBACK2\\}\label{TFR21-FEEDBACK2}
 
 Type: Functional, Manual, Dynamic
 
-Initial State: User has previously submitted feedback.
+Initial State: Tester has previously submitted feedback.
 
-Input/Condition: User navigates to the feedback history page.
+Input/Condition: Tester navigates to the feedback history page.
 
-Output/Result: The system displays all past feedback submitted by the user.
+Output/Result: The system displays all past feedback submitted by the tester.
 
-How test will be performed: User reviews their feedback history to ensure all previously submitted feedback is visible and accurate.
+How test will be performed: Tester reviews their feedback history to ensure all previously submitted feedback is visible and accurate.
 
 \item{TFR22-FEEDBACK3\\}\label{TFR22-FEEDBACK3}
 
 Type: Functional, Manual, Dynamic
 
-Initial State: User has submitted feedback and is on the feedback status page.
+Initial State: Tester has submitted feedback and is on the feedback status page.
 
-Input/Condition: User checks the status of their submitted feedback.
+Input/Condition: Tester checks the status of their submitted feedback.
 
-Output/Result: The system shows the current status of each piece of feedback submitted by the user.
+Output/Result: The system shows the current status of each piece of feedback submitted by the tester.
 
-How test will be performed: User submits feedback and later checks the status of their submissions, verifying that the system accurately tracks and displays the status.
+How test will be performed: Tester submits feedback and later checks the status of their submissions, verifying that the system accurately tracks and displays the status.
 
 \item{TFR23-PROFILE1\\}\label{TFR23-PROFILE1}
 
 Type: Functional, Manual, Dynamic
 
-Initial State: User is on their profile settings page.
+Initial State: Tester is on their profile settings page.
 
-Input/Condition: User attempts to change their username.
+Input/Condition: Tester attempts to change their username.
 
-Output/Result: The system updates the user's username across the platform.
+Output/Result: The system updates the tester's username across the platform.
 
-How test will be performed: User changes their username in profile settings, then navigates the platform to ensure the new username is displayed and used consistently.
+How test will be performed: Tester changes their username in profile settings, then navigates the platform to ensure the new username is displayed and used consistently.
 
 \item{TFR24-GPA1\\}\label{TFR24-GPA1}
 
 Type: Functional, Manual, Dynamic
 
-Initial State: User is on the GPA calculation page.
+Initial State: Tester is on the GPA calculation page.
 
-Input/Condition: User inputs their grades and credit hours to calculate their cumulated GPA.
+Input/Condition: Tester upload the transcript to calculate their cumulated GPA.
 
-Output/Result: The system calculates and displays the user's cumulated GPA.
+Output/Result: The system calculates and displays the tester's cumulated GPA.
 
-How test will be performed: User enters a variety of grades and credit hours to calculate their GPA, checking for accuracy of the calculated GPA against manual calculations.
+How test will be performed: upload the transcript, checking for accuracy of the calculated GPA against manual calculations.
 
 
 \subsection{Tests for Nonfunctional Requirements}
@@ -588,11 +588,11 @@ Type: Dynamic, Manual
 					
 Initial State: The web application is launched.
 					
-Input/Condition: Users are asked to read the text on each page.
+Input/Condition: Tester are asked to read the text on each page.
 					
-Output/Result:  \hyperref[MIN_UNDERSTAND]{\texttt{MIN\_UNDERSTAND\%}} of users reporting that all the texts are legible.
+Output/Result:  \hyperref[MIN_UNDERSTAND]{\texttt{MIN\_UNDERSTAND\%}} of tester reporting that all the texts are legible.
 					
-How test will be performed: The web application displayed with screens with various resolutions and sizes. \hyperref[MIN_TESTER_NUM]{\texttt{MIN\_TESTER\_NUM}} users are asked to read the texts and report any unclear typography.
+How test will be performed: The web application displayed with screens with various resolutions and sizes. \hyperref[MIN_TESTER_NUM]{\texttt{MIN\_TESTER\_NUM}} Tester are asked to read the texts and report any unclear typography.
 					
 \item{TAR-2\\}\label{TAR-2}
 
@@ -600,11 +600,11 @@ Type: Dynamic, Manual
 					
 Initial State: The web application is launched.
 					
-Input/Condition: Users are asked to observe color on each page.
+Input/Condition: Tester are asked to observe color on each page.
 					
-Output/Result: \hyperref[MIN_UNDERSTAND]{\texttt{MIN\_UNDERSTAND\%}} of users comfortable with the color used.
+Output/Result: \hyperref[MIN_UNDERSTAND]{\texttt{MIN\_UNDERSTAND\%}} of testers comfortable with the color used.
 					
-How test will be performed: \hyperref[MIN_TESTER_NUM]{\texttt{MIN\_TESTER\_NUM}} users are asked to observe the color and report any distracting or overwhelming color palette.
+How test will be performed: \hyperref[MIN_TESTER_NUM]{\texttt{MIN\_TESTER\_NUM}} Tester are asked to observe the color and report any distracting or overwhelming color palette.
 
 \item{TAR-3\\}\label{TAR-3}
 
@@ -612,11 +612,11 @@ Type: Dynamic, Manual
 					
 Initial State: The web application is launched.
 					
-Input/Condition: Users are asked to interpret icons and graphics on each page.
+Input/Condition: Tester are asked to interpret icons and graphics on each page.
 					
-Output/Result: \hyperref[MIN_UNDERSTAND]{\texttt{MIN\_UNDERSTAND\%}} of users able to understand the meaning of each icon and graphic as designed.
+Output/Result: \hyperref[MIN_UNDERSTAND]{\texttt{MIN\_UNDERSTAND\%}} of tester able to understand the meaning of each icon and graphic as designed.
 					
-How test will be performed: \hyperref[MIN_TESTER_NUM]{\texttt{MIN\_TESTER\_NUM}} users are asked what they think each icon and graphic means. Any mismatch from the UI designer's intention would be recorded.
+How test will be performed: \hyperref[MIN_TESTER_NUM]{\texttt{MIN\_TESTER\_NUM}} Tester are asked what they think each icon and graphic means. Any mismatch from the UI designer's intention would be recorded.
 
 \item{TAR-4\\}\label{TAR-4}
 
@@ -624,11 +624,11 @@ Type: Dynamic, Manual
 					
 Initial State: The web application is launched.
 					
-Input/Condition: Users are asked to observe the layout of each page.
+Input/Condition: Tester are asked to observe the layout of each page.
 					
-Output/Result: \hyperref[MIN_UNDERSTAND]{\texttt{MIN\_UNDERSTAND\%}} of users comfortable with the payout.
+Output/Result: \hyperref[MIN_UNDERSTAND]{\texttt{MIN\_UNDERSTAND\%}} of tester comfortable with the payout.
 					
-How test will be performed: The web application is launched with different devices including smartphones, tablets, and desktops.  \hyperref[MIN_TESTER_NUM]{\texttt{MIN\_TESTER\_NUM}} users are asked to point out any unresponsive, out-of-margin, or compressed elements.
+How test will be performed: The web application is launched with different devices including smartphones, tablets, and desktops.  \hyperref[MIN_TESTER_NUM]{\texttt{MIN\_TESTER\_NUM}} Tester are asked to point out any unresponsive, out-of-margin, or compressed elements.
 
 \item{TSTR-1\\}\label{TSTR-1}
 
@@ -636,11 +636,11 @@ Type: Dynamic, Manual
 					
 Initial State: The web application is launched.
 					
-Input/Condition: Users are asked to point out the menus and navigation bars.
+Input/Condition: Tester are asked to point out the menus and navigation bars.
 					
-Output/Result: \hyperref[MIN_UNDERSTAND]{\texttt{MIN\_UNDERSTAND\%}} of users able to locate menus and navigation tools without confusion.
+Output/Result: \hyperref[MIN_UNDERSTAND]{\texttt{MIN\_UNDERSTAND\%}} of tester able to locate menus and navigation tools without confusion.
 					
-How test will be performed: \hyperref[MIN_TESTER_NUM]{\texttt{MIN\_TESTER\_NUM}} users are asked to point out the menus and navigation bars without assistance.
+How test will be performed: \hyperref[MIN_TESTER_NUM]{\texttt{MIN\_TESTER\_NUM}} Tester are asked to point out the menus and navigation bars without assistance.
 
 \item{TSTR-2\\}\label{TSTR-2}
 
@@ -648,11 +648,11 @@ Type: Dynamic, Manual
 					
 Initial State: The web application is launched.
 					
-Input/Condition: Users are asked to point out inconsistent UI elements.
+Input/Condition: Tester are asked to point out inconsistent UI elements.
 					
 Output/Result: \hyperref[MAX_ELEMENT_BAD]{\texttt{MAX\_ELEMENT\_BAD}} inconsistent UI elements found.
 					
-How test will be performed: \hyperref[MIN_TESTER_NUM]{\texttt{MIN\_TESTER\_NUM}} users are asked to explore the application and point out any inconsistent UI elements that break the harmony.
+How test will be performed: \hyperref[MIN_TESTER_NUM]{\texttt{MIN\_TESTER\_NUM}} Tester are asked to explore the application and point out any inconsistent UI elements that break the harmony.
 
 \item{TSTR-3\\}\label{TSTR-3}
 
@@ -660,11 +660,11 @@ Type: Dynamic, Manual
 					
 Initial State: The web application is launched.
 					
-Input/Condition: Users are asked to click each interactive UI element.
+Input/Condition: Tester are asked to click each interactive UI element.
 					
 Output/Result: \hyperref[MAX_ELEMENT_BAD]{\texttt{MAX\_ELEMENT\_BAD}} interactive UI elements being unresponsive.
 					
-How test will be performed: \hyperref[MIN_TESTER_NUM]{\texttt{MIN\_TESTER\_NUM}} users are asked to explore the application and report any unresponsive interactive elements.
+How test will be performed: \hyperref[MIN_TESTER_NUM]{\texttt{MIN\_TESTER\_NUM}} Tester are asked to explore the application and report any unresponsive interactive elements.
 
 \item{TSTR-4\\}\label{TSTR-4}
 
@@ -672,11 +672,11 @@ Type: Dynamic, Manual
 					
 Initial State: The web application is launched.
 					
-Input/Condition: Users are asked to adjust font size.
+Input/Condition: Tester are asked to adjust font size.
 					
-Output/Result: \hyperref[MAX_UNSATISFIED]{\texttt{MAX\_UNSATISFIED\%}} of users reporting unsuitable font size.
+Output/Result: \hyperref[MAX_UNSATISFIED]{\texttt{MAX\_UNSATISFIED\%}} of tester reporting unsuitable font size.
 					
-How test will be performed: \hyperref[MIN_TESTER_NUM]{\texttt{MIN\_TESTER\_NUM}} users are asked to report how they like the default font size and attempt to adjust the font size to their preference. Report if the adjusted font still causes difficulty in reading.
+How test will be performed: \hyperref[MIN_TESTER_NUM]{\texttt{MIN\_TESTER\_NUM}} Tester are asked to report how they like the default font size and attempt to adjust the font size to their preference. Report if the adjusted font still causes difficulty in reading.
 
 \item{TSTR-5\\}\label{TSTR-5}
 
@@ -684,11 +684,11 @@ Type: Dynamic, Manual
 					
 Initial State: The web application is launched.
 					
-Input/Condition: Users are asked to perform a task while an animation is displayed.
+Input/Condition: Tester are asked to perform a task while an animation is displayed.
 					
-Output/Result: \hyperref[MIN_UNDERSTAND]{\texttt{MIN\_UNDERSTAND\%}} of users who could perform the task distracted.
+Output/Result: \hyperref[MIN_UNDERSTAND]{\texttt{MIN\_UNDERSTAND\%}} of tester who could perform the task distracted.
 					
-How test will be performed: \hyperref[MIN_TESTER_NUM]{\texttt{MIN\_TESTER\_NUM}} users are asked to perform a task that involves the animation display part of the screen.  They are asked to report if they feel the animation is intrusive or distracting.
+How test will be performed: \hyperref[MIN_TESTER_NUM]{\texttt{MIN\_TESTER\_NUM}} Tester are asked to perform a task that involves the animation display part of the screen.  They are asked to report if they feel the animation is intrusive or distracting.
 \end{enumerate}
 
 \subsubsection{Usability and Humanity}
@@ -700,11 +700,11 @@ Type: Dynamic, Manual
 					
 Initial State: The web application is launched.
 					
-Input/Condition: Users are asked to navigate to a required page.
+Input/Condition: Tester are asked to navigate to a required page.
 					
-Output/Result: \hyperref[MIN_UNDERSTAND]{\texttt{MIN\_UNDERSTAND\%}} of users able to navigate to a required page without confusion.
+Output/Result: \hyperref[MIN_UNDERSTAND]{\texttt{MIN\_UNDERSTAND\%}} of tester able to navigate to a required page without confusion.
 					
-How test will be performed: In an obeservational study, \hyperref[MIN_TESTER_NUM]{\texttt{MIN\_TESTER\_NUM}} users are asked to navigate to a required page without assistance within a reasonable amount of time undergoing minimum trial and error.
+How test will be performed: In an obeservational study, \hyperref[MIN_TESTER_NUM]{\texttt{MIN\_TESTER\_NUM}} Tester are asked to navigate to a required page without assistance within a reasonable amount of time undergoing minimum trial and error.
 
 \item{TUHR-2\\}\label{TUHR-2}
 
@@ -712,22 +712,28 @@ Type: Dynamic, Manual
 					
 Initial State: The web application is launched.
 					
-Input/Condition: Users are asked to perform a core function.
+Input/Condition: Testers are asked to perform a series of specified core functions, including:
+\begin{enumerate}
+    \item Navigating to and uploading a course syllabus in PDF format.
+    \item Starting a Pomodoro study session from the dashboard.
+    \item Posting a message in the forum section.
+\end{enumerate}
+
+Output/Result: \hyperref[MIN_UNDERSTAND]{\texttt{MIN\_UNDERSTAND\%}} of testers are able to perform each specified tasks without confusion or significant difficulty.
 					
-Output/Result: \hyperref[MIN_UNDERSTAND]{\texttt{MIN\_UNDERSTAND\%}} of users able to perform a core function.
-					
-How the test will be performed: In an obeservational study,\hyperref[MIN_TESTER_NUM]{\texttt{MIN\_TESTER\_NUM}} users are asked to perform a core function within a reasonable amount of time undergoing minimum trial and error.
+How the test will be performed: In an observational study, \hyperref[MIN_TESTER_NUM]{\texttt{MIN\_TESTER\_NUM}} testers are given a sequence of tasks that encompass the specified core functions. They are observed as they attempt to complete each task within a reasonable amount of time, with the goal of undergoing minimum trial and error. The observer records the ease with which each tester completes the tasks, noting any areas of confusion or difficulty. This data is then used to evaluate the usability and intuitiveness of the web application's core functionalities.
+
 \item{TUHR-3\\}\label{TUHR-3}
 
 Type: Dynamic, Manual
 					
 Initial State: The web application is launched.
 					
-Input/Condition: Users are asked to inspect the grammar of texts on the page.
+Input/Condition: Tester are asked to inspect the grammar of texts on the page.
 					
 Output/Result: \hyperref[MAX_BAD_GRAMMAR]{\texttt{MAX\_BAD\_GRAMMAR}} grammar mistakes found.
 					
-How test will be performed: In an obeservational study, \hyperref[MIN_TESTER_NUM]{\texttt{MIN\_TESTER\_NUM}} users are asked to report grammar mistakes in all the text visible in this web application.
+How test will be performed: In an obeservational study, \hyperref[MIN_TESTER_NUM]{\texttt{MIN\_TESTER\_NUM}} Tester are asked to report grammar mistakes in all the text visible in this web application.
 
 \item{TUHR-4\\}\label{TUHR-4}
 
@@ -735,11 +741,11 @@ Type: Dynamic, Manual
 					
 Initial State: The web application is launched.
 					
-Input/Condition: Users are asked to inspect for offensive messages on the page.
+Input/Condition: Tester are asked to inspect for offensive messages on the page.
 					
 Output/Result: \hyperref[MAX_OFFENSIVE]{\texttt{MAX\_OFFENSIVE}} offensive messages found.
 					
-How test will be performed: In an obeservational study, \hyperref[MIN_TESTER_NUM]{\texttt{MIN\_TESTER\_NUM}} users are asked to report offensive messages in all the text visible in this web application.
+How test will be performed: In an obeservational study, \hyperref[MIN_TESTER_NUM]{\texttt{MIN\_TESTER\_NUM}} Tester are asked to report offensive messages in all the text visible in this web application.
 
 \item{TUHR-5\\}\label{TUHR-5}
 
@@ -747,11 +753,11 @@ Type: Dynamic, Manual
 					
 Initial State: The web application is launched.
 					
-Input/Condition: Users are asked to observe color combinations on the page.
+Input/Condition: Tester are asked to observe color combinations on the page.
 					
 Output/Result: \hyperref[MAX_COLOR_AMBIGUOUS]{\texttt{MAX\_COLOR\_AMBIGUOUS}} indistinguishable color combinations found.
 					
-How test will be performed: In an obeservational study, \hyperref[MIN_TESTER_NUM]{\texttt{MIN\_TESTER\_NUM}} users are asked to report indistinguishable color combinations in this web application. This user group should include people with color blindness.
+How test will be performed: In an obeservational study, \hyperref[MIN_TESTER_NUM]{\texttt{MIN\_TESTER\_NUM}} Tester are asked to report indistinguishable color combinations in this web application. This user group should include people with color blindness.
 
 
 \end{enumerate}
@@ -814,7 +820,7 @@ Type: Dynamic, Automated
 					
 Initial State: The web application is launched.
 					
-Input/Condition: Incorrect user input.
+Input/Condition: Incorrect tester input.
 					
 Output/Result: \hyperref[MIN_OPERABLE]{\texttt{MIN\_OPERABLE\%}} of the system operating.
 					
@@ -876,11 +882,11 @@ Type: Dynamic, Manual
 					
 Initial State: The web application is launched.
 					
-Input/Condition: Users are asked to contact support.
+Input/Condition: Tester are asked to contact support.
 					
 Output/Result: \hyperref[MAX_SUPPORT_STEP]{\texttt{MAX\_SUPPORT\_STEP}} steps needed to reach help.
 					
-How test will be performed: \hyperref[MIN_TESTER_NUM]{\texttt{MIN\_TESTER\_NUM}} users are asked to reach the helpdesk through email, phone, and chatbot and record the steps it takes from the main page to help.
+How test will be performed: \hyperref[MIN_TESTER_NUM]{\texttt{MIN\_TESTER\_NUM}} Tester are asked to reach the helpdesk through email, phone, and chatbot and record the steps it takes from the main page to help.
 
 
 \item{TSPR-2\\}\label{TSPR-2}
@@ -889,11 +895,11 @@ Type: Dynamic, Automatic
 					
 Initial State: The web application is launched.
 					
-Input/Condition: User feedback is inputted.
+Input/Condition: Tester feedback is inputted.
 					
-Output/Result: User input in database.
+Output/Result: Tester input in database.
 					
-How test will be performed: A script is used to input user feedback and check if this feedback gets stored in the database.
+How test will be performed: A script is used to input tester feedback and check if this feedback gets stored in the database.
 
 \end{enumerate}
 
@@ -907,23 +913,30 @@ Type: Dynamic, Manual
 					
 Initial State: The web application is launched.
 					
-Input/Condition: Users are asked to modify the database.
+Input/Condition: Tester are asked to modify the database.
 					
-Output/Result: \hyperref[MAX_ATTACK_SUCCESS]{\texttt{MAX\_ATTACK\_SUCCESS}} users successfully modified the database.
+Output/Result: \hyperref[MAX_ATTACK_SUCCESS]{\texttt{MAX\_ATTACK\_SUCCESS}} Tester successfully modified the database.
 					
-How test will be performed: \hyperref[MIN_TESTER_NUM]{\texttt{MIN\_TESTER\_NUM}} users are asked to taint the database as unauthorised entity.
-
+How test will be performed: \hyperref[MIN_TESTER_NUM]{\texttt{MIN\_TESTER\_NUM}} Tester are asked to taint the database as unauthorised entity.
 \item{TSR-2\\}\label{TSR-4}
 
 Type: Dynamic, Automatic
 					
 Initial State: The web application is launched.
 					
-Input/Condition: A series of user actions.
+Input/Condition: A series of specific tester actions, including but not limited to, logging in, uploading a document, editing a profile, posting on a forum, and deleting an item from the to-do list.
 					
-Output/Result: An audit log.
+Output/Result: An audit log containing records of these actions.
 					
-How test will be performed: A script is used to perform a series of user actions and check that the activities are recorded with time stamps and relevant meta-data.
+How test will be performed: A script is used to automatically perform a predefined series of tester actions on the web application. These actions include:
+\begin{itemize}
+    \item Uploading a document (e.g., a PDF syllabus) to the application.
+    \item Editing the tester's user profile information.
+    \item Posting a message on the forum section of the application.
+    \item Adding a new task to the to-do list and subsequently deleting it.
+\end{itemize}
+After these actions are performed, the script will access the application's audit log to verify that each action is recorded with accurate timestamps and relevant metadata, such as the user ID, action type, and any pertinent details related to the action (e.g., the name of the uploaded document, the updated profile information, the content of the forum post, and the details of the added and deleted tasks).
+
 
 \end{enumerate}
 
@@ -1032,66 +1045,53 @@ All requirements refer to \href{https://github.com/wangq131/4G06CapstoneProjectT
 \subsection{Unit Testing Scope}
 Unit testing will focus on individual units or components of the software to determine if they operate correctly. Each test case is designed based on a functional requirement from the SRS.
 
-
-\subsection{Tests for Functional Requirements}
-
-\section{Functional Requirements Evaluation}
-
-This section outlines our approach for the unit testing of the functional requirements specified in our Software Requirements Specification (SRS) document. These tests are aimed at verifying that each component of the system behaves as intended.
-
-\subsection{Unit Testing Plan}
-
-Unit testing will focus on individual units or components of the software to determine if they operate correctly. Each test case is designed based on a functional requirement from the SRS.
-
-\subsection{Tests for Functional Requirements}
-
 \begin{enumerate}
     
     \item{UT-1\\}\label{UT-1}
     
         Objective: To verify that the system correctly extracts and displays key course information from uploaded syllabi.
         
-        Input: User uploads a course syllabus in PDF format.
+        Input: Tester uploads a course syllabus in PDF format.
         
-        Expected Output: Key details such as professor's email addresses, assignment weightings, and MSAF policy are extracted and displayed to the user.
+        Expected Output: Key details such as professor's email addresses, assignment weightings, and MSAF policy are extracted and displayed to the tester.
         
         Requirement Reference: FR1 - Course Information Extraction.
         
     \item{UT-2\\}\label{UT-2}
     
-        Objective: To verify the system automatically creates tasks from extracted course information and adds them to the user's to-do list.
+        Objective: To verify the system automatically creates tasks from extracted course information and adds them to the tester's to-do list.
         
         Input: Course information is processed by the system after a syllabus upload.
         
-        Expected Output: Tasks are automatically created and added to the user's to-do list based on the extracted course information.
+        Expected Output: Tasks are automatically created and added to the tester's to-do list based on the extracted course information.
         
         Requirement Reference: FR2 - Task Creation from Course Information.
         
     \item{UT-3\\}\label{UT-3}
     
-        Objective: To verify that users can successfully add a new course by providing a valid course code.
+        Objective: To verify that tester can successfully add a new course by providing a valid course code.
         
-        Input: User inputs a valid course code to add a new course.
+        Input: Tester inputs a valid course code to add a new course.
         
-        Expected Output: The new course is added to the user's profile.
+        Expected Output: The new course is added to the tester's profile.
         
         Requirement Reference: FR3 - Add New Course.
         
     \item{UT-4\\}\label{UT-4}
     
-        Objective: To verify that users can remove a course from their profile.
+        Objective: To verify that tester can remove a course from their profile.
         
-        Input: User selects a course to remove from their profile.
+        Input: Tester selects a course to remove from their profile.
         
-        Expected Output: The selected course is removed from the user's profile.
+        Expected Output: The selected course is removed from the tester's profile.
         
         Requirement Reference: FR4 - Remove Course.
         
     \item{UT-5\\}\label{UT-5}
     
-        Objective: To verify that the system allows users to start a study session using the Pomodoro timer.
+        Objective: To verify that the system allows tester to start a study session using the Pomodoro timer.
         
-        Input: User initiates a Pomodoro timer on the Pomodoro page.
+        Input: Tester initiates a Pomodoro timer on the Pomodoro page.
         
         Expected Output: A Pomodoro study session starts and is tracked by the system.
         
@@ -1099,9 +1099,9 @@ Unit testing will focus on individual units or components of the software to det
         
     \item{UT-6\\}\label{UT-6}
     
-        Objective: To verify that users can start a Pomodoro study session by selecting a specific task from the to-do list.
+        Objective: To verify that tester can start a Pomodoro study session by selecting a specific task from the to-do list.
         
-        Input: User starts a Pomodoro timer by clicking a specific task in their to-do list.
+        Input: Tester starts a Pomodoro timer by clicking a specific task in their to-do list.
         
         Expected Output: A Pomodoro study session specific to the selected task begins.
         
@@ -1109,9 +1109,9 @@ Unit testing will focus on individual units or components of the software to det
         
     \item{UT-7\\}\label{UT-7}
     
-        Objective: To verify that users can select and play different music as background during their study session.
+        Objective: To verify that tester can select and play different music as background during their study session.
         
-        Input: User selects a music option to play during an active Pomodoro study session.
+        Input: Tester selects a music option to play during an active Pomodoro study session.
         
         Expected Output: The selected music plays in the background during the study session.
         
@@ -1123,15 +1123,15 @@ Unit testing will focus on individual units or components of the software to det
         
         Input: Completion of a Pomodoro study session.
         
-        Expected Output: A tomato icon is generated and displayed in the user's harvest bucket.
+        Expected Output: A tomato icon is generated and displayed in the tester's harvest bucket.
         
         Requirement Reference: FR8 - Tomato Harvesting Post Study Session.
         
     \item{UT-9\\}\label{UT-9}
     
-        Objective: To verify that users can add a task to their to-do list successfully.
+        Objective: To verify that tester can add a task to their to-do list successfully.
         
-        Input: User adds a new task with details to their to-do list.
+        Input: Tester adds a new task with details to their to-do list.
         
         Expected Output: The new task is visible on the to-do list with the specified details.
         
@@ -1139,21 +1139,21 @@ Unit testing will focus on individual units or components of the software to det
         
     \item{UT-10\\}\label{UT-10}
     
-        Objective: To verify that users can view details of a task including due date, associated course, and weight.
+        Objective: To verify that tester can view details of a task including due date, associated course, and weight.
         
-        Input: User selects a task to view its details.
+        Input: Tester selects a task to view its details.
         
-        Expected Output: Detailed information about the task is displayed to the user.
+        Expected Output: Detailed information about the task is displayed to the tester.
         
         Requirement Reference: FR10 - Task Detail Viewing.
         
     \item{UT-11\\}\label{UT-11}
     
-        Objective: To verify that users can edit an existing task in their to-do list.
+        Objective: To verify that tester can edit an existing task in their to-do list.
         
-        Input: User edits an existing task by changing its details.
+        Input: Tester edits an existing task by changing its details.
         
-        Expected Output: The task is updated with the new information provided by the user.
+        Expected Output: The task is updated with the new information provided by the tester.
         
         Requirement Reference: FR11 - Editing an Existing Task.
         
@@ -1171,7 +1171,7 @@ Unit testing will focus on individual units or components of the software to det
     
         Objective: To verify the functionality of creating a new topic in the forum for discussion.
         
-        Input: User submits a new discussion topic with title and description.
+        Input: Tester submits a new discussion topic with title and description.
         
         Expected Output: The new topic is successfully created and visible in the forum.
         
@@ -1179,19 +1179,19 @@ Unit testing will focus on individual units or components of the software to det
         
     \item{UT-14\\}\label{UT-14}
     
-        Objective: To verify that users can search for topics in the forum using keywords.
+        Objective: To verify that tester can search for topics in the forum using keywords.
         
-        Input: User enters keywords in the forum search field.
+        Input: Tester enters keywords in the forum search field.
         
-        Expected Output: Topics matching the keywords are displayed to the user.
+        Expected Output: Topics matching the keywords are displayed to the tester.
         
         Requirement Reference: FR15 - Forum Topic Search.
         
     \item{UT-15\\}\label{UT-15}
     
-        Objective: To verify that users can comment on a specific topic in the forum.
+        Objective: To verify that tester can comment on a specific topic in the forum.
         
-        Input: User submits a comment on a forum topic.
+        Input: Tester submits a comment on a forum topic.
         
         Expected Output: The comment is added to the discussion under the topic.
         
@@ -1199,9 +1199,9 @@ Unit testing will focus on individual units or components of the software to det
         
     \item{UT-16\\}\label{UT-16}
     
-        Objective: To verify that users can reply to a comment within a forum topic.
+        Objective: To verify that tester can reply to a comment within a forum topic.
         
-        Input: User submits a reply to an existing comment.
+        Input: Tester submits a reply to an existing comment.
         
         Expected Output: The reply is correctly threaded under the original comment.
         
@@ -1209,9 +1209,9 @@ Unit testing will focus on individual units or components of the software to det
         
     \item{UT-17\\}\label{UT-17}
     
-        Objective: To verify that users can access key university websites and other relevant tools from the quick links section.
+        Objective: To verify that tester can access key university websites and other relevant tools from the quick links section.
         
-        Input: User navigates to the quick links section on the dashboard.
+        Input: Tester navigates to the quick links section on the dashboard.
         
         Expected Output: Key university websites and other relevant tools are displayed and accessible.
         
@@ -1219,19 +1219,19 @@ Unit testing will focus on individual units or components of the software to det
         
     \item{UT-18\\}\label{UT-18}
     
-        Objective: To verify that users can customize the order of website links in the quick links section.
+        Objective: To verify that tester can customize the order of website links in the quick links section.
         
-        Input: User drags and rearranges the order of quick links.
+        Input: Tester drags and rearranges the order of quick links.
         
-        Expected Output: The order of the links changes and persists according to user customization.
+        Expected Output: The order of the links changes and persists according to tester customization.
         
         Requirement Reference: FR19 - Customizing Order of Quick Links.
         
     \item{UT-19\\}\label{UT-19}
     
-        Objective: To verify that the system allows users to submit feedback through the feedback form.
+        Objective: To verify that the system allows tester to submit feedback through the feedback form.
         
-        Input: User fills out and submits the feedback form.
+        Input: Tester fills out and submits the feedback form.
         
         Expected Output: Feedback is successfully submitted and received by the system.
         
@@ -1239,19 +1239,19 @@ Unit testing will focus on individual units or components of the software to det
         
     \item{UT-20\\}\label{UT-20}
     
-        Objective: To verify that users can view their previously submitted feedback.
+        Objective: To verify that tester can view their previously submitted feedback.
         
-        Input: User navigates to the feedback history page.
+        Input: Tester navigates to the feedback history page.
         
-        Expected Output: All past feedback submitted by the user is visible and accurately displayed.
+        Expected Output: All past feedback submitted by the tester is visible and accurately displayed.
         
         Requirement Reference: FR21 - Viewing Past Feedback.
         
     \item{UT-21\\}\label{UT-21}
     
-        Objective: To verify that users can check the status of their submitted feedback.
+        Objective: To verify that tester can check the status of their submitted feedback.
         
-        Input: User checks the status of submitted feedback in the feedback section.
+        Input: Tester checks the status of submitted feedback in the feedback section.
         
         Expected Output: The current status of each submitted feedback is accurately displayed.
         
@@ -1259,21 +1259,21 @@ Unit testing will focus on individual units or components of the software to det
         
     \item{UT-22\\}\label{UT-22}
     
-        Objective: To verify that the system allows users to change their username through their profile settings.
+        Objective: To verify that the system allows tester to change their username through their profile settings.
         
-        Input: User changes their username in the profile settings.
+        Input: Tester changes their username in the profile settings.
         
-        Expected Output: The system updates the user's username across the platform.
+        Expected Output: The system updates the tester's username across the platform.
         
         Requirement Reference: FR23 - Username Change.
         
     \item{UT-23\\}\label{UT-23}
     
-        Objective: To verify that the system allows users to calculate their cumulative GPA by inputting grades and credit hours.
+        Objective: To verify that the system allows tester to calculate their cumulative GPA by inputting grades and credit hours.
         
-        Input: User inputs their grades and credit hours on the GPA calculation page.
+        Input: Tester inputs their grades and credit hours on the GPA calculation page.
         
-        Expected Output: The system calculates and displays the user's cumulative GPA.
+        Expected Output: The system calculates and displays the tester's cumulative GPA.
         
         Requirement Reference: FR24 - GPA Calculation.
 \end{enumerate}
@@ -1321,7 +1321,36 @@ Unit testing will focus on individual units or components of the software to det
 
 
 \newpage
+\section{Static Testing Plan}
 
+Static testing examine the software's code, documentation, and design without executing the program. The primary goal is to detect errors early in the development process, improve quality, and ensure compliance with coding standards and design guidelines.
+
+\subsubsection{Scope}
+
+The static testing in our project will focus on the following areas:
+\begin{itemize}
+    \item \textbf{Code Review:} To identify syntax errors, dead code, security vulnerabilities, and deviations from coding standards.
+    \item \textbf{Design Review:} To ensure the design documents accurately reflect the software requirements and align with the established design principles.
+    \item \textbf{Documentation Review:} To verify that all documentation is clear, complete, and consistent with the software implementation and user expectations.
+\end{itemize}
+
+
+\subsubsection{Walk-through}
+
+Facilitate a discussion around the documents or code to gather feedback and find errors. The author of the document walks the team through the content, explaining the logic and decisions. Participants ask questions and give feedback based on their understanding and expertise.
+
+\subsubsection{Inspection}
+
+Conduct a thorough examination of code and  documents to detect and correct issues. An inspection team (different from the authors) conducts a detailed examination. The findings should be documented for correction.
+
+\subsubsection{Process Split Up}
+\begin{itemize}
+    \item Establish a review process for all major documents and code with clear guidelines on how reviews, walk-through, and inspections are conducted.
+    \item Using specific tools like flake8 or using documentation/manual as reference.
+    \item Integrate static analysis into the CI/CD pipeline to ensure continuous code quality and security checks.
+    \item Monitor and iterate on the process, and continuously optimize the process.
+    
+\end{itemize}
 \section{Appendix}
 
 This is where you can place additional information.
