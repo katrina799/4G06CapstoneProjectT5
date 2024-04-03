@@ -15,10 +15,9 @@ from flask import (
     url_for,
     abort,
 )
-from forum import forum_blueprint 
+from profile_page import profile_blueprint
 import ast
 from werkzeug.utils import secure_filename
-
 try:
     from config import MOCK_COURSE_INFO_CSV, COURSE_WORK_EXTRACTED_INFO
 except ImportError:
@@ -64,13 +63,9 @@ except ImportError:
         create_presigned_url,
     )
 
-
-
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
-app.register_blueprint(forum_blueprint)
-
-
+app.register_blueprint(profile_blueprint, url_prefix='/profile')
 
 # Loading configs/global variables
 app.config.from_pyfile("config.py")
@@ -87,12 +82,19 @@ Transcript_path = app.config["UPLOAD_FOLDER"]
 
 icon_order_path = app.config["ICON_ORDER_PATH"]
 # Setting global variables
-username = ""
-userId = 1
-courses = []
-model = None
-current_page = "home"
-cGPA = "None (Please upload your transcript)"
+app.config['username'] = ""
+app.config['userId'] = 1
+app.config['courses'] = []
+app.config['model'] = None
+app.config['current_page'] = "home"
+app.config['cGPA'] = "None (Please upload your transcript)"
+# Setting global variables
+# username = ""
+# userId = 1
+# courses = []
+# model = None
+# current_page = "home"
+# cGPA = "None (Please upload your transcript)"
 
 s3 = boto3.client(
     "s3",
@@ -339,17 +341,17 @@ def course_page():
 
 
 # Router to user profile pageile
-@app.route("/profile_page", methods=["GET", "POST"])
-def profile_page():
-    global current_page
-    current_page = "profile_page"
-    # Render the profile page, showing username on pege
-    return render_template(
-        "profile_page.html",
-        username=username,
-        current_page=current_page,
-        cGPA=cGPA,
-    )
+# @app.route("/profile_page", methods=["GET", "POST"])
+# def profile_page():
+#     global current_page
+#     current_page = "profile_page"
+#     # Render the profile page, showing username on pege
+#     return render_template(
+#         "profile_page.html",
+#         username=username,
+#         current_page=current_page,
+#         cGPA=cGPA,
+#     )
 
 
 # Router to course detail page

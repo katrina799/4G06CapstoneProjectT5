@@ -1,12 +1,17 @@
-from flask import Blueprint
-forum_blueprint = Blueprint('profile', __name__)
-@forum_blueprint.route('/profile')
-# Router to user profile pageile
-@app.route("/profile_page", methods=["GET", "POST"])
+from flask import Blueprint, render_template, current_app
+
+profile_blueprint = Blueprint('profile', __name__)
+
+
+@profile_blueprint.route('/profile_page', methods=["GET", "POST"])
 def profile_page():
-    global current_page
-    current_page = "profile_page"
-    # Render the profile page, showing username on pege
+    username = current_app.config.get('username', '')
+    cGPA = current_app.config.get(
+        'cGPA', 
+        'None (Please upload your transcript)'
+    )
+    current_page = current_app.config.get('current_page', 'home')
+    
     return render_template(
         "profile_page.html",
         username=username,
