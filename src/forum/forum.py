@@ -15,14 +15,9 @@ from flask import (
     url_for,
     abort,
 )
-from forum import forum_blueprint 
 import ast
 from werkzeug.utils import secure_filename
 
-try:
-    from config import MOCK_COURSE_INFO_CSV, COURSE_WORK_EXTRACTED_INFO
-except ImportError:
-    from .config import MOCK_COURSE_INFO_CSV, COURSE_WORK_EXTRACTED_INFO                     
 try:
     from helper import (
         check_syllabus_exists,
@@ -65,12 +60,13 @@ except ImportError:
     )
 
 
-
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
-app.register_blueprint(forum_blueprint)
 
-
+try:
+    from config import MOCK_COURSE_INFO_CSV, COURSE_WORK_EXTRACTED_INFO
+except ImportError:
+    from .config import MOCK_COURSE_INFO_CSV, COURSE_WORK_EXTRACTED_INFO
 
 # Loading configs/global variables
 app.config.from_pyfile("config.py")
