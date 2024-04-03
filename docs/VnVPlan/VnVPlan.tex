@@ -49,6 +49,7 @@
 \toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
 \midrule
 Nov 3, 2023 & 1.0 & Initial Draft\\
+April 2, 2024 & 2.0 & Final Version\\
 \bottomrule
 \end{tabularx}
 
@@ -100,12 +101,21 @@ The V\&V plan is structured as follows:
 \section{General Information}
 
 \subsection{Summary}
-MacONE is a scheduling software that generates personalized study plans for students from course outlines that would be incorporated into the student's own schedule.  The application also comes with social components that enable friend-collaborative study sessions.
+MacONE is a tailored online platform aimed at streamlining and enhancing
+the McMaster student experience. It enables students to directly extract and
+integrate course information into their schedules, creating an individualized
+to-do list. Additionally, MacONE provides easy access to vital university
+resources, a forum for student interaction, a Pomodoro timer for effective
+study sessions, a feedback box for users to share their insights directly with
+developers, and a function allowing students to calculate their cumulative
+GPA by uploading their transcripts, all designed to simplify student life at
+McMaster University.
+
 
 \subsection{Objectives}
 This VnV plan would direct us through the testing process to ensure that our system would accomplish all the intended functions correctly and efficiently.  
 Adequate tests would be planned according to functional and non-functional requirements stated in our SRS to ensure our project exhibits adequate qualities and functions.
-We would prioritize and polish core functions including PDF unloading and analysis, AI scheduling algorithms, compatibility with other calendar applications, and those associated non-functional requirements. If time allows, we would also aim to develop tests for AI attention detection and the social component.
+We would prioritize and polish core functions including PDF unloading and analysis, integration between task management and Pomodoro, and those associated non-functional requirements. If time allows, we would also aim to develop tests for AI attention detection and the social component.
 
 
 \subsection{Relevant Documentation}
@@ -274,545 +284,297 @@ The Software Validation Plan will focus on ensuring that the final product meets
 	
 \subsection{Tests for Functional Requirements}
 
-
-
-  \subsubsection{Authentication}
-
-  \begin{enumerate}
-            
-  \item{TFR1-A1\\} \label{TFR1-A1}
-  
-  Control: Functional, Manual, Dynamic
-            
-  Initial State: Sign-up page that is used to create an account with username and password
-            
-  Input: Valid username and password in string format (letters, numbers, etc)
-            
-  Output: A prompt saying that the account has been created successfully
-  
-  Test Case Derivation: If the username and password are provided in a valid format, the user should be able to create an account and should be notified that the account has been created
-  
-  How test will be performed: A list of string pairs with different combinations of letters, and numbers will be given to the function that handles creating an account and we can then check our database if the provided string pairs get saved and if the website is prompting the notification telling the account has been created. 
-  
-  \item{TFR1-A2\\} \label{TFR1-A2}
-  
-  Control: Functional, Manual, Dynamic
-            
-  Initial State: Sign-up page that is used to create an account with username and password
-            
-  Input: Invalid username or password (such as empty strings, too few characters, existing username etc.)
-            
-  Output: A prompt saying that the username or password is invalid with detailed information such as more characters are needed or username/password cannot be empty or the username already exists
-  
-  Test Case Derivation: If the username and password are provided in an invalid format, the user should be notified with more information
-  
-  How test will be performed: Invalid usernames and passwords such as empty strings or strings with only a few letters or duplicated usernames will be given to the function that creates an account and we will check if the function throws an exception and if the website is notifying the user to provide valid inputs instead.
-  
-  \item{TFR2-A3\\} \label{TFR2-A3}
-  
-  Control: Functional, Manual, Dynamic
-            
-  Initial State: Sign-in page that is used to sign in with an existing account that includes placeholders of username and password
-            
-  Input: Username and password in string format
-            
-  Output: If the username and password match user data stored in our database, the user should be able to log in and be redirected to the home page, otherwise the user should be prompted saying that the username and password provided do not match
-  
-  Test Case Derivation: If the username and password match, this means our user is authenticated and hence should be able to log in, authenticated users should be redirected to the home page once logged in for further actions. If the username and password do not match, the user should be prompted in some way to be notified and asked to try again
-  
-  How test will be performed: A list of usernames and passwords (some of them match mock data stored in our database and some of them are just random strings that are not in our database) should be given to the function that handles user login, and we will check for those that match the mock user data in our database if the website directs to the home page and for those that do not match if the website prompts saying that username and password do not match
-  
-  \item{TFR3-A4\\} \label{TFR3-A4}
-  
-  Control: Functional, Manual, Dynamic
-            
-  Initial State: The user has logged in, and a drop-down menu is clicked and expanded
-            
-  Input: The option \textit{log out} in the drop-down menu is selected and clicked
-            
-  Output: The user should be able to log out of his/her account and prompted saying that you have logged out successfully
-  
-  Test Case Derivation: If the option \textit{log out} is selected and clicked, the user should be able to log out of his/her account and the user should be notified in some way so that he/she knows that the account has been logged out successfully
-  
-  How test will be performed: Manually log in using a mock account using different browsers and then log out for each one of them and see if we can log out and receive notifications about logging out
-  
-  \item{TFR4-A5\\} \label{TFR4-A5}
-  
-  Control: Functional, Manual, Dynamic
-            
-  Initial State: The user has logged in and in the home page
-            
-  Input:  The tab to view the scheduling information on the home page is selected and clicked
-            
-  Output: The scheduling information (in list view, Kanban view or calendar view, by default it is in list view) is displayed
-  
-  Test Case Derivation: The user should be able to view his/her scheduling information in a reasonable format such as list view, Kanban view or calendar view if the option to view the scheduling information is clicked on the home page
-            
-  How test will be performed: Manually log in using a list of mock accounts (the difference between these accounts would be the customized way of viewing the scheduling information such as by default using list view, using Kanban view, or using calendar view) using different browsers and then click the tab that is responsible for redirecting to the page viewing the scheduling information on the home page and check if we can be redirected to the page listing scheduling information and check if the information is displayed in the view that the account has been set
-  
-  \item{TFR5-A6\\} \label{TFR5-A6}
-  
-  Control: Functional, Manual, Dynamic
-            
-  Initial State: The user is on the page where he can retrieve his password by answering a list of security questions
-            
-  Input:  Strings to each one of the security questions that match the user data stored in our database
-            
-  Output: The password gets changed successfully and updated in our database, a text or diagram should be displayed to notify the user that the password has been changed 
-  
-  Test Case Derivation: The user should be able to change his password by answering the security questions correctly and should be notified in some way that the password has been changed
-            
-  How test will be performed: Manually log in using a mock account, navigate to the changing password page, answer mock security questions correctly and see if we get a notification like a text or a diagram indicating that the password has been changed successfully
-  
-  \item{TFR5-A7\\} \label{TFR5-A7}
-  
-  Control: Functional, Manual, Dynamic
-            
-  Initial State: The user is on the page where he can retrieve his password by answering a list of security questions
-            
-  Input:  Strings to each one of the security questions that do not match the user data stored in our database
-            
-  Output: A text or diagram should be displayed to notify the user that the answer to the security questions are not correct
-  
-  Test Case Derivation: The user should not be able to change his password by answering the security questions wrong and should be notified in some way that the answers are not correct
-            
-  How test will be performed: Manually log in using a mock account, navigate to the changing password page, answer mock security questions wrong and see if we get a notification like a text or a diagram indicating that the answers are wrong
-  
-  \end{enumerate}
-  
-  \subsubsection{User Input}
-  
-  \begin{enumerate}[resume]
-  \item{TFR6-UI1\\} \label{TFR6-UI1}
-  
-  Control: Functional, Manual, Dynamic
-            
-  Initial State: The user has logged in, and is currently on the course page,  
-            
-  Input: The option uploading PDF is selected and clicked and a PDF file is uploaded 
-            
-  Output: A prompt saying that the PDF has been uploaded successfully or saying that there is an error in cases where the format does not match (other files such as txt or csv etc.)
-  
-  Test Case Derivation: The user should be notified if the PDF gets uploaded successfully or when there is an error 
-            
-  How test will be performed: Manually log in and navigate to the course page, click on the option to upload a PDF file to see if a prompt shows up saying that it gets uploaded successfully, also upload a different file with different formats such as txt and csv and see if there is a prompt saying that the format does not match
-  \item{TFR6-UI2\\} \label{TFR6-UI2}
-  
-  Control: Functional, Manual, Dynamic
-            
-  Initial State: The user has logged in, and is currently on the course page,  
-            
-  Input: The option uploading PDF is selected and clicked and a PDF file is uploaded, repeat multiple times to upload multiple PDFs
-            
-  Output: A prompt saying that the PDF has been uploaded successfully or saying that there is an error in cases where the format does not match (other files such as txt or csv etc.)for each upload
-  
-  Test Case Derivation: The user should be notified if the PDF gets uploaded successfully or when there is an error for each upload
-            
-  How test will be performed: Manually log in and navigate to the course page, click on the option to upload a PDF file to see if a prompt shows up saying that it gets uploaded successfully. Repeat this multiple times to upload multiple PDFs and see if getting notifications multiple times 
-  
-  \item{TFR7-UI3\\} \label{TFR7-UI3}
-  
-  Control: Functional, Manual, Dynamic, Automatic
-            
-  Initial State: The user has logged in for the first time, a prompt shows up on the home page to ask if the user wants to select his/her preferred study intervals now or do it later, and a timetable is displayed where multiple study intervals are indicated
-            
-  Input: The user clicks on the option saying do it now or the user clicks on the option saying do it later
-            
-  Output: The user gets directed to the page where he/she can change the study intervals on a timetable if clicks on do it now or the prompt will be closed and the user stays on the home page
-  
-  Test Case Derivation: The user should be able to be redirected to the page where he/she can select the preferred study intervals if he/she wants to do it now for the first time, otherwise the prompt should disappear and the user should be able to stay on the home page and do further other actions
-  
-  How test will be performed: Manually log in to a new mock account and see if there is a prompt asking if we want to select the preferred study intervals now or do it later then click on do it now and see if we get directed to the page where we can select the intervals on a timetable. Repeat logging in for a different new account again but click on do it later this time to see the prompt goes away and if we stay on the home page
-  
-  \item{TFR8-UI4\\} \label{TFR8-UI4}
-  
-  Control: Functional, Manual, Dynamic, Automatic
-            
-  Initial State: The user has logged in, and a timetable is displayed where multiple study intervals are indicated
-            
-  Input: Drag and select the preferred time interval
-            
-  Output: The preferred time interval is highlighted and a save button is clicked
-  
-  Test Case Derivation: The selected time interval should be highlighted to indicate that this has been selected and once it is selected it should be saved after the save button is clicked
-  
-  How test will be performed: Manually log in and navigate to the setting to change the time interval, we will check if a timetable is displayed and  different time intervals are indicated in some ways, then we will select multiple different time intervals and check if selected intervals are highlighted and if the selected intervals are saved to the database once the save button is clicked 
-  
-  
-  \item{TFR9-UI5\\} \label{TFR9-UI5}
-  
-  Control: Functional, Manual, Dynamic, Automatic
-            
-  Initial State: The user has logged in for the first time, a prompt shows up on the home page to ask if the user wants to select his/her preferred study and break intervals now or do it later, and a Pomodoro is displayed where these can be input
-            
-  Input: The user clicks on the option saying do it now or the user clicks on the option saying do it later
-            
-  Output: The user gets directed to the page where he/she can change the study and break intervals on a Pomodoro if he clicks on do it now, or the prompt will be closed and the user stays on the home page if he clicks to do it later
-  
-  Test Case Derivation: The user should be able to be redirected to the page where he/she can select the preferred study and break intervals if he/she wants to do it now for the first time, otherwise the prompt should disappear and the user should be able to stay on the home page and do further other actions
-            
-  How test will be performed: Manually log in to a new mock account and see if there is a prompt asking if we want to select the preferred study and break intervals now or do it later then click on do it now and see if we get directed to the page where we can select the intervals on the Pomodoro. Repeat logging in for a different new account again but click on do it later this time to see if the prompt goes away and if we stay on the home page
-            
-  \item{TFR10-UI6\\} \label{TFR10-UI6}
-  
-  Control: Functional, Manual, Dynamic, Automatic
-            
-  Initial State: The user has logged in, and is on the page showing the Pomodoro settings
-            
-  Input: The user selects how much time they want to spend studying versus how much time taking a break
-            
-  Output: After the save button is clicked the Pomodoro settings will now reflect what the user had previously input for study and break times
-  
-  Test Case Derivation: The intervals for studying and taking a break should be shown on the timer once it has been input and save has been clicked
-            
-  How test will be performed: Manually log in and navigate to the setting to change the pomodoro study and break intervals, we will check if the Pomodoro is displayed and different time intervals are indicated in some ways, and then we will input multiple different intervals and check if the timer reflects these intervals and are saved to the database once the save button is clicked 
-  
-  \item{TFR11-UI7\\} \label{TFR11-UI7}
-  
-  Control: Functional, Manual, Dynamic
-            
-  Initial State: The user has logged in and the friend list panel is clicked and expanded
-            
-  Input: The option to send a friend request to a specific user (by username) is selected and clicked 
-            
-  Output: A prompt shows up and asks the user to provide the username that he/she wants to send a friend request to
-  
-  Test Case Derivation: Once the option of sending a friend request is selected, a prompt should be provided to ask the user to input the username that he/she wants to send a friend request to
-            
-  How test will be performed: Manually log in, expand the friend list, click on sending friend request option, and then check if a prompt asking the user to provide the username that he/she wants to send a friend request to shows up
-            
-  \item{TFR11-UI8\\} \label{TFR11-UI8}
-  
-  Control: Functional, Manual, Dynamic
-            
-  Initial State: A prompt is displayed asking to provide the username that he/she wants to send a friend request to
-            
-  Input: Valid and existing username and a send button is left-clicked
-            
-  Output: A text or diagram shows up to indicate that the friend request has been sent successfully 
-  
-  Test Case Derivation: When the user provides a valid username, the friend request should be sent successfully and there has to be a way to tell user that this has been done with no errors
-            
-  How test will be performed: Manually log in, expand the friend list, click on the sending friend request option, and then input a list of valid and existing usernames and click on the send button to see if we get notifications (by text or diagram) saying that the friend request has been sent 
-  
-  \item{TFR11-UI9\\} \label{TFR11-UI9}
-  
-  Control: Functional, Manual, Dynamic
-            
-  Initial State: A prompt is displayed asking to provide the username that he/she wants to send a friend request to
-            
-  Input: Invalid username such as empty string and a send button is left-clicked
-            
-  Output: A text or diagram shows up to indicate that the username provided is invalid 
-  
-  Test Case Derivation: When the user provides an invalid username, the friend request should not be sent and there has to be a way to tell the user that the username provided is invalid 
-            
-  How test will be performed: Manually log in, expand the friend list, click on the sending friend request option, and then input a list of invalid usernames such as empty strings and click on the send button to see if we get a notification (by text or diagram) saying that the username provided is invalid 
-  
-  \item{TFR12-UI10\\} \label{TFR12-UI10}
-		
-  Control: Functional, Manual, Dynamic
-            
-  Initial State: A notification indicating that there is an incoming friend request (could use sound effects or highlight the notification icon)
-            
-  Input: The notification gets left-clicked and the button accepting the friend request is clicked
-            
-  Output: A text or diagram showing that the friend request has been accepted
-  
-  Test Case Derivation: When the user accepts an incoming friend request, he/she should be notified when the friend request gets accepted successfully
-            
-  How test will be performed: Manually log in to one of the mock accounts, send a friend request to another mock account, log in to the account receiving the friend request and then check if there is a notification indicating that there is an incoming friend request, accept the friend request and then see if a text or a diagram gets displayed indicating that the friend request has been accepted
-		
-  \item{TFR13-UI11\\} \label{TFR13-UI11}
-
-  Control: Functional, Manual, Dynamic
-            
-  Initial State: A notification indicating that there is an incoming friend request (could use sound effects or highlight the notification icon)
-            
-  Input: The notification gets left-clicked and the button rejecting the friend request is clicked
-            
-  Output: A text or diagram showing that the friend request has been rejected
-  
-  Test Case Derivation: When the user rejects an incoming friend request, he/she should be notified that it has been rejected when the friend request gets rejected
-            
-  How test will be performed: Manually log in to one of the mock accounts, send a friend request to another mock account, log in to the account receiving the friend request and then check if there is a notification indicating that there is an incoming friend request, reject the friend request and then see if a text or a diagram gets displayed indicating that the friend request has been rejected
-  
-  \item{TFR14-UI12\\} \label{TFR14-UI12}
-  
-  Control: Functional, Manual, Dynamic
-            
-  Initial State: The user is logged in and is on the page that displays their tasks and current progress on those tasks
-            
-  Input: The user can input for each task what their current progress status and then save it
-            
-  Output: The task list will be updated with the current progress of the task
-  
-  Test Case Derivation: The user should be able to see a list of the current tasks he has to do and how far along he is on them. He should also be able to manually change the progress for each task when he has made progress or feels he needs more time
-            
-  How test will be performed: Manually log in and navigate to the task list page, select a task to edit the progress on, and then input a random percentage ranging from 0 to 100, Then, after pressing the save button this change should be committed and reflected on the task list page upon revisiting
-  
-  \item{TFR15-UI13\\} \label{TFR15-UI13}
-  
-  Control: Functional, Manual, Dynamic
-            
-  Initial State: The user is logged in and is on the page that displays their tasks and current progress on those tasks with a subtask marked as complete and there is a pop-up asking if the pace is comfortable
-            
-  Input: The user clicks if the pace is comfortable or not on the given pop-up
-            
-  Output: On clicking that the pace is comfortable, nothing is changed, if the pace is not comfortable the time for each task will change accordingly
-  
-  Test Case Derivation: The system curates a study plan for the user, so if the user does not feel as if he is doing well with this plan he should be able to provide feedback and have the study plan change around this feedback 
-            
-  How test will be performed: Manually log in head to the task list and complete a task. On the pop-up showing asking if the pace is comfortable, select that it is comfortable. Then, check that no change has been made to the timeline. Repeat this, but this time select that the pace is not comfortable, and then check that the study plan has changed how much time should be spent on the tasks
-  
-  \end{enumerate}
-		
-  \subsubsection{Data}
-  
-  \begin{enumerate}
-  
-    \item{TFR16-17-D1\\} \label{TFR16-17-D1}
-
-    Control: Functional, Manual, Dynamic
-                        
-    Initial State: The user has logged in and is on the PDF extraction page and has uploaded the course outline PDF
-                        
-    Input: The user presses to extract the course information from the uploaded PDF
-                        
-    Output: The page shows lists the course information extracted from the PDF as a task list
-    
-    Test Case Derivation: The user should be able to upload his course schedule and have the website extract the necessary information from it in order to create his schedule. After it has extracted the information it should display it to the user for quick verification
-                        
-    How test will be performed: Manually log in and upload a course PDF. Continue and click to parse the course outline and create a task list. Check that the extracted information from the list including \textit{courseName}, \textit{taskType}, \textit{taskName}, weight, and deadline from the uploaded course outline is correctly displayed as a task list
-    
-  \item{TFR18-D2\\} \label{TFR18-D2}
-  Control: Functional, Manual, Dynamic
-            
-  Initial State: The user has logged in and is on the PDF extraction page and has uploaded the course outline PDF.
-            
-  Input: The user presses to extract the course information from the uploaded PDF. The user has uploaded the corresponding \texttt{PDF} file of the course syllabus on \texttt{AWS S3}.
-            
-  Output: 
-  The function will show the user the calculated priority result on the extraction page and the course detail page as priority labels beside the course tasks. 
-  
-  Test Case Derivation: After all the priorities of course tasks have been calculated, the user should be able to preview and verify the calculated priorities on the extraction page related to the course information generated from the \texttt{PDF}. If the user agrees with the results, the user should be able to see the calculated priority result on his/her course detail page after clicking on the Add button.
-  
-  How the test will be performed: Manually log in and upload a course PDF. Continue and click to parse the course outline and create a task list. Check the priority label beside each task, and compare the labels according to the parameters of each task, the information extracted from the course syllabus file: \textit{taskType}, \textit{weight}, \textit{deadline}. If the priority labels are reasonable according to the parameters, click the Add button to save the generated priorities. The tester then manually goes to the course detail page to check if the labels are displayed correctly.
-
-  \item{TFR19-D3\\} \label{TFR19-D3}
-  Control: Functional, Manual, Dynamic
-            
-  Initial State: The user has logged in, set up a Pomodoro Timmer on the website, and turned on the camera on his/her device.
-            
-  Input: Live video stream captured by the camera, a series of consecutive image frames with information about faces, eyes, and movements.
-            
-  Output: After the end of the timer, the program will show the user the percentage score and a line graph chart showing the trend of the user's attention level during his/her focusing time.
-  
-  Test Case Derivation: The user should be able to detect human face and eye movements with different resolution cameras, in any lighting conditions, with different degrees of facial blocking, and at different angles, and receive reasonable analysis results after the Pomodoro Timmer ends. 
-            
-  How the test will be performed: Manually comparing single video frames of different resolutions to test the program's ability to localize the face and eyes of a person in different angles and lighting environments. Test the program's ability to recognize abnormality data by rapidly shaking and turning the head. Test the program's ability to recognize and classify facial expressions with different facial expressions. Partially cover the face to test whether the analysis results through eye tracking are reasonable. Test the system's analyzing ability and reaction time using real-time video data. Finding different testers to simulate different concentration situations in different environments to test the accuracy of the analysis results.
-
-  \item{TFR20-D4\\} \label{TFR20-D4}
-
-Control: Functional, Manual, Dynamic
-					
-Initial State: The user has logged in, set up a Pomodoro Timmer on the website, and turned on the camera on his/her device. The program detected the user's real-time attention score was low for a period of time.
-					
-Input: Live video stream captured by the camera, a series of consecutive image frames with information about faces, eyes, and movements.
-					
-Output: While the Pomodoro Timmer is on, it will be paused and inform the user via a pop-up window that his/her current attention span is low and suggest a break time.
-
-Test Case Derivation: The user should be able to see a notification to suggest a short break when their attention level is low and not suitable to continue the study task.
-					
-How the test will be performed: Verify that the system gives correct feedback by looking around, and making different gestures and facial expressions to simulate different levels of attention. Verify that the system correctly and accurately triggers the reminder and pauses the timer after a specific period of inattention by performing different inattentiveness for different lengths of time.
-
-\item{TFR21-D5\\} \label{TFR21-D5}
-
-Control: Functional, Manual, Dynamic
-					
-Initial State: The user has logged in and generated or created a task list, used Pomodoro Timmers to record work time, or used a checklist view or calendar view on the website to record their task progress each time after completing the scheduled study time period.
-					
-Input: The start and end times of the working hours for certain tasks recorded by the using the Pomodoro Timmers, the estimated progress user input at the end of the Pomodoro Timmers, as well as the user's list of tasks and the percentage of progress of the marked tasks.
-					
-Output: Displays to the user a list of tasks with completed or uncompleted status labels, and each uncompleted task has a progress bar that visually shows the progress of the current task.
-
-Test Case Derivation: The user should be able to view their task list on the website, including the progress status of each task. The progress status of each task can be shown as marked as completed or incomplete, and incomplete tasks will have a progress bar showing the progress of completion.
-					
-How test will be performed: Create test cases, use the Pomodoro Timmer tool to keep track of work time, and use the TO-DO List view and Calendar view to mark and change the progress of tasks, and verify if the function can generate the correct view. Test cases should cover different scenarios such as task completion, task incompletion, and change in task plan. During the development phase, conduct unit and integration tests to ensure that the components of the task management tool work together correctly to support the task progress viewing functionality.
-
-\item{TFR22-D6\\} \label{TFR22-D6}
-
-Control: Functional, Manual, Dynamic
-					
-Initial State: The user has the credentials for the corresponding calendar application he/she is trying to import, and the user has logged in to the website, is located on the Calendar page of the website, and has clicked the Import button.
-					
-Input: The valid authentication information the user provides, such as a username and password or an authorization token, so that the system can access data from other calendar applications. The source of the event and schedule data used for import may be Calendar, Outlook, Google Calendar, and so on. This data includes information such as the date, time, and location of the event. 
-					
-Output: A new combined calendar schedule of the internal and external calendar data will be displayed on the calendar page of the website without any conflict. 
-
-Test Case Derivation: Once the user has successfully authenticated and selected the calendar data to be imported, the system should be able to import this data into the user's web system so that the user can view and manage it in the calendar view of the website. The system should detect if there is a conflict between the user's internal existing events and the newly imported events. The system informs the user if there is any conflict, and provides the user with a change plan to resolve the conflict such as replacing, merging, or deleting.
-
-How test will be performed: Test the authentication process manually against different external data sources to ensure that authentication can be performed successfully and relevant external data can be obtained. Use non-conflicting external calendar programs for import and merge to test whether the data is successfully combined and displayed correctly. Also use conflicting external calendar data for import testing to check whether the delete, merge, and replace functions are effective.
-
-\item{TFR23-D7\\} \label{TFR23-D7}
-
-Control: Functional, Manual, Dynamic
-					
-Initial State: The user has the credentials for the corresponding calendar application he/she is trying to export to, and the user has logged in to the website, is located on the Calendar page of the website, and has clicked the Export button.
-					
-Input: Valid authentication information, such as a username and password or other authentication credentials. User's own task and schedule data, including \textit{taskType}, \textit{taskName}, \textit{weight}, \textit{deadline}, \textit{startTime}, \textit{endTime} etc. Also, the target calendar applications to which the data is exported, such as Calendar, Outlook, or Google Calendar.
-					
-Output: Tasks and events within the site can be seen on the corresponding external site with the relevant information for each of them. A success confirmation message or a failure error message at the end of the export process.
-
-Test Case Derivation: After the user clicks EXPORT, selects the target calendar application, and completes the relevant authentication, the system should export the user's event and schedule data to the selected target calendar application, ensuring that the data is rendered correctly in other applications. The user should be able to see the feedback to indicate whether the export operation was successful or not, if an error occurred, the user will see the appropriate error message. If the export was successful, the user should be able to get confirmation that the export operation was successful. If the user already has existing events and schedules in the target calendar application, the system should be able to recognize and inform the user and provide the user with decision options to resolve conflicts with the exported data.
-					
-How test will be performed: Manually create different types of events and calendars, then export them to different calendar applications, Calendar, Outlook, and Google Calendar, and verify the accuracy, completeness, and consistency of the data. Test whether the system can correctly recognize conflicts and provide users with decision-making options and successful conflict resolution by exporting calendar data with and without event conflicts. 
-
-\item{TFR22-23-D8\\} \label{TFR22-23-D8}
-
-Control: Functional, Manual, Dynamic
-					
-Initial State: The user does not have the credentials for the corresponding calendar application he/she is trying to import or export to, and the user has logged in to the website, is located on the Calendar page of the website, and has clicked the Import or Export button.
-					
-Input: Invalid authentication information, such as a username and password or other authentication credentials. The target calendar applications to which the data is exported, such as Calendar, Outlook, or Google Calendar.
-					
-Output: The warning message popped up to notify the user the account authorization inputs are not valid.
-
-Test Case Derivation: Once a user's authorization is entered incorrectly, they should be able to be notified and given the opportunity to re-enter their credential information.
-					
-How test will be performed: Tested with incorrect authentication information. Manually try to import and export calendar data by using invalid credentials, non-existent usernames, and invalid passwords.
-
-\item{TFR24-D9\\} \label{TFR24-D9}
-
-Control: Functional, Manual, Dynamic
-					
-Initial State: The user has logged in and is on the TO-DO list view on the website.
-					
-Input: The user clicks the Download button to issue a command requesting export to PDF. The user selects the time range of the TO-DO list view and selects the period format of the export list which can be daily, or weekly. The information data in the task list includes \textit{course}, \textit{taskName}, \textit{date}, \textit{deadline}, \textit{startTime}, \textit{endTime}, \textit{weight}, etc.
-					
-Output: PDF document with a to-do list view of the study plan in the selected time range and period format.
-
-Test Case Derivation: The user should be able to see a preview of the exported TO-DO list study plan before the PDF file is downloaded. After the user presses the download button on the preview page, the PDF file with the task list data should be downloaded to his/her local device. The preview and the PDF file should have proper formatting, fonts, and layout, and the exported task information should be accurate and consistent.
-					
-How the test will be performed: By manually simulating user input, perform the operation of exporting the TO-DO list as a PDF, and check whether the generated PDF file contains the correct information about the tasks, expected formatting, fonts, layout, etc. Manually test using different study plans, including different numbers of tasks, different dates, and times of scheduling, etc., to ensure that the export function works properly in a variety of situations.
-
-\item{TFR24-D10\\} \label{TFR24-D10}
-
-Control: Functional, Manual, Dynamic
-					
-Initial State: The user has logged in and is on the calendar view on the website.
-					
-Input: The user clicks the Download button to issue a command requesting export to PDF. The user selects the time range of the calendar list view and selects the period format of the calendar data which can be weekly or monthly. The calendar data includes \textit{course}, \textit{taskName}, \textit{startDate}, \textit{endDate} \textit{deadline}, \textit{startTime}, \textit{endTime}, \textit{weight}, etc.
-					
-Output: PDF document with a calendar view of the study plan in the selected time range and period format.
-
-Test Case Derivation: The user should be able to see a preview of the exported study plan calendar before the PDF file is downloaded. After the user presses the download button on the preview page, the PDF file with the calendar data should be downloaded to his/her local device. The preview and the PDF file should have proper formatting, fonts, and layout, and the exported event and task information should be accurate and consistent.
-					
-How the test will be performed: By manually simulating user input, perform the operation of exporting the calendar view as a PDF, and check whether the generated PDF file contains the correct information about the tasks and events, expected formatting, fonts, layout, etc. Manually test using different study plans, including different numbers of tasks, different dates, and times of scheduling, etc., to ensure that the export function works properly in a variety of situations.
-
-\end{enumerate}
-\subsubsection{Scheduling}
 \begin{enumerate}
+\item{TFR1-EXTRACT1\\}\label{TFR1-EXTRACT1}
 
-  \item{TFR25-S1\\} \label{TFR25-S1}
+Type: Functional, Manual, Dynamic
 
-  Control: Functional, Manual, Dynamic
-            
-  Initial State: The user has logged in and is on the task creation page or the extraction page.
-            
-  Input: the task information such as \textit{taskName}, \textit{taskType}, \textit{weight}, and \textit{priority}. The user's input for the initial estimated time needed to finish the task.
-            
-  Output: the initial estimate of the total time required for the task to complete.
-  
-  Test Case Derivation: The user should be able to view an initial estimated completion time for any task generated from the course syllabus PDF documents they upload. This estimated completion time can be modified by the user at any time after the task has been created. For any tasks created manually by users, the user can assign an initial estimated completion time period and change it at any time after the task has been created. 
-            
-  How the test will be performed:
-  Generate tasks from course syllabus PDF files and create tasks directly. Testing should encompass various types of tasks with different weights, user actions, different learning time records, and progress percentage inputs. Manually try to modify the value after the tasks have been created, and try input the various values like negative numbers or text, etc.
+Initial State: Tester is on the course information extraction page.
 
-\item{TFR26-S2\\} \label{TFR26-S2}
+Input/Condition: Tester uploads their course syllabi in PDF format.
 
-Control: Functional, Manual, Dynamic
-					
-Initial State: The user has logged in and generated or created a task list, used Pomodoro Timmers to record work time, or used a checklist or calendar view on the website to record their task progress each time after completing the scheduled study time period.
-					
-Input: Current schedule data for the task includes \textit{deadline}, \textit{priority}, \textit{weight}, current progress in completing the task, the user's history of the percentage of progress completed, and the corresponding time spent on the task.
-					
-Output: The updated Learning Plan, regenerated task schedule information based on the updated task progress from the user, which may include reordering of task list and TO-DO list, new priority of the task, etc.
+Output/Result: The system extracts key details such as professor's email addresses, assignment weightings, and MSAF policy, displaying them to the tester.
 
-Test Case Derivation: Each time the user updates the task progress and records the corresponding time spent, they will receive a reminder to update the learning schedule. After that, the user should be able to view a newly generated learning plan associated with the rate of change in task progress.
-					
-How test will be performed: After simulating the user's change of task progress, check whether the system has kept all the original task information and updated the related task plan. Compare the pre- and post-update learning plans to ensure that the updated plan correctly reflects the changes in task progress.
+How test will be performed: A tester uploads multiple course syllabi PDFs, and the system's ability to accurately extract and display the specified information is evaluated.
 
-\item{TFR27-S3\\} \label{TFR27-S3}
+\item{TFR2-TASK1\\}\label{TFR2-TASK1}
 
-Control: Functional, Manual, Dynamic
-					
-Initial State: The user has logged in and generated or created a task list, used Pomodoro Timmers to record work time, or used a checklist view or calendar view on the website to record their task progress each time after completing the scheduled study time period.
-					
-Input: \textit{taskName}, \textit{taskType}, \textit{weight} and the initial estimate of the total time required for the task to complete, the percentage of completing progress of the task recorded by the user at the end of the Pomodoro Timmers, and the corresponding time spent.
-					
-Output: The time needed to finish each task is dynamically updated accordingly.
+Type: Functional, Manual, Dynamic
+Initial State: The system has successfully extracted course information from an uploaded course outline.
 
-Test Case Derivation: The system should be capable of calculating the most up-to-date estimated time required to finish each task after the user records and inputs the progress percentage and the corresponding time spent.
-					
-How the test will be performed: Generate tasks from course syllabus PDF files and create tasks directly. Input multiple progress updates and corresponding study hours for each task. Estimate task completion time through both manual and automated testing methods. Testing should encompass various types of tasks with different weights, user actions, different learning time records, and progress percentage inputs. Compare the pre- and post-input of the new task progress and corresponding hours spent and check whether the changes in task estimated time needed are accurately reflected in the task data.
+Input/Condition: Course information is processed by the system.
 
-\item{TFR28-S4\\} \label{TFR28-S4}
+Output/Result: Tasks are automatically created and added to the tester's to-do list based on the extracted course information.
 
-Control: Functional, Manual, Dynamic
-					
-Initial State: The user has logged in and uploaded a course syllabus PDF file, and is on the extraction page of the website. 
-					
-Input: The user's task list and data for tasks including \textit{taskType}, \textit{weight} and \textit{deadline}.
-					
-Output: A task priority list, based on sorting the tasks in order by task type, weight, and deadline. High-priority tasks will be ranked first.
+How test will be performed: Course outlines are uploaded, and the automatic generation of tasks in the to-do list is verified for correctness and completeness.
 
-When the user attempts to extract all the information from the course, the program will extract the necessary data from the uploaded course syllabus PDF file and generate a list of tasks with a calculated priority number. The system should categorize all tasks into three priority levels: high, medium, and low, and assign each task a corresponding priority label. After this process, the user should be able to view the task lists with priority labels, ordered in descending order based on the priorities generated by the system.
-					
-How test will be performed: Create test sets with task lists of different task types, weights, and deadlines, and check that the generated list of sorted tasks meets the expected priority ordering. Using special case inputs, such as an empty task list, to ensure that the system handles edge cases correctly.
+\item{TFR3-ADD1\\}\label{TFR3-ADD1}
 
-\item{TFR29-S5\\} \label{TFR29-S5}
+Type: Functional, Manual, Dynamic
 
-Control: Functional, Manual, Dynamic
-					
-Initial State: The user has logged in and generated or created a task list with task information.
-					
-Input: Task information: \textit{taskName}, \textit{taskType}, \textit{weight}, \textit{deadline} \textit{priority}. The learner's preferred day and time period for the study. The user's current schedule, including scheduled events, and other existing tasks. The working time of the Pomodoro Timmer setting for each learning task.
-					
-Output: A complete schedule of the learning program, including the name, weight, deadline, priority, sub-tasks under each task, scheduled start and end times of Pomodoro Timmer for each sub-tasks. Display task and sub-task time periods and information on other external platforms.
+Initial State: Tester is on the course addition page.
 
-Test Case Derivation: Select different study periods, days, and various Pomodoro interval settings to assess the system's ability to handle invalid or incomplete input data. Using valid data, confirm that the system can generate a comprehensive study plan for each task, considering preferred study times and schedules while avoiding conflicts with existing activities. Export study schedules to an external calendar program and test the system's capability to accurately and completely export study plans to other calendar applications. In cases of task scheduling conflicts, verify that the system can provide solutions, such as suggesting alternative study times or allocating sub-tasks to different days.
+Input/Condition: Tester inputs a valid course code to add a new course.
 
-How test will be performed: Tests can be performed using automated testing frameworks to simulate various scenarios and input data. Write unit tests for different components and functional modules of the system. Verify that the system is able to generate the correct study plan based on different inputs. And that it can be successfully and completely exported to other calendar applications. Verify that the system is able to effectively resolve schedule conflicts and provide sound advice.
+Output/Result: The course is successfully added to the tester's profile.
 
-\item{TFR30-S6\\} \label{TFR30-S6}
+How test will be performed: Tester attempt to add various courses by providing valid course codes, and the system's response to correctly add those courses is assessed.
 
-Control: Functional, Manual, Dynamic
+\item{TFR4-REMOVE1\\}\label{TFR4-REMOVE1}
 
-Initial State: The user has logged in and generated a study schedule plan and a task list with task information and is on Pomodoro Timmer page.
-					
-Input: The generated task list with sub-tasks and the information of each sub-task, includes \textit{taskName}, \textit{startTime}, and \textit{endTime}.
-					
-Output: A list of Pomodoro Timmers of subtasks.
+Type: Functional, Manual, Dynamic
 
-Test Case Derivation: Using a valid list of sub-tasks and valid Pomodoro clock settings, e.g. 25 minutes of work and 5 minutes of rest, detect that each sub-task has a corresponding Pomodoro clock with work and rest time slots. Using an empty list of sub-tasks, the output should be that no Pomodoro clocks are created and no warning messages or errors appear. Entering an invalid sub-task list or invalid Pomodoro clock settings, the user should get a warning message that no Pomodoro clock can be created.
-					
-How test will be performed: Testing can be performed either by manually operating the system or by automated test scripts. The flow of the learning cycle should be tested to ensure that the Pomodoro clock is working as expected, and the user interactions and system responses should be tested to ensure that the system can correctly handle the user's actions and changes in the task state. Tests should cover different scenarios, including normal operation, incorrect operation, and edge cases.
+Initial State: Tester's profile contains one or more courses.
 
-\item{TFR31-S7\\} \label{TFR31-S7}
+Input/Condition: Tester selects a course to remove from their profile.
 
-Control: Functional, Manual, Dynamic
-					
-Initial State: The user has logged in and generated a study schedule plan and a task list with task information and is on Pomodoro Timmer page.
-					
-Input: The user's personal account profile information, and the user's contacts list, which includes a list of contacts that the user has added and their account information. The user's and the contacts' study schedules, including course lists, task lists, and sub-task schedule lists.
-					
-Output: The system will match the study schedules of the user and contacts and output a set of matched contact lists.
+Output/Result: The selected course is removed from the tester's profile.
 
-Test Case Derivation: Simulate the user to enter his study plan and request the system to match contacts. Check if the system has successfully matched contacts that fit the study plan and outputs a list of matches. If the user sends a match request, the user's contacts should be able to receive a notification of the request, and after the contacts agree, the system should generate a schedule and a link to the online learning session and send it to the user and the contacts who accepted the request. If the contact does not accept the match request, the contact can choose to leave a message for the user, after which the user should be able to receive an alert message indicating that the match was not successful and the corresponding message from the contact.
-					
-How test will be performed: Testing is performed by manually simulating the user's interaction with the system; the testing steps include entering a learning plan, selecting matching contacts, viewing match results, and scheduling an online learning session. The testing process should cover a variety of scenarios, including matching under normal circumstances, no-match scenarios, updating of the contacts list, and correctness of session scheduling. The system should also handle boundary cases of input data, such as empty learning plans, incomplete user information, etc.
-\end{enumerate}
+How test will be performed: Tester with multiple courses on their profile attempts to remove one, and the successful removal and profile update are verified.
+
+\item{TFR5-POMODORO1\\}\label{TFR5-POMODORO1}
+
+Type: Functional, Manual, Dynamic
+
+Initial State: Tester is on the Pomodoro timer page.
+
+Input/Condition: Tester initiates a study session using the Pomodoro timer.
+
+Output/Result: A Pomodoro study session starts.
+
+How test will be performed: Tester navigates to the Pomodoro page and starts a study session, verifying the timer's functionality and session tracking.
+
+\item{TFR6-POMODORO2\\}\label{TFR6-POMODORO2}
+
+Type: Functional, Manual, Dynamic
+
+Initial State: Tester's to-do list contains at least one task.
+
+Input/Condition: Tester starts a Pomodoro timer by selecting a specific task from the to-do list.
+Output/Result: A Pomodoro study session specific to the selected task begins.
+
+How test will be performed: Tester selects a task from their to-do list to start a Pomodoro session, and the system's ability to associate the session with the selected task is evaluated.
+
+\item{TFR7-MUSIC1\\}\label{TFR7-MUSIC1}
+
+Type: Functional, Manual, Dynamic
+
+Initial State: A Pomodoro study session is active.
+
+Input/Condition: Tester selects to play background music during the study session.
+
+Output/Result: Chosen background music plays during the Pomodoro session.
+
+How test will be performed: During an active Pomodoro session, the tester selects different music options to play in the background, and the system's ability to play and manage music selection is assessed.
+
+\item{TFR8-TOMATO1\\}\label{TFR8-TOMATO1}
+
+Type: Functional, Manual, Dynamic
+
+Initial State: A Pomodoro study session has just been completed.
+
+Input/Condition: Completion of a Pomodoro study session.
+
+Output/Result: A tomato icon is generated and displayed in the tester's "harvest bucket".
+
+How test will be performed: After completing a Pomodoro session, the presence of a new tomato icon in the harvest bucket is verified to assess the system's reward mechanism.
+
+\item{TFR9-TODO11\\}\label{TFR9-TODO1}
+
+Type: Functional, Manual, Dynamic
+
+Initial State: Tester is on the to-do list page.
+Input/Condition: Tester adds a new task to the to-do list.
+
+Output/Result: The new task appears on the to-do list.
+
+How test will be performed: Tester attempts to add a task by specifying task details, and the addition of the task to the list is confirmed.
+
+\item{TFR10-TODO2\\}\label{TFR10-TODO2}
+Type: Functional, Manual, Dynamic
+
+Initial State: Tester's to-do list contains at least one task.
+
+Input/Condition: Tester selects a task to view its details.
+
+Output/Result: Details of the selected task are displayed, including due date, associated course, weight, and other relevant information.
+
+How test will be performed: Tester clicks on various tasks to view their details, verifying that all relevant information is accurately presented.
+
+
+\item{TFR11-TODO3\\}\label{TFR11-TODO3}
+Type: Functional, Manual, Dynamic
+
+Initial State: Tester's to-do list contains at least one task.
+
+Input/Condition: Tester selects an existing task to edit in the to-do list.
+
+Output/Result: The task is updated with new information as provided by the tester.
+
+How test will be performed: Tester edits multiple tasks with different pieces of information, confirming that each change is reflected in the to-do list.
+
+
+\item{TFR12-TODO4\\}\label{TFR12-TODO4}
+
+Type: Functional, Manual, Dynamic
+
+Initial State: Tester's to-do list contains several tasks.
+
+Input/Condition: Tester views the to-do list.
+
+Output/Result: Tasks are organized and displayed in three separate columns: To Do, In Progress, and Done.
+
+How test will be performed: Tester verifies the organization of tasks into the specified columns and assesses the ease of understanding the task's status.
+
+
+\item{TFR13-TODO5\\}\label{TFR13-TODO5}
+
+Type: Functional, Manual, Dynamic
+
+Initial State: Tester is on the to-do list page.
+
+Input/Condition: Tester toggles between Kanban-style and calendar layout views.
+
+Output/Result: The to-do list is displayed according to the selected layout preference.
+
+How test will be performed: Tester switches between the two layout options multiple times to ensure the layout changes are applied correctly and persistently.
+
+
+\item{TFR14-FORUM1\\}\label{TFR14-FORUM1}
+
+Type: Functional, Manual, Dynamic
+
+Initial State: Tester is on the forum page.
+
+Input/Condition: Tester creates a new discussion topic.
+
+Output/Result: The new topic is successfully created and visible in the forum.
+
+How test will be performed: Tester attempts to create multiple discussion topics with different themes, verifying that each is added to the forum.
+
+\item{TFR15-FORUM2\\}\label{TFR15-FORUM2}
+
+Type: Functional, Manual, Dynamic
+
+Initial State: Forum contains multiple discussion topics.
+
+Input/Condition: Tester searches for a topic using keywords.
+
+Output/Result: Topics matching the keywords are displayed to the tester.
+
+How test will be performed: Tester performs several searches using different keywords, and the accuracy and relevance of search results are evaluated.
+
+
+\item{TFR15-FORUM3\\}\label{TFR16-FORUM3}
+
+Type: Functional, Manual, Dynamic
+
+Initial State: Tester is viewing a specific discussion topic in the forum.
+
+Input/Condition: Tester submits a comment on the topic.
+
+Output/Result: The comment is added to the discussion.
+
+How test will be performed: Tester comments on various topics and verifies that their comments are correctly posted and visible to others.
+
+\item{TFR17-FORUM4\\}\label{TFR17-FORUM4}
+
+Type: Functional, Manual, Dynamic
+
+Initial State: Tester is viewing a comment within a discussion topic in the forum.
+
+Input/Condition: Tester replies to a comment.
+Output/Result: The reply is posted as part of the discussion thread.
+
+How test will be performed: Tester replies to multiple comments in different discussion threads, checking for the proper organization and visibility of their replies.
+
+\item{TFR18-QUICKLINKS1\\}\label{TFR18-QUICKLINKS1}
+
+Type: Functional, Manual, Dynamic
+
+Initial State: Tester is on the dashboard or home page.
+
+Input/Condition: Tester navigates to the quick links section.
+
+Output/Result: The system displays key university websites and other relevant tools.
+
+How test will be performed: Tester checks the quick links section for accessibility and relevance of the provided links to university websites and other educational tools.
+
+
+\item{TFR19-QUICKLINKS2\\}\label{TFR19-QUICKLINKS2}
+
+Type: Functional, Manual, Dynamic
+
+Initial State: Quick links are displayed on the tester's dashboard or home page.
+
+Input/Condition: Tester attempts to drag and rearrange the order of website links.
+
+Output/Result: The order of the links changes according to the tester's customization.
+
+How test will be performed: Tester rearranges the quick links in a new order, verifies the order is saved and persists across sessions.
+
+\item{TFR20-FEEDBACK1\\}\label{TFR20-FEEDBACK1}
+
+Type: Functional, Manual, Dynamic
+
+Initial State: Tester is logged in and on the feedback submission page.
+
+Input/Condition: Tester submits feedback through the feedback form.
+
+Output/Result: Feedback is successfully submitted to the developers.
+
+How test will be performed: Tester fills out and submits the feedback form with various types of feedback, confirming submission success and receipt by the development team.
+
+
+\item{TFR21-FEEDBACK2\\}\label{TFR21-FEEDBACK2}
+
+Type: Functional, Manual, Dynamic
+
+Initial State: Tester has previously submitted feedback.
+
+Input/Condition: Tester navigates to the feedback history page.
+
+Output/Result: The system displays all past feedback submitted by the tester.
+
+How test will be performed: Tester reviews their feedback history to ensure all previously submitted feedback is visible and accurate.
+
+\item{TFR22-FEEDBACK3\\}\label{TFR22-FEEDBACK3}
+
+Type: Functional, Manual, Dynamic
+
+Initial State: Tester has submitted feedback and is on the feedback status page.
+
+Input/Condition: Tester checks the status of their submitted feedback.
+
+Output/Result: The system shows the current status of each piece of feedback submitted by the tester.
+
+How test will be performed: Tester submits feedback and later checks the status of their submissions, verifying that the system accurately tracks and displays the status.
+
+\item{TFR23-PROFILE1\\}\label{TFR23-PROFILE1}
+
+Type: Functional, Manual, Dynamic
+
+Initial State: Tester is on their profile settings page.
+
+Input/Condition: Tester attempts to change their username.
+
+Output/Result: The system updates the tester's username across the platform.
+
+How test will be performed: Tester changes their username in profile settings, then navigates the platform to ensure the new username is displayed and used consistently.
+
+\item{TFR24-GPA1\\}\label{TFR24-GPA1}
+
+Type: Functional, Manual, Dynamic
+
+Initial State: Tester is on the GPA calculation page.
+
+Input/Condition: Tester upload the transcript to calculate their cumulated GPA.
+
+Output/Result: The system calculates and displays the tester's cumulated GPA.
+
+How test will be performed: upload the transcript, checking for accuracy of the calculated GPA against manual calculations.
+
+
 \subsection{Tests for Nonfunctional Requirements}
 
 \subsubsection{Look and feel}
@@ -826,11 +588,11 @@ Type: Dynamic, Manual
 					
 Initial State: The web application is launched.
 					
-Input/Condition: Users are asked to read the text on each page.
+Input/Condition: Tester are asked to read the text on each page.
 					
-Output/Result:  \hyperref[MIN_UNDERSTAND]{\texttt{MIN\_UNDERSTAND\%}} of users reporting that all the texts are legible.
+Output/Result:  \hyperref[MIN_UNDERSTAND]{\texttt{MIN\_UNDERSTAND\%}} of tester reporting that all the texts are legible.
 					
-How test will be performed: The web application displayed with screens with various resolutions and sizes. \hyperref[MIN_TESTER_NUM]{\texttt{MIN\_TESTER\_NUM}} users are asked to read the texts and report any unclear typography.
+How test will be performed: The web application displayed with screens with various resolutions and sizes. \hyperref[MIN_TESTER_NUM]{\texttt{MIN\_TESTER\_NUM}} Tester are asked to read the texts and report any unclear typography.
 					
 \item{TAR-2\\}\label{TAR-2}
 
@@ -838,11 +600,11 @@ Type: Dynamic, Manual
 					
 Initial State: The web application is launched.
 					
-Input/Condition: Users are asked to observe color on each page.
+Input/Condition: Tester are asked to observe color on each page.
 					
-Output/Result: \hyperref[MIN_UNDERSTAND]{\texttt{MIN\_UNDERSTAND\%}} of users comfortable with the color used.
+Output/Result: \hyperref[MIN_UNDERSTAND]{\texttt{MIN\_UNDERSTAND\%}} of testers comfortable with the color used.
 					
-How test will be performed: \hyperref[MIN_TESTER_NUM]{\texttt{MIN\_TESTER\_NUM}} users are asked to observe the color and report any distracting or overwhelming color palette.
+How test will be performed: \hyperref[MIN_TESTER_NUM]{\texttt{MIN\_TESTER\_NUM}} Tester are asked to observe the color and report any distracting or overwhelming color palette.
 
 \item{TAR-3\\}\label{TAR-3}
 
@@ -850,11 +612,11 @@ Type: Dynamic, Manual
 					
 Initial State: The web application is launched.
 					
-Input/Condition: Users are asked to interpret icons and graphics on each page.
+Input/Condition: Tester are asked to interpret icons and graphics on each page.
 					
-Output/Result: \hyperref[MIN_UNDERSTAND]{\texttt{MIN\_UNDERSTAND\%}} of users able to understand the meaning of each icon and graphic as designed.
+Output/Result: \hyperref[MIN_UNDERSTAND]{\texttt{MIN\_UNDERSTAND\%}} of tester able to understand the meaning of each icon and graphic as designed.
 					
-How test will be performed: \hyperref[MIN_TESTER_NUM]{\texttt{MIN\_TESTER\_NUM}} users are asked what they think each icon and graphic means. Any mismatch from the UI designer's intention would be recorded.
+How test will be performed: \hyperref[MIN_TESTER_NUM]{\texttt{MIN\_TESTER\_NUM}} Tester are asked what they think each icon and graphic means. Any mismatch from the UI designer's intention would be recorded.
 
 \item{TAR-4\\}\label{TAR-4}
 
@@ -862,11 +624,11 @@ Type: Dynamic, Manual
 					
 Initial State: The web application is launched.
 					
-Input/Condition: Users are asked to observe the layout of each page.
+Input/Condition: Tester are asked to observe the layout of each page.
 					
-Output/Result: \hyperref[MIN_UNDERSTAND]{\texttt{MIN\_UNDERSTAND\%}} of users comfortable with the payout.
+Output/Result: \hyperref[MIN_UNDERSTAND]{\texttt{MIN\_UNDERSTAND\%}} of tester comfortable with the payout.
 					
-How test will be performed: The web application is launched with different devices including smartphones, tablets, and desktops.  \hyperref[MIN_TESTER_NUM]{\texttt{MIN\_TESTER\_NUM}} users are asked to point out any unresponsive, out-of-margin, or compressed elements.
+How test will be performed: The web application is launched with different devices including smartphones, tablets, and desktops.  \hyperref[MIN_TESTER_NUM]{\texttt{MIN\_TESTER\_NUM}} Tester are asked to point out any unresponsive, out-of-margin, or compressed elements.
 
 \item{TSTR-1\\}\label{TSTR-1}
 
@@ -874,11 +636,11 @@ Type: Dynamic, Manual
 					
 Initial State: The web application is launched.
 					
-Input/Condition: Users are asked to point out the menus and navigation bars.
+Input/Condition: Tester are asked to point out the menus and navigation bars.
 					
-Output/Result: \hyperref[MIN_UNDERSTAND]{\texttt{MIN\_UNDERSTAND\%}} of users able to locate menus and navigation tools without confusion.
+Output/Result: \hyperref[MIN_UNDERSTAND]{\texttt{MIN\_UNDERSTAND\%}} of tester able to locate menus and navigation tools without confusion.
 					
-How test will be performed: \hyperref[MIN_TESTER_NUM]{\texttt{MIN\_TESTER\_NUM}} users are asked to point out the menus and navigation bars without assistance.
+How test will be performed: \hyperref[MIN_TESTER_NUM]{\texttt{MIN\_TESTER\_NUM}} Tester are asked to point out the menus and navigation bars without assistance.
 
 \item{TSTR-2\\}\label{TSTR-2}
 
@@ -886,11 +648,11 @@ Type: Dynamic, Manual
 					
 Initial State: The web application is launched.
 					
-Input/Condition: Users are asked to point out inconsistent UI elements.
+Input/Condition: Tester are asked to point out inconsistent UI elements.
 					
 Output/Result: \hyperref[MAX_ELEMENT_BAD]{\texttt{MAX\_ELEMENT\_BAD}} inconsistent UI elements found.
 					
-How test will be performed: \hyperref[MIN_TESTER_NUM]{\texttt{MIN\_TESTER\_NUM}} users are asked to explore the application and point out any inconsistent UI elements that break the harmony.
+How test will be performed: \hyperref[MIN_TESTER_NUM]{\texttt{MIN\_TESTER\_NUM}} Tester are asked to explore the application and point out any inconsistent UI elements that break the harmony.
 
 \item{TSTR-3\\}\label{TSTR-3}
 
@@ -898,11 +660,11 @@ Type: Dynamic, Manual
 					
 Initial State: The web application is launched.
 					
-Input/Condition: Users are asked to click each interactive UI element.
+Input/Condition: Tester are asked to click each interactive UI element.
 					
 Output/Result: \hyperref[MAX_ELEMENT_BAD]{\texttt{MAX\_ELEMENT\_BAD}} interactive UI elements being unresponsive.
 					
-How test will be performed: \hyperref[MIN_TESTER_NUM]{\texttt{MIN\_TESTER\_NUM}} users are asked to explore the application and report any unresponsive interactive elements.
+How test will be performed: \hyperref[MIN_TESTER_NUM]{\texttt{MIN\_TESTER\_NUM}} Tester are asked to explore the application and report any unresponsive interactive elements.
 
 \item{TSTR-4\\}\label{TSTR-4}
 
@@ -910,11 +672,11 @@ Type: Dynamic, Manual
 					
 Initial State: The web application is launched.
 					
-Input/Condition: Users are asked to adjust font size.
+Input/Condition: Tester are asked to adjust font size.
 					
-Output/Result: \hyperref[MAX_UNSATISFIED]{\texttt{MAX\_UNSATISFIED\%}} of users reporting unsuitable font size.
+Output/Result: \hyperref[MAX_UNSATISFIED]{\texttt{MAX\_UNSATISFIED\%}} of tester reporting unsuitable font size.
 					
-How test will be performed: \hyperref[MIN_TESTER_NUM]{\texttt{MIN\_TESTER\_NUM}} users are asked to report how they like the default font size and attempt to adjust the font size to their preference. Report if the adjusted font still causes difficulty in reading.
+How test will be performed: \hyperref[MIN_TESTER_NUM]{\texttt{MIN\_TESTER\_NUM}} Tester are asked to report how they like the default font size and attempt to adjust the font size to their preference. Report if the adjusted font still causes difficulty in reading.
 
 \item{TSTR-5\\}\label{TSTR-5}
 
@@ -922,11 +684,11 @@ Type: Dynamic, Manual
 					
 Initial State: The web application is launched.
 					
-Input/Condition: Users are asked to perform a task while an animation is displayed.
+Input/Condition: Tester are asked to perform a task while an animation is displayed.
 					
-Output/Result: \hyperref[MIN_UNDERSTAND]{\texttt{MIN\_UNDERSTAND\%}} of users who could perform the task distracted.
+Output/Result: \hyperref[MIN_UNDERSTAND]{\texttt{MIN\_UNDERSTAND\%}} of tester who could perform the task distracted.
 					
-How test will be performed: \hyperref[MIN_TESTER_NUM]{\texttt{MIN\_TESTER\_NUM}} users are asked to perform a task that involves the animation display part of the screen.  They are asked to report if they feel the animation is intrusive or distracting.
+How test will be performed: \hyperref[MIN_TESTER_NUM]{\texttt{MIN\_TESTER\_NUM}} Tester are asked to perform a task that involves the animation display part of the screen.  They are asked to report if they feel the animation is intrusive or distracting.
 \end{enumerate}
 
 \subsubsection{Usability and Humanity}
@@ -938,11 +700,11 @@ Type: Dynamic, Manual
 					
 Initial State: The web application is launched.
 					
-Input/Condition: Users are asked to navigate to a required page.
+Input/Condition: Tester are asked to navigate to a required page.
 					
-Output/Result: \hyperref[MIN_UNDERSTAND]{\texttt{MIN\_UNDERSTAND\%}} of users able to navigate to a required page without confusion.
+Output/Result: \hyperref[MIN_UNDERSTAND]{\texttt{MIN\_UNDERSTAND\%}} of tester able to navigate to a required page without confusion.
 					
-How test will be performed: In an obeservational study, \hyperref[MIN_TESTER_NUM]{\texttt{MIN\_TESTER\_NUM}} users are asked to navigate to a required page without assistance within a reasonable amount of time undergoing minimum trial and error.
+How test will be performed: In an obeservational study, \hyperref[MIN_TESTER_NUM]{\texttt{MIN\_TESTER\_NUM}} Tester are asked to navigate to a required page without assistance within a reasonable amount of time undergoing minimum trial and error.
 
 \item{TUHR-2\\}\label{TUHR-2}
 
@@ -950,22 +712,28 @@ Type: Dynamic, Manual
 					
 Initial State: The web application is launched.
 					
-Input/Condition: Users are asked to perform a core function.
+Input/Condition: Testers are asked to perform a series of specified core functions, including:
+\begin{enumerate}
+    \item Navigating to and uploading a course syllabus in PDF format.
+    \item Starting a Pomodoro study session from the dashboard.
+    \item Posting a message in the forum section.
+\end{enumerate}
+
+Output/Result: \hyperref[MIN_UNDERSTAND]{\texttt{MIN\_UNDERSTAND\%}} of testers are able to perform each specified tasks without confusion or significant difficulty.
 					
-Output/Result: \hyperref[MIN_UNDERSTAND]{\texttt{MIN\_UNDERSTAND\%}} of users able to perform a core function.
-					
-How the test will be performed: In an obeservational study,\hyperref[MIN_TESTER_NUM]{\texttt{MIN\_TESTER\_NUM}} users are asked to perform a core function within a reasonable amount of time undergoing minimum trial and error.
+How the test will be performed: In an observational study, \hyperref[MIN_TESTER_NUM]{\texttt{MIN\_TESTER\_NUM}} testers are given a sequence of tasks that encompass the specified core functions. They are observed as they attempt to complete each task within a reasonable amount of time, with the goal of undergoing minimum trial and error. The observer records the ease with which each tester completes the tasks, noting any areas of confusion or difficulty. This data is then used to evaluate the usability and intuitiveness of the web application's core functionalities.
+
 \item{TUHR-3\\}\label{TUHR-3}
 
 Type: Dynamic, Manual
 					
 Initial State: The web application is launched.
 					
-Input/Condition: Users are asked to inspect the grammar of texts on the page.
+Input/Condition: Tester are asked to inspect the grammar of texts on the page.
 					
 Output/Result: \hyperref[MAX_BAD_GRAMMAR]{\texttt{MAX\_BAD\_GRAMMAR}} grammar mistakes found.
 					
-How test will be performed: In an obeservational study, \hyperref[MIN_TESTER_NUM]{\texttt{MIN\_TESTER\_NUM}} users are asked to report grammar mistakes in all the text visible in this web application.
+How test will be performed: In an obeservational study, \hyperref[MIN_TESTER_NUM]{\texttt{MIN\_TESTER\_NUM}} Tester are asked to report grammar mistakes in all the text visible in this web application.
 
 \item{TUHR-4\\}\label{TUHR-4}
 
@@ -973,11 +741,11 @@ Type: Dynamic, Manual
 					
 Initial State: The web application is launched.
 					
-Input/Condition: Users are asked to inspect for offensive messages on the page.
+Input/Condition: Tester are asked to inspect for offensive messages on the page.
 					
 Output/Result: \hyperref[MAX_OFFENSIVE]{\texttt{MAX\_OFFENSIVE}} offensive messages found.
 					
-How test will be performed: In an obeservational study, \hyperref[MIN_TESTER_NUM]{\texttt{MIN\_TESTER\_NUM}} users are asked to report offensive messages in all the text visible in this web application.
+How test will be performed: In an obeservational study, \hyperref[MIN_TESTER_NUM]{\texttt{MIN\_TESTER\_NUM}} Tester are asked to report offensive messages in all the text visible in this web application.
 
 \item{TUHR-5\\}\label{TUHR-5}
 
@@ -985,11 +753,11 @@ Type: Dynamic, Manual
 					
 Initial State: The web application is launched.
 					
-Input/Condition: Users are asked to observe color combinations on the page.
+Input/Condition: Tester are asked to observe color combinations on the page.
 					
 Output/Result: \hyperref[MAX_COLOR_AMBIGUOUS]{\texttt{MAX\_COLOR\_AMBIGUOUS}} indistinguishable color combinations found.
 					
-How test will be performed: In an obeservational study, \hyperref[MIN_TESTER_NUM]{\texttt{MIN\_TESTER\_NUM}} users are asked to report indistinguishable color combinations in this web application. This user group should include people with color blindness.
+How test will be performed: In an obeservational study, \hyperref[MIN_TESTER_NUM]{\texttt{MIN\_TESTER\_NUM}} Tester are asked to report indistinguishable color combinations in this web application. This user group should include people with color blindness.
 
 
 \end{enumerate}
@@ -1052,7 +820,7 @@ Type: Dynamic, Automated
 					
 Initial State: The web application is launched.
 					
-Input/Condition: Incorrect user input.
+Input/Condition: Incorrect tester input.
 					
 Output/Result: \hyperref[MIN_OPERABLE]{\texttt{MIN\_OPERABLE\%}} of the system operating.
 					
@@ -1061,19 +829,8 @@ How test will be performed: An automated script is used to put false input in ev
 \subsubsection{Capacity}
 
 \begin{enumerate}
-\item{TCR-1\\}\label{TCR-1}
 
-Type: Dynamic, Automated
-					
-Initial State: The web application is launched.
-					
-Input/Condition: Massive user operations.
-					
-Output/Result: \hyperref[MIN_OPERABLE]{\texttt{MIN\_OPERABLE\%}} of the system operating.
-					
-How test will be performed: An automated script is used to log in a large amount of users and repetitively upload and download files.
-
-\item{TCR-2\\}\label{TCR-2}
+\item{TCR-1\\}\label{TCR-2}
 
 Type: Dynamic, Automated
 					
@@ -1125,11 +882,11 @@ Type: Dynamic, Manual
 					
 Initial State: The web application is launched.
 					
-Input/Condition: Users are asked to contact support.
+Input/Condition: Tester are asked to contact support.
 					
 Output/Result: \hyperref[MAX_SUPPORT_STEP]{\texttt{MAX\_SUPPORT\_STEP}} steps needed to reach help.
 					
-How test will be performed: \hyperref[MIN_TESTER_NUM]{\texttt{MIN\_TESTER\_NUM}} users are asked to reach the helpdesk through email, phone, and chatbot and record the steps it takes from the main page to help.
+How test will be performed: \hyperref[MIN_TESTER_NUM]{\texttt{MIN\_TESTER\_NUM}} Tester are asked to reach the helpdesk through email, phone, and chatbot and record the steps it takes from the main page to help.
 
 
 \item{TSPR-2\\}\label{TSPR-2}
@@ -1138,76 +895,49 @@ Type: Dynamic, Automatic
 					
 Initial State: The web application is launched.
 					
-Input/Condition: User feedback is inputted.
+Input/Condition: Tester feedback is inputted.
 					
-Output/Result: User input in database.
+Output/Result: Tester input in database.
 					
-How test will be performed: A script is used to input user feedback and check if this feedback gets stored in the database.
+How test will be performed: A script is used to input tester feedback and check if this feedback gets stored in the database.
 
 \end{enumerate}
 
 \subsubsection{Security}
 
 \begin{enumerate}
-\item{TSR-1\\}\label{TSR-1}
 
-Type: Dynamic, Automatic
-					
-Initial State: The web application is launched.
-					
-Input/Condition: Wrong credential pairs.
-					
-Output/Result: Account not logged in.
-					
-How test will be performed: A script is used to input the wrong credential pairs and check that an error message indicating bad credentials is displayed and the account is not logged in.
-
-\item{TSR-2\\}\label{TSR-2}
-
-Type: Dynamic, Automatic
-					
-Initial State: The web application is launched.
-					
-Input/Condition: Create a new account.
-					
-Output/Result: Account data format.
-					
-How test will be performed: A script is used to create a new account and check that the account data is encrypted before transmission.
-
-\item{TSR-3\\}\label{TSR-3}
+\item{TSR-1\\}\label{TSR-3}
 
 Type: Dynamic, Manual
 					
 Initial State: The web application is launched.
 					
-Input/Condition: Users are asked to modify the database.
+Input/Condition: Tester are asked to modify the database.
 					
-Output/Result: \hyperref[MAX_ATTACK_SUCCESS]{\texttt{MAX\_ATTACK\_SUCCESS}} users successfully modified the database.
+Output/Result: \hyperref[MAX_ATTACK_SUCCESS]{\texttt{MAX\_ATTACK\_SUCCESS}} Tester successfully modified the database.
 					
-How test will be performed: \hyperref[MIN_TESTER_NUM]{\texttt{MIN\_TESTER\_NUM}} users are asked to taint the database as unauthorised entity.
-
-\item{TSR-4\\}\label{TSR-4}
-
-Type: Dynamic, Automatic
-					
-Initial State: The web application is launched.
-					
-Input/Condition: A series of user actions.
-					
-Output/Result: An audit log.
-					
-How test will be performed: A script is used to perform a series of user actions and check that the activities are recorded with time stamps and relevant meta-data.
-
-\item{TSR-5\\}\label{TSR-5}
+How test will be performed: \hyperref[MIN_TESTER_NUM]{\texttt{MIN\_TESTER\_NUM}} Tester are asked to taint the database as unauthorised entity.
+\item{TSR-2\\}\label{TSR-4}
 
 Type: Dynamic, Automatic
 					
 Initial State: The web application is launched.
 					
-Input/Condition: Login attempts.
+Input/Condition: A series of specific tester actions, including but not limited to, logging in, uploading a document, editing a profile, posting on a forum, and deleting an item from the to-do list.
 					
-Output/Result: Account restricted.
+Output/Result: An audit log containing records of these actions.
 					
-How test will be performed: A script is used to perform a brute-force attack to log in to a test account.
+How test will be performed: A script is used to automatically perform a predefined series of tester actions on the web application. These actions include:
+\begin{itemize}
+    \item Uploading a document (e.g., a PDF syllabus) to the application.
+    \item Editing the tester's user profile information.
+    \item Posting a message on the forum section of the application.
+    \item Adding a new task to the to-do list and subsequently deleting it.
+\end{itemize}
+After these actions are performed, the script will access the application's audit log to verify that each action is recorded with accurate timestamps and relevant metadata, such as the user ID, action type, and any pertinent details related to the action (e.g., the name of the uploaded document, the updated profile information, the content of the forum post, and the details of the added and deleted tasks).
+
+
 \end{enumerate}
 
 \subsubsection{Complience}
@@ -1228,94 +958,6 @@ How test will be performed: A PR containing local changes is pushed, which trigg
 \subsection{Traceability Between Test Cases and Requirements}
 All requirements refer to \href{https://github.com/wangq131/4G06CapstoneProjectT5/blob/689841fefc298f80d84232996e1c7ca7981dd93d/docs/SRS/SRS.pdf}{SRS.pdf}.
 
-\begin{table}[H]
-    \centering
-    \begin{adjustbox}{width=1\textwidth}
-    \begin{tabular}{l|ccccc}
-        \textbf{Test Case \#} & \multicolumn{5}{c}{\textbf{Requirement \#}}\\
-        \hline
-        ~ & \textbf{FR1} & \textbf{FR2} & \textbf{FR3} & \textbf{FR4} & \textbf{FR5} \\
-        \hyperref[TFR1-A1]{\textbf{TFR1-A1}}  & X & ~ & ~ & ~ & ~ \\
-        \hyperref[TFR1-A2]{\textbf{TFR1-A2}}  & X & ~ & ~ & ~ & ~ \\
-        \hyperref[TFR2-A3]{\textbf{TFR2-A3}}  & ~ & X & ~ & ~ & ~ \\
-        \hyperref[TFR3-A4]{\textbf{TFR3-A4}}  & ~ & ~ & X & ~ & ~ \\
-        \hyperref[TFR4-A5]{\textbf{TFR4-A5}}  & ~ & ~ & ~ & X & ~ \\
-        \hyperref[TFR5-A6]{\textbf{TFR5-A6}}  & ~ & ~ & ~ & ~ & X \\
-        \hyperref[TFR5-A7]{\textbf{TFR5-A7}}  & ~ & ~ & ~ & ~ & X \\
-    \end{tabular}
-    \end{adjustbox}
-    \caption{Traceability Matrix: Functional Requirements - Authentication}
-    \label{table:TraceabilityMatrix}
-\end{table}
-
-\begin{table}[H]
-    \centering
-    \begin{adjustbox}{width=1\textwidth}
-    \begin{tabular}{l|cccccccccc}
-        \textbf{Test Case \#} & \multicolumn{10}{c}{\textbf{Requirement \#}}\\
-        \hline
-        ~ & \textbf{FR6} & \textbf{FR7} & \textbf{FR8} & \textbf{FR9} & \textbf{FR10} & \textbf{FR11} & \textbf{FR12} & \textbf{FR13} & \textbf{FR14} & \textbf{FR15} \\\
-        \hyperref[TFR6-UI1]{\textbf{TFR6-UI1}}  & X & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ \\
-        \hyperref[TFR6-UI2]{\textbf{TFR6-UI2}}  & X & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ \\
-        \hyperref[TFR7-UI3]{\textbf{TFR7-UI3}}  & ~ & X & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ \\
-        \hyperref[TFR8-UI4]{\textbf{TFR8-UI4}}  & ~ & ~ & X & ~ & ~ & ~ & ~ & ~ & ~ & ~ \\
-        \hyperref[TFR9-UI5]{\textbf{TFR9-UI5}}  & ~ & ~ & ~ & X & ~ & ~ & ~ & ~ & ~ & ~ \\
-        \hyperref[TFR10-UI6]{\textbf{TFR10-UI6}}   & ~ & ~ & ~ & ~ & X & ~ & ~ & ~ & ~ & ~ \\
-        \hyperref[TFR11-UI7]{\textbf{TFR11-UI7}}   & ~ & ~ & ~ & ~ & ~ & X & ~ & ~ & ~ & ~ \\
-        \hyperref[TFR11-UI8]{\textbf{TFR11-UI8}}   & ~ & ~ & ~ & ~ & ~ & X & ~ & ~ & ~ & ~ \\
-        \hyperref[TFR11-UI9]{\textbf{TFR11-UI9}}   & ~ & ~ & ~ & ~ & ~ & X & ~ & ~ & ~ & ~ \\
-        \hyperref[TFR12-UI10]{\textbf{TFR12-UI10}}   & ~ & ~ & ~ & ~ & ~ & ~ & X & ~ & ~ & ~ \\
-        \hyperref[TFR13-UI11]{\textbf{TFR13-UI11}}   & ~ & ~ & ~ & ~ & ~ & ~ & ~ & X & ~ & ~ \\
-        \hyperref[TFR14-UI12]{\textbf{TFR14-UI12}}   & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & X & ~ \\
-        \hyperref[TFR15-UI13]{\textbf{TFR15-UI13}}   & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & X \\
-    \end{tabular}
-    \end{adjustbox}
-    \caption{Traceability Matrix: Functional Requirements - User Input}
-    \label{Traceability Matrix: Functional Requirements - User Input}
-\end{table}
-
-\begin{table}[H]
-    \centering
-    \begin{adjustbox}{width=1\textwidth}
-    \begin{tabular}{l|ccccccccc}
-        \textbf{Test Case \#} & \multicolumn{9}{c}{\textbf{Requirement \#}}\\
-        \hline
-        ~ & \textbf{FR16} & \textbf{FR17} & \textbf{FR18} & \textbf{FR19} & \textbf{FR20} & \textbf{FR21} & \textbf{FR22} & \textbf{FR23} & \textbf{FR24} \\\
-        \hyperref[TFR16-17-D1]{\textbf{TFR16-17-D1}}   & X & X & ~ & ~ & ~ & ~ & ~ & ~ & ~ \\
-        \hyperref[TFR18-D2]{\textbf{TFR18-D2}}   & ~ & ~ & X & ~ & ~ & ~ & ~ & ~ & ~ \\
-        \hyperref[TFR19-D3]{\textbf{TFR19-D3}}   & ~ & ~ & ~ & X & ~ & ~ & ~ & ~ & ~ \\
-        \hyperref[TFR20-D4]{\textbf{TFR20-D4}}   & ~ & ~ & ~ & ~ & X & ~ & ~ & ~ & ~ \\
-        \hyperref[TFR21-D5]{\textbf{TFR21-D5}}  & ~ & ~ & ~ & ~ & ~ & X & ~ & ~ & ~ \\
-        \hyperref[TFR22-D6]{\textbf{TFR22-D6}}  & ~ & ~ & ~ & ~ & ~ & ~ & X & ~ & ~ \\
-        \hyperref[TFR23-D7]{\textbf{TFR23-D7}}   & ~ & ~ & ~ & ~ & ~ & ~ & ~ & X & ~ \\
-        \hyperref[TFR22-23-D8]{\textbf{TFR22-23-D8}}   & ~ & ~ & ~ & ~ & ~ & ~ & X & X & ~ \\
-        \hyperref[TFR24-D9]{\textbf{TFR24-D9}}   & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & X \\
-        \hyperref[TFR24-D10]{\textbf{TFR24-D10}}   & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & X \\
-    \end{tabular}
-    \end{adjustbox}
-    \caption{Traceability Matrix: Functional Requirements - Data}
-    \label{Traceability Matrix: Functional Requirements - Data}
-\end{table}
-
-\begin{table}[H]
-    \centering
-    \begin{adjustbox}{width=1\textwidth}
-    \begin{tabular}{l|ccccccc}
-        \textbf{Test Case \#} & \multicolumn{7}{c}{\textbf{Requirement \#}}\\
-        \hline
-        ~ & \textbf{FR25} & \textbf{FR26} & \textbf{FR27} & \textbf{FR28} & \textbf{FR29} & \textbf{FR30} & \textbf{FR31} \\\
-        \hyperref[TFR25-S1]{\textbf{TFR25-S1}}   & X & ~ & ~ & ~ & ~ & ~ & ~ \\
-        \hyperref[TFR26-S2]{\textbf{TFR26-S2}}   & ~ & X & ~ & ~ & ~ & ~ & ~\\
-        \hyperref[TFR27-S3]{\textbf{TFR27-S3}}   & ~ & ~ & X & ~ & ~ & ~ & ~ \\
-        \hyperref[TFR28-S4]{\textbf{TFR28-S4}}   & ~ & ~ & ~ & X & ~ & ~ & ~ \\
-        \hyperref[TFR29-S5]{\textbf{TFR29-S5}}   & ~ & ~ & ~ & ~ & X & ~ & ~ \\
-        \hyperref[TFR30-S6]{\textbf{TFR30-S6}}   & ~ & ~ & ~ & ~ & ~ & X & ~ \\
-        \hyperref[TFR31-S7]{\textbf{TFR31-S7}}   & ~ & ~ & ~ & ~ & ~ & ~ & X \\
-    \end{tabular}
-    \end{adjustbox}
-    \caption{Traceability Matrix: Functional Requirements - Scheduling}
-    \label{Traceability Matrix: Functional Requirements - Scheduling}
-\end{table}
 
 \clearpage
 \begin{table}
@@ -1343,54 +985,372 @@ All requirements refer to \href{https://github.com/wangq131/4G06CapstoneProjectT
         \hyperref[TSCR-1]{\textbf{TSCR-1}}  & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & X & ~ & ~ & ~ & ~ & ~ & ~ & ~\\
         \hyperref[TPAR-1]{\textbf{TPAR-1}}  & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & X & ~ & ~ & ~ & ~ & ~ & ~\\
         \hyperref[TRFTR-1]{\textbf{TRFTR-1}}  & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & X & ~ & ~ & ~ & ~ & ~\\
-        \hyperref[TCR-1]{\textbf{TCR-1}}  & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & X & ~ & ~ & ~ & ~\\
         \hyperref[TCR-2]{\textbf{TCR-2}}  & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & X & ~ & ~ & ~\\
         \hyperref[TOER-1]{\textbf{TOER-1}}  & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & X & ~\\
         \hyperref[TOER-2]{\textbf{TOER-2}}  & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ &  & X\\
     \end{tabular}
     \end{adjustbox}
+    \caption{Traceability Matrix: Test Cases to Non-Functional Requirements}
 \end{table}
-\begin{table}
+
+\begin{table}[ht]
     \centering
     \begin{adjustbox}{width=1.2\textwidth}
+    \small % Adjust font size as needed
     \begin{tabular}{l|ccccccccccccccccccccccccc}
-        \textbf{Test Case \#} & \multicolumn{15}{c}{\textbf{Requirement \#}}\\
+        \textbf{Test Case \#} & \multicolumn{24}{c}{\textbf{Requirement \#}}\\
         \hline
-        ~ & \textbf{MR1} & \textbf{MR2} & \textbf{MR3} & \textbf{SPR1} & \textbf{SPR2} & \textbf{SPR3} & \textbf{ADR1} & \textbf{ADR2}& \textbf{SR1} & \textbf{SR2} & \textbf{SR3} & \textbf{SR4} & \textbf{SR5} & \textbf{SR6}& \textbf{SR7}& \textbf{SR8}& \textbf{SR9}& \textbf{CR1}& \textbf{CTR1}& \textbf{CTR2}& \textbf{CPR1}& \textbf{CPR2}\\\
-        \hyperref[TSPR-1]{\textbf{TSPR-1}}  & ~ & ~ & ~ & X & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~\\
-        \hyperref[TSPR-2]{\textbf{TSPR-2}}    & ~ & ~ & ~ & ~ & ~ & X & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~\\
-        \hyperref[TSR-1]{\textbf{TSR-1}}  & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & X & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~\\
-        \hyperref[TSR-2]{\textbf{TSR-2}}  & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & X & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~\\
-        \hyperref[TSR-3]{\textbf{TSR-3}}  & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & X & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~\\
-        \hyperref[TSR-4]{\textbf{TSR-4}}  & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & X & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~\\
-        \hyperref[TSR-5]{\textbf{TSR-5}}  & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & X & ~ & ~ & ~ & ~ & ~ & ~\\
-        \hyperref[TCPR-1]{\textbf{TCPR-1}}  & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ &  X\\
-    \end{tabular}
-    \end{adjustbox}
-    \caption{Traceability Matrix: Non-Functional Requirements}
-    \label{Traceability Matrix: Non-Functional Requirements}
+        ~ & \textbf{FR1} & \textbf{FR2} & \textbf{FR3} & \textbf{FR4} & \textbf{FR5} & \textbf{FR6} & \textbf{FR7} & \textbf{FR8} & \textbf{FR9} & \textbf{FR10} & \textbf{FR11} & \textbf{FR12} & \textbf{FR13} & \textbf{FR14} & \textbf{FR15} & \textbf{FR16} & \textbf{FR17} & \textbf{FR18} & \textbf{FR19} & \textbf{FR20} & \textbf{FR21} & \textbf{FR22} & \textbf{FR23} & \textbf{FR24} \\
+        \hline
+        \hyperref[TFR1-EXTRACT1]{\textbf{TFR1-EXTRACT1}} & X & & & & & & & & & & & & & & & & & & & & & & & \\
+        \hyperref[TFR2-TASK1]{\textbf{TFR2-TASK1}} & & X & & & & & & & & & & & & & & & & & & & & & & \\
+        \hyperref[TFR3-ADD1]{\textbf{TFR3-ADD1}} & & & X & & & & & & & & & & & & & & & & & & & & & \\
+        \hyperref[TFR4-REMOVE1]{\textbf{TFR4-REMOVE1}} & & & & X & & & & & & & & & & & & & & & & & & & & \\
+        \hyperref[TFR5-POMODORO1]{\textbf{TFR5-POMODORO1}} & & & & & X & & & & & & & & & & & & & & & & & & & \\
+        \hyperref[TFR6-POMODORO2]{\textbf{TFR6-POMODORO2}} & & & & & & X & & & & & & & & & & & & & & & & & & \\
+        \hyperref[TFR7-MUSIC1]{\textbf{TFR7-MUSIC1}} & & & & & & & X & & & & & & & & & & & & & & & & & \\
+        \hyperref[TFR8-TOMATO1]{\textbf{TFR8-TOMATO1}} & & & & & & & & X & & & & & & & & & & & & & & & & \\
+        \hyperref[TFR9-TODO1]{\textbf{TFR9-TODO1}} & & & & & & & & & X & & & & & & & & & & & & & & & \\
+        \hyperref[TFR10-TODO2]{\textbf{TFR10-TODO2}} & & & & & & & & & & X & & & & & & & & & & & & & & \\
+        \hyperref[TFR11-TODO3]{\textbf{TFR11-TODO3}} & & & & & & & & & & & X & & & & & & & & & & & & & \\
+        \hyperref[TFR12-TODO4]{\textbf{TFR12-TODO4}} & & & & & & & & & & & & X & & & & & & & & & & & & \\
+        \hyperref[TFR13-TODO5]{\textbf{TFR13-TODO5}} & & & & & & & & & & & & & X & & & & & & & & & & & \\
+         \hyperref[TFR14-FORUM1]{\textbf{TFR14-FORUM1}} & & & & & & & & & & & & & & X & & & & & & & & & & \\
+        \hyperref[TFR15-FORUM2]{\textbf{TFR15-FORUM2}} & & & & & & & & & & & & & & & X & & & & & & & & & \\
+        \hyperref[TFR16-FORUM3]{\textbf{TFR16-FORUM3}} & & & & & & & & & & & & & & & & X & & & & & & & & \\
+        \hyperref[TFR17-FORUM4]{\textbf{TFR17-FORUM4}} & & & & & & & & & & & & & & & & & X & & & & & & & \\
+        \hyperref[TFR18-QUICKLINKS1]{\textbf{TFR18-QUICKLINKS1}} & & & & & & & & & & & & & & & & & & X & & & & & & \\
+        \hyperref[TFR19-QUICKLINKS2]{\textbf{TFR19-QUICKLINKS2}} & & & & & & & & & & & & & & & & & & & X & & & & & \\
+        \hyperref[TFR20-FEEDBACK1]{\textbf{TFR20-FEEDBACK1}} & & & & & & & & & & & & & & & & & & & & X & & & & \\
+        \hyperref[TFR21-FEEDBACK2]{\textbf{TFR21-FEEDBACK2}} & & & & & & & & & & & & & & & & & & & & & X & & & \\
+        \hyperref[TFR22-FEEDBACK3]{\textbf{TFR22-FEEDBACK3}} & & & & & & & & & & & & & & & & & & & & & & X & & \\
+        \hyperref[TFR23-PROFILE1]{\textbf{TFR23-PROFILE1}} & & & & & & & & & & & & & & & & & & & & & & & X & \\
+        \hyperref[TFR24-GPA1]{\textbf{TFR24-GPA1}} & & & & & & & & & & & & & & & & & & & & & & & & X \\
+\hline
+\end{tabular}
+\end{adjustbox}
+\caption{Traceability Matrix: Test Cases to Functional Requirements}
 \end{table}
+
+
+
+
 \pagestyle{plain}%
 \clearpage
 
 				
 % \bibliographystyle{plainnat}
 \section{Unit Test Description}
-This section will be filled once the the MIS is done and the design of the system is up
+
 \subsection{Unit Testing Scope}
-TBD
+Unit testing will focus on individual units or components of the software to determine if they operate correctly. Each test case is designed based on a functional requirement from the SRS.
 
-\subsection{Tests for Functional Requirements}
-TBD
+\begin{enumerate}
+    
+    \item{UT-1\\}\label{UT-1}
+    
+        Objective: To verify that the system correctly extracts and displays key course information from uploaded syllabi.
+        
+        Input: Tester uploads a course syllabus in PDF format.
+        
+        Expected Output: Key details such as professor's email addresses, assignment weightings, and MSAF policy are extracted and displayed to the tester.
+        
+        Requirement Reference: FR1 - Course Information Extraction.
+        
+    \item{UT-2\\}\label{UT-2}
+    
+        Objective: To verify the system automatically creates tasks from extracted course information and adds them to the tester's to-do list.
+        
+        Input: Course information is processed by the system after a syllabus upload.
+        
+        Expected Output: Tasks are automatically created and added to the tester's to-do list based on the extracted course information.
+        
+        Requirement Reference: FR2 - Task Creation from Course Information.
+        
+    \item{UT-3\\}\label{UT-3}
+    
+        Objective: To verify that tester can successfully add a new course by providing a valid course code.
+        
+        Input: Tester inputs a valid course code to add a new course.
+        
+        Expected Output: The new course is added to the tester's profile.
+        
+        Requirement Reference: FR3 - Add New Course.
+        
+    \item{UT-4\\}\label{UT-4}
+    
+        Objective: To verify that tester can remove a course from their profile.
+        
+        Input: Tester selects a course to remove from their profile.
+        
+        Expected Output: The selected course is removed from the tester's profile.
+        
+        Requirement Reference: FR4 - Remove Course.
+        
+    \item{UT-5\\}\label{UT-5}
+    
+        Objective: To verify that the system allows tester to start a study session using the Pomodoro timer.
+        
+        Input: Tester initiates a Pomodoro timer on the Pomodoro page.
+        
+        Expected Output: A Pomodoro study session starts and is tracked by the system.
+        
+        Requirement Reference: FR5 - Pomodoro Timer Start from Page.
+        
+    \item{UT-6\\}\label{UT-6}
+    
+        Objective: To verify that tester can start a Pomodoro study session by selecting a specific task from the to-do list.
+        
+        Input: Tester starts a Pomodoro timer by clicking a specific task in their to-do list.
+        
+        Expected Output: A Pomodoro study session specific to the selected task begins.
+        
+        Requirement Reference: FR6 - Pomodoro Timer Start from Task.
+        
+    \item{UT-7\\}\label{UT-7}
+    
+        Objective: To verify that tester can select and play different music as background during their study session.
+        
+        Input: Tester selects a music option to play during an active Pomodoro study session.
+        
+        Expected Output: The selected music plays in the background during the study session.
+        
+        Requirement Reference: FR7 - Music Selection for Pomodoro Session.
+        
+    \item{UT-8\\}\label{UT-8}
+    
+        Objective: To verify the system generates and displays a tomato icon in the harvest bucket upon completion of a study session.
+        
+        Input: Completion of a Pomodoro study session.
+        
+        Expected Output: A tomato icon is generated and displayed in the tester's harvest bucket.
+        
+        Requirement Reference: FR8 - Tomato Harvesting Post Study Session.
+        
+    \item{UT-9\\}\label{UT-9}
+    
+        Objective: To verify that tester can add a task to their to-do list successfully.
+        
+        Input: Tester adds a new task with details to their to-do list.
+        
+        Expected Output: The new task is visible on the to-do list with the specified details.
+        
+        Requirement Reference: FR9 - Adding a Task to the To-Do List.
+        
+    \item{UT-10\\}\label{UT-10}
+    
+        Objective: To verify that tester can view details of a task including due date, associated course, and weight.
+        
+        Input: Tester selects a task to view its details.
+        
+        Expected Output: Detailed information about the task is displayed to the tester.
+        
+        Requirement Reference: FR10 - Task Detail Viewing.
+        
+    \item{UT-11\\}\label{UT-11}
+    
+        Objective: To verify that tester can edit an existing task in their to-do list.
+        
+        Input: Tester edits an existing task by changing its details.
+        
+        Expected Output: The task is updated with the new information provided by the tester.
+        
+        Requirement Reference: FR11 - Editing an Existing Task.
+        
+    \item{UT-12\\}\label{UT-12}
+    
+        Objective: To verify that tasks are organized into 'To Do', 'In Progress', and 'Done' columns.
+        
+        Input: Viewing the to-do list with multiple tasks in different stages.
+        
+        Expected Output: Tasks are correctly organized and displayed in their respective columns.
+        
+        Requirement Reference: FR12 - Task Organization in Columns.
 
-\subsection{Tests for Nonfunctional Requirements}
-TBD
+    \item{UT-13\\}\label{UT-13}
+    
+        Objective: To verify the functionality of creating a new topic in the forum for discussion.
+        
+        Input: Tester submits a new discussion topic with title and description.
+        
+        Expected Output: The new topic is successfully created and visible in the forum.
+        
+        Requirement Reference: FR14 - Forum Topic Creation.
+        
+    \item{UT-14\\}\label{UT-14}
+    
+        Objective: To verify that tester can search for topics in the forum using keywords.
+        
+        Input: Tester enters keywords in the forum search field.
+        
+        Expected Output: Topics matching the keywords are displayed to the tester.
+        
+        Requirement Reference: FR15 - Forum Topic Search.
+        
+    \item{UT-15\\}\label{UT-15}
+    
+        Objective: To verify that tester can comment on a specific topic in the forum.
+        
+        Input: Tester submits a comment on a forum topic.
+        
+        Expected Output: The comment is added to the discussion under the topic.
+        
+        Requirement Reference: FR16 - Forum Topic Commenting.
+        
+    \item{UT-16\\}\label{UT-16}
+    
+        Objective: To verify that tester can reply to a comment within a forum topic.
+        
+        Input: Tester submits a reply to an existing comment.
+        
+        Expected Output: The reply is correctly threaded under the original comment.
+        
+        Requirement Reference: FR17 - Comment Replies in Forum.
+        
+    \item{UT-17\\}\label{UT-17}
+    
+        Objective: To verify that tester can access key university websites and other relevant tools from the quick links section.
+        
+        Input: Tester navigates to the quick links section on the dashboard.
+        
+        Expected Output: Key university websites and other relevant tools are displayed and accessible.
+        
+        Requirement Reference: FR18 - Quick Links Access.
+        
+    \item{UT-18\\}\label{UT-18}
+    
+        Objective: To verify that tester can customize the order of website links in the quick links section.
+        
+        Input: Tester drags and rearranges the order of quick links.
+        
+        Expected Output: The order of the links changes and persists according to tester customization.
+        
+        Requirement Reference: FR19 - Customizing Order of Quick Links.
+        
+    \item{UT-19\\}\label{UT-19}
+    
+        Objective: To verify that the system allows tester to submit feedback through the feedback form.
+        
+        Input: Tester fills out and submits the feedback form.
+        
+        Expected Output: Feedback is successfully submitted and received by the system.
+        
+        Requirement Reference: FR20 - Feedback Submission.
+        
+    \item{UT-20\\}\label{UT-20}
+    
+        Objective: To verify that tester can view their previously submitted feedback.
+        
+        Input: Tester navigates to the feedback history page.
+        
+        Expected Output: All past feedback submitted by the tester is visible and accurately displayed.
+        
+        Requirement Reference: FR21 - Viewing Past Feedback.
+        
+    \item{UT-21\\}\label{UT-21}
+    
+        Objective: To verify that tester can check the status of their submitted feedback.
+        
+        Input: Tester checks the status of submitted feedback in the feedback section.
+        
+        Expected Output: The current status of each submitted feedback is accurately displayed.
+        
+        Requirement Reference: FR22 - Checking Feedback Status.
+        
+    \item{UT-22\\}\label{UT-22}
+    
+        Objective: To verify that the system allows tester to change their username through their profile settings.
+        
+        Input: Tester changes their username in the profile settings.
+        
+        Expected Output: The system updates the tester's username across the platform.
+        
+        Requirement Reference: FR23 - Username Change.
+        
+    \item{UT-23\\}\label{UT-23}
+    
+        Objective: To verify that the system allows tester to calculate their cumulative GPA by inputting grades and credit hours.
+        
+        Input: Tester inputs their grades and credit hours on the GPA calculation page.
+        
+        Expected Output: The system calculates and displays the tester's cumulative GPA.
+        
+        Requirement Reference: FR24 - GPA Calculation.
+\end{enumerate}
 
 \subsection{Traceability Between Test Cases and Modules}
-TBD
+\begin{landscape}
+\begin{table}[H]
+    \centering
+    \begin{adjustbox}{width=1.4\textwidth}
+    \begin{tabular}{l|cccccccccccccccccccccccc}
+        \hline
+        \textbf{Test Case \#} & \textbf{FR1} & \textbf{FR2} & \textbf{FR3} & \textbf{FR4} & \textbf{FR5} & \textbf{FR6} & \textbf{FR7} & \textbf{FR8} & \textbf{FR9} & \textbf{FR10} & \textbf{FR11} & \textbf{FR12} & \textbf{FR13} & \textbf{FR14} & \textbf{FR15} & \textbf{FR16} & \textbf{FR17} & \textbf{FR18} & \textbf{FR19} & \textbf{FR20} & \textbf{FR21} & \textbf{FR22} & \textbf{FR23} & \textbf{FR24} \\
+        \hline
+        \hyperref[UT-1]{\textbf{UT-1}} & X &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+        \hyperref[UT-2]{\textbf{UT-2}} &  & X &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+        \hyperref[UT-3]{\textbf{UT-3}} &  &  & X &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+        \hyperref[UT-4]{\textbf{UT-4}} &  &  &  & X &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+        \hyperref[UT-5]{\textbf{UT-5}} &  &  &  &  & X &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+        \hyperref[UT-6]{\textbf{UT-6}} &  &  &  &  &  & X &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+        \hyperref[UT-7]{\textbf{UT-7}} &  &  &  &  &  &  & X &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+        \hyperref[UT-8]{\textbf{UT-8}} &  &  &  &  &  &  &  & X &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+        \hyperref[UT-9]{\textbf{UT-9}} &  &  &  &  &  &  &  &  & X &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+        \hyperref[UT-10]{\textbf{UT-10}} &  &  &  &  &  &  &  &  &  & X &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+        \hyperref[UT-11]{\textbf{UT-11}} &  &  &  &  &  &  &  &  &  &  & X &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+        \hyperref[UT-12]{\textbf{UT-12}} &  &  &  &  &  &  &  &  &  &  &  & X &  &  &  &  &  &  &  &  &  &  &  &  \\
+        \hyperref[UT-13]{\textbf{UT-13}} &  &  &  &  &  &  &  &  &  &  &  &  & X &  &  &  &  &  &  &  &  &  &  &  \\
+        \hyperref[UT-14]{\textbf{UT-14}} &  &  &  &  &  &  &  &  &  &  &  &  &  & X &  &  &  &  &  &  &  &  &  &  \\
+        \hyperref[UT-15]{\textbf{UT-15}} &  &  &  &  &  &  &  &  &  &  &  &  &  &  & X &  &  &  &  &  &  &  &  &  \\
+        \hyperref[UT-16]{\textbf{UT-16}} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & X &  &  &  &  &  &  &  &  \\
+        \hyperref[UT-17]{\textbf{UT-17}} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & X &  &  &  &  &  &  &  \\
+        \hyperref[UT-17]{\textbf{UT-18}} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & & X  &  &  &  &  &  &  \\
+        \hyperref[UT-17]{\textbf{UT-19}} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & & & X  &  &  &  &  &  \\
+        \hyperref[UT-17]{\textbf{UT-20}} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & & &  &  X  &  &  &  &  \\
+        \hyperref[UT-17]{\textbf{UT-21}} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & & &  &  &  X  &  &  &  \\
+        \hyperref[UT-17]{\textbf{UT-22}} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & & &  &  &  &  X  &  &  \\
+        \hyperref[UT-17]{\textbf{UT-23}} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & & &  &  &  &  &  X  &  \\
+        \hyperref[UT-17]{\textbf{UT-24}} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & & &  &  &  &  &  &  X  \\
+        % Add more \hyperref entries as needed for each test case and its corresponding FR
+        \hline
+    \end{tabular}
+    \end{adjustbox}
+    \caption{Traceability Matrix: Unit Test Cases to Functional Requirements}
+\end{table}
+\end{landscape}
+
 
 \newpage
+\section{Static Testing Plan}
 
+Static testing examine the software's code, documentation, and design without executing the program. The primary goal is to detect errors early in the development process, improve quality, and ensure compliance with coding standards and design guidelines.
+
+\subsubsection{Scope}
+
+The static testing in our project will focus on the following areas:
+\begin{itemize}
+    \item \textbf{Code Review:} To identify syntax errors, dead code, security vulnerabilities, and deviations from coding standards.
+    \item \textbf{Design Review:} To ensure the design documents accurately reflect the software requirements and align with the established design principles.
+    \item \textbf{Documentation Review:} To verify that all documentation is clear, complete, and consistent with the software implementation and user expectations.
+\end{itemize}
+
+
+\subsubsection{Walk-through}
+
+Facilitate a discussion around the documents or code to gather feedback and find errors. The author of the document walks the team through the content, explaining the logic and decisions. Participants ask questions and give feedback based on their understanding and expertise.
+
+\subsubsection{Inspection}
+
+Conduct a thorough examination of code and  documents to detect and correct issues. An inspection team (different from the authors) conducts a detailed examination. The findings should be documented for correction.
+
+\subsubsection{Process Split Up}
+\begin{itemize}
+    \item Establish a review process for all major documents and code with clear guidelines on how reviews, walk-through, and inspections are conducted.
+    \item Using specific tools like flake8 or using documentation/manual as reference.
+    \item Integrate static analysis into the CI/CD pipeline to ensure continuous code quality and security checks.
+    \item Monitor and iterate on the process, and continuously optimize the process.
+    
+\end{itemize}
 \section{Appendix}
 
 This is where you can place additional information.
