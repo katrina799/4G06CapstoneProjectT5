@@ -7,18 +7,17 @@ from flask import (
     url_for,
 )
 import os
+import pypdf
 
 try:
     from src.util import (
         upload_df_to_s3,
         get_df_from_csv_in_s3,
-        process_transcript_pdf,
     )
 except ImportError:
     from .util import (
         upload_df_to_s3,
         get_df_from_csv_in_s3,
-        process_transcript_pdf,
     )
 profile_blueprint = Blueprint("profile", __name__)
 
@@ -59,7 +58,7 @@ def upload_transcript():
                 "profile_page.html",
                 username=username,
                 current_page=current_page,
-                cGPA=str(cGPA),
+                cGPA=str(current_app.config["cGPA"]),
             )
             # If it's a GET request, just render the upload form
     return render_template(
@@ -85,3 +84,20 @@ def change_username():
         upload_df_to_s3(df, s3, bucket_name, mock_data_file)
         current_app.config["username"] = new_username
     return redirect(url_for("start"))
+
+
+def process_transcript_pdf(path_to_pdf):
+    reader = pypdf.PdfReader(path_to_pdf)
+    text = ""
+    points = []
+    units = []
+    for page in reader.pages:
+        text = page.extract_text()
+        if text:
+            for line in text.split("\n"):
+                if line.startswith("Term Totals"):
+                    points.append(float(line.split()[-2]))
+                    units.append(float(line.split()[-3]))
+    cGPA = sum(points) / sum(units)
+    os.remove(path_to_pdf)
+    return cGPA

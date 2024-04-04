@@ -78,7 +78,7 @@ function updateTomatoCount(day) {
 
 function loadWeeklyData() {
 
-    fetch('/get_weekly_data')
+    fetch('/pomodoro/get_weekly_data')
         .then(response => response.json())
         .then(data => {
             const maxCount = Math.max(...data.map(item => item.count));

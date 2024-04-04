@@ -107,7 +107,7 @@ function drop(e) {
 
 function updateTaskStatus(taskId, newStatus, sourceColumnId, targetColumnId) {
     taskId = parseInt(taskId);
-    fetch('/update_task_status', {
+    fetch('/tasks/update_task_status', {
         method: 'POST',
         body: JSON.stringify({ id: taskId, status: newStatus }),
         headers: {

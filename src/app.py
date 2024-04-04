@@ -20,13 +20,11 @@ from tasks_page import tasks_blueprint
 try:
     from src.util import (
         get_df_from_csv_in_s3,
-        read_order_csv_from_s3,
         write_order_csv_to_s3,
     )
 except ImportError:
     from .util import (
         get_df_from_csv_in_s3,
-        read_order_csv_from_s3,
         write_order_csv_to_s3,
     )
 
@@ -51,9 +49,8 @@ model_file_path = app.config["PRIORITY_MODEL_PATH"]
 mock_tasks_data_file = app.config["MOCK_DATA_POC_TASKS"]
 Transcript_path = app.config["UPLOAD_FOLDER"]
 tomato_data_key = app.config["TOMATO_DATA_KEY"]
-
-
 icon_order_path = app.config["ICON_ORDER_PATH"]
+
 # Setting global variables
 app.config["username"] = ""
 app.config["userId"] = 1
@@ -129,6 +126,25 @@ def update_order():
     return jsonify(
         {"status": "success", "message": "Order updated successfully."}
     )
+
+
+def read_order_csv_from_s3(s3, username, bucket_name, key):
+    try:
+        response = s3.get_object(Bucket=bucket_name, Key=key)
+        df = pd.read_csv(response["Body"])
+        return df
+    except s3.exceptions.NoSuchKey:
+        default_order = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+        default_df = pd.DataFrame(
+            [{"username": username, "orders": default_order}]
+        )
+
+        write_order_csv_to_s3(s3, icon_order_path, default_df, bucket_name)
+
+        return default_df
+    except Exception as e:
+        print(f"An unexpected error occurred: {e}")
+        return pd.DataFrame(columns=["username", "orders"])
 
 
 if __name__ == "__main__":

@@ -11,24 +11,20 @@ from flask import (
 try:
     from src.util import (
         get_df_from_csv_in_s3,
-        build_comment_hierarchy,
-        allowed_file,
-        create_presigned_url,
     )
 except ImportError:
     from .util import (
         get_df_from_csv_in_s3,
-        build_comment_hierarchy,
-        allowed_file,
-        create_presigned_url,
     )
 
+import botocore
 import pandas as pd
 from io import StringIO
 from datetime import datetime
 from werkzeug.utils import secure_filename
 
 forum_blueprint = Blueprint("forum", __name__)
+ALLOWED_EXTENSIONS = {"png", "jpg", "jpeg", "gif"}
 
 
 @forum_blueprint.route("/forum_page", methods=["GET"])
@@ -389,3 +385,43 @@ def search():
     return render_template(
         "search_forum_results.html", results=results, query=query
     )
+
+
+def build_comment_hierarchy(comments_with_usernames, parent_id=0, layer=0):
+    """
+    Flatten comment hierarchy into a list with context about each comment's
+    layer,
+    starting with top-level comments having parentId=0.
+    Each item in the hierarchy list is a tuple: ((comment, username), layer).
+    """
+    hierarchy = []
+    for comment_with_username in comments_with_usernames:
+        comment, username = comment_with_username
+        if comment["parentId"] == parent_id:
+            # Add the comment with its layer information
+            hierarchy.append(((comment, username), layer))
+            # Recursively find and append replies, increasing the layer
+            hierarchy += build_comment_hierarchy(
+                comments_with_usernames, comment["id"], layer + 1
+            )
+    return hierarchy
+
+
+def allowed_file(filename):
+    return (
+        "." in filename
+        and filename.rsplit(".", 1)[1].lower() in ALLOWED_EXTENSIONS
+    )
+
+
+def create_presigned_url(s3, bucket_name, object_name, expiration=604800):
+    try:
+        response = s3.generate_presigned_url(
+            "get_object",
+            Params={"Bucket": bucket_name, "Key": object_name},
+            ExpiresIn=expiration,
+        )
+    except botocore.exceptions.ClientError as e:
+        print(f"Error generating presigned URL: {e}")
+        return None
+    return response
