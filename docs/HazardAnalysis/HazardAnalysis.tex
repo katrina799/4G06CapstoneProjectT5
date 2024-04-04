@@ -57,8 +57,8 @@
 \textbf{Date} & \textbf{Developer(s)} & \textbf{Change}\\
 \midrule
 2023/10/19 & Chenwei Song, Qiang Gao  & Initial draft of the document\\
-... & ... & ...\\
-... & ... & ...\\
+2024/03/31 & Qianni Wang & Update SRS reference\\
+2024/04/03 & Chenwei Song & Peer review and changes\\
 \bottomrule
 \end{tabularx}
 \end{table}
@@ -83,10 +83,14 @@ The primary aim of this document is to determine potential hazards within the sy
     \item \textbf{The MacONE Application}: Installed on user devices, comprising both the user interface (front-end) and server interactions (back-end). The primary components are:
     \begin{itemize}
         \item Syllabus Uploading
-        \item Task Generation
-        \item Task Prioritization (ML-based)
+        \item Course Information Extraction
+        \item To Do List
+        \item Quick Links
+        \item Pomodoro Timer
         \item User Authentication \& Data Encryption
-        \item Notification System
+        \item Feedback Box
+        \item Forum
+        \item cGPA Calculator
     \end{itemize}
     
     \item \textbf{The Physical Device (e.g., smartphone or tablet)}
@@ -98,7 +102,6 @@ The primary aim of this document is to determine potential hazards within the sy
 
 \begin{enumerate}
     \item \textbf{Device Compatibility}: It is assumed that users will utilize devices that meet the application's minimum technical specifications.
-    \item \textbf{Stable Internet Connectivity}: The app functions optimally with a stable internet connection, allowing for real-time data syncing, task updating, and notifications.
     \item \textbf{Database Reliability}: We assume that the third-party database provider consistently maintains industry-standard security measures and operational uptimes.
     \item \textbf{User Behavior}: It is assumed that users will not intentionally try to exploit or compromise the system. This includes attempting to bypass security protocols, introducing malicious software, or purposefully corrupting their data.
     \item \textbf{External Services}: Services and APIs the application relies upon (for tasks like ML processing or cloud operations) are assumed to be available and operational at all times.
@@ -120,18 +123,29 @@ The primary aim of this document is to determine potential hazards within the sy
   \hline
   User Login & Login failure & Denied access & Password mismatch & Authenticat \-ion system would check username and password match & Provide password recovery & \srref{Data_Encryption},\srref{Encrypted_Data_Storage}, \srref{Security_Patches_and_Updates},\srref{Role-based_Access_Control}, \srref{Attack_Prevention},\srref{Password_Recovery} \\
   \hline
-  Task Generation & No tasks generated & Disorgani -zed schedule & PDF extraction module not recognizing certain tasks & User feedback & Systematic bug fixes & \href{https://github.com/wangq131/4G06CapstoneProjectT5/blob/689841fefc298f80d84232996e1c7ca7981dd93d/docs/SRS/SRS.pdf}{FR16(P28)}, \href{https://github.com/wangq131/4G06CapstoneProjectT5/blob/689841fefc298f80d84232996e1c7ca7981dd93d/docs/SRS/SRS.pdf}{PAR1(P34)} \\
+  Task Generation & No tasks generated & Disorgani -zed schedule & PDF extraction module not recognizing certain tasks; Wrong file format uploaded & User feedback & Systematic bug fixes & \href{https://github.com/wangq131/4G06CapstoneProjectT5/blob/689841fefc298f80d84232996e1c7ca7981dd93d/docs/SRS/SRS.pdf}{FR16(P28)}, \href{https://github.com/wangq131/4G06CapstoneProjectT5/blob/689841fefc298f80d84232996e1c7ca7981dd93d/docs/SRS/SRS.pdf}{PAR1(P34)} \\
   \hline
-  Task Prioritization & Incorrect prioritization & Mismana \-ged time & Algorithm error & User feedback & Refine prioritization algorithm & \srref{Audit_Log_Maintenance}, \href{https://github.com/wangq131/4G06CapstoneProjectT5/blob/689841fefc298f80d84232996e1c7ca7981dd93d/docs/SRS/SRS.pdf}{FR17(P28)}, \href{https://github.com/wangq131/4G06CapstoneProjectT5/blob/689841fefc298f80d84232996e1c7ca7981dd93d/docs/SRS/SRS.pdf}{PAR1(P34)} \\
+  Progress Visualization & Inaccurate visuals & Bugs in task update functions  & Progress data not updated  & User feedback, Regression tests & Make sure visualization module uses updated data & \srref{Audit_Log_Maintenance}, \href{https://github.com/wangq131/4G06CapstoneProjectT5/blob/689841fefc298f80d84232996e1c7ca7981dd93d/docs/SRS/SRS.pdf}{FR20(P28)}, \href{https://github.com/wangq131/4G06CapstoneProjectT5/blob/689841fefc298f80d84232996e1c7ca7981dd93d/docs/SRS/SRS.pdf}{OER3(P36)}\\
   \hline
-  Progress Visualization & Inaccurate visuals & Misunders \-tanding of progress & Progress data not updated with user feedback & Regression tests & Make sure visualization module uses updated data & \srref{Audit_Log_Maintenance}, \href{https://github.com/wangq131/4G06CapstoneProjectT5/blob/689841fefc298f80d84232996e1c7ca7981dd93d/docs/SRS/SRS.pdf}{FR20(P28)}, \href{https://github.com/wangq131/4G06CapstoneProjectT5/blob/689841fefc298f80d84232996e1c7ca7981dd93d/docs/SRS/SRS.pdf}{OER3(P36)}\\
+  Estimate Task Duration & Incorrect estimates & Misalloca \-ted time for tasks & Algorithm inaccuracies & User feedback & Refine estimation algorithms & \href{https://github.com/wangq131/4G06CapstoneProjectT5/blob/689841fefc298f80d84232996e1c7ca7981dd93d/docs/SRS/SRS.pdf}{FR1(P22)} \\
   \hline
-  Connected Learning & Connection issues & Isolation in learning & Network instability & Connectivity checks & Run a connectivity check when the user attempts connected learning & \href{https://github.com/wangq131/4G06CapstoneProjectT5/blob/689841fefc298f80d84232996e1c7ca7981dd93d/docs/SRS/SRS.pdf}{SLR1(P33)} \\
+    Course Schedule Integration & Incorrect Integration & Students receive incorrect schedule information & Bugs in data extraction or processing & User feedback & Review and test integration code, improve validation checks & \href{https://github.com/wangq131/4G06CapstoneProjectT5/blob/689841fefc298f80d84232996e1c7ca7981dd93d/docs/SRS/SRS.pdf}{FR1(P22)}, \href{https://github.com/wangq131/4G06CapstoneProjectT5/blob/689841fefc298f80d84232996e1c7ca7981dd93d/docs/SRS/SRS.pdf}{FR2(P22)}\\
   \hline
-  Export to Other Calendars & Export failure & Disconnect \-ed schedules & Compatibility issues & User feedback & Enhance compatibility layers & \srref{Security_Patches_and_Updates},\srref{Audit_Log_Maintenance}, \href{https://github.com/wangq131/4G06CapstoneProjectT5/blob/689841fefc298f80d84232996e1c7ca7981dd93d/docs/SRS/SRS.pdf}{AR1(P30)} \\
+     To-Do List & Data Loss & Students' to-do items disappear, causing missed deadlines & Server error, data not saved properly & User feedback, Regular data backups & Implement robust data backup and recovery processes & \href{https://github.com/wangq131/4G06CapstoneProjectT5/blob/689841fefc298f80d84232996e1c7ca7981dd93d/docs/SRS/SRS.pdf}{FR2(P22)}, \href{https://github.com/wangq131/4G06CapstoneProjectT5/blob/689841fefc298f80d84232996e1c7ca7981dd93d/docs/SRS/SRS.pdf}{FR9(P23)} \\
   \hline
-  Estimate Task Duration & Incorrect estimates & Misalloca \-ted time for tasks & Algorithm inaccuracies & User feedback & Refine estimation algorithms & \href{https://github.com/wangq131/4G06CapstoneProjectT5/blob/689841fefc298f80d84232996e1c7ca7981dd93d/docs/SRS/SRS.pdf}{FR14(P17)} \\
+  University Resources Access & Access Denied & Students can't access necessary resources & Permission errors, broken links & User feedback & Regularly update permissions and links, establish a monitoring system& \href{https://github.com/wangq131/4G06CapstoneProjectT5/blob/689841fefc298f80d84232996e1c7ca7981dd93d/docs/SRS/SRS.pdf}{FR18(P24)} \\
   \hline
+  Student Forum & Data Loss & Students can't access forum contents & Permission errors, Server error & User feedback & Regularly update permissions and links, establish a monitoring system& \href{https://github.com/wangq131/4G06CapstoneProjectT5/blob/689841fefc298f80d84232996e1c7ca7981dd93d/docs/SRS/SRS.pdf}{FR14(P24)}, \href{https://github.com/wangq131/4G06CapstoneProjectT5/blob/689841fefc298f80d84232996e1c7ca7981dd93d/docs/SRS/SRS.pdf}{FR16(P24)}, \href{https://github.com/wangq131/4G06CapstoneProjectT5/blob/689841fefc298f80d84232996e1c7ca7981dd93d/docs/SRS/SRS.pdf}{FR17(P24)} \\
+  \hline
+  Pomodoro Timer & Timer Inaccuracy & Reduced study efficiency & Software bugs, inaccurate time tracking & User feedback & Test the timer feature extensively, fix identified bugs& \href{https://github.com/wangq131/4G06CapstoneProjectT5/blob/689841fefc298f80d84232996e1c7ca7981dd93d/docs/SRS/SRS.pdf}{FR8(P23)} \\
+  \hline
+  Feedback Box & Data Loss & Developers miss critical user feedback & Server error, data not saved properly & User feedback, regular review of feedback submissions, alert system & Ensure feedback is reviewed regularly and developers are notified& \href{https://github.com/wangq131/4G06CapstoneProjectT5/blob/689841fefc298f80d84232996e1c7ca7981dd93d/docs/SRS/SRS.pdf}{FR20(P24)} \\
+  \hline
+  GPA Calculator & Incorrect Calculation & Students receive incorrect GPA estimates & Bugs in calculation algorithm & User reports, periodic testing & Review GPA calculation logic, enhance testing procedures& \href{https://github.com/wangq131/4G06CapstoneProjectT5/blob/689841fefc298f80d84232996e1c7ca7981dd93d/docs/SRS/SRS.pdf}{FR1(P22)} \\
+  \hline
+  File upload & Connection Failure & User unable to submit changes & Internet connection error & User reports, periodic testing & Implement a connection check system& \href{https://github.com/wangq131/4G06CapstoneProjectT5/blob/689841fefc298f80d84232996e1c7ca7981dd93d/docs/SRS/SRS.pdf}{FR14(P17)}, \href{https://github.com/wangq131/4G06CapstoneProjectT5/blob/689841fefc298f80d84232996e1c7ca7981dd93d/docs/SRS/SRS.pdf}{FR14(P24)}, \href{https://github.com/wangq131/4G06CapstoneProjectT5/blob/689841fefc298f80d84232996e1c7ca7981dd93d/docs/SRS/SRS.pdf}{FR20(P24)} \\
+  \hline
+  
   \end{longtable}
 
   
