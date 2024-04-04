@@ -2,10 +2,8 @@ import ast
 import pandas as pd
 import pytest
 from unittest.mock import patch, ANY, MagicMock
-from src.app import app, update_task_status
+from src.app import app
 import io
-from werkzeug.datastructures import FileStorage
-from urllib.parse import unquote_plus
 import sys
 import os
 
@@ -211,9 +209,6 @@ def test_forum_page(client):
     # Check if the HTTP response status code is 200 (OK)
     assert response.status_code == 200
 
-    # Optionally, verify that specific content is present in the response
-    # This step might require knowing the expected structure of your forum page.
-    # For example:
     assert (
         b"MacForum - The McMaster community dissussion board" in response.data
     )
@@ -233,7 +228,7 @@ def test_add_topic(client):
         "/add_topic", data=form_data
     )  # Adjust the route as necessary
 
-    # Check if the HTTP response indicates a successful operation (e.g., a redirect to the forum page)
+    # Check if the HTTP response indicates a successful operation
     assert response.status_code in [200, 302]  # 302 if there's a redirect
 
 
@@ -265,15 +260,16 @@ def test_add_task(client):
         "course_name": "Test Course",
         "task_name": "Test Task",
         "due_date": "2023-01-01",  # Use an appropriate date format
-        "weight": "5",  # Assuming weight is a string; adjust the type as needed
-        "est_hours": "2",  # Assuming est_hours is a string; adjust the type as needed
+        "weight": "5",
+        # Assuming weight is a string; adjust the type as needed
+        "est_hours": "2",
+        # Assuming est_hours is a string; adjust the type as needed
     }
     response = client.post("/add_task", data=task_data)
 
     assert (
         response.status_code == 302
     )  # Or the appropriate success code for your application
-    # Additional assertions to verify the task's creation can be implemented here
 
 
 def test_get_task(client):
@@ -332,8 +328,6 @@ def test_pomodoro_page(client):
     # Check if the HTTP response status code is 200 (OK)
     assert response.status_code == 200
 
-    # Optionally, check that the response contains expected content
-    # This could be text specific to the Pomodoro page or functional elements like timers or buttons
     assert (
         b"Pomodoro" in response.data
     )  # Adjust the keyword based on your page content
