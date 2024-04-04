@@ -24,7 +24,7 @@
           <!-- ... other elements ... -->
           <div class="pb-3 mb-0 small lh-sm border-bottom w-100">
             <h2 class="topic-title">
-              <a style="color: #941035;" href="/forum/topic/{{ topic.id }}">{{ topic.title }}</a>
+              <a style="color: #941035;" href="/fm/topic/{{ topic.id }}">{{ topic.title }}</a>
             </h2>
             <span class="d-block truncate">{{ topic.description }}</span>
           </div>
@@ -43,7 +43,7 @@
             <strong class="text-gray-dark truncate">
               {{ comment.text }}
             </strong>
-            <a href="/forum/topic/{{ comment.topicId }}" class="d-block mt-1">Go to Topic</a>
+            <a href="/fm/topic/{{ comment.topicId }}" class="d-block mt-1">Go to Topic</a>
           </div>
         </div>
         {% else %}

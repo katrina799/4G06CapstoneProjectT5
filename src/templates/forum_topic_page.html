@@ -16,7 +16,7 @@
         </div>
       </div>
       <div id="replyForm-{{ comment.id }}" class="reply-form" style="display:none;">
-        <form action="/forum/topic/{{ topic.id }}" method="post">
+        <form action="/fm/topic/{{ topic.id }}" method="post">
           <input type="hidden" name="parentId" value="{{ comment.id }}">
           <textarea name="comment" class="form-control" rows="2" placeholder="What are your thoughts?"></textarea>
           <div class="mt-2">
@@ -66,7 +66,7 @@
     </div>
 
     <h1 class="fs-4 text my-4">Add a comment</h1>
-    <form accept="/forum/topic/{{topic.id}}" method="post">
+    <form accept="/fm/topic/{{topic.id}}" method="post">
         <div class="mb-3">
           <label for="title" class="form-label">comment</label>
           <input type="text" name="comment" class="form-control" id="comment">

@@ -4,56 +4,28 @@ from flask import (
     current_app,
     request,
     redirect,
-    jsonify,
     url_for,
     abort,
 )
 
 try:
     from src.util import (
-        check_syllabus_exists,
-        add_task_todo,
-        update_csv,
-        upload_df_to_s3,
         get_df_from_csv_in_s3,
-        read_order_csv_from_s3,
-        write_order_csv_to_s3,
-        update_csv_after_deletion,
-        extract_text_from_pdf,
-        extract_course_work_details,
-        process_course_work_with_openai,
-        analyze_course_content,
-        convert_to_list_of_dicts,
-        write_course_work_to_csv,
         build_comment_hierarchy,
         allowed_file,
         create_presigned_url,
     )
 except ImportError:
     from .util import (
-        check_syllabus_exists,
-        add_task_todo,
-        update_csv,
-        upload_df_to_s3,
         get_df_from_csv_in_s3,
-        read_order_csv_from_s3,
-        write_order_csv_to_s3,
-        extract_text_from_pdf,
-        extract_course_work_details,
-        process_course_work_with_openai,
-        analyze_course_content,
-        convert_to_list_of_dicts,
-        write_course_work_to_csv,
         build_comment_hierarchy,
         allowed_file,
         create_presigned_url,
     )
 
-import botocore
-import ast
 import pandas as pd
 from io import StringIO
-from datetime import datetime, timedelta, timezone
+from datetime import datetime
 from werkzeug.utils import secure_filename
 
 forum_blueprint = Blueprint("forum", __name__)
@@ -228,7 +200,7 @@ def reverse_forum_order():
     return redirect(url_for("forum.forum_page"))
 
 
-@forum_blueprint.route("/forum/topic/<topic_id>", methods=["GET", "POST"])
+@forum_blueprint.route("/fm/topic/<topic_id>", methods=["GET", "POST"])
 def topic(topic_id):
     bucket_name = current_app.config["BUCKET_NAME"]
     s3 = current_app.config["S3_CLIENT"]
