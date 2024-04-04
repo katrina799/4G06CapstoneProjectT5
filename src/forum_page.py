@@ -282,7 +282,7 @@ def topic(topic_id):
             Body=csv_buffer.getvalue(),
         )
 
-        return redirect(url_for("topic", topic_id=topic_id))
+        return redirect(url_for("forum.topic", topic_id=topic_id))
     # Initialize
     topic_dict = {}
     comments_with_usernames = []
