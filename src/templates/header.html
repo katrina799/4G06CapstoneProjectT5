@@ -19,7 +19,7 @@
                                 style="font-size:24px;"></i>
                 </a>
                 <a class="courses {{ 'active' if current_page == 'course_page' else '' }}"
-                        href="{{ url_for('course_page') }}"><i class="glyphicon glyphicon-book" title="your course list"
+                        href="{{ url_for('courses.course_page') }}"><i class="glyphicon glyphicon-book" title="your course list"
                                 style="font-size:24px;"></i>
                 </a>
                 <a class="feedback {{ 'active' if current_page == 'feedback_page' else '' }}"
@@ -47,8 +47,8 @@
             <li class="nav-item {{ 'active' if request.path == url_for('start') else '' }}">
               <a class="nav-link" href="{{ url_for('start') }}">Home</a>
             </li>
-            <li class="nav-item {{ 'active' if request.path == url_for('course_page') else '' }}">
-                <a class="nav-link" href="{{ url_for('course_page') }}">Courses</a>
+            <li class="nav-item {{ 'active' if request.path == url_for('courses.course_page') else '' }}">
+                <a class="nav-link" href="{{ url_for('courses.course_page') }}">Courses</a>
               </li>
             <li class="nav-item {{ 'active' if request.path == url_for('tasks_page') else '' }}">
                 <a class="nav-link" href="{{ url_for('tasks_page') }}"> Tasks</a>

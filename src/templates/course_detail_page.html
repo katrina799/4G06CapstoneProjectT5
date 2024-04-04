@@ -11,7 +11,7 @@ Course Details - {{ course }}
         <!-- File Upload Section always visible -->
         <div class="panel-file" style="margin-top: 20px; background-color: #fff; padding: 20px; border-radius: 5px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
             <h2 style="color: #941035; margin-bottom: 15px;">Please Upload or Update Course Syllabus Here</h2>
-            <form method="POST" action="{{ url_for('upload_file', course_id=course) }}" enctype="multipart/form-data" class="form-inline">
+            <form method="POST" action="{{ url_for('courses.upload_file', course_id=course) }}" enctype="multipart/form-data" class="form-inline">
                 <div class="form-group mb-2">
                     <input type="file" name="file" class="form-control-file">
                 </div>

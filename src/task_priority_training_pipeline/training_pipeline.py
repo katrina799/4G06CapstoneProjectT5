@@ -8,7 +8,7 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 
 from src import config
-from src.helper import get_task_priority_training_pipeline
+from src.util import get_task_priority_training_pipeline
 
 # Set up logger
 logging.basicConfig(

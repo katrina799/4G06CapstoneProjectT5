@@ -8,7 +8,8 @@ import re
 import json
 import csv
 import openai
-
+from io import StringIO
+from datetime import datetime, timedelta, timezone
 from joblib import load
 from sklearn.base import TransformerMixin
 from sklearn.pipeline import Pipeline
@@ -43,6 +44,54 @@ class SqueezeTransformer(TransformerMixin):
 
     def transform(self, X):
         return X.squeeze()
+
+
+def add_task_todo(
+    course_name,
+    task_name,
+    due_date,
+    weight,
+    est_hours,
+    s3,
+    bucket_name,
+    mock_tasks_data_file,
+):
+    try:
+        if due_date not in ["", "Not Found", "0"]:
+            due_date_obj = datetime.strptime(due_date, "%Y-%m-%d")
+            days_until_due = (due_date_obj - datetime.now()).days
+            priority = "high" if days_until_due < 7 else "low"
+        else:
+            due_date = "0000-00-00"
+            priority = "unknown"
+    except ValueError:
+        due_date = "0000-00-00"
+        priority = "unknown"
+
+    tasks_df = get_df_from_csv_in_s3(s3, bucket_name, mock_tasks_data_file)
+
+    new_task = {
+        "id": tasks_df["id"].max() + 1 if not tasks_df.empty else 1,
+        "title": task_name,
+        "course": course_name,
+        "due_date": due_date,
+        "weight": weight,
+        "est_time": est_hours,
+        "priority": priority,
+        "status": "todo",
+    }
+    new_task_df = pd.DataFrame([new_task])
+    tasks_df = pd.concat([tasks_df, new_task_df], ignore_index=True)
+
+    csv_buffer = StringIO()
+    tasks_df.to_csv(csv_buffer, index=False)
+    csv_buffer.seek(0)
+    s3.put_object(
+        Bucket=bucket_name,
+        Key=mock_tasks_data_file,
+        Body=csv_buffer.getvalue(),
+        ContentType="text/csv",
+    )
 
 
 # Define training pipeline for task priority classification
@@ -240,7 +289,7 @@ def extract_course_work_details(syllabus_text, max_tokens=4097):
 def process_course_work_in_segments(text, max_tokens):
     segment_length = max_tokens * 4
     segments = [
-        text[i: i + segment_length]
+        text[i : i + segment_length]
         for i in range(0, len(text), segment_length)
     ]
     full_output = ""

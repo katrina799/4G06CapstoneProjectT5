@@ -1,20 +1,87 @@
-from flask import Blueprint, render_template, current_app
+from flask import (
+    Blueprint,
+    render_template,
+    current_app,
+    request,
+    redirect,
+    url_for,
+)
+import os
 
-profile_blueprint = Blueprint('profile', __name__)
-
-
-@profile_blueprint.route('/profile_page', methods=["GET", "POST"])
-def profile_page():
-    username = current_app.config.get('username', '')
-    cGPA = current_app.config.get(
-        'cGPA', 
-        'None (Please upload your transcript)'
+try:
+    from src.util import (
+        upload_df_to_s3,
+        get_df_from_csv_in_s3,
+        process_transcript_pdf,
     )
-    current_page = current_app.config.get('current_page', 'home')
-    
+except ImportError:
+    from .util import (
+        upload_df_to_s3,
+        get_df_from_csv_in_s3,
+        process_transcript_pdf,
+    )
+profile_blueprint = Blueprint("profile", __name__)
+
+
+@profile_blueprint.route("/profile_page", methods=["GET", "POST"])
+def profile_page():
+    username = current_app.config.get("username", "")
+    current_page = current_app.config.get("current_page", "home")
+    cGPA = current_app.config.get(
+        "cGPA", "None (Please upload your transcript)"
+    )
     return render_template(
         "profile_page.html",
         username=username,
         current_page=current_page,
         cGPA=cGPA,
     )
+
+
+@profile_blueprint.route("/upload_transcript", methods=["GET", "POST"])
+def upload_transcript():
+    username = current_app.config.get("username", "")
+    current_page = current_app.config.get("current_page", "home")
+    Transcript_path = current_app.config["UPLOAD_FOLDER"]
+    cGPA = current_app.config.get(
+        "cGPA", "None (Please upload your transcript)"
+    )
+    if request.method == "POST":
+        file = request.files["transcript"]
+        os.makedirs(Transcript_path, exist_ok=True)
+        if file:
+            filename = file.filename
+            file.save(os.path.join(Transcript_path, filename))
+            current_app.config["cGPA"] = process_transcript_pdf(
+                os.path.join(Transcript_path, filename)
+            )
+            return render_template(
+                "profile_page.html",
+                username=username,
+                current_page=current_page,
+                cGPA=str(cGPA),
+            )
+            # If it's a GET request, just render the upload form
+    return render_template(
+        "profile_page.html",
+        username=username,
+        current_page=current_page,
+        cGPA=cGPA,
+    )
+
+
+# Change user's name
+@profile_blueprint.route("/change_username", methods=["POST"])
+def change_username():
+    username = current_app.config.get("username", "")
+    bucket_name = current_app.config["BUCKET_NAME"]
+    mock_data_file = current_app.config["MOCK_DATA_POC_NAME"]
+
+    s3 = current_app.config["S3_CLIENT"]
+    if request.method == "POST":
+        new_username = request.form["newusername"]
+        df = get_df_from_csv_in_s3(s3, bucket_name, mock_data_file)
+        df.loc[df["username"] == username, "username"] = new_username
+        upload_df_to_s3(df, s3, bucket_name, mock_data_file)
+        current_app.config["username"] = new_username
+    return redirect(url_for("start"))
