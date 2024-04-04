@@ -26,6 +26,7 @@
 
 \begin{document}
 
+
 \title{Verification and Validation Report: \progname} 
 \author{\authname}
 \date{\today}
@@ -34,18 +35,48 @@
 
 \pagenumbering{roman}
 
+\newpage
+
+\tableofcontents
+
+\listoftables %if appropriate
+
+\listoffigures %if appropriate
+
+\newpage
+
+\pagenumbering{arabic}
+
 \section{Revision History}
 
 \begin{tabularx}{\textwidth}{p{3cm}p{2cm}X}
 \toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
 \midrule
-2024-03-06 & 1.0 & -\\
+2024-03-06 & 1.0 & - First Version\\
+2024-04-02 & 2.0 & - Final Version -\\
 \bottomrule
 \end{tabularx}
 
 ~\newpage
 
-\section{Symbols, Abbreviations and Acronyms}
+\section{Additional Information}
+
+\subsection{Introduction}
+This document outlines the Verification and Validation (V\&V) report for the MacONE project developed by Team \#5, Overwatch League. The V\&V report is a critical component of our project management and quality assurance processes, ensuring that MacONE not only meets its specified requirements but also fulfills the needs and expectations of its users and stakeholders. The testers would walk through the testing process as the guidance of VnV Plan to ensure that our system would accomplish all the intended functions correctly and efficiently.  
+
+\subsection{Project Summary}
+MacONE is a tailored online platform aimed at streamlining and enhancing
+the McMaster student experience. It enables students to directly extract and
+integrate course information into their schedules, creating an individualized
+to-do list. Additionally, MacONE provides easy access to vital university
+resources, a forum for student interaction, a Pomodoro timer for effective
+study sessions, a feedback box for users to share their insights directly with
+developers, and a function allowing students to calculate their cumulative
+GPA by uploading their transcripts, all designed to simplify student life at
+McMaster University.
+
+
+\subsection{Symbols, Abbreviations and Acronyms}
 
 \renewcommand{\arraystretch}{1.2}
 \begin{tabular}{l l} 
@@ -61,17 +92,7 @@
   \bottomrule
   
 \end{tabular}\\
-\newpage
 
-\tableofcontents
-
-\listoftables %if appropriate
-
-\listoffigures %if appropriate
-
-\newpage
-
-\pagenumbering{arabic}
 
 
 \section{Functional Requirements Evaluation}
@@ -463,7 +484,7 @@ weight, and deadline. High-priority tasks will be ranked first.
 \subsubsection{Survey}\label{4.1.1}
 \textbf{Testing Progress} \\
 
-\noindent A usability testing survey was completed by 10 participants, all of whom are students, with 8 attending McMaster University. Participants were invited to provide their feedback through a Google Forms survey, with the questions outlined in Section 6.2 of the Verification and Validation (VnV) plan.\\
+\noindent A usability testing survey was completed by 10 participants, all of whom are students, with 8 attending McMaster University. Participants were invited to provide their feedback through a Google Forms survey, with the questions outlined in the Appendix \href{survey}{survey} section. The result values are calculated by surveying the overall satisfaction levels, ease of use, and the effectiveness of the specific features.\\
 
 \noindent \textbf{Result}
 \begin{table}[htb!]
@@ -555,7 +576,7 @@ We then decided to extract the course information through the OpenAI API by inpu
 % \clearpage
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1\linewidth]{VnV/Frequency of use of functions.png}
+    \includegraphics[width=1\linewidth]{Frequency of use of functions.png}
     \caption{The Number of Votes Got from Survey for Which Feature Attracts Users More}
     \label{fig:enter-label}
 \end{figure}
@@ -596,6 +617,14 @@ From the testing result and analysis, we can see that we need to improve our UI 
 
  \subsection{Task Management \& Calendar} \label{TMCR}
   After the testing, we find that the task management system with To-do List and Kanban board is one  of the most attractive features to our target users. This feature allows users to organize the tasks into different columns representing different stages of the process. Students could create the new task, categorize the task content, and drag&drop the cards between these columns to modify their state. This functionality makes the task management process very transparent and the workflow could be efficient as well. Also, the integration with the course outline extraction functionality support  automated and consistent task generation features, save the student time and better focus on study itself, leading to better user-experienced application.
+  
+\section{Changes Due to Feedback}
+
+After the Demo 0, we took the advice of professor, to implement the integration between the task manegment tools and the Pomodoro Timer feature. This kind of integration can highly increase the motivation fro users to focus study and put more efforts of the specific tasks with rewards. Such kind of mechanism of "tomato basket" and "weekly achievements" make the users' study time visualized and could manage the tasks using Kan-ban board in an easy way. \\
+
+Also, we took the advice that make a platform for users to submit feedback and receive responses directly from the developers. Through this kind of transparent and straight-forward mechanism, the application could be continuously improved based on the popular usage. This kind of add-on feature also aligns with the user-friendly purpose mentioned by the supervisor, Prof and TAs.  The user-driven enhancements ensure the platform evolves to meet the most demanded features and functions.\\
+
+According to the feedback given by Prof when Rev0, we also optimized some detailed features. For the course code, we regularized the code name to include the course program in the purpose of improving the usability. Also the problematic issue of anonymous feedback is mentioned in the final demo, we are also working on the real-name system of the feedback form submission for better management and maintainability.
 
 
 \section{Traceability Matrix} \label{SecTM}
@@ -721,13 +750,31 @@ TCPR-1 & N.A. & N.A.\\
 
 
 \newpage{}
-\section*{Appendix --- Reflection}
+\section*{Appendix}
 
-\\
+\subsection{Reflection}
 The VnV Report outlined specific tests conducted, including unit and manual testing, non-functional requirements evaluation, and changes due to testing which were more detailed compared to the initial plan. This indicates a deeper exploration into the practical aspects of verification and validation as the project progressed. \\
 Changes were necessitated by the results obtained from testing, such as the removal of the task priority prediction feature, changing the algorithm for course information extraction, and adding new features based on user feedback and testing outcomes. These changes indicate adaptability and responsiveness to testing outcomes and user feedback, underscoring the dynamic nature of the development process. Changes occurred due to a variety of reasons including low user interest in certain features, the need for improved accuracy in algorithms, and the desire to enhance user experience based on feedback. These adjustments were critical for aligning the project closer to user needs and technical feasibility.\\
 While some changes could potentially be anticipated in future projects through more thorough initial testing and user feedback collection, the unpredictable nature of development work means that some adjustments will always be a part of the process. Lessons learned from this project, such as the importance of early and continuous user feedback, can help in better anticipating future changes.
 
+\subsection{Survey Questions}\label{survey}
+
+\begin{enumerate}
+  \item Are you a student? If so, are you from McMaster?
+  \item Which following current feature in the website attracts you the most?
+  \item Please select from the options below that you think may be used less often?
+  \item We are considering adding some new features to the website to improve your experience. Please select from the options below the features that you think will make you use our site more frequently.
+  \item Is the content on our website clear and understandable?
+  \item On a scale of 1 to 5, how easy was it to navigate our website overall?
+  \item On a scale of 1 to 5, how would you rate the ease of the priority generation feature?
+  \item On a scale of 1 to 5, how visually appealing do you find our website?
+  \item Were you able to find all the current features we have? if not, please describe the problem you met.
+  \item On a scale of 1 to 5, how would you rate the accuracy of the information provided on our website overall?
+  \item On a scale of 1 to 5, how would you rate the task priority feature?
+  \item have you encountered any other inaccuracies while using our website? if yes, please provide examples.
+\end{enumerate}
+
+\newpage{}
 \newpage
 
 \newpage
