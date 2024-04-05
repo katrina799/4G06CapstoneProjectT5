@@ -28,12 +28,13 @@ citecolor=blue,      % color of links to bibliography
 filecolor=magenta,  % color of file links
 urlcolor=cyan          % color of external links
 }
- \input{Comments}
- \input{Commen}
+
 \usepackage{array}
 
 \externaldocument{../../SRS/SRS}
 
+\input{../../Comments}
+\input{../../Common}
 
 \begin{document}
 
@@ -52,7 +53,8 @@ urlcolor=cyan          % color of external links
 \begin{tabularx}{\textwidth}{p{3cm}p{2cm}X}
 \toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
 \midrule
-2021/1/17 & Version 0  & Initial draft of the document\\
+2024-01-17 & 1.0 & First version of MIS\\
+2024-04-03 & 2.0 & Update after final demo\\
 \bottomrule
 \end{tabularx}
 
@@ -555,7 +557,7 @@ None
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
 getOrder & - & \textit{List[Icon]} & internetError \\
-updateOorder & \textit{List[Icon]} & \textit{Boolean} & InvalidOrderException \\
+updateOrder & \textit{List[Icon]} & \textit{Boolean} & InvalidOrderException \\
 \hline
 \end{tabular}
 \end{center}
