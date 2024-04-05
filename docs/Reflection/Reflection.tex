@@ -23,7 +23,7 @@
 \subsubsection{SRS}
 In response to feedback from surveys, TA and professor suggestions, we revised the Software Requirements Specification (SRS). The majority of the modifications were centered on the functional requirements and the corresponding use cases. This included adding and removing features that were either highly requested by users or deemed unfeasible within the project's scope.\\
 \\
-We updated our project goals to better reflect the refined vision of the project, which was more closely aligned with the needs and expectations of our user groups. Additionally, the reviews received from other teams on our SRS prompted us to revise the Non-Functional Requirements (NFRs), particularly the fit criteria. Previously, our NFRs were abstract and lacked specificity. We have since made them more concrete and quantifiable, ensuring they are clearly measurable and providing a clear benchmark for success.
+We updated our project goals to better reflect the refined vision of the project, which was more closely aligned with the needs and expectations of our user groups. Additionally, the reviews received from other teams on our SRS prompted us to revise the Non-Functional Requirements (NFRs), particularly the fit criteria. Previously, our NFRs were abstract and lacked specificity. We have since made them more concrete and quantifiable, ensuring they are clearly measurable.
 \subsubsection{Hazard Analysis}
 The Manual task entry and order, once deemed necessary for our machine learning module, were removed from our HA following the realization that this module would no longer be part of our project as per Team 01 HA Review \#112. Similarly, the Vague Task Prioritization Recommended Action was also removed in response to feedback \#107 since task prioritization is no longer a feature of the project.\\
 \\
@@ -39,15 +39,15 @@ In terms of the traceability between Non-Functional Requirements (NFRs) and modu
 \subsubsection{VnV Plan}
 TSR-4 in the VnV Plan was revised to remove ambiguity and add detailed possible user actions as per Team 01's review (\#150). This specificity ensures that our testing strategy is well-understood and thoroughly captures user interactions.\\
 \\
-The confusion surrounding "core function" in THUR-2 was resolved by listing specific tasks and providing a detailed test process, addressing Team 01's VnV Plan Review (\#147). This change eliminates ambiguity and clearly defines the scope of testing.\\
+The confusion surrounding "core function" in THUR-2 was resolved by listing specific tasks and providing a detailed test process, addressing Team 01's VnV Plan Review (\#147) for eliminating ambiguity.\\
 \\
-In response to feedback related to login credentials, we removed the login feature, consequently eliminating the corresponding functionality tests. This decision streamlines the application's use and reflects our commitment to user-centric design.\\
+In response to feedback related to login credentials, we removed the login feature, consequently eliminating the corresponding functionality tests.\\
 \\
-We updated the missing traceability and NFR testing in alignment with the revised SRS document. These updates ensure that our project's development aligns with specified requirements and industry standards for software quality and reliability.
+We also updated the missing traceability and NFR testing in alignment with the revised SRS document.
 \subsubsection{VnV Report}
-The unit tests UT-1, UT-4, and UT-6 were revised to include failure test cases. This was an important update prompted by Team 10's feedback (\#285), which helped to ensure a more comprehensive test coverage.\\
+The unit tests UT-1, UT-4, and UT-6 were revised to include failure test cases. This was update prompted by Team 10's feedback (\#285), which ensures a better test coverage.\\
 \\
-We incorporated a new step for the calculation of usability survey results, responding to Team 01's VnV Report Review (\#281). This step adds rigor to our analysis process and allows for a more objective interpretation of the survey data.\\
+We added a new step in computation of usability survey results's response of Team 01's VnV Report Review (\#281).\\
 \\
 The VnV Report was improved with the addition of an introduction and objectives section as suggested in Team 01's review (\#278), providing readers with a clear understanding of the report's purpose right from the outset.\\
 \\
@@ -62,9 +62,7 @@ Our initial design heavily relied on Regular Expression for extracting course in
 \\
 Another significant change was the removal of the task priority prediction feature. Feedback and survey results indicated that only 1 out of 10 users found this feature attractive, and the model required a large amount of data to be effective, which was not feasible within our timeline.\\
 \\
-As the project progressed, user feedback highlighted the need for additional features and improvements in the user interface. New features such as the cGPA Calculator, the Forum Discussion Board, and Pomodoro & Weekly Achievements were added in response to what users found most beneficial. Improvements to the main UI elements were made to enhance navigation and interaction, guided by the observation study results, where the majority of users struggled with clarity and ease of use.\\
-\\
-The traceability matrix further directed our revisions, ensuring that changes were aligned with both our Verification and Validation (VnV) Plan and user requirements. Each iterative change was meticulously documented, capturing the evolution of the project from its conception to the final product. This reflective and responsive approach to design and implementation underlines our commitment to delivering a user-centered application. The ongoing process of refinement and enhancement led to the final version, which is a testament to the adaptability and user-focused development methodology embraced by our team.
+As the project progressed, user feedback highlighted the need for additional features and improvements in the user interface. New features such as the cGPA Calculator, the Forum Discussion Board, and Pomodoro & Weekly Achievements were added in response to what users found most beneficial. Improvements to the main UI elements were made to enhance navigation and interaction, guided by the observation study results, where the majority of users struggled with clarity and ease of use.
 
 \section{Design Decisions (LO12)}
 
@@ -79,18 +77,19 @@ Another critical area where assumptions influenced our design was the user inter
 Lastly, technical constraints such as server response times and integration capabilities influenced our decision to refine existing features rather than adding new ones. This decision ensured that we could maintain a high standard of performance and reliability, which were non-negotiable for the user experience.
 \section{Economic Considerations (LO23)}
 
+In the process of launching and sustaining the project, MacONE will have undeniable market within educational circles which brings in the business mindset.\\
+\\
+Setting marketing strategies, one would go for academic places where integration between technology and learning is not only just appreciated but preferred. Functioning as a pivotal organizational tool is possible by a partnership with universities, which sustains a fruitful interaction that develops overall education system while creating a consistent user base.\\
+\\
+MacONE cost plans shall be comprised of software development, maintenance, server allocations, and marketing budget. A free version may be created with the advanced features available only for the subscription paywall. Such system has a user-friendly interface and thus gives opportunity for consumers to realize the value of the item before they make a decision to buy it.\\
+\\
+Implementation of MacONE as a paid service will be based on the pricing strategies' analysis, however the option of subscription summary could be applied—selecting individual student plans or institutional packages that are more desirable.\\
+\\
+There is a large potential user base, and the chances to grow are potential as MacON came into the picture with its application for both students and teachers. 
 
-Considering the economic principles in the decision-making, we find that there is a clear market for this product among students and educational institutions looking for comprehensive academic management tools.\\
-\\
-Marketing the product would involve targeted campaigns within educational sectors, focusing on universities, colleges, and even high schools where students and teachers seek to streamline course management and enhance study habits. Partnerships with educational institutions for direct integration into their systems could provide a streamlined user experience.\\
-\\
-Cost estimations for producing Course Buddy would involve software development, maintenance, server costs, and marketing. A freemium model could be applied where basic features are free, and advanced features are behind a subscription paywall. This model allows users to understand the value of the product before committing financially.\\
-\\
-Charging for Course Buddy would depend on the competitive pricing analysis, but a tiered subscription model could be implemented—ranging from individual student plans to larger institutional packages.\\
-\\
-To attract users to an open-source project, we would leverage social media, academic forums, and open-source communities like GitHub. Contributions could also be incentivized through hackathons or feature request bounties.\\
-\\
-The potential user base is vast, including millions of students and educators worldwide. The exact figure would depend on market research, but initially, targeting specific regions or institutions could provide a focused approach to user acquisition.
+
+
+
 
 \section{Reflection on Project Management (LO24)}
 \\
@@ -110,6 +109,6 @@ In terms of processes, we underestimated the complexity of certain features like
 
 For future projects, earlier and more comprehensive testing, particularly of AI features, would be essential. We would also focus on gathering user feedback earlier in the development process to better guide feature prioritization and ensure the project meets user expectations.
 \\\\
-In conclusion, our project management practices were largely effective, but they highlighted the importance of flexibility and the readiness to adapt to new information and user feedback. The ability to pivot and embrace more suitable technologies like the OpenAI API when faced with unforeseen challenges was crucial to our success. This reflective learning will guide our economic considerations for potential future marketing and development of Course Buddy.
+In conclusion, our project management practices were largely effective, but they highlighted the importance of flexibility and the readiness to adapt to new information and user feedback. The ability to pivot and embrace more suitable technologies like the OpenAI API when faced with unforeseen challenges was crucial to our success. This reflective learning will guide our economic considerations for potential future marketing and development of MacONE.
 
 \end{document}
