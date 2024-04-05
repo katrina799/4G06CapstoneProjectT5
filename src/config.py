@@ -5,9 +5,11 @@ Description:
     A configuration file where all constants are defined
 
 Author: All team members
-Created: 2024-01-23
+Created: 2023-09-23
 Last Modified: 2024-04-03
 """
+
+ALLOWED_EXTENSIONS = {"png", "jpg", "jpeg", "gif"}
 BUCKET_NAME = "course-buddy"
 MOCK_DATA_POC_NAME = "mock_data_poc.csv"
 USER_DATA_NAME = "user_data.csv"

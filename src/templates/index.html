@@ -157,7 +157,7 @@
                                 <div class="course-details">
                                     <h4>{{course}}</h4>
                                 </div>
-                                <form style="position: absolute; top: 0; right: 0; margin: 3px;" action="/remove_course"
+                                <form style="position: absolute; top: 0; right: 0; margin: 3px;" action="/courses/remove_course"
                                     method="post">
                                     <input type="hidden" name="index" value="{{ loop.index - 1 }}">
                                     <input type="hidden" name="course" value="{{ course }}">

@@ -1,3 +1,13 @@
+/*
+Author: Qianni Wang
+Created: 2024-02-04
+Last Updated: 2024-04-04
+
+Description:
+This script fetches the order of tiles from the server and rearranges them
+accordingly on the web page. It also allows dragging and dropping of tiles
+to change their order and updates the server with the new order.
+*/
 document.addEventListener('DOMContentLoaded', function () {
 
     fetch('/grid/get-order')
@@ -24,7 +34,8 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         })
         .catch(error => console.error('Error fetching order array:', error));
-
+        
+        
     function saveNewOrder() {
         let tiles = document.querySelectorAll('.app-tile');
         let orderArray = Array.from(tiles).map(tile => parseInt(tile.id.replace('app-tile', '')));

@@ -6,9 +6,10 @@ Description:
     for MacONE.
 
 Author: Qianni Wang
-Created: 2024-02-14
+Created: 2024-01-21
 Last Modified: 2024-04-04
 """
+
 from flask import (
     Blueprint,
     current_app,
@@ -38,8 +39,7 @@ grid_blueprint = Blueprint("grid", __name__)
 def get_order():
     """
     Fetches and returns the current icon order for the logged-in user.
-    
-    This function retrieves the user's current icon order from an S3 CSV file. 
+    This function retrieves the user's current icon order from an S3 CSV file.
     If no specific order exists, it returns a default order.
     """
     # Extract necessary configuration and S3 client from app config
@@ -50,7 +50,7 @@ def get_order():
 
     # Read current order from S3
     df = read_order_csv_from_s3(s3, username, bucket_name, icon_order_path)
-    
+
     # Filter for current user's order
     filtered_df = df[df["username"] == username]
 
@@ -67,7 +67,6 @@ def get_order():
 def update_order():
     """
     Updates the icon order for the logged-in user based on the received input.
-    
     This function updates the user's icon order in the S3 CSV file based on the
     order specified in the request's JSON payload.
     """
@@ -100,7 +99,6 @@ def update_order():
 def read_order_csv_from_s3(s3, username, bucket_name, key):
     """
     Reads and returns the order data from a CSV file stored in S3.
-    
     Attempts to fetch the CSV file specified by the key from the S3 bucket.
     If the file doesn't exist, it creates a default order for the user.
     """

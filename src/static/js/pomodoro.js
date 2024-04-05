@@ -1,3 +1,13 @@
+/*
+Author: Shuting Shi
+Created: 2024-02-01
+Last Updated: 2024-04-04
+
+Description:
+This script manages a Pomodoro timer and task-related functionalities.
+It includes functions for starting and resetting the timer, playing
+music, updating task status, and loading task details.
+*/
 var isRunning = false;
 var timer;
 var start;
@@ -136,7 +146,7 @@ window.onload = function () {
     });
 
     document.getElementById('finishTaskBtn').addEventListener('click', function() {
-        fetch(`/update_task_status/${{ task_id }}/finished`, { method: 'POST' })
+        fetch(`/pomodoro/update_task_status/${{ task_id }}/finished`, { method: 'POST' })
         .then(response => response.json())
         .then(data => {
             alert(data.message);
@@ -153,7 +163,7 @@ window.onload = function () {
   
     if (taskId) {
       // Fetch task details from the backend using the 'taskId'
-      fetch(`/get_task/${taskId}`)
+      fetch(`/tasks/get_task/${taskId}`)
         .then(response => {
           if (!response.ok) {
             throw new Error('Network response was not ok');
@@ -189,11 +199,11 @@ window.onload = function () {
             const params = new URLSearchParams(window.location.search);
             const taskId = params.get("task_id");
             if(taskId) {
-                fetch(`/update_task_status/${taskId}/done`, { method: 'POST' })
+                fetch(`/pomodoro/update_task_status/${taskId}/done`, { method: 'POST' })
                     .then(response => response.json())
                     .then(data => {
                         alert(data.message);
-                        window.location.href = '/tasks';
+                        window.location.href = '/tasks/tasks';
                     })
                     .catch(error => console.error('Error:', error));
             }

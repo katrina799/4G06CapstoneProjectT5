@@ -5,10 +5,9 @@ Description:
     This file serves as the main entry point for a Flask-based web application.
 
 Author: Qianni Wang
-Created: 2024-02-14
+Created: 2023-09-24
 Last Modified: 2024-04-04
 """
-
 
 import os
 import boto3
@@ -87,7 +86,6 @@ app.config["S3_CLIENT"] = s3
 def start():
     """
     Route to handle the landing page of the application.
-
     Fetches user-related data from an S3-stored CSV file to
     demonstrate a proof of concept(PoC). This includes setting
     a default username, user ID, and courses list for the session.

@@ -9,9 +9,19 @@ Description:
     forum.
 
 Author: Chenwei Song
-Created: 2024-01-23
+Created: 2024-01-25
 Last Modified: 2024-04-03
 """
+
+# Attempt to import configuration and utility functions
+try:
+    from config import (
+        ALLOWED_EXTENSIONS,
+    )
+except ImportError:
+    from .config import (
+        ALLOWED_EXTENSIONS,
+    )
 
 from flask import (
     Blueprint,
@@ -39,7 +49,6 @@ from datetime import datetime
 from werkzeug.utils import secure_filename
 
 forum_blueprint = Blueprint("forum", __name__)
-ALLOWED_EXTENSIONS = {"png", "jpg", "jpeg", "gif"}
 
 
 @forum_blueprint.route("/forum_page", methods=["GET"])
@@ -115,6 +124,9 @@ def forum_page():
 
 @forum_blueprint.route("/add_topic", methods=["GET", "POST"])
 def add_topic():
+    """
+    View function for displaying the forum page.
+    """
     username = current_app.config["username"]
     current_page = current_app.config["current_page"]
     userId = current_app.config["userId"]
@@ -201,6 +213,9 @@ def add_topic():
 
 @forum_blueprint.route("/forum_page/reverse_order", methods=["POST"])
 def reverse_forum_order():
+    """
+    Reverse the order of topics on the forum page.
+    """
     topics = current_app.config["topics"]
     # Assuming 'topics' is a global variable that stores your topics
 
@@ -213,6 +228,10 @@ def reverse_forum_order():
 
 @forum_blueprint.route("/fm/topic/<topic_id>", methods=["GET", "POST"])
 def topic(topic_id):
+    """
+    View and interact with a forum topic.
+    """
+    # Get necessary configurations
     bucket_name = current_app.config["BUCKET_NAME"]
     s3 = current_app.config["S3_CLIENT"]
     comment_data_file = current_app.config["COMMENT_DATA_NAME"]
@@ -223,13 +242,13 @@ def topic(topic_id):
     userId = current_app.config["userId"]
 
     if request.method == "POST":
+        # Extract comment data from form
         comment_text = request.form.get("comment")
-        parent_id = request.form.get(
-            "parentId", None
-        )  # Might be part of the form if it's a reply
+        parent_id = request.form.get("parentId", None)
         layer = 0
         current_timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
+        # Fetch existing comments data
         comments_df = get_df_from_csv_in_s3(s3, bucket_name, comment_data_file)
 
         # Determine layer based on parent_id
@@ -266,12 +285,13 @@ def topic(topic_id):
         )
 
         return redirect(url_for("forum.topic", topic_id=topic_id))
+
     # Initialize
     topic_dict = {}
     comments_with_usernames = []
 
     try:
-        # Fetch all necessary data from CSV
+        # Fetch necessary data from CSVs
         topics_df = get_df_from_csv_in_s3(s3, bucket_name, "topic_data.csv")
         topics_df["imageUrl"] = topics_df["imageUrl"].fillna("none")
         topics_df["imageUrl"] = topics_df["imageUrl"].astype(str)
@@ -328,7 +348,7 @@ def topic(topic_id):
         "forum_topic_page.html",
         topic=topic_dict,
         current_page=current_page,
-        username=username,  # Assuming username is correctly set elsewhere
+        username=username,
         author_username=author_username,
         comments=comment_hierarchy,
     )
@@ -336,6 +356,9 @@ def topic(topic_id):
 
 @forum_blueprint.route("/search_forum")
 def search():
+    """
+    Search forum topics and comments based on the given query.
+    """
     bucket_name = current_app.config["BUCKET_NAME"]
     s3 = current_app.config["S3_CLIENT"]
 
@@ -423,20 +446,29 @@ def build_comment_hierarchy(comments_with_usernames, parent_id=0, layer=0):
 
 
 def allowed_file(filename):
+    """
+    Check if the filename has an allowed file extension.
+    """
     return (
-        "." in filename
+        "." in filename  # Check if filename contains a dot
         and filename.rsplit(".", 1)[1].lower() in ALLOWED_EXTENSIONS
+        # Check if the file extension is in the list of allowed extensions
     )
 
 
 def create_presigned_url(s3, bucket_name, object_name, expiration=604800):
+    """
+    Generate a presigned URL for accessing an object in an S3 bucket.
+    """
     try:
+        # Generate presigned URL for accessing the object
         response = s3.generate_presigned_url(
             "get_object",
             Params={"Bucket": bucket_name, "Key": object_name},
             ExpiresIn=expiration,
         )
     except botocore.exceptions.ClientError as e:
+        # Print error message and return None if URL generation fails
         print(f"Error generating presigned URL: {e}")
         return None
     return response
