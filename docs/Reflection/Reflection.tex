@@ -16,68 +16,100 @@
 
 \maketitle
 
-\plt{Reflection is an important component of getting the full benefits from a
-learning experience.  Besides the intrinsic benefits of reflection, this
-document will be used to help the TAs grade how well your team responded to
-feedback.  In addition, several CEAB (Canadian Engineering Accreditation Board)
-Learning Outcomes (LOs) will be assessed based on your reflections.}
 
 \section{Changes in Response to Feedback}
 
-\plt{Summarize the changes made over the course of the project in response to
-feedback from TAs, the instructor, teammates, other teams, the project
-supervisor (if present), and from user testers.}
-
-\plt{For those teams with an external supervisor, please highlight how the feedback 
-from the supervisor shaped your project.  In particular, you should highlight the 
-supervisor's response to your Rev 0 demonstration to them.}
-
 \subsection{SRS and Hazard Analysis}
-
+\subsubsection{SRS}
+In response to feedback from surveys, TA and professor suggestions, we revised the Software Requirements Specification (SRS). The majority of the modifications were centered on the functional requirements and the corresponding use cases. This included adding and removing features that were either highly requested by users or deemed unfeasible within the project's scope.\\
+\\
+We updated our project goals to better reflect the refined vision of the project, which was more closely aligned with the needs and expectations of our user groups. Additionally, the reviews received from other teams on our SRS prompted us to revise the Non-Functional Requirements (NFRs), particularly the fit criteria. Previously, our NFRs were abstract and lacked specificity. We have since made them more concrete and quantifiable, ensuring they are clearly measurable and providing a clear benchmark for success.
+\subsubsection{Hazard Analysis}
+The Manual task entry and order, once deemed necessary for our machine learning module, were removed from our HA following the realization that this module would no longer be part of our project as per Team 01 HA Review \#112. Similarly, the Vague Task Prioritization Recommended Action was also removed in response to feedback \#107 since task prioritization is no longer a feature of the project.\\
+\\
+The FMEA entries have been updated to address the need for more specific and consistent information regarding modes of failure as pointed out in Team 01 HA Review \#110, as well as completing causes of failure as indicated in \#109. New FMEA entries have been included to establish a clear link between the design function and components following the recommendation of #108 and to adjust our critical assumptions, which were found to be too restrictive as per \#106.
 \subsection{Design and Design Documentation}
-
+\subsubsection{MIS}
+The feedback suggested that the specification of the validity of input (\#217) is now irrelevant due to the removal of the timeTable component from our project. Exceptions handling has been improved, with null return cases added (\#215) to ensure the robustness of the system.\\
+\\
+We have updated data typing specifications (\#214) to align with the feedback received, ensuring that our data types are consistent throughout the project. Environment variables have been revised for missing types (\#211), and error descriptions have been clarified as per suggestion (\#212) to ensure that all potential exceptions are well-explained and managed.
+\subsubsection{MG}
+In terms of the traceability between Non-Functional Requirements (NFRs) and modules (\#210), it was determined that since most NFRs are related only to the Interface Module and the current design practices are already in place to mitigate critical NFRs, a detailed traceability for each NFR may not provide additional value at this stage of development.
 \subsection{VnV Plan and Report}
-
+\subsubsection{VnV Plan}
+TSR-4 in the VnV Plan was revised to remove ambiguity and add detailed possible user actions as per Team 01's review (\#150). This specificity ensures that our testing strategy is well-understood and thoroughly captures user interactions.\\
+\\
+The confusion surrounding "core function" in THUR-2 was resolved by listing specific tasks and providing a detailed test process, addressing Team 01's VnV Plan Review (\#147). This change eliminates ambiguity and clearly defines the scope of testing.\\
+\\
+In response to feedback related to login credentials, we removed the login feature, consequently eliminating the corresponding functionality tests. This decision streamlines the application's use and reflects our commitment to user-centric design.\\
+\\
+We updated the missing traceability and NFR testing in alignment with the revised SRS document. These updates ensure that our project's development aligns with specified requirements and industry standards for software quality and reliability.
+\subsubsection{VnV Report}
+The unit tests UT-1, UT-4, and UT-6 were revised to include failure test cases. This was an important update prompted by Team 10's feedback (\#285), which helped to ensure a more comprehensive test coverage.\\
+\\
+We incorporated a new step for the calculation of usability survey results, responding to Team 01's VnV Report Review (\#281). This step adds rigor to our analysis process and allows for a more objective interpretation of the survey data.\\
+\\
+The VnV Report was improved with the addition of an introduction and objectives section as suggested in Team 01's review (\#278), providing readers with a clear understanding of the report's purpose right from the outset.\\
+\\
+Following Team 01's review (\#276), we included a section in the Appendix dedicated to the survey and responses, improving the organization of the document and making it easier for readers to find detailed results.\\
+\\
+The team member, number, and revision history were updated according to TA feedback, ensuring that the report accurately reflects the project's iterative development process.
 \section{Design Iteration (LO11)}
 
-\plt{Explain how you arrived at your final design and implementation.  How did
-the design evolve from the first version to the final version?} 
+In the process of arriving at the final design and implementation for our project, MacONE, our team underwent a series of iterative steps. The initial version started with a simple task management system, which we envisioned would meet the primary needs of our users. Through unit and manual testing, as well as usability surveys and observation studies, we gained valuable insights that drove iterative improvements. \\
+\\
+Our initial design heavily relied on Regular Expression for extracting course information from PDFs. However, testing revealed this method's limitations due to format inconsistencies of course outlines, as it only achieved a 23.6\% accuracy rate, which was far below our VnV Plan threshold of 90\%. This led us to integrate OpenAI's API, resulting in a dramatically improved accuracy of 95.6\%, demonstrating a successful pivot in our approach based on empirical evidence from testing.\\
+\\
+Another significant change was the removal of the task priority prediction feature. Feedback and survey results indicated that only 1 out of 10 users found this feature attractive, and the model required a large amount of data to be effective, which was not feasible within our timeline.\\
+\\
+As the project progressed, user feedback highlighted the need for additional features and improvements in the user interface. New features such as the cGPA Calculator, the Forum Discussion Board, and Pomodoro & Weekly Achievements were added in response to what users found most beneficial. Improvements to the main UI elements were made to enhance navigation and interaction, guided by the observation study results, where the majority of users struggled with clarity and ease of use.\\
+\\
+The traceability matrix further directed our revisions, ensuring that changes were aligned with both our Verification and Validation (VnV) Plan and user requirements. Each iterative change was meticulously documented, capturing the evolution of the project from its conception to the final product. This reflective and responsive approach to design and implementation underlines our commitment to delivering a user-centered application. The ongoing process of refinement and enhancement led to the final version, which is a testament to the adaptability and user-focused development methodology embraced by our team.
 
 \section{Design Decisions (LO12)}
 
-\plt{Reflect and justify your design decisions.  How did limitations,
- assumptions, and constraints influence your decisions?}
-
+Initially, we assumed that a task priority prediction feature would be highly beneficial for our users. However, the constraint of collecting an adequate dataset for model training and the limited time frame became significant hurdles. User feedback further indicated a low interest in this feature. This led to the strategic decision to remove the feature altogether, instead of allocating resources to a less impactful aspect of the project.\\
+\\
+We also encountered limitations in data extraction accuracy when using Regular Expressions to parse course information from PDFs. The diversity in document formats presented a major challenge, and our initial assumption that Regular Expressions would be sufficient proved to be incorrect. To overcome this, we shifted our approach to incorporate OpenAI's API, which significantly enhanced our extraction accuracy, demonstrating our adaptive response to technical constraints.\\
+\\
+Constraints such as project timeline and the need for immediate user value drove us to prioritize features with the most significant impact based on user feedback. For example, despite the complexity involved, we introduced a cGPA calculator as user surveys showed a high demand for such a tool. This decision was justified by the desire to provide immediate, tangible benefits to our user base.\\
+\\
+Another critical area where assumptions influenced our design was the user interface. We initially believed that our UI was intuitive; however, usability studies indicated otherwise. We had to reconsider our design approach, simplifying the user interface and navigation significantly. This was a direct result of acknowledging the limitations of our initial design and the constraints users faced while interacting with our application.\\
+\\
+Lastly, technical constraints such as server response times and integration capabilities influenced our decision to refine existing features rather than adding new ones. This decision ensured that we could maintain a high standard of performance and reliability, which were non-negotiable for the user experience.
 \section{Economic Considerations (LO23)}
 
-\plt{Is there a market for your product? What would be involved in marketing your 
-product? What is your estimate of the cost to produce a version that you could 
-sell?  What would you charge for your product?  How many units would you have to 
-sell to make money? If your product isn't something that would be sold, like an 
-open source project, how would you go about attracting users?  How many potential 
-users currently exist?}
+
+Considering the economic principles in the decision-making, we find that there is a clear market for this product among students and educational institutions looking for comprehensive academic management tools.\\
+\\
+Marketing the product would involve targeted campaigns within educational sectors, focusing on universities, colleges, and even high schools where students and teachers seek to streamline course management and enhance study habits. Partnerships with educational institutions for direct integration into their systems could provide a streamlined user experience.\\
+\\
+Cost estimations for producing Course Buddy would involve software development, maintenance, server costs, and marketing. A freemium model could be applied where basic features are free, and advanced features are behind a subscription paywall. This model allows users to understand the value of the product before committing financially.\\
+\\
+Charging for Course Buddy would depend on the competitive pricing analysis, but a tiered subscription model could be implemented—ranging from individual student plans to larger institutional packages.\\
+\\
+To attract users to an open-source project, we would leverage social media, academic forums, and open-source communities like GitHub. Contributions could also be incentivized through hackathons or feature request bounties.\\
+\\
+The potential user base is vast, including millions of students and educators worldwide. The exact figure would depend on market research, but initially, targeting specific regions or institutions could provide a focused approach to user acquisition.
 
 \section{Reflection on Project Management (LO24)}
-
-\plt{This question focuses on processes and tools used for project management.}
-
-\subsection{How Does Your Project Management Compare to Your Development Plan}
-
-\plt{Did you follow your Development plan, with respect to the team meeting plan, 
-team communication plan, team member roles and workflow plan.  Did you use the 
-technology you planned on using?}
+\\
+Team Meeting Plan and Communication:
+Our project management mirrored the Development Plan in terms of team meeting schedules and communication platforms. Meetings occurred as planned, with sprint planning, stand-up, and general meetings effectively driving the project forward. The adoption of WeChat and GitHub for daily communication and issue tracking maintained a seamless flow of information, aligning with our defined strategies.
+\\
+\\
+Workflow and Technology:
+The workflow plan, especially the GitHub-based issue tracking and feature branch workflow for code changes, was implemented successfully. This structured approach ensured code quality and facilitated a smooth CI/CD process, integrating with technologies such as Python, PyTest, Flask, and Streamlit as planned. However, we encountered some difficulties with the integration of certain AI functionalities, which prompted us to pivot to alternative solutions like the OpenAI API.
 
 \subsection{What Went Well?}
-
-\plt{What went well for your project management in terms of processes and 
-technology?}
+The division of team roles and adherence to coding standards contributed to a well-managed project scope. Our use of GitHub Actions for automated lint checks and testing ensured that our code adhered to PEP 8 standards. These processes and tools provided a strong foundation for development, allowing us to maintain focus on our deliverables.
 
 \subsection{What Went Wrong?}
-
-\plt{What went wrong in terms of processes and technology?}
-
+In terms of processes, we underestimated the complexity of certain features like the task priority prediction, leading to its removal. The assumption that Regular Expressions would suffice for data extraction proved incorrect, which was a significant oversight. As for technology, while our chosen stack was mostly effective, the limitations in initial AI model accuracy underscored the need for more robust testing methodologies.
 \subsection{What Would you Do Differently Next Time?}
 
-\plt{What will you do differently for your next project?}
+For future projects, earlier and more comprehensive testing, particularly of AI features, would be essential. We would also focus on gathering user feedback earlier in the development process to better guide feature prioritization and ensure the project meets user expectations.
+\\\\
+In conclusion, our project management practices were largely effective, but they highlighted the importance of flexibility and the readiness to adapt to new information and user feedback. The ability to pivot and embrace more suitable technologies like the OpenAI API when faced with unforeseen challenges was crucial to our success. This reflective learning will guide our economic considerations for potential future marketing and development of Course Buddy.
 
 \end{document}
