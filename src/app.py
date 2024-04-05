@@ -1,41 +1,55 @@
+"""
+Filename: <app.py>
+
+Description:
+    This file serves as the main entry point for a Flask-based web application.
+
+Author: Qianni Wang
+Created: 2024-02-14
+Last Modified: 2024-04-04
+"""
+
+
 import os
-import pandas as pd
 import boto3
 import ast
 
 from flask import (
     Flask,
-    jsonify,
     render_template,
-    request,
 )
 
+# Importing blueprints for different application modules
 from profile_page import profile_blueprint
 from course_page import courses_blueprint
 from forum_page import forum_blueprint
 from feedback_page import feedback_blueprint
 from pomodoro_page import pomodoro_blueprint
 from tasks_page import tasks_blueprint
+from app_grid import grid_blueprint
 
+# Attempt to import utility function for S3 operations
 try:
     from src.util import (
         get_df_from_csv_in_s3,
-        write_order_csv_to_s3,
     )
 except ImportError:
     from .util import (
         get_df_from_csv_in_s3,
-        write_order_csv_to_s3,
     )
 
 app = Flask(__name__)
+# Generate a random secret key for session management
 app.secret_key = os.urandom(24)
+
+# Registering application blueprints with their URL prefixes
 app.register_blueprint(profile_blueprint, url_prefix="/profile")
 app.register_blueprint(courses_blueprint, url_prefix="/courses")
 app.register_blueprint(forum_blueprint, url_prefix="/forum")
 app.register_blueprint(feedback_blueprint, url_prefix="/feedback")
 app.register_blueprint(pomodoro_blueprint, url_prefix="/pomodoro")
 app.register_blueprint(tasks_blueprint, url_prefix="/tasks")
+app.register_blueprint(grid_blueprint, url_prefix="/grid")
 
 # Loading configs/global variables
 app.config.from_pyfile("config.py")
@@ -71,8 +85,17 @@ app.config["S3_CLIENT"] = s3
 
 @app.route("/")
 def start():
+    """
+    Route to handle the landing page of the application.
+
+    Fetches user-related data from an S3-stored CSV file to
+    demonstrate a proof of concept(PoC). This includes setting
+    a default username, user ID, and courses list for the session.
+    """
+    # Fetch mock data from CSV in S3 for PoC and set initial configuration
     df = get_df_from_csv_in_s3(s3, bucket_name, mock_data_file)
 
+    # Set up default session variables for demonstration purposes
     app.config["username"] = df.loc[0, "username"]  # For PoC purpose
     print("username is: ", app.config["username"])
     app.config["userId"] = df.loc[0, "user_id"]  # For PoC purpose
@@ -88,63 +111,6 @@ def start():
         courses=app.config["courses"],
         current_page=app.config["current_page"],
     )
-
-
-@app.route("/get-order")
-def get_order():
-    username = app.config["username"]
-
-    df = read_order_csv_from_s3(s3, username, bucket_name, icon_order_path)
-
-    filtered_df = df[df["username"] == username]
-
-    if filtered_df.empty:
-        existing_order = [3, 1, 11, 4, 2, 12, 8, 10, 6, 9, 5, 7]
-    else:
-        existing_order = filtered_df["orders"].iloc[0]
-
-    return jsonify(existing_order)
-
-
-@app.route("/update-order", methods=["POST"])
-def update_order():
-    new_orders = request.json
-    username = app.config["username"]
-
-    df = get_df_from_csv_in_s3(s3, bucket_name, icon_order_path)
-
-    if username in df["username"].values:
-        df.loc[df["username"] == username, "orders"] = str(new_orders)
-    else:
-        new_row = pd.DataFrame(
-            {"username": [username], "orders": [str(new_orders)]}
-        )
-        df = pd.concat([df, new_row], ignore_index=True)
-
-    write_order_csv_to_s3(s3, icon_order_path, df, bucket_name)
-
-    return jsonify(
-        {"status": "success", "message": "Order updated successfully."}
-    )
-
-
-def read_order_csv_from_s3(s3, username, bucket_name, key):
-    try:
-        response = s3.get_object(Bucket=bucket_name, Key=key)
-        df = pd.read_csv(response["Body"])
-        return df
-    except s3.exceptions.NoSuchKey:
-        default_order = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
-        default_df = pd.DataFrame(
-            [{"username": username, "orders": default_order}]
-        )
-
-        write_order_csv_to_s3(s3, icon_order_path, default_df, bucket_name)
-
-        return default_df
-    except Exception as e:
-        print(f"An unexpected error occurred: {e}")
-        return pd.DataFrame(columns=["username", "orders"])
 
 
 if __name__ == "__main__":

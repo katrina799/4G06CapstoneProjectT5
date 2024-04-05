@@ -1,3 +1,17 @@
+"""
+Filename: <app_grid.py>
+
+Description:
+    Collection of helper functions designed for task management and data
+    handling within a web application. Includes functionalities for adding
+    tasks,fetching and uploading dataframes to AWS S3, and processing
+    data. Integrates OpenAI for advanced text processing and uses pandas
+    for data manipulation.
+
+Author: All team members
+Created: 2024-02-14
+Last Modified: 2024-04-04
+"""
 # Helper functions that will be commonly used
 import pandas as pd
 import os

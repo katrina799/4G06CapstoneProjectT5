@@ -1,3 +1,16 @@
+"""
+Filename: <course_page.py>
+
+Description:
+    Manages course functionalities including adding, viewing, and removing
+    courses, along with uploading and analyzing course syllabuses. Integrates
+    with AWS S3 for storage and OpenAI for text processing.
+
+Author: Jingyao Qin
+Created: 2024-02-21
+Last Modified: 2024-04-04
+"""
+
 from flask import (
     Blueprint,
     render_template,
@@ -8,6 +21,7 @@ from flask import (
     url_for,
 )
 
+# Importing required modules and packages
 import openai
 import re
 import csv
@@ -18,7 +32,7 @@ import pandas as pd
 import io
 import pypdf
 
-
+# Attempt to import configuration and utility functions
 try:
     from config import (
         MOCK_COURSE_INFO_CSV,
@@ -44,6 +58,8 @@ except ImportError:
         upload_df_to_s3,
         get_df_from_csv_in_s3,
     )
+
+# Defining a Blueprint for the courses module
 courses_blueprint = Blueprint("courses", __name__)
 
 

@@ -1,3 +1,18 @@
+"""
+Filename: <forum_page.py>
+
+Description:
+    Handles forum operations for a web application. Enables users to post
+    topics, submit comments, and manage image uploads. Integrates with AWS
+    S3 for storing images and forum data. Supports topic filtering by tags and
+    includes functionality for reversing topic order and searching within the
+    forum.
+
+Author: Chenwei Song
+Created: 2024-01-23
+Last Modified: 2024-04-03
+"""
+
 from flask import (
     Blueprint,
     render_template,

@@ -1,3 +1,16 @@
+"""
+Filename: tasks_module.py
+
+Description:
+    Handles task management for a web application, including displaying tasks,
+    adding new tasks, editing, and deleting tasks. Integrates with AWS S3 for
+    task data storage and retrieval. Supports filtering tasks by date and
+    status, and updating task status directly from the tasks page.
+
+Author: Qiang Gao
+Created: 2024-02-14
+Last Modified: 2024-04-04
+"""
 from flask import (
     Blueprint,
     render_template,

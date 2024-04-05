@@ -1,3 +1,16 @@
+
+"""
+Filename: <pomodoro_page.py>
+
+Description:
+    Manages Pomodoro timer functionalities in a web app. Allows users to start
+    Pomodoro timers for tasks, view and update task statuses, and track weekly
+    Pomodoro counts. Utilizes AWS S3 for storing task and Pomodoro count data.
+
+Author: Shuting Shi
+Created: 2024-02-21
+Last Modified: 2024-04-04
+"""
 from flask import (
     Blueprint,
     render_template,

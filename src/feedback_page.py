@@ -1,3 +1,17 @@
+"""
+Filename: <feedback_page.py>
+
+Description:
+    Manages feedback for a web app. Supports submitting and viewing feedback,
+    using AWS S3 for storage. Feedback is categorized as 'viewed' or 'pending'.
+    This module facilitates feedback form rendering, submission to S3, and
+    retrieval/display of feedback from S3 based on user interactions.
+
+Author: Qianni Wang
+Created: 2024-01-23
+Last Modified: 2024-04-03
+"""
+
 from flask import (
     Blueprint,
     render_template,

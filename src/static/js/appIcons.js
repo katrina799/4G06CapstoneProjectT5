@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
 
-    fetch('/get-order')
+    fetch('/grid/get-order')
         .then(response => response.json())
         .then(orderArray => {
             let appGrid = document.getElementById('app-grid');
@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function () {
         let tiles = document.querySelectorAll('.app-tile');
         let orderArray = Array.from(tiles).map(tile => parseInt(tile.id.replace('app-tile', '')));
 
-        fetch('/update-order', {
+        fetch('/grid/update-order', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

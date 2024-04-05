@@ -1,3 +1,19 @@
+"""
+Filename: profile_page.py
+
+Description:
+    Manages user profile operations for a web application. Features include
+    displaying user profiles with academic details, uploading academic
+    transcripts to calculate and display the cumulative Grade Point Average
+    (cGPA), and allowing users to change their username. It integrates with
+    filesystem operations for file handling and AWS S3 for data storage.
+
+Author: Qianni Wang
+Created: 2024-02-14
+Last Modified: 2024-04-04
+"""
+
+
 from flask import (
     Blueprint,
     render_template,
