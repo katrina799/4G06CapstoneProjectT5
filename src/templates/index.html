@@ -142,7 +142,7 @@
                 <div class="courses" id = "course-block"
                     style="display: flex; flex-wrap: wrap; justify-content: flex-start; width: 100%; border-spacing: 10px;">
                     {% for course in courses %}
-                    <a href="/course_detail_page/{{ course }}" class="course-detail-link" style="flex-basis: 256px;">
+                    <a href="/courses/course_detail_page/{{ course }}" class="course-detail-link" style="flex-basis: 256px;">
                         <div id="{{ course.0.1 }}" class=" course-detail">
                             <div class="course-image">
                                 <img style="vertical-align:middle; width: 256px;"
@@ -157,7 +157,7 @@
                                 <div class="course-details">
                                     <h4>{{course}}</h4>
                                 </div>
-                                <form style="position: absolute; top: 0; right: 0; margin: 3px;" action="/remove_course"
+                                <form style="position: absolute; top: 0; right: 0; margin: 3px;" action="/courses/remove_course"
                                     method="post">
                                     <input type="hidden" name="index" value="{{ loop.index - 1 }}">
                                     <input type="hidden" name="course" value="{{ course }}">

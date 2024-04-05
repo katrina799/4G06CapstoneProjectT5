@@ -11,27 +11,27 @@
                                 class="glyphicon glyphicon-home" title="home page"
                                 style="font-size:24px; margin-left: 30px;"></i></a>
                 <a class="tasks {{ 'active' if current_page == 'tasks' else '' }}"
-                        href="{{ url_for('tasks_page') }}"><i class="glyphicon glyphicon-list-alt" title="tasks"
+                        href="{{ url_for('tasks.tasks_page') }}"><i class="glyphicon glyphicon-list-alt" title="tasks"
                                 style="font-size:24px;"></i>
                 </a>
                 <a class="timer {{ 'active' if current_page == 'pomodoro_page' else '' }}"
-                        href="{{ url_for('pomodoro_page') }}"><i class="glyphicon glyphicon-time" title="pomodoro timer"
+                        href="{{ url_for('pomodoro.pomodoro_page') }}"><i class="glyphicon glyphicon-time" title="pomodoro timer"
                                 style="font-size:24px;"></i>
                 </a>
                 <a class="courses {{ 'active' if current_page == 'course_page' else '' }}"
-                        href="{{ url_for('course_page') }}"><i class="glyphicon glyphicon-book" title="your course list"
+                        href="{{ url_for('courses.course_page') }}"><i class="glyphicon glyphicon-book" title="your course list"
                                 style="font-size:24px;"></i>
                 </a>
                 <a class="feedback {{ 'active' if current_page == 'feedback_page' else '' }}"
-                        href="{{ url_for('feedback_page') }}"><i class="glyphicon glyphicon-comment"
+                        href="{{ url_for('feedback.feedback_page') }}"><i class="glyphicon glyphicon-comment"
                                 title="feedback box" style="font-size:24px;"></i>
                 </a>
                 <a class="forum {{ 'active' if current_page == 'forum_page' else '' }}"
-                href="{{ url_for('forum_page') }}">
+                href="{{ url_for('forum.forum_page') }}">
                 <i class="glyphicon glyphicon-fire" title="forum page" style="font-size:24px;"></i>
                 </a>
                 <a class="user {{ 'active' if current_page == 'profile_page' else '' }}"
-                        href="{{ url_for('profile_page') }}">
+                        href="{{ url_for('profile.profile_page') }}">
                         <i class="glyphicon glyphicon-user" title="profile page" style="font-size:24px;"></i>
                 </a>
         </div>
@@ -47,23 +47,23 @@
             <li class="nav-item {{ 'active' if request.path == url_for('start') else '' }}">
               <a class="nav-link" href="{{ url_for('start') }}">Home</a>
             </li>
-            <li class="nav-item {{ 'active' if request.path == url_for('course_page') else '' }}">
-                <a class="nav-link" href="{{ url_for('course_page') }}">Courses</a>
+            <li class="nav-item {{ 'active' if request.path == url_for('courses.course_page') else '' }}">
+                <a class="nav-link" href="{{ url_for('courses.course_page') }}">Courses</a>
               </li>
-            <li class="nav-item {{ 'active' if request.path == url_for('tasks_page') else '' }}">
-                <a class="nav-link" href="{{ url_for('tasks_page') }}"> Tasks</a>
+            <li class="nav-item {{ 'active' if request.path == url_for('tasks.tasks_page') else '' }}">
+                <a class="nav-link" href="{{ url_for('tasks.tasks_page') }}"> Tasks</a>
               </li>
-            <li class="nav-item {{ 'active' if request.path == url_for('pomodoro_page') else '' }}">
-              <a class="nav-link" href="{{ url_for('pomodoro_page') }}">Pomodoro Timer</a>
+            <li class="nav-item {{ 'active' if request.path == url_for('pomodoro.pomodoro_page') else '' }}">
+              <a class="nav-link" href="{{ url_for('pomodoro.pomodoro_page') }}">Pomodoro Timer</a>
             </li>
-            <li class="nav-item {{ 'active' if request.path == url_for('feedback_page') else '' }}">
-              <a class="nav-link" href="{{ url_for('feedback_page') }}">Feedback</a>
+            <li class="nav-item {{ 'active' if request.path == url_for('feedback.feedback_page') else '' }}">
+              <a class="nav-link" href="{{ url_for('feedback.feedback_page') }}">Feedback</a>
             </li>
-            <li class="nav-item {{ 'active' if request.path == url_for('forum_page') else '' }}">
-              <a class="nav-link" href="{{ url_for('forum_page') }}">Forum</a>
+            <li class="nav-item {{ 'active' if request.path == url_for('forum.forum_page') else '' }}">
+              <a class="nav-link" href="{{ url_for('forum.forum_page') }}">Forum</a>
             </li>
-            <li class="nav-item {{ 'active' if request.path == url_for('profile_page') else '' }}">
-              <a class="nav-link" href="{{ url_for('profile_page') }}">Profile</a>
+            <li class="nav-item {{ 'active' if request.path == url_for('profile.profile_page') else '' }}">
+              <a class="nav-link" href="{{ url_for('profile.profile_page') }}">Profile</a>
             </li>
           </ul>
         </div>

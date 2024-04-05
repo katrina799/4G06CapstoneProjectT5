@@ -1,3 +1,13 @@
+/*
+Author: Qiang Gao
+Created: 2024-02-01
+Last Updated: 2024-04-04
+
+Description:
+This script handles drag and drop functionality for tasks and their columns,
+as well as context menu actions for tasks. It also provides functions for
+updating task status, editing tasks, and managing modal dialogs.
+*/
 document.addEventListener('DOMContentLoaded', (event) => {
     let tasks = document.querySelectorAll('.task-card');
     let columns = document.querySelectorAll('.task-column');
@@ -107,7 +117,7 @@ function drop(e) {
 
 function updateTaskStatus(taskId, newStatus, sourceColumnId, targetColumnId) {
     taskId = parseInt(taskId);
-    fetch('/update_task_status', {
+    fetch('/tasks/update_task_status', {
         method: 'POST',
         body: JSON.stringify({ id: taskId, status: newStatus }),
         headers: {
@@ -174,7 +184,7 @@ function editTask(taskId) {
 
         const formData = new FormData(editForm);
 
-        fetch(`/edit_task/${taskId}`, {
+        fetch(`/tasks/edit_task/${taskId}`, {
             method: 'POST',
             body: formData,
             headers: {

@@ -11,7 +11,7 @@
             <p><strong>Username:</strong> {{ username }}</p>
             <div class="cgpa-upload-container" style="display: flex; align-items: center; gap: 10px;">
                 <p><strong>cGPA:</strong> {{ cGPA }}</p>
-                <form action="/upload_transcript" method="post" enctype="multipart/form-data" class="upload-form" style="display: flex; align-items: center; gap: 10px;">
+                <form action="/profile/upload_transcript" method="post" enctype="multipart/form-data" class="upload-form" style="display: flex; align-items: center; gap: 10px;">
                     <button type="submit" class="btn btn-primary">Upload Transcript</button>
                     <input type="file" name="transcript" accept="application/pdf" required>
                 </form>
@@ -19,7 +19,7 @@
         </div>
         <div class="change-username">
             <h2 style="color: #941035; margin-bottom: 15px;">Change Username</h2>
-            <form action="/change_username" method="post" class="username-form">
+            <form action="/profile/change_username" method="post" class="username-form">
                 <div class="form-group">
                     <label for="newusername">Enter New Username:</label>
                     <input type="text" id="newusername" name="newusername" required>

@@ -16,17 +16,17 @@
           </div>
           <!-- Column for the search form, aligning it to the right -->
           <div class="col-auto">
-            <form action="/search_forum" method="get" class="d-flex">
+            <form action="/forum/search_forum" method="get" class="d-flex">
               <input type="text" name="query" placeholder="Search topics ..." required class="form-control me-2">
               <input type="submit" value="Search" class="btn" style="background-color: #a53045; color: white; border: none;">
             </form>
           </div>
         </div>
         <div class="col">
-          <a href="{{ url_for('add_topic') }}" class="btn" style="background-color: #a53045; color: white; text-decoration: none; border: none; padding: 10px 20px; font-size: 18px;">Add Topic</a>
+          <a href="{{ url_for('forum.add_topic') }}" class="btn" style="background-color: #a53045; color: white; text-decoration: none; border: none; padding: 10px 20px; font-size: 18px;">Add Topic</a>
         </div>        
         <div style = "padding: 10px 20px; font-size: 16px;" class="filter-by-tag">
-          <form action="{{ url_for('forum_page') }}" method="get">
+          <form action="{{ url_for('forum.forum_page') }}" method="get">
             <label for="tag">Filter by tag:</label>
             <select name="tag" onchange="this.form.submit()">
               <option value="All" {% if current_tag == 'All' %}selected{% endif %}>All</option>
@@ -55,7 +55,7 @@
                   Posted by <span class="topic-author">@{{username}}</span>
                 </div>
                 <h2 class="topic-title">
-                  <a style="color: #941035;" href="/forum/topic/{{ topic.id }}">{{ topic.title }}</a>
+                  <a style="color: #941035;" href="/fm/topic/{{ topic.id }}">{{ topic.title }}</a>
                 </h2><div style="color: #555555;"bclass="topic-date">Posted on: {{ topic.date }}</div>
                 <div class="topic-tag">{{ topic.tag }}</div>
                 {% if topic.imageUrl and topic.imageUrl != 'none' %}

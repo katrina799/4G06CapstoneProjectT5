@@ -12,7 +12,7 @@ Course Page
                 <div style="display: flex; margin: 5px; align-items: center; ">
                     <h2 style="color: #941035; margin-bottom: 15px;">My Courses </h2>
                     <h3 style="color: #941035; margin-bottom: 15px;">({{courses|length}})</h3>
-                    <form action="/add_course" method="post" style="margin-top: 15px; margin-left: 15px;">
+                    <form action="/courses/add_course" method="post" style="margin-top: 15px; margin-left: 15px;">
                         <label for="newcourse">Add a New Course:</label>
                         <input type="text" id="newcourse" name="newcourse" required>
                         
@@ -28,7 +28,7 @@ Course Page
                 <div class="courses"
                     style="display: flex; flex-wrap: wrap; justify-content: flex-start; width: 100%; border-spacing: 10px;">
                     {% for course in courses %}
-                    <a href="/course_detail_page/{{ course }}" class="course-detail-link" style="flex-basis: 256px;">
+                    <a href="/courses/course_detail_page/{{ course }}" class="course-detail-link" style="flex-basis: 256px;">
                         <div id="{{ course.0.1 }}" class=" course-detail">
                             <div class="course-image">
                                 <img style="vertical-align:middle; width: 256px;"
@@ -43,7 +43,7 @@ Course Page
                                 <div class="course-details">
                                     <h4>{{course}}</h4>
                                 </div>
-                                <form style="position: absolute; top: 0; right: 0; margin: 3px;" action="/remove_course"
+                                <form style="position: absolute; top: 0; right: 0; margin: 3px;" action="/courses/remove_course"
                                     method="post">
                                     <input type="hidden" name="index" value="{{ loop.index - 1 }}">
                                     <input type="hidden" name="course" value="{{ course }}">

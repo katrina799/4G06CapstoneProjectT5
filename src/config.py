@@ -1,9 +1,21 @@
-# A configuration file where all constants are defined
+"""
+Filename: <config.py>
+
+Description:
+    A configuration file where all constants are defined
+
+Author: All team members
+Created: 2023-09-23
+Last Modified: 2024-04-03
+"""
+
+ALLOWED_EXTENSIONS = {"png", "jpg", "jpeg", "gif"}
 BUCKET_NAME = "course-buddy"
 MOCK_DATA_POC_NAME = "mock_data_poc.csv"
 USER_DATA_NAME = "user_data.csv"
 TOPIC_DATA_NAME = "topic_data.csv"
 COMMENT_DATA_NAME = "comment_data.csv"
+TOMATO_DATA_KEY = "weekly_tomato_data.csv"
 PRIORITY_MODEL_FILE_NAME = "trained_priority_model.joblib"
 PRIORITY_MODEL_FILE_PATH = (
     f"src/task_priority_training_pipeline/{PRIORITY_MODEL_FILE_NAME}"
