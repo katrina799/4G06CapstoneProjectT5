@@ -47,6 +47,7 @@
 \toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
 \midrule
 2024-01-17 & 1.0 & First version of module guide\\
+2024-04-03 & 2.0 & Update after final demo\\
 \bottomrule
 \end{tabularx}
 
@@ -196,17 +197,16 @@ actually be implemented.
 \item [\refstepcounter{mnum} \mthemnum \label{mIM}:] Interface Module
 \item [\refstepcounter{mnum} \mthemnum \label{mBEWS}:] Back End Web Service Module
 \item [\refstepcounter{mnum} \mthemnum \label{mUserAM}:] User Authentication Module
+\item [\refstepcounter{mnum} \mthemnum \label{mAGM}:] App Grid Module
 \item [\refstepcounter{mnum} \mthemnum \label{mTaskAM}:] Task Module
 \item [\refstepcounter{mnum} \mthemnum \label{mCM}:] Course Module
 \item [\refstepcounter{mnum} \mthemnum \label{mUM}:] User Module
-\item [\refstepcounter{mnum} \mthemnum \label{mMsgNM}:] Message Notification Module
-\item [\refstepcounter{mnum} \mthemnum \label{mFRSM}:] Friend System Module
-\item [\refstepcounter{mnum} \mthemnum \label{mTM}:] Timetable Module
 \item [\refstepcounter{mnum} \mthemnum \label{mPM}:] Pomodoro Module
+\item [\refstepcounter{mnum} \mthemnum \label{mFM}:] Forum Module
+\item [\refstepcounter{mnum} \mthemnum \label{mFBM}:] Feedback Module
 \item [\refstepcounter{mnum} \mthemnum \label{mPEM}:] PDF Extraction Module
+\item [\refstepcounter{mnum} \mthemnum \label{mCCM}:] cGPA Calculation Module
 \item [\refstepcounter{mnum} \mthemnum \label{mDTM}:] Database Module
-\item [\refstepcounter{mnum} \mthemnum \label{mSPSM}:] Study Plan Scheduling Module
-\item [\refstepcounter{mnum} \mthemnum \label{mTPPM}:] Task Priority Prediction Module
 \end{description}
 
 
@@ -223,20 +223,19 @@ actually be implemented.
 \multirow{7}{0.3\textwidth}{Behaviour-Hiding Module}
 & Back End Web Service Module\\
 & User Authentication Module\\ 
+& App Grid Module Module\\ 
 & Task Module\\
 & Course Module\\
 & User Module\\
-& Message Notification Module\\ 
-& Friend System Module\\ 
-& Timetable Module\\ 
 & Pomodoro Module\\
+& Forum Module\\
+& Feedback Module\\
 \midrule
 
 \multirow{3}{0.3\textwidth}{Software Decision Module}
 & PDF Extraction Module \\
+& cGPA Calculation Module \\
 & Database Module\\
-& Study Plan Scheduling Module \\
-& Task Priority Prediction Module \\
 
 \bottomrule
 
@@ -304,10 +303,18 @@ to be implemented.
 \item[Implemented By:] Integrates with User Module and Database module, utilizes data mapping and hashing technique for verification. 
 \end{description}
 
+\subsubsection{App Grid Module (\mref{mAGM})}
+
+\begin{description}
+\item[Secrets:] The categorization and manipulation of apps.
+\item[Services:] Provides functionalities for users to change the position of icons in the app grid.
+\item[Implemented By:] Integrates with the database module for consistent data storage of app grid information.
+\end{description}
+
 \subsubsection{Task Module (\mref{mTaskAM})}
 
 \begin{description}
-\item[Secrets:] The internal prioritization logic and categorization of tasks.
+\item[Secrets:] The categorization and manipulation of tasks.
 \item[Services:] Provides functionalities for users to manipulate tasks, including creating, reading, updating and deleting tasks. Also, the service involves additional features: setting deadlines,  tasks, set difficulty levels. 
 \item[Implemented By:] Integrates with the database module for consistent data storage of task information. Also, utilize request transmission technique API for sending data to the Task prioritization module, and receive requests from the back-end server-side to execute instructions.
 \end{description}
@@ -329,28 +336,6 @@ to be implemented.
 \item[Implemented By:] Integrates with the database module and authentication module. 
 \end{description}
 
-\subsubsection{Message Notification Module (\mref{mMsgNM})}
-
-\begin{description}
-\item[Secrets:] Notification generation and delivery mechanisms.
-\item[Services: ] Sends notifications to users based on the specific triggers.
-\item[Implemented By:] Integrates with the Friend System Module and User Module by the event-driven mechanism to implement message notification service.
-\end{description}
-
-\subsubsection{Friend System Module (\mref{mFRSM})}
-
-\begin{description}
-\item[Secrets:]Friend recommendation and classmate lookup mechanisms.
-\item[Services:] Manages friend lists, friend requests, and friend deletion.
-\item[Implemented By:] Integrates with User Module, Database Module, the technical solution involves database relations with analysis of user social information. 
-\end{description}
-\subsubsection{Timetable Module (\mref{mTM})}
-
-\begin{description}
-\item[Secrets:] Timetable generation and management mechanisms.
-\item[Services:] Offers users to create, view, and manipulate their timetables. 
-\item[Implemented By:] Supported by the front-end interface involves interactive components collecting user-triggered actions, also combined with the study plan scheduling module.   
-\end{description}
 
 \subsubsection{Pomodoro Module (\mref{mPM})}
 
@@ -360,7 +345,21 @@ to be implemented.
 \item[Implemented By:] Integrate with the user interface and provide a real-time interactive feature by scripting language and UI design.
 \end{description}
 
+\subsubsection{Forum Module (\mref{mFM})}
 
+\begin{description}
+\item[Secrets:] Forum info data handling method.
+\item[Services:] Manages forum information, including the creation, modification, and deletion.
+\item[Implemented By:] Integrate with the user interface and provide a real-time interactive feature by scripting language and UI design.
+\end{description}
+
+\subsubsection{Feedback Module (\mref{mFBM})}
+
+\begin{description}
+\item[Secrets:] Feedback info data handling method.
+\item[Services:] Manages feedback information, including the creation and modification.
+\item[Implemented By:] Integrates with the database module and UI design.
+\end{description}
 
 \subsection{Software Decision Module}
 
@@ -384,6 +383,14 @@ to be implemented.
 \item[Implemented By:] Utilizes specific libraries for pdf processing
 \end{description}
 
+\subsubsection{cGPA Calculation Module (\mref{mCCM})}
+
+\begin{description}
+\item[Secrets:] Techniques and specific algorithms or logics for calculating cGpa from PDF files. 
+\item[Services:] Extracts and processes information from the user-uploaded PDF documents.
+\item[Implemented By:] Utilizes specific libraries for pdf processing
+\end{description}
+
 \subsubsection{Database Module (\mref{mDTM})}
 
 \begin{description}
@@ -392,25 +399,12 @@ to be implemented.
 \item[Implemented By:] Deployed on the AWS cloud service platform and utilized a relational database system.  
 \end{description}
 
-\subsubsection{Study Plan Scheduling Module (\mref{mSPSM})}
-
-\begin{description}
-\item[Secrets:] Algorithms for creating and optimizing study schedules. 
-\item[Services:] Generates personalized study plans based on user input. 
-\item[Implemented By:] Integrates with the Course and User Modules.
-\end{description}
-
-\subsubsection{Task Priority Prediction Module (\mref{mTPPM})}
-
-\begin{description}
-\item[Secrets:] The Algorithms and criteria for priority determination.
-\item[Services:] Predicts and assigns priorities to the target tasks
-\item[Implemented By:] Utilizes machine learning mechanism to improve the accuracy of prediction. 
-\end{description}
 \section{Traceability Matrix} \label{SecTM}
 
 This section shows two traceability matrices: between the modules and the
 requirements and between the modules and the anticipated changes.
+
+The traceability between NFR and Modules is not provided, as the majority of NFRs are only associated with the Interface Module(\mref{mCM}).  The current design and development practices already mitigate the most critical NFRs (such as using a responsive framework for UI development), detailed traceability for each NFR may not provide additional value at this stage.
 
 % the table should use mref, the requirements should be named, use something
 % like fref
@@ -420,37 +414,30 @@ requirements and between the modules and the anticipated changes.
 \toprule
 \textbf{Req.} & \textbf{Modules}\\
 \midrule
-FR1 & \mref{mUserAM}, \mref{mUM}, \mref{mBEWS}, \mref{mDTM}\\
-FR2 & \mref{mUserAM}, \mref{mUM}, \mref{mBEWS}, \mref{mDTM}\\
-FR3 & \mref{mUserAM}, \mref{mUM}, \mref{mBEWS}, \mref{mDTM}\\
-FR4 & \mref{mUserAM}, \mref{mUM}, \mref{mBEWS}, \mref{mDTM}, \mref{mTaskAM}\\
-FR5 & \mref{mUserAM}, \mref{mUM}, \mref{mBEWS}, \mref{mDTM}\\
-FR6 & \mref{mUM}, \mref{mDTM}, \mref{mPEM}\\
+FR1 & \mref{mCM}, \mref{mBEWS}, \mref{mPEM} \mref{mDTM}\\
+FR2 & \mref{mCM}, \mref{mTaskAM}, \mref{mPM}, \mref{mBEWS}, \mref{mDTM}\\
+FR3 & \mref{mUM}, \mref{mCM}, \mref{mBEWS}, \mref{mDTM}, \mref{mTaskAM}\\
+FR4 & \mref{mUM}, \mref{mCM}, \mref{mBEWS}, \mref{mDTM}, \mref{mTaskAM}\\
+FR5 & \mref{mUM}, \mref{mBEWS}, \mref{mDTM}, \mref{mPM}\\
+FR6 & \mref{mUM}, \mref{mBEWS}, \mref{mDTM}, \mref{mPM}\\
 FR7 & \mref{mUM}, \mref{mDTM}, \mref{mPM}\\
 FR8 & \mref{mUM}, \mref{mDTM}, \mref{mPM}\\
-FR9 & \mref{mUM}, \mref{mDTM}, \mref{mPM}, \mref{mBEWS}\\
-FR10 &  \mref{mIM}, \mref{mUM}, \mref{mDTM}, \mref{mPM}\\
-FR11 & \mref{mFRSM}, \mref{mUM}, \mref{mMsgNM}, \mref{mBEWS}\\
-FR12 & \mref{mFRSM}, \mref{mUM}, \mref{mMsgNM}, \mref{mBEWS}\\
-FR13 & \mref{mFRSM}, \mref{mUM}, \mref{mMsgNM}, \mref{mBEWS}\\
-FR14 & \mref{mTaskAM}, \mref{mUM}, \mref{mIM}, \mref{mBEWS}\\
-FR15 & \mref{mTaskAM}, \mref{mDTM}\\
-FR16 & \mref{mPEM}, \mref{mDTM}\\
-FR17 & \mref{mTaskAM}, \mref{mTPPM}\\
-FR18 & \mref{mTaskAM}, \mref{mUM}, \mref{mDTM}\\
-FR19 & \mref{mIM}, \mref{mDTM}, \mref{mBEWS}\\
-FR20 & \mref{mIM}, \mref{mBEWS}\\
-FR21 & \mref{mIM}, \mref{mTaskAM}, \mref{mDTM}\\
-FR22 & \mref{mTaskAM}, \mref{mTM}, \mref{mUserAM}, \mref{mIM},  \mref{mBEWS}\\
-FR23 & \mref{mTaskAM}, \mref{mTM}, \mref{mUserAM}, \mref{mIM},  \mref{mBEWS}\\
-FR24 & \mref{mSPSM}, \mref{mPEM}\\
-FR25 & \mref{mTaskAM}, \mref{mBEWS}\\
-FR26 & \mref{mSPSM}, \mref{mDTM}, \mref{mTaskAM}\\
-FR27 & \mref{mTaskAM}, \mref{mDTM}\\
-FR28 & \mref{mTPPM}, \mref{mTaskAM}\\
-FR29 & \mref{mSPSM}, \mref{mDTM}, \mref{mBEWS}, \mref{mUserAM},  \mref{mTaskAM}\\
-FR30 & \mref{mPM}, \mref{mTaskAM}\\
-FR31 & \mref{mSPSM}, \mref{mFRSM}, \mref{mBEWS}\\
+FR9 & \mref{mUM}, \mref{mDTM}, \mref{mTaskAM}, \mref{mBEWS}\\
+FR10 & \mref{mIM}, \mref{mDTM}, \mref{mTaskAM}\\
+FR11 & \mref{mIM}, \mref{mDTM}, \mref{mTaskAM} \mref{mBEWS}\\
+FR12 & \mref{mIM}, \mref{mDTM}, \mref{mTaskAM}\\
+FR13 & \mref{mIM}, \mref{mTaskAM}\\
+FR14 & \mref{mUM}, \mref{mIM}, \mref{mBEWS}, \mref{mFM}, \mref{mDTM}\\
+FR15 & \mref{mFM}, \mref{mDTM}\\
+FR16 & \mref{mUM}, \mref{mIM}, \mref{mBEWS}, \mref{mFM}, \mref{mDTM}\\
+FR17 & \mref{mUM}, \mref{mIM}, \mref{mBEWS}, \mref{mFM}, \mref{mDTM}\\
+FR18 & \mref{mIM}, \mref{mUM}, \mref{mAGM}, \mref{mDTM}\\
+FR19 & \mref{mIM}, \mref{mUM}, \mref{mAGM}, \mref{mDTM} \mref{mBEWS}\\
+FR20 & \mref{mIM}, \mref{mFBM}, \mref{mBEWS}, \mref{mDTM}\\
+FR21 & \mref{mIM}, \mref{mFBM}, \mref{mDTM}\\
+FR22 & \mref{mIM}, \mref{mFBM}, \mref{mDTM}\\
+FR23 & \mref{mIM}, \mref{mUserAM}, \mref{mUM}, \mref{mBEWS}, \mref{mDTM}\\
+FR24 & \mref{mIM}, \mref{mBEWS}, \mref{mCCM}\\
 \bottomrule
 \end{tabular}
 \caption{Trace Between Requirements and Modules}
@@ -464,7 +451,7 @@ FR31 & \mref{mSPSM}, \mref{mFRSM}, \mref{mBEWS}\\
 \textbf{AC} & \textbf{Modules}\\
 \midrule
 \acref{acUI} & \mref{mIM}\\
-\acref{acALGM} & \mref{mTPPM}, \mref{mSPSM}, \mref{mPEM}\\
+\acref{acALGM} & \mref{mCCM}, \mref{mPEM}\\
 \acref{acDBSCH} & \mref{mDTM}\\
 \acref{acAPI} & \mref{mBEWS}\\
 \acref{acSCALE} & \mref{mDTM} \\
@@ -524,7 +511,13 @@ PDF Extraction Module & PDF Processing and Extraction Logic & Chenwei Song, Shut
 \hline
  & PDF Extraction Module Testing & Qianni Wang, Qiang Gao & 2024-02-01 \\
 \hline
-Study Plan Scheduling & Scheduling Algorithms Development & Qianni Wang, Qiang Gao & 2024-01-29 \\
+Feedback Module & App order Functions Implementation & Qianni Wang & 2024-01-27 \\
+\hline
+ & Feedback Module Testing & Jingyao Qin, Chenwei Song & 2024-01-31 \\
+\hline
+cGpa calculation Module & App order Functions Implementation & Qianni Wang & 2024-01-27 \\
+\hline
+ & cGpa calculation Module Testing & Jingyao Qin, Chenwei Song & 2024-01-31 \\
 \hline
 \end{tabular}
 \caption{Timeline (Part 1)}
@@ -538,11 +531,13 @@ Study Plan Scheduling & Scheduling Algorithms Development & Qianni Wang, Qiang G
 \hline
 \textbf{Module} & \textbf{Task} & \textbf{Responsible Members} & \textbf{Completion Date} \\
 \hline
- & Scheduling Module Testing & Jingyao Qin, Chenwei Song & 2024-02-02 \\
+App grid Module & App order Functions Implementation & Qianni Wang & 2024-01-27 \\
 \hline
-Task Priority Prediction & Priority Algorithm Implementation & Shuting Shi, Jingyao Qin & 2024-01-30 \\
+ & App grid Module Testing & Jingyao Qin, Chenwei Song & 2024-01-31 \\
 \hline
- & Priority Prediction Testing & Chenwei Song, Qianni Wang & 2024-02-03 \\
+Forum Module & App order Functions Implementation & Chenwei Song & 2024-01-27 \\
+\hline
+ & Forum Module Testing &Chenwei Song & 2024-01-31 \\
 \hline
 Basic Testing & Integration Testing for Each Module & All Members & 2024-02-05 \\
 \hline
