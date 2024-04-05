@@ -203,7 +203,8 @@ renderSuccess: \textit{Boolean}\\
 
 \subsubsection{Environment Variables}
 
-\textit{DBAccessID}, \textit{DBAccessCode}, \textit{sessionToken}
+\textit{DBAccessID}: \textit{String}\\ \textit{DBAccessCode}: \textit{String}\\
+\textit{sessionToken}: \textit{String}
 
 \subsubsection{Assumptions}
 
@@ -218,77 +219,77 @@ renderSuccess: \textit{Boolean}\\
 \begin{itemize}
 \item transition: \(currentPage := \text{"Authentication Page"}\)
 \item output: \(renderSuccess := pageTitle = \text{"Authentication Page"}\)
-\item exception: internetError
+\item exception: internetError if the connection failed.
 \end{itemize}
 
 \noindent renderHomePage(\textit{sessionToken}):
 \begin{itemize}
 \item transition: \(currentPage := \text{"Home Page"}\)
 \item output: \(renderSuccess := pageTitle = \text{"Home Page"}\)
-\item exception: internetError
+\item exception: internetError if the connection failed.
 \end{itemize}
 
 \noindent renderCourseDetailPage(\textit{sessionToken}):
 \begin{itemize}
 \item transition: \(currentPage := \text{"CourseDetail"}\)
 \item output: \(renderSuccess := pageTitle = \text{"CourseDetail"}\)
-\item exception: internetError
+\item exception: internetError if the connection failed.
 \end{itemize}
 
 \noindent renderFeedbackPage(\textit{sessionToken}):
 \begin{itemize}
 \item transition: \(currentPage := \text{Feedback Page"}\)
 \item output: \(renderSuccess := pageTitle = \text{"Feedback Page"}\)
-\item exception: internetError
+\item exception: internetError if the connection failed.
 \end{itemize}
 
 \noindent renderForumPage(\textit{sessionToken}):
 \begin{itemize}
 \item transition: \(currentPage := \text{Forum Page"}\)
 \item output: \(renderSuccess := pageTitle = \text{"Forum Page"}\)
-\item exception: internetError
+\item exception: internetError if the connection failed.
 \end{itemize}
 
 \noindent renderForumTopicPage(\textit{sessionToken}):
 \begin{itemize}
 \item transition: \(currentPage := \text{ForumTopic Page"}\)
 \item output: \(renderSuccess := pageTitle = \text{"ForumTopic Page"}\)
-\item exception: internetError
+\item exception: internetError if the connection failed.
 \end{itemize}
 
 \noindent renderSearchForumPage(\textit{sessionToken}):
 \begin{itemize}
 \item transition: \(currentPage := \text{SearchForum Page"}\)
 \item output: \(renderSuccess := pageTitle = \text{"SearchForum Page"}\)
-\item exception: internetError
+\item exception: internetError if the connection failed.
 \end{itemize}
 
 \noindent renderPomodoroPage(\textit{sessionToken}):
 \begin{itemize}
 \item transition: \(currentPage := \text{Pomodoro Page"}\)
 \item output: \(renderSuccess := pageTitle = \text{"Pomodoro Page"}\)
-\item exception: internetError
+\item exception: internetError if the connection failed.
 \end{itemize}
 
 \noindent renderTasksPage(\textit{sessionToken}):
 \begin{itemize}
 \item transition: \(currentPage := \text{Tasks Page"}\)
 \item output: \(renderSuccess := pageTitle = \text{"Tasks Page"}\)
-\item exception: internetError
+\item exception: internetError if the connection failed.
 \end{itemize}
 
 \noindent renderUserProfilePage(\textit{sessionToken}):
 \begin{itemize}
 \item transition: \(currentPage := \text{"UserProfile Page"}\)
 \item output: \(renderSuccess := pageTitle = \text{"UserProfile Page"}\)
-\item exception: internetError
+\item exception: internetError if the connection failed.
 \end{itemize}
 
 \noindent renderCoursePage(\textit{sessionToken}):
 \begin{itemize}
 \item transition: \(currentPage := \text{"Course Page"}\)
 \item output: \(renderSuccess := pageTitle = \text{"Course Page"}\)
-\item exception: internetError
+\item exception: internetError if the connection failed.
 \end{itemize}
 
 
@@ -335,7 +336,7 @@ responseData: \textit{ResponseData}
 
 \subsubsection{Environment Variables}
 
-\textit{ServerStorage}, \textit{ServerProcessor}
+\textit{ServerStorage}: \textit{String}\\ \textit{ServerProcessor}: \textit{String}
 
 \subsubsection{Secrets}
 Internal Logic and data processing methods
@@ -450,7 +451,8 @@ userList: \textit{List[User]}
 
 \subsubsection{Environment Variables}
 
-\textit{DBAccessID}, \textit{DBAccessCode}
+\textit{DBAccessID}: \textit{String}\\
+\textit{DBAccessCode}: \textit{String}
 
 \subsubsection{Assumptions}
 
@@ -490,7 +492,7 @@ userList: \textit{List[User]}
 &\, \textit{authSuccess} = \textit{false}
 \end{align*}
 
-\item exception: internetError
+\item exception: internetError if the connection failed.
 \end{itemize}
 \noindent newUser(\textit{userName}, \textit{password}):
 \begin{itemize}
@@ -508,7 +510,7 @@ false, & \text{otherwise.}
 \end{align*}
 
 
-\item exception: internetError
+\item exception: internetError if the connection failed.
 \end{itemize}
 
 \noindent resetPassword(\textit{userName}, \textit{password}):
@@ -526,7 +528,7 @@ false, & \text{otherwise.}
 \end{cases}
 \end{align*}
 
-\item exception: internetError
+\item exception: internetError if the connection failed.
 \end{itemize}
 
 \subsubsection{Local Functions}
@@ -583,7 +585,7 @@ DBAccessCode: \textit{String}\\
 \noindent getOrder():
 \begin{itemize}
 \item output: \( out := \text{iconOrder} \)
-\item exception: internetError \\
+\item exception: internetError if the connection failed. \\
 \end{itemize}
 
 \noindent updateOrder(\textit{newOrder}):
@@ -629,7 +631,7 @@ None
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-addTask&  \textit{String} & \textit{Boolean} & internetError \\
+addTask&  \textit{String} & \textit{Boolean} & internetError if the connection failed. \\
 updateTask&  \textit{String} & \textit{Boolean} & internetError \\
 deleteTask&  \textit{String} & \textit{Boolean} & internetError \\
 getTask&  \textit{String} & \textit{List[String]} & displayError \\
@@ -653,7 +655,8 @@ taskList: \textit{List(Task)}\\
 
 \subsubsection{Environment Variables}
 
-\textit{DBAccessID}, \textit{DBAccessCode}
+\textit{DBAccessID}: \textit{String}\\
+\textit{DBAccessCode}: \textit{String}
 
 \subsubsection{Assumptions}
 
@@ -692,7 +695,7 @@ out := \exists \, (task &\in taskList \, | \\
 &task.deadline = deadline)
 \end{align*}
 
-\item exception: internetError
+\item exception: internetError if the connection failed.
 \end{itemize}
 
 \noindent deleteTask(\textit{taskId}):
@@ -700,7 +703,7 @@ out := \exists \, (task &\in taskList \, | \\
 \item transition: \(taskList := (task \setminus task \, | \, task.taskId = taskId )\)
 \item output: $out := \mathit{! \ \exists \, (task \in taskList \, | \, task.taskId = taskId)
 }$
-\item exception: internetError
+\item exception: internetError if the connection failed.
 \end{itemize}
 
 \noindent getTask(\textit{taskId}):
@@ -711,7 +714,7 @@ out := &\, \{task.taskType, task.courseCode, task.taskWeight, task.deadline\| \\
 &\, task \in taskList \, \land \, task.taskId = taskId\}
 \end{align*}
 
-\item exception: internetError
+\item exception: internetError if the connection failed.
 \end{itemize}
 
 \noindent switchView(\textit{viewType}):
@@ -768,7 +771,8 @@ courseList: \textit{List(Course)}\\
 
 \subsubsection{Environment Variables}
 
-\textit{DBAccessID}, \textit{DBAccessCode}
+\textit{DBAccessID}: \textit{String}\\
+\textit{DBAccessCode}: \textit{String}
 
 \subsubsection{Assumptions}
 
@@ -906,11 +910,11 @@ None
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-startSession&  \textit{Integer} & \textit{Void} & \textit{InvalidTimeException} \\
+startSession&  $\mathbb{Z}$ & \textit{Void} & \textit{InvalidTimeException} \\
 stopSession& - & \textit{Void} &voidSession- \\
-getRemainingTime& - & \textit{Integer} & voidSession \\
-setWorkDuration&  \textit{Integer} & \textit{Void} & \textit{InvalidTimeException} \\
-setBreakDuration&  \textit{Integer} & \textit{Void} & \textit{InvalidTimeException} \\
+getRemainingTime& - & $\mathbb{Z}$ & voidSession \\
+setWorkDuration&  $\mathbb{Z}$ & \textit{Void} & \textit{InvalidTimeException} \\
+setBreakDuration&  $\mathbb{Z}$ & \textit{Void} & \textit{InvalidTimeException} \\
 \hline
 \end{tabular}
 \end{center}
@@ -918,9 +922,9 @@ setBreakDuration&  \textit{Integer} & \textit{Void} & \textit{InvalidTimeExcepti
 \subsection{Semantics}
 
 \subsubsection{State Variables}
-workDuration: \textit{Integer}\\
-breakDuration: \textit{Integer}\\
-remainingTime: \textit{Integer}
+workDuration: $\mathbb{Z}$\\
+breakDuration: $\mathbb{Z}$\\
+remainingTime: $\mathbb{Z}$
 
 \subsubsection{Environment Variables}
 N/A
@@ -1162,7 +1166,7 @@ feedbackForm: \textit{HTML Form}
 \noindent getFeedback():
 \begin{itemize}
 \item output: \( out := \text{feedbackList} \)
-\item exception: internetError
+\item exception: internetError if the connection failed.
 \end{itemize}
 
 \noindent submitFeedback(\textit{username, feedbackType, content}):
@@ -1333,7 +1337,7 @@ None
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-getCGPA & \textit{File} & \textit{Float} & PDFParseException, CGPACalculationException \\
+getCGPA & \textit{File} & $\mathbb{R}$ & PDFParseException, CGPACalculationException \\
 \hline
 \end{tabular}
 \end{center}
@@ -1419,7 +1423,8 @@ files: \textit{List[csv File]}
 
 \subsubsection{Environment Variables}
 
-\textit{DBAccessID}, \textit{DBAccessCode}
+\textit{DBAccessID}: \textit{String}\\
+\textit{DBAccessCode}: \textit{String}
 
 \subsubsection{Assumptions}
 
@@ -1433,7 +1438,7 @@ files: \textit{List[csv File]}
 \noindent connectToDB(\textit{addressOfDB}):
 \begin{itemize}
 \item output: $out := \mathit{\exists( ip: ipAddress|ip=addressOfDB)}$
-\item exception: internetError
+\item exception: internetError if the connection failed.
 \end{itemize}
 
 \noindent getDataFile(\textit{fileName}):
@@ -1445,7 +1450,7 @@ files: \textit{List[csv File]}
 \noindent uploadDataFile(\textit{fileName}):
 \begin{itemize}
 \item transition: \(files := (files \cup fileName)\)
-\item exception: internetError
+\item exception: internetError if the connection failed.
 \end{itemize}
 
 \noindent deleteDataFile(\textit{fileName}):
