@@ -4,13 +4,12 @@ Developer Names: Qianni Wang, Shuting Shi, Jingyao Qin, Qiang Gao, Chewnei Song
 
 Date of project start: Sep 19, 2023
 
-This project is a web-based scheduling application that aims to ease students' stress when facing multiple deadlines. In our objectives, it automatically generates personalised study plan based on uploaded course outline and interact with the user's calendar of choice to ensure no assignments get overdue and dynamically adjust according to the user's progress. 
-Students could progress towards their academic success in their own pace and even connect with classmates with similar schedule to have collaborative study sessions.
+MacONE is an innovative web-based application designed to simplify the academic life of McMaster University students. It seamlessly integrates with students' calendars, automatically generating personalized study plans from uploaded course outlines and dynamically adapting to their progress to ensure that all assignments are completed on time. With features like GPA calculation, resource access, a forum for interaction, and a Pomodoro timer, MacONE is the ultimate tool for enhancing efficiency and reducing the stress of managing multiple deadlines.
 
 The folders and files for this project are as follows:
 
 - docs - Documentation for the project
 - refs - Reference material used for the project, including papers
 - src - Source code
-- test - Test cases
-- etc.
+- .devcontainer - holds settings for Visual Studio Code's Development Container feature
+- .github - contains configuration files for GitHub functionalities like automated workflows and templates for issues and pull requests.
